@@ -1,5 +1,8 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.exceptions.NotExistingPlayerException;
+import it.polimi.ingsw.model.gameboard.GameBoard;
+
 import java.util.ArrayList;
 
 /*
@@ -22,8 +25,10 @@ public class Game {
         return players;
     }
 
+
+
     //Gets a player by nickname
-    public Player getPlayer(String nickname) throws NotExistingPlayerException{
+    public Player getPlayer(String nickname) throws NotExistingPlayerException {
         for (Player p:players) {
             if(p.getNickname().equals(nickname))
                 return  p;

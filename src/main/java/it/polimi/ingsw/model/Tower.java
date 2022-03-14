@@ -1,21 +1,12 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.model.enumeration.TowerColour;
+
 public class Tower {
-    private TowerColour TColour;
+    private TowerColour towerColor;
 
-
-    public TowerColour getTColour() {
-        return TColour;
-    }
-
-    public void setTColour(TowerColour TColour) {
-        this.TColour = TColour;
-    }
-
-    @Override
-    public String toString() {
-        return "Tower{" +
-                "TColour=" + TColour +
-                '}';
+    //Gets the tower color
+    public TowerColour getTowerColor() {
+        return towerColor;
     }
 }

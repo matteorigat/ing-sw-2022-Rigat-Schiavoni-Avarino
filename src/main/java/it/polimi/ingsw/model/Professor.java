@@ -1,21 +1,12 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.model.enumeration.Colour;
+
 public class Professor {
-    private Colour ProfessorColour;
+    private Colour professorColour;
 
-
+    //Gets the professor color
     public Colour getProfessorColour() {
-        return ProfessorColour;
-    }
-
-    public void setProfessorColour(Colour professorColour) {
-        ProfessorColour = professorColour;
-    }
-
-    @Override
-    public String toString() {
-        return "Professor{" +
-                "ProfessorColour=" + ProfessorColour +
-                '}';
+        return professorColour;
     }
 }
