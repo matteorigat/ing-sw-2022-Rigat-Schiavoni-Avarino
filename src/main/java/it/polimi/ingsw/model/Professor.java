@@ -11,4 +11,11 @@ public class Professor {
     public void setProfessorColour(Colour professorColour) {
         ProfessorColour = professorColour;
     }
+
+    @Override
+    public String toString() {
+        return "Professor{" +
+                "ProfessorColour=" + ProfessorColour +
+                '}';
+    }
 }
