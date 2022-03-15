@@ -15,7 +15,8 @@ public class Island {
 
     public void addStudent (Student s){
         this.students.add(s);
-        NumStudents[Colour.valueOf(s.getColour().toString())]++ ;
+
+        NumStudents[s.getColour().ordinal()]++ ;
 
     }
 
