@@ -1,10 +1,10 @@
 package it.polimi.ingsw.model.gameboard;
 
 import java.util.ArrayList;
-
+import java.util.LinkedList;
 public class GameBoard {
 
-    private final ArrayList<Island> islands;
+    private final LinkedList<Island> islands;
     private final ArrayList<Cloud> clouds;
     private final MotherNature motherNature;
     private final Bag bag;
