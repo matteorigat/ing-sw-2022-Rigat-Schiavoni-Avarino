@@ -18,9 +18,9 @@ public class App
         Game g = new Game();
 
         g.init(b);
-        for(int i=0; i<10; i++){
+        for(int i=0; i<120; i++){
             Student s = b.draw();
-            System.out.println(s);
+            System.out.println(s + "" + i);
         }
 
     }
