@@ -12,15 +12,18 @@ public class Bag {
 
 
 
-    public void Bag(){
-        students = new ArrayList<Student>();
+    public Bag(){
+        this.students = new ArrayList<>();
     }
   public void fill(ArrayList<Student> input) {
 
 
-       //   students.addAll(input);
-          input.addAll(students);
+          for (Student s : input){
+              this.students.add(s);
+          }
+
           Collections.shuffle(students);
+
   }
   public Student draw(){
       Student s = students.get(0);
