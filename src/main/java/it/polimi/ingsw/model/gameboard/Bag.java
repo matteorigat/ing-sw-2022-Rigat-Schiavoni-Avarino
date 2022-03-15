@@ -10,10 +10,16 @@ public class Bag {
 
     ArrayList<Student> students;
 
+
+
+    public void Bag(){
+        students = new ArrayList<Student>();
+    }
   public void fill(ArrayList<Student> input) {
 
 
-          students.addAll(input);
+       //   students.addAll(input);
+          input.addAll(students);
           Collections.shuffle(students);
   }
   public Student draw(){

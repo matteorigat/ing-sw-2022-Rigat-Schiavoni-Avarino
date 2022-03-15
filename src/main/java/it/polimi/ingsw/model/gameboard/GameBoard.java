@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 public class GameBoard {
 
-    private final LinkedList<Island> islands;
-    private final ArrayList<Cloud> clouds;
-    private final MotherNature motherNature;
-    private final Bag bag;
+    private  LinkedList<Island> islands;
+    private  ArrayList<Cloud> clouds;
+    private  MotherNature motherNature;
+    private  Bag bag;
 
     public GameBoard() {
         this.islands = islands;
