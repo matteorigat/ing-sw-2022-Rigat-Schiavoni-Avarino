@@ -9,4 +9,10 @@ public class Student {
     public Student(Colour colour) {
         this.colour = colour;
     }
+
+    @Override
+    public String toString() {
+        return colour.toString();
+
+    }
 }

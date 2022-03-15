@@ -2,6 +2,7 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.NotExistingPlayerException;
 import it.polimi.ingsw.model.enumeration.Colour;
+import it.polimi.ingsw.model.gameboard.Bag;
 import it.polimi.ingsw.model.gameboard.GameBoard;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class Game {
     //Constructor Game creates a new Game instance
     public Game() {
         players = new ArrayList<>();
+
         gameBoard = new GameBoard();
     }
 
@@ -45,7 +47,7 @@ public class Game {
 
 
 
-    public void init(){
+    public void init(Bag b){
 
         ArrayList<Student> arr = new ArrayList<>();
         for (Colour c : Colour.values()) {
@@ -54,6 +56,7 @@ public class Game {
                 arr.add(s);
             }
         }
+        b.fill(arr);
     }
 
 }
