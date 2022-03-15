@@ -1,9 +1,11 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.NotExistingPlayerException;
+import it.polimi.ingsw.model.enumeration.Colour;
 import it.polimi.ingsw.model.gameboard.GameBoard;
 
 import java.util.ArrayList;
+import it.polimi.ingsw.model.enumeration.Colour;
 
 /*
  * In this class we manage the main actions of the match.
@@ -39,6 +41,19 @@ public class Game {
     //Gets the gameBoard instance
     public GameBoard getGameBoard() {
         return gameBoard;
+    }
+
+
+
+    public void init(){
+
+        ArrayList<Student> arr = new ArrayList<>();
+        for (Colour c : Colour.values()) {
+            for(int i=0;i<2;i++){
+                Student s = new Student(c);
+                arr.add(s);
+            }
+        }
     }
 
 }
