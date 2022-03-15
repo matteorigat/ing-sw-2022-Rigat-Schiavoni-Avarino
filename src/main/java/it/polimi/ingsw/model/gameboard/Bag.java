@@ -1,4 +1,8 @@
 package it.polimi.ingsw.model.gameboard;
 
 public class Bag {
+
+
+
+    public int i;
 }
