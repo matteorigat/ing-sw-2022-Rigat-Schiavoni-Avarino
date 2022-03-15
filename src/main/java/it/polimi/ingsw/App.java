@@ -2,6 +2,7 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.Student;
+import it.polimi.ingsw.model.enumeration.Colour;
 import it.polimi.ingsw.model.gameboard.Bag;
 
 /**
@@ -13,7 +14,7 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        System.out.println( "Hello World!");
         Bag b = new Bag();
         Game g = new Game();
 
