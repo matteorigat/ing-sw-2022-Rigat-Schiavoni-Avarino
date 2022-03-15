@@ -15,4 +15,8 @@ public class Student {
         return colour.toString();
 
     }
+
+    public Colour getColour(){
+        return this.colour;
+    }
 }

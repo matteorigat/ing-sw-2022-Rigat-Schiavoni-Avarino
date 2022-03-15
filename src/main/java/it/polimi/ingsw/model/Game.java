@@ -58,5 +58,9 @@ public class Game {
         }
         b.fill(arr);
     }
+    public void play() {
+        while (true) {
 
+        }
+    }
 }
