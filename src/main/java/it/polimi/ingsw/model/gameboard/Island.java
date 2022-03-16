@@ -31,31 +31,38 @@ public class Island {
         }
     }
 
-    public Player Influence (){
+    //Return the player with the most influence on the island
+    public Player Influence (ArrayList<Player> players){
 
-        ArrayList<Professor> prof = (ArrayList<Professor>) getProfessorsByTower(towerColor).clone();
+        ArrayList<Professor> prof = new ArrayList<>();
+
+        for(Player p: players)
+            if(p.PlayerTowerColor().equals(towerColor))
+                prof = p.getPlayerSchoolBoard().getProfessors();
 
         ArrayList<Integer> stud = (ArrayList<Integer>) numStudents.clone();
 
         for(Professor p: prof){
-            stud.set(p.getProfessorColour().ordinal(), stud.get(p.getProfessorColour().ordinal() + numTower));
+            stud.set(p.getProfessorColour().ordinal(), stud.get(p.getProfessorColour().ordinal()) + numTower);
         }
 
-        int num;
+        int num = 6;  //dovevo inizializzarlo per non avere errore, 6 non rappresenta nessun colore
         int max = 0;
         for (int i = 0; i<5; i++){
-            if(max < numStudents.get(i)) {
-                max = numStudents.get(i);
+            if(max < stud.get(i)) {
+                max = stud.get(i);
                 num = i;
             }
         }
 
-        return getPlayerByProfessor(Colour.values()[num]);
+        for(Player p: players) {
+            prof = p.getPlayerSchoolBoard().getProfessors();
+            for (Professor pr : prof)
+                if (pr.getProfessorColour().equals(Colour.values()[num]))
+                    return p;
+        }
 
+        return null;  // se non trova chi domina l'isola ritorna null
     }
-
-
-
-
 
 }

@@ -2,6 +2,7 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.NotExistingPlayerException;
 import it.polimi.ingsw.model.enumeration.Colour;
+import it.polimi.ingsw.model.enumeration.TowerColour;
 import it.polimi.ingsw.model.gameboard.Bag;
 import it.polimi.ingsw.model.gameboard.GameBoard;
 
@@ -59,9 +60,4 @@ public class Game {
         b.fill(arr);
     }
 
-    public void play() {
-        while (true) {
-
-        }
-    }
 }
