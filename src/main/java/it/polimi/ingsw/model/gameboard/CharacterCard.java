@@ -1,4 +1,4 @@
 package it.polimi.ingsw.model.gameboard;
 
-public class GeneralSupply {
+public class CharacterCard {
 }
