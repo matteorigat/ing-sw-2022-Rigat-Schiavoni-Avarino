@@ -21,7 +21,6 @@ public class Game {
     //Constructor Game creates a new Game instance
     public Game() {
         players = new ArrayList<>();
-
         gameBoard = new GameBoard();
     }
 
@@ -31,21 +30,10 @@ public class Game {
     }
 
 
-
-    //Gets a player by nickname
-    public Player getPlayer(String nickname) throws NotExistingPlayerException {
-        for (Player p:players) {
-            if(p.getNickname().equals(nickname))
-                return  p;
-        }
-        throw  new NotExistingPlayerException();
-    }
-
     //Gets the gameBoard instance
     public GameBoard getGameBoard() {
         return gameBoard;
     }
-
 
 
     public void init(Bag b){

@@ -65,4 +65,8 @@ public class Island {
         return null;  // se non trova chi domina l'isola ritorna null
     }
 
+
+    public ArrayList<Student> getStudents() {
+        return students;
+    }
 }

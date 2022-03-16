@@ -20,14 +20,10 @@ public class Player {
         return playerSchoolBoard.getTowerColor();
     }
 
-    public ArrayList<Professor> getPlayerProfessor(){
+    public ArrayList<Professor> getPlayerProfessors(){
         return playerSchoolBoard.getProfessors();
     }
 
-    //Gets the nickname of the player
-    public String getNickname() {
-        return nickname;
-    }
     //Gets the schoolBoard of the player
     public SchoolBoard getPlayerSchoolBoard() {
         return playerSchoolBoard;
