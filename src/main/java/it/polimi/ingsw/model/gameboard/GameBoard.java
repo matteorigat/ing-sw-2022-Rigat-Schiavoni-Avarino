@@ -36,7 +36,7 @@ public class GameBoard {
 
     public void addFirstStudentOnIsland(){
         for (Island i: islands){
-            if(0 == 0) {  //sostituire con se non c'è madrenatura su i e se i è isola opposta a madrenatura (i + 6)
+            if(0 == 0) {  //sostituire con se non c'è madrenatura su i e se i non è isola opposta a madrenatura (i + 6)
                 i.addStudent(bag.draw());
             }
 
