@@ -40,12 +40,23 @@ public class Game {
 
         ArrayList<Student> arr = new ArrayList<>();
         for (Colour c : Colour.values()) {
+            for(int i=0;i<2;i++){
+                Student s = new Student(c);
+                arr.add(s);
+            }
+        }
+        b.fill(arr);
+
+        gameBoard.addFirstStudentOnIsland();
+
+        for (Colour c : Colour.values()) {
             for(int i=0;i<24;i++){
                 Student s = new Student(c);
                 arr.add(s);
             }
         }
         b.fill(arr);
+
     }
 
 }
