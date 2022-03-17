@@ -20,7 +20,7 @@ public class DiningRoom {
     }
 
     public void addStudent(Student s){                 // scusate i tanti if ma sono funzionali
-        if(s.getColour().equals(Colour.Green))         // qui poi nelle regole esperte bisogna contare le monete
+        if(s.getColour().equals(Colour.Green))         // qui poi nelle regole esperte bisogna contare le  monete
             greenStudents.add(s);
         else if(s.getColour().equals(Colour.Red))
             redStudents.add(s);

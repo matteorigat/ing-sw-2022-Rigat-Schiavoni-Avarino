@@ -6,7 +6,7 @@ import it.polimi.ingsw.model.gameboard.Island;
 import java.util.ArrayList;
 
 public class SchoolBoard {
-    private ArrayList<Student> studentsEntrance;   // studenti all'entrata: 9
+    private ArrayList<Student> studentsEntrance;   //studenti all'entrata: 9
     private DiningRoom diningRoom;
     private ArrayList<Professor> professors;
     private ArrayList<Tower> tower;

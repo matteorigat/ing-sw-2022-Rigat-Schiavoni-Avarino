@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import it.polimi.ingsw.model.enumeration.Colour;
 
 /*
- * In this class we manage the main actions of the match.
+ *  In this class we manage the main actions of the match.
  */
 
 public class Game {

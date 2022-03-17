@@ -9,7 +9,7 @@ public class Player {
     private SchoolBoard playerSchoolBoard;
 
 
-    //Constructor Player creates a new Player instance
+    // Constructor Player creates a new Player instance
     public Player(String nickname) {
         this.nickname = nickname;
         this.playerSchoolBoard = new SchoolBoard();

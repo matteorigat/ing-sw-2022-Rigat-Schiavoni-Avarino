@@ -21,7 +21,7 @@ public class Island {
     public void addStudent (Student s){
         this.students.add(s);
 
-       // NumStudents[s.getColour().ordinal()]++ ;
+       // NumStudents[s.getColour().ordinal()]++  ;
        numStudents.set(s.getColour().ordinal(), (numStudents.get(s.getColour().ordinal()) + 1));
     }
 

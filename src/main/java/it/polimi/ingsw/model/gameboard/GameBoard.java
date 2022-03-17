@@ -13,7 +13,7 @@ public class GameBoard {
 
     public GameBoard() {
         this.islands = new ArrayList<>(12);
-        this.clouds = new ArrayList<>(); // mettere una define globale per la grandezza
+        this.clouds = new ArrayList<>(); //  mettere una define globale per la grandezza
         this.bag = new Bag();
     }
 

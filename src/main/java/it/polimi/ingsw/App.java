@@ -6,7 +6,7 @@ import it.polimi.ingsw.model.enumeration.Colour;
 import it.polimi.ingsw.model.gameboard.Bag;
 
 /**
- *  Hello world!
+ *   Hello world!
  *
  **/
 
