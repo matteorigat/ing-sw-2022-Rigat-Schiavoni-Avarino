@@ -17,6 +17,7 @@ public class Island {
     private ArrayList<Student> students;
     private ArrayList<Integer> numStudents;
 
+
     public void addStudent (Student s){
         this.students.add(s);
 
@@ -65,6 +66,13 @@ public class Island {
         return null;  // se non trova chi domina l'isola ritorna null
     }
 
+    public int getIslandRank() {
+        return islandRank;
+    }
+
+    public void setIslandRank(int islandRank) {
+        this.islandRank = islandRank;
+    }
 
     public ArrayList<Student> getStudents() {
         return students;

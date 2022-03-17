@@ -11,10 +11,16 @@ public class SchoolBoard {
     private ArrayList<Professor> professors;
     private ArrayList<Tower> tower;
 
+    public SchoolBoard() {
+        this.studentsEntrance = new ArrayList<>();
+        this.diningRoom = new DiningRoom();
+        this.professors = new ArrayList<>(0);
+        this.tower = new ArrayList<>();
+    }
+
     public ArrayList<Student> getStudentsEntrance() {
         return studentsEntrance;
     }
-
 
     public ArrayList<Professor> getProfessors() {
         return professors;

@@ -36,9 +36,13 @@ public class Game {
     }
 
 
-    public void init(Bag b){
+    public void init(Bag b){   //sto seguendo l'inizializzazione della partita
+        double casual = Math.random()*11;
+        int mn = (int) casual;
 
-        ArrayList<Student> arr = new ArrayList<>();
+        gameBoard.setMotherNature(mn);  //posiziono madrenatura
+
+        ArrayList<Student> arr = new ArrayList<>();  //creo studenti per le isole
         for (Colour c : Colour.values()) {
             for(int i=0;i<2;i++){
                 Student s = new Student(c);
@@ -47,16 +51,29 @@ public class Game {
         }
         b.fill(arr);
 
-        gameBoard.addFirstStudentOnIsland();
+        gameBoard.addFirstStudentOnIsland(mn);  //posiziono gli studenti
 
-        for (Colour c : Colour.values()) {
+        for (Colour c : Colour.values()) {  //creo gli studenti per il sacchetto
             for(int i=0;i<24;i++){
                 Student s = new Student(c);
                 arr.add(s);
             }
         }
         b.fill(arr);
+    }
 
+    public void CreateNewPlayer(String nickname){
+        int num = 0;
+        for(Player p: players){
+            num++;
+        }
+
+        if(num < 3) { // qui andrebbe messa una DEFINE globale cosi da rendere più scalabile l'applicazione
+            Player p = new Player(nickname);
+        }
+        else{
+            //qui bisogna mettere una exception che nella partita ci sono già 4 giocatori
+        }
     }
 
 }
