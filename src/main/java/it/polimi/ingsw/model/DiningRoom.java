@@ -11,8 +11,16 @@ public class DiningRoom {
     private ArrayList<Student> pinkStudents;
     private ArrayList<Student> blueStudents;
 
+    public DiningRoom() {
+        this.greenStudents = new ArrayList<>(0);
+        this.redStudents = new ArrayList<>(0);
+        this.yellowStudents = new ArrayList<>(0);
+        this.pinkStudents = new ArrayList<>(0);
+        this.blueStudents = new ArrayList<>(0);
+    }
+
     public void addStudent(Student s){                 // scusate i tanti if ma sono funzionali
-        if(s.getColour().equals(Colour.Green))         // qui poi nelle regole esperte bisogna contare le monete
+        if(s.getColour().equals(Colour.Green))         // qui poi nelle regole esperte bisogna contare le  monete
             greenStudents.add(s);
         else if(s.getColour().equals(Colour.Red))
             redStudents.add(s);

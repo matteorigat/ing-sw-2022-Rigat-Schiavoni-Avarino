@@ -17,10 +17,11 @@ public class Island {
     private ArrayList<Student> students;
     private ArrayList<Integer> numStudents;
 
+
     public void addStudent (Student s){
         this.students.add(s);
 
-       // NumStudents[s.getColour().ordinal()]++ ;
+       // NumStudents[s.getColour().ordinal()]++  ;
        numStudents.set(s.getColour().ordinal(), (numStudents.get(s.getColour().ordinal()) + 1));
     }
 
@@ -65,6 +66,13 @@ public class Island {
         return null;  // se non trova chi domina l'isola ritorna null
     }
 
+    public int getIslandRank() {
+        return islandRank;
+    }
+
+    public void setIslandRank(int islandRank) {
+        this.islandRank = islandRank;
+    }
 
     public ArrayList<Student> getStudents() {
         return students;

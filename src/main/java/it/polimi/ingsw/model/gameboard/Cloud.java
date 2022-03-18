@@ -9,12 +9,10 @@ public class Cloud {
 
     private ArrayList<Student> students;
 
-
-    //A inizio turmo si aggiungono giocatori sulla nuvola... è possibile modificare la funzione e passare tutti gli studenti insieme come arraylist
+    // A inizio turmo si aggiungono giocatori sulla nuvola... è possibile modificare la funzione e passare tutti gli studenti insieme come arraylist
     public void addStudent(Student s) {
         this.students.add(s);
     }
-
 
     //quando un giocatore finisce il turno, prende gli studenti dalla nuvola e la svuota
     public ArrayList<Student> getStudents() {

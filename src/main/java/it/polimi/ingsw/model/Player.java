@@ -9,10 +9,10 @@ public class Player {
     private SchoolBoard playerSchoolBoard;
 
 
-    //Constructor Player creates a new Player instance
-    public Player() {
+    // Constructor Player creates a new Player instance
+    public Player(String nickname) {
         this.nickname = nickname;
-        this.playerSchoolBoard = playerSchoolBoard;
+        this.playerSchoolBoard = new SchoolBoard();
     }
 
     //Return the player's tower color
