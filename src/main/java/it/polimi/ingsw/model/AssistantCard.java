@@ -5,6 +5,11 @@ public class AssistantCard {
     private int value;
     private int movements;
 
+    public AssistantCard(int value, int movements) {
+        this.value = value;
+        this.movements = movements;
+    }
+
     public int getValue() {
         return value;
     }

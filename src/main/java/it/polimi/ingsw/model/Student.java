@@ -2,8 +2,12 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.model.enumeration.Colour;
 
+import java.util.ArrayList;
+
+
 public class Student {
     private Colour colour;
+
 
 
     public Student(Colour colour) {
@@ -19,4 +23,10 @@ public class Student {
     public Colour getColour(){
         return this.colour;
     }
+
+
+
+
+
 }
+

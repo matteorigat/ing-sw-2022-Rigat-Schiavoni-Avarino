@@ -65,6 +65,7 @@ public class Game {
     public void CreateNewPlayer(String nickname){
         int num = 0;
         for(Player p: players){
+            p.assistantDeck.initAssistantDeck(); // sarebbe meglio mettere i player in un arrayList
             num++;
         }
 

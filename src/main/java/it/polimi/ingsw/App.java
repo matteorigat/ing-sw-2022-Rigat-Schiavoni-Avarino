@@ -17,6 +17,7 @@ public class App
         System.out.println( "Hello World!");
         Game game = new Game();
         Bag b = new Bag();
+
         String nickname = null;  // qui bisogna fare qualcosa per prendere in lettura i vari nickname
 
         boolean isfull = false;
