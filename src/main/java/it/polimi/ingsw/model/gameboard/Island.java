@@ -12,24 +12,30 @@ import static it.polimi.ingsw.model.enumeration.Colour.Green;
 
 public class Island {
     private int islandRank;
+    private int islandIndex;
     private int numTower;
     private TowerColour towerColor;
     private ArrayList<Student> students;
     private ArrayList<Integer> numStudents;
 
 
+    public Island(){
+        this.students = new ArrayList<Student>(0);
+        this.numTower = 0;
+        this.islandRank = 1;
+        this.towerColor = null;
+        this.numStudents = new ArrayList<>();
+
+        for (int i = 0; i<5; i++){
+            numStudents.add(0);
+        }
+    }
+
     public void addStudent (Student s){
         this.students.add(s);
 
        // NumStudents[s.getColour().ordinal()]++  ;
        numStudents.set(s.getColour().ordinal(), (numStudents.get(s.getColour().ordinal()) + 1));
-    }
-
-    public Island(){
-        numStudents = new ArrayList<>();
-        for (int i = 0; i<5; i++){
-            numStudents.add(0);
-        }
     }
 
     //Return the player with the most influence on the island
@@ -72,6 +78,14 @@ public class Island {
 
     public void setIslandRank(int islandRank) {
         this.islandRank = islandRank;
+    }
+
+    public int getIslandIndex() {
+        return islandIndex;
+    }
+
+    public void setIslandIndex(int islandIndex) {
+        this.islandIndex = islandIndex;
     }
 
     public ArrayList<Student> getStudents() {

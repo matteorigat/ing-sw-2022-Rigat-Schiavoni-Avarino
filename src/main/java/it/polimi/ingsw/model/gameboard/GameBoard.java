@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.gameboard;
 
+import it.polimi.ingsw.model.Parameters;
 import it.polimi.ingsw.model.Student;
 import it.polimi.ingsw.model.enumeration.Colour;
 
@@ -12,17 +13,27 @@ public class GameBoard {
     private Bag bag;
 
     public GameBoard() {
-        this.islands = new ArrayList<>(12);
-        this.clouds = new ArrayList<>(); //  mettere una define globale per la grandezza
+        this.islands = new ArrayList<>(Parameters.numIsland);
+        this.clouds = new ArrayList<>(Parameters.numClouds);
         this.bag = new Bag();
+
+        for (int i=0; i<Parameters.numIsland; i++){
+            Island isl = new Island();
+            islands.add(isl);
+        }
+
+        for (int i=0; i<Parameters.numClouds; i++){
+            Cloud cl = new Cloud();
+            clouds.add(cl);
+        }
     }
 
-    public void addFirstStudentOnIsland(int mn){
-        for (Island i: islands){
-            if(i.getIslandRank() != mn || i.getIslandRank() != mn + 1) {  //sostituire con se non c'è madrenatura su i e se i non è isola opposta a madrenatura (i + 6)
-                i.addStudent(bag.draw());
-            }
-        }
+    public void addStudentOnIsland(int numIsland, Student student){
+        islands.get(numIsland).addStudent(student);
+    }
+
+    public void addStudentOnCloud(int numCloud, Student student){
+        clouds.get(numCloud).addStudent(student);
     }
 
     public int getMotherNature() {
@@ -32,6 +43,14 @@ public class GameBoard {
 
     public void setMotherNature(int motherNature) {
         this.motherNature = motherNature;
+    }
+
+    public Bag getBag() {
+        return bag;
+    }
+
+    public ArrayList<Cloud> getClouds() {
+        return clouds;
     }
 
     public void islandFusion(int island1, int island2) {

@@ -9,13 +9,18 @@ public class SchoolBoard {
     private ArrayList<Student> studentsEntrance;   //studenti all'entrata: 9
     private DiningRoom diningRoom;
     private ArrayList<Professor> professors;
-    private ArrayList<Tower> tower;
+    private ArrayList<Tower> towers;
 
-    public SchoolBoard() {
+    public SchoolBoard(TowerColour towerColour) {
         this.studentsEntrance = new ArrayList<>();
         this.diningRoom = new DiningRoom();
         this.professors = new ArrayList<>(0);
-        this.tower = new ArrayList<>();
+        this.towers = new ArrayList<>(Parameters.numTowers);
+
+        for (int i=0; i<Parameters.numTowers; i++) {
+            Tower t = new Tower(towerColour);
+            towers.add(t);
+        }
     }
 
     public ArrayList<Student> getStudentsEntrance() {
@@ -27,7 +32,7 @@ public class SchoolBoard {
     }
 
     public TowerColour getTowerColor() {
-       return tower.get(0).getTowerColor();
+       return towers.get(0).getTowerColor();
     }
 
     public void moveStudentToDiningRoom(Student s){
