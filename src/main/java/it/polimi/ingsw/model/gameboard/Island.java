@@ -43,26 +43,26 @@ public class Island {
 
         ArrayList<Professor> prof = new ArrayList<>();
 
-        for(Player p: players)
+        for(Player p: players)    //prendo i professori del giocatore che controlla l'isola
             if(p.PlayerTowerColor().equals(towerColor))
                 prof = p.getPlayerSchoolBoard().getProfessors();
 
-        ArrayList<Integer> stud = (ArrayList<Integer>) numStudents.clone();
+        ArrayList<Integer> stud = (ArrayList<Integer>) numStudents.clone();  //clone fa la copia dell'array
 
-        for(Professor p: prof){
-            stud.set(p.getProfessorColour().ordinal(), stud.get(p.getProfessorColour().ordinal()) + numTower);
+        for(Professor p: prof){   //per ogni colore di un professore sommo al colore di numStudent corrispondente il numero di torri
+            stud.set(p.getProfessorColour().ordinal(), numStudents.get(p.getProfessorColour().ordinal()) + numTower);
         }
 
         int num = 6;  //dovevo inizializzarlo per non avere errore, 6 non rappresenta nessun colore
         int max = 0;
-        for (int i = 0; i<5; i++){
+        for (int i = 0; i<5; i++){   //trovo il colore del massimo tra studenti o studenti+professori
             if(max < stud.get(i)) {
                 max = stud.get(i);
                 num = i;
             }
         }
 
-        for(Player p: players) {
+        for(Player p: players) {  //trovo a quale giocatore controlla il professore del colore max
             prof = p.getPlayerSchoolBoard().getProfessors();
             for (Professor pr : prof)
                 if (pr.getProfessorColour().equals(Colour.values()[num]))
