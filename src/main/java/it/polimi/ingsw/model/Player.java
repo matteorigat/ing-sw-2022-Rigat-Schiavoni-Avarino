@@ -81,8 +81,8 @@ public class Player {
                 this.currentCard = cardPlayed;
                 assistantDeck.remove(cardPlayed);
             }
-        }
-    }
+
+
 
 
 }

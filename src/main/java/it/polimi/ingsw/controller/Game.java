@@ -46,7 +46,7 @@ public class Game {
 
     public void addPlayer(String nickname){   //DA RIFAREEEEEE
 
-        if(players.size() < Parameters.numPlayers) { // qui andrebbe messa una DEFINE globale cosi da rendere più scalabile l'applicazione
+        if(players.size() < Parameters.numPlayers) {
             Player p = new Player(nickname, players.size());
             players.add(p);
         }
@@ -117,5 +117,11 @@ public class Game {
     }
 
 
+    public void moveStudentToIsland(int position, int player, Colour colour){
 
+    }
+
+    public void moveStudentToDiningRoom(int position, int player,Colour colour){
+
+    }
 }
