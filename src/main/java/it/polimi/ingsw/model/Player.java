@@ -13,6 +13,7 @@ public class Player {
     private String nickname;
     private SchoolBoard playerSchoolBoard;
     private ArrayList<AssistantCard> assistantDeck;
+    private AssistantCard currentCard;
 
 
     // Constructor Player creates a new Player instance
@@ -77,9 +78,8 @@ public class Player {
     }
     // play a card and remove it from the deck (da implementare le funzionalità di giocata)
     public void playCard(AssistantCard cardPlayed){
-        for(int i =0;i<assistantDeck.size();i++){
-            if(cardPlayed.getValue() == assistantDeck.get(i).getValue() && cardPlayed.getMovements() == assistantDeck.get(i).getMovements()){
-                assistantDeck.remove(i);
+                this.currentCard = cardPlayed;
+                assistantDeck.remove(cardPlayed);
             }
         }
     }

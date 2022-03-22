@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.gameboard;
 
+import it.polimi.ingsw.model.AssistantCard;
 import it.polimi.ingsw.model.Parameters;
 import it.polimi.ingsw.model.Student;
 import it.polimi.ingsw.model.enumeration.Colour;
@@ -9,6 +10,7 @@ public class GameBoard {
 
     private ArrayList<Island> islands;
     private ArrayList<Cloud> clouds;
+
     private int motherNature;
     private Bag bag;
 

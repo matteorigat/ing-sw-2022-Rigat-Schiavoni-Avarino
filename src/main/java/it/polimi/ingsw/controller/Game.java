@@ -1,6 +1,7 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.exceptions.NotExistingPlayerException;
+import it.polimi.ingsw.model.AssistantCard;
 import it.polimi.ingsw.model.Parameters;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.Student;
@@ -70,7 +71,7 @@ public class Game {
         gameBoard.getBag().fill(arr);
 
         for (int i=0; i<12; i++){
-            if(i != gameBoard.getMotherNature() && i != (gameBoard.getMotherNature() + 6)%12)
+            if(i != gameBoard.getMotherNature() && i != (gameBoard.getMotherNature() + 6)%12) //doesn't place students on the island with mothernature and the opposite one
                 gameBoard.addStudentOnIsland(i, gameBoard.getBag().draw());
         }
 
@@ -97,7 +98,17 @@ public class Game {
         }
     }
 
-    public void ActionPhase(){
+    public void playAssistantCard(int prioriy, int playerIndex){
+        for (AssistantCard as : players.get(playerIndex).getAssistantDeck()){
+            if ( as.getValue() == (prioriy) ) {
+                players.get(playerIndex).playCard(as);
+
+
+            }
+        }
+
+    }
+    public void ActionPhase(int playerIndex){
 
     }
 
