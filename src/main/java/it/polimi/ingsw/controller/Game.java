@@ -1,10 +1,7 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.exceptions.NotExistingPlayerException;
-import it.polimi.ingsw.model.AssistantCard;
-import it.polimi.ingsw.model.Parameters;
-import it.polimi.ingsw.model.Player;
-import it.polimi.ingsw.model.Student;
+import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.enumeration.Colour;
 import it.polimi.ingsw.model.enumeration.TowerColour;
 import it.polimi.ingsw.model.gameboard.Bag;
@@ -116,10 +113,21 @@ public class Game {
     }
 
     public void moveMotherNature(int movements){
-        this.gameBoard.setMotherNature(this.gameBoard.getMotherNature() + movements);    //moves motherNature by specified movements
+        int newPos = ((this.gameBoard.getMotherNature() + movements)%Parameters.numIsland);
+        this.gameBoard.setMotherNature(newPos);//moves motherNature by specified movements
+        this.checkIsland(newPos);
     }
 
+    public void checkIsland(int islandIndex){
+       Player p = this.gameBoard.getIslands().get(islandIndex).Influence(this.players);
+       if (p!=null){
+         for(int i=0; i<this.gameBoard.getIslands().get(islandIndex).getIslandRank(); i++) {
+             //  this.gameBoard.getIslands().get(islandIndex).set   p.getPlayerSchoolBoard().getTowerColor()
 
+             p.getPlayerSchoolBoard().getTowers().remove(0);
+         }
+       } else return;
+    }
     public void moveStudentToIsland(int IslandPosition, int player, int colour) {
 
         players.get(player).getPlayerSchoolBoard().moveStudentToIsland(colour, this.gameBoard.getIslands().get(IslandPosition) );

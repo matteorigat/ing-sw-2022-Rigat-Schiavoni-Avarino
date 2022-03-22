@@ -56,4 +56,8 @@ public class SchoolBoard {
             }
         }
     }
+
+    public ArrayList<Tower> getTowers() {
+        return towers;
+    }
 }

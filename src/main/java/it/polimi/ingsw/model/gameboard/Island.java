@@ -18,7 +18,13 @@ public class Island {
     private ArrayList<Student> students;
     private ArrayList<Integer> numStudents;
 
-
+    public void setNumTower(int numTower) {
+        this.numTower = numTower;
+    }
+    public void addTower(TowerColour colour){
+        this.numTower = this.islandRank;
+        this.towerColor = colour;
+    }
     public Island(){
         this.students = new ArrayList<Student>(0);
         this.numTower = 0;
