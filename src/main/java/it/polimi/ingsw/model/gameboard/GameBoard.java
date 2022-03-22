@@ -75,4 +75,8 @@ public class GameBoard {
         islands.remove(island2);
         islands.remove(island3);
     }
+
+    public ArrayList<Island> getIslands() {
+        return islands;
+    }
 }

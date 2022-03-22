@@ -21,12 +21,14 @@ import it.polimi.ingsw.model.enumeration.Colour;
 public class Game {
     private final ArrayList<Player> players;
     private final GameBoard gameBoard;
+    private Player currentPlayer;
 
 
     //Constructor Game creates a new Game instance
     public Game() {
         players = new ArrayList<>();
         gameBoard = new GameBoard();
+        currentPlayer = null;
     }
 
     //Gets the players of the match
@@ -88,6 +90,7 @@ public class Game {
                p.getPlayerSchoolBoard().getStudentsEntrance().add(gameBoard.getBag().draw());
         }
 
+
     }
 
     public void PlanningPhase(){
@@ -117,11 +120,19 @@ public class Game {
     }
 
 
-    public void moveStudentToIsland(int position, int player, Colour colour){
+    public void moveStudentToIsland(int IslandPosition, int player, int colour) {
+
+        players.get(player).getPlayerSchoolBoard().moveStudentToIsland(colour, this.gameBoard.getIslands().get(IslandPosition) );
 
     }
 
-    public void moveStudentToDiningRoom(int position, int player,Colour colour){
+    public void moveStudentToDiningRoom(int player,int colour){
 
+        players.get(player).getPlayerSchoolBoard().moveStudentToDiningRoom(colour);
+    }
+
+
+    public int getCurrentPlayer(){
+      return players.indexOf(currentPlayer);
     }
 }
