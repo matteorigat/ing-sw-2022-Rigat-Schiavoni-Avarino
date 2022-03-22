@@ -105,4 +105,6 @@ public class Game {
         this.gameBoard.setMotherNature(this.gameBoard.getMotherNature() + movements);    //moves motherNature by specified movements
     }
 
+
+
 }
