@@ -39,8 +39,7 @@ public class Island {
     public void addStudent (Student s){
         this.students.add(s);
 
-       // NumStudents[s.getColour().ordinal()]++  ;
-       numStudents.set(s.getColour().ordinal(), (numStudents.get(s.getColour().ordinal()) + 1));
+        numStudents.set(s.getColour().ordinal(), (numStudents.get(s.getColour().ordinal()) + 1));
     }
 
     //Return the player with the most influence on the island
@@ -48,21 +47,15 @@ public class Island {
 
         ArrayList<Professor> prof = new ArrayList<>();
 
-        for(Player p: players)    //prendo i professori del giocatore che controlla l'isola
-            if(p.PlayerTowerColor().equals(towerColor))
-                prof = p.getPlayerSchoolBoard().getProfessors();
-
-        ArrayList<Integer> stud = (ArrayList<Integer>) numStudents.clone();  //clone fa la copia dell'array
-
-        for(Professor p: prof){   //per ogni colore di un professore di chi domina sommo numStudent e il numero di torri
-            stud.set(p.getProfessorColour().ordinal(), numStudents.get(p.getProfessorColour().ordinal()) + numTower);
-        }
-
+        // sommo gli studenti (colori diversi) di un singolo giocatore in base ai colori che controlla
         int[] somma = new int[Parameters.numPlayers];
-        for(Player pl: players) {   // sommo gli studenti (colori diversi) di un singolo giocatore
+        for(Player pl: players) {
             prof = pl.getPlayerSchoolBoard().getProfessors();
             for (Professor pr : prof)
-                somma[pl.getIndex()] += stud.get(pr.getProfessorColour().ordinal());
+                somma[pl.getIndex()] += numStudents.get(pr.getProfessorColour().ordinal());
+
+            if(pl.PlayerTowerColor().equals(towerColor))
+                somma[pl.getIndex()] += numTower;
         }
 
         ArrayList<Integer> rank = null;
@@ -72,7 +65,7 @@ public class Island {
                 max = somma[i];
                 rank.clear();
                 rank.add(i);
-            }else if (max == stud.get(i) && max != 0){  //qui ho parità
+            }else if (max == somma[i] && max != 0){  //qui ho parità
                 rank.add(i);
             }
         }
@@ -89,6 +82,10 @@ public class Island {
 
     public int getNumTower() {
         return numTower;
+    }
+
+    public void setNumTower(int numTower) {
+        this.numTower = numTower;
     }
 
     public TowerColour getTowerColor() {
