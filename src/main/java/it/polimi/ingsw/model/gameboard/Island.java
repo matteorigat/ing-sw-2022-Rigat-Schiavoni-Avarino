@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.gameboard;
 
+import it.polimi.ingsw.model.Parameters;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.Professor;
 import it.polimi.ingsw.model.Student;
@@ -11,20 +12,14 @@ import java.util.ArrayList;
 import static it.polimi.ingsw.model.enumeration.Colour.Green;
 
 public class Island {
-    private int islandRank;
+    private int islandRank;    //numero di isole unite
     private int islandIndex;
     private int numTower;
     private TowerColour towerColor;
     private ArrayList<Student> students;
     private ArrayList<Integer> numStudents;
 
-    public void setNumTower(int numTower) {
-        this.numTower = numTower;
-    }
-    public void addTower(TowerColour colour){
-        this.numTower = this.islandRank;
-        this.towerColor = colour;
-    }
+
     public Island(){
         this.students = new ArrayList<Student>(0);
         this.numTower = 0;
@@ -35,6 +30,10 @@ public class Island {
         for (int i = 0; i<5; i++){
             numStudents.add(0);
         }
+    }
+
+    public void changeTowerColor(TowerColour colour){
+        this.towerColor = colour;
     }
 
     public void addStudent (Student s){
@@ -55,27 +54,45 @@ public class Island {
 
         ArrayList<Integer> stud = (ArrayList<Integer>) numStudents.clone();  //clone fa la copia dell'array
 
-        for(Professor p: prof){   //per ogni colore di un professore sommo al colore di numStudent corrispondente il numero di torri
+        for(Professor p: prof){   //per ogni colore di un professore di chi domina sommo numStudent e il numero di torri
             stud.set(p.getProfessorColour().ordinal(), numStudents.get(p.getProfessorColour().ordinal()) + numTower);
         }
 
-        int num = 6;  //dovevo inizializzarlo per non avere errore, 6 non rappresenta nessun colore
+        int[] somma = new int[Parameters.numPlayers];
+        for(Player pl: players) {   // sommo gli studenti (colori diversi) di un singolo giocatore
+            prof = pl.getPlayerSchoolBoard().getProfessors();
+            for (Professor pr : prof)
+                somma[pl.getIndex()] += stud.get(pr.getProfessorColour().ordinal());
+        }
+
+        ArrayList<Integer> rank = null;
         int max = 0;
-        for (int i = 0; i<5; i++){   //trovo il colore del massimo tra studenti o studenti+professori
-            if(max < stud.get(i)) {
-                max = stud.get(i);
-                num = i;
+        for (int i = 0; i<Parameters.numPlayers; i++){  //trovo il giocatore con più studenti
+            if(max < somma[i]){
+                max = somma[i];
+                rank.clear();
+                rank.add(i);
+            }else if (max == stud.get(i) && max != 0){  //qui ho parità
+                rank.add(i);
             }
         }
 
-        for(Player p: players) {  //trovo a quale giocatore controlla il professore del colore max
-            prof = p.getPlayerSchoolBoard().getProfessors();
-            for (Professor pr : prof)
-                if (pr.getProfessorColour().equals(Colour.values()[num]))
-                    return p;
+        if(rank.size() == 1){
+            for(Player p: players) {  //ritoeno il giocatore che ha il max
+               if(p.getIndex() == rank.get(0))
+                   return p;
+            }
         }
 
-        return null;  // se non trova chi domina l'isola ritorna null
+        return null;  // se non trova nessun player o più di uno
+    }
+
+    public int getNumTower() {
+        return numTower;
+    }
+
+    public TowerColour getTowerColor() {
+        return towerColor;
     }
 
     public int getIslandRank() {

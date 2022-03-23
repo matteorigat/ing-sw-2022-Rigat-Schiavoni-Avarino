@@ -86,32 +86,33 @@ public class Game {
            for (int i=0; i<Parameters.entranceStudents; i++)
                p.getPlayerSchoolBoard().getStudentsEntrance().add(gameBoard.getBag().draw());
         }
-
-
     }
 
-    public void PlanningPhase(){
-        for(Cloud c: gameBoard.getClouds()){    // a inizio della fase di pianificazione aggiungo gli studenti alle isole
-            for(int i=0; i<Parameters.numCloudStudents; i++){
+
+    //Fase pianificazione punto 1
+    public void addStudentsOnClouds(){
+        for(Cloud c: gameBoard.getClouds())
+            for(int i=0; i<Parameters.numCloudStudents; i++)
                 gameBoard.addStudentOnCloud(i, gameBoard.getBag().draw());
-            }
-        }
     }
-
-    public void playAssistantCard(int prioriy, int playerIndex){
-        for (AssistantCard as : players.get(playerIndex).getAssistantDeck()){
-            if ( as.getValue() == (prioriy) ) {
+    //Fase pianificazione punto 2
+    public void playAssistantCard(int priority, int playerIndex){
+        for (AssistantCard as : players.get(playerIndex).getAssistantDeck())
+            if (as.getValue() == priority)
                 players.get(playerIndex).playCard(as);
-
-
-            }
-        }
-
-    }
-    public void ActionPhase(int playerIndex){
-
     }
 
+
+    //Fase azione punto 1
+    public void moveStudentToIsland(int IslandPosition, int player, int colour){
+        players.get(player).getPlayerSchoolBoard().moveStudentToIsland(colour, this.gameBoard.getIslands().get(IslandPosition));
+    }
+    //Fase azione punto 1
+    public void moveStudentToDiningRoom(int player,int colour){
+        players.get(player).getPlayerSchoolBoard().moveStudentToDiningRoom(colour);
+    }
+
+    //Fase azione punto 2
     public void moveMotherNature(int movements){
         int newPos = ((this.gameBoard.getMotherNature() + movements)%Parameters.numIsland);
         this.gameBoard.setMotherNature(newPos);//moves motherNature by specified movements
@@ -119,24 +120,26 @@ public class Game {
     }
 
     public void checkIsland(int islandIndex){
-       Player p = this.gameBoard.getIslands().get(islandIndex).Influence(this.players);
-       if (p!=null){
-         for(int i=0; i<this.gameBoard.getIslands().get(islandIndex).getIslandRank(); i++) {
-             //  this.gameBoard.getIslands().get(islandIndex).set   p.getPlayerSchoolBoard().getTowerColor()
+        // vedo chi controllava l'isola prima
+        Player oldPlayer = null;
+        for (Player pl: players){
+            if(pl.PlayerTowerColor().equals(this.gameBoard.getIslands().get(islandIndex).getTowerColor())){
+                oldPlayer = pl;
+            }
+        }
 
-             p.getPlayerSchoolBoard().getTowers().remove(0);
-         }
-       } else return;
-    }
-    public void moveStudentToIsland(int IslandPosition, int player, int colour) {
+        // vedo chi ha più influenza ora
+        Player newPlayer = this.gameBoard.getIslands().get(islandIndex).Influence(this.players);
 
-        players.get(player).getPlayerSchoolBoard().moveStudentToIsland(colour, this.gameBoard.getIslands().get(IslandPosition) );
+        //ridò al vecchio giocatore le sue torri e le sostituisco con quelle del nuovo giocatore
+        if (newPlayer!=null){
+           for(int i=0; i<=this.gameBoard.getIslands().get(islandIndex).getNumTower(); i++){
+               oldPlayer.getPlayerSchoolBoard().addTower(oldPlayer.PlayerTowerColor());
+               newPlayer.getPlayerSchoolBoard().getTowers().remove(0);
+           }
+           this.getGameBoard().getIslands().get(islandIndex).changeTowerColor(newPlayer.PlayerTowerColor());
 
-    }
-
-    public void moveStudentToDiningRoom(int player,int colour){
-
-        players.get(player).getPlayerSchoolBoard().moveStudentToDiningRoom(colour);
+        } else return; //se non c'è ancora una torre sull'isola o in caso di parità non succede nulla
     }
 
 

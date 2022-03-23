@@ -36,6 +36,9 @@ public class Player {
         assistantDeck.add(new AssistantCard(10,5));
     }
 
+    public int getIndex() {
+        return index;
+    }
 
     //Return the player's tower color
     public TowerColour PlayerTowerColor(){
