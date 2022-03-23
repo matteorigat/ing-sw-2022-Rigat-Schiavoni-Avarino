@@ -78,6 +78,7 @@ public class Player {
         for(int i=0;i< assistantDeck.size();i++){
             System.out.println(assistantDeck.get(i).getValue() + " " + assistantDeck.get(i).getMovements());
         }
+
     }
     // play a card and remove it from the deck (da implementare le funzionalità di giocata)
     public void playCard(AssistantCard cardPlayed){

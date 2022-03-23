@@ -1,6 +1,7 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.controller.Game;
+import it.polimi.ingsw.model.Parameters;
 import it.polimi.ingsw.model.Student;
 import it.polimi.ingsw.model.gameboard.Bag;
 
@@ -19,9 +20,7 @@ public class App
         String nickname = null;  // qui bisogna fare qualcosa per prendere in lettura i vari nickname
 
 
-        boolean isfull = false;
-        while(isfull){  // condizione a caso, da cambiare
-
+        for(int i = 0; i< Parameters.numPlayers; i++){ // Ha senso?
             game.addPlayer(nickname);
         }
 
