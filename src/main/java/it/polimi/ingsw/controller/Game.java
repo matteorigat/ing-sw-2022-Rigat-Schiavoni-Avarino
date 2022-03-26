@@ -9,7 +9,6 @@ import it.polimi.ingsw.model.gameboard.Cloud;
 import it.polimi.ingsw.model.gameboard.GameBoard;
 
 import java.util.ArrayList;
-import it.polimi.ingsw.model.enumeration.Colour;
 
 /*
  *  In this class we manage the main actions of the match.
