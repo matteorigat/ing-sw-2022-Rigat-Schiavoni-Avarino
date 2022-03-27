@@ -1,4 +1,4 @@
-package it.polimi.ingsw.model.gameboard;
+package it.polimi.ingsw.model.gameboard.Characters;
 
 public interface CharacterCard {
 

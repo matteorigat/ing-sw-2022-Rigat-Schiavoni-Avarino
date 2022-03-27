@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.gameboard;
 
 import it.polimi.ingsw.model.Parameters;
+import it.polimi.ingsw.model.gameboard.Characters.CharacterCard;
 
 import java.util.ArrayList;
 
