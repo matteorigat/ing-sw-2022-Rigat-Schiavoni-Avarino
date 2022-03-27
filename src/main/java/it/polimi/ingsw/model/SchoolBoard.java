@@ -36,6 +36,11 @@ public class SchoolBoard {
        return towers.get(0).getTowerColor();
     }
 
+    public void addTower(TowerColour towerColour){
+        Tower t = new Tower(towerColour);
+        towers.add(t);
+    }
+
     public void moveStudentToDiningRoom(int studentColour) {
         for (Student s : studentsEntrance){
             if (s.getColour().equals(Colour.values()[studentColour])) {

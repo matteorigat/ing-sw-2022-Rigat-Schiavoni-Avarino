@@ -60,20 +60,11 @@ public class GameBoard {
         for(Student s: islands.get(island2).getStudents())
             islands.get(island1).addStudent(s);
 
-        islands.remove(island2);
-
-    }
-
-    public void islandFusion(int island1, int island2, int island3) {  //se conquisto l'isola in mezzo a due già mie, ho una fusione a tre
-
-        for(Student s: islands.get(island2).getStudents())
-            islands.get(island1).addStudent(s);
-
-        for(Student s: islands.get(island3).getStudents())
-            islands.get(island1).addStudent(s);
+        this.islands.get(island1).setNumTower(this.islands.get(island1).getNumTower() + 1);
+        this.islands.get(island1).setNumTower(this.islands.get(island1).getIslandRank() + 1);
 
         islands.remove(island2);
-        islands.remove(island3);
+
     }
 
     public ArrayList<Island> getIslands() {

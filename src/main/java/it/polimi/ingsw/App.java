@@ -1,6 +1,7 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.controller.Game;
+import it.polimi.ingsw.model.Parameters;
 import it.polimi.ingsw.model.Student;
 import it.polimi.ingsw.model.gameboard.Bag;
 
@@ -16,22 +17,21 @@ public class App
         System.out.println( "Hello World!");
         Game game = new Game();
         Bag b = new Bag();
-        String nickname = null;  // qui bisogna fare qualcosa per prendere in lettura i vari nickname
+        String nickname = "carlo";  // qui bisogna fare qualcosa per prendere in lettura i vari nickname
 
 
-        boolean isfull = false;
-        while(isfull){  // condizione a caso, da cambiare
-
+        for(int i = 0; i< Parameters.numPlayers; i++){ // Ha senso?
             game.addPlayer(nickname);
         }
 
         game.init();
 
-
+        /*
         for(int i=0; i<10; i++){
             Student s = b.draw();
             System.out.println(s + "" + i);
         }
+        */
 
     }
 }
