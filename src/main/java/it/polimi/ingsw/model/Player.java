@@ -45,9 +45,6 @@ public class Player {
         return playerSchoolBoard.getTowerColor();
     }
 
-    public ArrayList<Professor> getPlayerProfessors(){
-        return playerSchoolBoard.getProfessors();
-    }
 
     //Gets the schoolBoard of the player
     public SchoolBoard getPlayerSchoolBoard() {
@@ -58,20 +55,6 @@ public class Player {
     public ArrayList<AssistantCard> getAssistantDeck() {
         return assistantDeck;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     public void printDeck(){
