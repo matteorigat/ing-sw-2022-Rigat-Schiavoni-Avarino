@@ -16,6 +16,7 @@ public class CharacterDeck {
             n =  Math.random()* Parameters.numCharacterCards;
             k = (int) n + 1;
             threeCards.add(characterCards.get(k));
+            characterCards.remove(k);
         }
 
         return threeCards;
