@@ -38,8 +38,8 @@ public class Game {
         return gameBoard;
     }
 
-    public void setNumPlayers(int num){
-        Parameters.setParameters(num);
+    public void setGameParameters(int num,boolean mode){
+        Parameters.setParameters(num,mode);
     }
 
     public void addPlayer(String nickname){   //DA RIFAREEEEEE
