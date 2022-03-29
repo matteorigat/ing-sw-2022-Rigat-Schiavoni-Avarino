@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.enumeration.Colour;
 import java.util.ArrayList;
 
 public class DiningRoom {
+
     private ArrayList<Student> greenStudents;
     private ArrayList<Student> redStudents;
     private ArrayList<Student> yellowStudents;
