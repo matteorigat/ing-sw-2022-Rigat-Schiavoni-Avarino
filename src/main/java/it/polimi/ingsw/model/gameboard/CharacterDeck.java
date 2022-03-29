@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.gameboard;
 
 import it.polimi.ingsw.model.Parameters;
+import it.polimi.ingsw.model.gameboard.Characters.CharacterCard;
 
 import java.util.ArrayList;
 
@@ -16,6 +17,7 @@ public class CharacterDeck {
             n =  Math.random()* Parameters.numCharacterCards;
             k = (int) n + 1;
             threeCards.add(characterCards.get(k));
+            characterCards.remove(k);
         }
 
         return threeCards;
