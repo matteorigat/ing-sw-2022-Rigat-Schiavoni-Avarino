@@ -65,23 +65,20 @@ public class DiningRoom {
     }
      */
 
-    public int NumOfGreenStudents() {
-        return greenStudents.size();
+    public int numOfStudentByColor(Colour color){
+        if(color.equals(Colour.Green)){
+            return greenStudents.size();
+        } else if(color.equals(Colour.Red)){
+            return redStudents.size();
+        } else if(color.equals(Colour.Yellow)){
+            return yellowStudents.size();
+        } else if(color.equals(Colour.Pink)){
+            return pinkStudents.size();
+        } else if(color.equals(Colour.Blue)){
+            return blueStudents.size();
+        }
+        return -1;
     }
 
-    public int NumOfRedStudents() {
-        return redStudents.size();
-    }
 
-    public int NumOfYellowStudents() {
-        return yellowStudents.size();
-    }
-
-    public int NumOfPinkStudents() {
-        return pinkStudents.size();
-    }
-
-    public int NumOfBlueStudents() {
-        return blueStudents.size();
-    }
 }

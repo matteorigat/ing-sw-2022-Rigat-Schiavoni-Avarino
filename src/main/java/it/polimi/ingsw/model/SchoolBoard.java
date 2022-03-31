@@ -62,6 +62,22 @@ public class SchoolBoard {
         }
     }
 
+    public DiningRoom getDiningRoom() {
+        return diningRoom;
+    }
+
+    public void removeProfessor(Colour color){
+        for (Professor p: professors){
+            if (p.getProfessorColour().equals(color))
+                professors.remove(p);
+        }
+    }
+
+    public void addProfessor(Colour color){
+        Professor pr = new Professor(color);
+        professors.add(pr);
+    }
+
     public ArrayList<Tower> getTowers() {
         return towers;
     }

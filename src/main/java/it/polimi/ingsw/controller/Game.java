@@ -109,6 +109,30 @@ public class Game {
     //Fase azione punto 1
     public void moveStudentToDiningRoom(int playerIndex, int colour){
         players.get(playerIndex).getPlayerSchoolBoard().moveStudentToDiningRoom(colour);
+
+        int c;
+        int max = 0;
+        Player oldProfessorOwner = null;
+        Player newProfessorOwner = null;
+        for(Player p: players){
+            //vedo chi aveva il professore prima
+            for(Professor pr: p.getPlayerSchoolBoard().getProfessors()){
+                if(pr.getProfessorColour().equals(Colour.values()[colour]))
+                    oldProfessorOwner = p;
+            }
+            //vedo chi merita il professore ora
+            c = p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colour]);
+            if(c > max){
+                max = c;
+                newProfessorOwner = p;
+            }
+        }
+        //se il propretario è cambiato faccio il passaggio
+        if(!oldProfessorOwner.equals(newProfessorOwner)){
+            oldProfessorOwner.getPlayerSchoolBoard().removeProfessor(Colour.values()[colour]);
+            newProfessorOwner.getPlayerSchoolBoard().addProfessor(Colour.values()[colour]);
+        }
+
     }
 
     //Fase azione punto 2.1
