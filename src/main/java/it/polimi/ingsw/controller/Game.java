@@ -144,25 +144,26 @@ public class Game {
 
     private void orderPlayerActionPhase(){
         for(int i = 0; i < playersTurnOrder.length; i++){
-            boolean end = false;
+            boolean swap = false;
             for(int j = 0; j < playersTurnOrder.length-1; j++){
                 if(playersTurnOrder[j].getCurrentCard().getValue() > playersTurnOrder[j+1].getCurrentCard().getValue()) {
                     Player k = playersTurnOrder[j];
                     playersTurnOrder[j] = playersTurnOrder[j+1];
                     playersTurnOrder[j+1] = k;
-                    end = true; //segna che è avvenuto uno scambio
+                    swap = true; //segna che è avvenuto uno scambio
                 }
             }
-            if(!end) break; // esce prima se ha già ordinato tutto
+            if(!swap) break; // esce prima se ha già ordinato tutto
         }
     }
 
 
     public void playCharacterCard(int playerIndex, int cardIndex){
-        if(playerIndex == currentPlayer);
-
+        if(playerIndex == currentPlayer /*&& players.get(playerIndex).getCoins() >= cardIndex.costo*/){
+            //cardindex.play() o comunque si attiva il suo effetto, inoltre il costo viene implementato di uno
+            //gameBoard.addCoinsToGeneralReserve(cardIndex - 1); //meno uno perchè una va sulla carta
+        }
     }
-
 
     //Fase azione punto 1
     public void moveStudentToIsland(int playerIndex, int colour, int IslandPosition){
@@ -183,6 +184,7 @@ public class Game {
             coin = players.get(playerIndex).getPlayerSchoolBoard().moveStudentToDiningRoom(colour);
             if(Parameters.expertMode && coin){
                 players.get(playerIndex).addCoin();
+                gameBoard.getOneCoin();
             }
 
             //controllo chi possiede il professore ora
@@ -287,7 +289,6 @@ public class Game {
                 currentPhase = GamePhase.MoveStudents;
                 currentPlayer = playersTurnOrder[playerPhaseCounter].getIndex();
             }
-
         }
     }
 

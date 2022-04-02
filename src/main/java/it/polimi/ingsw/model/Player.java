@@ -58,14 +58,7 @@ public class Player {
         return assistantDeck;
     }
 
-
-    public void printDeck(){
-        for(int i=0;i< assistantDeck.size();i++){
-            System.out.println(assistantDeck.get(i).getValue() + " " + assistantDeck.get(i).getMovements());
-        }
-
-    }
-    // play a card and remove it from the deck (da implementare le funzionalità di giocata)
+    // play a card and remove it from the deck
     public void playCard(AssistantCard cardPlayed){
                 this.currentCard = cardPlayed;
                 assistantDeck.remove(cardPlayed);
@@ -78,6 +71,10 @@ public class Player {
 
     public void addCoin() {
         coins++;
+    }
+
+    public int getCoins() {
+        return coins;
     }
 }
 

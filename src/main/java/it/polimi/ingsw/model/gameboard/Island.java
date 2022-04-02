@@ -71,7 +71,7 @@ public class Island {
         }
 
         if(rank.size() == 1){
-            for(Player p: players) {  //ritoeno il giocatore che ha il max
+            for(Player p: players) {  //ritorno il giocatore che ha il max
                if(p.getIndex() == rank.get(0))
                    return p;
             }
@@ -96,16 +96,8 @@ public class Island {
         return islandRank;
     }
 
-    public void setIslandRank(int islandRank) {
-        this.islandRank = islandRank;
-    }
-
     public int getIslandIndex() {
         return islandIndex;
-    }
-
-    public void setIslandIndex(int islandIndex) {
-        this.islandIndex = islandIndex;
     }
 
     public ArrayList<Student> getStudents() {

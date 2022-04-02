@@ -79,7 +79,7 @@ public class DiningRoom {
         } else if(color.equals(Colour.Blue)){
             return blueStudents.size();
         }
-        return -1;
+        return -1;//non dovrebbe mai succedere
     }
 
 

@@ -13,6 +13,7 @@ public class GameBoard {
 
     private int motherNature;
     private Bag bag;
+    private int generalReserve;
 
     public GameBoard() {
         this.islands = new ArrayList<>(Parameters.numIsland);
@@ -65,6 +66,14 @@ public class GameBoard {
 
         islands.remove(island2);
 
+    }
+
+    public void getOneCoin(){
+        this.generalReserve--;
+    }
+
+    public void addCoinsToGeneralReserve(int coins) {
+        this.generalReserve += coins;
     }
 
     public ArrayList<Island> getIslands() {
