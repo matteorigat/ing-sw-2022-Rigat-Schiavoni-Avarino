@@ -107,9 +107,12 @@ public class Game {
 
     //Fase pianificazione punto 1
     public void addStudentsOnClouds(){
-        for(Cloud c: gameBoard.getClouds())
-            for(int i=0; i<Parameters.numCloudStudents; i++)
-                gameBoard.addStudentOnCloud(i, gameBoard.getBag().draw());
+        int num = 0;
+        for(Cloud c: gameBoard.getClouds()){
+            for (int i = 0; i < Parameters.numCloudStudents; i++)
+                gameBoard.addStudentOnCloud(num, gameBoard.getBag().draw());
+            num++;
+        }
     }
     //Fase pianificazione punto 2
     public void playAssistantCard(int playerIndex, int priority){
@@ -244,17 +247,24 @@ public class Game {
                     oldPlayer = pl;
             }
 
-            //ridò al vecchio giocatore le sue torri e le sostituisco con quelle del nuovo giocatore
-            for(int i=0; i<=this.gameBoard.getIslands().get(islandIndex).getNumTower(); i++){
-                if(oldPlayer != null)
-                    oldPlayer.getPlayerSchoolBoard().addTower(oldPlayer.PlayerTowerColor());
-                newPlayer.getPlayerSchoolBoard().getTowers().remove(0);
+            if(!oldPlayer.equals(newPlayer)){
+                //ridò al vecchio giocatore le sue torri e le sostituisco con quelle del nuovo giocatore
+                for(int i=0; i<=this.gameBoard.getIslands().get(islandIndex).getNumTower(); i++){
+                    if(oldPlayer != null)
+                        oldPlayer.getPlayerSchoolBoard().addTower(oldPlayer.PlayerTowerColor());
+                    newPlayer.getPlayerSchoolBoard().getTowers().remove(0);
+                }
+                this.getGameBoard().getIslands().get(islandIndex).changeTowerColor(newPlayer.PlayerTowerColor());
+
+                if(newPlayer.getPlayerSchoolBoard().getTowers().size() == 0){
+                    endGame();
+                }
+
+                checkIslandFusion(islandIndex);
             }
-            this.getGameBoard().getIslands().get(islandIndex).changeTowerColor(newPlayer.PlayerTowerColor());
 
-            checkIslandFusion(islandIndex);
-
-        } else return; //se non c'è ancora una torre sull'isola o in caso di parità non succede nulla
+        }
+        //se nessuno ha l'influenza o in caso di parità non succede nulla
     }
     //Fase azione punto 2.3
     private void checkIslandFusion(int islandIndex){
@@ -267,6 +277,9 @@ public class Game {
         while (this.gameBoard.getIslands().get(newPosition).getTowerColor().equals(this.gameBoard.getIslands().get(newPosition-1).getTowerColor())){
             this.gameBoard.islandFusion(newPosition-1, newPosition);
             newPosition--;
+        }
+        if(this.gameBoard.getIslands().size() <= 3){
+            endGame();
         }
     }
 
@@ -285,6 +298,14 @@ public class Game {
                 addStudentsOnClouds();
                 orderPlayersAssistantCard();
                 currentPhase = GamePhase.PlayAssistantCard;
+
+                if(gameBoard.getBag().getStudents().size() == 0)  //bisogna mettere delle exception dove viene pescato uno studente se non ce ne sono più, poi qui finisco il gioco.
+                    endGame();
+
+                for(Player p: players)
+                    if(p.getAssistantDeck().size() == 0)
+                        endGame();
+
             } else {
                 currentPhase = GamePhase.MoveStudents;
                 currentPlayer = playersTurnOrder[playerPhaseCounter].getIndex();
@@ -307,6 +328,12 @@ public class Game {
         currentPlayer = index;
         for(int i = 0; i<Parameters.numPlayers; i++)
             playersTurnOrder[i] = players.get((index + i)%Parameters.numPlayers);
+    }
+
+    public void endGame(){
+        //non so cosa succeda qui dentro
+        //vince il giocatore che ha costruito il maggior numero di torri
+        //in caso di parità chi ha piu professori
     }
 
     public int getCurrentPlayer(){

@@ -11,23 +11,27 @@ public class Bag {
     ArrayList<Student> students;
 
 
-
     public Bag(){
         this.students = new ArrayList<>();
     }
 
-  public void fill(ArrayList<Student> input) {
+    public void fill(ArrayList<Student> input) {
 
-          for (Student s : input){
-              this.students.add(s);
-          }
+        for (Student s : input){
+            this.students.add(s);
+        }
 
-          Collections.shuffle(students);
+        Collections.shuffle(students);
 
-  }
-  public Student draw(){
-      Student s = students.get(0);
-      students.remove(0);
-      return s;
-  }
+    }
+
+    public Student draw(){
+        Student s = students.get(0);
+        students.remove(0);
+        return s;
+    }
+
+    public ArrayList<Student> getStudents() {
+        return students;
+    }
 }
