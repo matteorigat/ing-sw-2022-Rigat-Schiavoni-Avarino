@@ -19,7 +19,7 @@ public class DiningRoom {
         this.pinkStudents = new ArrayList<>(0);
         this.blueStudents = new ArrayList<>(0);
     }
-
+    /*
     public void addStudent(Student s){                 // scusate i tanti if ma sono funzionali
         if(s.getColour().equals(Colour.Green))         // qui poi nelle regole esperte bisogna contare le  monete
             greenStudents.add(s);
@@ -33,9 +33,11 @@ public class DiningRoom {
             blueStudents.add(s);
     }
 
-    /*
+     */
+
+
     //variante con monete, se ritorna true il giocatore guadagna una moneta
-    public boolean addStudent(Student s, int i){
+    public boolean addStudent(Student s){
         if(s.getColour().equals(Colour.Green)){
             greenStudents.add(s);
             if (greenStudents.size()%3 == 0) //moneta se 3, 6 e 9
@@ -63,7 +65,7 @@ public class DiningRoom {
         }
         return false;
     }
-     */
+
 
     public int numOfStudentByColor(Colour color){
         if(color.equals(Colour.Green)){

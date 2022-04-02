@@ -137,28 +137,29 @@ public class Game {
                 currentPhase = GamePhase.MoveStudents;
                 phaseCounter = 0;
                 this.orderPlayerActionPhase();
+                currentPlayer = playersTurnOrder[0].getIndex();
             }
         }
     }
 
-    public void orderPlayerActionPhase(){
+    private void orderPlayerActionPhase(){
         for(int i = 0; i < playersTurnOrder.length; i++){
-            boolean flag = false;
+            boolean end = false;
             for(int j = 0; j < playersTurnOrder.length-1; j++){
                 if(playersTurnOrder[j].getCurrentCard().getValue() > playersTurnOrder[j+1].getCurrentCard().getValue()) {
                     Player k = playersTurnOrder[j];
                     playersTurnOrder[j] = playersTurnOrder[j+1];
                     playersTurnOrder[j+1] = k;
-                    flag=true;
+                    end = true; //segna che è avvenuto uno scambio
                 }
             }
-            if(!flag) break; // esce prima se ha già ordinato tutto
+            if(!end) break; // esce prima se ha già ordinato tutto
         }
     }
 
 
     public void playCharacterCard(int playerIndex, int cardIndex){
-
+        if(playerIndex == currentPlayer);
 
     }
 
@@ -178,8 +179,13 @@ public class Game {
     //Fase azione punto 1
     public void moveStudentToDiningRoom(int playerIndex, int colour){
         if(currentPhase.equals(GamePhase.MoveStudents) && playerIndex == currentPlayer){
-            players.get(playerIndex).getPlayerSchoolBoard().moveStudentToDiningRoom(colour);
+            boolean coin; //ritorna true se il giocatore merita una moneta
+            coin = players.get(playerIndex).getPlayerSchoolBoard().moveStudentToDiningRoom(colour);
+            if(Parameters.expertMode && coin){
+                players.get(playerIndex).addCoin();
+            }
 
+            //controllo chi possiede il professore ora
             int c;
             int max = 0;
             Player oldProfessorOwner = null;
@@ -224,7 +230,7 @@ public class Game {
         }
     }
     //Fase azione punto 2.2 //vedo chi controlla l'isola, se il player è cambiato sostituisco le torri
-    public void checkIslandInfluence(int islandIndex){
+    private void checkIslandInfluence(int islandIndex){
 
         // vedo chi ha più influenza ora
         Player newPlayer = this.gameBoard.getIslands().get(islandIndex).Influence(this.players);
@@ -249,7 +255,7 @@ public class Game {
         } else return; //se non c'è ancora una torre sull'isola o in caso di parità non succede nulla
     }
     //Fase azione punto 2.3
-    public void checkIslandFusion(int islandIndex){
+    private void checkIslandFusion(int islandIndex){
         //se il colore delle torri sull'isola e su quella successiva sono uguali
         while (this.gameBoard.getIslands().get(islandIndex).getTowerColor().equals(this.gameBoard.getIslands().get(islandIndex+1).getTowerColor())){
             this.gameBoard.islandFusion(islandIndex, islandIndex+1);
@@ -279,12 +285,13 @@ public class Game {
                 currentPhase = GamePhase.PlayAssistantCard;
             } else {
                 currentPhase = GamePhase.MoveStudents;
+                currentPlayer = playersTurnOrder[playerPhaseCounter].getIndex();
             }
 
         }
     }
 
-    public void orderPlayersAssistantCard(){
+    private void orderPlayersAssistantCard(){
         int index = -1;
         int num;
         int min = 11;

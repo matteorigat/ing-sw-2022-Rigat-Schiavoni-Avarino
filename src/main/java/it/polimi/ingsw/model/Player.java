@@ -14,6 +14,7 @@ public class Player {
     private SchoolBoard playerSchoolBoard;
     private ArrayList<AssistantCard> assistantDeck;
     private AssistantCard currentCard;
+    private int coins;
 
 
     // Constructor Player creates a new Player instance
@@ -23,6 +24,7 @@ public class Player {
         this.playerSchoolBoard = new SchoolBoard(this.towerColour);
         this.assistantDeck = new ArrayList<>();
         this.index = index;
+        this.coins = 1;
 
         assistantDeck.add(new AssistantCard(1,1));
         assistantDeck.add(new AssistantCard(2,1));
@@ -72,6 +74,10 @@ public class Player {
 
     public AssistantCard getCurrentCard() {
         return currentCard;
+    }
+
+    public void addCoin() {
+        coins++;
     }
 }
 

@@ -41,14 +41,16 @@ public class SchoolBoard {
         towers.add(t);
     }
 
-    public void moveStudentToDiningRoom(int studentColour) {
+    public boolean moveStudentToDiningRoom(int studentColour) {
+        boolean coin = false;
         for (Student s : studentsEntrance){
             if (s.getColour().equals(Colour.values()[studentColour])) {
-                this.diningRoom.addStudent(s);
+                coin = this.diningRoom.addStudent(s);
                 studentsEntrance.remove(s);
                 break;
             }
         }
+        return coin;
     }
 
     public void moveStudentToIsland(int studentColour, Island i) {
