@@ -8,6 +8,10 @@ import java.util.ArrayList;
 public class CharacterDeck {
     private ArrayList<CharacterCard> characterCards;
 
+    public CharacterDeck() {
+
+    }
+
     public ArrayList<CharacterCard> getThreeRandomCards(){
         ArrayList<CharacterCard> threeCards = null;
         double n;

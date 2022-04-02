@@ -70,8 +70,9 @@ public class Player {
             }
 
 
-
-
+    public AssistantCard getCurrentCard() {
+        return currentCard;
+    }
 }
 
 

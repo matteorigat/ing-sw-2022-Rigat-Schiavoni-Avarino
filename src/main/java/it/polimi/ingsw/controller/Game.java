@@ -3,12 +3,16 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.exceptions.NotExistingPlayerException;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.enumeration.Colour;
+import it.polimi.ingsw.model.enumeration.GamePhase;
 import it.polimi.ingsw.model.enumeration.TowerColour;
 import it.polimi.ingsw.model.gameboard.Bag;
+import it.polimi.ingsw.model.gameboard.CharacterDeck;
+import it.polimi.ingsw.model.gameboard.Characters.CharacterCard;
 import it.polimi.ingsw.model.gameboard.Cloud;
 import it.polimi.ingsw.model.gameboard.GameBoard;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /*
  *  In this class we manage the main actions of the match.
@@ -17,14 +21,23 @@ import java.util.ArrayList;
 public class Game {
     private final ArrayList<Player> players;
     private final GameBoard gameBoard;
-    private Player currentPlayer;
+    private CharacterDeck characterDeck;
+    private ArrayList<CharacterCard> threeCharacterCards;
+    private int currentPlayer;
+    private GamePhase currentPhase;
+    private Player[] playersTurnOrder;
+
+    private int phaseCounter;
+    private int playerPhaseCounter;
 
 
     //Constructor Game creates a new Game instance
     public Game() {
         players = new ArrayList<>();
         gameBoard = new GameBoard();
-        currentPlayer = null;
+        characterDeck = new CharacterDeck();
+        phaseCounter = 0;
+        playerPhaseCounter = 0;
     }
 
     //Gets the players of the match
@@ -54,6 +67,10 @@ public class Game {
     }
 
     public void init(){   //sto seguendo l'inizializzazione della partita
+        if(Parameters.expertMode){
+            threeCharacterCards = characterDeck.getThreeRandomCards();
+        }
+
         double casual = Math.random()*12; //(PUNTO 2)
         int mn = (int) casual;
 
@@ -96,51 +113,114 @@ public class Game {
     }
     //Fase pianificazione punto 2
     public void playAssistantCard(int playerIndex, int priority){
-        for (AssistantCard as : players.get(playerIndex).getAssistantDeck())
-            if (as.getValue() == priority)
-                players.get(playerIndex).playCard(as);
+        if(currentPhase.equals(GamePhase.PlayAssistantCard) && playerIndex == currentPlayer) {
+
+            int check = 0;
+            for(AssistantCard as: players.get(playerIndex).getAssistantDeck()){
+                for(int i=0; i<phaseCounter; i++){
+                    if(as.getValue() == playersTurnOrder[phaseCounter].getCurrentCard().getValue()){
+                        check++;
+                    }
+                }
+            }
+
+            if (check != players.get(playerIndex).getAssistantDeck().size())
+                return;
+
+            for (AssistantCard as : players.get(playerIndex).getAssistantDeck())
+                if (as.getValue() == priority)
+                    players.get(playerIndex).playCard(as);
+
+            currentPlayer = playersTurnOrder[phaseCounter + 1].getIndex();
+            phaseCounter++;
+            if (phaseCounter == Parameters.numPlayers) {
+                currentPhase = GamePhase.MoveStudents;
+                phaseCounter = 0;
+                this.orderPlayerActionPhase();
+            }
+        }
+    }
+
+    public void orderPlayerActionPhase(){
+        for(int i = 0; i < playersTurnOrder.length; i++){
+            boolean flag = false;
+            for(int j = 0; j < playersTurnOrder.length-1; j++){
+                if(playersTurnOrder[j].getCurrentCard().getValue() > playersTurnOrder[j+1].getCurrentCard().getValue()) {
+                    Player k = playersTurnOrder[j];
+                    playersTurnOrder[j] = playersTurnOrder[j+1];
+                    playersTurnOrder[j+1] = k;
+                    flag=true;
+                }
+            }
+            if(!flag) break; // esce prima se ha già ordinato tutto
+        }
+    }
+
+
+    public void playCharacterCard(int playerIndex, int cardIndex){
+
+
     }
 
 
     //Fase azione punto 1
     public void moveStudentToIsland(int playerIndex, int colour, int IslandPosition){
-        players.get(playerIndex).getPlayerSchoolBoard().moveStudentToIsland(colour, this.gameBoard.getIslands().get(IslandPosition));
+        if(currentPhase.equals(GamePhase.MoveStudents) && playerIndex == currentPlayer){
+            players.get(playerIndex).getPlayerSchoolBoard().moveStudentToIsland(colour, this.gameBoard.getIslands().get(IslandPosition));
+
+            phaseCounter++;
+            if(phaseCounter == Parameters.numCloudStudents){
+                currentPhase = GamePhase.MoveMotherNature;
+                phaseCounter = 0;
+            }
+        }
     }
     //Fase azione punto 1
     public void moveStudentToDiningRoom(int playerIndex, int colour){
-        players.get(playerIndex).getPlayerSchoolBoard().moveStudentToDiningRoom(colour);
+        if(currentPhase.equals(GamePhase.MoveStudents) && playerIndex == currentPlayer){
+            players.get(playerIndex).getPlayerSchoolBoard().moveStudentToDiningRoom(colour);
 
-        int c;
-        int max = 0;
-        Player oldProfessorOwner = null;
-        Player newProfessorOwner = null;
-        for(Player p: players){
-            //vedo chi aveva il professore prima
-            for(Professor pr: p.getPlayerSchoolBoard().getProfessors()){
-                if(pr.getProfessorColour().equals(Colour.values()[colour]))
-                    oldProfessorOwner = p;
+            int c;
+            int max = 0;
+            Player oldProfessorOwner = null;
+            Player newProfessorOwner = null;
+            for(Player p: players){
+                //vedo chi aveva il professore prima
+                for(Professor pr: p.getPlayerSchoolBoard().getProfessors()){
+                    if(pr.getProfessorColour().equals(Colour.values()[colour]))
+                        oldProfessorOwner = p;
+                }
+                //vedo chi merita il professore ora
+                c = p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colour]);
+                if(c > max){
+                    max = c;
+                    newProfessorOwner = p;
+                }
             }
-            //vedo chi merita il professore ora
-            c = p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colour]);
-            if(c > max){
-                max = c;
-                newProfessorOwner = p;
+            //se il propretario è cambiato faccio il passaggio
+            if(!oldProfessorOwner.equals(newProfessorOwner)){
+                oldProfessorOwner.getPlayerSchoolBoard().removeProfessor(Colour.values()[colour]);
+                newProfessorOwner.getPlayerSchoolBoard().addProfessor(Colour.values()[colour]);
+            }
+
+            phaseCounter++;
+            if(phaseCounter == Parameters.numCloudStudents){
+                currentPhase = GamePhase.MoveMotherNature;
+                phaseCounter = 0;
             }
         }
-        //se il propretario è cambiato faccio il passaggio
-        if(!oldProfessorOwner.equals(newProfessorOwner)){
-            oldProfessorOwner.getPlayerSchoolBoard().removeProfessor(Colour.values()[colour]);
-            newProfessorOwner.getPlayerSchoolBoard().addProfessor(Colour.values()[colour]);
-        }
-
     }
 
     //Fase azione punto 2.1
     public void moveMotherNature(int playerIndex, int movements){ //devo controllare se player ha i permessi
-        if(movements > 0){
-            int newPos = ((this.gameBoard.getMotherNature() + movements)%Parameters.numIsland);
-            this.gameBoard.setMotherNature(newPos);//moves motherNature by specified movements
-            this.checkIslandInfluence(newPos);
+        if(currentPhase.equals(GamePhase.MoveMotherNature) && playerIndex == currentPlayer){
+            if(movements > 0 && movements <= players.get(currentPlayer).getCurrentCard().getMovements()){
+                int newPos = ((this.gameBoard.getMotherNature() + movements)%Parameters.numIsland);
+                this.gameBoard.setMotherNature(newPos);//moves motherNature by specified movements
+                this.checkIslandInfluence(newPos);
+            }
+
+            currentPhase = GamePhase.ChooseCloud;
         }
     }
     //Fase azione punto 2.2 //vedo chi controlla l'isola, se il player è cambiato sostituisco le torri
@@ -184,11 +264,41 @@ public class Game {
 
     //Fase azione punto 3
     public void chooseCloud(int playerIndex, int cloudPosition){
-        ArrayList<Student> stud = this.gameBoard.getClouds().get(cloudPosition).getStudents();
+        if(currentPhase.equals(GamePhase.MoveMotherNature) && playerIndex == currentPlayer){
+            ArrayList<Student> stud = this.gameBoard.getClouds().get(cloudPosition).getStudents();
 
-        for (Student s: stud){ //qui e alla fine del metodo init() farei un nuovo metodo add che controlla anche se non viene superato il limite di studenti all'entrata
-            players.get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance().add(s);
+            for (Student s: stud){ //qui e alla fine del metodo init() farei un nuovo metodo add che controlla anche se non viene superato il limite di studenti all'entrata
+                players.get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance().add(s);
+            }
+
+            playerPhaseCounter++;
+            if(playerPhaseCounter == Parameters.numPlayers){
+                playerPhaseCounter = 0;
+                addStudentsOnClouds();
+                orderPlayersAssistantCard();
+                currentPhase = GamePhase.PlayAssistantCard;
+            } else {
+                currentPhase = GamePhase.MoveStudents;
+            }
+
         }
+    }
+
+    public void orderPlayersAssistantCard(){
+        int index = -1;
+        int num;
+        int min = 11;
+        for(Player p: players){
+            num = p.getCurrentCard().getValue();
+            if(num < min){
+                min = num;
+                index = p.getIndex();
+            }
+        }
+
+        currentPlayer = index;
+        for(int i = 0; i<Parameters.numPlayers; i++)
+            playersTurnOrder[i] = players.get((index + i)%Parameters.numPlayers);
     }
 
     public int getCurrentPlayer(){
