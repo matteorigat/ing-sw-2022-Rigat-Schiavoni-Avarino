@@ -13,4 +13,6 @@ public class Tower {
     public TowerColour getTowerColor() {
         return towerColor;
     }
+
+
 }

@@ -9,6 +9,7 @@ public class StudentTest extends TestCase{
     public void testStudent(){
         Student student = new Student(Colour.Green);
         assertEquals(student.getColour(),Colour.Green);
+        assertEquals(Colour.Green,student.getColour());
 
     }
 }
