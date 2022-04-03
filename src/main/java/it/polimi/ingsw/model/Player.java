@@ -26,6 +26,7 @@ public class Player {
         this.index = index;
         this.coins = 1;
 
+
         assistantDeck.add(new AssistantCard(1,1));
         assistantDeck.add(new AssistantCard(2,1));
         assistantDeck.add(new AssistantCard(3,2));
@@ -59,7 +60,7 @@ public class Player {
     }
 
     // play a card and remove it from the deck
-    public void playCard(AssistantCard cardPlayed){
+    public void playAssistantCard(AssistantCard cardPlayed){
                 this.currentCard = cardPlayed;
                 assistantDeck.remove(cardPlayed);
             }
