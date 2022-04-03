@@ -14,17 +14,11 @@ public class Student {
         this.colour = colour;
     }
 
-    @Override
-    public String toString() {
-        return colour.toString();
 
-    }
 
     public Colour getColour(){
         return this.colour;
     }
-
-
 
 
 
