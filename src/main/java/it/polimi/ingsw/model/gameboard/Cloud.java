@@ -20,6 +20,7 @@ public class Cloud {
         if (this.students.size() < Parameters.numCloudStudents){
             this.students.add(s);
         }
+
     }
 
     //quando un giocatore finisce il turno, prende gli studenti dalla nuvola e la svuota

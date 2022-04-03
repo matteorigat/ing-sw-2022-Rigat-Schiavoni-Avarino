@@ -34,9 +34,9 @@ public class Bag {
         else return null;
     }
 
-    public ArrayList<Student> getStudents() {
+  /*  public ArrayList<Student> getStudents() {
         return students;
-    }
+    } */
 
     public int getSize(){
         return students.size();
