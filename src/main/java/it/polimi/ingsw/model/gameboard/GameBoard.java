@@ -20,6 +20,7 @@ public class GameBoard {
         this.islands = new ArrayList<>(Parameters.numIsland);
         this.clouds = new ArrayList<>(Parameters.numClouds);
         this.bag = new Bag();
+        this.generalReserve = 20 - Parameters.numPlayers;
 
         for (int i=0; i<Parameters.numIsland; i++){
             Island isl = new Island();
