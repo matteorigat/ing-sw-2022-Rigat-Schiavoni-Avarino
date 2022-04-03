@@ -132,7 +132,7 @@ public class Game {
 
             for (AssistantCard as : players.get(playerIndex).getAssistantDeck())
                 if (as.getValue() == priority)
-                    players.get(playerIndex).playCard(as);
+                    players.get(playerIndex).playAssistantCard(as);
 
             currentPlayer = playersTurnOrder[phaseCounter + 1].getIndex();
             phaseCounter++;
