@@ -24,6 +24,7 @@ public class Game {
     private CharacterDeck characterDeck;
     private ArrayList<CharacterCard> threeCharacterCards;
     private int currentPlayer;
+    private int winner;
     private GamePhase currentPhase;
     private Player[] playersTurnOrder;
 

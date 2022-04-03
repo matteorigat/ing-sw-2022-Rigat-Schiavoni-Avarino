@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.gameboard;
 
+import it.polimi.ingsw.model.Parameters;
 import it.polimi.ingsw.model.Student;
 
 import java.util.ArrayList;
@@ -14,8 +15,10 @@ public class Cloud {
     }
 
     // A inizio turmo si aggiungono giocatori sulla nuvola... è possibile modificare la funzione e passare tutti gli studenti insieme come arraylist
-    public void addStudent(Student s) {
-        this.students.add(s);
+    public void addStudent(Student s){
+        if (this.students.size() < Parameters.numCloudStudents){
+            this.students.add(s);
+        }
     }
 
     //quando un giocatore finisce il turno, prende gli studenti dalla nuvola e la svuota
