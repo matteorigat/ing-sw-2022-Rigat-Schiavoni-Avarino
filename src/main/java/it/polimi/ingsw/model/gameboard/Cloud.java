@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.gameboard;
 
+import it.polimi.ingsw.exceptions.TooManyStudentsOnCloudException;
 import it.polimi.ingsw.model.Parameters;
 import it.polimi.ingsw.model.Student;
 
@@ -16,10 +17,11 @@ public class Cloud {
     }
 
     // A inizio turmo si aggiungono giocatori sulla nuvola... è possibile modificare la funzione e passare tutti gli studenti insieme come arraylist
-    public void addStudent(Student s){
+    public void addStudent(Student s) throws TooManyStudentsOnCloudException {
         if (this.students.size() < Parameters.numCloudStudents){
             this.students.add(s);
         }
+        else throw new TooManyStudentsOnCloudException();
 
     }
 

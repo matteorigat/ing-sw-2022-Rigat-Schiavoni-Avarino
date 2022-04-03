@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.gameboard;
 
+import it.polimi.ingsw.exceptions.TooManyStudentsOnCloudException;
 import it.polimi.ingsw.model.AssistantCard;
 import it.polimi.ingsw.model.Parameters;
 import it.polimi.ingsw.model.Student;
@@ -36,7 +37,12 @@ public class GameBoard {
     }
 
     public void addStudentOnCloud(int numCloud, Student student){
+        try{
         clouds.get(numCloud).addStudent(student);
+        }
+        catch(TooManyStudentsOnCloudException e){
+            // CODICE GESTIONE ERRORE
+        }
     }
 
     public int getMotherNature() {

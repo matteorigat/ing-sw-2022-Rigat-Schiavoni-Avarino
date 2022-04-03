@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 public class AssistantCardTest extends TestCase {
 
     @Test
-    public void getNumber() {
+    public void testCard() {
         AssistantCard card = new AssistantCard(2,1);
         assertEquals(2, card.getValue());
         assertEquals(1,card.getMovements());
