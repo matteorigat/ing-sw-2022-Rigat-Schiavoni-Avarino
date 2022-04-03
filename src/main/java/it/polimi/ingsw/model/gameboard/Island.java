@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import static it.polimi.ingsw.model.enumeration.Colour.Green;
 
 public class Island {
-    private int islandRank;    //numero di isole unite
+   // private int islandRank;    //numero di isole unite
     private int islandIndex;
     private int numTower;
     private TowerColour towerColor;
@@ -23,7 +23,7 @@ public class Island {
     public Island(){
         this.students = new ArrayList<Student>(0);
         this.numTower = 0;
-        this.islandRank = 1;
+        //this.islandRank = 1;
         this.towerColor = null;
         this.numStudents = new ArrayList<>();
 
@@ -86,15 +86,16 @@ public class Island {
 
     public void setNumTower(int numTower) {
         this.numTower = numTower;
+      //  this.islandRank = numTower;
     }
 
     public TowerColour getTowerColor() {
         return towerColor;
     }
 
-    public int getIslandRank() {
+  /*  public int getIslandRank() {
         return islandRank;
-    }
+    } */
 
     public int getIslandIndex() {
         return islandIndex;

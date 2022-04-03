@@ -68,8 +68,8 @@ public class GameBoard {
         for(Student s: islands.get(island2).getStudents())
             islands.get(island1).addStudent(s);
 
-        this.islands.get(island1).setNumTower(this.islands.get(island1).getNumTower() + 1);
-        this.islands.get(island1).setNumTower(this.islands.get(island1).getIslandRank() + 1);
+        this.islands.get(island1).setNumTower(this.islands.get(island1).getNumTower() + this.islands.get(island2).getNumTower());
+       // this.islands.get(island1).setNumTower(this.islands.get(island1).getIslandRank() + 1);
 
         islands.remove(island2);
 
@@ -77,6 +77,10 @@ public class GameBoard {
 
     public void getOneCoin(){
         this.generalReserve--;
+    }
+
+    public int getGeneralReserve() {
+        return generalReserve;
     }
 
     public void addCoinsToGeneralReserve(int coins) {
