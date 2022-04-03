@@ -21,8 +21,8 @@ import java.util.Collections;
 public class Game {
     private final ArrayList<Player> players;
     private final GameBoard gameBoard;
-    private CharacterDeck characterDeck;
-    private ArrayList<CharacterCard> threeCharacterCards;
+
+
     private int currentPlayer;
     private int winner;
     private GamePhase currentPhase;
@@ -36,7 +36,7 @@ public class Game {
     public Game() {
         players = new ArrayList<>();
         gameBoard = new GameBoard();
-        characterDeck = new CharacterDeck();
+
         phaseCounter = 0;
         playerPhaseCounter = 0;
     }
@@ -69,7 +69,7 @@ public class Game {
 
     public void init(){   //sto seguendo l'inizializzazione della partita
         if(Parameters.expertMode){
-            threeCharacterCards = characterDeck.getThreeRandomCards();
+            gameBoard.getThreeCards();
         }
 
         double casual = Math.random()*12; //(PUNTO 2)

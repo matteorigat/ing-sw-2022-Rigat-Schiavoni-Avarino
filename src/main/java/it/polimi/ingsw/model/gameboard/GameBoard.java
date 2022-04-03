@@ -5,12 +5,15 @@ import it.polimi.ingsw.model.AssistantCard;
 import it.polimi.ingsw.model.Parameters;
 import it.polimi.ingsw.model.Student;
 import it.polimi.ingsw.model.enumeration.Colour;
+import it.polimi.ingsw.model.gameboard.Characters.CharacterCard;
 
 import java.util.ArrayList;
 public class GameBoard {
 
+    private CharacterDeck characterDeck;
     private ArrayList<Island> islands;
     private ArrayList<Cloud> clouds;
+    private ArrayList<CharacterCard> threeCharacterCards;
 
     private int motherNature;
     private Bag bag;
@@ -21,6 +24,8 @@ public class GameBoard {
         this.clouds = new ArrayList<>(Parameters.numClouds);
         this.bag = new Bag();
         this.generalReserve = 20 - Parameters.numPlayers;
+        this.characterDeck = new CharacterDeck();
+
 
         for (int i=0; i<Parameters.numIsland; i++){
             Island isl = new Island();
@@ -35,6 +40,10 @@ public class GameBoard {
 
     public void addStudentOnIsland(int numIsland, Student student){
         islands.get(numIsland).addStudent(student);
+    }
+
+    public void getThreeCards(){
+        threeCharacterCards = characterDeck.getThreeRandomCards();
     }
 
     public void addStudentOnCloud(int numCloud, Student student){

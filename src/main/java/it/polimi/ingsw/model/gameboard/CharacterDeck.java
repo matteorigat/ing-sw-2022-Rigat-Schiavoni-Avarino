@@ -4,11 +4,13 @@ import it.polimi.ingsw.model.Parameters;
 import it.polimi.ingsw.model.gameboard.Characters.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class CharacterDeck {
     private ArrayList<CharacterCard> characterCards;
 
     public CharacterDeck() {
+        characterCards = new ArrayList<CharacterCard>();
         characterCards.add(new Character1());
         characterCards.add(new Character2());
         characterCards.add(new Character3());
@@ -20,17 +22,20 @@ public class CharacterDeck {
     }
 
     public ArrayList<CharacterCard> getThreeRandomCards(){
-        ArrayList<CharacterCard> threeCards = null;
-        double n;
-        int k;
+        ArrayList<CharacterCard> threeCards = new ArrayList<CharacterCard>();
+
+        Collections.shuffle(this.characterCards);
 
         for (int i=0; i<3; i++){
-            n =  Math.random()* Parameters.numCharacterCards;
-            k = (int) n + 1;
-            threeCards.add(characterCards.get(k));
-            characterCards.remove(k);
+
+            threeCards.add(characterCards.get(0));
+            characterCards.remove(0);
         }
 
         return threeCards;
+    }
+
+    public ArrayList<CharacterCard> getCharacterCards() {
+        return characterCards;
     }
 }
