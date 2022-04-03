@@ -13,5 +13,5 @@ class AssistantCardTest extends TestCase {
         AssistantCard card = new AssistantCard(1,1);
         assertEquals(2, card.getValue());
     }
-
+//bvdhhjdhd
 }
