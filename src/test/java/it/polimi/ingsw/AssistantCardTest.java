@@ -15,7 +15,4 @@ class AssistantCardTest extends TestCase {
         assertEquals(1,card.getMovements());
     }
 
-
-    //ciao
-//bvdhhjdhd
 }
