@@ -88,6 +88,7 @@ public class Game {
         for (int i=0; i<12; i++){
             if(i != gameBoard.getMotherNature() && i != (gameBoard.getMotherNature() + 6)%12) //doesn't place students on the island with mothernature and the opposite one
                 gameBoard.addStudentOnIsland(i, gameBoard.getBag().draw());
+
         }
 
         for (Colour c : Colour.values()) {  //creo gli studenti per il sacchetto
@@ -110,7 +111,8 @@ public class Game {
         int num = 0;
         for(Cloud c: gameBoard.getClouds()){
             for (int i = 0; i < Parameters.numCloudStudents; i++)
-                gameBoard.addStudentOnCloud(num, gameBoard.getBag().draw());
+                if(gameBoard.getBag().getSize() > 0)
+                    gameBoard.addStudentOnCloud(num, gameBoard.getBag().draw());
             num++;
         }
     }
@@ -299,7 +301,7 @@ public class Game {
                 orderPlayersAssistantCard();
                 currentPhase = GamePhase.PlayAssistantCard;
 
-                if(gameBoard.getBag().getStudents().size() == 0)  //bisogna mettere delle exception dove viene pescato uno studente se non ce ne sono più, poi qui finisco il gioco.
+                if(gameBoard.getBag().getSize() == 0)  //bisogna mettere delle exception dove viene pescato uno studente se non ce ne sono più, poi qui finisco il gioco.
                     endGame();
 
                 for(Player p: players)
@@ -334,6 +336,11 @@ public class Game {
         //non so cosa succeda qui dentro
         //vince il giocatore che ha costruito il maggior numero di torri
         //in caso di parità chi ha piu professori
+        currentPhase = GamePhase.GameEnded;
+    }
+
+    public GamePhase getCurrentPhase() {
+        return currentPhase;
     }
 
     public int getCurrentPlayer(){
