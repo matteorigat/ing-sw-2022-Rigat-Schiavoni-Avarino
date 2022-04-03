@@ -4,7 +4,7 @@ import it.polimi.ingsw.model.AssistantCard;
 import junit.framework.TestCase;
 import org.junit.Test;
 
-class AssistantCardTest extends TestCase {
+public class AssistantCardTest extends TestCase {
 
     @Test
     public void getNumber() {

@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.Student;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 
 public class Cloud {
 
@@ -25,8 +26,8 @@ public class Cloud {
     public ArrayList<Student> getStudents() {
         ArrayList<Student> stud = (ArrayList<Student>) students.clone();
 
-        for(Student s: students)
-            students.remove(s);
+        for(int i=0; i<stud.size(); i++)
+            students.remove(0);
 
         return stud;
     }
