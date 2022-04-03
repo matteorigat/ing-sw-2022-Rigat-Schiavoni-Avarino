@@ -26,9 +26,12 @@ public class Bag {
     }
 
     public Student draw(){
+        if (students.size()>0) {
         Student s = students.get(0);
         students.remove(0);
         return s;
+        }
+        else return null;
     }
 
     public ArrayList<Student> getStudents() {

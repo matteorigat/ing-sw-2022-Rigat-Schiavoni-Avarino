@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class AssistantCardTest extends TestCase {
 
     @Test
-    void getNumber() {
+    public void getNumber() {
         AssistantCard card = new AssistantCard(2,1);
         assertEquals(2, card.getValue());
         assertEquals(1,card.getMovements());
