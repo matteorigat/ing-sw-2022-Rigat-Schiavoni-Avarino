@@ -8,7 +8,7 @@ import java.util.Collections;
 
 public class Bag {
 
-    ArrayList<Student> students;
+    private ArrayList<Student> students;
 
 
     public Bag(){
@@ -36,5 +36,9 @@ public class Bag {
 
     public ArrayList<Student> getStudents() {
         return students;
+    }
+
+    public int getSize(){
+        return students.size();
     }
 }

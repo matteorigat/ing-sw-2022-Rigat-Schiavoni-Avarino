@@ -23,7 +23,8 @@ public class BagTest extends TestCase{
         ArrayList arrayList = new ArrayList<>();
         arrayList.add(student);
         bag.fill(arrayList);
-        assertEquals(bag.draw(),student);
+        Student student1 = bag.draw();
+        assertEquals(student1,student);
         assertEquals(bag.draw(),null);
 
     }
