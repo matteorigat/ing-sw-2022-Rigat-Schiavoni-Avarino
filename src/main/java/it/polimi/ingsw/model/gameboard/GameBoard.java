@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.AssistantCard;
 import it.polimi.ingsw.model.Parameters;
 import it.polimi.ingsw.model.Student;
 import it.polimi.ingsw.model.enumeration.Colour;
+import it.polimi.ingsw.model.gameboard.Characters.*;
 import it.polimi.ingsw.model.gameboard.Characters.CharacterCard;
 
 import java.util.ArrayList;
@@ -23,18 +24,20 @@ public class GameBoard {
         this.islands = new ArrayList<>(Parameters.numIsland);
         this.clouds = new ArrayList<>(Parameters.numClouds);
         this.bag = new Bag();
-        this.generalReserve = 20 - Parameters.numPlayers;
-        this.characterDeck = new CharacterDeck();
+
+        if(Parameters.expertMode){
+            this.generalReserve = 20 - Parameters.numPlayers;
+            this.characterDeck = new CharacterDeck();
+        }
 
 
         for (int i=0; i<Parameters.numIsland; i++){
             Island isl = new Island(i);
             islands.add(isl);
-        }
-
-        for (int i=0; i<Parameters.numClouds; i++){
-            Cloud cl = new Cloud();
-            clouds.add(cl);
+            if(i<Parameters.numClouds){
+                Cloud cl = new Cloud();
+                clouds.add(cl);
+            }
         }
     }
 
@@ -42,8 +45,23 @@ public class GameBoard {
         islands.get(numIsland).addStudent(student);
     }
 
-    public void getThreeCards(){
+    public void chooseThreeCards(){
         threeCharacterCards = characterDeck.getThreeRandomCards();
+
+        for(CharacterCard c: threeCharacterCards){
+            if(c.getIndex() == 1){
+                for (int i=0; i<4; i++)
+                    ((Character1) c).addStudent(getBag().draw());
+            } else if(c.getIndex() == 11){
+                for (int i=0; i<4; i++)
+                    ((Character11) c).addStudent(getBag().draw());
+            }
+        }
+    }
+
+
+    public ArrayList<CharacterCard> getThreeCharacterCards() {
+        return threeCharacterCards;
     }
 
     public void addStudentOnCloud(int numCloud, Student student){

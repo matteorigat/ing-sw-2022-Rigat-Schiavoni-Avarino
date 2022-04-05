@@ -1,27 +1,12 @@
 package it.polimi.ingsw.model.gameboard.Characters;
 
-import it.polimi.ingsw.model.gameboard.GameBoard;
-
-public class Character8 implements CharacterCard{
+public class Character12 implements CharacterCard{
     private int index;
     private int cost;
-    private boolean effectFlag;
 
-    public Character8() {
+    public Character12() {
         this.index = 1;
         this.cost = 1; //mettere valore carta
-    }
-
-    public void enableEffect(){
-        effectFlag = true;
-    }
-
-    public void disableEffect(){
-        effectFlag = false;
-    }
-
-    public boolean isEffectFlag() {
-        return effectFlag;
     }
 
     @Override
@@ -38,4 +23,5 @@ public class Character8 implements CharacterCard{
     public int getCost() {
         return cost;
     }
+
 }

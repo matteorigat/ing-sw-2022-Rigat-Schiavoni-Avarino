@@ -8,14 +8,14 @@ import it.polimi.ingsw.model.gameboard.GameBoard;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Character1 implements CharacterCard{
+public class Character11 implements CharacterCard{
     private int index;
     private int cost;
     private ArrayList<Student> students;
 
-    public Character1() {
-        this.index = 1;
-        this.cost = 1;
+    public Character11() {
+        this.index = 11;
+        this.cost = 2;
     }
 
     public Student getStudent(int colorIndex) {

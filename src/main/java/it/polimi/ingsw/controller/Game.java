@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.enumeration.GamePhase;
 import it.polimi.ingsw.model.enumeration.TowerColour;
 import it.polimi.ingsw.model.gameboard.Bag;
 import it.polimi.ingsw.model.gameboard.CharacterDeck;
+import it.polimi.ingsw.model.gameboard.Characters.*;
 import it.polimi.ingsw.model.gameboard.Characters.CharacterCard;
 import it.polimi.ingsw.model.gameboard.Cloud;
 import it.polimi.ingsw.model.gameboard.GameBoard;
@@ -21,10 +22,7 @@ import java.util.Collections;
 public class Game {
     private final ArrayList<Player> players;
     private final GameBoard gameBoard;
-
-
     private int currentPlayer;
-    private int winner;
     private GamePhase currentPhase;
     private Player[] playersTurnOrder;
 
@@ -58,7 +56,7 @@ public class Game {
 
     public int addPlayer(String nickname){   //DA RIFAREEEEEE
 
-        if(players.size() < Parameters.numPlayers) {
+        if(players.size() <= Parameters.numPlayers) {
             Player p = new Player(nickname, players.size());
             players.add(p);
             return players.size()-1;
@@ -71,7 +69,7 @@ public class Game {
 
     public void init(){   //sto seguendo l'inizializzazione della partita
         if(Parameters.expertMode){
-            gameBoard.getThreeCards();
+            gameBoard.chooseThreeCards();
         }
 
         double casual = Math.random()*12; //(PUNTO 2)
@@ -166,14 +164,6 @@ public class Game {
         }
     }
 
-
-    public void playCharacterCard(int playerIndex, int cardIndex){
-        if(playerIndex == currentPlayer /*&& players.get(playerIndex).getCoins() >= cardIndex.costo*/){
-            //cardindex.play() o comunque si attiva il suo effetto, inoltre il costo viene implementato di uno
-            //gameBoard.addCoinsToGeneralReserve(cardIndex - 1); //meno uno perchè una va sulla carta
-        }
-    }
-
     //Fase azione punto 1
     public void moveStudentToIsland(int playerIndex, int colour, int IslandPosition){
         if(currentPhase.equals(GamePhase.MoveStudents) && playerIndex == currentPlayer){
@@ -232,19 +222,43 @@ public class Game {
     public void moveMotherNature(int playerIndex, int movements){ //devo controllare se player ha i permessi
         if(currentPhase.equals(GamePhase.MoveMotherNature) && playerIndex == currentPlayer){
             if(movements > 0 && movements <= players.get(currentPlayer).getCurrentCard().getMovements()){
-                int newPos = ((this.gameBoard.getMotherNature() + movements)%Parameters.numIsland);
+
+                int newPos = 0;
+                if(Parameters.expertMode){
+                    for(CharacterCard c: gameBoard.getThreeCharacterCards())
+                        if(c.getIndex() == 4 && ((Character4) c).isEffectFlag())
+                            newPos = 2;
+                }
+                newPos = ((newPos + this.gameBoard.getMotherNature() + movements)%Parameters.numIsland);
                 this.gameBoard.setMotherNature(newPos);//moves motherNature by specified movements
-                this.checkIslandInfluence(newPos);
+                this.checkIslandInfluence(newPos, playerIndex);
             }
 
             currentPhase = GamePhase.ChooseCloud;
         }
     }
     //Fase azione punto 2.2 //vedo chi controlla l'isola, se il player è cambiato sostituisco le torri
-    private void checkIslandInfluence(int islandIndex){
+    private void checkIslandInfluence(int islandIndex, int playerIndex){
+        boolean noTowerFlag = false;
+        int twoMorePointsPlayer = -1;
+        if(Parameters.expertMode){
+            for(CharacterCard c: gameBoard.getThreeCharacterCards())
+                if(c.getIndex() == 5 && gameBoard.getIslands().get(islandIndex).getNoEntry() > 0){
+                    gameBoard.getIslands().get(islandIndex).removeNoEntry();
+                    ((Character5) c).addNoEntry();
+                    return;  // proseguo come se madre natura non fosse capitata qui
+                } else if(c.getIndex() == 6 && ((Character6) c).isEffectFlag()){
+                    ((Character6) c).disableEffect();
+                    noTowerFlag = true;
+                } else if(c.getIndex() == 8 && ((Character8) c).isEffectFlag()){
+                    ((Character6) c).disableEffect();
+                    twoMorePointsPlayer = playerIndex;
+                }
+
+        }
 
         // vedo chi ha più influenza ora
-        Player newPlayer = this.gameBoard.getIslands().get(islandIndex).Influence(this.players);
+        Player newPlayer = this.gameBoard.getIslands().get(islandIndex).Influence(this.players, noTowerFlag, twoMorePointsPlayer);
 
         if (newPlayer!=null){
             Player oldPlayer = null;  // vedo chi controllava l'isola prima
@@ -349,5 +363,122 @@ public class Game {
 
     public int getCurrentPlayer(){
         return players.indexOf(currentPlayer);
+    }
+
+
+
+
+
+
+
+
+
+
+
+    public void playCharacterCard1(int playerIndex, int cardIndex, int colorIndex, int islandIndex){
+        if(playerIndex == currentPlayer){
+            for (CharacterCard c: gameBoard.getThreeCharacterCards()){
+                if(cardIndex == c.getIndex() && players.get(playerIndex).getCoins() >= c.getCost() && ((Character1) c).checkColorExists(colorIndex)){
+                    c.play();
+                    gameBoard.addCoinsToGeneralReserve(c.getCost() - 1); //meno uno perchè una va sulla carta
+
+                    gameBoard.addStudentOnIsland(islandIndex, ((Character1) c).getStudent(colorIndex));
+                    ((Character1) c).addStudent(gameBoard.getBag().draw());
+                }
+            }
+        }
+    }
+
+    public void playCharacterCard3(int playerIndex, int cardIndex, int islandIndex){
+        if(playerIndex == currentPlayer){
+            for (CharacterCard c: gameBoard.getThreeCharacterCards()){
+                if(cardIndex == c.getIndex() && players.get(playerIndex).getCoins() >= c.getCost()){
+                    c.play();
+                    gameBoard.addCoinsToGeneralReserve(c.getCost() - 1); //meno uno perchè una va sulla carta
+
+                    checkIslandInfluence(islandIndex, playerIndex);
+                }
+            }
+        }
+    }
+
+    public void playCharacterCard4(int playerIndex, int cardIndex){
+        if(playerIndex == currentPlayer && currentPhase.ordinal() <= GamePhase.MoveMotherNature.ordinal()){
+            for (CharacterCard c: gameBoard.getThreeCharacterCards()){
+                if(cardIndex == c.getIndex() && players.get(playerIndex).getCoins() >= c.getCost()){
+                    c.play();
+                    gameBoard.addCoinsToGeneralReserve(c.getCost() - 1); //meno uno perchè una va sulla carta
+
+                    ((Character4) c).enableEffect();
+                }
+            }
+        }
+    }
+
+    public void playCharacterCard5(int playerIndex, int cardIndex, int islandIndex){
+        if(playerIndex == currentPlayer){
+            for (CharacterCard c: gameBoard.getThreeCharacterCards()){
+                if(cardIndex == c.getIndex() && players.get(playerIndex).getCoins() >= c.getCost()){
+                    c.play();
+                    gameBoard.addCoinsToGeneralReserve(c.getCost() - 1); //meno uno perchè una va sulla carta
+
+                    gameBoard.getIslands().get(islandIndex).addNoEntry();
+                }
+            }
+        }
+    }
+
+    public void playCharacterCard6(int playerIndex, int cardIndex){
+        if(playerIndex == currentPlayer && currentPhase.ordinal() <= GamePhase.MoveStudents.ordinal()){
+            for (CharacterCard c: gameBoard.getThreeCharacterCards()){
+                if(cardIndex == c.getIndex() && players.get(playerIndex).getCoins() >= c.getCost()){
+                    c.play();
+                    gameBoard.addCoinsToGeneralReserve(c.getCost() - 1); //meno uno perchè una va sulla carta
+
+                    ((Character6) c).enableEffect();
+                }
+            }
+        }
+    }
+
+    public void playCharacterCard8(int playerIndex, int cardIndex){
+        if(playerIndex == currentPlayer && currentPhase.ordinal() <= GamePhase.MoveStudents.ordinal()){
+            for (CharacterCard c: gameBoard.getThreeCharacterCards()){
+                if(cardIndex == c.getIndex() && players.get(playerIndex).getCoins() >= c.getCost()){
+                    c.play();
+                    gameBoard.addCoinsToGeneralReserve(c.getCost() - 1); //meno uno perchè una va sulla carta
+
+                    ((Character8) c).enableEffect();
+                }
+            }
+        }
+    }
+
+    public void playCharacterCard11(int playerIndex, int cardIndex, int colorIndex){
+        if(playerIndex == currentPlayer){
+            for (CharacterCard c: gameBoard.getThreeCharacterCards()){
+                if(cardIndex == c.getIndex() && players.get(playerIndex).getCoins() >= c.getCost() && ((Character11) c).checkColorExists(colorIndex)){
+                    c.play();
+                    gameBoard.addCoinsToGeneralReserve(c.getCost() - 1); //meno uno perchè una va sulla carta
+
+                    players.get(playerIndex).getPlayerSchoolBoard().getDiningRoom().addStudent(((Character11) c).getStudent(colorIndex));
+                    ((Character11) c).addStudent(gameBoard.getBag().draw());
+                }
+            }
+        }
+    }
+
+    public void playCharacterCard12(int playerIndex, int cardIndex, int colorIndex){
+        if(playerIndex == currentPlayer){
+            for (CharacterCard c: gameBoard.getThreeCharacterCards()){
+                if(cardIndex == c.getIndex() && players.get(playerIndex).getCoins() >= c.getCost()){
+                    c.play();
+                    gameBoard.addCoinsToGeneralReserve(c.getCost() - 1); //meno uno perchè una va sulla carta
+
+                    for (Player p: players)
+                            gameBoard.getBag().fill(p.getPlayerSchoolBoard().getDiningRoom().removeThreeStudents(Colour.values()[colorIndex]));
+                }
+            }
+        }
     }
 }

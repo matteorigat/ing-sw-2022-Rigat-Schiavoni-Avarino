@@ -32,7 +32,7 @@ public class IslandTest2 {
 
 
 
-        assertNull(island.Influence(arrayPlayers)); //All'inizio non c'è nessun giocatore con influenza
+        assertNull(island.Influence(arrayPlayers, false, -1)); //All'inizio non c'è nessun giocatore con influenza
 
         island.addStudent(student1);
         island.addStudent(student2);
@@ -47,21 +47,21 @@ public class IslandTest2 {
         p2.getPlayerSchoolBoard().addProfessor(Colour.Yellow);
         p2.getPlayerSchoolBoard().addProfessor(Colour.Blue);
 
-        Player px =  island.Influence(arrayPlayers);
+        Player px =  island.Influence(arrayPlayers, false, -1);
         assertEquals(px,p2);
-        assertEquals(island.Influence(arrayPlayers),p2);
+        assertEquals(island.Influence(arrayPlayers, false, -1),p2);
 
         assertEquals(arrayPlayers.size(),2);
 
         island.setNumTower(1);
         island.changeTowerColor(TowerColour.Black);
 
-        assertNull(island.Influence(arrayPlayers)); //parità
+        assertNull(island.Influence(arrayPlayers, false, -1)); //parità
         island.setNumTower(2);
-        assertEquals(island.Influence(arrayPlayers),p1);
+        assertEquals(island.Influence(arrayPlayers, false, -1),p1);
         island.addStudent(student5);
         island.addStudent(student5);
-        assertEquals(island.Influence(arrayPlayers),p2);
+        assertEquals(island.Influence(arrayPlayers, false, -1),p2);
         assertEquals(island.getNumTower(),2);
         assertEquals(island.getIslandIndex(),5);
        ArrayList<Integer> array1 = island.getNumStudents();

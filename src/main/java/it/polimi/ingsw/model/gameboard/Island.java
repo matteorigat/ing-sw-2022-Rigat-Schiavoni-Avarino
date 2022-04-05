@@ -18,6 +18,7 @@ public class Island {
     private TowerColour towerColor;
     private ArrayList<Student> students;
     private ArrayList<Integer> numStudents;
+    private int noEntry; //int perchè ne puoi mettere più di uno
 
 
     public Island(int index){
@@ -27,6 +28,10 @@ public class Island {
         //this.islandRank = 1;
         this.towerColor = null;
         this.numStudents = new ArrayList<>();
+
+        if(Parameters.expertMode){
+            this.noEntry = 0;
+        }
 
         for (int i = 0; i<5; i++){
             numStudents.add(0);
@@ -44,7 +49,7 @@ public class Island {
     }
 
     //Return the player with the most influence on the island
-    public Player Influence (ArrayList<Player> players){
+    public Player Influence (ArrayList<Player> players, boolean noTowerFlag, int twoMorePointsPlayer){
 
         ArrayList<Professor> prof = new ArrayList<>();
 
@@ -55,8 +60,11 @@ public class Island {
             for (Professor pr : prof)
                 somma[pl.getIndex()] += numStudents.get(pr.getProfessorColour().ordinal());
 
-            if(pl.PlayerTowerColor().equals(towerColor))
+            if(pl.PlayerTowerColor().equals(towerColor) && !noTowerFlag)
                 somma[pl.getIndex()] += numTower;
+
+            if(pl.getIndex() == twoMorePointsPlayer)
+                somma[pl.getIndex()] += 2;
         }
 
         ArrayList<Integer> rank = new ArrayList<>();
@@ -108,5 +116,17 @@ public class Island {
 
     public ArrayList<Integer> getNumStudents() {
         return numStudents;
+    }
+
+    public void addNoEntry() {
+        this.noEntry++;
+    }
+
+    public void removeNoEntry(){
+        this.noEntry--;
+    }
+
+    public int getNoEntry() {
+        return noEntry;
     }
 }
