@@ -76,6 +76,7 @@ public class SchoolBoard {
         for (int i=0; i<size; i++){
             if (professors.get(i).getProfessorColour().equals(color))
                 professors.remove(i);
+                return;
 
         }
     }

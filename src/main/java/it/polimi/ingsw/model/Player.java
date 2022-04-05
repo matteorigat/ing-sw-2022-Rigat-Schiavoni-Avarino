@@ -19,8 +19,8 @@ public class Player {
     // Constructor Player creates a new Player instance
     public Player(String nickname, int index) {
         this.nickname = nickname;
-        this.towerColour = TowerColour.values()[(index-1)];
-        this.playerSchoolBoard = new SchoolBoard(TowerColour.values()[(index-1)]);
+        this.towerColour = TowerColour.values()[(index)];
+        this.playerSchoolBoard = new SchoolBoard(TowerColour.values()[(index)]);
         this.assistantDeck = new ArrayList<>();
         this.index = index;
         this.coins = 1;
@@ -73,7 +73,13 @@ public class Player {
     public int getCoins() {
         return coins;
     }
+
+    @Override
+    public String toString() {
+        return "Player : " + index + " " +nickname;
+    }
 }
+
 
 
 

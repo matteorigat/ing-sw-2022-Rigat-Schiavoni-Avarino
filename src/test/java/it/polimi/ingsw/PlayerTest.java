@@ -15,13 +15,13 @@ public class PlayerTest extends TestCase {
     @Test
     public void testPlayer(){
         Parameters.setParameters(3,true);
-        Player p1 = new Player("mef", 1);
-        Player p2 = new Player("gius", 2);
-        Player p3 = new Player("nico", 3);
+        Player p1 = new Player("mef", 0);
+        Player p2 = new Player("gius", 1);
+        Player p3 = new Player("nico", 2);
 
-        assertEquals(1, p1.getIndex());
-        assertEquals(2, p2.getIndex());
-        assertEquals(3, p3.getIndex());
+        assertEquals(0, p1.getIndex());
+        assertEquals(1, p2.getIndex());
+        assertEquals(2, p3.getIndex());
 
         assertEquals(TowerColour.values()[0], p1.PlayerTowerColor());
         assertEquals(p1.PlayerTowerColor(), p1.getPlayerSchoolBoard().getTowerColor());

@@ -9,9 +9,9 @@ import it.polimi.ingsw.model.gameboard.Island;
 
 import static org.junit.jupiter.api.Assertions.*;
 import junit.framework.TestCase;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-public class SchoolBoardTest extends TestCase{
+public class SchoolBoardTest {
 
     @Test
     public void SchoolBoardInitTest(){
