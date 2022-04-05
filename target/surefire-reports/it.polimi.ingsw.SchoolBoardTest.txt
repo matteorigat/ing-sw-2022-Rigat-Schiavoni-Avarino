@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: it.polimi.ingsw.SchoolBoardTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0 s <<< FAILURE! - in it.polimi.ingsw.SchoolBoardTest
-SchoolBoardInitTest  Time elapsed: 0 s  <<< ERROR!
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.002 s <<< FAILURE! - in it.polimi.ingsw.SchoolBoardTest
+SchoolBoardInitTest  Time elapsed: 0.001 s  <<< ERROR!
 java.lang.IndexOutOfBoundsException: Index 1 out of bounds for length 1
 	at it.polimi.ingsw.SchoolBoardTest.SchoolBoardInitTest(SchoolBoardTest.java:50)
 

@@ -58,7 +58,7 @@ public class Island {
                 somma[pl.getIndex()] += numTower;
         }
 
-        ArrayList<Integer> rank = null;
+        ArrayList<Integer> rank = new ArrayList<>();
         int max = 0;
         for (int i = 0; i<Parameters.numPlayers; i++){  //trovo il giocatore con più studenti
             if(max < somma[i]){
