@@ -16,12 +16,11 @@ public class Player {
     private AssistantCard currentCard;
     private int coins;
 
-
     // Constructor Player creates a new Player instance
     public Player(String nickname, int index) {
         this.nickname = nickname;
-        this.towerColour = TowerColour.values()[index];
-        this.playerSchoolBoard = new SchoolBoard(this.towerColour);
+        this.towerColour = TowerColour.values()[(index-1)];
+        this.playerSchoolBoard = new SchoolBoard(TowerColour.values()[(index-1)]);
         this.assistantDeck = new ArrayList<>();
         this.index = index;
         this.coins = 1;
@@ -48,12 +47,10 @@ public class Player {
         return playerSchoolBoard.getTowerColor();
     }
 
-
     //Gets the schoolBoard of the player
     public SchoolBoard getPlayerSchoolBoard() {
         return playerSchoolBoard;
     }
-
 
     public ArrayList<AssistantCard> getAssistantDeck() {
         return assistantDeck;
@@ -63,8 +60,7 @@ public class Player {
     public void playAssistantCard(AssistantCard cardPlayed){
                 this.currentCard = cardPlayed;
                 assistantDeck.remove(cardPlayed);
-            }
-
+    }
 
     public AssistantCard getCurrentCard() {
         return currentCard;

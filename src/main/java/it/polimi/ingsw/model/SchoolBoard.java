@@ -42,6 +42,9 @@ public class SchoolBoard {
     }
 
     public boolean moveStudentToDiningRoom(int studentColour) {
+        if(this.diningRoom.numOfStudentByColor(Colour.values()[studentColour]) >= 10)
+            return false;  //sala piena, non gli faccio aggiungere nulla
+
         boolean coin = false;
         for (Student s : studentsEntrance){
             if (s.getColour().equals(Colour.values()[studentColour])) {
