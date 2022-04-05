@@ -9,7 +9,7 @@ import junit.framework.TestCase;
 import org.junit.jupiter.api.Test;
 
 
-public class DiningRoomTest {
+public class DiningRoomTest extends TestCase{
 
     @Test
     public void testStudentsDiningRoom(){

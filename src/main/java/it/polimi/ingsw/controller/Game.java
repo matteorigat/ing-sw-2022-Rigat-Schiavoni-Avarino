@@ -134,8 +134,9 @@ public class Game {
                 return;
 
             for (AssistantCard as : players.get(playerIndex).getAssistantDeck())
-                if (as.getValue() == priority)
+                if (as.getValue() == priority){
                     players.get(playerIndex).playAssistantCard(as);
+                } else return; //non ha la carta, non ha senso proseguire, tocca ancora lui
 
             currentPlayer = playersTurnOrder[phaseCounter + 1].getIndex();
             phaseCounter++;
