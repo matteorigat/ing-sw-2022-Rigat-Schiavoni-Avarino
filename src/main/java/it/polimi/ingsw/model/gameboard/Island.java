@@ -20,8 +20,9 @@ public class Island {
     private ArrayList<Integer> numStudents;
 
 
-    public Island(){
+    public Island(int index){
         this.students = new ArrayList<Student>(0);
+        this.islandIndex = index;
         this.numTower = 0;
         //this.islandRank = 1;
         this.towerColor = null;
@@ -103,5 +104,9 @@ public class Island {
 
     public ArrayList<Student> getStudents() {
         return students;
+    }
+
+    public ArrayList<Integer> getNumStudents() {
+        return numStudents;
     }
 }

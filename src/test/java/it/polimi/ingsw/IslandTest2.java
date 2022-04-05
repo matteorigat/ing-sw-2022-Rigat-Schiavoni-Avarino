@@ -21,12 +21,16 @@ public class IslandTest2 {
         arrayPlayers.add(p1);
         arrayPlayers.add(p2);
 
-        Island island = new Island();
+        Island island = new Island(5);
         Student student1 = new Student(Colour.Green);
         Student student2 = new Student(Colour.Green);
         Student student3 = new Student(Colour.Yellow);
         Student student4 = new Student(Colour.Yellow);
         Student student5 = new Student(Colour.Blue);
+        Student student6 = new Student(Colour.Pink);
+        Student student7 = new Student(Colour.Red);
+
+
 
         assertNull(island.Influence(arrayPlayers)); //All'inizio non c'è nessun giocatore con influenza
 
@@ -35,6 +39,9 @@ public class IslandTest2 {
         island.addStudent(student3);
         island.addStudent(student4);
         island.addStudent(student5);
+        island.addStudent(student6);
+        island.addStudent(student7);
+        island.addStudent(student7);
 
         p1.getPlayerSchoolBoard().addProfessor(Colour.Green);
         p2.getPlayerSchoolBoard().addProfessor(Colour.Yellow);
@@ -55,5 +62,11 @@ public class IslandTest2 {
         island.addStudent(student5);
         island.addStudent(student5);
         assertEquals(island.Influence(arrayPlayers),p2);
+        assertEquals(island.getNumTower(),2);
+        assertEquals(island.getIslandIndex(),5);
+       ArrayList<Integer> array1 = island.getNumStudents();
+       for(Integer i : array1) {
+           System.out.println(i);
+       }
     }
 }

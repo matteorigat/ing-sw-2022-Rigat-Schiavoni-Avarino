@@ -28,7 +28,7 @@ public class GameBoard {
 
 
         for (int i=0; i<Parameters.numIsland; i++){
-            Island isl = new Island();
+            Island isl = new Island(i);
             islands.add(isl);
         }
 
