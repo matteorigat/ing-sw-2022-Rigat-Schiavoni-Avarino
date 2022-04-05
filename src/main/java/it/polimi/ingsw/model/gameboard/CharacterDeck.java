@@ -11,13 +11,13 @@ public class CharacterDeck {
     public CharacterDeck() {
         characterCards = new ArrayList<CharacterCard>();
         characterCards.add(new Character1());
-        characterCards.add(new Character11());
         characterCards.add(new Character3());
         characterCards.add(new Character4());
         characterCards.add(new Character5());
         characterCards.add(new Character6());
-        characterCards.add(new Character12());
         characterCards.add(new Character8());
+        characterCards.add(new Character11());
+        characterCards.add(new Character12());
     }
 
     public ArrayList<CharacterCard> getThreeRandomCards(){
@@ -31,5 +31,9 @@ public class CharacterDeck {
         }
 
         return threeCards;
+    }
+
+    public ArrayList<CharacterCard> getCharacterCards() {
+        return characterCards;
     }
 }

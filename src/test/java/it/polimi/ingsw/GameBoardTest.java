@@ -17,7 +17,7 @@ public class GameBoardTest extends TestCase {
 
     @Test
     public void testGameBoard(){
-        Parameters.setParameters(3,false);
+        Parameters.setParameters(3,true);
         GameBoard gb = new GameBoard();
         gb.setMotherNature(1);
         assertEquals(gb.getMotherNature(),1);

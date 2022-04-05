@@ -39,27 +39,27 @@ public class DiningRoom {
 
     //variante con monete, se ritorna true il giocatore guadagna una moneta
     public boolean addStudent(Student s){
-        if(s.getColour().equals(Colour.Green)){
+        if(s.getColour().equals(Colour.Green) && greenStudents.size() < 10){
             greenStudents.add(s);
             if (greenStudents.size()%3 == 0) //moneta se 3, 6 e 9
                 return true;
         }
-        else if(s.getColour().equals(Colour.Red)){
+        else if(s.getColour().equals(Colour.Red) && redStudents.size() < 10){
             redStudents.add(s);
             if (redStudents.size()%3 == 0)
                 return true;
         }
-        else if(s.getColour().equals(Colour.Yellow)){
+        else if(s.getColour().equals(Colour.Yellow) && yellowStudents.size() < 10){
             yellowStudents.add(s);
             if (yellowStudents.size()%3 == 0)
                 return true;
         }
-        else if(s.getColour().equals(Colour.Pink)){
+        else if(s.getColour().equals(Colour.Pink) && pinkStudents.size() < 10){
             pinkStudents.add(s);
             if (pinkStudents.size()%3 == 0)
                 return true;
         }
-        else if(s.getColour().equals(Colour.Blue)){
+        else if(s.getColour().equals(Colour.Blue) && blueStudents.size() < 10){
             blueStudents.add(s);
             if (blueStudents.size()%3 == 0)
                 return true;
