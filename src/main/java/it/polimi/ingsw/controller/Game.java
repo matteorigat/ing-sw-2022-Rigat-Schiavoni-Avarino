@@ -56,14 +56,16 @@ public class Game {
         Parameters.setParameters(num,mode);
     }
 
-    public void addPlayer(String nickname){   //DA RIFAREEEEEE
+    public int addPlayer(String nickname){   //DA RIFAREEEEEE
 
         if(players.size() < Parameters.numPlayers) {
             Player p = new Player(nickname, players.size());
             players.add(p);
+            return players.size()-1;
         }
         else{
             //qui bisogna mettere una exception che nella partita ci sono già 4 giocatori
+            return -1;
         }
     }
 

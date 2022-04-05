@@ -1,5 +1,3 @@
-it/polimi/ingsw/AppTest.class
-it/polimi/ingsw/TowerTest.class
 it/polimi/ingsw/SchoolBoardTest.class
 it/polimi/ingsw/AssistantCardTest.class
 it/polimi/ingsw/CloudTest.class
@@ -10,3 +8,6 @@ it/polimi/ingsw/PlayerTest.class
 it/polimi/ingsw/BagTest.class
 it/polimi/ingsw/StudentTest.class
 it/polimi/ingsw/GameBoardTest.class
+it/polimi/ingsw/AppTest.class
+it/polimi/ingsw/TowerTest.class
+it/polimi/ingsw/IslandTest.class
