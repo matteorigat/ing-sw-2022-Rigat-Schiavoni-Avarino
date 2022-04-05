@@ -343,8 +343,8 @@ public class Game {
         currentPhase = GamePhase.GameEnded;
     }
 
-    public GamePhase getCurrentPhase() {
-        return currentPhase;
+    public int getCurrentPhase() {
+        return currentPhase.ordinal();
     }
 
     public int getCurrentPlayer(){
