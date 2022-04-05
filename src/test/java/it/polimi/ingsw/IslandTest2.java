@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 public class IslandTest2 {
@@ -20,6 +21,7 @@ public class IslandTest2 {
 
         Island isl = new Island();
 
-        assertNull(isl.Influence(arr));
+        assertNull(isl.Influence(arr)); //All'inizio non c'è nessun giocatore con influenza
+
     }
 }
