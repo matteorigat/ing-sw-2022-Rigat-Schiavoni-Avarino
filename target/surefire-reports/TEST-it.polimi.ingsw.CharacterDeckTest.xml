@@ -12,7 +12,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="IT"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk-17.0.2.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/Users/matteorigat/IdeaProjects/ing-sw-2022-Rigat-Schiavoni-Avarino/target/surefire/surefirebooter2768077781136006710.jar /Users/matteorigat/IdeaProjects/ing-sw-2022-Rigat-Schiavoni-Avarino/target/surefire 2022-04-05T12-52-28_654-jvmRun1 surefire1548717978067112109tmp surefire_012072401231542604030tmp"/>
+    <property name="sun.java.command" value="/Users/matteorigat/IdeaProjects/ing-sw-2022-Rigat-Schiavoni-Avarino/target/surefire/surefirebooter678003478253795224.jar /Users/matteorigat/IdeaProjects/ing-sw-2022-Rigat-Schiavoni-Avarino/target/surefire 2022-04-05T14-18-15_681-jvmRun1 surefire15934916731782215613tmp surefire_016866994198471496957tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/Users/matteorigat/IdeaProjects/ing-sw-2022-Rigat-Schiavoni-Avarino/target/test-classes:/Users/matteorigat/IdeaProjects/ing-sw-2022-Rigat-Schiavoni-Avarino/target/classes:/Users/matteorigat/.m2/repository/junit/junit/4.13.2/junit-4.13.2.jar:/Users/matteorigat/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/Users/matteorigat/.m2/repository/org/junit/jupiter/junit-jupiter/5.8.2/junit-jupiter-5.8.2.jar:/Users/matteorigat/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.8.2/junit-jupiter-api-5.8.2.jar:/Users/matteorigat/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/Users/matteorigat/.m2/repository/org/junit/platform/junit-platform-commons/1.8.2/junit-platform-commons-1.8.2.jar:/Users/matteorigat/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/matteorigat/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.8.2/junit-jupiter-params-5.8.2.jar:/Users/matteorigat/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.8.2/junit-jupiter-engine-5.8.2.jar:/Users/matteorigat/.m2/repository/org/junit/platform/junit-platform-engine/1.8.2/junit-platform-engine-1.8.2.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -27,7 +27,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="/Users/matteorigat/IdeaProjects/ing-sw-2022-Rigat-Schiavoni-Avarino/target/surefire/surefirebooter2768077781136006710.jar"/>
+    <property name="surefire.real.class.path" value="/Users/matteorigat/IdeaProjects/ing-sw-2022-Rigat-Schiavoni-Avarino/target/surefire/surefirebooter678003478253795224.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="17.0.2+8-LTS-86"/>
     <property name="user.name" value="matteorigat"/>
