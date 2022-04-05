@@ -185,7 +185,7 @@ public class Game {
     }
     //Fase azione punto 1
     public void moveStudentToDiningRoom(int playerIndex, int colour){
-        if(currentPhase.equals(GamePhase.MoveStudents) && playerIndex == currentPlayer){
+        if(currentPhase.equals(GamePhase.MoveStudents) && playerIndex == currentPlayer && players.get(playerIndex).getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colour]) < 10){
             boolean coin; //ritorna true se il giocatore merita una moneta
             coin = players.get(playerIndex).getPlayerSchoolBoard().moveStudentToDiningRoom(colour);
             if(Parameters.expertMode && coin){
