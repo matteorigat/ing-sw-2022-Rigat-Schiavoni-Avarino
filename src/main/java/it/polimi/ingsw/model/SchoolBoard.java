@@ -72,9 +72,11 @@ public class SchoolBoard {
     }
 
     public void removeProfessor(Colour color){
-        for (Professor p: professors){
-            if (p.getProfessorColour().equals(color))
-                professors.remove(p);
+        int size = professors.size();
+        for (int i=0; i<size; i++){
+            if (professors.get(i).getProfessorColour().equals(color))
+                professors.remove(i);
+
         }
     }
 
