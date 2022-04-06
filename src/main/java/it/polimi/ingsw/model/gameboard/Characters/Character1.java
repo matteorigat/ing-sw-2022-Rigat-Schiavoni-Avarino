@@ -1,12 +1,9 @@
 package it.polimi.ingsw.model.gameboard.Characters;
 
-import it.polimi.ingsw.model.Player;
-import it.polimi.ingsw.model.Student;
+import it.polimi.ingsw.model.player.Student;
 import it.polimi.ingsw.model.enumeration.Colour;
-import it.polimi.ingsw.model.gameboard.GameBoard;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Character1 implements CharacterCard{
     private int index;
@@ -16,6 +13,7 @@ public class Character1 implements CharacterCard{
     public Character1() {
         this.index = 1;
         this.cost = 1;
+        this.students = new ArrayList<>();
     }
 
     public Student getStudent(int colorIndex) {

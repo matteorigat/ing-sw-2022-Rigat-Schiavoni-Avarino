@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GameBoard.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">GC18</a> &gt; <a href="index.source.html" class="el_package">it.polimi.ingsw.model.gameboard</a> &gt; <span class="el_source">GameBoard.java</span></div><h1>GameBoard.java</h1><pre class="source lang-java linenums">package it.polimi.ingsw.model.gameboard;
+
+import it.polimi.ingsw.exceptions.TooManyStudentsOnCloudException;
+import it.polimi.ingsw.model.player.AssistantCard;
+import it.polimi.ingsw.model.Parameters;
+import it.polimi.ingsw.model.player.Student;
+import it.polimi.ingsw.model.gameboard.Characters.*;
+import it.polimi.ingsw.model.gameboard.Characters.CharacterCard;
+
+import java.util.ArrayList;
+public class GameBoard {
+
+    private CharacterDeck characterDeck;
+    private ArrayList&lt;Island&gt; islands;
+    private ArrayList&lt;Cloud&gt; clouds;
+    private ArrayList&lt;CharacterCard&gt; threeCharacterCards;
+
+    private int motherNature;
+    private Bag bag;
+    private int generalReserve;
+
+<span class="nc" id="L22">    public GameBoard() {</span>
+<span class="nc" id="L23">        this.islands = new ArrayList&lt;&gt;(Parameters.numIsland);</span>
+<span class="nc" id="L24">        this.clouds = new ArrayList&lt;&gt;(Parameters.numClouds);</span>
+<span class="nc" id="L25">        this.bag = new Bag();</span>
+
+<span class="nc bnc" id="L27" title="All 2 branches missed.">        if(Parameters.expertMode){</span>
+<span class="nc" id="L28">            this.generalReserve = 20 - Parameters.numPlayers;</span>
+<span class="nc" id="L29">            this.characterDeck = new CharacterDeck();</span>
+        }
+
+
+<span class="nc bnc" id="L33" title="All 2 branches missed.">        for (int i=0; i&lt;Parameters.numIsland; i++){</span>
+<span class="nc" id="L34">            Island isl = new Island(i);</span>
+<span class="nc" id="L35">            islands.add(isl);</span>
+<span class="nc bnc" id="L36" title="All 2 branches missed.">            if(i&lt;Parameters.numClouds){</span>
+<span class="nc" id="L37">                Cloud cl = new Cloud();</span>
+<span class="nc" id="L38">                clouds.add(cl);</span>
+            }
+        }
+<span class="nc" id="L41">    }</span>
+
+    public void addStudentOnIsland(int numIsland, Student student){
+<span class="nc" id="L44">        islands.get(numIsland).addStudent(student);</span>
+<span class="nc" id="L45">    }</span>
+
+    public void chooseThreeCards(){
+<span class="nc" id="L48">        threeCharacterCards = characterDeck.getThreeRandomCards();</span>
+
+<span class="nc bnc" id="L50" title="All 2 branches missed.">        for(CharacterCard c: threeCharacterCards){</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">            if(c.getIndex() == 1){</span>
+<span class="nc bnc" id="L52" title="All 2 branches missed.">                for (int i=0; i&lt;4; i++)</span>
+<span class="nc" id="L53">                    ((Character1) c).addStudent(getBag().draw());</span>
+<span class="nc bnc" id="L54" title="All 2 branches missed.">            } else if(c.getIndex() == 11){</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">                for (int i=0; i&lt;4; i++)</span>
+<span class="nc" id="L56">                    ((Character11) c).addStudent(getBag().draw());</span>
+            }
+<span class="nc" id="L58">        }</span>
+<span class="nc" id="L59">    }</span>
+
+    public ArrayList&lt;CharacterCard&gt; getThreeCharacterCards() {
+<span class="nc" id="L62">        return threeCharacterCards;</span>
+    }
+
+    public void addStudentOnCloud(int numCloud, Student student){
+        try{
+<span class="nc" id="L67">        clouds.get(numCloud).addStudent(student);</span>
+        }
+<span class="nc" id="L69">        catch(TooManyStudentsOnCloudException e){</span>
+            // CODICE GESTIONE ERRORE
+<span class="nc" id="L71">        }</span>
+<span class="nc" id="L72">    }</span>
+
+    public int getMotherNature() {
+<span class="nc" id="L75">        return motherNature;</span>
+    }
+
+
+    public void setMotherNature(int motherNature) {
+<span class="nc" id="L80">        this.motherNature = motherNature;</span>
+<span class="nc" id="L81">    }</span>
+
+    public Bag getBag() {
+<span class="nc" id="L84">        return bag;</span>
+    }
+
+    public ArrayList&lt;Cloud&gt; getClouds() {
+<span class="nc" id="L88">        return clouds;</span>
+    }
+
+    public void islandFusion(int island1, int island2) {
+
+<span class="nc bnc" id="L93" title="All 2 branches missed.">        for(Student s: islands.get(island2).getStudents())</span>
+<span class="nc" id="L94">            islands.get(island1).addStudent(s);</span>
+
+<span class="nc" id="L96">        this.islands.get(island1).setNumTower(this.islands.get(island1).getNumTower() + this.islands.get(island2).getNumTower());</span>
+       // this.islands.get(island1).setNumTower(this.islands.get(island1).getIslandRank() + 1);
+
+<span class="nc" id="L99">        islands.remove(island2);</span>
+
+<span class="nc" id="L101">    }</span>
+
+    public void getOneCoin(){
+<span class="nc" id="L104">        this.generalReserve--;</span>
+<span class="nc" id="L105">    }</span>
+
+    public int getGeneralReserve() {
+<span class="nc" id="L108">        return generalReserve;</span>
+    }
+
+    public void addCoinsToGeneralReserve(int coins) {
+<span class="nc" id="L112">        this.generalReserve += coins;</span>
+<span class="nc" id="L113">    }</span>
+
+    public ArrayList&lt;Island&gt; getIslands() {
+<span class="nc" id="L116">        return islands;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

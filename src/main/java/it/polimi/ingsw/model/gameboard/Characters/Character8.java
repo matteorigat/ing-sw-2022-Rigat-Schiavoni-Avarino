@@ -8,8 +8,9 @@ public class Character8 implements CharacterCard{
     private boolean effectFlag;
 
     public Character8() {
-        this.index = 1;
-        this.cost = 1; //mettere valore carta
+        this.index = 8;
+        this.cost = 2;
+
     }
 
     public void enableEffect(){

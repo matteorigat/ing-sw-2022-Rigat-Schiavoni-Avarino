@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Game.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">GC18</a> &gt; <a href="index.source.html" class="el_package">it.polimi.ingsw.controller</a> &gt; <span class="el_source">Game.java</span></div><h1>Game.java</h1><pre class="source lang-java linenums">package it.polimi.ingsw.controller;
+
+import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.model.enumeration.Colour;
+import it.polimi.ingsw.model.enumeration.GamePhase;
+import it.polimi.ingsw.model.gameboard.Characters.*;
+import it.polimi.ingsw.model.gameboard.Characters.CharacterCard;
+import it.polimi.ingsw.model.gameboard.Cloud;
+import it.polimi.ingsw.model.gameboard.GameBoard;
+import it.polimi.ingsw.model.player.Player;
+import it.polimi.ingsw.model.player.AssistantCard;
+import it.polimi.ingsw.model.player.Professor;
+import it.polimi.ingsw.model.player.Student;
+
+import java.util.ArrayList;
+
+/*
+ *  In this class we manage the main actions of the match.
+ */
+
+public class Game {
+    private final ArrayList&lt;Player&gt; players;
+    private final GameBoard gameBoard;
+
+    private int currentPlayer;
+    private GamePhase currentPhase;
+    private Player[] playersTurnOrder;
+    private int phaseCounter;
+    private int playerPhaseCounter;
+
+
+    //Constructor Game creates a new Game instance
+<span class="nc" id="L33">    public Game() {</span>
+<span class="nc" id="L34">        players = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L35">        gameBoard = new GameBoard();</span>
+
+<span class="nc" id="L37">        phaseCounter = 0;</span>
+<span class="nc" id="L38">        playerPhaseCounter = 0;</span>
+<span class="nc" id="L39">    }</span>
+
+    //Gets the players of the match
+    public ArrayList&lt;Player&gt; getPlayers() {
+<span class="nc" id="L43">        return players;</span>
+    }
+
+
+    //Gets the gameBoard instance
+    public GameBoard getGameBoard() {
+<span class="nc" id="L49">        return gameBoard;</span>
+    }
+
+    public void setGameParameters(int num,boolean mode){
+<span class="nc" id="L53">        Parameters.setParameters(num,mode);</span>
+<span class="nc" id="L54">    }</span>
+
+    public int addPlayer(String nickname){   //DA RIFAREEEEEE
+
+<span class="nc bnc" id="L58" title="All 2 branches missed.">        if(players.size() &lt;= Parameters.numPlayers) {</span>
+<span class="nc" id="L59">            Player p = new Player(nickname, players.size());</span>
+<span class="nc" id="L60">            players.add(p);</span>
+<span class="nc" id="L61">            return players.size()-1;</span>
+        }
+        else{
+            //qui bisogna mettere una exception che nella partita ci sono già 4 giocatori
+<span class="nc" id="L65">            return -1;</span>
+        }
+    }
+
+    public void init(){   //sto seguendo l'inizializzazione della partita
+<span class="nc bnc" id="L70" title="All 2 branches missed.">        if(Parameters.expertMode){</span>
+<span class="nc" id="L71">            gameBoard.chooseThreeCards();</span>
+        }
+
+<span class="nc" id="L74">        double casual = Math.random()*12; //(PUNTO 2)</span>
+<span class="nc" id="L75">        int mn = (int) casual;</span>
+
+<span class="nc" id="L77">        gameBoard.setMotherNature(mn);  //posiziono madrenatura</span>
+
+<span class="nc" id="L79">        ArrayList&lt;Student&gt; arr = new ArrayList&lt;&gt;();  //(PUNTO 3)creo studenti per le isole</span>
+<span class="nc bnc" id="L80" title="All 2 branches missed.">        for (Colour c : Colour.values()) {</span>
+<span class="nc bnc" id="L81" title="All 2 branches missed.">            for(int i=0;i&lt;2;i++){</span>
+<span class="nc" id="L82">                Student s = new Student(c);</span>
+<span class="nc" id="L83">                arr.add(s);</span>
+            }
+        }
+<span class="nc" id="L86">        gameBoard.getBag().fill(arr);</span>
+
+<span class="nc bnc" id="L88" title="All 2 branches missed.">        for (int i=0; i&lt;12; i++){</span>
+<span class="nc bnc" id="L89" title="All 4 branches missed.">            if(i != gameBoard.getMotherNature() &amp;&amp; i != (gameBoard.getMotherNature() + 6)%12) //doesn't place students on the island with mothernature and the opposite one</span>
+<span class="nc" id="L90">                gameBoard.addStudentOnIsland(i, gameBoard.getBag().draw());</span>
+
+        }
+
+<span class="nc bnc" id="L94" title="All 2 branches missed.">        for (Colour c : Colour.values()) {  //creo gli studenti per il sacchetto</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">            for(int i=0;i&lt;24;i++){</span>
+<span class="nc" id="L96">                Student s = new Student(c);</span>
+<span class="nc" id="L97">                arr.add(s);</span>
+            }
+        }
+<span class="nc" id="L100">        gameBoard.getBag().fill(arr);</span>
+
+<span class="nc bnc" id="L102" title="All 2 branches missed.">        for (Player p: players){</span>
+<span class="nc bnc" id="L103" title="All 2 branches missed.">            for (int i=0; i&lt;Parameters.entranceStudents; i++)</span>
+<span class="nc" id="L104">                p.getPlayerSchoolBoard().getStudentsEntrance().add(gameBoard.getBag().draw());</span>
+<span class="nc" id="L105">        }</span>
+<span class="nc" id="L106">    }</span>
+
+
+    //Fase pianificazione punto 1
+    public void addStudentsOnClouds(){
+<span class="nc" id="L111">        int num = 0;</span>
+<span class="nc bnc" id="L112" title="All 2 branches missed.">        for(Cloud c: gameBoard.getClouds()){</span>
+<span class="nc bnc" id="L113" title="All 2 branches missed.">            for (int i = 0; i &lt; Parameters.numCloudStudents; i++)</span>
+<span class="nc bnc" id="L114" title="All 2 branches missed.">                if(gameBoard.getBag().getSize() &gt; 0)</span>
+<span class="nc" id="L115">                    gameBoard.addStudentOnCloud(num, gameBoard.getBag().draw());</span>
+<span class="nc" id="L116">            num++;</span>
+<span class="nc" id="L117">        }</span>
+<span class="nc" id="L118">    }</span>
+    //Fase pianificazione punto 2
+    public void playAssistantCard(int playerIndex, int priority){
+<span class="nc bnc" id="L121" title="All 4 branches missed.">        if(currentPhase.equals(GamePhase.PlayAssistantCard) &amp;&amp; playerIndex == currentPlayer) {</span>
+
+<span class="nc" id="L123">            int check = 0;</span>
+<span class="nc bnc" id="L124" title="All 2 branches missed.">            for(AssistantCard as: players.get(playerIndex).getAssistantDeck()){</span>
+<span class="nc bnc" id="L125" title="All 2 branches missed.">                for(int i=0; i&lt;phaseCounter; i++){</span>
+<span class="nc bnc" id="L126" title="All 2 branches missed.">                    if(as.getValue() == playersTurnOrder[phaseCounter].getCurrentCard().getValue()){</span>
+<span class="nc" id="L127">                        check++;</span>
+                    }
+                }
+<span class="nc" id="L130">            }</span>
+
+<span class="nc bnc" id="L132" title="All 2 branches missed.">            if (check != players.get(playerIndex).getAssistantDeck().size())</span>
+<span class="nc" id="L133">                return;</span>
+
+<span class="nc bnc" id="L135" title="All 2 branches missed.">            for (AssistantCard as : players.get(playerIndex).getAssistantDeck())</span>
+<span class="nc bnc" id="L136" title="All 2 branches missed.">                if (as.getValue() == priority){</span>
+<span class="nc" id="L137">                    players.get(playerIndex).playAssistantCard(as);</span>
+<span class="nc" id="L138">                } else return; //non ha la carta, non ha senso proseguire, tocca ancora lui</span>
+
+<span class="nc" id="L140">            currentPlayer = playersTurnOrder[phaseCounter + 1].getIndex();</span>
+<span class="nc" id="L141">            phaseCounter++;</span>
+<span class="nc bnc" id="L142" title="All 2 branches missed.">            if (phaseCounter == Parameters.numPlayers) {</span>
+<span class="nc" id="L143">                currentPhase = GamePhase.MoveStudents;</span>
+<span class="nc" id="L144">                phaseCounter = 0;</span>
+<span class="nc" id="L145">                this.orderPlayerActionPhase();</span>
+<span class="nc" id="L146">                currentPlayer = playersTurnOrder[0].getIndex();</span>
+            }
+        }
+<span class="nc" id="L149">    }</span>
+
+    private void orderPlayerActionPhase(){
+<span class="nc bnc" id="L152" title="All 2 branches missed.">        for(int i = 0; i &lt; playersTurnOrder.length; i++){</span>
+<span class="nc" id="L153">            boolean swap = false;</span>
+<span class="nc bnc" id="L154" title="All 2 branches missed.">            for(int j = 0; j &lt; playersTurnOrder.length-1; j++){</span>
+<span class="nc bnc" id="L155" title="All 2 branches missed.">                if(playersTurnOrder[j].getCurrentCard().getValue() &gt; playersTurnOrder[j+1].getCurrentCard().getValue()) {</span>
+<span class="nc" id="L156">                    Player k = playersTurnOrder[j];</span>
+<span class="nc" id="L157">                    playersTurnOrder[j] = playersTurnOrder[j+1];</span>
+<span class="nc" id="L158">                    playersTurnOrder[j+1] = k;</span>
+<span class="nc" id="L159">                    swap = true; //segna che è avvenuto uno scambio</span>
+                }
+            }
+<span class="nc bnc" id="L162" title="All 2 branches missed.">            if(!swap) break; // esce prima se ha già ordinato tutto</span>
+        }
+<span class="nc" id="L164">    }</span>
+
+    //Fase azione punto 1
+    public void moveStudentToIsland(int playerIndex, int colour, int IslandPosition){
+<span class="nc bnc" id="L168" title="All 4 branches missed.">        if(currentPhase.equals(GamePhase.MoveStudents) &amp;&amp; playerIndex == currentPlayer){</span>
+<span class="nc" id="L169">            players.get(playerIndex).getPlayerSchoolBoard().moveStudentToIsland(colour, this.gameBoard.getIslands().get(IslandPosition));</span>
+
+<span class="nc" id="L171">            phaseCounter++;</span>
+<span class="nc bnc" id="L172" title="All 2 branches missed.">            if(phaseCounter == Parameters.numCloudStudents){</span>
+<span class="nc" id="L173">                currentPhase = GamePhase.MoveMotherNature;</span>
+<span class="nc" id="L174">                phaseCounter = 0;</span>
+            }
+        }
+<span class="nc" id="L177">    }</span>
+    //Fase azione punto 1
+    public void moveStudentToDiningRoom(int playerIndex, int colour){
+<span class="nc bnc" id="L180" title="All 6 branches missed.">        if(currentPhase.equals(GamePhase.MoveStudents) &amp;&amp; playerIndex == currentPlayer &amp;&amp; players.get(playerIndex).getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colour]) &lt; 10){</span>
+            boolean coin; //ritorna true se il giocatore merita una moneta
+<span class="nc" id="L182">            coin = players.get(playerIndex).getPlayerSchoolBoard().moveStudentToDiningRoom(colour);</span>
+<span class="nc bnc" id="L183" title="All 4 branches missed.">            if(Parameters.expertMode &amp;&amp; coin){</span>
+<span class="nc" id="L184">                players.get(playerIndex).addCoin();</span>
+<span class="nc" id="L185">                gameBoard.getOneCoin();</span>
+            }
+
+            //controllo chi possiede il professore ora
+            int c;
+<span class="nc" id="L190">            int max = 0;</span>
+<span class="nc" id="L191">            Player oldProfessorOwner = null;</span>
+<span class="nc" id="L192">            Player newProfessorOwner = null;</span>
+<span class="nc bnc" id="L193" title="All 2 branches missed.">            for(Player p: players){</span>
+                //vedo chi aveva il professore prima
+<span class="nc bnc" id="L195" title="All 2 branches missed.">                for(Professor pr: p.getPlayerSchoolBoard().getProfessors()){</span>
+<span class="nc bnc" id="L196" title="All 2 branches missed.">                    if(pr.getProfessorColour().equals(Colour.values()[colour]))</span>
+<span class="nc" id="L197">                        oldProfessorOwner = p;</span>
+<span class="nc" id="L198">                }</span>
+                //vedo chi merita il professore ora
+<span class="nc" id="L200">                c = p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colour]);</span>
+<span class="nc bnc" id="L201" title="All 2 branches missed.">                if(c &gt; max){</span>
+<span class="nc" id="L202">                    max = c;</span>
+<span class="nc" id="L203">                    newProfessorOwner = p;</span>
+                }
+<span class="nc" id="L205">            }</span>
+            //se il propretario è cambiato faccio il passaggio
+<span class="nc bnc" id="L207" title="All 2 branches missed.">            if(!oldProfessorOwner.equals(newProfessorOwner)){</span>
+<span class="nc" id="L208">                oldProfessorOwner.getPlayerSchoolBoard().removeProfessor(Colour.values()[colour]);</span>
+<span class="nc" id="L209">                newProfessorOwner.getPlayerSchoolBoard().addProfessor(Colour.values()[colour]);</span>
+            }
+
+<span class="nc" id="L212">            phaseCounter++;</span>
+<span class="nc bnc" id="L213" title="All 2 branches missed.">            if(phaseCounter == Parameters.numCloudStudents){</span>
+<span class="nc" id="L214">                currentPhase = GamePhase.MoveMotherNature;</span>
+<span class="nc" id="L215">                phaseCounter = 0;</span>
+            }
+        }
+<span class="nc" id="L218">    }</span>
+
+    //Fase azione punto 2.1
+    public void moveMotherNature(int playerIndex, int movements){ //devo controllare se player ha i permessi
+<span class="nc bnc" id="L222" title="All 4 branches missed.">        if(currentPhase.equals(GamePhase.MoveMotherNature) &amp;&amp; playerIndex == currentPlayer){</span>
+<span class="nc bnc" id="L223" title="All 4 branches missed.">            if(movements &gt; 0 &amp;&amp; movements &lt;= players.get(currentPlayer).getCurrentCard().getMovements()){</span>
+
+<span class="nc" id="L225">                int newPos = 0;</span>
+<span class="nc bnc" id="L226" title="All 2 branches missed.">                if(Parameters.expertMode){</span>
+<span class="nc bnc" id="L227" title="All 2 branches missed.">                    for(CharacterCard c: gameBoard.getThreeCharacterCards())</span>
+<span class="nc bnc" id="L228" title="All 4 branches missed.">                        if(c.getIndex() == 4 &amp;&amp; ((Character4) c).isEffectFlag())</span>
+<span class="nc" id="L229">                            newPos = 2;</span>
+                }
+<span class="nc" id="L231">                newPos = ((newPos + this.gameBoard.getMotherNature() + movements)%Parameters.numIsland);</span>
+<span class="nc" id="L232">                this.gameBoard.setMotherNature(newPos);//moves motherNature by specified movements</span>
+<span class="nc" id="L233">                this.checkIslandInfluence(newPos, playerIndex);</span>
+            }
+
+<span class="nc" id="L236">            currentPhase = GamePhase.ChooseCloud;</span>
+        }
+<span class="nc" id="L238">    }</span>
+    //Fase azione punto 2.2 //vedo chi controlla l'isola, se il player è cambiato sostituisco le torri
+    private void checkIslandInfluence(int islandIndex, int playerIndex){
+<span class="nc" id="L241">        boolean noTowerFlag = false;</span>
+<span class="nc" id="L242">        int twoMorePointsPlayer = -1;</span>
+<span class="nc bnc" id="L243" title="All 2 branches missed.">        if(Parameters.expertMode){</span>
+<span class="nc bnc" id="L244" title="All 2 branches missed.">            for(CharacterCard c: gameBoard.getThreeCharacterCards())</span>
+<span class="nc bnc" id="L245" title="All 4 branches missed.">                if(c.getIndex() == 5 &amp;&amp; gameBoard.getIslands().get(islandIndex).getNoEntry() &gt; 0){</span>
+<span class="nc" id="L246">                    gameBoard.getIslands().get(islandIndex).removeNoEntry();</span>
+<span class="nc" id="L247">                    ((Character5) c).addNoEntry();</span>
+<span class="nc" id="L248">                    return;  // proseguo come se madre natura non fosse capitata qui</span>
+<span class="nc bnc" id="L249" title="All 4 branches missed.">                } else if(c.getIndex() == 6 &amp;&amp; ((Character6) c).isEffectFlag()){</span>
+<span class="nc" id="L250">                    ((Character6) c).disableEffect();</span>
+<span class="nc" id="L251">                    noTowerFlag = true;</span>
+<span class="nc bnc" id="L252" title="All 4 branches missed.">                } else if(c.getIndex() == 8 &amp;&amp; ((Character8) c).isEffectFlag()){</span>
+<span class="nc" id="L253">                    ((Character6) c).disableEffect();</span>
+<span class="nc" id="L254">                    twoMorePointsPlayer = playerIndex;</span>
+                }
+
+        }
+
+        // vedo chi ha più influenza ora
+<span class="nc" id="L260">        Player newPlayer = this.gameBoard.getIslands().get(islandIndex).Influence(this.players, noTowerFlag, twoMorePointsPlayer);</span>
+
+<span class="nc bnc" id="L262" title="All 2 branches missed.">        if (newPlayer!=null){</span>
+<span class="nc" id="L263">            Player oldPlayer = null;  // vedo chi controllava l'isola prima</span>
+<span class="nc bnc" id="L264" title="All 2 branches missed.">            for (Player pl: players){</span>
+<span class="nc bnc" id="L265" title="All 2 branches missed.">                if(pl.PlayerTowerColor().equals(this.gameBoard.getIslands().get(islandIndex).getTowerColor()))</span>
+<span class="nc" id="L266">                    oldPlayer = pl;</span>
+<span class="nc" id="L267">            }</span>
+
+<span class="nc bnc" id="L269" title="All 2 branches missed.">            if(!oldPlayer.equals(newPlayer)){</span>
+                //ridò al vecchio giocatore le sue torri e le sostituisco con quelle del nuovo giocatore
+<span class="nc bnc" id="L271" title="All 2 branches missed.">                for(int i=0; i&lt;=this.gameBoard.getIslands().get(islandIndex).getNumTower(); i++){</span>
+<span class="nc bnc" id="L272" title="All 2 branches missed.">                    if(oldPlayer != null)</span>
+<span class="nc" id="L273">                        oldPlayer.getPlayerSchoolBoard().addTower(oldPlayer.PlayerTowerColor());</span>
+<span class="nc" id="L274">                    newPlayer.getPlayerSchoolBoard().getTowers().remove(0);</span>
+                }
+<span class="nc" id="L276">                this.getGameBoard().getIslands().get(islandIndex).changeTowerColor(newPlayer.PlayerTowerColor());</span>
+
+<span class="nc bnc" id="L278" title="All 2 branches missed.">                if(newPlayer.getPlayerSchoolBoard().getTowers().size() == 0){</span>
+<span class="nc" id="L279">                    endGame();</span>
+                }
+
+<span class="nc" id="L282">                checkIslandFusion(islandIndex);</span>
+            }
+
+        }
+        //se nessuno ha l'influenza o in caso di parità non succede nulla
+<span class="nc" id="L287">    }</span>
+    //Fase azione punto 2.3
+    private void checkIslandFusion(int islandIndex){
+        //se il colore delle torri sull'isola e su quella successiva sono uguali
+<span class="nc bnc" id="L291" title="All 2 branches missed.">        while (this.gameBoard.getIslands().get(islandIndex).getTowerColor().equals(this.gameBoard.getIslands().get(islandIndex+1).getTowerColor())){</span>
+<span class="nc" id="L292">            this.gameBoard.islandFusion(islandIndex, islandIndex+1);</span>
+        }
+<span class="nc" id="L294">        int newPosition = islandIndex;</span>
+        //se il colore delle torri sull'isola e su quella precedente sono uguali
+<span class="nc bnc" id="L296" title="All 2 branches missed.">        while (this.gameBoard.getIslands().get(newPosition).getTowerColor().equals(this.gameBoard.getIslands().get(newPosition-1).getTowerColor())){</span>
+<span class="nc" id="L297">            this.gameBoard.islandFusion(newPosition-1, newPosition);</span>
+<span class="nc" id="L298">            newPosition--;</span>
+        }
+<span class="nc bnc" id="L300" title="All 2 branches missed.">        if(this.gameBoard.getIslands().size() &lt;= 3){</span>
+<span class="nc" id="L301">            endGame();</span>
+        }
+<span class="nc" id="L303">    }</span>
+
+    //Fase azione punto 3
+    public void chooseCloud(int playerIndex, int cloudPosition){
+<span class="nc bnc" id="L307" title="All 4 branches missed.">        if(currentPhase.equals(GamePhase.MoveMotherNature) &amp;&amp; playerIndex == currentPlayer){</span>
+<span class="nc" id="L308">            ArrayList&lt;Student&gt; stud = this.gameBoard.getClouds().get(cloudPosition).getStudents();</span>
+
+<span class="nc bnc" id="L310" title="All 2 branches missed.">            for (Student s: stud){ //qui e alla fine del metodo init() farei un nuovo metodo add che controlla anche se non viene superato il limite di studenti all'entrata</span>
+<span class="nc" id="L311">                players.get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance().add(s);</span>
+<span class="nc" id="L312">            }</span>
+
+<span class="nc" id="L314">            playerPhaseCounter++;</span>
+<span class="nc bnc" id="L315" title="All 2 branches missed.">            if(playerPhaseCounter == Parameters.numPlayers){</span>
+<span class="nc" id="L316">                playerPhaseCounter = 0;</span>
+<span class="nc" id="L317">                addStudentsOnClouds();</span>
+<span class="nc" id="L318">                orderPlayersAssistantCard();</span>
+<span class="nc" id="L319">                currentPhase = GamePhase.PlayAssistantCard;</span>
+
+<span class="nc bnc" id="L321" title="All 2 branches missed.">                if(gameBoard.getBag().getSize() == 0)  //bisogna mettere delle exception dove viene pescato uno studente se non ce ne sono più, poi qui finisco il gioco.</span>
+<span class="nc" id="L322">                    endGame();</span>
+
+<span class="nc bnc" id="L324" title="All 2 branches missed.">                for(Player p: players)</span>
+<span class="nc bnc" id="L325" title="All 2 branches missed.">                    if(p.getAssistantDeck().size() == 0)</span>
+<span class="nc" id="L326">                        endGame();</span>
+
+            } else {
+<span class="nc" id="L329">                currentPhase = GamePhase.MoveStudents;</span>
+<span class="nc" id="L330">                currentPlayer = playersTurnOrder[playerPhaseCounter].getIndex();</span>
+            }
+        }
+<span class="nc" id="L333">    }</span>
+
+    private void orderPlayersAssistantCard(){
+<span class="nc" id="L336">        int index = -1;</span>
+        int num;
+<span class="nc" id="L338">        int min = 11;</span>
+<span class="nc bnc" id="L339" title="All 2 branches missed.">        for(Player p: players){</span>
+<span class="nc" id="L340">            num = p.getCurrentCard().getValue();</span>
+<span class="nc bnc" id="L341" title="All 2 branches missed.">            if(num &lt; min){</span>
+<span class="nc" id="L342">                min = num;</span>
+<span class="nc" id="L343">                index = p.getIndex();</span>
+            }
+<span class="nc" id="L345">        }</span>
+
+<span class="nc" id="L347">        currentPlayer = index;</span>
+<span class="nc bnc" id="L348" title="All 2 branches missed.">        for(int i = 0; i&lt;Parameters.numPlayers; i++)</span>
+<span class="nc" id="L349">            playersTurnOrder[i] = players.get((index + i)%Parameters.numPlayers);</span>
+<span class="nc" id="L350">    }</span>
+
+    public void endGame(){
+        //non so cosa succeda qui dentro
+        //vince il giocatore che ha costruito il maggior numero di torri
+        //in caso di parità chi ha piu professori
+<span class="nc" id="L356">        currentPhase = GamePhase.GameEnded;</span>
+<span class="nc" id="L357">    }</span>
+
+    public int getCurrentPhase() {
+<span class="nc" id="L360">        return currentPhase.ordinal();</span>
+    }
+
+    public int getCurrentPlayer(){
+<span class="nc" id="L364">        return players.indexOf(currentPlayer);</span>
+    }
+
+
+
+
+
+
+
+
+
+
+
+    public void playCharacterCard1(int playerIndex, int cardIndex, int colorIndex, int islandIndex){
+<span class="nc bnc" id="L378" title="All 2 branches missed.">        if(playerIndex == currentPlayer){</span>
+<span class="nc bnc" id="L379" title="All 2 branches missed.">            for (CharacterCard c: gameBoard.getThreeCharacterCards()){</span>
+<span class="nc bnc" id="L380" title="All 6 branches missed.">                if(cardIndex == c.getIndex() &amp;&amp; players.get(playerIndex).getCoins() &gt;= c.getCost() &amp;&amp; ((Character1) c).checkColorExists(colorIndex)){</span>
+<span class="nc" id="L381">                    c.play();</span>
+<span class="nc" id="L382">                    gameBoard.addCoinsToGeneralReserve(c.getCost() - 1); //meno uno perchè una va sulla carta</span>
+
+<span class="nc" id="L384">                    gameBoard.addStudentOnIsland(islandIndex, ((Character1) c).getStudent(colorIndex));</span>
+<span class="nc" id="L385">                    ((Character1) c).addStudent(gameBoard.getBag().draw());</span>
+                }
+<span class="nc" id="L387">            }</span>
+        }
+<span class="nc" id="L389">    }</span>
+
+    public void playCharacterCard3(int playerIndex, int cardIndex, int islandIndex){
+<span class="nc bnc" id="L392" title="All 2 branches missed.">        if(playerIndex == currentPlayer){</span>
+<span class="nc bnc" id="L393" title="All 2 branches missed.">            for (CharacterCard c: gameBoard.getThreeCharacterCards()){</span>
+<span class="nc bnc" id="L394" title="All 4 branches missed.">                if(cardIndex == c.getIndex() &amp;&amp; players.get(playerIndex).getCoins() &gt;= c.getCost()){</span>
+<span class="nc" id="L395">                    c.play();</span>
+<span class="nc" id="L396">                    gameBoard.addCoinsToGeneralReserve(c.getCost() - 1); //meno uno perchè una va sulla carta</span>
+
+<span class="nc" id="L398">                    checkIslandInfluence(islandIndex, playerIndex);</span>
+                }
+<span class="nc" id="L400">            }</span>
+        }
+<span class="nc" id="L402">    }</span>
+
+    public void playCharacterCard4(int playerIndex, int cardIndex){
+<span class="nc bnc" id="L405" title="All 4 branches missed.">        if(playerIndex == currentPlayer &amp;&amp; currentPhase.ordinal() &lt;= GamePhase.MoveMotherNature.ordinal()){</span>
+<span class="nc bnc" id="L406" title="All 2 branches missed.">            for (CharacterCard c: gameBoard.getThreeCharacterCards()){</span>
+<span class="nc bnc" id="L407" title="All 4 branches missed.">                if(cardIndex == c.getIndex() &amp;&amp; players.get(playerIndex).getCoins() &gt;= c.getCost()){</span>
+<span class="nc" id="L408">                    c.play();</span>
+<span class="nc" id="L409">                    gameBoard.addCoinsToGeneralReserve(c.getCost() - 1); //meno uno perchè una va sulla carta</span>
+
+<span class="nc" id="L411">                    ((Character4) c).enableEffect();</span>
+                }
+<span class="nc" id="L413">            }</span>
+        }
+<span class="nc" id="L415">    }</span>
+
+    public void playCharacterCard5(int playerIndex, int cardIndex, int islandIndex){
+<span class="nc bnc" id="L418" title="All 2 branches missed.">        if(playerIndex == currentPlayer){</span>
+<span class="nc bnc" id="L419" title="All 2 branches missed.">            for (CharacterCard c: gameBoard.getThreeCharacterCards()){</span>
+<span class="nc bnc" id="L420" title="All 4 branches missed.">                if(cardIndex == c.getIndex() &amp;&amp; players.get(playerIndex).getCoins() &gt;= c.getCost()){</span>
+<span class="nc" id="L421">                    c.play();</span>
+<span class="nc" id="L422">                    gameBoard.addCoinsToGeneralReserve(c.getCost() - 1); //meno uno perchè una va sulla carta</span>
+
+<span class="nc" id="L424">                    gameBoard.getIslands().get(islandIndex).addNoEntry();</span>
+                }
+<span class="nc" id="L426">            }</span>
+        }
+<span class="nc" id="L428">    }</span>
+
+    public void playCharacterCard6(int playerIndex, int cardIndex){
+<span class="nc bnc" id="L431" title="All 4 branches missed.">        if(playerIndex == currentPlayer &amp;&amp; currentPhase.ordinal() &lt;= GamePhase.MoveStudents.ordinal()){</span>
+<span class="nc bnc" id="L432" title="All 2 branches missed.">            for (CharacterCard c: gameBoard.getThreeCharacterCards()){</span>
+<span class="nc bnc" id="L433" title="All 4 branches missed.">                if(cardIndex == c.getIndex() &amp;&amp; players.get(playerIndex).getCoins() &gt;= c.getCost()){</span>
+<span class="nc" id="L434">                    c.play();</span>
+<span class="nc" id="L435">                    gameBoard.addCoinsToGeneralReserve(c.getCost() - 1); //meno uno perchè una va sulla carta</span>
+
+<span class="nc" id="L437">                    ((Character6) c).enableEffect();</span>
+                }
+<span class="nc" id="L439">            }</span>
+        }
+<span class="nc" id="L441">    }</span>
+
+    public void playCharacterCard8(int playerIndex, int cardIndex){
+<span class="nc bnc" id="L444" title="All 4 branches missed.">        if(playerIndex == currentPlayer &amp;&amp; currentPhase.ordinal() &lt;= GamePhase.MoveStudents.ordinal()){</span>
+<span class="nc bnc" id="L445" title="All 2 branches missed.">            for (CharacterCard c: gameBoard.getThreeCharacterCards()){</span>
+<span class="nc bnc" id="L446" title="All 4 branches missed.">                if(cardIndex == c.getIndex() &amp;&amp; players.get(playerIndex).getCoins() &gt;= c.getCost()){</span>
+<span class="nc" id="L447">                    c.play();</span>
+<span class="nc" id="L448">                    gameBoard.addCoinsToGeneralReserve(c.getCost() - 1); //meno uno perchè una va sulla carta</span>
+
+<span class="nc" id="L450">                    ((Character8) c).enableEffect();</span>
+                }
+<span class="nc" id="L452">            }</span>
+        }
+<span class="nc" id="L454">    }</span>
+
+    public void playCharacterCard11(int playerIndex, int cardIndex, int colorIndex){
+<span class="nc bnc" id="L457" title="All 2 branches missed.">        if(playerIndex == currentPlayer){</span>
+<span class="nc bnc" id="L458" title="All 2 branches missed.">            for (CharacterCard c: gameBoard.getThreeCharacterCards()){</span>
+<span class="nc bnc" id="L459" title="All 6 branches missed.">                if(cardIndex == c.getIndex() &amp;&amp; players.get(playerIndex).getCoins() &gt;= c.getCost() &amp;&amp; ((Character11) c).checkColorExists(colorIndex)){</span>
+<span class="nc" id="L460">                    c.play();</span>
+<span class="nc" id="L461">                    gameBoard.addCoinsToGeneralReserve(c.getCost() - 1); //meno uno perchè una va sulla carta</span>
+
+<span class="nc" id="L463">                    players.get(playerIndex).getPlayerSchoolBoard().getDiningRoom().addStudent(((Character11) c).getStudent(colorIndex));</span>
+<span class="nc" id="L464">                    ((Character11) c).addStudent(gameBoard.getBag().draw());</span>
+                }
+<span class="nc" id="L466">            }</span>
+        }
+<span class="nc" id="L468">    }</span>
+
+    public void playCharacterCard12(int playerIndex, int cardIndex, int colorIndex){
+<span class="nc bnc" id="L471" title="All 2 branches missed.">        if(playerIndex == currentPlayer){</span>
+<span class="nc bnc" id="L472" title="All 2 branches missed.">            for (CharacterCard c: gameBoard.getThreeCharacterCards()){</span>
+<span class="nc bnc" id="L473" title="All 4 branches missed.">                if(cardIndex == c.getIndex() &amp;&amp; players.get(playerIndex).getCoins() &gt;= c.getCost()){</span>
+<span class="nc" id="L474">                    c.play();</span>
+<span class="nc" id="L475">                    gameBoard.addCoinsToGeneralReserve(c.getCost() - 1); //meno uno perchè una va sulla carta</span>
+
+<span class="nc bnc" id="L477" title="All 2 branches missed.">                    for (Player p: players)</span>
+<span class="nc" id="L478">                            gameBoard.getBag().fill(p.getPlayerSchoolBoard().getDiningRoom().removeThreeStudents(Colour.values()[colorIndex]));</span>
+                }
+<span class="nc" id="L480">            }</span>
+        }
+<span class="nc" id="L482">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

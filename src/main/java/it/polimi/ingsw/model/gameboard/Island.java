@@ -1,15 +1,12 @@
 package it.polimi.ingsw.model.gameboard;
 
 import it.polimi.ingsw.model.Parameters;
-import it.polimi.ingsw.model.Player;
-import it.polimi.ingsw.model.Professor;
-import it.polimi.ingsw.model.Student;
-import it.polimi.ingsw.model.enumeration.Colour;
+import it.polimi.ingsw.model.player.Player;
+import it.polimi.ingsw.model.player.Professor;
+import it.polimi.ingsw.model.player.Student;
 import it.polimi.ingsw.model.enumeration.TowerColour;
 
 import java.util.ArrayList;
-
-import static it.polimi.ingsw.model.enumeration.Colour.Green;
 
 public class Island {
    // private int islandRank;    //numero di isole unite

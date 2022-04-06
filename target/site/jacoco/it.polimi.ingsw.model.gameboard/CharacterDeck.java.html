@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CharacterDeck.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">GC18</a> &gt; <a href="index.source.html" class="el_package">it.polimi.ingsw.model.gameboard</a> &gt; <span class="el_source">CharacterDeck.java</span></div><h1>CharacterDeck.java</h1><pre class="source lang-java linenums">package it.polimi.ingsw.model.gameboard;
+
+import it.polimi.ingsw.model.gameboard.Characters.*;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class CharacterDeck {
+    private ArrayList&lt;CharacterCard&gt; characterCards;
+
+<span class="fc" id="L11">    public CharacterDeck() {</span>
+<span class="fc" id="L12">        characterCards = new ArrayList&lt;CharacterCard&gt;();</span>
+<span class="fc" id="L13">        characterCards.add(new Character1());</span>
+<span class="fc" id="L14">        characterCards.add(new Character3());</span>
+<span class="fc" id="L15">        characterCards.add(new Character4());</span>
+<span class="fc" id="L16">        characterCards.add(new Character5());</span>
+<span class="fc" id="L17">        characterCards.add(new Character6());</span>
+<span class="fc" id="L18">        characterCards.add(new Character8());</span>
+<span class="fc" id="L19">        characterCards.add(new Character11());</span>
+<span class="fc" id="L20">        characterCards.add(new Character12());</span>
+<span class="fc" id="L21">    }</span>
+
+    public ArrayList&lt;CharacterCard&gt; getThreeRandomCards(){
+<span class="fc" id="L24">        ArrayList&lt;CharacterCard&gt; threeCards = new ArrayList&lt;CharacterCard&gt;();</span>
+
+<span class="fc" id="L26">        Collections.shuffle(this.characterCards);</span>
+
+<span class="fc bfc" id="L28" title="All 2 branches covered.">        for (int i=0; i&lt;3; i++){</span>
+<span class="fc" id="L29">            threeCards.add(characterCards.get(0));</span>
+<span class="fc" id="L30">            characterCards.remove(0);</span>
+        }
+
+<span class="fc" id="L33">        return threeCards;</span>
+    }
+
+    public ArrayList&lt;CharacterCard&gt; getCharacterCards() {
+<span class="fc" id="L37">        return characterCards;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -10,6 +10,7 @@ public class Character6 implements CharacterCard{
     public Character6() {
         this.index = 6;
         this.cost = 3;
+        this.effectFlag = false;
     }
 
     public void enableEffect(){

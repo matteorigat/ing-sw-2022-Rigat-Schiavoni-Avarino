@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Cloud.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">GC18</a> &gt; <a href="index.source.html" class="el_package">it.polimi.ingsw.model.gameboard</a> &gt; <span class="el_source">Cloud.java</span></div><h1>Cloud.java</h1><pre class="source lang-java linenums">package it.polimi.ingsw.model.gameboard;
+
+import it.polimi.ingsw.exceptions.TooManyStudentsOnCloudException;
+import it.polimi.ingsw.model.Parameters;
+import it.polimi.ingsw.model.player.Student;
+
+import java.util.ArrayList;
+
+public class Cloud {
+
+    private ArrayList&lt;Student&gt; students;
+
+<span class="nc" id="L13">    public Cloud() {</span>
+<span class="nc" id="L14">        this.students = new ArrayList&lt;&gt;(0);</span>
+<span class="nc" id="L15">    }</span>
+
+    // A inizio turmo si aggiungono giocatori sulla nuvola... è possibile modificare la funzione e passare tutti gli studenti insieme come arraylist
+    public void addStudent(Student s) throws TooManyStudentsOnCloudException {
+<span class="nc bnc" id="L19" title="All 2 branches missed.">        if (this.students.size() &lt; Parameters.numCloudStudents){</span>
+<span class="nc" id="L20">            this.students.add(s);</span>
+        }
+<span class="nc" id="L22">        else throw new TooManyStudentsOnCloudException();</span>
+
+<span class="nc" id="L24">    }</span>
+
+    //quando un giocatore finisce il turno, prende gli studenti dalla nuvola e la svuota
+    public ArrayList&lt;Student&gt; getStudents() {
+<span class="nc" id="L28">        ArrayList&lt;Student&gt; stud = (ArrayList&lt;Student&gt;) students.clone();</span>
+
+<span class="nc bnc" id="L30" title="All 2 branches missed.">        for(int i=0; i&lt;stud.size(); i++)</span>
+<span class="nc" id="L31">            students.remove(0);</span>
+
+<span class="nc" id="L33">        return stud;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

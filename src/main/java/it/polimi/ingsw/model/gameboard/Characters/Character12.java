@@ -5,8 +5,8 @@ public class Character12 implements CharacterCard{
     private int cost;
 
     public Character12() {
-        this.index = 1;
-        this.cost = 1; //mettere valore carta
+        this.index = 12;
+        this.cost = 3;
     }
 
     @Override

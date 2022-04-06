@@ -1,19 +1,18 @@
 package it.polimi.ingsw.controller;
 
-import it.polimi.ingsw.exceptions.NotExistingPlayerException;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.enumeration.Colour;
 import it.polimi.ingsw.model.enumeration.GamePhase;
-import it.polimi.ingsw.model.enumeration.TowerColour;
-import it.polimi.ingsw.model.gameboard.Bag;
-import it.polimi.ingsw.model.gameboard.CharacterDeck;
 import it.polimi.ingsw.model.gameboard.Characters.*;
 import it.polimi.ingsw.model.gameboard.Characters.CharacterCard;
 import it.polimi.ingsw.model.gameboard.Cloud;
 import it.polimi.ingsw.model.gameboard.GameBoard;
+import it.polimi.ingsw.model.player.Player;
+import it.polimi.ingsw.model.player.AssistantCard;
+import it.polimi.ingsw.model.player.Professor;
+import it.polimi.ingsw.model.player.Student;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 /*
  *  In this class we manage the main actions of the match.
@@ -22,10 +21,10 @@ import java.util.Collections;
 public class Game {
     private final ArrayList<Player> players;
     private final GameBoard gameBoard;
+
     private int currentPlayer;
     private GamePhase currentPhase;
     private Player[] playersTurnOrder;
-
     private int phaseCounter;
     private int playerPhaseCounter;
 

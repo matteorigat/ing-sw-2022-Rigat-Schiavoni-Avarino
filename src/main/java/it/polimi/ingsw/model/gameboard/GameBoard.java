@@ -1,10 +1,9 @@
 package it.polimi.ingsw.model.gameboard;
 
 import it.polimi.ingsw.exceptions.TooManyStudentsOnCloudException;
-import it.polimi.ingsw.model.AssistantCard;
+import it.polimi.ingsw.model.player.AssistantCard;
 import it.polimi.ingsw.model.Parameters;
-import it.polimi.ingsw.model.Student;
-import it.polimi.ingsw.model.enumeration.Colour;
+import it.polimi.ingsw.model.player.Student;
 import it.polimi.ingsw.model.gameboard.Characters.*;
 import it.polimi.ingsw.model.gameboard.Characters.CharacterCard;
 
@@ -58,7 +57,6 @@ public class GameBoard {
             }
         }
     }
-
 
     public ArrayList<CharacterCard> getThreeCharacterCards() {
         return threeCharacterCards;
