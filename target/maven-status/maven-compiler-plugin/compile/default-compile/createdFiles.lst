@@ -1,7 +1,7 @@
 it/polimi/ingsw/model/gameboard/Characters/Character5.class
 it/polimi/ingsw/model/DiningRoom.class
-it/polimi/ingsw/model/gameboard/Characters/Character7.class
 it/polimi/ingsw/model/Professor.class
+it/polimi/ingsw/model/gameboard/Characters/Character12.class
 it/polimi/ingsw/model/SchoolBoard.class
 it/polimi/ingsw/exceptions/TooManyPlayersException.class
 it/polimi/ingsw/exceptions/TooManyStudentsOnCloudException.class
@@ -10,6 +10,7 @@ it/polimi/ingsw/model/Student.class
 it/polimi/ingsw/model/Tower.class
 it/polimi/ingsw/model/gameboard/Island.class
 it/polimi/ingsw/model/gameboard/Characters/Character3.class
+it/polimi/ingsw/model/gameboard/Characters/Character11.class
 it/polimi/ingsw/model/gameboard/Characters/Character1.class
 it/polimi/ingsw/model/gameboard/CharacterDeck.class
 it/polimi/ingsw/model/enumeration/Colour.class
@@ -24,7 +25,6 @@ it/polimi/ingsw/model/Player.class
 it/polimi/ingsw/model/gameboard/Characters/Character8.class
 it/polimi/ingsw/model/gameboard/GameBoard.class
 it/polimi/ingsw/model/enumeration/TowerColour.class
-it/polimi/ingsw/model/gameboard/Characters/Character2.class
 it/polimi/ingsw/model/gameboard/Bag.class
 it/polimi/ingsw/model/Parameters.class
 it/polimi/ingsw/model/AssistantCard.class
