@@ -3,10 +3,7 @@ package it.polimi.ingsw.view;
 import it.polimi.ingsw.controller.Game;
 import it.polimi.ingsw.model.gameboard.GameBoard;
 import it.polimi.ingsw.model.gameboard.Island;
-import it.polimi.ingsw.model.player.DiningRoom;
-import it.polimi.ingsw.model.player.Player;
-import it.polimi.ingsw.model.player.SchoolBoard;
-import it.polimi.ingsw.model.player.Student;
+import it.polimi.ingsw.model.player.*;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -62,6 +59,10 @@ public class LocalViewTest {
                 System.out.println("YELLOW: " + dr.getYellowStudents());
                 System.out.println("PINK: " + dr.getPinkStudents());
                 System.out.println("BLUE: " + dr.getBlueStudents());
+                System.out.println("DECK: ");
+                for(AssistantCard card : p.getAssistantDeck()){
+                    System.out.println(card.getValue());
+                }
                 System.out.println("\n\n");
             }
             System.out.println("PHASE: " + controller.getCurrentPhase());
@@ -69,7 +70,8 @@ public class LocalViewTest {
             System.out.println("Students in the bag: " + controller.getGameBoard().getBag().getSize());
             System.out.println("CHOOSE : ");
                      int result = -2;
-                     while(result == -1 || result == -2) {
+                     boolean resultbool = false;
+                     while(resultbool == false) {
                          choice = scanner.next();
 
                          char ch = choice.charAt(0);
@@ -82,6 +84,7 @@ public class LocalViewTest {
                                  int c = (int)choice.charAt(2) -48;
                                  System.out.println(ch + " " + b + " " +c);
                                  result = controller.playAssistantCard(b,c);
+                                 if(result == 1) resultbool = true;
                                  System.out.println(result);
 
                              }
