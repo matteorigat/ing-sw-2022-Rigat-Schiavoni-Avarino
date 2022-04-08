@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.controller.Game;
+import it.polimi.ingsw.model.enumeration.GamePhase;
 import it.polimi.ingsw.model.gameboard.GameBoard;
 import it.polimi.ingsw.model.gameboard.Island;
 import it.polimi.ingsw.model.player.*;
@@ -65,8 +66,8 @@ public class LocalViewTest {
                 }
                 System.out.println("\n\n");
             }
-            System.out.println("PHASE: " + controller.getCurrentPhase());
-            System.out.println("CURRENT PLAYER: " + controller.getCurrentPlayer());
+            System.out.println("PHASE: " + GamePhase.values()[controller.getCurrentPhase()]);
+            System.out.println("CURRENT PLAYER: " + controller.getCurrentPlayer() + " " + controller.getPlayers().get(controller.getCurrentPlayer()));
             System.out.println("Students in the bag: " + controller.getGameBoard().getBag().getSize());
             System.out.println("CHOOSE : ");
                      int result = -2;
