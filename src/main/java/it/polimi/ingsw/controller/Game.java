@@ -33,10 +33,11 @@ public class Game {
     public Game() {
         players = new ArrayList<>();
         gameBoard = new GameBoard();
+        playersTurnOrder = new Player[Parameters.numPlayers]; //GIUS
 
         phaseCounter = 0;
         playerPhaseCounter = 0;
-        currentPhase = GamePhase.PlayAssistantCard; //AGGIUNTA GIUS
+
     }
 
     //Gets the players of the match
@@ -71,7 +72,7 @@ public class Game {
         if(Parameters.expertMode){
             gameBoard.chooseThreeCards();
         }
-
+        this.currentPhase = GamePhase.PlayAssistantCard; //AGGIUNTA GIUS
         double casual = Math.random()*12; //(PUNTO 2)
         int mn = (int) casual;
 
@@ -104,6 +105,13 @@ public class Game {
             for (int i=0; i<Parameters.entranceStudents; i++)
                 p.getPlayerSchoolBoard().getStudentsEntrance().add(gameBoard.getBag().draw());
         }
+
+        //AGGIUNTA GIUS
+
+        currentPlayer = 0;
+        for(int i = 0; i<Parameters.numPlayers; i++){
+            playersTurnOrder[i] = players.get(i);
+        }
     }
 
 
@@ -118,10 +126,10 @@ public class Game {
         }
     }
     //Fase pianificazione punto 2
-    public void playAssistantCard(int playerIndex, int priority){
+    public int playAssistantCard(int playerIndex, int priority){
         if(currentPhase.equals(GamePhase.PlayAssistantCard) && playerIndex == currentPlayer) {
 
-            int check = 0;
+          /*  int check = 0;     //COMMENTATO PERCHÈ C'È QUALCHE ERRORE!  (Codice per verificare se la carta è già stata giocata da un altro giocatore)
             for(AssistantCard as: players.get(playerIndex).getAssistantDeck()){
                 for(int i=0; i<phaseCounter; i++){
                     if(as.getValue() == playersTurnOrder[phaseCounter].getCurrentCard().getValue()){
@@ -131,22 +139,34 @@ public class Game {
             }
 
             if (check != players.get(playerIndex).getAssistantDeck().size())
-                return;
+                return -1; */
 
+            boolean found = false; //AGGIUNTA GIUS
             for (AssistantCard as : players.get(playerIndex).getAssistantDeck())
                 if (as.getValue() == priority){
-                    players.get(playerIndex).playAssistantCard(as);
-                } else return; //non ha la carta, non ha senso proseguire, tocca ancora lui
+                    players.get(playerIndex).playAssistantCard(as);//QUI ERRORE CUNCURRENT!!!!
 
-            currentPlayer = playersTurnOrder[phaseCounter + 1].getIndex();
+                    found = true; //AGGIUNTA GIUS
+                    break;
+                }
+            if(found == false) return -2; //non ha la carta, non ha senso proseguire, tocca ancora lui
+            if(phaseCounter<Parameters.numPlayers-1) {   //AGGIUNTA GIUS ALTRIMENTI SFORA LA DIMENSIONE DELL'ARRAY
+                currentPlayer = playersTurnOrder[phaseCounter + 1].getIndex();
+
+            }
             phaseCounter++;
             if (phaseCounter == Parameters.numPlayers) {
                 currentPhase = GamePhase.MoveStudents;
                 phaseCounter = 0;
                 this.orderPlayerActionPhase();
                 currentPlayer = playersTurnOrder[0].getIndex();
+
             }
+            return 1;
         }
+        else return -3;
+
+
     }
 
     private void orderPlayerActionPhase(){
@@ -219,7 +239,7 @@ public class Game {
     }
 
     //Fase azione punto 2.1
-    public void moveMotherNature(int playerIndex, int movements){ //devo controllare se player ha i permessi
+    public int moveMotherNature(int playerIndex, int movements){ //devo controllare se player ha i permessi
         if(currentPhase.equals(GamePhase.MoveMotherNature) && playerIndex == currentPlayer){
             if(movements > 0 && movements <= players.get(currentPlayer).getCurrentCard().getMovements()){
 
@@ -235,7 +255,9 @@ public class Game {
             }
 
             currentPhase = GamePhase.ChooseCloud;
+            return 1;
         }
+        return -1;
     }
     //Fase azione punto 2.2 //vedo chi controlla l'isola, se il player è cambiato sostituisco le torri
     private void checkIslandInfluence(int islandIndex, int playerIndex){
@@ -362,7 +384,9 @@ public class Game {
     }
 
     public int getCurrentPlayer(){
-        return players.indexOf(currentPlayer);
+       // return players.indexOf(currentPlayer);  //MODIFICATO PERCHÈ indexOf prenderebbe un Player e non un intero
+        return currentPlayer;                     //QUINDI ritorno direttamente l'intero currentPlayer
+                                                  // (Gius)
     }
 
 

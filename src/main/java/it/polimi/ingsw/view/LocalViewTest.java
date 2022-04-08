@@ -9,12 +9,14 @@ import it.polimi.ingsw.model.player.SchoolBoard;
 import it.polimi.ingsw.model.player.Student;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class LocalViewTest {
 
     Scanner scanner;
     private Game controller;
+    private String choice;
 
     public LocalViewTest() {
         this.scanner = new Scanner(System.in);
@@ -24,7 +26,7 @@ public class LocalViewTest {
         this.controller = controller;
     }
 
-    public void start(){
+    public void start() {
         while(true){
             System.out.println("CURRENT STATE");
             GameBoard gb = controller.getGameBoard();
@@ -64,9 +66,35 @@ public class LocalViewTest {
             }
             System.out.println("PHASE: " + controller.getCurrentPhase());
             System.out.println("CURRENT PLAYER: " + controller.getCurrentPlayer());
+            System.out.println("Students in the bag: " + controller.getGameBoard().getBag().getSize());
             System.out.println("CHOOSE : ");
-            int choice = scanner.nextInt();
+                     int result = -2;
+                     while(result == -1 || result == -2) {
+                         choice = scanner.next();
 
+                         char ch = choice.charAt(0);
+
+                         switch (ch) {
+
+                             case '1' : if(choice.length()>=3) {
+                                 System.out.println(result);
+                                 int b = (int)choice.charAt(1) -48;
+                                 int c = (int)choice.charAt(2) -48;
+                                 System.out.println(ch + " " + b + " " +c);
+                                 result = controller.playAssistantCard(b,c);
+                                 System.out.println(result);
+
+                             }
+
+                             case '3': if(choice.length()>=3) {
+                                           result = controller.moveMotherNature(choice.charAt(1), choice.charAt(2));
+
+                             }
+                         }
+                         System.out.println("PHASE: " + controller.getCurrentPhase());
+                         System.out.println("CURRENT PLAYER: " + controller.getCurrentPlayer());
+                         System.out.println("Students in the bag: " + controller.getGameBoard().getBag().getSize());
+                     }
             }
 
         }
