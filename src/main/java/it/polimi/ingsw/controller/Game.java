@@ -112,6 +112,7 @@ public class Game {
         for(int i = 0; i<Parameters.numPlayers; i++){
             playersTurnOrder[i] = players.get(i);
         }
+        addStudentsOnClouds();  //GIUS
     }
 
 
@@ -185,7 +186,7 @@ public class Game {
     }
 
     //Fase azione punto 1
-    public void moveStudentToIsland(int playerIndex, int colour, int IslandPosition){
+    public int moveStudentToIsland(int playerIndex, int colour, int IslandPosition){
         if(currentPhase.equals(GamePhase.MoveStudents) && playerIndex == currentPlayer){
             players.get(playerIndex).getPlayerSchoolBoard().moveStudentToIsland(colour, this.gameBoard.getIslands().get(IslandPosition));
 
@@ -194,7 +195,9 @@ public class Game {
                 currentPhase = GamePhase.MoveMotherNature;
                 phaseCounter = 0;
             }
+            return 1;
         }
+        else return -1;
     }
     //Fase azione punto 1
     public void moveStudentToDiningRoom(int playerIndex, int colour){
@@ -257,7 +260,7 @@ public class Game {
             currentPhase = GamePhase.ChooseCloud;
             return 1;
         }
-        return -1;
+        else return -1;
     }
     //Fase azione punto 2.2 //vedo chi controlla l'isola, se il player è cambiato sostituisco le torri
     private void checkIslandInfluence(int islandIndex, int playerIndex){

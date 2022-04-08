@@ -26,6 +26,7 @@ public class LocalViewTest {
 
     public void start() {
         while(true){
+            System.out.println("\n\n\n\n\n");
             System.out.println("CURRENT STATE");
             GameBoard gb = controller.getGameBoard();
             System.out.println("MOTHER NATURE ON ISLAND :" + gb.getMotherNature());
@@ -67,7 +68,7 @@ public class LocalViewTest {
                 System.out.println("\n\n");
             }
             System.out.println("PHASE: " + GamePhase.values()[controller.getCurrentPhase()]);
-            System.out.println("CURRENT PLAYER: " + controller.getCurrentPlayer() + " " + controller.getPlayers().get(controller.getCurrentPlayer()));
+            System.out.println("CURRENT PLAYER: " + controller.getCurrentPlayer() + " -> " + controller.getPlayers().get(controller.getCurrentPlayer()).getNickname());
             System.out.println("Students in the bag: " + controller.getGameBoard().getBag().getSize());
             System.out.println("CHOOSE : ");
                      int result = -2;
@@ -89,9 +90,22 @@ public class LocalViewTest {
                                  System.out.println(result);
 
                              }
+                             case '2' : if (choice.length()>=4){
 
-                             case '3': if(choice.length()>=3) {
-                                           result = controller.moveMotherNature(choice.charAt(1), choice.charAt(2));
+                                 int b = (int)choice.charAt(1) -48;
+                                 int c = (int)choice.charAt(2) -48;
+                                 int d = (int)choice.charAt(3) -48;
+                                 result = controller.moveStudentToIsland(b,c,d);
+                                 if(result == 1) resultbool = true;
+                             }
+                             case '4' : if(choice.length()>=3 && result!=1) {
+                                           int b = (int)choice.charAt(1) -48;
+                                           int c = (int)choice.charAt(2) -48;
+                                           result = controller.moveMotherNature(b,c);
+                                           if(result == 1) {
+                                               resultbool = true;
+
+                                           }
 
                              }
                          }
