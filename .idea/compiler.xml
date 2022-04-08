@@ -10,5 +10,8 @@
         <module name="softeng-GC18" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="softeng-GC18" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
 </project>

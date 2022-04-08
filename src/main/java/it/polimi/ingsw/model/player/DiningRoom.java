@@ -110,5 +110,23 @@ public class DiningRoom {
         return stud;
     }
 
+    public int getGreenStudents() {
+        return greenStudents.size();
+    }
 
+    public int getRedStudents() {
+        return redStudents.size();
+    }
+
+    public int getYellowStudents() {
+        return yellowStudents.size();
+    }
+
+    public int getPinkStudents() {
+        return pinkStudents.size();
+    }
+
+    public int getBlueStudents() {
+        return blueStudents.size();
+    }
 }

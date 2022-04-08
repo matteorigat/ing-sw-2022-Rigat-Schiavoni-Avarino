@@ -75,6 +75,10 @@ public class Player {
     public String toString() {
         return "Player : " + index + " " +nickname;
     }
+
+    public String getNickname() {
+        return nickname;
+    }
 }
 
 

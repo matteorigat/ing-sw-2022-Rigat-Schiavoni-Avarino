@@ -36,6 +36,7 @@ public class Game {
 
         phaseCounter = 0;
         playerPhaseCounter = 0;
+        currentPhase = GamePhase.PlayAssistantCard; //AGGIUNTA GIUS
     }
 
     //Gets the players of the match
