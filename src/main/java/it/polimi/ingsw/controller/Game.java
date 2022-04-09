@@ -347,6 +347,15 @@ public class Game {
             if(newPosition == 0)
                 newPosition = 12;
 
+            if(!Parameters.expertMode){
+                gameBoard.setMotherNature(newPosition);
+            } else {
+                for(CharacterCard c: gameBoard.getThreeCharacterCards())
+                    if(c.getIndex() == 3 && !((Character3) c).isEffectFlag()){
+                        gameBoard.setMotherNature(newPosition);
+                        break;
+                    }
+            }
 
         }
         if(this.gameBoard.getIslands().size() <= 3){
@@ -356,7 +365,7 @@ public class Game {
 
     //Fase azione punto 3
     public int chooseCloud(int playerIndex, int cloudPosition){
-        if(currentPhase.equals(GamePhase.ChooseCloud) && playerIndex == currentPlayer && !gameBoard.getClouds().get(cloudPosition).isTaken()){
+        if(currentPhase.equals(GamePhase.ChooseCloud) && playerIndex == currentPlayer && !gameBoard.getClouds().get(cloudPosition).isTaken() && cloudPosition >= 0 && cloudPosition < Parameters.numClouds){
             ArrayList<Student> stud = this.gameBoard.getClouds().get(cloudPosition).getStudents();
 
             for (Student s: stud){ //qui e alla fine del metodo init() farei un nuovo metodo add che controlla anche se non viene superato il limite di studenti all'entrata
@@ -452,7 +461,9 @@ public class Game {
                     c.play();
                     gameBoard.addCoinsToGeneralReserve(c.getCost() - 1); //meno uno perchè una va sulla carta
 
+                    ((Character3) c).enableEffect();
                     checkIslandInfluence(islandIndex, playerIndex);
+                    ((Character3) c).disableEffect();
                 }
             }
         }

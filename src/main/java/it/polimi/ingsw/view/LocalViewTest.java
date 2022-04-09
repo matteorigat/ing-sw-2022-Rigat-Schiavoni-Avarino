@@ -37,7 +37,7 @@ public class LocalViewTest {
                 if(i.getIslandIndex() == gb.getMotherNature()){
                     System.out.print("Island: " + gb.getIslands().indexOf(i) + " M |\t");
                 } else
-                    System.out.print("Island: " + i.getIslandIndex() + "\t|\t");
+                    System.out.print("Island: " + gb.getIslands().indexOf(i) + "\t|\t");
 
                 for(Student s : i.getStudents()) {
                     System.out.print(s.getColour() + " ");
@@ -88,66 +88,65 @@ public class LocalViewTest {
             System.out.println("\nPHASE: " + GamePhase.values()[controller.getCurrentPhase()]);
             System.out.println("CURRENT PLAYER: " + controller.getCurrentPlayer() + " -> " + controller.getPlayers().get(controller.getCurrentPlayer()).getNickname());
             System.out.println("Students in the bag: " + controller.getGameBoard().getBag().getSize());
-            System.out.println("CHOOSE : ");
-                     int result = -2;
-                     boolean resultbool = false;
-                     while(resultbool == false) {
-                         choice = scanner.next();
 
-                         char ch = choice.charAt(0);
+            int result = -2;
+            boolean resultbool = false;
+            while(resultbool == false) {
 
-                         switch (ch) {
+                //questi due valori andranno presi dal client poi
+                char phase = (char) (controller.getCurrentPhase() + 48);
+                int currentPlayer = controller.getCurrentPlayer();
 
-                             case '1' : if(choice.length()>=3 && result!=1) {
-                                // System.out.println(result);
-                                 int b = (int)choice.charAt(1) -48;
-                                 int c = (int)choice.charAt(2) -48;
-                               //  System.out.println(ch + " " + b + " " +c);
-                                 result = controller.playAssistantCard(b,c);
-                                 if(result == 1) resultbool = true;
-                               //  System.out.println(result);
+                switch (phase) {
 
-                             }
-                             case '2' : if (choice.length()>=4 && result!=1){
+                    case '0' : if(result!=1) {
+                        System.out.print("Assistant card number: ");
+                        choice = scanner.next();
+                        // System.out.println(result);
+                        int c = (int)choice.charAt(0) - 48;
+                        //  System.out.println(ch + " " + b + " " +c);
+                        result = controller.playAssistantCard(currentPlayer, c);
+                        if(result == 1) resultbool = true;
+                        //  System.out.println(result);
 
-                                 int b = (int)choice.charAt(1) -48;
-                                 int c = (int)choice.charAt(2) -48;
-                                 int d = (int)choice.charAt(3) -48;
-                                 result = controller.moveStudentToIsland(b,c,d);
-                                 if(result == 1) resultbool = true;
-                             }
+                    }
 
-                             case '3' : if (choice.length()>=3 && result!=1){
+                    case '1' : if (result!=1){
+                        System.out.print("Student color and eventually the Island index: ");
+                        choice = scanner.next();
+                        int c = (int)choice.charAt(0) - 48;
+                        if(choice.length() == 1)
+                            result = controller.moveStudentToDiningRoom(currentPlayer, c);
+                        else if(choice.length() >= 2){
+                            int d = (int)choice.charAt(1) - 48;
+                            d = d * 10 + (int)choice.charAt(2) - 48;
+                            result = controller.moveStudentToIsland(currentPlayer, c, d);
+                        }
+                        if(result == 1)
+                            resultbool = true;
+                    }
 
-                                 int b = (int)choice.charAt(1) -48;
-                                 int c = (int)choice.charAt(2) -48;
-                                 result = controller.moveStudentToDiningRoom(b,c);
-                                 if(result == 1) resultbool = true;
-                             }
+                    case '2' : if(result!=1) {
+                        System.out.print("Mother nature movements: ");
+                        choice = scanner.next();
+                        int c = (int)choice.charAt(0) - 48;
+                        result = controller.moveMotherNature(currentPlayer, c);
+                        if(result == 1) resultbool = true;
+                    }
 
-                             case '4' : if(choice.length()>=3 && result!=1) {
-                                           int b = (int)choice.charAt(1) -48;
-                                           int c = (int)choice.charAt(2) -48;
-                                           result = controller.moveMotherNature(b,c);
-                                           if(result == 1)
-                                               resultbool = true;
-                             }
-
-                             case '5' : if(choice.length()>=3 && result!=1) {
-                                 int b = (int)choice.charAt(1) -48;
-                                 int c = (int)choice.charAt(2) -48;
-                                 result = controller.chooseCloud(b,c);
-                                 if(result == 1)
-                                     resultbool = true;
-                             }
-                         }
-                         if(result!=1)
-                         System.out.println("RETRY!!!");
-                     }
+                    case '3' : if(result!=1) {
+                        System.out.print("Cloud index: ");
+                        choice = scanner.next();
+                        int c = (int)choice.charAt(0) - 48;
+                        result = controller.chooseCloud(currentPlayer,c);
+                        if(result == 1)
+                            resultbool = true;
+                    }
+                }
+                if(result!=1)
+                    System.out.println("Wrong! Retry!");
             }
-
         }
-
-
     }
+}
 
