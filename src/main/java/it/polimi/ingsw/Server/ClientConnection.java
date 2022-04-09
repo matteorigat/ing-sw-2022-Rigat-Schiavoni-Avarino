@@ -1,6 +1,6 @@
 package it.polimi.ingsw.Server;
 
-
+/*
 import sun.jvm.hotspot.utilities.Observer;
 
 public interface ClientConnection{
@@ -12,3 +12,4 @@ public interface ClientConnection{
         void asyncSend(Object message);
     }
 
+*/

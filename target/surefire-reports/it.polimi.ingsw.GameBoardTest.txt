@@ -1,8 +1,0 @@
--------------------------------------------------------------------------------
-Test set: it.polimi.ingsw.GameBoardTest
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.01 s <<< FAILURE! - in it.polimi.ingsw.GameBoardTest
-testGameBoard  Time elapsed: 0.01 s  <<< ERROR!
-java.lang.NullPointerException: Cannot invoke "java.util.ArrayList.add(Object)" because "this.students" is null
-	at it.polimi.ingsw.GameBoardTest.testGameBoard(GameBoardTest.java:80)
-

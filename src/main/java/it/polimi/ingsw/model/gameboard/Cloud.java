@@ -9,9 +9,11 @@ import java.util.ArrayList;
 public class Cloud {
 
     private ArrayList<Student> students;
+    private boolean taken;
 
     public Cloud() {
         this.students = new ArrayList<>(0);
+        this.taken = false;
     }
 
     // A inizio turmo si aggiungono giocatori sulla nuvola... è possibile modificare la funzione e passare tutti gli studenti insieme come arraylist
@@ -21,6 +23,10 @@ public class Cloud {
         }
         else throw new TooManyStudentsOnCloudException();
 
+    }
+
+    public ArrayList<Student> seeStudents() {
+        return (ArrayList<Student>) students.clone();
     }
 
     //quando un giocatore finisce il turno, prende gli studenti dalla nuvola e la svuota
@@ -33,4 +39,11 @@ public class Cloud {
         return stud;
     }
 
+    public boolean isTaken() {
+        return taken;
+    }
+
+    public void setTaken(boolean taken) {
+        this.taken = taken;
+    }
 }
