@@ -108,6 +108,8 @@ public class LocalViewTest {
                         choice = scanner.next();
                         // System.out.println(result);
                         int c = (int)choice.charAt(0) - 48;
+                        if(choice.length() > 1)
+                            c = c * 10 + (int)choice.charAt(1) - 48;
                         //  System.out.println(ch + " " + b + " " +c);
                         result = controller.playAssistantCard(currentPlayer, c);
                         if(result == 1) resultbool = true;
@@ -121,7 +123,7 @@ public class LocalViewTest {
                         int c = (int)choice.charAt(0) - 48;
                         if(choice.length() == 1)
                             result = controller.moveStudentToDiningRoom(currentPlayer, c);
-                        else if(choice.length() >= 2){
+                        else if(choice.length() > 1){
                             int d = (int)choice.charAt(1) - 48;
                             if(choice.length() >= 3)
                                 d = d * 10 + (int)choice.charAt(2) - 48;
@@ -148,12 +150,12 @@ public class LocalViewTest {
                         if(result == 1) resultbool = true;
                         break;
                     }
-                    /*
+
                     case 5 : if(result!=1) {
                         String winner = controller.getTheWinner();
                         System.out.println(winner + "WON THE GAME!");
                         return;
-                    } */
+                    }
                 }
                 if(result!=1)
                     System.out.println("Wrong! Retry!");

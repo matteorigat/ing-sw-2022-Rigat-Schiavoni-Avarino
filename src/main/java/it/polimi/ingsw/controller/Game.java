@@ -206,7 +206,7 @@ public class Game {
             if(Colour.values()[colour] == s.getColour())
                 checkStudentColor = true;
 
-        if(currentPhase.equals(GamePhase.MoveStudents) && playerIndex == currentPlayer && checkStudentColor){
+        if(currentPhase.equals(GamePhase.MoveStudents) && playerIndex == currentPlayer && checkStudentColor && colour >= 0 && colour < Colour.values().length && IslandPosition >= 0 && IslandPosition < Parameters.numIslands){
             players.get(playerIndex).getPlayerSchoolBoard().moveStudentToIsland(colour, this.gameBoard.getIslands().get(IslandPosition));
 
             phaseCounter++;
@@ -226,7 +226,7 @@ public class Game {
             if(Colour.values()[colour] == s.getColour())
                 checkStudentColor = true;
 
-        if(currentPhase.equals(GamePhase.MoveStudents) && playerIndex == currentPlayer && players.get(playerIndex).getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colour]) < 10 && checkStudentColor){
+        if(currentPhase.equals(GamePhase.MoveStudents) && playerIndex == currentPlayer && players.get(playerIndex).getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colour]) < 10 && checkStudentColor && colour >= 0 && colour < Colour.values().length){
             boolean coin; //ritorna true se il giocatore merita una moneta
             coin = players.get(playerIndex).getPlayerSchoolBoard().moveStudentToDiningRoom(colour);
             if(Parameters.expertMode && coin){
@@ -286,7 +286,7 @@ public class Game {
                 int newPos = (this.gameBoard.getMotherNature() + movements)%gameBoard.getIslands().size();
                 this.gameBoard.setMotherNature(newPos);//moves motherNature by specified movements
                 this.checkIslandInfluence(newPos, playerIndex);
-            }
+            } else return -1;
 
             currentPhase = GamePhase.ChooseCloud;
             return 1;
