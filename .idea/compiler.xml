@@ -6,9 +6,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="ing-sw-2022-Rigat-Schiavoni-Avarino" />
         <module name="softeng-GC18" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ing-sw-2022-Rigat-Schiavoni-Avarino" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="ing-sw-2022-Rigat-Schiavoni-Avarino" options="--add-exports jdk.hotspot.agent/sun.jvm.hotspot.utilities=ALL-UNNAMED" />
+    </option>
   </component>
 </project>

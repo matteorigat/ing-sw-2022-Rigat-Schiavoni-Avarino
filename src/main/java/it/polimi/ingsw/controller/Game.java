@@ -22,6 +22,7 @@ public class Game {
     private final ArrayList<Player> players;
     private final GameBoard gameBoard;
 
+    private Player winner;
     private int currentPlayer;
     private GamePhase currentPhase;
     private Player[] playersTurnOrder;
@@ -124,26 +125,38 @@ public class Game {
                 if(gameBoard.getBag().getSize() > 0)
                     gameBoard.addStudentOnCloud(num, gameBoard.getBag().draw());
             num++;
+            c.setTaken(false);
         }
     }
     //Fase pianificazione punto 2
     public int playAssistantCard(int playerIndex, int priority){
         if(currentPhase.equals(GamePhase.PlayAssistantCard) && playerIndex == currentPlayer) {
-
-          /*  int check = 0;     //COMMENTATO PERCHÈ C'È QUALCHE ERRORE!  (Codice per verificare se la carta è già stata giocata da un altro giocatore)
-            for(AssistantCard as: players.get(playerIndex).getAssistantDeck()){
-                for(int i=0; i<phaseCounter; i++){
-                    if(as.getValue() == playersTurnOrder[phaseCounter].getCurrentCard().getValue()){
-                        check++;
-                    }
+            boolean alreadyPlayed = false;
+            for(int i=0; i<phaseCounter; i++) {
+                if (priority == playersTurnOrder[i].getCurrentCard().getValue()) {
+                    alreadyPlayed = true;
+                    break;
                 }
             }
+            if(alreadyPlayed) {
+                int check = 0;     //COMMENTATO PERCHÈ C'È QUALCHE ERRORE!  (Codice per verificare se la carta è già stata giocata da un altro giocatore)
+                for (AssistantCard as : players.get(playerIndex).getAssistantDeck()) {
+                    for (int i = 0; i < phaseCounter; i++) {
+                        if (as.getValue() == playersTurnOrder[i].getCurrentCard().getValue()) {
+                            check++;
+                        }
+                    }
+                }
 
-            if (check != players.get(playerIndex).getAssistantDeck().size())
-                return -1; */
+                if (check != players.get(playerIndex).getAssistantDeck().size())
+                    return -1;
+            }
+
 
             boolean found = false; //AGGIUNTA GIUS
-            for (AssistantCard as : players.get(playerIndex).getAssistantDeck())
+            int deckSize = players.get(playerIndex).getAssistantDeck().size();
+            ArrayList<AssistantCard> clone = (ArrayList<AssistantCard>) players.get(playerIndex).getAssistantDeck().clone();
+            for (AssistantCard as : clone)
                 if (as.getValue() == priority){
                     players.get(playerIndex).playAssistantCard(as);//QUI ERRORE CUNCURRENT!!!!
 
@@ -200,7 +213,7 @@ public class Game {
         else return -1;
     }
     //Fase azione punto 1
-    public void moveStudentToDiningRoom(int playerIndex, int colour){
+    public int moveStudentToDiningRoom(int playerIndex, int colour){
         if(currentPhase.equals(GamePhase.MoveStudents) && playerIndex == currentPlayer && players.get(playerIndex).getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colour]) < 10){
             boolean coin; //ritorna true se il giocatore merita una moneta
             coin = players.get(playerIndex).getPlayerSchoolBoard().moveStudentToDiningRoom(colour);
@@ -227,32 +240,37 @@ public class Game {
                     newProfessorOwner = p;
                 }
             }
-            //se il propretario è cambiato faccio il passaggio
-            if(!oldProfessorOwner.equals(newProfessorOwner)){
+            //se il propretario è cambiato faccio il passaggio OPPURE SE NON LO HA ANCORA NESSUNO
+            if(oldProfessorOwner != null  &&   !oldProfessorOwner.equals(newProfessorOwner)) {  //GIUS
                 oldProfessorOwner.getPlayerSchoolBoard().removeProfessor(Colour.values()[colour]);
-                newProfessorOwner.getPlayerSchoolBoard().addProfessor(Colour.values()[colour]);
             }
+                newProfessorOwner.getPlayerSchoolBoard().addProfessor(Colour.values()[colour]);
+
 
             phaseCounter++;
             if(phaseCounter == Parameters.numCloudStudents){
                 currentPhase = GamePhase.MoveMotherNature;
                 phaseCounter = 0;
             }
-        }
+
+            return 1;
+        } else
+            return -1;
     }
 
     //Fase azione punto 2.1
     public int moveMotherNature(int playerIndex, int movements){ //devo controllare se player ha i permessi
         if(currentPhase.equals(GamePhase.MoveMotherNature) && playerIndex == currentPlayer){
-            if(movements > 0 && movements <= players.get(currentPlayer).getCurrentCard().getMovements()){
-
-                int newPos = 0;
-                if(Parameters.expertMode){
-                    for(CharacterCard c: gameBoard.getThreeCharacterCards())
-                        if(c.getIndex() == 4 && ((Character4) c).isEffectFlag())
-                            newPos = 2;
-                }
-                newPos = ((newPos + this.gameBoard.getMotherNature() + movements)%Parameters.numIsland);
+            int maxMovements = players.get(currentPlayer).getCurrentCard().getMovements();
+            if(Parameters.expertMode){
+                for(CharacterCard c: gameBoard.getThreeCharacterCards())
+                    if(c.getIndex() == 4 && ((Character4) c).isEffectFlag()){
+                        maxMovements += 2;
+                        ((Character4) c).disableEffect();
+                    }
+            }
+            if(movements > 0 && movements <= maxMovements){
+                int newPos = (this.gameBoard.getMotherNature() + movements)%gameBoard.getIslands().size();
                 this.gameBoard.setMotherNature(newPos);//moves motherNature by specified movements
                 this.checkIslandInfluence(newPos, playerIndex);
             }
@@ -292,13 +310,16 @@ public class Game {
                     oldPlayer = pl;
             }
 
-            if(!oldPlayer.equals(newPlayer)){
+            if(oldPlayer == null || !oldPlayer.equals(newPlayer)){
                 //ridò al vecchio giocatore le sue torri e le sostituisco con quelle del nuovo giocatore
                 for(int i=0; i<=this.gameBoard.getIslands().get(islandIndex).getNumTower(); i++){
                     if(oldPlayer != null)
                         oldPlayer.getPlayerSchoolBoard().addTower(oldPlayer.PlayerTowerColor());
                     newPlayer.getPlayerSchoolBoard().getTowers().remove(0);
                 }
+                if(oldPlayer == null)
+                    this.getGameBoard().getIslands().get(islandIndex).setNumTower(1);
+
                 this.getGameBoard().getIslands().get(islandIndex).changeTowerColor(newPlayer.PlayerTowerColor());
 
                 if(newPlayer.getPlayerSchoolBoard().getTowers().size() == 0){
@@ -314,14 +335,29 @@ public class Game {
     //Fase azione punto 2.3
     private void checkIslandFusion(int islandIndex){
         //se il colore delle torri sull'isola e su quella successiva sono uguali
-        while (this.gameBoard.getIslands().get(islandIndex).getTowerColor().equals(this.gameBoard.getIslands().get(islandIndex+1).getTowerColor())){
-            this.gameBoard.islandFusion(islandIndex, islandIndex+1);
+        while (this.gameBoard.getIslands().get(islandIndex).getTowerColor().equals(this.gameBoard.getIslands().get((islandIndex+1)%gameBoard.getIslands().size()).getTowerColor())){
+            this.gameBoard.islandFusion(islandIndex, (islandIndex+1)%gameBoard.getIslands().size());
         }
         int newPosition = islandIndex;
+        if(newPosition == 0)
+            newPosition = 12;
         //se il colore delle torri sull'isola e su quella precedente sono uguali
         while (this.gameBoard.getIslands().get(newPosition).getTowerColor().equals(this.gameBoard.getIslands().get(newPosition-1).getTowerColor())){
             this.gameBoard.islandFusion(newPosition-1, newPosition);
             newPosition--;
+            if(newPosition == 0)
+                newPosition = 12;
+
+            if(!Parameters.expertMode){
+                gameBoard.setMotherNature(newPosition);
+            } else {
+                for(CharacterCard c: gameBoard.getThreeCharacterCards())
+                    if(c.getIndex() == 3 && !((Character3) c).isEffectFlag()){
+                        gameBoard.setMotherNature(newPosition);
+                        break;
+                    }
+            }
+
         }
         if(this.gameBoard.getIslands().size() <= 3){
             endGame();
@@ -329,8 +365,8 @@ public class Game {
     }
 
     //Fase azione punto 3
-    public void chooseCloud(int playerIndex, int cloudPosition){
-        if(currentPhase.equals(GamePhase.MoveMotherNature) && playerIndex == currentPlayer){
+    public int chooseCloud(int playerIndex, int cloudPosition){
+        if(currentPhase.equals(GamePhase.ChooseCloud) && playerIndex == currentPlayer && !gameBoard.getClouds().get(cloudPosition).isTaken() && cloudPosition >= 0 && cloudPosition < Parameters.numClouds){
             ArrayList<Student> stud = this.gameBoard.getClouds().get(cloudPosition).getStudents();
 
             for (Student s: stud){ //qui e alla fine del metodo init() farei un nuovo metodo add che controlla anche se non viene superato il limite di studenti all'entrata
@@ -355,7 +391,10 @@ public class Game {
                 currentPhase = GamePhase.MoveStudents;
                 currentPlayer = playersTurnOrder[playerPhaseCounter].getIndex();
             }
-        }
+            gameBoard.getClouds().get(cloudPosition).setTaken(true);
+            return 1;
+        } else
+            return -1;
     }
 
     private void orderPlayersAssistantCard(){
@@ -376,10 +415,34 @@ public class Game {
     }
 
     public void endGame(){
-        //non so cosa succeda qui dentro
         //vince il giocatore che ha costruito il maggior numero di torri
+        ArrayList<Player> rank = new ArrayList<>();
+        int min = Parameters.numTowers;
+        for (Player p: players)
+            if(p.getPlayerSchoolBoard().getTowers().size() < min){
+                min = p.getPlayerSchoolBoard().getTowers().size();
+                rank.clear();
+                rank.add(p);
+            } else if(p.getPlayerSchoolBoard().getTowers().size() == min)
+                rank.add(p);
+
         //in caso di parità chi ha piu professori
+        if(rank.size() == 1)
+            winner = rank.get(0);
+        else {
+            int max = 0;
+            for(Player p: rank)
+                if(p.getPlayerSchoolBoard().getProfessors().size() > max){
+                    max = p.getPlayerSchoolBoard().getProfessors().size();
+                    winner = p;
+                }
+        }
+
         currentPhase = GamePhase.GameEnded;
+    }
+
+    public String getTheWinner(){
+        return winner.getNickname();
     }
 
     public int getCurrentPhase() {
@@ -423,7 +486,9 @@ public class Game {
                     c.play();
                     gameBoard.addCoinsToGeneralReserve(c.getCost() - 1); //meno uno perchè una va sulla carta
 
+                    ((Character3) c).enableEffect();
                     checkIslandInfluence(islandIndex, playerIndex);
+                    ((Character3) c).disableEffect();
                 }
             }
         }

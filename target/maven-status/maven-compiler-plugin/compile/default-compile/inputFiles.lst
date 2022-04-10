@@ -1,4 +1,6 @@
 /Users/matteorigat/IdeaProjects/ing-sw-2022-Rigat-Schiavoni-Avarino/src/main/java/it/polimi/ingsw/model/gameboard/Cloud.java
+/Users/matteorigat/IdeaProjects/ing-sw-2022-Rigat-Schiavoni-Avarino/src/main/java/it/polimi/ingsw/Server/ClientConnection.java
+/Users/matteorigat/IdeaProjects/ing-sw-2022-Rigat-Schiavoni-Avarino/src/main/java/it/polimi/ingsw/Server/Server.java
 /Users/matteorigat/IdeaProjects/ing-sw-2022-Rigat-Schiavoni-Avarino/src/main/java/it/polimi/ingsw/model/PhaseTurn.java
 /Users/matteorigat/IdeaProjects/ing-sw-2022-Rigat-Schiavoni-Avarino/src/main/java/it/polimi/ingsw/model/player/Player.java
 /Users/matteorigat/IdeaProjects/ing-sw-2022-Rigat-Schiavoni-Avarino/src/main/java/it/polimi/ingsw/model/gameboard/Characters/Character5.java
@@ -6,6 +8,7 @@
 /Users/matteorigat/IdeaProjects/ing-sw-2022-Rigat-Schiavoni-Avarino/src/main/java/it/polimi/ingsw/App.java
 /Users/matteorigat/IdeaProjects/ing-sw-2022-Rigat-Schiavoni-Avarino/src/main/java/it/polimi/ingsw/model/gameboard/Characters/Character12.java
 /Users/matteorigat/IdeaProjects/ing-sw-2022-Rigat-Schiavoni-Avarino/src/main/java/it/polimi/ingsw/model/gameboard/Bag.java
+/Users/matteorigat/IdeaProjects/ing-sw-2022-Rigat-Schiavoni-Avarino/src/main/java/it/polimi/ingsw/view/LocalViewTest.java
 /Users/matteorigat/IdeaProjects/ing-sw-2022-Rigat-Schiavoni-Avarino/src/main/java/it/polimi/ingsw/model/gameboard/Characters/Character3.java
 /Users/matteorigat/IdeaProjects/ing-sw-2022-Rigat-Schiavoni-Avarino/src/main/java/it/polimi/ingsw/model/enumeration/TowerColour.java
 /Users/matteorigat/IdeaProjects/ing-sw-2022-Rigat-Schiavoni-Avarino/src/main/java/it/polimi/ingsw/model/gameboard/CharacterDeck.java
@@ -30,3 +33,4 @@
 /Users/matteorigat/IdeaProjects/ing-sw-2022-Rigat-Schiavoni-Avarino/src/main/java/it/polimi/ingsw/exceptions/NotExistingPlayerException.java
 /Users/matteorigat/IdeaProjects/ing-sw-2022-Rigat-Schiavoni-Avarino/src/main/java/it/polimi/ingsw/model/player/Professor.java
 /Users/matteorigat/IdeaProjects/ing-sw-2022-Rigat-Schiavoni-Avarino/src/main/java/it/polimi/ingsw/model/player/Student.java
+/Users/matteorigat/IdeaProjects/ing-sw-2022-Rigat-Schiavoni-Avarino/src/main/java/it/polimi/ingsw/Server/SocketClientConnection.java

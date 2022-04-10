@@ -8,33 +8,33 @@ import java.util.Collections;
 public class CharacterDeck {
     private ArrayList&lt;CharacterCard&gt; characterCards;
 
-<span class="fc" id="L11">    public CharacterDeck() {</span>
-<span class="fc" id="L12">        characterCards = new ArrayList&lt;CharacterCard&gt;();</span>
-<span class="fc" id="L13">        characterCards.add(new Character1());</span>
-<span class="fc" id="L14">        characterCards.add(new Character3());</span>
-<span class="fc" id="L15">        characterCards.add(new Character4());</span>
-<span class="fc" id="L16">        characterCards.add(new Character5());</span>
-<span class="fc" id="L17">        characterCards.add(new Character6());</span>
-<span class="fc" id="L18">        characterCards.add(new Character8());</span>
-<span class="fc" id="L19">        characterCards.add(new Character11());</span>
-<span class="fc" id="L20">        characterCards.add(new Character12());</span>
-<span class="fc" id="L21">    }</span>
+<span class="nc" id="L11">    public CharacterDeck() {</span>
+<span class="nc" id="L12">        characterCards = new ArrayList&lt;CharacterCard&gt;();</span>
+<span class="nc" id="L13">        characterCards.add(new Character1());</span>
+<span class="nc" id="L14">        characterCards.add(new Character3());</span>
+<span class="nc" id="L15">        characterCards.add(new Character4());</span>
+<span class="nc" id="L16">        characterCards.add(new Character5());</span>
+<span class="nc" id="L17">        characterCards.add(new Character6());</span>
+<span class="nc" id="L18">        characterCards.add(new Character8());</span>
+<span class="nc" id="L19">        characterCards.add(new Character11());</span>
+<span class="nc" id="L20">        characterCards.add(new Character12());</span>
+<span class="nc" id="L21">    }</span>
 
     public ArrayList&lt;CharacterCard&gt; getThreeRandomCards(){
-<span class="fc" id="L24">        ArrayList&lt;CharacterCard&gt; threeCards = new ArrayList&lt;CharacterCard&gt;();</span>
+<span class="nc" id="L24">        ArrayList&lt;CharacterCard&gt; threeCards = new ArrayList&lt;CharacterCard&gt;();</span>
 
-<span class="fc" id="L26">        Collections.shuffle(this.characterCards);</span>
+<span class="nc" id="L26">        Collections.shuffle(this.characterCards);</span>
 
-<span class="fc bfc" id="L28" title="All 2 branches covered.">        for (int i=0; i&lt;3; i++){</span>
-<span class="fc" id="L29">            threeCards.add(characterCards.get(0));</span>
-<span class="fc" id="L30">            characterCards.remove(0);</span>
+<span class="nc bnc" id="L28" title="All 2 branches missed.">        for (int i=0; i&lt;3; i++){</span>
+<span class="nc" id="L29">            threeCards.add(characterCards.get(0));</span>
+<span class="nc" id="L30">            characterCards.remove(0);</span>
         }
 
-<span class="fc" id="L33">        return threeCards;</span>
+<span class="nc" id="L33">        return threeCards;</span>
     }
 
     public ArrayList&lt;CharacterCard&gt; getCharacterCards() {
-<span class="fc" id="L37">        return characterCards;</span>
+<span class="nc" id="L37">        return characterCards;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

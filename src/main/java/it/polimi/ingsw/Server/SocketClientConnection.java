@@ -1,5 +1,5 @@
 package it.polimi.ingsw.Server;
-
+/*
 import sun.jvm.hotspot.utilities.Observable;
 import sun.jvm.hotspot.utilities.Observer;
 
@@ -64,3 +64,4 @@ public class SocketClientConnection extends Observable implements ClientConnecti
         System.out.println("Done!");
     }
 }
+*/

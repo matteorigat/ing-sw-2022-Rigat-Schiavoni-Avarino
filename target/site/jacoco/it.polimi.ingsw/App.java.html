@@ -3,27 +3,28 @@
 import it.polimi.ingsw.controller.Game;
 import it.polimi.ingsw.model.Parameters;
 import it.polimi.ingsw.model.gameboard.Bag;
+import it.polimi.ingsw.view.LocalViewTest;
 
 /**
  *   Hello world!
  *
  **/
 
-<span class="nc" id="L12">public class App </span>
+<span class="nc" id="L13">public class App </span>
 {
     public static void main( String[] args )
     {
-<span class="nc" id="L16">        System.out.println( &quot;Hello World!&quot;);</span>
-<span class="nc" id="L17">        Game game = new Game();</span>
-<span class="nc" id="L18">        Bag b = new Bag();</span>
-<span class="nc" id="L19">        String nickname = &quot;carlo&quot;;  // qui bisogna fare qualcosa per prendere in lettura i vari nickname</span>
+       /* System.out.println( &quot;Hello World!&quot;);
+        Game game = new Game();
+        Bag b = new Bag();
+        String nickname = &quot;carlo&quot;;  // qui bisogna fare qualcosa per prendere in lettura i vari nickname
 
 
-<span class="nc bnc" id="L22" title="All 2 branches missed.">        for(int i = 0; i&lt; Parameters.numPlayers; i++){ // Ha senso?</span>
-<span class="nc" id="L23">            game.addPlayer(nickname);</span>
+        for(int i = 0; i&lt; Parameters.numPlayers; i++){ // Ha senso?
+            game.addPlayer(nickname);
         }
 
-<span class="nc" id="L26">        game.init();</span>
+        game.init(); */
 
         /*
         for(int i=0; i&lt;10; i++){
@@ -31,7 +32,15 @@ import it.polimi.ingsw.model.gameboard.Bag;
             System.out.println(s + &quot;&quot; + i);
         }
         */
+<span class="nc" id="L35">        Parameters.setParameters(2,false);</span>
+<span class="nc" id="L36">        Game controller = new Game();</span>
+<span class="nc" id="L37">        controller.addPlayer(&quot;Gius&quot;);</span>
+<span class="nc" id="L38">        controller.addPlayer(&quot;Matt&quot;);</span>
+<span class="nc" id="L39">        controller.init();</span>
+<span class="nc" id="L40">        LocalViewTest view = new LocalViewTest();</span>
+<span class="nc" id="L41">        view.setController(controller);</span>
+<span class="nc" id="L42">        view.start();</span>
 
-<span class="nc" id="L35">    }</span>
+<span class="nc" id="L44">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
