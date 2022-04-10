@@ -5,25 +5,39 @@ import it.polimi.ingsw.model.gameboard.GameBoard;
 public class Character3 implements CharacterCard{
     private int index;
     private int cost;
+    private boolean effectFlag;
 
-<span class="nc" id="L9">    public Character3() {</span>
-<span class="nc" id="L10">        this.index = 3;</span>
-<span class="nc" id="L11">        this.cost = 3;</span>
-<span class="nc" id="L12">    }</span>
+<span class="nc" id="L10">    public Character3() {</span>
+<span class="nc" id="L11">        this.index = 3;</span>
+<span class="nc" id="L12">        this.cost = 3;</span>
+<span class="nc" id="L13">        this.effectFlag = false;</span>
+<span class="nc" id="L14">    }</span>
+
+    public void enableEffect(){
+<span class="nc" id="L17">        effectFlag = true;</span>
+<span class="nc" id="L18">    }</span>
+
+    public void disableEffect(){
+<span class="nc" id="L21">        effectFlag = false;</span>
+<span class="nc" id="L22">    }</span>
+
+    public boolean isEffectFlag() {
+<span class="nc" id="L25">        return effectFlag;</span>
+    }
 
     @Override
     public void play() {
-<span class="nc" id="L16">        this.cost++;</span>
-<span class="nc" id="L17">    }</span>
+<span class="nc" id="L30">        this.cost++;</span>
+<span class="nc" id="L31">    }</span>
 
     @Override
     public int getIndex() {
-<span class="nc" id="L21">        return index;</span>
+<span class="nc" id="L35">        return index;</span>
     }
 
     @Override
     public int getCost() {
-<span class="nc" id="L26">        return cost;</span>
+<span class="nc" id="L40">        return cost;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

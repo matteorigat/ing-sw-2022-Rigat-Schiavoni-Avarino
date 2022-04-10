@@ -200,7 +200,13 @@ public class Game {
 
     //Fase azione punto 1
     public int moveStudentToIsland(int playerIndex, int colour, int IslandPosition){
-        if(currentPhase.equals(GamePhase.MoveStudents) && playerIndex == currentPlayer){
+
+        boolean checkStudentColor = false; // vedo se ha lo studente di quel colore
+        for(Student s: players.get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance())
+            if(Colour.values()[colour] == s.getColour())
+                checkStudentColor = true;
+
+        if(currentPhase.equals(GamePhase.MoveStudents) && playerIndex == currentPlayer && checkStudentColor){
             players.get(playerIndex).getPlayerSchoolBoard().moveStudentToIsland(colour, this.gameBoard.getIslands().get(IslandPosition));
 
             phaseCounter++;
@@ -214,7 +220,13 @@ public class Game {
     }
     //Fase azione punto 1
     public int moveStudentToDiningRoom(int playerIndex, int colour){
-        if(currentPhase.equals(GamePhase.MoveStudents) && playerIndex == currentPlayer && players.get(playerIndex).getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colour]) < 10){
+
+        boolean checkStudentColor = false; // vedo se ha lo studente di quel colore
+        for(Student s: players.get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance())
+            if(Colour.values()[colour] == s.getColour())
+                checkStudentColor = true;
+
+        if(currentPhase.equals(GamePhase.MoveStudents) && playerIndex == currentPlayer && players.get(playerIndex).getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colour]) < 10 && checkStudentColor){
             boolean coin; //ritorna true se il giocatore merita una moneta
             coin = players.get(playerIndex).getPlayerSchoolBoard().moveStudentToDiningRoom(colour);
             if(Parameters.expertMode && coin){
@@ -243,7 +255,8 @@ public class Game {
             //se il propretario è cambiato faccio il passaggio OPPURE SE NON LO HA ANCORA NESSUNO
             if(oldProfessorOwner != null  &&   !oldProfessorOwner.equals(newProfessorOwner)) {  //GIUS
                 oldProfessorOwner.getPlayerSchoolBoard().removeProfessor(Colour.values()[colour]);
-            }
+                newProfessorOwner.getPlayerSchoolBoard().addProfessor(Colour.values()[colour]);
+            } else if(newProfessorOwner != null)
                 newProfessorOwner.getPlayerSchoolBoard().addProfessor(Colour.values()[colour]);
 
 
@@ -323,7 +336,9 @@ public class Game {
                 this.getGameBoard().getIslands().get(islandIndex).changeTowerColor(newPlayer.PlayerTowerColor());
 
                 if(newPlayer.getPlayerSchoolBoard().getTowers().size() == 0){
-                    endGame();
+                    winner = newPlayer;
+                    currentPhase = GamePhase.GameEnded;
+                    return;
                 }
 
                 checkIslandFusion(islandIndex);
@@ -338,18 +353,16 @@ public class Game {
         while (this.gameBoard.getIslands().get(islandIndex).getTowerColor().equals(this.gameBoard.getIslands().get((islandIndex+1)%gameBoard.getIslands().size()).getTowerColor())){
             this.gameBoard.islandFusion(islandIndex, (islandIndex+1)%gameBoard.getIslands().size());
         }
-        int newPosition = islandIndex;
-        if(newPosition == 0)
-            newPosition = 12;
-        //se il colore delle torri sull'isola e su quella precedente sono uguali
-        while (this.gameBoard.getIslands().get(newPosition).getTowerColor().equals(this.gameBoard.getIslands().get(newPosition-1).getTowerColor())){
-            this.gameBoard.islandFusion(newPosition-1, newPosition);
-            newPosition--;
-            if(newPosition == 0)
-                newPosition = 12;
 
+        int newPosition = islandIndex;
+        int newPosition2 = newPosition-1;
+        if (newPosition2 == -1)
+            newPosition2 = this.gameBoard.getIslands().size()-1;
+        //se il colore delle torri sull'isola e su quella precedente sono uguali
+        while (this.gameBoard.getIslands().get(newPosition).getTowerColor().equals(this.gameBoard.getIslands().get(newPosition2).getTowerColor())){
+            this.gameBoard.islandFusion(newPosition2, newPosition);
             if(!Parameters.expertMode){
-                gameBoard.setMotherNature(newPosition);
+                gameBoard.setMotherNature(newPosition2);
             } else {
                 for(CharacterCard c: gameBoard.getThreeCharacterCards())
                     if(c.getIndex() == 3 && !((Character3) c).isEffectFlag()){
@@ -357,16 +370,23 @@ public class Game {
                         break;
                     }
             }
+            newPosition--;
+            if(newPosition == -1)
+                newPosition = this.gameBoard.getIslands().size()-1;
+            newPosition2 = newPosition-1;
+            if (newPosition2 == -1)
+                newPosition2 = this.gameBoard.getIslands().size()-1;
 
         }
         if(this.gameBoard.getIslands().size() <= 3){
             endGame();
+            return;
         }
     }
 
     //Fase azione punto 3
     public int chooseCloud(int playerIndex, int cloudPosition){
-        if(currentPhase.equals(GamePhase.ChooseCloud) && playerIndex == currentPlayer && !gameBoard.getClouds().get(cloudPosition).isTaken() && cloudPosition >= 0 && cloudPosition < Parameters.numClouds){
+        if(currentPhase.equals(GamePhase.ChooseCloud) && playerIndex == currentPlayer && cloudPosition >= 0 && cloudPosition < Parameters.numClouds && !gameBoard.getClouds().get(cloudPosition).isTaken()){
             ArrayList<Student> stud = this.gameBoard.getClouds().get(cloudPosition).getStudents();
 
             for (Student s: stud){ //qui e alla fine del metodo init() farei un nuovo metodo add che controlla anche se non viene superato il limite di studenti all'entrata
@@ -380,18 +400,21 @@ public class Game {
                 orderPlayersAssistantCard();
                 currentPhase = GamePhase.PlayAssistantCard;
 
-                if(gameBoard.getBag().getSize() == 0)  //bisogna mettere delle exception dove viene pescato uno studente se non ce ne sono più, poi qui finisco il gioco.
-                    endGame();
 
+                if(gameBoard.getBag().getSize() == 0){//bisogna mettere delle exception dove viene pescato uno studente se non ce ne sono più, poi qui finisco il gioco.
+                    endGame();
+                    return 1;
+                }
                 for(Player p: players)
-                    if(p.getAssistantDeck().size() == 0)
+                    if(p.getAssistantDeck().size() == 0){
                         endGame();
+                        return 1;
+                    }
 
             } else {
                 currentPhase = GamePhase.MoveStudents;
                 currentPlayer = playersTurnOrder[playerPhaseCounter].getIndex();
             }
-            gameBoard.getClouds().get(cloudPosition).setTaken(true);
             return 1;
         } else
             return -1;

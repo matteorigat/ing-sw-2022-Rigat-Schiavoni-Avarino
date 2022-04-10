@@ -28,28 +28,32 @@ public class LocalViewTest {
 
     public void start() {
         while(true){
-            System.out.println("-------------------------------------------------------");
+            System.out.println("\n--------------------------------------------------------------------------------------------------------------");
             GameBoard gb = controller.getGameBoard();
             System.out.println("");
 
             for(Island i : gb.getIslands()){
                 boolean bool = false;
-                if(i.getIslandIndex() == gb.getMotherNature()){
+                if(i.getIslandIndex() == gb.getMotherNature() && i.getIslandIndex() < 10){
+                    System.out.print("Island: " + gb.getIslands().indexOf(i) + "  M |\t");
+                } else if(i.getIslandIndex() == gb.getMotherNature()){
                     System.out.print("Island: " + gb.getIslands().indexOf(i) + " M |\t");
                 } else
-                    System.out.print("Island: " + gb.getIslands().indexOf(i) + "\t|\t");
+                    System.out.print("Island: " + gb.getIslands().indexOf(i) + "\t |\t");
+
+                System.out.print("Towers: " + i.getNumTower() + "\t|\t");
+                System.out.print("Colour: " + i.getTowerColor() + "\t|\t");
 
                 for(Student s : i.getStudents()) {
                     System.out.print(s.getColour() + " ");
                     bool = true;
                 }
-                    if(bool == false) {
-                        System.out.print("\t");
-                    }
+                if(bool == false)
+                    System.out.print("\t\t|");
+                else
+                    System.out.print("\t|");
 
-                    System.out.print("\t|\t" + "Towers: " + i.getNumTower() + "\t|\t");
-                    System.out.print("Colour: " + i.getTowerColor());
-                    System.out.println("\n");
+                System.out.println("\n");
             }
 
             ArrayList<Player> arrPlr = controller.getPlayers();
@@ -94,12 +98,12 @@ public class LocalViewTest {
             while(resultbool == false) {
 
                 //questi due valori andranno presi dal client poi
-                char phase = (char) (controller.getCurrentPhase() + 48);
+                int phase = controller.getCurrentPhase();
                 int currentPlayer = controller.getCurrentPlayer();
 
                 switch (phase) {
 
-                    case '0' : if(result!=1) {
+                    case 0 : if(result!=1) {
                         System.out.print("Assistant card number: ");
                         choice = scanner.next();
                         // System.out.println(result);
@@ -107,11 +111,11 @@ public class LocalViewTest {
                         //  System.out.println(ch + " " + b + " " +c);
                         result = controller.playAssistantCard(currentPlayer, c);
                         if(result == 1) resultbool = true;
+                        break;
                         //  System.out.println(result);
-
                     }
 
-                    case '1' : if (result!=1){
+                    case 1 : if (result!=1){
                         System.out.print("Student color and eventually the Island index: ");
                         choice = scanner.next();
                         int c = (int)choice.charAt(0) - 48;
@@ -119,35 +123,37 @@ public class LocalViewTest {
                             result = controller.moveStudentToDiningRoom(currentPlayer, c);
                         else if(choice.length() >= 2){
                             int d = (int)choice.charAt(1) - 48;
-                            d = d * 10 + (int)choice.charAt(2) - 48;
+                            if(choice.length() >= 3)
+                                d = d * 10 + (int)choice.charAt(2) - 48;
                             result = controller.moveStudentToIsland(currentPlayer, c, d);
                         }
-                        if(result == 1)
-                            resultbool = true;
+                        if(result == 1) resultbool = true;
+                        break;
                     }
 
-                    case '2' : if(result!=1) {
+                    case 2 : if(result!=1) {
                         System.out.print("Mother nature movements: ");
                         choice = scanner.next();
                         int c = (int)choice.charAt(0) - 48;
                         result = controller.moveMotherNature(currentPlayer, c);
                         if(result == 1) resultbool = true;
+                        break;
                     }
 
-                    case '3' : if(result!=1) {
+                    case 3 : if(result!=1) {
                         System.out.print("Cloud index: ");
                         choice = scanner.next();
                         int c = (int)choice.charAt(0) - 48;
                         result = controller.chooseCloud(currentPlayer,c);
-                        if(result == 1)
-                            resultbool = true;
+                        if(result == 1) resultbool = true;
+                        break;
                     }
-
-                    case '5' : if(result!=1) {
+                    /*
+                    case 5 : if(result!=1) {
                         String winner = controller.getTheWinner();
                         System.out.println(winner + "WON THE GAME!");
                         return;
-                    }
+                    } */
                 }
                 if(result!=1)
                     System.out.println("Wrong! Retry!");
