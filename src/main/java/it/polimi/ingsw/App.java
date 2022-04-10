@@ -35,7 +35,8 @@ public class App
         Parameters.setParameters(2,false);
         Game controller = new Game();
         controller.addPlayer("Gius");
-        controller.addPlayer("Matt");
+        controller.addPlayer("Mef");
+        //controller.addPlayer("Nico");
         controller.init();
         LocalViewTest view = new LocalViewTest();
         view.setController(controller);

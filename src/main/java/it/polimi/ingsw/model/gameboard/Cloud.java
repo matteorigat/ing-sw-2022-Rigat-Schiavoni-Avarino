@@ -36,6 +36,8 @@ public class Cloud {
         for(int i=0; i<stud.size(); i++)
             students.remove(0);
 
+        this.taken = true;
+
         return stud;
     }
 

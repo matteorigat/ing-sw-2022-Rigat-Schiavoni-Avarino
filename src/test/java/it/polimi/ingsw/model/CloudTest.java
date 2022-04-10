@@ -47,12 +47,24 @@ public class CloudTest{
         catch (TooManyStudentsOnCloudException e){
             thrown = true;
         }
-
-        stud= cloud.getStudents();
-        assertEquals(stud.size(),4);
         assertEquals(thrown,true);
 
+        stud = cloud.seeStudents();
+        assertEquals(stud.size(),4);
+        stud = cloud.seeStudents();
+        assertEquals(stud.size(),4);
 
+        cloud.setTaken(false);
+        assertFalse(cloud.isTaken());
+
+        stud = cloud.getStudents();
+        assertEquals(stud.size(),4);
+        stud = cloud.getStudents();
+        assertEquals(stud.size(),0);
+
+        assertTrue(cloud.isTaken());
+        cloud.setTaken(false);
+        assertFalse(cloud.isTaken());
 
     }
 }
