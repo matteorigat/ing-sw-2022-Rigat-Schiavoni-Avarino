@@ -142,6 +142,12 @@ public class LocalViewTest {
                         if(result == 1)
                             resultbool = true;
                     }
+
+                    case '5' : if(result!=1) {
+                        String winner = controller.getTheWinner();
+                        System.out.println(winner + "WON THE GAME!");
+                        return;
+                    }
                 }
                 if(result!=1)
                     System.out.println("Wrong! Retry!");

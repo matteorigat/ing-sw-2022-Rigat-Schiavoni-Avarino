@@ -22,6 +22,7 @@ public class Game {
     private final ArrayList<Player> players;
     private final GameBoard gameBoard;
 
+    private Player winner;
     private int currentPlayer;
     private GamePhase currentPhase;
     private Player[] playersTurnOrder;
@@ -414,10 +415,34 @@ public class Game {
     }
 
     public void endGame(){
-        //non so cosa succeda qui dentro
         //vince il giocatore che ha costruito il maggior numero di torri
+        ArrayList<Player> rank = new ArrayList<>();
+        int min = Parameters.numTowers;
+        for (Player p: players)
+            if(p.getPlayerSchoolBoard().getTowers().size() < min){
+                min = p.getPlayerSchoolBoard().getTowers().size();
+                rank.clear();
+                rank.add(p);
+            } else if(p.getPlayerSchoolBoard().getTowers().size() == min)
+                rank.add(p);
+
         //in caso di parità chi ha piu professori
+        if(rank.size() == 1)
+            winner = rank.get(0);
+        else {
+            int max = 0;
+            for(Player p: rank)
+                if(p.getPlayerSchoolBoard().getProfessors().size() > max){
+                    max = p.getPlayerSchoolBoard().getProfessors().size();
+                    winner = p;
+                }
+        }
+
         currentPhase = GamePhase.GameEnded;
+    }
+
+    public String getTheWinner(){
+        return winner.getNickname();
     }
 
     public int getCurrentPhase() {
