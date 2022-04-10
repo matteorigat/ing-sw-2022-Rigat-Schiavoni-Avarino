@@ -20,7 +20,7 @@ public class GameBoard {
     private int generalReserve;
 
 <span class="nc" id="L22">    public GameBoard() {</span>
-<span class="nc" id="L23">        this.islands = new ArrayList&lt;&gt;(Parameters.numIsland);</span>
+<span class="nc" id="L23">        this.islands = new ArrayList&lt;&gt;(Parameters.numIslands);</span>
 <span class="nc" id="L24">        this.clouds = new ArrayList&lt;&gt;(Parameters.numClouds);</span>
 <span class="nc" id="L25">        this.bag = new Bag();</span>
 
@@ -30,7 +30,7 @@ public class GameBoard {
         }
 
 
-<span class="nc bnc" id="L33" title="All 2 branches missed.">        for (int i=0; i&lt;Parameters.numIsland; i++){</span>
+<span class="nc bnc" id="L33" title="All 2 branches missed.">        for (int i=0; i&lt;Parameters.numIslands; i++){</span>
 <span class="nc" id="L34">            Island isl = new Island(i);</span>
 <span class="nc" id="L35">            islands.add(isl);</span>
 <span class="nc bnc" id="L36" title="All 2 branches missed.">            if(i&lt;Parameters.numClouds){</span>
