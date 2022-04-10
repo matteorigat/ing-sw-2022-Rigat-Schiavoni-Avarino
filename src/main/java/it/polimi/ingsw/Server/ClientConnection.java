@@ -9,6 +9,7 @@ public interface ClientConnection{
 
         void addObserver(Observer observer);
 
+
         void asyncSend(Object message);
     }
 

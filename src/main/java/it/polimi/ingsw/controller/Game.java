@@ -220,55 +220,56 @@ public class Game {
     }
     //Fase azione punto 1
     public int moveStudentToDiningRoom(int playerIndex, int colour){
+        if(0<=colour && colour<=4) { //ALTRIMENTI ECCEZIONE PER LIMITI ARRAY
+            boolean checkStudentColor = false; // vedo se ha lo studente di quel colore
+            for (Student s : players.get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance())
+                if (Colour.values()[colour] == s.getColour())
+                    checkStudentColor = true;
 
-        boolean checkStudentColor = false; // vedo se ha lo studente di quel colore
-        for(Student s: players.get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance())
-            if(Colour.values()[colour] == s.getColour())
-                checkStudentColor = true;
-
-        if(currentPhase.equals(GamePhase.MoveStudents) && playerIndex == currentPlayer && players.get(playerIndex).getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colour]) < 10 && checkStudentColor && colour >= 0 && colour < Colour.values().length){
-            boolean coin; //ritorna true se il giocatore merita una moneta
-            coin = players.get(playerIndex).getPlayerSchoolBoard().moveStudentToDiningRoom(colour);
-            if(Parameters.expertMode && coin){
-                players.get(playerIndex).addCoin();
-                gameBoard.getOneCoin();
-            }
-
-            //controllo chi possiede il professore ora
-            int c;
-            int max = 0;
-            Player oldProfessorOwner = null;
-            Player newProfessorOwner = null;
-            for(Player p: players){
-                //vedo chi aveva il professore prima
-                for(Professor pr: p.getPlayerSchoolBoard().getProfessors()){
-                    if(pr.getProfessorColour().equals(Colour.values()[colour]))
-                        oldProfessorOwner = p;
+            if (currentPhase.equals(GamePhase.MoveStudents) && playerIndex == currentPlayer && players.get(playerIndex).getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colour]) < 10 && checkStudentColor && colour >= 0 && colour < Colour.values().length) {
+                boolean coin; //ritorna true se il giocatore merita una moneta
+                coin = players.get(playerIndex).getPlayerSchoolBoard().moveStudentToDiningRoom(colour);
+                if (Parameters.expertMode && coin) {
+                    players.get(playerIndex).addCoin();
+                    gameBoard.getOneCoin();
                 }
-                //vedo chi merita il professore ora
-                c = p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colour]);
-                if(c > max){
-                    max = c;
-                    newProfessorOwner = p;
+
+                //controllo chi possiede il professore ora
+                int c;
+                int max = 0;
+                Player oldProfessorOwner = null;
+                Player newProfessorOwner = null;
+                for (Player p : players) {
+                    //vedo chi aveva il professore prima
+                    for (Professor pr : p.getPlayerSchoolBoard().getProfessors()) {
+                        if (pr.getProfessorColour().equals(Colour.values()[colour]))
+                            oldProfessorOwner = p;
+                    }
+                    //vedo chi merita il professore ora
+                    c = p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colour]);
+                    if (c > max) {
+                        max = c;
+                        newProfessorOwner = p;
+                    }
                 }
-            }
-            //se il propretario è cambiato faccio il passaggio OPPURE SE NON LO HA ANCORA NESSUNO
-            if(oldProfessorOwner != null  &&   !oldProfessorOwner.equals(newProfessorOwner)) {  //GIUS
-                oldProfessorOwner.getPlayerSchoolBoard().removeProfessor(Colour.values()[colour]);
-                newProfessorOwner.getPlayerSchoolBoard().addProfessor(Colour.values()[colour]);
-            } else if(newProfessorOwner != null)
-                newProfessorOwner.getPlayerSchoolBoard().addProfessor(Colour.values()[colour]);
+                //se il propretario è cambiato faccio il passaggio OPPURE SE NON LO HA ANCORA NESSUNO
+                if (oldProfessorOwner != null && !oldProfessorOwner.equals(newProfessorOwner)) {  //GIUS
+                    oldProfessorOwner.getPlayerSchoolBoard().removeProfessor(Colour.values()[colour]);
+                    newProfessorOwner.getPlayerSchoolBoard().addProfessor(Colour.values()[colour]);
+                } else if (newProfessorOwner != null)
+                    newProfessorOwner.getPlayerSchoolBoard().addProfessor(Colour.values()[colour]);
 
 
-            phaseCounter++;
-            if(phaseCounter == Parameters.numCloudStudents){
-                currentPhase = GamePhase.MoveMotherNature;
-                phaseCounter = 0;
-            }
+                phaseCounter++;
+                if (phaseCounter == Parameters.numCloudStudents) {
+                    currentPhase = GamePhase.MoveMotherNature;
+                    phaseCounter = 0;
+                }
 
-            return 1;
-        } else
-            return -1;
+                return 1;
+            } else
+                return -1;
+        }       else return -1;
     }
 
     //Fase azione punto 2.1

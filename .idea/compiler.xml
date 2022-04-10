@@ -6,11 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="softeng-GC18" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="ing-sw-2022-Rigat-Schiavoni-Avarino" target="17" />
+      <module name="softeng-GC18" target="1.7" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
