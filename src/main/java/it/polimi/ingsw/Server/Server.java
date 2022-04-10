@@ -1,32 +1,47 @@
 package it.polimi.ingsw.Server;
-/*
+
+import it.polimi.ingsw.ServerClientHandler;
+
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class Server {
-    private ServerSocket serverSocket;
-    private static final int PORT = 12345;
-    private ExecutorService executor = Executors.newFixedThreadPool(128);
+// server in grado di accettare più connessioni client
 
-    public Server() throws IOException {
-        this.serverSocket = new ServerSocket(PORT);
+public class Server {
+    private int port;
+
+    public Server(int port){
+        this.port = port;
     }
 
-    public void run(){
-        while(true){
-            try {
-                Socket newSocket = serverSocket.accept();
-                SocketClientConnection socketConnection = new SocketClientConnection(newSocket, this);
-                executor.submit(socketConnection);
-            } catch (IOException e) {
-                System.out.println("Connection Error!");
+    public void startServer() throws IOException{
+        //It creates threads when necessary, otherwise it re-uses existing one when possible
+        ExecutorService executor = Executors.newCachedThreadPool();
+        ServerSocket serverSocket;
+        try{
+            serverSocket = new ServerSocket(port);
+        }catch (IOException e){
+            System.err.println(e.getMessage()); //port not available
+            return;
+        }
+        System.out.println("Server ready");
+        while (true){
+            try{
+                Socket socket = serverSocket.accept();
+                executor.submit(new ServerClientHandler(socket));
+            }catch(IOException e){
+                break; //In case the serverSocket gets closed
             }
         }
+        executor.shutdown();
+        serverSocket.close();
     }
 
-
 }
-*/
+
+
