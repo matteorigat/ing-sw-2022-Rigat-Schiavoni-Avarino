@@ -3,8 +3,8 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.enumeration.Colour;
 import it.polimi.ingsw.model.enumeration.GamePhase;
-import it.polimi.ingsw.model.gameboard.Characters.*;
-import it.polimi.ingsw.model.gameboard.Characters.CharacterCard;
+import it.polimi.ingsw.model.gameboard.characters.*;
+import it.polimi.ingsw.model.gameboard.characters.CharacterCard;
 import it.polimi.ingsw.model.gameboard.Cloud;
 import it.polimi.ingsw.model.gameboard.GameBoard;
 import it.polimi.ingsw.model.player.Player;
@@ -38,7 +38,6 @@ public class Game {
 
         phaseCounter = 0;
         playerPhaseCounter = 0;
-
     }
 
     //Gets the players of the match
@@ -46,17 +45,12 @@ public class Game {
         return players;
     }
 
-
     //Gets the gameBoard instance
     public GameBoard getGameBoard() {
         return gameBoard;
     }
 
-    public void setGameParameters(int num,boolean mode){
-        Parameters.setParameters(num,mode);
-    }
-
-    public int addPlayer(String nickname){   //DA RIFAREEEEEE
+    public int addPlayer(String nickname){
 
         if(players.size() <= Parameters.numPlayers) {
             Player p = new Player(nickname, players.size());
@@ -73,13 +67,13 @@ public class Game {
         if(Parameters.expertMode){
             gameBoard.chooseThreeCards();
         }
-        this.currentPhase = GamePhase.PlayAssistantCard; //AGGIUNTA GIUS
+
         double casual = Math.random()*12; //(PUNTO 2)
         int mn = (int) casual;
 
         gameBoard.setMotherNature(mn);  //posiziono madrenatura
 
-        ArrayList<Student> arr = new ArrayList<>();  //(PUNTO 3)creo studenti per le isole
+        ArrayList<Student> arr = new ArrayList<>();  //(PUNTO 3) creo studenti per le isole
         for (Colour c : Colour.values()) {
             for(int i=0;i<2;i++){
                 Student s = new Student(c);
@@ -107,13 +101,14 @@ public class Game {
                 p.getPlayerSchoolBoard().getStudentsEntrance().add(gameBoard.getBag().draw());
         }
 
-        //AGGIUNTA GIUS
-
         currentPlayer = 0;
         for(int i = 0; i<Parameters.numPlayers; i++){
             playersTurnOrder[i] = players.get(i);
         }
-        addStudentsOnClouds();  //GIUS
+
+        addStudentsOnClouds();
+
+        this.currentPhase = GamePhase.PlayAssistantCard;
     }
 
 
@@ -442,7 +437,7 @@ public class Game {
             playersTurnOrder[i] = players.get((index + i)%Parameters.numPlayers);
     }
 
-    public void endGame(){
+    private void endGame(){
         //vince il giocatore che ha costruito il maggior numero di torri
         ArrayList<Player> rank = new ArrayList<>();
         int min = Parameters.numTowers;
@@ -478,9 +473,7 @@ public class Game {
     }
 
     public int getCurrentPlayer(){
-       // return players.indexOf(currentPlayer);  //MODIFICATO PERCHÈ indexOf prenderebbe un Player e non un intero
-        return currentPlayer;                     //QUINDI ritorno direttamente l'intero currentPlayer
-                                                  // (Gius)
+        return currentPlayer;
     }
 
 

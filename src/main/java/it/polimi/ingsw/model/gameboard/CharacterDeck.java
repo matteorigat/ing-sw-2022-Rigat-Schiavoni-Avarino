@@ -1,6 +1,6 @@
 package it.polimi.ingsw.model.gameboard;
 
-import it.polimi.ingsw.model.gameboard.Characters.*;
+import it.polimi.ingsw.model.gameboard.characters.*;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -2,6 +2,7 @@ package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.controller.Game;
 import it.polimi.ingsw.model.Parameters;
+import it.polimi.ingsw.model.enumeration.Colour;
 import it.polimi.ingsw.model.enumeration.GamePhase;
 import it.polimi.ingsw.model.gameboard.Cloud;
 import it.polimi.ingsw.model.gameboard.GameBoard;
@@ -70,11 +71,11 @@ public class LocalViewTest {
                 }
                 System.out.print("\nDINING ROOM: ");
                 DiningRoom dr = sb.getDiningRoom();
-                System.out.print("Green: " + dr.getGreenStudents() + " | ");
-                System.out.print("Red: " + dr.getRedStudents() + " | ");
-                System.out.print("Yellow: " + dr.getYellowStudents() + " | ");
-                System.out.print("Pink: " + dr.getPinkStudents() + " | ");
-                System.out.println("Blue: " + dr.getBlueStudents());
+                System.out.print("Green: " + dr.numOfStudentByColor(Colour.Green) + " | ");
+                System.out.print("Red: " + dr.numOfStudentByColor(Colour.Red) + " | ");
+                System.out.print("Yellow: " + dr.numOfStudentByColor(Colour.Yellow) + " | ");
+                System.out.print("Pink: " + dr.numOfStudentByColor(Colour.Pink) + " | ");
+                System.out.println("Blue: " + dr.numOfStudentByColor(Colour.Blue));
                 System.out.print("DECK: ");
                 for(AssistantCard card : p.getAssistantDeck()){
                     System.out.print(card.getValue() + " ");

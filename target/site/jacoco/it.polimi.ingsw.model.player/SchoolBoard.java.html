@@ -74,11 +74,11 @@ public class SchoolBoard {
 
     public void removeProfessor(Colour color){
 <span class="nc" id="L76">        int size = professors.size();</span>
-<span class="nc bnc" id="L77" title="All 2 branches missed.">        for (int i=0; i&lt;size; i++){</span>
-<span class="nc bnc" id="L78" title="All 2 branches missed.">            if (professors.get(i).getProfessorColour().equals(color))</span>
+<span class="nc bnc" id="L77" title="All 2 branches missed.">        for(int i=0; i&lt;size; i++){</span>
+<span class="nc bnc" id="L78" title="All 2 branches missed.">            if(professors.get(i).getProfessorColour().equals(color)){</span>
 <span class="nc" id="L79">                professors.remove(i);</span>
 <span class="nc" id="L80">                return;</span>
-
+            }
         }
 <span class="nc" id="L83">    }</span>
 

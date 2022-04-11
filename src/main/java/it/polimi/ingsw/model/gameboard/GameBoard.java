@@ -1,11 +1,10 @@
 package it.polimi.ingsw.model.gameboard;
 
 import it.polimi.ingsw.exceptions.TooManyStudentsOnCloudException;
-import it.polimi.ingsw.model.player.AssistantCard;
 import it.polimi.ingsw.model.Parameters;
 import it.polimi.ingsw.model.player.Student;
-import it.polimi.ingsw.model.gameboard.Characters.*;
-import it.polimi.ingsw.model.gameboard.Characters.CharacterCard;
+import it.polimi.ingsw.model.gameboard.characters.*;
+import it.polimi.ingsw.model.gameboard.characters.CharacterCard;
 
 import java.util.ArrayList;
 public class GameBoard {
