@@ -130,7 +130,7 @@ public class Game {
     }
     //Fase pianificazione punto 2
     public int playAssistantCard(int playerIndex, int priority){
-        if(currentPhase.equals(GamePhase.PlayAssistantCard) && playerIndex == currentPlayer) {
+        if(currentPhase.equals(GamePhase.PlayAssistantCard) && playerIndex == currentPlayer && priority > 0 && priority <= 10) {
             boolean alreadyPlayed = false;
             for(int i=0; i<phaseCounter; i++) {
                 if (priority == playersTurnOrder[i].getCurrentCard().getValue()) {
@@ -139,7 +139,7 @@ public class Game {
                 }
             }
             if(alreadyPlayed) {
-                int check = 0;     //COMMENTATO PERCHÈ C'È QUALCHE ERRORE!  (Codice per verificare se la carta è già stata giocata da un altro giocatore)
+                int check = 0;
                 for (AssistantCard as : players.get(playerIndex).getAssistantDeck()) {
                     for (int i = 0; i < phaseCounter; i++) {
                         if (as.getValue() == playersTurnOrder[i].getCurrentCard().getValue()) {
@@ -152,19 +152,18 @@ public class Game {
                     return -1;
             }
 
-
-            boolean found = false; //AGGIUNTA GIUS
-            int deckSize = players.get(playerIndex).getAssistantDeck().size();
+            boolean found = false;
             ArrayList<AssistantCard> clone = (ArrayList<AssistantCard>) players.get(playerIndex).getAssistantDeck().clone();
             for (AssistantCard as : clone)
                 if (as.getValue() == priority){
                     players.get(playerIndex).playAssistantCard(as);//QUI ERRORE CUNCURRENT!!!!
 
-                    found = true; //AGGIUNTA GIUS
+                    found = true;
                     break;
                 }
+
             if(found == false) return -2; //non ha la carta, non ha senso proseguire, tocca ancora lui
-            if(phaseCounter<Parameters.numPlayers-1) {   //AGGIUNTA GIUS ALTRIMENTI SFORA LA DIMENSIONE DELL'ARRAY
+            if(phaseCounter < Parameters.numPlayers-1) {   //AGGIUNTA GIUS ALTRIMENTI SFORA LA DIMENSIONE DELL'ARRAY
                 currentPlayer = playersTurnOrder[phaseCounter + 1].getIndex();
 
             }
@@ -183,7 +182,7 @@ public class Game {
 
     }
 
-    private void orderPlayerActionPhase(){
+    private void orderPlayerActionPhase(){  // con algoritmo bubble sort
         for(int i = 0; i < playersTurnOrder.length; i++){
             boolean swap = false;
             for(int j = 0; j < playersTurnOrder.length-1; j++){
@@ -220,13 +219,14 @@ public class Game {
     }
     //Fase azione punto 1
     public int moveStudentToDiningRoom(int playerIndex, int colour){
-        if(0<=colour && colour<=4) { //ALTRIMENTI ECCEZIONE PER LIMITI ARRAY
+        if (currentPhase.equals(GamePhase.MoveStudents) && playerIndex == currentPlayer && colour >= 0 && colour < Colour.values().length && players.get(playerIndex).getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colour]) < 10){
+
             boolean checkStudentColor = false; // vedo se ha lo studente di quel colore
             for (Student s : players.get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance())
                 if (Colour.values()[colour] == s.getColour())
                     checkStudentColor = true;
 
-            if (currentPhase.equals(GamePhase.MoveStudents) && playerIndex == currentPlayer && players.get(playerIndex).getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colour]) < 10 && checkStudentColor && colour >= 0 && colour < Colour.values().length) {
+            if(checkStudentColor){
                 boolean coin; //ritorna true se il giocatore merita una moneta
                 coin = players.get(playerIndex).getPlayerSchoolBoard().moveStudentToDiningRoom(colour);
                 if (Parameters.expertMode && coin) {
@@ -235,30 +235,35 @@ public class Game {
                 }
 
                 //controllo chi possiede il professore ora
-                int c;
-                int max = 0;
+
                 Player oldProfessorOwner = null;
-                Player newProfessorOwner = null;
-                for (Player p : players) {
-                    //vedo chi aveva il professore prima
-                    for (Professor pr : p.getPlayerSchoolBoard().getProfessors()) {
-                        if (pr.getProfessorColour().equals(Colour.values()[colour]))
+                for (Player p : players)  //vedo chi aveva il professore prima
+                    for (Professor pr : p.getPlayerSchoolBoard().getProfessors())
+                        if (pr.getProfessorColour().equals(Colour.values()[colour])){
                             oldProfessorOwner = p;
-                    }
-                    //vedo chi merita il professore ora
-                    c = p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colour]);
-                    if (c > max) {
-                        max = c;
-                        newProfessorOwner = p;
+                            break;
+                        }
+
+                ArrayList<Player> rank = new ArrayList<>();
+                int max = 0;
+                for (Player p : players){  //trovo il giocatore con più studenti
+                    if(max < p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colour])){
+                        max = p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colour]);
+                        rank.clear();
+                        rank.add(p);
+                    }else if (max == p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colour]) && max != 0){  //qui ho parità
+                        rank.add(p);
                     }
                 }
-                //se il propretario è cambiato faccio il passaggio OPPURE SE NON LO HA ANCORA NESSUNO
-                if (oldProfessorOwner != null && !oldProfessorOwner.equals(newProfessorOwner)) {  //GIUS
-                    oldProfessorOwner.getPlayerSchoolBoard().removeProfessor(Colour.values()[colour]);
-                    newProfessorOwner.getPlayerSchoolBoard().addProfessor(Colour.values()[colour]);
-                } else if (newProfessorOwner != null)
-                    newProfessorOwner.getPlayerSchoolBoard().addProfessor(Colour.values()[colour]);
 
+                if(rank.size() == 1){
+                    if(oldProfessorOwner == null){
+                        rank.get(0).getPlayerSchoolBoard().addProfessor(Colour.values()[colour]);
+                    } else if(!oldProfessorOwner.equals(rank.get(0))){
+                        oldProfessorOwner.getPlayerSchoolBoard().removeProfessor(Colour.values()[colour]);
+                        rank.get(0).getPlayerSchoolBoard().addProfessor(Colour.values()[colour]);
+                    }
+                }
 
                 phaseCounter++;
                 if (phaseCounter == Parameters.numCloudStudents) {
@@ -267,9 +272,8 @@ public class Game {
                 }
 
                 return 1;
-            } else
-                return -1;
-        }       else return -1;
+            } else return -1;
+        } else return -1;
     }
 
     //Fase azione punto 2.1

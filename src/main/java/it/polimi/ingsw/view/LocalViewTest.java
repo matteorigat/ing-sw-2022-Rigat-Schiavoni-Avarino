@@ -58,19 +58,23 @@ public class LocalViewTest {
 
             ArrayList<Player> arrPlr = controller.getPlayers();
             for(Player p : arrPlr){
-                System.out.println("Player: " + p.getIndex() +  " " + p.getNickname());
+                System.out.println("PLAYER: " + p.getIndex() +  " " + p.getNickname());
                 SchoolBoard sb = p.getPlayerSchoolBoard();
                 System.out.print("ENTRANCE: ");
-                for(Student t : sb.getStudentsEntrance()){
+                for(Student t: sb.getStudentsEntrance()){
                     System.out.print(t.getColour() + " ");
+                }
+                System.out.print("\nPROFESSORS: ");
+                for(Professor pr: sb.getProfessors()){
+                    System.out.print(pr.getProfessorColour() + " ");
                 }
                 System.out.print("\nDINING ROOM: ");
                 DiningRoom dr = sb.getDiningRoom();
-                System.out.print("GREEN: " + dr.getGreenStudents() + " | ");
-                System.out.print("RED: " + dr.getRedStudents() + " | ");
-                System.out.print("YELLOW: " + dr.getYellowStudents() + " | ");
-                System.out.print("PINK: " + dr.getPinkStudents() + " | ");
-                System.out.println("BLUE: " + dr.getBlueStudents());
+                System.out.print("Green: " + dr.getGreenStudents() + " | ");
+                System.out.print("Red: " + dr.getRedStudents() + " | ");
+                System.out.print("Yellow: " + dr.getYellowStudents() + " | ");
+                System.out.print("Pink: " + dr.getPinkStudents() + " | ");
+                System.out.println("Blue: " + dr.getBlueStudents());
                 System.out.print("DECK: ");
                 for(AssistantCard card : p.getAssistantDeck()){
                     System.out.print(card.getValue() + " ");

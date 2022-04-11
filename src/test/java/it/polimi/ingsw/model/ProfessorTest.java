@@ -23,11 +23,6 @@ public class ProfessorTest{
         assertEquals(Colour.Pink,professor4.getProfessorColour());
         assertEquals(Colour.Blue,professor5.getProfessorColour());
 
-
-
-
-
-
     }
 
 
