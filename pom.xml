@@ -14,8 +14,9 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <sonar.coverage.exclusions>**/client/**/*, **/exceptions/**/*, **/server/**/*, **/view/**/*, **/ClientApp.java, **/ServerApp.java, **/ServerClientHandler.java</sonar.coverage.exclusions>
   </properties>
 
   <dependencies>
