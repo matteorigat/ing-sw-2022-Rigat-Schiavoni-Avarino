@@ -18,85 +18,85 @@ public class Island {
     private int noEntry; //int perchè ne puoi mettere più di uno
 
 
-<span class="nc" id="L21">    public Island(int index){</span>
-<span class="nc" id="L22">        this.students = new ArrayList&lt;Student&gt;(0);</span>
-<span class="nc" id="L23">        this.islandIndex = index;</span>
-<span class="nc" id="L24">        this.numTower = 0;</span>
+<span class="fc" id="L21">    public Island(int index){</span>
+<span class="fc" id="L22">        this.students = new ArrayList&lt;Student&gt;(0);</span>
+<span class="fc" id="L23">        this.islandIndex = index;</span>
+<span class="fc" id="L24">        this.numTower = 0;</span>
         //this.islandRank = 1;
-<span class="nc" id="L26">        this.towerColor = null;</span>
-<span class="nc" id="L27">        this.numStudents = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L26">        this.towerColor = null;</span>
+<span class="fc" id="L27">        this.numStudents = new ArrayList&lt;&gt;();</span>
 
-<span class="nc bnc" id="L29" title="All 2 branches missed.">        if(Parameters.expertMode){</span>
-<span class="nc" id="L30">            this.noEntry = 0;</span>
+<span class="pc bpc" id="L29" title="1 of 2 branches missed.">        if(Parameters.expertMode){</span>
+<span class="fc" id="L30">            this.noEntry = 0;</span>
         }
 
-<span class="nc bnc" id="L33" title="All 2 branches missed.">        for (int i = 0; i&lt;5; i++){</span>
-<span class="nc" id="L34">            numStudents.add(0);</span>
+<span class="fc bfc" id="L33" title="All 2 branches covered.">        for (int i = 0; i&lt;5; i++){</span>
+<span class="fc" id="L34">            numStudents.add(0);</span>
         }
-<span class="nc" id="L36">    }</span>
+<span class="fc" id="L36">    }</span>
 
     public void changeTowerColor(TowerColour colour){
-<span class="nc" id="L39">        this.towerColor = colour;</span>
-<span class="nc" id="L40">    }</span>
+<span class="fc" id="L39">        this.towerColor = colour;</span>
+<span class="fc" id="L40">    }</span>
 
     public void addStudent (Student s){
-<span class="nc" id="L43">        this.students.add(s);</span>
+<span class="fc" id="L43">        this.students.add(s);</span>
 
-<span class="nc" id="L45">        numStudents.set(s.getColour().ordinal(), (numStudents.get(s.getColour().ordinal()) + 1));</span>
-<span class="nc" id="L46">    }</span>
+<span class="fc" id="L45">        numStudents.set(s.getColour().ordinal(), (numStudents.get(s.getColour().ordinal()) + 1));</span>
+<span class="fc" id="L46">    }</span>
 
     //Return the player with the most influence on the island
     public Player Influence (ArrayList&lt;Player&gt; players, boolean noTowerFlag, int twoMorePointsPlayer){
 
-<span class="nc" id="L51">        ArrayList&lt;Professor&gt; prof = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L51">        ArrayList&lt;Professor&gt; prof = new ArrayList&lt;&gt;();</span>
 
         // sommo gli studenti (colori diversi) di un singolo giocatore in base ai colori che controlla
-<span class="nc" id="L54">        int[] somma = new int[Parameters.numPlayers];</span>
-<span class="nc bnc" id="L55" title="All 2 branches missed.">        for(Player pl: players) {</span>
-<span class="nc" id="L56">            prof = pl.getPlayerSchoolBoard().getProfessors();</span>
-<span class="nc bnc" id="L57" title="All 2 branches missed.">            for (Professor pr : prof)</span>
-<span class="nc" id="L58">                somma[pl.getIndex()] += numStudents.get(pr.getProfessorColour().ordinal());</span>
+<span class="fc" id="L54">        int[] somma = new int[Parameters.numPlayers];</span>
+<span class="fc bfc" id="L55" title="All 2 branches covered.">        for(Player pl: players) {</span>
+<span class="fc" id="L56">            prof = pl.getPlayerSchoolBoard().getProfessors();</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">            for (Professor pr : prof)</span>
+<span class="fc" id="L58">                somma[pl.getIndex()] += numStudents.get(pr.getProfessorColour().ordinal());</span>
 
-<span class="nc bnc" id="L60" title="All 4 branches missed.">            if(pl.PlayerTowerColor().equals(towerColor) &amp;&amp; !noTowerFlag)</span>
-<span class="nc" id="L61">                somma[pl.getIndex()] += numTower;</span>
+<span class="pc bpc" id="L60" title="1 of 4 branches missed.">            if(pl.PlayerTowerColor().equals(towerColor) &amp;&amp; !noTowerFlag)</span>
+<span class="fc" id="L61">                somma[pl.getIndex()] += numTower;</span>
 
-<span class="nc bnc" id="L63" title="All 2 branches missed.">            if(pl.getIndex() == twoMorePointsPlayer)</span>
+<span class="pc bpc" id="L63" title="1 of 2 branches missed.">            if(pl.getIndex() == twoMorePointsPlayer)</span>
 <span class="nc" id="L64">                somma[pl.getIndex()] += 2;</span>
-<span class="nc" id="L65">        }</span>
+<span class="fc" id="L65">        }</span>
 
-<span class="nc" id="L67">        ArrayList&lt;Integer&gt; rank = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L68">        int max = 0;</span>
-<span class="nc bnc" id="L69" title="All 2 branches missed.">        for (int i = 0; i&lt;Parameters.numPlayers; i++){  //trovo il giocatore con più studenti</span>
-<span class="nc bnc" id="L70" title="All 2 branches missed.">            if(max &lt; somma[i]){</span>
-<span class="nc" id="L71">                max = somma[i];</span>
-<span class="nc" id="L72">                rank.clear();</span>
-<span class="nc" id="L73">                rank.add(i);</span>
-<span class="nc bnc" id="L74" title="All 4 branches missed.">            }else if (max == somma[i] &amp;&amp; max != 0){  //qui ho parità</span>
-<span class="nc" id="L75">                rank.add(i);</span>
+<span class="fc" id="L67">        ArrayList&lt;Integer&gt; rank = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L68">        int max = 0;</span>
+<span class="fc bfc" id="L69" title="All 2 branches covered.">        for (int i = 0; i&lt;Parameters.numPlayers; i++){  //trovo il giocatore con più studenti</span>
+<span class="fc bfc" id="L70" title="All 2 branches covered.">            if(max &lt; somma[i]){</span>
+<span class="fc" id="L71">                max = somma[i];</span>
+<span class="fc" id="L72">                rank.clear();</span>
+<span class="fc" id="L73">                rank.add(i);</span>
+<span class="fc bfc" id="L74" title="All 4 branches covered.">            }else if (max == somma[i] &amp;&amp; max != 0){  //qui ho parità</span>
+<span class="fc" id="L75">                rank.add(i);</span>
             }
         }
 
-<span class="nc bnc" id="L79" title="All 2 branches missed.">        if(rank.size() == 1){</span>
-<span class="nc bnc" id="L80" title="All 2 branches missed.">            for(Player p: players) {  //ritorno il giocatore che ha il max</span>
-<span class="nc bnc" id="L81" title="All 2 branches missed.">               if(p.getIndex() == rank.get(0))</span>
-<span class="nc" id="L82">                   return p;</span>
-<span class="nc" id="L83">            }</span>
+<span class="fc bfc" id="L79" title="All 2 branches covered.">        if(rank.size() == 1){</span>
+<span class="pc bpc" id="L80" title="1 of 2 branches missed.">            for(Player p: players) {  //ritorno il giocatore che ha il max</span>
+<span class="fc bfc" id="L81" title="All 2 branches covered.">               if(p.getIndex() == rank.get(0))</span>
+<span class="fc" id="L82">                   return p;</span>
+<span class="fc" id="L83">            }</span>
         }
 
-<span class="nc" id="L86">        return null;  // se non trova nessun player o più di uno</span>
+<span class="fc" id="L86">        return null;  // se non trova nessun player o più di uno</span>
     }
 
     public int getNumTower() {
-<span class="nc" id="L90">        return numTower;</span>
+<span class="fc" id="L90">        return numTower;</span>
     }
 
     public void setNumTower(int numTower) {
-<span class="nc" id="L94">        this.numTower = numTower;</span>
+<span class="fc" id="L94">        this.numTower = numTower;</span>
       //  this.islandRank = numTower;
-<span class="nc" id="L96">    }</span>
+<span class="fc" id="L96">    }</span>
 
     public TowerColour getTowerColor() {
-<span class="nc" id="L99">        return towerColor;</span>
+<span class="fc" id="L99">        return towerColor;</span>
     }
 
   /*  public int getIslandRank() {
@@ -104,27 +104,27 @@ public class Island {
     } */
 
     public int getIslandIndex() {
-<span class="nc" id="L107">        return islandIndex;</span>
+<span class="fc" id="L107">        return islandIndex;</span>
     }
 
     public ArrayList&lt;Student&gt; getStudents() {
-<span class="nc" id="L111">        return students;</span>
+<span class="fc" id="L111">        return students;</span>
     }
 
     public ArrayList&lt;Integer&gt; getNumStudents() {
-<span class="nc" id="L115">        return numStudents;</span>
+<span class="fc" id="L115">        return numStudents;</span>
     }
 
     public void addNoEntry() {
-<span class="nc" id="L119">        this.noEntry++;</span>
-<span class="nc" id="L120">    }</span>
+<span class="fc" id="L119">        this.noEntry++;</span>
+<span class="fc" id="L120">    }</span>
 
     public void removeNoEntry(){
-<span class="nc" id="L123">        this.noEntry--;</span>
-<span class="nc" id="L124">    }</span>
+<span class="fc" id="L123">        this.noEntry--;</span>
+<span class="fc" id="L124">    }</span>
 
     public int getNoEntry() {
-<span class="nc" id="L127">        return noEntry;</span>
+<span class="fc" id="L127">        return noEntry;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

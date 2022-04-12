@@ -31,31 +31,31 @@ public class Game {
 
 
     //Constructor Game creates a new Game instance
-<span class="nc" id="L34">    public Game() {</span>
-<span class="nc" id="L35">        players = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L36">        gameBoard = new GameBoard();</span>
-<span class="nc" id="L37">        playersTurnOrder = new Player[Parameters.numPlayers]; //GIUS</span>
+<span class="fc" id="L34">    public Game() {</span>
+<span class="fc" id="L35">        players = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L36">        gameBoard = new GameBoard();</span>
+<span class="fc" id="L37">        playersTurnOrder = new Player[Parameters.numPlayers]; //GIUS</span>
 
-<span class="nc" id="L39">        phaseCounter = 0;</span>
-<span class="nc" id="L40">        playerPhaseCounter = 0;</span>
-<span class="nc" id="L41">    }</span>
+<span class="fc" id="L39">        phaseCounter = 0;</span>
+<span class="fc" id="L40">        playerPhaseCounter = 0;</span>
+<span class="fc" id="L41">    }</span>
 
     //Gets the players of the match
     public ArrayList&lt;Player&gt; getPlayers() {
-<span class="nc" id="L45">        return players;</span>
+<span class="fc" id="L45">        return players;</span>
     }
 
     //Gets the gameBoard instance
     public GameBoard getGameBoard() {
-<span class="nc" id="L50">        return gameBoard;</span>
+<span class="fc" id="L50">        return gameBoard;</span>
     }
 
     public int addPlayer(String nickname){
 
-<span class="nc bnc" id="L55" title="All 2 branches missed.">        if(players.size() &lt;= Parameters.numPlayers) {</span>
-<span class="nc" id="L56">            Player p = new Player(nickname, players.size());</span>
-<span class="nc" id="L57">            players.add(p);</span>
-<span class="nc" id="L58">            return players.size()-1;</span>
+<span class="pc bpc" id="L55" title="1 of 2 branches missed.">        if(players.size() &lt;= Parameters.numPlayers) {</span>
+<span class="fc" id="L56">            Player p = new Player(nickname, players.size());</span>
+<span class="fc" id="L57">            players.add(p);</span>
+<span class="fc" id="L58">            return players.size()-1;</span>
         }
         else{
             //qui bisogna mettere una exception che nella partita ci sono già 4 giocatori
@@ -64,76 +64,76 @@ public class Game {
     }
 
     public void init(){   //sto seguendo l'inizializzazione della partita
-<span class="nc bnc" id="L67" title="All 2 branches missed.">        if(Parameters.expertMode){</span>
-<span class="nc" id="L68">            gameBoard.chooseThreeCards();</span>
+<span class="pc bpc" id="L67" title="1 of 2 branches missed.">        if(Parameters.expertMode){</span>
+<span class="fc" id="L68">            gameBoard.chooseThreeCards();</span>
         }
 
-<span class="nc" id="L71">        double casual = Math.random()*12; //(PUNTO 2)</span>
-<span class="nc" id="L72">        int mn = (int) casual;</span>
+<span class="fc" id="L71">        double casual = Math.random()*12; //(PUNTO 2)</span>
+<span class="fc" id="L72">        int mn = (int) casual;</span>
 
-<span class="nc" id="L74">        gameBoard.setMotherNature(mn);  //posiziono madrenatura</span>
+<span class="fc" id="L74">        gameBoard.setMotherNature(mn);  //posiziono madrenatura</span>
 
-<span class="nc" id="L76">        ArrayList&lt;Student&gt; arr = new ArrayList&lt;&gt;();  //(PUNTO 3) creo studenti per le isole</span>
-<span class="nc bnc" id="L77" title="All 2 branches missed.">        for (Colour c : Colour.values()) {</span>
-<span class="nc bnc" id="L78" title="All 2 branches missed.">            for(int i=0;i&lt;2;i++){</span>
-<span class="nc" id="L79">                Student s = new Student(c);</span>
-<span class="nc" id="L80">                arr.add(s);</span>
+<span class="fc" id="L76">        ArrayList&lt;Student&gt; arr = new ArrayList&lt;&gt;();  //(PUNTO 3) creo studenti per le isole</span>
+<span class="fc bfc" id="L77" title="All 2 branches covered.">        for (Colour c : Colour.values()) {</span>
+<span class="fc bfc" id="L78" title="All 2 branches covered.">            for(int i=0;i&lt;2;i++){</span>
+<span class="fc" id="L79">                Student s = new Student(c);</span>
+<span class="fc" id="L80">                arr.add(s);</span>
             }
         }
-<span class="nc" id="L83">        gameBoard.getBag().fill(arr);</span>
+<span class="fc" id="L83">        gameBoard.getBag().fill(arr);</span>
 
-<span class="nc bnc" id="L85" title="All 2 branches missed.">        for (int i=0; i&lt;12; i++){</span>
-<span class="nc bnc" id="L86" title="All 4 branches missed.">            if(i != gameBoard.getMotherNature() &amp;&amp; i != (gameBoard.getMotherNature() + 6)%12) //doesn't place students on the island with mothernature and the opposite one</span>
-<span class="nc" id="L87">                gameBoard.addStudentOnIsland(i, gameBoard.getBag().draw());</span>
+<span class="fc bfc" id="L85" title="All 2 branches covered.">        for (int i=0; i&lt;12; i++){</span>
+<span class="fc bfc" id="L86" title="All 4 branches covered.">            if(i != gameBoard.getMotherNature() &amp;&amp; i != (gameBoard.getMotherNature() + 6)%12) //doesn't place students on the island with mothernature and the opposite one</span>
+<span class="fc" id="L87">                gameBoard.addStudentOnIsland(i, gameBoard.getBag().draw());</span>
 
         }
 
-<span class="nc bnc" id="L91" title="All 2 branches missed.">        for (Colour c : Colour.values()) {  //creo gli studenti per il sacchetto</span>
-<span class="nc bnc" id="L92" title="All 2 branches missed.">            for(int i=0;i&lt;24;i++){</span>
-<span class="nc" id="L93">                Student s = new Student(c);</span>
-<span class="nc" id="L94">                arr.add(s);</span>
+<span class="fc bfc" id="L91" title="All 2 branches covered.">        for (Colour c : Colour.values()) {  //creo gli studenti per il sacchetto</span>
+<span class="fc bfc" id="L92" title="All 2 branches covered.">            for(int i=0;i&lt;24;i++){</span>
+<span class="fc" id="L93">                Student s = new Student(c);</span>
+<span class="fc" id="L94">                arr.add(s);</span>
             }
         }
-<span class="nc" id="L97">        gameBoard.getBag().fill(arr);</span>
+<span class="fc" id="L97">        gameBoard.getBag().fill(arr);</span>
 
-<span class="nc bnc" id="L99" title="All 2 branches missed.">        for (Player p: players){</span>
-<span class="nc bnc" id="L100" title="All 2 branches missed.">            for (int i=0; i&lt;Parameters.entranceStudents; i++)</span>
-<span class="nc" id="L101">                p.getPlayerSchoolBoard().getStudentsEntrance().add(gameBoard.getBag().draw());</span>
-<span class="nc" id="L102">        }</span>
+<span class="fc bfc" id="L99" title="All 2 branches covered.">        for (Player p: players){</span>
+<span class="fc bfc" id="L100" title="All 2 branches covered.">            for (int i=0; i&lt;Parameters.entranceStudents; i++)</span>
+<span class="fc" id="L101">                p.getPlayerSchoolBoard().getStudentsEntrance().add(gameBoard.getBag().draw());</span>
+<span class="fc" id="L102">        }</span>
 
-<span class="nc" id="L104">        currentPlayer = 0;</span>
-<span class="nc bnc" id="L105" title="All 2 branches missed.">        for(int i = 0; i&lt;Parameters.numPlayers; i++){</span>
-<span class="nc" id="L106">            playersTurnOrder[i] = players.get(i);</span>
+<span class="fc" id="L104">        currentPlayer = 0;</span>
+<span class="fc bfc" id="L105" title="All 2 branches covered.">        for(int i = 0; i&lt;Parameters.numPlayers; i++){</span>
+<span class="fc" id="L106">            playersTurnOrder[i] = players.get(i);</span>
         }
 
-<span class="nc" id="L109">        addStudentsOnClouds();</span>
+<span class="fc" id="L109">        addStudentsOnClouds();</span>
 
-<span class="nc" id="L111">        this.currentPhase = GamePhase.PlayAssistantCard;</span>
-<span class="nc" id="L112">    }</span>
+<span class="fc" id="L111">        this.currentPhase = GamePhase.PlayAssistantCard;</span>
+<span class="fc" id="L112">    }</span>
 
 
     //Fase pianificazione punto 1
     public void addStudentsOnClouds(){
-<span class="nc" id="L117">        int num = 0;</span>
-<span class="nc bnc" id="L118" title="All 2 branches missed.">        for(Cloud c: gameBoard.getClouds()){</span>
-<span class="nc bnc" id="L119" title="All 2 branches missed.">            for (int i = 0; i &lt; Parameters.numCloudStudents; i++)</span>
-<span class="nc bnc" id="L120" title="All 2 branches missed.">                if(gameBoard.getBag().getSize() &gt; 0)</span>
-<span class="nc" id="L121">                    gameBoard.addStudentOnCloud(num, gameBoard.getBag().draw());</span>
-<span class="nc" id="L122">            num++;</span>
-<span class="nc" id="L123">            c.setTaken(false);</span>
-<span class="nc" id="L124">        }</span>
-<span class="nc" id="L125">    }</span>
+<span class="fc" id="L117">        int num = 0;</span>
+<span class="fc bfc" id="L118" title="All 2 branches covered.">        for(Cloud c: gameBoard.getClouds()){</span>
+<span class="fc bfc" id="L119" title="All 2 branches covered.">            for (int i = 0; i &lt; Parameters.numCloudStudents; i++)</span>
+<span class="pc bpc" id="L120" title="1 of 2 branches missed.">                if(gameBoard.getBag().getSize() &gt; 0)</span>
+<span class="fc" id="L121">                    gameBoard.addStudentOnCloud(num, gameBoard.getBag().draw());</span>
+<span class="fc" id="L122">            num++;</span>
+<span class="fc" id="L123">            c.setTaken(false);</span>
+<span class="fc" id="L124">        }</span>
+<span class="fc" id="L125">    }</span>
     //Fase pianificazione punto 2
     public int playAssistantCard(int playerIndex, int priority){
-<span class="nc bnc" id="L128" title="All 8 branches missed.">        if(currentPhase.equals(GamePhase.PlayAssistantCard) &amp;&amp; playerIndex == currentPlayer &amp;&amp; priority &gt; 0 &amp;&amp; priority &lt;= 10) {</span>
-<span class="nc" id="L129">            boolean alreadyPlayed = false;</span>
-<span class="nc bnc" id="L130" title="All 2 branches missed.">            for(int i=0; i&lt;phaseCounter; i++) {</span>
-<span class="nc bnc" id="L131" title="All 2 branches missed.">                if (priority == playersTurnOrder[i].getCurrentCard().getValue()) {</span>
+<span class="pc bpc" id="L128" title="4 of 8 branches missed.">        if(currentPhase.equals(GamePhase.PlayAssistantCard) &amp;&amp; playerIndex == currentPlayer &amp;&amp; priority &gt; 0 &amp;&amp; priority &lt;= 10) {</span>
+<span class="fc" id="L129">            boolean alreadyPlayed = false;</span>
+<span class="fc bfc" id="L130" title="All 2 branches covered.">            for(int i=0; i&lt;phaseCounter; i++) {</span>
+<span class="pc bpc" id="L131" title="1 of 2 branches missed.">                if (priority == playersTurnOrder[i].getCurrentCard().getValue()) {</span>
 <span class="nc" id="L132">                    alreadyPlayed = true;</span>
 <span class="nc" id="L133">                    break;</span>
                 }
             }
-<span class="nc bnc" id="L136" title="All 2 branches missed.">            if(alreadyPlayed) {</span>
+<span class="pc bpc" id="L136" title="1 of 2 branches missed.">            if(alreadyPlayed) {</span>
 <span class="nc" id="L137">                int check = 0;</span>
 <span class="nc bnc" id="L138" title="All 2 branches missed.">                for (AssistantCard as : players.get(playerIndex).getAssistantDeck()) {</span>
 <span class="nc bnc" id="L139" title="All 2 branches missed.">                    for (int i = 0; i &lt; phaseCounter; i++) {</span>
@@ -147,30 +147,30 @@ public class Game {
 <span class="nc" id="L147">                    return -1;</span>
             }
 
-<span class="nc" id="L150">            boolean found = false;</span>
-<span class="nc" id="L151">            ArrayList&lt;AssistantCard&gt; clone = (ArrayList&lt;AssistantCard&gt;) players.get(playerIndex).getAssistantDeck().clone();</span>
-<span class="nc bnc" id="L152" title="All 2 branches missed.">            for (AssistantCard as : clone)</span>
-<span class="nc bnc" id="L153" title="All 2 branches missed.">                if (as.getValue() == priority){</span>
-<span class="nc" id="L154">                    players.get(playerIndex).playAssistantCard(as);//QUI ERRORE CUNCURRENT!!!!</span>
+<span class="fc" id="L150">            boolean found = false;</span>
+<span class="fc" id="L151">            ArrayList&lt;AssistantCard&gt; clone = (ArrayList&lt;AssistantCard&gt;) players.get(playerIndex).getAssistantDeck().clone();</span>
+<span class="pc bpc" id="L152" title="1 of 2 branches missed.">            for (AssistantCard as : clone)</span>
+<span class="fc bfc" id="L153" title="All 2 branches covered.">                if (as.getValue() == priority){</span>
+<span class="fc" id="L154">                    players.get(playerIndex).playAssistantCard(as);//QUI ERRORE CUNCURRENT!!!!</span>
 
-<span class="nc" id="L156">                    found = true;</span>
-<span class="nc" id="L157">                    break;</span>
+<span class="fc" id="L156">                    found = true;</span>
+<span class="fc" id="L157">                    break;</span>
                 }
 
-<span class="nc bnc" id="L160" title="All 2 branches missed.">            if(found == false) return -2; //non ha la carta, non ha senso proseguire, tocca ancora lui</span>
-<span class="nc bnc" id="L161" title="All 2 branches missed.">            if(phaseCounter &lt; Parameters.numPlayers-1) {   //AGGIUNTA GIUS ALTRIMENTI SFORA LA DIMENSIONE DELL'ARRAY</span>
-<span class="nc" id="L162">                currentPlayer = playersTurnOrder[phaseCounter + 1].getIndex();</span>
+<span class="pc bpc" id="L160" title="1 of 2 branches missed.">            if(found == false) return -2; //non ha la carta, non ha senso proseguire, tocca ancora lui</span>
+<span class="fc bfc" id="L161" title="All 2 branches covered.">            if(phaseCounter &lt; Parameters.numPlayers-1) {   //AGGIUNTA GIUS ALTRIMENTI SFORA LA DIMENSIONE DELL'ARRAY</span>
+<span class="fc" id="L162">                currentPlayer = playersTurnOrder[phaseCounter + 1].getIndex();</span>
 
             }
-<span class="nc" id="L165">            phaseCounter++;</span>
-<span class="nc bnc" id="L166" title="All 2 branches missed.">            if (phaseCounter == Parameters.numPlayers) {</span>
-<span class="nc" id="L167">                currentPhase = GamePhase.MoveStudents;</span>
-<span class="nc" id="L168">                phaseCounter = 0;</span>
-<span class="nc" id="L169">                this.orderPlayerActionPhase();</span>
-<span class="nc" id="L170">                currentPlayer = playersTurnOrder[0].getIndex();</span>
+<span class="fc" id="L165">            phaseCounter++;</span>
+<span class="fc bfc" id="L166" title="All 2 branches covered.">            if (phaseCounter == Parameters.numPlayers) {</span>
+<span class="fc" id="L167">                currentPhase = GamePhase.MoveStudents;</span>
+<span class="fc" id="L168">                phaseCounter = 0;</span>
+<span class="fc" id="L169">                this.orderPlayerActionPhase();</span>
+<span class="fc" id="L170">                currentPlayer = playersTurnOrder[0].getIndex();</span>
 
             }
-<span class="nc" id="L173">            return 1;</span>
+<span class="fc" id="L173">            return 1;</span>
         }
 <span class="nc" id="L175">        else return -3;</span>
 
@@ -178,19 +178,19 @@ public class Game {
     }
 
     private void orderPlayerActionPhase(){  // con algoritmo bubble sort
-<span class="nc bnc" id="L181" title="All 2 branches missed.">        for(int i = 0; i &lt; playersTurnOrder.length; i++){</span>
-<span class="nc" id="L182">            boolean swap = false;</span>
-<span class="nc bnc" id="L183" title="All 2 branches missed.">            for(int j = 0; j &lt; playersTurnOrder.length-1; j++){</span>
-<span class="nc bnc" id="L184" title="All 2 branches missed.">                if(playersTurnOrder[j].getCurrentCard().getValue() &gt; playersTurnOrder[j+1].getCurrentCard().getValue()) {</span>
-<span class="nc" id="L185">                    Player k = playersTurnOrder[j];</span>
-<span class="nc" id="L186">                    playersTurnOrder[j] = playersTurnOrder[j+1];</span>
-<span class="nc" id="L187">                    playersTurnOrder[j+1] = k;</span>
-<span class="nc" id="L188">                    swap = true; //segna che è avvenuto uno scambio</span>
+<span class="pc bpc" id="L181" title="1 of 2 branches missed.">        for(int i = 0; i &lt; playersTurnOrder.length; i++){</span>
+<span class="fc" id="L182">            boolean swap = false;</span>
+<span class="fc bfc" id="L183" title="All 2 branches covered.">            for(int j = 0; j &lt; playersTurnOrder.length-1; j++){</span>
+<span class="fc bfc" id="L184" title="All 2 branches covered.">                if(playersTurnOrder[j].getCurrentCard().getValue() &gt; playersTurnOrder[j+1].getCurrentCard().getValue()) {</span>
+<span class="fc" id="L185">                    Player k = playersTurnOrder[j];</span>
+<span class="fc" id="L186">                    playersTurnOrder[j] = playersTurnOrder[j+1];</span>
+<span class="fc" id="L187">                    playersTurnOrder[j+1] = k;</span>
+<span class="fc" id="L188">                    swap = true; //segna che è avvenuto uno scambio</span>
                 }
             }
-<span class="nc bnc" id="L191" title="All 2 branches missed.">            if(!swap) break; // esce prima se ha già ordinato tutto</span>
+<span class="fc bfc" id="L191" title="All 2 branches covered.">            if(!swap) break; // esce prima se ha già ordinato tutto</span>
         }
-<span class="nc" id="L193">    }</span>
+<span class="fc" id="L193">    }</span>
 
     //Fase azione punto 1
     public int moveStudentToIsland(int playerIndex, int colour, int IslandPosition){
@@ -473,7 +473,7 @@ public class Game {
     }
 
     public int getCurrentPlayer(){
-<span class="nc" id="L476">        return currentPlayer;</span>
+<span class="fc" id="L476">        return currentPlayer;</span>
     }
 
 

@@ -13,82 +13,82 @@ public class SchoolBoard {
     private ArrayList&lt;Professor&gt; professors;
     private ArrayList&lt;Tower&gt; towers;
 
-<span class="nc" id="L16">    public SchoolBoard(TowerColour towerColour) {</span>
-<span class="nc" id="L17">        this.studentsEntrance = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L18">        this.diningRoom = new DiningRoom();</span>
-<span class="nc" id="L19">        this.professors = new ArrayList&lt;&gt;(0);</span>
-<span class="nc" id="L20">        this.towers = new ArrayList&lt;&gt;(Parameters.numTowers);</span>
+<span class="fc" id="L16">    public SchoolBoard(TowerColour towerColour) {</span>
+<span class="fc" id="L17">        this.studentsEntrance = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L18">        this.diningRoom = new DiningRoom();</span>
+<span class="fc" id="L19">        this.professors = new ArrayList&lt;&gt;(0);</span>
+<span class="fc" id="L20">        this.towers = new ArrayList&lt;&gt;(Parameters.numTowers);</span>
 
-<span class="nc bnc" id="L22" title="All 2 branches missed.">        for (int i=0; i&lt;Parameters.numTowers; i++) {</span>
-<span class="nc" id="L23">            Tower t = new Tower(towerColour);</span>
-<span class="nc" id="L24">            towers.add(t);</span>
+<span class="fc bfc" id="L22" title="All 2 branches covered.">        for (int i=0; i&lt;Parameters.numTowers; i++) {</span>
+<span class="fc" id="L23">            Tower t = new Tower(towerColour);</span>
+<span class="fc" id="L24">            towers.add(t);</span>
         }
-<span class="nc" id="L26">    }</span>
+<span class="fc" id="L26">    }</span>
 
     public ArrayList&lt;Student&gt; getStudentsEntrance() {
-<span class="nc" id="L29">        return studentsEntrance;</span>
+<span class="fc" id="L29">        return studentsEntrance;</span>
     }
 
     public ArrayList&lt;Professor&gt; getProfessors() {
-<span class="nc" id="L33">        return professors;</span>
+<span class="fc" id="L33">        return professors;</span>
     }
 
     public TowerColour getTowerColor() {
-<span class="nc" id="L37">       return towers.get(0).getTowerColor();</span>
+<span class="fc" id="L37">       return towers.get(0).getTowerColor();</span>
     }
 
     public void addTower(TowerColour towerColour){
-<span class="nc" id="L41">        Tower t = new Tower(towerColour);</span>
-<span class="nc" id="L42">        towers.add(t);</span>
-<span class="nc" id="L43">    }</span>
+<span class="fc" id="L41">        Tower t = new Tower(towerColour);</span>
+<span class="fc" id="L42">        towers.add(t);</span>
+<span class="fc" id="L43">    }</span>
 
     public boolean moveStudentToDiningRoom(int studentColour) {
-<span class="nc bnc" id="L46" title="All 2 branches missed.">        if(this.diningRoom.numOfStudentByColor(Colour.values()[studentColour]) &gt;= 10)</span>
+<span class="pc bpc" id="L46" title="1 of 2 branches missed.">        if(this.diningRoom.numOfStudentByColor(Colour.values()[studentColour]) &gt;= 10)</span>
 <span class="nc" id="L47">            return false;  //sala piena, non gli faccio aggiungere nulla</span>
 
-<span class="nc" id="L49">        boolean coin = false;</span>
-<span class="nc bnc" id="L50" title="All 2 branches missed.">        for (Student s : studentsEntrance){</span>
-<span class="nc bnc" id="L51" title="All 2 branches missed.">            if (s.getColour().equals(Colour.values()[studentColour])) {</span>
-<span class="nc" id="L52">                coin = this.diningRoom.addStudent(s);</span>
-<span class="nc" id="L53">                studentsEntrance.remove(s);</span>
-<span class="nc" id="L54">                break;</span>
+<span class="fc" id="L49">        boolean coin = false;</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">        for (Student s : studentsEntrance){</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">            if (s.getColour().equals(Colour.values()[studentColour])) {</span>
+<span class="fc" id="L52">                coin = this.diningRoom.addStudent(s);</span>
+<span class="fc" id="L53">                studentsEntrance.remove(s);</span>
+<span class="fc" id="L54">                break;</span>
             }
-<span class="nc" id="L56">        }</span>
-<span class="nc" id="L57">        return coin;</span>
+<span class="fc" id="L56">        }</span>
+<span class="fc" id="L57">        return coin;</span>
     }
 
     public void moveStudentToIsland(int studentColour, Island i) {
-<span class="nc bnc" id="L61" title="All 2 branches missed.">        for (Student s : studentsEntrance) {</span>
-<span class="nc bnc" id="L62" title="All 2 branches missed.">            if (s.getColour().equals(Colour.values()[studentColour])) {</span>
+<span class="pc bpc" id="L61" title="1 of 2 branches missed.">        for (Student s : studentsEntrance) {</span>
+<span class="fc bfc" id="L62" title="All 2 branches covered.">            if (s.getColour().equals(Colour.values()[studentColour])) {</span>
 
-<span class="nc" id="L64">                i.addStudent(s);</span>
-<span class="nc" id="L65">                this.studentsEntrance.remove(s);</span>
-<span class="nc" id="L66">                break;</span>
+<span class="fc" id="L64">                i.addStudent(s);</span>
+<span class="fc" id="L65">                this.studentsEntrance.remove(s);</span>
+<span class="fc" id="L66">                break;</span>
             }
-<span class="nc" id="L68">        }</span>
-<span class="nc" id="L69">    }</span>
+<span class="fc" id="L68">        }</span>
+<span class="fc" id="L69">    }</span>
 
     public DiningRoom getDiningRoom() {
-<span class="nc" id="L72">        return diningRoom;</span>
+<span class="fc" id="L72">        return diningRoom;</span>
     }
 
     public void removeProfessor(Colour color){
-<span class="nc" id="L76">        int size = professors.size();</span>
-<span class="nc bnc" id="L77" title="All 2 branches missed.">        for(int i=0; i&lt;size; i++){</span>
-<span class="nc bnc" id="L78" title="All 2 branches missed.">            if(professors.get(i).getProfessorColour().equals(color)){</span>
-<span class="nc" id="L79">                professors.remove(i);</span>
-<span class="nc" id="L80">                return;</span>
+<span class="fc" id="L76">        int size = professors.size();</span>
+<span class="pc bpc" id="L77" title="1 of 2 branches missed.">        for(int i=0; i&lt;size; i++){</span>
+<span class="pc bpc" id="L78" title="1 of 2 branches missed.">            if(professors.get(i).getProfessorColour().equals(color)){</span>
+<span class="fc" id="L79">                professors.remove(i);</span>
+<span class="fc" id="L80">                return;</span>
             }
         }
 <span class="nc" id="L83">    }</span>
 
     public void addProfessor(Colour color){
-<span class="nc" id="L86">        Professor pr = new Professor(color);</span>
-<span class="nc" id="L87">        professors.add(pr);</span>
-<span class="nc" id="L88">    }</span>
+<span class="fc" id="L86">        Professor pr = new Professor(color);</span>
+<span class="fc" id="L87">        professors.add(pr);</span>
+<span class="fc" id="L88">    }</span>
 
     public ArrayList&lt;Tower&gt; getTowers() {
-<span class="nc" id="L91">        return towers;</span>
+<span class="fc" id="L91">        return towers;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

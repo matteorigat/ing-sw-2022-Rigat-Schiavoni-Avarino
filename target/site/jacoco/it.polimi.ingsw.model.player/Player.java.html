@@ -14,70 +14,70 @@ public class Player {
     private int coins;
 
     // Constructor Player creates a new Player instance
-<span class="nc" id="L17">    public Player(String nickname, int index) {</span>
-<span class="nc" id="L18">        this.nickname = nickname;</span>
-<span class="nc" id="L19">        this.towerColour = TowerColour.values()[(index)];</span>
-<span class="nc" id="L20">        this.playerSchoolBoard = new SchoolBoard(TowerColour.values()[(index)]);</span>
-<span class="nc" id="L21">        this.assistantDeck = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L22">        this.index = index;</span>
-<span class="nc" id="L23">        this.coins = 1;</span>
+<span class="fc" id="L17">    public Player(String nickname, int index) {</span>
+<span class="fc" id="L18">        this.nickname = nickname;</span>
+<span class="fc" id="L19">        this.towerColour = TowerColour.values()[(index)];</span>
+<span class="fc" id="L20">        this.playerSchoolBoard = new SchoolBoard(TowerColour.values()[(index)]);</span>
+<span class="fc" id="L21">        this.assistantDeck = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L22">        this.index = index;</span>
+<span class="fc" id="L23">        this.coins = 1;</span>
 
 
-<span class="nc" id="L26">        assistantDeck.add(new AssistantCard(1,1));</span>
-<span class="nc" id="L27">        assistantDeck.add(new AssistantCard(2,1));</span>
-<span class="nc" id="L28">        assistantDeck.add(new AssistantCard(3,2));</span>
-<span class="nc" id="L29">        assistantDeck.add(new AssistantCard(4,2));</span>
-<span class="nc" id="L30">        assistantDeck.add(new AssistantCard(5,3));</span>
-<span class="nc" id="L31">        assistantDeck.add(new AssistantCard(6,3));</span>
-<span class="nc" id="L32">        assistantDeck.add(new AssistantCard(7,4));</span>
-<span class="nc" id="L33">        assistantDeck.add(new AssistantCard(8,4));</span>
-<span class="nc" id="L34">        assistantDeck.add(new AssistantCard(9,5));</span>
-<span class="nc" id="L35">        assistantDeck.add(new AssistantCard(10,5));</span>
-<span class="nc" id="L36">    }</span>
+<span class="fc" id="L26">        assistantDeck.add(new AssistantCard(1,1));</span>
+<span class="fc" id="L27">        assistantDeck.add(new AssistantCard(2,1));</span>
+<span class="fc" id="L28">        assistantDeck.add(new AssistantCard(3,2));</span>
+<span class="fc" id="L29">        assistantDeck.add(new AssistantCard(4,2));</span>
+<span class="fc" id="L30">        assistantDeck.add(new AssistantCard(5,3));</span>
+<span class="fc" id="L31">        assistantDeck.add(new AssistantCard(6,3));</span>
+<span class="fc" id="L32">        assistantDeck.add(new AssistantCard(7,4));</span>
+<span class="fc" id="L33">        assistantDeck.add(new AssistantCard(8,4));</span>
+<span class="fc" id="L34">        assistantDeck.add(new AssistantCard(9,5));</span>
+<span class="fc" id="L35">        assistantDeck.add(new AssistantCard(10,5));</span>
+<span class="fc" id="L36">    }</span>
 
     public int getIndex() {
-<span class="nc" id="L39">        return index;</span>
+<span class="fc" id="L39">        return index;</span>
     }
 
     //Return the player's tower color
     public TowerColour PlayerTowerColor(){
-<span class="nc" id="L44">        return playerSchoolBoard.getTowerColor();</span>
+<span class="fc" id="L44">        return playerSchoolBoard.getTowerColor();</span>
     }
 
     //Gets the schoolBoard of the player
     public SchoolBoard getPlayerSchoolBoard() {
-<span class="nc" id="L49">        return playerSchoolBoard;</span>
+<span class="fc" id="L49">        return playerSchoolBoard;</span>
     }
 
     public ArrayList&lt;AssistantCard&gt; getAssistantDeck() {
-<span class="nc" id="L53">        return assistantDeck;</span>
+<span class="fc" id="L53">        return assistantDeck;</span>
     }
 
     // play a card and remove it from the deck
     public void playAssistantCard(AssistantCard cardPlayed){
-<span class="nc" id="L58">                this.currentCard = cardPlayed;</span>
-<span class="nc" id="L59">                assistantDeck.remove(cardPlayed);</span>
-<span class="nc" id="L60">    }</span>
+<span class="fc" id="L58">                this.currentCard = cardPlayed;</span>
+<span class="fc" id="L59">                assistantDeck.remove(cardPlayed);</span>
+<span class="fc" id="L60">    }</span>
 
     public AssistantCard getCurrentCard() {
-<span class="nc" id="L63">        return currentCard;</span>
+<span class="fc" id="L63">        return currentCard;</span>
     }
 
     public void addCoin() {
-<span class="nc" id="L67">        coins++;</span>
-<span class="nc" id="L68">    }</span>
+<span class="fc" id="L67">        coins++;</span>
+<span class="fc" id="L68">    }</span>
 
     public int getCoins() {
-<span class="nc" id="L71">        return coins;</span>
+<span class="fc" id="L71">        return coins;</span>
     }
 
     @Override
     public String toString() {
-<span class="nc" id="L76">        return &quot;Player : &quot; + index + &quot; &quot; +nickname;</span>
+<span class="fc" id="L76">        return &quot;Player : &quot; + index + &quot; &quot; +nickname;</span>
     }
 
     public String getNickname() {
-<span class="nc" id="L80">        return nickname;</span>
+<span class="fc" id="L80">        return nickname;</span>
     }
 }
 

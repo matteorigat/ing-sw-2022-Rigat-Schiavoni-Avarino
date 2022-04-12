@@ -7,26 +7,26 @@
     public static int numTowers;
     public static int entranceStudents;
     public static boolean expertMode;  //true se è expert
-<span class="nc" id="L10">    public static int numIslands = 12;</span>
-<span class="nc" id="L11">    public static int numStudents = 130;</span>
-<span class="nc" id="L12">    public static int numCharacterCards = 8; //se ne implementiamo altre mettiamo 12</span>
+<span class="fc" id="L10">    public static int numIslands = 12;</span>
+<span class="fc" id="L11">    public static int numStudents = 130;</span>
+<span class="fc" id="L12">    public static int numCharacterCards = 8; //se ne implementiamo altre mettiamo 12</span>
 
 
     public static void setParameters(int players, boolean mode){
-<span class="nc" id="L16">        numPlayers = players;</span>
-<span class="nc" id="L17">        numClouds = players; //numero nuvole uguale a numero giocatori</span>
-<span class="nc" id="L18">        expertMode = mode;</span>
+<span class="fc" id="L16">        numPlayers = players;</span>
+<span class="fc" id="L17">        numClouds = players; //numero nuvole uguale a numero giocatori</span>
+<span class="fc" id="L18">        expertMode = mode;</span>
 
-<span class="nc bnc" id="L20" title="All 2 branches missed.">        if (players == 2){</span>
-<span class="nc" id="L21">            numCloudStudents = 3;</span>
-<span class="nc" id="L22">            numTowers = 8;</span>
-<span class="nc" id="L23">            entranceStudents = 7;</span>
+<span class="fc bfc" id="L20" title="All 2 branches covered.">        if (players == 2){</span>
+<span class="fc" id="L21">            numCloudStudents = 3;</span>
+<span class="fc" id="L22">            numTowers = 8;</span>
+<span class="fc" id="L23">            entranceStudents = 7;</span>
         } else{
-<span class="nc" id="L25">            numCloudStudents = 4;</span>
-<span class="nc" id="L26">            numTowers = 6;</span>
-<span class="nc" id="L27">            entranceStudents = 9;</span>
+<span class="fc" id="L25">            numCloudStudents = 4;</span>
+<span class="fc" id="L26">            numTowers = 6;</span>
+<span class="fc" id="L27">            entranceStudents = 9;</span>
         }
-<span class="nc" id="L29">    }</span>
+<span class="fc" id="L29">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

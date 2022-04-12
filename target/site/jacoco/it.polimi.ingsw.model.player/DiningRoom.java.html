@@ -12,13 +12,13 @@ public class DiningRoom {
     private ArrayList&lt;Student&gt; pinkStudents;
     private ArrayList&lt;Student&gt; blueStudents;
 
-<span class="nc" id="L15">    public DiningRoom() {</span>
-<span class="nc" id="L16">        this.greenStudents = new ArrayList&lt;&gt;(0);</span>
-<span class="nc" id="L17">        this.redStudents = new ArrayList&lt;&gt;(0);</span>
-<span class="nc" id="L18">        this.yellowStudents = new ArrayList&lt;&gt;(0);</span>
-<span class="nc" id="L19">        this.pinkStudents = new ArrayList&lt;&gt;(0);</span>
-<span class="nc" id="L20">        this.blueStudents = new ArrayList&lt;&gt;(0);</span>
-<span class="nc" id="L21">    }</span>
+<span class="fc" id="L15">    public DiningRoom() {</span>
+<span class="fc" id="L16">        this.greenStudents = new ArrayList&lt;&gt;(0);</span>
+<span class="fc" id="L17">        this.redStudents = new ArrayList&lt;&gt;(0);</span>
+<span class="fc" id="L18">        this.yellowStudents = new ArrayList&lt;&gt;(0);</span>
+<span class="fc" id="L19">        this.pinkStudents = new ArrayList&lt;&gt;(0);</span>
+<span class="fc" id="L20">        this.blueStudents = new ArrayList&lt;&gt;(0);</span>
+<span class="fc" id="L21">    }</span>
     /*
     public void addStudent(Student s){                 // scusate i tanti if ma sono funzionali
         if(s.getColour().equals(Colour.Green))         // qui poi nelle regole esperte bisogna contare le  monete
@@ -38,76 +38,76 @@ public class DiningRoom {
 
     //variante con monete, se ritorna true il giocatore guadagna una moneta
     public boolean addStudent(Student s){
-<span class="nc bnc" id="L41" title="All 4 branches missed.">        if(s.getColour().equals(Colour.Green) &amp;&amp; greenStudents.size() &lt; 10){</span>
-<span class="nc" id="L42">            greenStudents.add(s);</span>
-<span class="nc bnc" id="L43" title="All 2 branches missed.">            if (greenStudents.size()%3 == 0) //moneta se 3, 6 e 9</span>
-<span class="nc" id="L44">                return true;</span>
+<span class="fc bfc" id="L41" title="All 4 branches covered.">        if(s.getColour().equals(Colour.Green) &amp;&amp; greenStudents.size() &lt; 10){</span>
+<span class="fc" id="L42">            greenStudents.add(s);</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">            if (greenStudents.size()%3 == 0) //moneta se 3, 6 e 9</span>
+<span class="fc" id="L44">                return true;</span>
         }
-<span class="nc bnc" id="L46" title="All 4 branches missed.">        else if(s.getColour().equals(Colour.Red) &amp;&amp; redStudents.size() &lt; 10){</span>
-<span class="nc" id="L47">            redStudents.add(s);</span>
-<span class="nc bnc" id="L48" title="All 2 branches missed.">            if (redStudents.size()%3 == 0)</span>
-<span class="nc" id="L49">                return true;</span>
+<span class="fc bfc" id="L46" title="All 4 branches covered.">        else if(s.getColour().equals(Colour.Red) &amp;&amp; redStudents.size() &lt; 10){</span>
+<span class="fc" id="L47">            redStudents.add(s);</span>
+<span class="fc bfc" id="L48" title="All 2 branches covered.">            if (redStudents.size()%3 == 0)</span>
+<span class="fc" id="L49">                return true;</span>
         }
-<span class="nc bnc" id="L51" title="All 4 branches missed.">        else if(s.getColour().equals(Colour.Yellow) &amp;&amp; yellowStudents.size() &lt; 10){</span>
-<span class="nc" id="L52">            yellowStudents.add(s);</span>
-<span class="nc bnc" id="L53" title="All 2 branches missed.">            if (yellowStudents.size()%3 == 0)</span>
-<span class="nc" id="L54">                return true;</span>
+<span class="fc bfc" id="L51" title="All 4 branches covered.">        else if(s.getColour().equals(Colour.Yellow) &amp;&amp; yellowStudents.size() &lt; 10){</span>
+<span class="fc" id="L52">            yellowStudents.add(s);</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">            if (yellowStudents.size()%3 == 0)</span>
+<span class="fc" id="L54">                return true;</span>
         }
-<span class="nc bnc" id="L56" title="All 4 branches missed.">        else if(s.getColour().equals(Colour.Pink) &amp;&amp; pinkStudents.size() &lt; 10){</span>
-<span class="nc" id="L57">            pinkStudents.add(s);</span>
-<span class="nc bnc" id="L58" title="All 2 branches missed.">            if (pinkStudents.size()%3 == 0)</span>
-<span class="nc" id="L59">                return true;</span>
+<span class="fc bfc" id="L56" title="All 4 branches covered.">        else if(s.getColour().equals(Colour.Pink) &amp;&amp; pinkStudents.size() &lt; 10){</span>
+<span class="fc" id="L57">            pinkStudents.add(s);</span>
+<span class="fc bfc" id="L58" title="All 2 branches covered.">            if (pinkStudents.size()%3 == 0)</span>
+<span class="fc" id="L59">                return true;</span>
         }
-<span class="nc bnc" id="L61" title="All 4 branches missed.">        else if(s.getColour().equals(Colour.Blue) &amp;&amp; blueStudents.size() &lt; 10){</span>
-<span class="nc" id="L62">            blueStudents.add(s);</span>
-<span class="nc bnc" id="L63" title="All 2 branches missed.">            if (blueStudents.size()%3 == 0)</span>
-<span class="nc" id="L64">                return true;</span>
+<span class="fc bfc" id="L61" title="All 4 branches covered.">        else if(s.getColour().equals(Colour.Blue) &amp;&amp; blueStudents.size() &lt; 10){</span>
+<span class="fc" id="L62">            blueStudents.add(s);</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">            if (blueStudents.size()%3 == 0)</span>
+<span class="fc" id="L64">                return true;</span>
         }
-<span class="nc" id="L66">        return false;</span>
+<span class="fc" id="L66">        return false;</span>
     }
 
 
     public int numOfStudentByColor(Colour color){
-<span class="nc bnc" id="L71" title="All 2 branches missed.">        if(color.equals(Colour.Green)){</span>
-<span class="nc" id="L72">            return greenStudents.size();</span>
-<span class="nc bnc" id="L73" title="All 2 branches missed.">        } else if(color.equals(Colour.Red)){</span>
-<span class="nc" id="L74">            return redStudents.size();</span>
-<span class="nc bnc" id="L75" title="All 2 branches missed.">        } else if(color.equals(Colour.Yellow)){</span>
-<span class="nc" id="L76">            return yellowStudents.size();</span>
-<span class="nc bnc" id="L77" title="All 2 branches missed.">        } else if(color.equals(Colour.Pink)){</span>
-<span class="nc" id="L78">            return pinkStudents.size();</span>
-<span class="nc bnc" id="L79" title="All 2 branches missed.">        } else if(color.equals(Colour.Blue)){</span>
-<span class="nc" id="L80">            return blueStudents.size();</span>
+<span class="fc bfc" id="L71" title="All 2 branches covered.">        if(color.equals(Colour.Green)){</span>
+<span class="fc" id="L72">            return greenStudents.size();</span>
+<span class="fc bfc" id="L73" title="All 2 branches covered.">        } else if(color.equals(Colour.Red)){</span>
+<span class="fc" id="L74">            return redStudents.size();</span>
+<span class="fc bfc" id="L75" title="All 2 branches covered.">        } else if(color.equals(Colour.Yellow)){</span>
+<span class="fc" id="L76">            return yellowStudents.size();</span>
+<span class="fc bfc" id="L77" title="All 2 branches covered.">        } else if(color.equals(Colour.Pink)){</span>
+<span class="fc" id="L78">            return pinkStudents.size();</span>
+<span class="pc bpc" id="L79" title="1 of 2 branches missed.">        } else if(color.equals(Colour.Blue)){</span>
+<span class="fc" id="L80">            return blueStudents.size();</span>
         }
 <span class="nc" id="L82">        return -1;//non dovrebbe mai succedere</span>
     }
 
     public ArrayList&lt;Student&gt; removeThreeStudents(Colour color){
-<span class="nc" id="L86">        ArrayList&lt;Student&gt; stud = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L87">        int num = 3;</span>
-<span class="nc bnc" id="L88" title="All 2 branches missed.">        if(numOfStudentByColor(color) &lt; 3)</span>
+<span class="fc" id="L86">        ArrayList&lt;Student&gt; stud = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L87">        int num = 3;</span>
+<span class="pc bpc" id="L88" title="1 of 2 branches missed.">        if(numOfStudentByColor(color) &lt; 3)</span>
 <span class="nc" id="L89">            num = numOfStudentByColor(color);</span>
 
-<span class="nc bnc" id="L91" title="All 2 branches missed.">        for (int i=0; i&lt;num; i++){</span>
-<span class="nc bnc" id="L92" title="All 2 branches missed.">            if(color.equals(Colour.Green)){</span>
-<span class="nc" id="L93">                stud.add(greenStudents.get(0));</span>
-<span class="nc" id="L94">                greenStudents.remove(0);</span>
-<span class="nc bnc" id="L95" title="All 2 branches missed.">            } else if(color.equals(Colour.Red)){</span>
-<span class="nc" id="L96">                stud.add(redStudents.get(0));</span>
-<span class="nc" id="L97">                redStudents.remove(0);</span>
-<span class="nc bnc" id="L98" title="All 2 branches missed.">            } else if(color.equals(Colour.Yellow)){</span>
-<span class="nc" id="L99">                stud.add(yellowStudents.get(0));</span>
-<span class="nc" id="L100">                yellowStudents.remove(0);</span>
-<span class="nc bnc" id="L101" title="All 2 branches missed.">            } else if(color.equals(Colour.Pink)){</span>
-<span class="nc" id="L102">                stud.add(pinkStudents.get(0));</span>
-<span class="nc" id="L103">                pinkStudents.remove(0);</span>
-<span class="nc bnc" id="L104" title="All 2 branches missed.">            } else if(color.equals(Colour.Blue)){</span>
-<span class="nc" id="L105">                stud.add(blueStudents.get(0));</span>
-<span class="nc" id="L106">                blueStudents.remove(0);</span>
+<span class="fc bfc" id="L91" title="All 2 branches covered.">        for (int i=0; i&lt;num; i++){</span>
+<span class="fc bfc" id="L92" title="All 2 branches covered.">            if(color.equals(Colour.Green)){</span>
+<span class="fc" id="L93">                stud.add(greenStudents.get(0));</span>
+<span class="fc" id="L94">                greenStudents.remove(0);</span>
+<span class="fc bfc" id="L95" title="All 2 branches covered.">            } else if(color.equals(Colour.Red)){</span>
+<span class="fc" id="L96">                stud.add(redStudents.get(0));</span>
+<span class="fc" id="L97">                redStudents.remove(0);</span>
+<span class="fc bfc" id="L98" title="All 2 branches covered.">            } else if(color.equals(Colour.Yellow)){</span>
+<span class="fc" id="L99">                stud.add(yellowStudents.get(0));</span>
+<span class="fc" id="L100">                yellowStudents.remove(0);</span>
+<span class="fc bfc" id="L101" title="All 2 branches covered.">            } else if(color.equals(Colour.Pink)){</span>
+<span class="fc" id="L102">                stud.add(pinkStudents.get(0));</span>
+<span class="fc" id="L103">                pinkStudents.remove(0);</span>
+<span class="pc bpc" id="L104" title="1 of 2 branches missed.">            } else if(color.equals(Colour.Blue)){</span>
+<span class="fc" id="L105">                stud.add(blueStudents.get(0));</span>
+<span class="fc" id="L106">                blueStudents.remove(0);</span>
             }
         }
 
-<span class="nc" id="L110">        return stud;</span>
+<span class="fc" id="L110">        return stud;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

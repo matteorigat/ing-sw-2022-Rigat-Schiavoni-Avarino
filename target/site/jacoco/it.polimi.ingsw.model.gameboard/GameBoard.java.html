@@ -18,101 +18,101 @@ public class GameBoard {
     private Bag bag;
     private int generalReserve;
 
-<span class="nc" id="L21">    public GameBoard() {</span>
-<span class="nc" id="L22">        this.islands = new ArrayList&lt;&gt;(Parameters.numIslands);</span>
-<span class="nc" id="L23">        this.clouds = new ArrayList&lt;&gt;(Parameters.numClouds);</span>
-<span class="nc" id="L24">        this.bag = new Bag();</span>
+<span class="fc" id="L21">    public GameBoard() {</span>
+<span class="fc" id="L22">        this.islands = new ArrayList&lt;&gt;(Parameters.numIslands);</span>
+<span class="fc" id="L23">        this.clouds = new ArrayList&lt;&gt;(Parameters.numClouds);</span>
+<span class="fc" id="L24">        this.bag = new Bag();</span>
 
-<span class="nc bnc" id="L26" title="All 2 branches missed.">        if(Parameters.expertMode){</span>
-<span class="nc" id="L27">            this.generalReserve = 20 - Parameters.numPlayers;</span>
-<span class="nc" id="L28">            this.characterDeck = new CharacterDeck();</span>
+<span class="pc bpc" id="L26" title="1 of 2 branches missed.">        if(Parameters.expertMode){</span>
+<span class="fc" id="L27">            this.generalReserve = 20 - Parameters.numPlayers;</span>
+<span class="fc" id="L28">            this.characterDeck = new CharacterDeck();</span>
         }
 
 
-<span class="nc bnc" id="L32" title="All 2 branches missed.">        for (int i=0; i&lt;Parameters.numIslands; i++){</span>
-<span class="nc" id="L33">            Island isl = new Island(i);</span>
-<span class="nc" id="L34">            islands.add(isl);</span>
-<span class="nc bnc" id="L35" title="All 2 branches missed.">            if(i&lt;Parameters.numClouds){</span>
-<span class="nc" id="L36">                Cloud cl = new Cloud();</span>
-<span class="nc" id="L37">                clouds.add(cl);</span>
+<span class="fc bfc" id="L32" title="All 2 branches covered.">        for (int i=0; i&lt;Parameters.numIslands; i++){</span>
+<span class="fc" id="L33">            Island isl = new Island(i);</span>
+<span class="fc" id="L34">            islands.add(isl);</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">            if(i&lt;Parameters.numClouds){</span>
+<span class="fc" id="L36">                Cloud cl = new Cloud();</span>
+<span class="fc" id="L37">                clouds.add(cl);</span>
             }
         }
-<span class="nc" id="L40">    }</span>
+<span class="fc" id="L40">    }</span>
 
     public void addStudentOnIsland(int numIsland, Student student){
-<span class="nc" id="L43">        islands.get(numIsland).addStudent(student);</span>
-<span class="nc" id="L44">    }</span>
+<span class="fc" id="L43">        islands.get(numIsland).addStudent(student);</span>
+<span class="fc" id="L44">    }</span>
 
     public void chooseThreeCards(){
-<span class="nc" id="L47">        threeCharacterCards = characterDeck.getThreeRandomCards();</span>
+<span class="fc" id="L47">        threeCharacterCards = characterDeck.getThreeRandomCards();</span>
 
-<span class="nc bnc" id="L49" title="All 2 branches missed.">        for(CharacterCard c: threeCharacterCards){</span>
-<span class="nc bnc" id="L50" title="All 2 branches missed.">            if(c.getIndex() == 1){</span>
-<span class="nc bnc" id="L51" title="All 2 branches missed.">                for (int i=0; i&lt;4; i++)</span>
-<span class="nc" id="L52">                    ((Character1) c).addStudent(getBag().draw());</span>
-<span class="nc bnc" id="L53" title="All 2 branches missed.">            } else if(c.getIndex() == 11){</span>
-<span class="nc bnc" id="L54" title="All 2 branches missed.">                for (int i=0; i&lt;4; i++)</span>
-<span class="nc" id="L55">                    ((Character11) c).addStudent(getBag().draw());</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">        for(CharacterCard c: threeCharacterCards){</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">            if(c.getIndex() == 1){</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">                for (int i=0; i&lt;4; i++)</span>
+<span class="fc" id="L52">                    ((Character1) c).addStudent(getBag().draw());</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">            } else if(c.getIndex() == 11){</span>
+<span class="fc bfc" id="L54" title="All 2 branches covered.">                for (int i=0; i&lt;4; i++)</span>
+<span class="fc" id="L55">                    ((Character11) c).addStudent(getBag().draw());</span>
             }
-<span class="nc" id="L57">        }</span>
-<span class="nc" id="L58">    }</span>
+<span class="fc" id="L57">        }</span>
+<span class="fc" id="L58">    }</span>
 
     public ArrayList&lt;CharacterCard&gt; getThreeCharacterCards() {
-<span class="nc" id="L61">        return threeCharacterCards;</span>
+<span class="fc" id="L61">        return threeCharacterCards;</span>
     }
 
     public void addStudentOnCloud(int numCloud, Student student){
         try{
-<span class="nc" id="L66">        clouds.get(numCloud).addStudent(student);</span>
+<span class="fc" id="L66">        clouds.get(numCloud).addStudent(student);</span>
         }
 <span class="nc" id="L68">        catch(TooManyStudentsOnCloudException e){</span>
             // CODICE GESTIONE ERRORE
-<span class="nc" id="L70">        }</span>
-<span class="nc" id="L71">    }</span>
+<span class="fc" id="L70">        }</span>
+<span class="fc" id="L71">    }</span>
 
     public int getMotherNature() {
-<span class="nc" id="L74">        return motherNature;</span>
+<span class="fc" id="L74">        return motherNature;</span>
     }
 
 
     public void setMotherNature(int motherNature) {
-<span class="nc" id="L79">        this.motherNature = motherNature;</span>
-<span class="nc" id="L80">    }</span>
+<span class="fc" id="L79">        this.motherNature = motherNature;</span>
+<span class="fc" id="L80">    }</span>
 
     public Bag getBag() {
-<span class="nc" id="L83">        return bag;</span>
+<span class="fc" id="L83">        return bag;</span>
     }
 
     public ArrayList&lt;Cloud&gt; getClouds() {
-<span class="nc" id="L87">        return clouds;</span>
+<span class="fc" id="L87">        return clouds;</span>
     }
 
     public void islandFusion(int island1, int island2) {
 
-<span class="nc bnc" id="L92" title="All 2 branches missed.">        for(Student s: islands.get(island2).getStudents())</span>
-<span class="nc" id="L93">            islands.get(island1).addStudent(s);</span>
+<span class="fc bfc" id="L92" title="All 2 branches covered.">        for(Student s: islands.get(island2).getStudents())</span>
+<span class="fc" id="L93">            islands.get(island1).addStudent(s);</span>
 
-<span class="nc" id="L95">        this.islands.get(island1).setNumTower(this.islands.get(island1).getNumTower() + this.islands.get(island2).getNumTower());</span>
+<span class="fc" id="L95">        this.islands.get(island1).setNumTower(this.islands.get(island1).getNumTower() + this.islands.get(island2).getNumTower());</span>
        // this.islands.get(island1).setNumTower(this.islands.get(island1).getIslandRank() + 1);
 
-<span class="nc" id="L98">        islands.remove(island2);</span>
+<span class="fc" id="L98">        islands.remove(island2);</span>
 
-<span class="nc" id="L100">    }</span>
+<span class="fc" id="L100">    }</span>
 
     public void getOneCoin(){
-<span class="nc" id="L103">        this.generalReserve--;</span>
-<span class="nc" id="L104">    }</span>
+<span class="fc" id="L103">        this.generalReserve--;</span>
+<span class="fc" id="L104">    }</span>
 
     public int getGeneralReserve() {
-<span class="nc" id="L107">        return generalReserve;</span>
+<span class="fc" id="L107">        return generalReserve;</span>
     }
 
     public void addCoinsToGeneralReserve(int coins) {
-<span class="nc" id="L111">        this.generalReserve += coins;</span>
-<span class="nc" id="L112">    }</span>
+<span class="fc" id="L111">        this.generalReserve += coins;</span>
+<span class="fc" id="L112">    }</span>
 
     public ArrayList&lt;Island&gt; getIslands() {
-<span class="nc" id="L115">        return islands;</span>
+<span class="fc" id="L115">        return islands;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
