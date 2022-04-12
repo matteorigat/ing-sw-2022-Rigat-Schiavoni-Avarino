@@ -4,14 +4,14 @@ import it.polimi.ingsw.server.Server;
 
 import java.io.IOException;
 
-public class ServerApp{
-
+public class ServerApp {
 
 
 
     public static void main(String[] args) {
-        Server server = new Server(1337);
+
         try {
+            Server server = new Server();
             server.startServer();
         } catch (IOException e) {
             System.err.println(e.getMessage());

@@ -1,45 +1,95 @@
 package it.polimi.ingsw.server;
 
+import it.polimi.ingsw.Connection;
 import it.polimi.ingsw.ServerClientHandler;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 // server in grado di accettare più connessioni client
 
 public class Server {
-    private int port;
+    private static final int PORT= 12345;
+    private ServerSocket serverSocket;
 
-    public Server(int port){
-        this.port = port;
+    private ExecutorService executor = Executors.newFixedThreadPool(128);
+
+    private List<Connection> connections = new ArrayList<Connection>();
+    private Map<String, Connection> waitingConnection = new HashMap<>();
+    private Map<Connection, Connection> playingConnection = new HashMap<>();
+
+    //Register connection
+    private synchronized void registerConnection(Connection c){
+        connections.add(c);
     }
 
-    public void startServer() throws IOException{
-        //It creates threads when necessary, otherwise it re-uses existing one when possible
-        ExecutorService executor = Executors.newCachedThreadPool();
-        ServerSocket serverSocket;
-        try{
-            serverSocket = new ServerSocket(port);
-        }catch (IOException e){
-            System.err.println(e.getMessage()); //port not available
-            return;
+    //Deregister connection
+    public synchronized void deregisterConnection(Connection c){
+        connections.remove(c);
+        Connection opponent = playingConnection.get(c);
+        if(opponent != null){
+            opponent.closeConnection();
+            playingConnection.remove(c);
+            playingConnection.remove(opponent);
         }
-        System.out.println("Server ready");
-        while (true){
-            try{
+    }
+
+    public synchronized void lobby(Connection c, String name){
+        waitingConnection.put(name, c);
+        if(waitingConnection.size() == 2){
+            List<String> keys = new ArrayList<>(waitingConnection.keySet());
+            Connection c1 = waitingConnection.get(keys.get(0));
+            Connection c2 = waitingConnection.get(keys.get(1));
+            playingConnection.put(c1, c2);
+            playingConnection.put(c2, c1);
+            waitingConnection.clear();
+        }
+        if(waitingConnection.size() == 3){
+            List<String> keys = new ArrayList<>(waitingConnection.keySet());
+            Connection c1 = waitingConnection.get(keys.get(0));
+            Connection c2 = waitingConnection.get(keys.get(1));
+            Connection c3 = waitingConnection.get(keys.get(2));
+            playingConnection.put(c1, c2);
+            playingConnection.put(c1, c3);
+            playingConnection.put(c2, c3);
+            playingConnection.put(c2, c1);
+
+
+            waitingConnection.clear();
+        }
+
+
+    }
+
+
+
+    public Server() throws IOException {
+        this.serverSocket = new ServerSocket(PORT);
+    }
+
+    public void startServer(){
+        System.out.println("Server listening on port: " + PORT);
+        while(true){
+            try {
                 Socket socket = serverSocket.accept();
-                executor.submit(new ServerClientHandler(socket));
-            }catch(IOException e){
-                break; //In case the serverSocket gets closed
+                Connection connection = new Connection(socket, this);
+                registerConnection(connection);
+                executor.submit(connection);
+            } catch (IOException e){
+                System.err.println("Connection error!");
             }
         }
-        executor.shutdown();
-        serverSocket.close();
     }
 
 }
+
+
 
 
