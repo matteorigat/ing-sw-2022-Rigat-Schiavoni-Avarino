@@ -32,8 +32,8 @@ public class App
             System.out.println(s + "" + i);
         }
         */
-        Parameters.setParameters(2,false);
         Game controller = new Game();
+        controller.setParameters(2, true);
         controller.addPlayer("Gius");
         controller.addPlayer("Mef");
         //controller.addPlayer("Nico");

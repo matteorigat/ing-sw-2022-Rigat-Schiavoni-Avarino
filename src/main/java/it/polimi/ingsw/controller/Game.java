@@ -19,26 +19,14 @@ import java.util.ArrayList;
  */
 
 public class Game {
-    private final ArrayList<Player> players;
-    private final GameBoard gameBoard;
-
+    private ArrayList<Player> players;
+    private GameBoard gameBoard;
     private Player winner;
     private int currentPlayer;
     private GamePhase currentPhase;
     private Player[] playersTurnOrder;
     private int phaseCounter;
     private int playerPhaseCounter;
-
-
-    //Constructor Game creates a new Game instance
-    public Game() {
-        players = new ArrayList<>();
-        gameBoard = new GameBoard();
-        playersTurnOrder = new Player[Parameters.numPlayers]; //GIUS
-
-        phaseCounter = 0;
-        playerPhaseCounter = 0;
-    }
 
     //Gets the players of the match
     public ArrayList<Player> getPlayers() {
@@ -50,9 +38,24 @@ public class Game {
         return gameBoard;
     }
 
+    public void setParameters(int numPlayers, Boolean expertMode){
+        Parameters.setParameters(numPlayers, expertMode);
+        initGame();
+    }
+
+    //Constructor Game creates a new Game instance
+    private void initGame() {
+        this.players = new ArrayList<>();
+        this.gameBoard = new GameBoard();
+
+        this.playersTurnOrder = new Player[Parameters.numPlayers];
+        this.phaseCounter = 0;
+        this.playerPhaseCounter = 0;
+    }
+
     public int addPlayer(String nickname){
 
-        if(players.size() <= Parameters.numPlayers) {
+        if(players.size() < Parameters.numPlayers) {
             Player p = new Player(nickname, players.size());
             players.add(p);
             return players.size()-1;
@@ -157,7 +160,7 @@ public class Game {
                     break;
                 }
 
-            if(found == false) return -2; //non ha la carta, non ha senso proseguire, tocca ancora lui
+            if(found == false) return -1; //non ha la carta, non ha senso proseguire, tocca ancora lui
             if(phaseCounter < Parameters.numPlayers-1) {   //AGGIUNTA GIUS ALTRIMENTI SFORA LA DIMENSIONE DELL'ARRAY
                 currentPlayer = playersTurnOrder[phaseCounter + 1].getIndex();
 
@@ -172,9 +175,7 @@ public class Game {
             }
             return 1;
         }
-        else return -3;
-
-
+        else return -1;
     }
 
     private void orderPlayerActionPhase(){  // con algoritmo bubble sort
