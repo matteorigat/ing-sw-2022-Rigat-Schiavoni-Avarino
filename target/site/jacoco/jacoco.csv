@@ -2,7 +2,7 @@ GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_
 GC18,it.polimi.ingsw.model.enumeration,TowerColour,0,21,0,0,0,2,0,1,0,1
 GC18,it.polimi.ingsw.model.enumeration,GamePhase,0,39,0,0,0,2,0,1,0,1
 GC18,it.polimi.ingsw.model.enumeration,Colour,0,33,0,0,0,2,0,1,0,1
-GC18,it.polimi.ingsw.controller,Game,1465,452,266,50,260,84,157,28,18,9
+GC18,it.polimi.ingsw.controller,Game,745,1180,164,152,132,215,115,72,10,19
 GC18,it.polimi.ingsw.model,Parameters,3,30,0,2,1,14,1,3,1,2
 GC18,it.polimi.ingsw.view,View,3,0,0,0,1,0,1,0,1,0
 GC18,it.polimi.ingsw.view,LocalViewTest,524,0,60,0,107,0,35,0,3,0
@@ -24,14 +24,16 @@ GC18,it.polimi.ingsw.model.player,Student,0,9,0,0,0,4,0,2,0,2
 GC18,it.polimi.ingsw.exceptions,NotExistingPlayerException,3,0,0,0,1,0,1,0,1,0
 GC18,it.polimi.ingsw.exceptions,TooManyStudentsOnCloudException,0,3,0,0,0,1,0,1,0,1
 GC18,it.polimi.ingsw.exceptions,TooManyPlayersException,3,0,0,0,1,0,1,0,1,0
-GC18,it.polimi.ingsw.server,Server,42,0,0,0,18,0,2,0,2,0
+GC18,it.polimi.ingsw.server,Server,200,0,6,0,43,0,8,0,5,0
 GC18,it.polimi.ingsw.model.gameboard,Cloud,0,63,0,4,0,17,0,8,0,6
 GC18,it.polimi.ingsw.model.gameboard,Bag,0,51,0,4,0,14,0,6,0,4
 GC18,it.polimi.ingsw.model.gameboard,CharacterDeck,0,96,0,2,0,18,0,4,0,3
-GC18,it.polimi.ingsw.model.gameboard,Island,8,243,4,24,1,53,4,23,0,13
-GC18,it.polimi.ingsw.model.gameboard,GameBoard,1,215,1,17,1,46,1,22,0,14
+GC18,it.polimi.ingsw.model.gameboard,Island,8,243,3,25,1,53,3,24,0,13
+GC18,it.polimi.ingsw.model.gameboard,GameBoard,1,215,0,18,1,46,0,23,0,14
 GC18,it.polimi.ingsw,ServerClientHandler,49,0,2,0,18,0,3,0,2,0
-GC18,it.polimi.ingsw,App,30,0,0,0,10,0,2,0,2,0
-GC18,it.polimi.ingsw,ServerApp,17,0,0,0,7,0,2,0,2,0
+GC18,it.polimi.ingsw,Connection.new Runnable() {...},15,0,0,0,3,0,2,0,2,0
+GC18,it.polimi.ingsw,Connection,108,0,2,0,36,0,8,0,7,0
+GC18,it.polimi.ingsw,App,32,0,0,0,10,0,2,0,2,0
+GC18,it.polimi.ingsw,ServerApp,16,0,0,0,7,0,2,0,2,0
 GC18,it.polimi.ingsw,ClientApp,18,0,0,0,7,0,2,0,2,0
 GC18,it.polimi.ingsw.client,Client,65,0,0,0,22,0,2,0,2,0

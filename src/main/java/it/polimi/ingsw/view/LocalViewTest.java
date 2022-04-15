@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.enumeration.GamePhase;
 import it.polimi.ingsw.model.gameboard.Cloud;
 import it.polimi.ingsw.model.gameboard.GameBoard;
 import it.polimi.ingsw.model.gameboard.Island;
+import it.polimi.ingsw.model.gameboard.characters.CharacterCard;
 import it.polimi.ingsw.model.player.*;
 
 import java.util.ArrayList;
@@ -80,10 +81,20 @@ public class LocalViewTest {
                 for(AssistantCard card : p.getAssistantDeck()){
                     System.out.print(card.getValue() + " ");
                 }
+                if(Parameters.expertMode){
+                    System.out.print("\nCoins: " + p.getCoins());
+                }
                 System.out.println("\n");
             }
 
-            for(int i=0; i< Parameters.numPlayers; i++){
+            if(Parameters.expertMode){
+                ArrayList<CharacterCard> chtrs = (ArrayList<CharacterCard>) controller.getGameBoard().getThreeCharacterCards().clone();
+                for (CharacterCard c:  chtrs)
+                    System.out.println("CharacterCard | index: " + c.getIndex() + "\tCost: " + c.getCost());
+                System.out.print("\n");
+            }
+
+            for(int i=0; i<Parameters.numPlayers; i++){
                 System.out.print("Cloud index: " + i + " | ");
                 ArrayList<Cloud> clds = (ArrayList<Cloud>) controller.getGameBoard().getClouds().clone();
                 for (Student s:  clds.get(i).seeStudents()){
@@ -93,8 +104,12 @@ public class LocalViewTest {
             }
 
 
-
-            System.out.println("\nPHASE: " + GamePhase.values()[controller.getCurrentPhase()]);
+            if(Parameters.expertMode){
+                System.out.println("\nPHASE: " + GamePhase.values()[controller.getCurrentPhase()] + "... or write 'c' to play a character card");
+                boolean characterbool = false;
+            } else {
+                System.out.println("\nPHASE: " + GamePhase.values()[controller.getCurrentPhase()]);
+            }
             System.out.println("CURRENT PLAYER: " + controller.getCurrentPlayer() + " -> " + controller.getPlayers().get(controller.getCurrentPlayer()).getNickname());
             System.out.println("Students in the bag: " + controller.getGameBoard().getBag().getSize());
 
@@ -111,20 +126,19 @@ public class LocalViewTest {
                     case 0 : if(result!=1) {
                         System.out.print("Assistant card number: ");
                         choice = scanner.next();
-                        // System.out.println(result);
+                        if(Parameters.expertMode && choice.equals("c")) break;
                         int c = (int)choice.charAt(0) - 48;
                         if(choice.length() > 1)
                             c = c * 10 + (int)choice.charAt(1) - 48;
-                        //  System.out.println(ch + " " + b + " " +c);
                         result = controller.playAssistantCard(currentPlayer, c);
                         if(result == 1) resultbool = true;
                         break;
-                        //  System.out.println(result);
                     }
 
                     case 1 : if (result!=1){
                         System.out.print("Student color and eventually the Island index: ");
                         choice = scanner.next();
+                        if(Parameters.expertMode && choice.equals("c")) break;
                         int c = (int)choice.charAt(0) - 48;
                         if(choice.length() == 1)
                             result = controller.moveStudentToDiningRoom(currentPlayer, c);
@@ -141,6 +155,7 @@ public class LocalViewTest {
                     case 2 : if(result!=1) {
                         System.out.print("Mother nature movements: ");
                         choice = scanner.next();
+                        if(Parameters.expertMode && choice.equals("c")) break;
                         int c = (int)choice.charAt(0) - 48;
                         result = controller.moveMotherNature(currentPlayer, c);
                         if(result == 1) resultbool = true;
@@ -150,6 +165,7 @@ public class LocalViewTest {
                     case 3 : if(result!=1) {
                         System.out.print("Cloud index: ");
                         choice = scanner.next();
+                        if(Parameters.expertMode && choice.equals("c")) break;
                         int c = (int)choice.charAt(0) - 48;
                         result = controller.chooseCloud(currentPlayer,c);
                         if(result == 1) resultbool = true;
@@ -162,6 +178,88 @@ public class LocalViewTest {
                         return;
                     }
                 }
+
+                int c, color, island;
+                if(choice.equals("c")){
+                    System.out.print("Character card index: ");
+                    choice = scanner.next();
+                    c = (int)choice.charAt(0) - 48;
+                    if(choice.length() > 1)
+                        c = c * 10 + (int)choice.charAt(1) - 48;
+
+                    if(c == 1){
+                        System.out.print("Insert the student color and island index: ");
+                        choice = scanner.next();
+                        color = (int)choice.charAt(0) - 48;
+                        island = (int)choice.charAt(1) - 48;
+                        if(choice.length() > 1)
+                            island = island * 10 + (int)choice.charAt(2) - 48;
+                        result = controller.playCharacterCard1(currentPlayer, c, color, island);
+                        if(result == 1) resultbool = true;
+
+                    }/*else if(c == 2){
+                            result = controller.playCharacterCard2();
+                            if(result == 1) resultbool = true;
+
+                        }*/else if(c == 3){
+                        System.out.print("Insert the island index: ");
+                        choice = scanner.next();
+                        island = (int)choice.charAt(0) - 48;
+                        if(choice.length() > 1)
+                            island = island * 10 + (int)choice.charAt(1) - 48;
+                        result = controller.playCharacterCard3(currentPlayer, c, island);
+                        if(result == 1) resultbool = true;
+
+                    } else if(c == 4){
+                        result = controller.playCharacterCard4(currentPlayer, c);
+                        if(result == 1) resultbool = true;
+
+                    } else if(c == 5){
+                        System.out.print("Insert the island index: ");
+                        choice = scanner.next();
+                        island = (int)choice.charAt(0) - 48;
+                        if(choice.length() > 1)
+                            island = island * 10 + (int)choice.charAt(1) - 48;
+                        result = controller.playCharacterCard5(currentPlayer, c, island);
+                        if(result == 1) resultbool = true;
+
+                    } else if(c == 6){
+                        result = controller.playCharacterCard6(currentPlayer, c);
+                        if(result == 1) resultbool = true;
+
+                    }/*else if(c == 7){
+                            result = controller.playCharacterCard7();
+                            if(result == 1) resultbool = true;
+
+                        }*/else if(c == 8){
+                        result = controller.playCharacterCard8(currentPlayer, c);
+                        if(result == 1) resultbool = true;
+
+                    }/*else if(c == 9){
+                            result = controller.playCharacterCard9();
+                            if(result == 1) resultbool = true;
+
+                        } else if(c == 10){
+                            result = controller.playCharacterCard10();
+                            if(result == 1) resultbool = true;
+
+                        }*/else if(c == 11){
+                        System.out.print("Insert the student color: ");
+                        choice = scanner.next();
+                        color = (int)choice.charAt(0) - 48;
+                        result = controller.playCharacterCard11(currentPlayer, c, color);
+                        if(result == 1) resultbool = true;
+
+                    } else if(c == 12){
+                        System.out.print("Insert the student color: ");
+                        choice = scanner.next();
+                        color = (int)choice.charAt(0) - 48;
+                        result = controller.playCharacterCard12(currentPlayer, c, color);
+                        if(result == 1) resultbool = true;
+
+                    }
+                }
+
                 if(result!=1)
                     System.out.println("Wrong! Retry!");
             }
