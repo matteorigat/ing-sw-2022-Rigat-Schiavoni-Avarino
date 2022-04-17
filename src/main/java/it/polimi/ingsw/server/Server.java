@@ -25,6 +25,10 @@ public class Server {
     private Map<String, Connection> waitingConnection = new HashMap<>();
     private Map<Connection, Connection> playingConnection = new HashMap<>();
 
+    private Map<Integer,Boolean>gameSettings = new HashMap<>();
+
+
+
     //Register connection
     private synchronized void registerConnection(Connection c){
         connections.add(c);
@@ -41,8 +45,17 @@ public class Server {
         }
     }
 
-    public synchronized void lobby(Connection c, String name){
+
+    //lobby da capire come gestirla, il primo player decide la modalità e il num di giocatori?
+    public synchronized void lobby(Connection c, String name,int numOfPlayers,Boolean gameMode){
+
+
+
         waitingConnection.put(name, c);
+
+
+
+
         if(waitingConnection.size() == 2){
             List<String> keys = new ArrayList<>(waitingConnection.keySet());
             Connection c1 = waitingConnection.get(keys.get(0));
@@ -70,12 +83,15 @@ public class Server {
 
 
 
+
     public Server() throws IOException {
         this.serverSocket = new ServerSocket(PORT);
     }
 
     public void startServer(){
         System.out.println("Server listening on port: " + PORT);
+
+
         while(true){
             try {
                 Socket socket = serverSocket.accept();
@@ -87,6 +103,15 @@ public class Server {
             }
         }
     }
+
+
+
+
+
+
+
+
+
 
 }
 

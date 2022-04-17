@@ -17,6 +17,8 @@ public class Connection implements Runnable {
         private PrintWriter out;
         private Server server;
         private String name;
+        private int numOfPlayers;
+        private Boolean gameMode;
         private boolean active = true;
 
         public Connection(Socket socket, Server server) {
@@ -66,8 +68,17 @@ public class Connection implements Runnable {
                 out = new PrintWriter(socket.getOutputStream());
                 send("Welcome! What's your name?");
                 name = in.nextLine();
-                server.lobby(this, name);
+                System.out.println("[1] nome ricevuto: "+ name);
+                send("select how many players");
+                numOfPlayers = in.nextInt();
+                System.out.println("[2] numero di giocatori ricevuto: " + numOfPlayers);
+                gameMode = true;
+
+
+
+                server.lobby(this, name, numOfPlayers,gameMode);
                 while (isActive()) {
+
                     String read = in.nextLine();
 
                 }
