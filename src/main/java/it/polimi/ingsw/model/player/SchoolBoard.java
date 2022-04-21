@@ -12,12 +12,14 @@ public class SchoolBoard {
     private DiningRoom diningRoom;
     private ArrayList<Professor> professors;
     private ArrayList<Tower> towers;
+    private TowerColour towerColor;
 
     public SchoolBoard(TowerColour towerColour) {
         this.studentsEntrance = new ArrayList<>();
         this.diningRoom = new DiningRoom();
         this.professors = new ArrayList<>(0);
         this.towers = new ArrayList<>(Parameters.numTowers);
+        this.towerColor = towerColour;
 
         for (int i=0; i<Parameters.numTowers; i++) {
             Tower t = new Tower(towerColour);
@@ -34,7 +36,7 @@ public class SchoolBoard {
     }
 
     public TowerColour getTowerColor() {
-       return towers.get(0).getTowerColor();
+       return towerColor;
     }
 
     public void addTower(TowerColour towerColour){

@@ -50,7 +50,7 @@ public class GameTest {
         assertEquals(-1, game.moveMotherNature(0, 2));
         assertEquals(-1, game.moveMotherNature(1, 5));
         game.moveMotherNature(1, 3);
-        assertEquals((mn + 3)%Parameters.numIslands, game.getGameBoard().getMotherNature());
+        assertEquals((mn + 3)%game.getGameBoard().getIslands().size(), game.getGameBoard().getMotherNature());
 
         assertEquals(3, game.getCurrentPhase());
         assertEquals(-1, game.chooseCloud(0, 0));
@@ -76,7 +76,6 @@ public class GameTest {
         assertEquals(-1, game.moveMotherNature(1, 2));
         assertEquals(-1, game.moveMotherNature(0, 7));
         game.moveMotherNature(0, 1);
-        assertEquals((mn + 1)%Parameters.numIslands, game.getGameBoard().getMotherNature());
 
         assertEquals(3, game.getCurrentPhase());
         assertEquals(-1, game.chooseCloud(1, 1));

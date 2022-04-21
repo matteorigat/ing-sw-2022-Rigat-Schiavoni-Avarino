@@ -30,4 +30,11 @@ public class Character5 implements CharacterCard{
     public int getCost() {
         return cost;
     }
+
+    @Override
+    public String toString() {
+        return  "index: " + index +
+                "\tcost: " + cost +
+                "\t\tnoEntry: " + noEntry;
+    }
 }

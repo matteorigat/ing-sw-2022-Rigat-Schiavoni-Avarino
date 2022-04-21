@@ -73,7 +73,7 @@ public class LocalViewTest {
                 System.out.print("\nDINING ROOM: ");
                 DiningRoom dr = sb.getDiningRoom();
                 System.out.print("Green: " + dr.numOfStudentByColor(Colour.Green) + " | ");
-                System.out.print("Red: " + dr.numOfStudentByColor(Colour.Red) + " | ");
+                System.out.print("Red:  " + dr.numOfStudentByColor(Colour.Red) + " | ");
                 System.out.print("Yellow: " + dr.numOfStudentByColor(Colour.Yellow) + " | ");
                 System.out.print("Pink: " + dr.numOfStudentByColor(Colour.Pink) + " | ");
                 System.out.println("Blue: " + dr.numOfStudentByColor(Colour.Blue));
@@ -90,7 +90,7 @@ public class LocalViewTest {
             if(Parameters.expertMode){
                 ArrayList<CharacterCard> chtrs = (ArrayList<CharacterCard>) controller.getGameBoard().getThreeCharacterCards().clone();
                 for (CharacterCard c:  chtrs)
-                    System.out.println("CharacterCard | index: " + c.getIndex() + "\tCost: " + c.getCost());
+                    System.out.println("CharacterCard | " + c.toString());
                 System.out.print("\n");
             }
 
@@ -144,7 +144,7 @@ public class LocalViewTest {
                             result = controller.moveStudentToDiningRoom(currentPlayer, c);
                         else if(choice.length() > 1){
                             int d = (int)choice.charAt(1) - 48;
-                            if(choice.length() >= 3)
+                            if(choice.length() > 2)
                                 d = d * 10 + (int)choice.charAt(2) - 48;
                             result = controller.moveStudentToIsland(currentPlayer, c, d);
                         }
@@ -192,7 +192,7 @@ public class LocalViewTest {
                         choice = scanner.next();
                         color = (int)choice.charAt(0) - 48;
                         island = (int)choice.charAt(1) - 48;
-                        if(choice.length() > 1)
+                        if(choice.length() > 2)
                             island = island * 10 + (int)choice.charAt(2) - 48;
                         result = controller.playCharacterCard1(currentPlayer, c, color, island);
                         if(result == 1) resultbool = true;

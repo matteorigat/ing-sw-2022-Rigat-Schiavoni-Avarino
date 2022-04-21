@@ -67,10 +67,6 @@ public class Game {
     }
 
     public void init(){   //sto seguendo l'inizializzazione della partita
-        if(Parameters.expertMode){
-            gameBoard.chooseThreeCards();
-        }
-
         double casual = Math.random()*12; //(PUNTO 2)
         int mn = (int) casual;
 
@@ -102,6 +98,10 @@ public class Game {
         for (Player p: players){
             for (int i=0; i<Parameters.entranceStudents; i++)
                 p.getPlayerSchoolBoard().getStudentsEntrance().add(gameBoard.getBag().draw());
+        }
+
+        if(Parameters.expertMode){
+            gameBoard.chooseThreeCards();
         }
 
         currentPlayer = 0;
@@ -492,8 +492,9 @@ public class Game {
         if(playerIndex == currentPlayer){
             for (CharacterCard c: gameBoard.getThreeCharacterCards()){
                 if(cardIndex == c.getIndex() && players.get(playerIndex).getCoins() >= c.getCost() && ((Character1) c).checkColorExists(colorIndex)){
-                    c.play();
+                    players.get(playerIndex).removeCoin(c.getCost());
                     gameBoard.addCoinsToGeneralReserve(c.getCost() - 1); //meno uno perchè una va sulla carta
+                    c.play();
 
                     gameBoard.addStudentOnIsland(islandIndex, ((Character1) c).getStudent(colorIndex));
                     ((Character1) c).addStudent(gameBoard.getBag().draw());
@@ -509,8 +510,9 @@ public class Game {
         if(playerIndex == currentPlayer){
             for (CharacterCard c: gameBoard.getThreeCharacterCards()){
                 if(cardIndex == c.getIndex() && players.get(playerIndex).getCoins() >= c.getCost()){
+                    players.get(playerIndex).removeCoin(c.getCost());
+                    gameBoard.addCoinsToGeneralReserve(c.getCost() - 1);
                     c.play();
-                    gameBoard.addCoinsToGeneralReserve(c.getCost() - 1); //meno uno perchè una va sulla carta
 
                     ((Character3) c).enableEffect();
                     checkIslandInfluence(islandIndex, playerIndex);
@@ -527,8 +529,9 @@ public class Game {
         if(playerIndex == currentPlayer && currentPhase.ordinal() <= GamePhase.MoveMotherNature.ordinal()){
             for (CharacterCard c: gameBoard.getThreeCharacterCards()){
                 if(cardIndex == c.getIndex() && players.get(playerIndex).getCoins() >= c.getCost()){
+                    players.get(playerIndex).removeCoin(c.getCost());
+                    gameBoard.addCoinsToGeneralReserve(c.getCost() - 1);
                     c.play();
-                    gameBoard.addCoinsToGeneralReserve(c.getCost() - 1); //meno uno perchè una va sulla carta
 
                     ((Character4) c).enableEffect();
                     return 1;
@@ -543,8 +546,9 @@ public class Game {
         if(playerIndex == currentPlayer){
             for (CharacterCard c: gameBoard.getThreeCharacterCards()){
                 if(cardIndex == c.getIndex() && players.get(playerIndex).getCoins() >= c.getCost()){
+                    players.get(playerIndex).removeCoin(c.getCost());
+                    gameBoard.addCoinsToGeneralReserve(c.getCost() - 1);
                     c.play();
-                    gameBoard.addCoinsToGeneralReserve(c.getCost() - 1); //meno uno perchè una va sulla carta
 
                     gameBoard.getIslands().get(islandIndex).addNoEntry();
                     return 1;
@@ -559,8 +563,9 @@ public class Game {
         if(playerIndex == currentPlayer && currentPhase.ordinal() <= GamePhase.MoveStudents.ordinal()){
             for (CharacterCard c: gameBoard.getThreeCharacterCards()){
                 if(cardIndex == c.getIndex() && players.get(playerIndex).getCoins() >= c.getCost()){
+                    players.get(playerIndex).removeCoin(c.getCost());
+                    gameBoard.addCoinsToGeneralReserve(c.getCost() - 1);
                     c.play();
-                    gameBoard.addCoinsToGeneralReserve(c.getCost() - 1); //meno uno perchè una va sulla carta
 
                     ((Character6) c).enableEffect();
                     return 1;
@@ -575,8 +580,9 @@ public class Game {
         if(playerIndex == currentPlayer && currentPhase.ordinal() <= GamePhase.MoveStudents.ordinal()){
             for (CharacterCard c: gameBoard.getThreeCharacterCards()){
                 if(cardIndex == c.getIndex() && players.get(playerIndex).getCoins() >= c.getCost()){
+                    players.get(playerIndex).removeCoin(c.getCost());
+                    gameBoard.addCoinsToGeneralReserve(c.getCost() - 1);
                     c.play();
-                    gameBoard.addCoinsToGeneralReserve(c.getCost() - 1); //meno uno perchè una va sulla carta
 
                     ((Character8) c).enableEffect();
                     return 1;
@@ -591,8 +597,9 @@ public class Game {
         if(playerIndex == currentPlayer){
             for (CharacterCard c: gameBoard.getThreeCharacterCards()){
                 if(cardIndex == c.getIndex() && players.get(playerIndex).getCoins() >= c.getCost() && ((Character11) c).checkColorExists(colorIndex)){
+                    players.get(playerIndex).removeCoin(c.getCost());
+                    gameBoard.addCoinsToGeneralReserve(c.getCost() - 1);
                     c.play();
-                    gameBoard.addCoinsToGeneralReserve(c.getCost() - 1); //meno uno perchè una va sulla carta
 
                     players.get(playerIndex).getPlayerSchoolBoard().getDiningRoom().addStudent(((Character11) c).getStudent(colorIndex));
                     ((Character11) c).addStudent(gameBoard.getBag().draw());
@@ -608,8 +615,9 @@ public class Game {
         if(playerIndex == currentPlayer){
             for (CharacterCard c: gameBoard.getThreeCharacterCards()){
                 if(cardIndex == c.getIndex() && players.get(playerIndex).getCoins() >= c.getCost()){
+                    players.get(playerIndex).removeCoin(c.getCost());
+                    gameBoard.addCoinsToGeneralReserve(c.getCost() - 1);
                     c.play();
-                    gameBoard.addCoinsToGeneralReserve(c.getCost() - 1); //meno uno perchè una va sulla carta
 
                     for (Player p: players)
                             gameBoard.getBag().fill(p.getPlayerSchoolBoard().getDiningRoom().removeThreeStudents(Colour.values()[colorIndex]));
