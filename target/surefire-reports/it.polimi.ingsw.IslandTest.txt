@@ -1,8 +1,0 @@
--------------------------------------------------------------------------------
-Test set: it.polimi.ingsw.IslandTest
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.012 s <<< FAILURE! - in it.polimi.ingsw.IslandTest
-IslandMethodsTest  Time elapsed: 0.011 s  <<< ERROR!
-java.lang.ArrayIndexOutOfBoundsException: Index -1 out of bounds for length 3
-	at it.polimi.ingsw.IslandTest.IslandMethodsTest(IslandTest.java:18)
-

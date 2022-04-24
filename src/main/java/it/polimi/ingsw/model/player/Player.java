@@ -67,6 +67,10 @@ public class Player {
         coins++;
     }
 
+    public void removeCoin(int cost){
+        coins -= cost;
+    }
+
     public int getCoins() {
         return coins;
     }

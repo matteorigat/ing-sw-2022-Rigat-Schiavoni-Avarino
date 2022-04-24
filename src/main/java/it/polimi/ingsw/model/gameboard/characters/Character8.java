@@ -37,4 +37,11 @@ public class Character8 implements CharacterCard{
     public int getCost() {
         return cost;
     }
+
+    @Override
+    public String toString() {
+        return  "index: " + index +
+                "\tcost: " + cost +
+                "\t\teffectFlag: " + effectFlag;
+    }
 }

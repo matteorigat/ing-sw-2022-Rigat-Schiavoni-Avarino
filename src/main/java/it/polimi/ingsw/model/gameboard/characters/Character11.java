@@ -20,11 +20,13 @@ public class Character11 implements CharacterCard{
     public Student getStudent(int colorIndex) {
         Student stud = null;
         for (Student s: students)
-            if(s.getColour().equals(Colour.values()[colorIndex]))
+            if(s.getColour().equals(Colour.values()[colorIndex])){
                 stud = s;
+                students.remove(s);
+                return stud;
+            }
 
-        students.remove(stud);
-        return stud; //non dovrebbe mai succedere
+        return null; //non dovrebbe mai succedere
     }
 
     public boolean checkColorExists(int colorIndex){
@@ -52,5 +54,12 @@ public class Character11 implements CharacterCard{
     @Override
     public int getCost() {
         return cost;
+    }
+
+    @Override
+    public String toString() {
+        return  "index: " + index +
+                "\tcost: " + cost +
+                "\t\tstudents: " + students;
     }
 }

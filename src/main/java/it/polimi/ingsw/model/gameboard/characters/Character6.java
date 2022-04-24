@@ -38,4 +38,10 @@ public class Character6 implements CharacterCard{
         return cost;
     }
 
+    @Override
+    public String toString() {
+        return  "index: " + index +
+                "\tcost: " + cost +
+                "\t\teffectFlag: " + effectFlag;
+    }
 }
