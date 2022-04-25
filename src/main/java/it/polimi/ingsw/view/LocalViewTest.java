@@ -4,6 +4,7 @@ import it.polimi.ingsw.controller.Game;
 import it.polimi.ingsw.model.Parameters;
 import it.polimi.ingsw.model.enumeration.Colour;
 import it.polimi.ingsw.model.enumeration.GamePhase;
+import it.polimi.ingsw.model.enumeration.TowerColour;
 import it.polimi.ingsw.model.gameboard.Cloud;
 import it.polimi.ingsw.model.gameboard.GameBoard;
 import it.polimi.ingsw.model.gameboard.Island;
@@ -29,42 +30,36 @@ public class LocalViewTest {
     }
 
     public void start() {
+
+        System.out.println("\n███████╗██████╗░██╗░█████╗░███╗░░██╗████████╗██╗░░░██╗░██████╗");
+        System.out.println("██╔════╝██╔══██╗██║██╔══██╗████╗░██║╚══██╔══╝╚██╗░██╔╝██╔════╝");
+        System.out.println("█████╗░░██████╔╝██║███████║██╔██╗██║░░░██║░░░░╚████╔╝░╚█████╗░");
+        System.out.println("██╔══╝░░██╔══██╗██║██╔══██║██║╚████║░░░██║░░░░░╚██╔╝░░░╚═══██╗");
+        System.out.println("███████╗██║░░██║██║██║░░██║██║░╚███║░░░██║░░░░░░██║░░░██████╔╝");
+        System.out.println("╚══════╝╚═╝░░╚═╝╚═╝╚═╝░░╚═╝╚═╝░░╚══╝░░░╚═╝░░░░░░╚═╝░░░╚═════╝░");
+
         while(true){
-            System.out.println("\n--------------------------------------------------------------------------------------------------------------");
+            System.out.println("\n-------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
             GameBoard gb = controller.getGameBoard();
             System.out.println("");
 
             for(Island i : gb.getIslands()){
                 boolean bool = false;
                 if(i.getIslandIndex() == gb.getMotherNature() && i.getIslandIndex() < 10){
-                    System.out.print("Island: " + gb.getIslands().indexOf(i) + " \033[5;31m  M \033[0m  |\t");
+                    System.out.print("Island: " + gb.getIslands().indexOf(i) + "\033[5;31m   M \033[0m |\t");
                 } else if(i.getIslandIndex() == gb.getMotherNature()){
-                    System.out.print("Island: " + gb.getIslands().indexOf(i) + " \033[5;31m  M \033[0m  |\t");
-                } else
-                    System.out.print("Island: " + gb.getIslands().indexOf(i) + "\t |\t");
+                    System.out.print("Island: " + gb.getIslands().indexOf(i) + "\033[5;31m  M\033[0m  |\t");
+                } else if(i.getNoEntry() != 0){
+                    System.out.print("Island: " + gb.getIslands().indexOf(i) + "\033[5;31m   " + i.getNoEntry() + " \033[0m |\t");
+                }else
+                    System.out.print("Island: " + gb.getIslands().indexOf(i) + "\t   |\t");
 
-                System.out.print("Towers: " + i.getNumTower() + "\t|\t");
-                System.out.print("Colour: " + i.getTowerColor() + "\t|\t");
+                System.out.print("Towers: "+ textTower(i.getNumTower(), i.getTowerColor()) + "\t|\t");
 
                 for(Student s : i.getStudents()) {
-                    int colour = s.getColour().ordinal();
-                    String str = "";
-                    switch(colour) {
-                        case (0) : { str = "\033[38;2;31;224;44m"; break;}
-                        case (1) : {str = "\033[31m"; break;}
-                        case (2) : {str = "\033[93m"; break;}
-                        case (3) : {str = "\033[38;2;249;177;250m"; break;}
-                        case (4) : {str = "\033[95m"; break;}
-
-                    }
-                            System.out.print(str + s.getColour() + "\033[0m" + " 🟢");
-
+                    System.out.print(textColor(s.getColour()) + " ");
                     bool = true;
                 }
-                if(bool == false)
-                    System.out.print("\t\t|");
-                else
-                    System.out.print("\t|");
 
                 System.out.println("\n");
             }
@@ -75,20 +70,20 @@ public class LocalViewTest {
                 SchoolBoard sb = p.getPlayerSchoolBoard();
                 System.out.print("ENTRANCE: ");
                 for(Student t: sb.getStudentsEntrance()){
-                    System.out.print(t.getColour() + " ");
-                }
-                System.out.print("\nPROFESSORS: ");
-                for(Professor pr: sb.getProfessors()){
-                    System.out.print(pr.getProfessorColour() + " ");
+                    System.out.print(textColor(t.getColour())+ " ");
                 }
                 System.out.print("\nDINING ROOM: ");
                 DiningRoom dr = sb.getDiningRoom();
-                System.out.print("Green: " + dr.numOfStudentByColor(Colour.Green) + " | ");
-                System.out.print("Red: " + dr.numOfStudentByColor(Colour.Red) + " | ");
-                System.out.print("Yellow: " + dr.numOfStudentByColor(Colour.Yellow) + " | ");
-                System.out.print("Pink: " + dr.numOfStudentByColor(Colour.Pink) + " | ");
-                System.out.println("Blue: " + dr.numOfStudentByColor(Colour.Blue));
-                System.out.print("DECK: ");
+                System.out.print("\033[38;2;31;224;44mGreen\033[0m: " + dr.numOfStudentByColor(Colour.Green) + " | ");
+                System.out.print("\033[31mRed\033[0m: " + dr.numOfStudentByColor(Colour.Red) + " | ");
+                System.out.print("\033[93mYellow\033[0m: " + dr.numOfStudentByColor(Colour.Yellow) + " | ");
+                System.out.print("\033[38;2;249;177;250mPink\033[0m: " + dr.numOfStudentByColor(Colour.Pink) + " | ");
+                System.out.println("\033[38;2;85;99;250mBlue\033[0m: " + dr.numOfStudentByColor(Colour.Blue));
+                System.out.print("PROFESSORS: ");
+                for(Professor pr: sb.getProfessors()){
+                    System.out.print(textColor(pr.getProfessorColour()) + " ");
+                }
+                System.out.print("\nDECK: ");
                 for(AssistantCard card : p.getAssistantDeck()){
                     System.out.print(card.getValue() + " ");
                 }
@@ -109,7 +104,7 @@ public class LocalViewTest {
                 System.out.print("Cloud index: " + i + " | ");
                 ArrayList<Cloud> clds = (ArrayList<Cloud>) controller.getGameBoard().getClouds().clone();
                 for (Student s:  clds.get(i).seeStudents()){
-                    System.out.print(s.getColour() + " ");
+                    System.out.print(textColor(s.getColour()) + " ");
                 }
                 System.out.print("\n");
             }
@@ -275,6 +270,33 @@ public class LocalViewTest {
                     System.out.println("Wrong! Retry!");
             }
         }
+    }
+
+    private String textColor(Colour colour){
+        int colorInt = colour.ordinal();
+        switch(colorInt) {
+            case (0) : return "🟢"; //""\033[38;2;31;224;44mGreen\033[0m";
+            case (1) : return "🔴"; //"\033[31mRed\033[0m";
+            case (2) : return "🟡"; //"\033[93mYellow\033[0m";
+            case (3) : return "🟣"; //"\033[38;2;249;177;250mPink\033[0m";
+            case (4) : return "🔵"; //"\033[38;2;85;99;250mBlue\033[0m";
+
+        }
+       return null;
+    }
+
+    private String textTower(int n, TowerColour colour){
+        String s = "";
+        for(int i = 0; i<n; i++)
+            if(colour.equals(TowerColour.White)){
+                s = s + "🤍 ";
+            } else if(colour.equals(TowerColour.Black)){
+                s = s + "🖤 ";
+            } else if(colour.equals(TowerColour.Grey)){
+                s = s + "🤎 ";
+            }
+
+        return s;
     }
 }
 

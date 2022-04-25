@@ -99,8 +99,12 @@ public class GameBoard {
 
     }
 
-    public void getOneCoin(){
-        this.generalReserve--;
+    public boolean getOneCoin(){
+        if(this.generalReserve > 0){
+            this.generalReserve--;
+            return true;
+        } else
+            return false;
     }
 
     public int getGeneralReserve() {

@@ -20,7 +20,7 @@ public class Player {
         this.playerSchoolBoard = new SchoolBoard(TowerColour.values()[(index)]);
         this.assistantDeck = new ArrayList<>();
         this.index = index;
-        this.coins = 1;
+        this.coins = 500;
 
 
         assistantDeck.add(new AssistantCard(1,1));
