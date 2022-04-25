@@ -163,12 +163,12 @@ public class GameTest {
                  assertEquals(1, game.playCharacterCard6(0,6));
                  assertTrue(((Character6) c).isEffectFlag());
                 //come lo testo senza cabiare metà codice? si fa prima a testare dalla view
-            } else if(c.getIndex() == 8){
+            }/* else if(c.getIndex() == 8){
                 assertFalse(((Character8) c).isEffectFlag());
-                assertEquals(1, game.playCharacterCard6(0,6));
+                //assertEquals(1, game.playCharacterCard6(0,6));
                 assertTrue(((Character8) c).isEffectFlag());
                 //come lo testo senza cabiare metà codice? si fa prima a testare dalla view
-            }
+            }*/
         }
 
     }

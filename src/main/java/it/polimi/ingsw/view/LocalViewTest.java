@@ -73,7 +73,7 @@ public class LocalViewTest {
                 System.out.print("\nDINING ROOM: ");
                 DiningRoom dr = sb.getDiningRoom();
                 System.out.print("Green: " + dr.numOfStudentByColor(Colour.Green) + " | ");
-                System.out.print("Red:  " + dr.numOfStudentByColor(Colour.Red) + " | ");
+                System.out.print("Red: " + dr.numOfStudentByColor(Colour.Red) + " | ");
                 System.out.print("Yellow: " + dr.numOfStudentByColor(Colour.Yellow) + " | ");
                 System.out.print("Pink: " + dr.numOfStudentByColor(Colour.Pink) + " | ");
                 System.out.println("Blue: " + dr.numOfStudentByColor(Colour.Blue));
@@ -82,7 +82,7 @@ public class LocalViewTest {
                     System.out.print(card.getValue() + " ");
                 }
                 if(Parameters.expertMode){
-                    System.out.print("\nCoins: " + p.getCoins());
+                    System.out.print("\nCOINS: " + p.getCoins());
                 }
                 System.out.println("\n");
             }
