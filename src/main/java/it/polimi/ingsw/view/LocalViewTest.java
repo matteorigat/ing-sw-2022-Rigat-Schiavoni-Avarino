@@ -43,7 +43,7 @@ public class LocalViewTest {
                 } else
                     System.out.print("Island: " + gb.getIslands().indexOf(i) + "\t |\t");
 
-                System.out.print("🍄Towers: " + i.getNumTower() + "\t|\t");
+                System.out.print("Towers: " + i.getNumTower() + "\t|\t");
                 System.out.print("Colour: " + i.getTowerColor() + "\t|\t");
 
                 for(Student s : i.getStudents()) {
@@ -57,7 +57,7 @@ public class LocalViewTest {
                         case (4) : {str = "\033[95m"; break;}
 
                     }
-                            System.out.print(str + s.getColour() + "\033[0m" + " ");
+                            System.out.print(str + s.getColour() + "\033[0m" + " 🟢");
 
                     bool = true;
                 }
