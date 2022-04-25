@@ -37,9 +37,9 @@ public class LocalViewTest {
             for(Island i : gb.getIslands()){
                 boolean bool = false;
                 if(i.getIslandIndex() == gb.getMotherNature() && i.getIslandIndex() < 10){
-                    System.out.print("Island: " + gb.getIslands().indexOf(i) + "  M |\t");
+                    System.out.print("Island: " + gb.getIslands().indexOf(i) + " \033[5;31m  M \033[0m  |\t");
                 } else if(i.getIslandIndex() == gb.getMotherNature()){
-                    System.out.print("Island: " + gb.getIslands().indexOf(i) + " M |\t");
+                    System.out.print("Island: " + gb.getIslands().indexOf(i) + " \033[5;31m  M \033[0m  |\t");
                 } else
                     System.out.print("Island: " + gb.getIslands().indexOf(i) + "\t |\t");
 
@@ -47,7 +47,18 @@ public class LocalViewTest {
                 System.out.print("Colour: " + i.getTowerColor() + "\t|\t");
 
                 for(Student s : i.getStudents()) {
-                    System.out.print(s.getColour() + " ");
+                    int colour = s.getColour().ordinal();
+                    String str = "";
+                    switch(colour) {
+                        case (0) : { str = "\033[38;2;31;224;44m"; break;}
+                        case (1) : {str = "\033[31m"; break;}
+                        case (2) : {str = "\033[93m"; break;}
+                        case (3) : {str = "\033[38;2;249;177;250m"; break;}
+                        case (4) : {str = "\033[95m"; break;}
+
+                    }
+                            System.out.print(str + s.getColour() + "\033[0m" + " ");
+
                     bool = true;
                 }
                 if(bool == false)
@@ -73,7 +84,7 @@ public class LocalViewTest {
                 System.out.print("\nDINING ROOM: ");
                 DiningRoom dr = sb.getDiningRoom();
                 System.out.print("Green: " + dr.numOfStudentByColor(Colour.Green) + " | ");
-                System.out.print("Red:  " + dr.numOfStudentByColor(Colour.Red) + " | ");
+                System.out.print("Red: " + dr.numOfStudentByColor(Colour.Red) + " | ");
                 System.out.print("Yellow: " + dr.numOfStudentByColor(Colour.Yellow) + " | ");
                 System.out.print("Pink: " + dr.numOfStudentByColor(Colour.Pink) + " | ");
                 System.out.println("Blue: " + dr.numOfStudentByColor(Colour.Blue));
@@ -82,7 +93,7 @@ public class LocalViewTest {
                     System.out.print(card.getValue() + " ");
                 }
                 if(Parameters.expertMode){
-                    System.out.print("\nCoins: " + p.getCoins());
+                    System.out.print("\nCOINS: " + p.getCoins());
                 }
                 System.out.println("\n");
             }
