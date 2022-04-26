@@ -17,7 +17,7 @@ public class SchoolBoardTest {
     public void SchoolBoardInitTest(){
         Parameters.setParameters(2, true);
         SchoolBoard sb = new SchoolBoard(TowerColour.Black);
-        Island isl = new Island(0);
+        Island isl = new Island();
 
         assertEquals(TowerColour.Black, sb.getTowerColor());
 

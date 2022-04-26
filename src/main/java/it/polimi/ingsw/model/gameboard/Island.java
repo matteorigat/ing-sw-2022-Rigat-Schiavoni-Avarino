@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Island {
    // private int islandRank;    //numero di isole unite
-    private int islandIndex;
+    //private int islandIndex;
     private int numTower;
     private TowerColour towerColor;
     private ArrayList<Student> students;
@@ -18,9 +18,9 @@ public class Island {
     private int noEntry; //int perchè ne puoi mettere più di uno
 
 
-    public Island(int index){
+    public Island(){
         this.students = new ArrayList<Student>(0);
-        this.islandIndex = index;
+        //this.islandIndex = index;
         this.numTower = 0;
         //this.islandRank = 1;
         this.towerColor = null;
@@ -103,9 +103,9 @@ public class Island {
         return islandRank;
     } */
 
-    public int getIslandIndex() {
+   /* public int getIslandIndex() {
         return islandIndex;
-    }
+    } */
 
     public ArrayList<Student> getStudents() {
         return students;
