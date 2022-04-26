@@ -5,6 +5,8 @@ public class Character3 implements CharacterCard{
     private int cost;
     private boolean effectFlag;
 
+    private static final String Description = "Scegli un'isola e calcola l'influenza come se MN avesse terminato lì";
+
     public Character3() {
         this.index = 3;
         this.cost = 3;
@@ -42,6 +44,6 @@ public class Character3 implements CharacterCard{
     public String toString() {
         return  "index: " + index +
                 "\tcost: " + cost +
-                "\t\teffectFlag: " + effectFlag;
+                "\t\teffectFlag: " + effectFlag +  "\t\t" +Description;
     }
 }

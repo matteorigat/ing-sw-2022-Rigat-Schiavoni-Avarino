@@ -5,6 +5,8 @@ public class Character4 implements CharacterCard{
     private int cost;
     private boolean effectFlag;
 
+    private static final String Description = "Puoi muovere MN fino a 2 isole addizionali";
+
     public Character4(){
         this.index = 4;
         this.cost = 1;
@@ -42,6 +44,6 @@ public class Character4 implements CharacterCard{
     public String toString() {
         return  "index: " + index +
                 "\tcost: " + cost +
-                "\t\teffectFlag: " + effectFlag;
+                "\t\teffectFlag: " + effectFlag +  "\t\t" +Description;
     }
 }

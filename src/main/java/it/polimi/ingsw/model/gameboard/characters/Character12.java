@@ -4,6 +4,8 @@ public class Character12 implements CharacterCard{
     private int index;
     private int cost;
 
+    private static final String Description = "Scegli un colore, tutti i giocatori devono mettere 3 studenti di quel colore dalla sala al sacchetto";
+
     public Character12() {
         this.index = 12;
         this.cost = 3;
@@ -27,6 +29,6 @@ public class Character12 implements CharacterCard{
     @Override
     public String toString() {
         return  "index: " + index +
-                "\tcost: " + cost;
+                "\tcost: " + cost +  "\t\t" +Description;
     }
 }
