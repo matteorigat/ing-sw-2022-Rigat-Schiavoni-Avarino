@@ -115,6 +115,8 @@ public class LocalViewTest {
             }
             System.out.println("CURRENT PLAYER: " + controller.getCurrentPlayer() + " -> " + controller.getPlayers().get(controller.getCurrentPlayer()).getNickname());
             System.out.println("Students in the bag: " + controller.getGameBoard().getBag().getSize());
+            System.out.println("Mn on: " + controller.getGameBoard().getMotherNature());
+
 
             int result = -2;
             boolean resultbool = false;
