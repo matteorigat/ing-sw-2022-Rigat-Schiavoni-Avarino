@@ -684,6 +684,37 @@ public class Game {
                     for (Player p: players)
                             gameBoard.getBag().fill(p.getPlayerSchoolBoard().getDiningRoom().removeThreeStudents(Colour.values()[colorIndex]));
 
+                    //controllo chi possiede il professore ora
+
+                    Player oldProfessorOwner = null;
+                    for (Player p : players)  //vedo chi aveva il professore prima
+                        for (Professor pr : p.getPlayerSchoolBoard().getProfessors())
+                            if (pr.getProfessorColour().equals(Colour.values()[colorIndex])){
+                                oldProfessorOwner = p;
+                                break;
+                            }
+
+                    ArrayList<Player> rank = new ArrayList<>();
+                    int max = 0;
+                    for (Player p : players){  //trovo il giocatore con più studenti
+                        if(max < p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colorIndex])){
+                            max = p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colorIndex]);
+                            rank.clear();
+                            rank.add(p);
+                        }else if (max == p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colorIndex]) && max != 0){  //qui ho parità
+                            rank.add(p);
+                        }
+                    }
+
+                    if(rank.size() == 1){
+                        if(oldProfessorOwner == null){
+                            rank.get(0).getPlayerSchoolBoard().addProfessor(Colour.values()[colorIndex]);
+                        } else if(!oldProfessorOwner.equals(rank.get(0))){
+                            oldProfessorOwner.getPlayerSchoolBoard().removeProfessor(Colour.values()[colorIndex]);
+                            rank.get(0).getPlayerSchoolBoard().addProfessor(Colour.values()[colorIndex]);
+                        }
+                    }
+
                     return 1;
                 }
             }
