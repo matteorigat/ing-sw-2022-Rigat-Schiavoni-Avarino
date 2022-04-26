@@ -382,8 +382,12 @@ public class Game {
                     if(c.getIndex() == 3 && ((Character3) c).isEffectFlag())
                         card3 = true;
 
-                if(!card3)
+                if(!card3){
+                    if(newPosition2 == gameBoard.getIslands().size())
+                        newPosition2 = gameBoard.getIslands().size()-1;
+
                     gameBoard.setMotherNature(newPosition2);
+                }
                 else if(gameBoard.getMotherNature() >= (newPosition2+1)%(gameBoard.getIslands().size()+1)){
                     int mn = gameBoard.getMotherNature()-1;
                     if(mn == -1)

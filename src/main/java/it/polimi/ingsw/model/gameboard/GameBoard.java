@@ -30,7 +30,7 @@ public class GameBoard {
 
 
         for (int i=0; i<Parameters.numIslands; i++){
-            Island isl = new Island(i);
+            Island isl = new Island();
             islands.add(isl);
             if(i<Parameters.numClouds){
                 Cloud cl = new Cloud();

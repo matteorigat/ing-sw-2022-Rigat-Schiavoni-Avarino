@@ -22,7 +22,7 @@ public class IslandTest {
         arrayPlayers.add(p1);
         arrayPlayers.add(p2);
 
-        Island island = new Island(5);
+        Island island = new Island();
         Student student1 = new Student(Colour.Green);
         Student student2 = new Student(Colour.Green);
         Student student3 = new Student(Colour.Yellow);

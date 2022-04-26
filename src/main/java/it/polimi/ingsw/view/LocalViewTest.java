@@ -44,7 +44,7 @@ public class LocalViewTest {
             System.out.println("");
 
             for(Island i : gb.getIslands()){
-                if(gb.getIslands().indexOf(i) == gb.getMotherNature() && i.getIslandIndex() < 10){
+                if(gb.getIslands().indexOf(i) == gb.getMotherNature() && gb.getIslands().indexOf(i) < 10){
                     System.out.print("Island: " + gb.getIslands().indexOf(i) + "\033[5;31m   M \033[0m |\t");
                 } else if(gb.getIslands().indexOf(i) == gb.getMotherNature()){
                     System.out.print("Island: " + gb.getIslands().indexOf(i) + "\033[5;31m  M\033[0m  |\t");
