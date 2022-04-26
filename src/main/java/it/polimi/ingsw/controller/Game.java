@@ -201,7 +201,7 @@ public class Game {
             if(Colour.values()[colour] == s.getColour())
                 checkStudentColor = true;
 
-        if(currentPhase.equals(GamePhase.MoveStudents) && playerIndex == currentPlayer && checkStudentColor && colour >= 0 && colour < Colour.values().length && IslandPosition >= 0 && IslandPosition < Parameters.numIslands){
+        if(currentPhase.equals(GamePhase.MoveStudents) && playerIndex == currentPlayer && checkStudentColor && colour >= 0 && colour < Colour.values().length && IslandPosition >= 0 && IslandPosition < gameBoard.getIslands().size()){
             players.get(playerIndex).getPlayerSchoolBoard().moveStudentToIsland(colour, this.gameBoard.getIslands().get(IslandPosition));
 
             phaseCounter++;
