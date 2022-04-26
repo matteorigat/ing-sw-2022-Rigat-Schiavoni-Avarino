@@ -94,6 +94,7 @@ public class GameTest {
         game.playAssistantCard(0,1);
         assertEquals(0, game.getCurrentPlayer());
 
+        /*
         for(int i=0; i<50; i++){
             game.getPlayers().get(0).addCoin();
         }
@@ -163,13 +164,13 @@ public class GameTest {
                  assertEquals(1, game.playCharacterCard6(0,6));
                  assertTrue(((Character6) c).isEffectFlag());
                 //come lo testo senza cabiare metà codice? si fa prima a testare dalla view
-            }/* else if(c.getIndex() == 8){
+            } else if(c.getIndex() == 8){
                 assertFalse(((Character8) c).isEffectFlag());
                 //assertEquals(1, game.playCharacterCard6(0,6));
                 assertTrue(((Character8) c).isEffectFlag());
                 //come lo testo senza cabiare metà codice? si fa prima a testare dalla view
-            }*/
-        }
+            }
+        }*/
 
     }
 }

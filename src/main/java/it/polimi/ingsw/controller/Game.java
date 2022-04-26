@@ -225,10 +225,9 @@ public class Game {
             if(checkStudentColor){
                 boolean coin; //ritorna true se il giocatore merita una moneta
                 coin = players.get(playerIndex).getPlayerSchoolBoard().moveStudentToDiningRoom(colour);
-                if (Parameters.expertMode && coin) {
-                    players.get(playerIndex).addCoin();
-                    gameBoard.getOneCoin();
-                }
+                if (Parameters.expertMode && coin)
+                    if(gameBoard.getOneCoin())
+                        players.get(playerIndex).addCoin();
 
                 //controllo chi possiede il professore ora
 
@@ -276,7 +275,7 @@ public class Game {
     public int moveMotherNature(int playerIndex, int movements){ //devo controllare se player ha i permessi
         if(currentPhase.equals(GamePhase.MoveMotherNature) && playerIndex == currentPlayer){
             int maxMovements = players.get(currentPlayer).getCurrentCard().getMovements();
-            if(Parameters.expertMode){
+            if(Parameters.expertMode && movements <= maxMovements+2){
                 for(CharacterCard c: gameBoard.getThreeCharacterCards())
                     if(c.getIndex() == 4 && ((Character4) c).isEffectFlag()){
                         maxMovements += 2;
@@ -308,7 +307,7 @@ public class Game {
                     ((Character6) c).disableEffect();
                     noTowerFlag = true;
                 } else if(c.getIndex() == 8 && ((Character8) c).isEffectFlag()){
-                    ((Character6) c).disableEffect();
+                    ((Character8) c).disableEffect();
                     twoMorePointsPlayer = playerIndex;
                 }
 
@@ -351,34 +350,56 @@ public class Game {
     //Fase azione punto 2.3
     private void checkIslandFusion(int islandIndex){
         //se il colore delle torri sull'isola e su quella successiva sono uguali
-        while (this.gameBoard.getIslands().get(islandIndex).getTowerColor().equals(this.gameBoard.getIslands().get((islandIndex+1)%gameBoard.getIslands().size()).getTowerColor())){
+        while (gameBoard.getIslands().get(islandIndex).getTowerColor().equals(gameBoard.getIslands().get((islandIndex+1)%gameBoard.getIslands().size()).getTowerColor())){
+            if(Parameters.expertMode)
+                for (CharacterCard c: gameBoard.getThreeCharacterCards())
+                    if(c.getIndex() == 3 && ((Character3) c).isEffectFlag() && gameBoard.getMotherNature() >= (islandIndex+1)%gameBoard.getIslands().size()){
+                        int mn = gameBoard.getMotherNature()-1;
+                        if(mn == -1)
+                            mn = gameBoard.getIslands().size()-1;
+                        gameBoard.setMotherNature(mn);
+                    }
+
             this.gameBoard.islandFusion(islandIndex, (islandIndex+1)%gameBoard.getIslands().size());
         }
 
         int newPosition = islandIndex;
         int newPosition2 = newPosition-1;
         if (newPosition2 == -1)
-            newPosition2 = this.gameBoard.getIslands().size()-1;
+            newPosition2 = gameBoard.getIslands().size()-1;
         //se il colore delle torri sull'isola e su quella precedente sono uguali
-        while (this.gameBoard.getIslands().get(newPosition).getTowerColor().equals(this.gameBoard.getIslands().get(newPosition2).getTowerColor())){
+        while (gameBoard.getIslands().get(newPosition).getTowerColor().equals(gameBoard.getIslands().get(newPosition2).getTowerColor())){
             this.gameBoard.islandFusion(newPosition2, newPosition);
-            //if(!Parameters.expertMode){
+
+            if(!Parameters.expertMode){
+                if(newPosition2 == gameBoard.getIslands().size())
+                    newPosition2 = gameBoard.getIslands().size()-1;
+
                 gameBoard.setMotherNature(newPosition2);
-            /*} else {
+            } else {
+                boolean card3 = false;
                 for(CharacterCard c: gameBoard.getThreeCharacterCards())
-                    if(c.getIndex() == 3 && !((Character3) c).isEffectFlag()){
-                        gameBoard.setMotherNature(newPosition2);
-                        break;
-                    }
-            }*/
+                    if(c.getIndex() == 3 && ((Character3) c).isEffectFlag())
+                        card3 = true;
+
+                if(!card3)
+                    gameBoard.setMotherNature(newPosition2);
+                else if(gameBoard.getMotherNature() >= (newPosition2+1)%(gameBoard.getIslands().size()+1)){
+                    int mn = gameBoard.getMotherNature()-1;
+                    if(mn == -1)
+                        mn = gameBoard.getIslands().size()-1;
+                    gameBoard.setMotherNature(mn);
+                }
+            }
+
             newPosition--;
             if(newPosition == -1)
                 newPosition = this.gameBoard.getIslands().size()-1;
             newPosition2 = newPosition-1;
             if (newPosition2 == -1)
                 newPosition2 = this.gameBoard.getIslands().size()-1;
-
         }
+
         if(this.gameBoard.getIslands().size() <= 3){
             endGame();
             return;
@@ -559,7 +580,7 @@ public class Game {
     }
 
     public int playCharacterCard6(int playerIndex, int cardIndex){
-        if(playerIndex == currentPlayer && currentPhase.ordinal() <= GamePhase.MoveStudents.ordinal()){
+        if(playerIndex == currentPlayer && currentPhase.ordinal() <= GamePhase.MoveMotherNature.ordinal()){
             for (CharacterCard c: gameBoard.getThreeCharacterCards()){
                 if(cardIndex == c.getIndex() && players.get(playerIndex).getCoins() >= c.getCost()){
                     System.out.println("STAI GIOCANDO LA CARTA 6");
@@ -576,7 +597,7 @@ public class Game {
     }
 
     public int playCharacterCard8(int playerIndex, int cardIndex){
-        if(playerIndex == currentPlayer && currentPhase.ordinal() <= GamePhase.MoveStudents.ordinal()){
+        if(playerIndex == currentPlayer && currentPhase.ordinal() <= GamePhase.MoveMotherNature.ordinal()){
             for (CharacterCard c: gameBoard.getThreeCharacterCards()){
                 if(cardIndex == c.getIndex() && players.get(playerIndex).getCoins() >= c.getCost()){
                     System.out.println("STAI GIOCANDO LA CARTA 8");
@@ -601,7 +622,44 @@ public class Game {
                     gameBoard.addCoinsToGeneralReserve(c.getCost() - 1);
                     c.play();
 
-                    players.get(playerIndex).getPlayerSchoolBoard().getDiningRoom().addStudent(((Character11) c).getStudent(colorIndex));
+                    boolean coin; //ritorna true se il giocatore merita una moneta
+                    coin = players.get(playerIndex).getPlayerSchoolBoard().getDiningRoom().addStudent(((Character11) c).getStudent(colorIndex));
+                    if (Parameters.expertMode && coin)
+                        if(gameBoard.getOneCoin())
+                            players.get(playerIndex).addCoin();
+
+
+                    //controllo chi possiede il professore ora
+
+                    Player oldProfessorOwner = null;
+                    for (Player p : players)  //vedo chi aveva il professore prima
+                        for (Professor pr : p.getPlayerSchoolBoard().getProfessors())
+                            if (pr.getProfessorColour().equals(Colour.values()[colorIndex])){
+                                oldProfessorOwner = p;
+                                break;
+                            }
+
+                    ArrayList<Player> rank = new ArrayList<>();
+                    int max = 0;
+                    for (Player p : players){  //trovo il giocatore con più studenti
+                        if(max < p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colorIndex])){
+                            max = p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colorIndex]);
+                            rank.clear();
+                            rank.add(p);
+                        }else if (max == p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colorIndex]) && max != 0){  //qui ho parità
+                            rank.add(p);
+                        }
+                    }
+
+                    if(rank.size() == 1){
+                        if(oldProfessorOwner == null){
+                            rank.get(0).getPlayerSchoolBoard().addProfessor(Colour.values()[colorIndex]);
+                        } else if(!oldProfessorOwner.equals(rank.get(0))){
+                            oldProfessorOwner.getPlayerSchoolBoard().removeProfessor(Colour.values()[colorIndex]);
+                            rank.get(0).getPlayerSchoolBoard().addProfessor(Colour.values()[colorIndex]);
+                        }
+                    }
+
                     ((Character11) c).addStudent(gameBoard.getBag().draw());
                     return 1;
                 }
