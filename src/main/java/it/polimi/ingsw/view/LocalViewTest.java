@@ -44,9 +44,9 @@ public class LocalViewTest {
             System.out.println("");
 
             for(Island i : gb.getIslands()){
-                if(i.getIslandIndex() == gb.getMotherNature() && i.getIslandIndex() < 10){
+                if(gb.getIslands().indexOf(i) == gb.getMotherNature() && i.getIslandIndex() < 10){
                     System.out.print("Island: " + gb.getIslands().indexOf(i) + "\033[5;31m   M \033[0m |\t");
-                } else if(i.getIslandIndex() == gb.getMotherNature()){
+                } else if(gb.getIslands().indexOf(i) == gb.getMotherNature()){
                     System.out.print("Island: " + gb.getIslands().indexOf(i) + "\033[5;31m  M\033[0m  |\t");
                 } else if(i.getNoEntry() != 0){
                     System.out.print("Island: " + gb.getIslands().indexOf(i) + "\033[5;31m   " + i.getNoEntry() + " \033[0m |\t");
@@ -117,7 +117,7 @@ public class LocalViewTest {
             System.out.println("Students in the bag: " + controller.getGameBoard().getBag().getSize());
             System.out.println("Mn on: " + controller.getGameBoard().getMotherNature());
 
-
+            
             int result = -2;
             boolean resultbool = false;
             while(resultbool == false) {

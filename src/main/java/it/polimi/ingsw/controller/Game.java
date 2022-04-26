@@ -351,15 +351,15 @@ public class Game {
     private void checkIslandFusion(int islandIndex){
         //se il colore delle torri sull'isola e su quella successiva sono uguali
         while (gameBoard.getIslands().get(islandIndex).getTowerColor().equals(gameBoard.getIslands().get((islandIndex+1)%gameBoard.getIslands().size()).getTowerColor())){
-            if(Parameters.expertMode)
-                for (CharacterCard c: gameBoard.getThreeCharacterCards())
-                    if(c.getIndex() == 3 && ((Character3) c).isEffectFlag() && gameBoard.getMotherNature() >= (islandIndex+1)%gameBoard.getIslands().size()){
-                        int mn = gameBoard.getMotherNature()-1;
-                        if(mn == -1)
-                            mn = gameBoard.getIslands().size()-1;
+            if(Parameters.expertMode) {
+                for (CharacterCard c : gameBoard.getThreeCharacterCards())
+                    if (c.getIndex() == 3 && ((Character3) c).isEffectFlag() && gameBoard.getMotherNature() >= (islandIndex + 1) % gameBoard.getIslands().size()) {
+                        int mn = gameBoard.getMotherNature() - 1;
+                        if (mn == -1)
+                            mn = gameBoard.getIslands().size() - 1;
                         gameBoard.setMotherNature(mn);
                     }
-
+            }
             this.gameBoard.islandFusion(islandIndex, (islandIndex+1)%gameBoard.getIslands().size());
         }
 
