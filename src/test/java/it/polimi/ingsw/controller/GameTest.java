@@ -158,12 +158,12 @@ public class GameTest {
                  assertEquals(1, game.playCharacterCard5(0,5,0));
                  assertEquals(1, game.getGameBoard().getIslands().get(0).getNoEntry());
                  //come lo testo senza cabiare metà codice? si fa prima a testare dalla view
-            } else if(c.getIndex() == 6){
+            }/* else if(c.getIndex() == 6){
                  assertFalse(((Character6) c).isEffectFlag());
                  assertEquals(1, game.playCharacterCard6(0,6));
                  assertTrue(((Character6) c).isEffectFlag());
                 //come lo testo senza cabiare metà codice? si fa prima a testare dalla view
-            }/* else if(c.getIndex() == 8){
+            } else if(c.getIndex() == 8){
                 assertFalse(((Character8) c).isEffectFlag());
                 //assertEquals(1, game.playCharacterCard6(0,6));
                 assertTrue(((Character8) c).isEffectFlag());

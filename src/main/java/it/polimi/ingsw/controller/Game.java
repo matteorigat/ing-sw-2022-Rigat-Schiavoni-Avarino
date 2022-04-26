@@ -350,33 +350,47 @@ public class Game {
     //Fase azione punto 2.3
     private void checkIslandFusion(int islandIndex){
         //se il colore delle torri sull'isola e su quella successiva sono uguali
-        while (this.gameBoard.getIslands().get(islandIndex).getTowerColor().equals(this.gameBoard.getIslands().get((islandIndex+1)%gameBoard.getIslands().size()).getTowerColor())){
+        while (gameBoard.getIslands().get(islandIndex).getTowerColor().equals(gameBoard.getIslands().get((islandIndex+1)%gameBoard.getIslands().size()).getTowerColor())){
+            if(Parameters.expertMode)
+                for (CharacterCard c: gameBoard.getThreeCharacterCards())
+                    if(c.getIndex() == 3 && ((Character3) c).isEffectFlag() && gameBoard.getMotherNature() >= (islandIndex+1)%gameBoard.getIslands().size()){
+                        int mn = gameBoard.getMotherNature()-1;
+                        if(mn == -1)
+                            mn = gameBoard.getIslands().size()-1;
+                        gameBoard.setMotherNature(mn);
+                    }
+
             this.gameBoard.islandFusion(islandIndex, (islandIndex+1)%gameBoard.getIslands().size());
         }
 
         int newPosition = islandIndex;
         int newPosition2 = newPosition-1;
         if (newPosition2 == -1)
-            newPosition2 = this.gameBoard.getIslands().size()-1;
+            newPosition2 = gameBoard.getIslands().size()-1;
         //se il colore delle torri sull'isola e su quella precedente sono uguali
-        while (this.gameBoard.getIslands().get(newPosition).getTowerColor().equals(this.gameBoard.getIslands().get(newPosition2).getTowerColor())){
+        while (gameBoard.getIslands().get(newPosition).getTowerColor().equals(gameBoard.getIslands().get(newPosition2).getTowerColor())){
+            this.gameBoard.islandFusion(newPosition2, newPosition);
+
             if(!Parameters.expertMode){
+                if(newPosition2 == gameBoard.getIslands().size())
+                    newPosition2 = gameBoard.getIslands().size()-1;
+
                 gameBoard.setMotherNature(newPosition2);
             } else {
                 boolean card3 = false;
                 for(CharacterCard c: gameBoard.getThreeCharacterCards())
-                    if(c.getIndex() == 3 && ((Character3) c).isEffectFlag() && gameBoard.getMotherNature() != newPosition)
+                    if(c.getIndex() == 3 && ((Character3) c).isEffectFlag())
                         card3 = true;
 
                 if(!card3)
                     gameBoard.setMotherNature(newPosition2);
-                else {
-                    if(gameBoard.getMotherNature() > newPosition)
-                        gameBoard.setMotherNature(gameBoard.getMotherNature()-1);
+                else if(gameBoard.getMotherNature() >= (newPosition2+1)%(gameBoard.getIslands().size()+1)){
+                    int mn = gameBoard.getMotherNature()-1;
+                    if(mn == -1)
+                        mn = gameBoard.getIslands().size()-1;
+                    gameBoard.setMotherNature(mn);
                 }
             }
-
-            this.gameBoard.islandFusion(newPosition2, newPosition);
 
             newPosition--;
             if(newPosition == -1)
@@ -384,8 +398,8 @@ public class Game {
             newPosition2 = newPosition-1;
             if (newPosition2 == -1)
                 newPosition2 = this.gameBoard.getIslands().size()-1;
-
         }
+
         if(this.gameBoard.getIslands().size() <= 3){
             endGame();
             return;
