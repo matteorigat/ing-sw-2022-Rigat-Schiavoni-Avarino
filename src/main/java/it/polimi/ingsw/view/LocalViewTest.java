@@ -44,7 +44,6 @@ public class LocalViewTest {
             System.out.println("");
 
             for(Island i : gb.getIslands()){
-                boolean bool = false;
                 if(i.getIslandIndex() == gb.getMotherNature() && i.getIslandIndex() < 10){
                     System.out.print("Island: " + gb.getIslands().indexOf(i) + "\033[5;31m   M \033[0m |\t");
                 } else if(i.getIslandIndex() == gb.getMotherNature()){
@@ -56,10 +55,8 @@ public class LocalViewTest {
 
                 System.out.print("Towers: "+ textTower(i.getNumTower(), i.getTowerColor()) + "\t|\t");
 
-                for(Student s : i.getStudents()) {
+                for(Student s : i.getStudents())
                     System.out.print(textColor(s.getColour()) + " ");
-                    bool = true;
-                }
 
                 System.out.println("\n");
             }

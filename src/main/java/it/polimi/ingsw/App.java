@@ -2,6 +2,7 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.controller.Game;
 import it.polimi.ingsw.model.Parameters;
+import it.polimi.ingsw.model.enumeration.GamePhase;
 import it.polimi.ingsw.model.gameboard.Bag;
 import it.polimi.ingsw.view.LocalViewTest;
 
@@ -32,8 +33,9 @@ public class App
             System.out.println(s + "" + i);
         }
         */
+
         Game controller = new Game();
-        controller.setParameters(2, true);
+        controller.setParameters(2, false);
         controller.addPlayer("Gius");
         controller.addPlayer("Mef");
         //controller.addPlayer("Nico");

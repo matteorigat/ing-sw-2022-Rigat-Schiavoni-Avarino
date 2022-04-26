@@ -363,17 +363,17 @@ public class Game {
             if(!Parameters.expertMode){
                 gameBoard.setMotherNature(newPosition2);
             } else {
-                boolean nocard3 = true;
+                boolean card3 = false;
                 for(CharacterCard c: gameBoard.getThreeCharacterCards())
-                    if(c.getIndex() == 3){
-                        nocard3 = false;
-                        if(!((Character3) c).isEffectFlag()){
-                            gameBoard.setMotherNature(newPosition2);
-                            break;
-                        }
-                    }
-                if(nocard3)
+                    if(c.getIndex() == 3 && ((Character3) c).isEffectFlag() && gameBoard.getMotherNature() != newPosition)
+                        card3 = true;
+
+                if(!card3)
                     gameBoard.setMotherNature(newPosition2);
+                else {
+                    if(gameBoard.getMotherNature() > newPosition)
+                        gameBoard.setMotherNature(gameBoard.getMotherNature()-1);
+                }
             }
 
             this.gameBoard.islandFusion(newPosition2, newPosition);
