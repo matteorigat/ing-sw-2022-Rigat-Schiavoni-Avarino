@@ -5,6 +5,8 @@ public class Character8 implements CharacterCard{
     private int cost;
     private boolean effectFlag;
 
+    private static final String Description = "2 punti influenza addizionali";
+
     public Character8() {
         this.index = 8;
         this.cost = 2;
@@ -42,6 +44,6 @@ public class Character8 implements CharacterCard{
     public String toString() {
         return  "index: " + index +
                 "\tcost: " + cost +
-                "\t\teffectFlag: " + effectFlag;
+                "\t\teffectFlag: " + effectFlag +  "\t\t" +Description;
     }
 }

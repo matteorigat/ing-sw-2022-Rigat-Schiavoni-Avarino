@@ -10,6 +10,8 @@ public class Character1 implements CharacterCard{
     private int cost;
     private ArrayList<Student> students;
 
+    private static final String Description = "Prendi 1 studente e piazzalo su un'isola";
+
     public Character1() {
         this.index = 1;
         this.cost = 1;
@@ -59,6 +61,6 @@ public class Character1 implements CharacterCard{
     public String toString() {
         return  "index: " + index +
                 "\tcost: " + cost +
-                "\t\tstudents: " + students;
+                "\t\tstudents: " + students +  "\t\t" +Description;
     }
 }

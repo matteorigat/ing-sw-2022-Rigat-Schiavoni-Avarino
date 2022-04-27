@@ -5,6 +5,7 @@ public class Character5 implements CharacterCard{
     private int cost;
     private int noEntry;
 
+    private static final String Description = "Tessera divieto su un'isola";
     public Character5() {
         this.index = 5;
         this.cost = 2;
@@ -35,6 +36,6 @@ public class Character5 implements CharacterCard{
     public String toString() {
         return  "index: " + index +
                 "\tcost: " + cost +
-                "\t\tnoEntry: " + noEntry;
+                "\t\tnoEntry: " + noEntry +  "\t\t" +Description;
     }
 }
