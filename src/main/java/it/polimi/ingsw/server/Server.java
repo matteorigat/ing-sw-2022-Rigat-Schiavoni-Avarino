@@ -9,10 +9,41 @@ import java.util.concurrent.Executors;
 
 public class Server {
     private int port;
+    private Map<String, ClientConnection> waitingConnection = new HashMap<>();
+
+
+
 
     public Server(int port){
         this.port = port;
     }
+
+
+
+
+
+
+
+    public synchronized void lobby(ClientConnection c, String name){
+        waitingConnection.put(name, c);
+        System.out.println(name + " è nella lobby ");
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public void startServer() throws IOException {
         //It creates threads when necessary, otherwise it re-uses existing one when possible
@@ -32,7 +63,8 @@ public class Server {
             try{
                 Socket socket = serverSocket.accept();
                 System.out.println("[2] connessione stabilita con un client ");
-                executor.submit(new ServerClientHandler(socket));
+                ServerClientHandler socketConnection = new ServerClientHandler(socket, this);
+                executor.submit(socketConnection);
             }catch(IOException e){
                 break; //In case the serverSocket gets closed
             }
