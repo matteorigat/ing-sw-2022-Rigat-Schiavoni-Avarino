@@ -39,9 +39,9 @@ public class ServerClientHandler extends Observable implements ClientConnection 
             while (true){
                 String name = in.nextLine();
                 System.out.println("ho ricevuto : " + name);
-                String answare = name.toUpperCase(Locale.ROOT);
-                System.out.println("[3]  -Rispondo con :" +answare);
-                out.write(answare + "\n");
+                String answer = name.toUpperCase(Locale.ROOT);
+                System.out.println("[3] Rispondo con :" + answer);
+                out.write(answer + "\n");
                 server.lobby(this, name);
                 if(name.equals("quit")){
                     break;
