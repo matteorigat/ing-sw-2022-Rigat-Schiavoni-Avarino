@@ -12,16 +12,9 @@ public class Server {
     private Map<String, ClientConnection> waitingConnection = new HashMap<>();
 
 
-
-
     public Server(int port){
         this.port = port;
     }
-
-
-
-
-
 
 
     public synchronized void lobby(ClientConnection c, String name){
@@ -31,18 +24,6 @@ public class Server {
 
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     public void startServer() throws IOException {
