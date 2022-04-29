@@ -3,6 +3,7 @@ package it.polimi.ingsw.server;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.io.Writer;
 import java.net.Socket;
 import java.util.Locale;
 import java.util.Observable;
@@ -11,17 +12,17 @@ import java.util.Scanner;
 public class ServerClientHandler extends Observable implements ClientConnection , Runnable {
     private Socket socket;
     private Server server;
-    private ObjectOutputStream out;
+    private Writer out;
     public ServerClientHandler(Socket socket,Server server){
         this.server = server;
         this.socket = socket;
     }
     private boolean active = true;
 
-    private synchronized void send(Object message) {
+    private synchronized void send(String message) {
         try {
-            out.reset();
-            out.writeObject(message);
+            //out.reset();
+            out.write(message);
             out.flush();
         } catch(IOException e){
             System.err.println(e.getMessage());
@@ -34,18 +35,18 @@ public class ServerClientHandler extends Observable implements ClientConnection 
     public void run() {
         try {
             Scanner in = new Scanner(socket.getInputStream());
-            out = new ObjectOutputStream(socket.getOutputStream());
+            out = new PrintWriter(socket.getOutputStream());
             while (true){
                 String name = in.nextLine();
                 System.out.println("ho ricevuto : " + name);
                 String answare = name.toUpperCase(Locale.ROOT);
                 System.out.println("[3]  -Rispondo con :" +answare);
-                out.writeObject(answare + "\n");
+                out.write(answare + "\n");
                 server.lobby(this, name);
                 if(name.equals("quit")){
                     break;
                 } else {
-                    out.writeObject("Received: " + name);
+                    out.write("Received: " + name);
                     out.flush();
                 }
             }
@@ -70,7 +71,12 @@ public class ServerClientHandler extends Observable implements ClientConnection 
     }
 
     @Override
-    public void asyncSend(final Object message){
+    public void asyncSend(Object message) {
+
+    }
+
+    //@Override
+    public void asyncSend(final String message){
         new Thread(new Runnable() {
             @Override
             public void run() {
