@@ -1,98 +1,95 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.model.Parameters;
-import it.polimi.ingsw.model.enumeration.Colour;
-import it.polimi.ingsw.model.gameboard.Island;
-import it.polimi.ingsw.model.gameboard.characters.*;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-public class GameTest {
+public class ControllerTest {
 
     @Test
     public void ControllerGameTest(){
-        Game game = new Game();
-        game.setParameters(2,true);
+        Controller controller = new Controller();
+        controller.setParameters(2,true);
 
-        assertNotNull(game.getGameBoard());
-        assertNotNull(game.getPlayers());
+        assertNotNull(controller.getGameBoard());
+        assertNotNull(controller.getPlayers());
 
-        game.addPlayer("gius");
-        game.addPlayer("mef");
-        assertEquals(-1, game.addPlayer("nico"));
+        controller.addPlayer("gius");
+        controller.addPlayer("mef");
+        assertEquals(-1, controller.addPlayer("nico"));
 
-        game.init();
+        controller.init();
 
-        assertEquals(0, game.getCurrentPhase());
-        game.playAssistantCard(0,9);
-        assertEquals(-1, game.playAssistantCard(0,5));
-        assertEquals(-1, game.playAssistantCard(1,9));
-        game.playAssistantCard(1,5);
-        assertEquals(1, game.getCurrentPlayer());
+        assertEquals(0, controller.getCurrentPhase());
+        controller.playAssistantCard(0,9);
+        assertEquals(-1, controller.playAssistantCard(0,5));
+        assertEquals(-1, controller.playAssistantCard(1,9));
+        controller.playAssistantCard(1,5);
+        assertEquals(1, controller.getCurrentPlayer());
 
         int color;
         ///////////////// GIOCATORE 1 /////////////////
-        assertEquals(1, game.getCurrentPhase());
-        color = game.getPlayers().get(game.getCurrentPlayer()).getPlayerSchoolBoard().getStudentsEntrance().get(0).getColour().ordinal();
-        game.moveStudentToDiningRoom(1, color);
-        assertEquals(color, game.getPlayers().get(game.getCurrentPlayer()).getPlayerSchoolBoard().getProfessors().get(0).getProfessorColour().ordinal());
+        assertEquals(1, controller.getCurrentPhase());
+        color = controller.getPlayers().get(controller.getCurrentPlayer()).getPlayerSchoolBoard().getStudentsEntrance().get(0).getColour().ordinal();
+        controller.moveStudentToDiningRoom(1, color);
+        assertEquals(color, controller.getPlayers().get(controller.getCurrentPlayer()).getPlayerSchoolBoard().getProfessors().get(0).getProfessorColour().ordinal());
 
-        color = game.getPlayers().get(game.getCurrentPlayer()).getPlayerSchoolBoard().getStudentsEntrance().get(0).getColour().ordinal();
-        game.moveStudentToDiningRoom(1, color);
-        color = game.getPlayers().get(game.getCurrentPlayer()).getPlayerSchoolBoard().getStudentsEntrance().get(0).getColour().ordinal();
-        game.moveStudentToIsland(1, color, game.getGameBoard().getMotherNature());
-        assertEquals(color, game.getGameBoard().getIslands().get(game.getGameBoard().getMotherNature()).getStudents().get(0).getColour().ordinal());
+        color = controller.getPlayers().get(controller.getCurrentPlayer()).getPlayerSchoolBoard().getStudentsEntrance().get(0).getColour().ordinal();
+        controller.moveStudentToDiningRoom(1, color);
+        color = controller.getPlayers().get(controller.getCurrentPlayer()).getPlayerSchoolBoard().getStudentsEntrance().get(0).getColour().ordinal();
+        controller.moveStudentToIsland(1, color, controller.getGameBoard().getMotherNature());
+        assertEquals(color, controller.getGameBoard().getIslands().get(controller.getGameBoard().getMotherNature()).getStudents().get(0).getColour().ordinal());
 
-        assertEquals(Parameters.entranceStudents-3, game.getPlayers().get(game.getCurrentPlayer()).getPlayerSchoolBoard().getStudentsEntrance().size());
+        assertEquals(Parameters.entranceStudents-3, controller.getPlayers().get(controller.getCurrentPlayer()).getPlayerSchoolBoard().getStudentsEntrance().size());
 
-        int mn = game.getGameBoard().getMotherNature();
-        assertEquals(2, game.getCurrentPhase());
-        assertEquals(-1, game.moveMotherNature(0, 2));
-        assertEquals(-1, game.moveMotherNature(1, 5));
-        game.moveMotherNature(1, 3);
-        assertEquals((mn + 3)%game.getGameBoard().getIslands().size(), game.getGameBoard().getMotherNature());
+        int mn = controller.getGameBoard().getMotherNature();
+        assertEquals(2, controller.getCurrentPhase());
+        assertEquals(-1, controller.moveMotherNature(0, 2));
+        assertEquals(-1, controller.moveMotherNature(1, 5));
+        controller.moveMotherNature(1, 3);
+        assertEquals((mn + 3)% controller.getGameBoard().getIslands().size(), controller.getGameBoard().getMotherNature());
 
-        assertEquals(3, game.getCurrentPhase());
-        assertEquals(-1, game.chooseCloud(0, 0));
-        assertEquals(-1, game.chooseCloud(1, 2));
-        game.chooseCloud(1, 0);
-        assertEquals(Parameters.entranceStudents, game.getPlayers().get(game.getCurrentPlayer()).getPlayerSchoolBoard().getStudentsEntrance().size());
+        assertEquals(3, controller.getCurrentPhase());
+        assertEquals(-1, controller.chooseCloud(0, 0));
+        assertEquals(-1, controller.chooseCloud(1, 2));
+        controller.chooseCloud(1, 0);
+        assertEquals(Parameters.entranceStudents, controller.getPlayers().get(controller.getCurrentPlayer()).getPlayerSchoolBoard().getStudentsEntrance().size());
 
         ///////////////// GIOCATORE 2 /////////////////
 
-        assertEquals(1, game.getCurrentPhase());
-        color = game.getPlayers().get(game.getCurrentPlayer()).getPlayerSchoolBoard().getStudentsEntrance().get(0).getColour().ordinal();
-        game.moveStudentToDiningRoom(0, color);
-        color = game.getPlayers().get(game.getCurrentPlayer()).getPlayerSchoolBoard().getStudentsEntrance().get(0).getColour().ordinal();
-        game.moveStudentToDiningRoom(0, color);
-        color = game.getPlayers().get(game.getCurrentPlayer()).getPlayerSchoolBoard().getStudentsEntrance().get(0).getColour().ordinal();
-        game.moveStudentToIsland(0, color, game.getGameBoard().getMotherNature());
-        assertEquals(2, game.getGameBoard().getIslands().get(game.getGameBoard().getMotherNature()).getStudents().size());
+        assertEquals(1, controller.getCurrentPhase());
+        color = controller.getPlayers().get(controller.getCurrentPlayer()).getPlayerSchoolBoard().getStudentsEntrance().get(0).getColour().ordinal();
+        controller.moveStudentToDiningRoom(0, color);
+        color = controller.getPlayers().get(controller.getCurrentPlayer()).getPlayerSchoolBoard().getStudentsEntrance().get(0).getColour().ordinal();
+        controller.moveStudentToDiningRoom(0, color);
+        color = controller.getPlayers().get(controller.getCurrentPlayer()).getPlayerSchoolBoard().getStudentsEntrance().get(0).getColour().ordinal();
+        controller.moveStudentToIsland(0, color, controller.getGameBoard().getMotherNature());
+        assertEquals(2, controller.getGameBoard().getIslands().get(controller.getGameBoard().getMotherNature()).getStudents().size());
 
-        assertEquals(Parameters.entranceStudents-3, game.getPlayers().get(game.getCurrentPlayer()).getPlayerSchoolBoard().getStudentsEntrance().size());
+        assertEquals(Parameters.entranceStudents-3, controller.getPlayers().get(controller.getCurrentPlayer()).getPlayerSchoolBoard().getStudentsEntrance().size());
 
-        assertEquals(2, game.getCurrentPhase());
-        mn = game.getGameBoard().getMotherNature();
-        assertEquals(-1, game.moveMotherNature(1, 2));
-        assertEquals(-1, game.moveMotherNature(0, 7));
-        game.moveMotherNature(0, 1);
+        assertEquals(2, controller.getCurrentPhase());
+        mn = controller.getGameBoard().getMotherNature();
+        assertEquals(-1, controller.moveMotherNature(1, 2));
+        assertEquals(-1, controller.moveMotherNature(0, 7));
+        controller.moveMotherNature(0, 1);
 
-        assertEquals(3, game.getCurrentPhase());
-        assertEquals(-1, game.chooseCloud(1, 1));
-        assertEquals(-1, game.chooseCloud(0, 0));
-        assertEquals(-1, game.chooseCloud(0, 2));
-        game.chooseCloud(0, 1);
-        assertEquals(Parameters.entranceStudents, game.getPlayers().get(game.getCurrentPlayer()).getPlayerSchoolBoard().getStudentsEntrance().size());
+        assertEquals(3, controller.getCurrentPhase());
+        assertEquals(-1, controller.chooseCloud(1, 1));
+        assertEquals(-1, controller.chooseCloud(0, 0));
+        assertEquals(-1, controller.chooseCloud(0, 2));
+        controller.chooseCloud(0, 1);
+        assertEquals(Parameters.entranceStudents, controller.getPlayers().get(controller.getCurrentPlayer()).getPlayerSchoolBoard().getStudentsEntrance().size());
 
 
-        assertEquals(0, game.getCurrentPhase());
+        assertEquals(0, controller.getCurrentPhase());
 
-        assertEquals(-1, game.playAssistantCard(0,3));
-        assertEquals(-1, game.playAssistantCard(1,5));
-        game.playAssistantCard(1,8);
-        game.playAssistantCard(0,1);
-        assertEquals(0, game.getCurrentPlayer());
+        assertEquals(-1, controller.playAssistantCard(0,3));
+        assertEquals(-1, controller.playAssistantCard(1,5));
+        controller.playAssistantCard(1,8);
+        controller.playAssistantCard(0,1);
+        assertEquals(0, controller.getCurrentPlayer());
 
         /*
         for(int i=0; i<50; i++){

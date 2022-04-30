@@ -11,6 +11,8 @@ import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.AssistantCard;
 import it.polimi.ingsw.model.player.Professor;
 import it.polimi.ingsw.model.player.Student;
+import it.polimi.ingsw.observer.Observer;
+import it.polimi.ingsw.server.PlayerMove;
 
 import java.util.ArrayList;
 
@@ -18,7 +20,16 @@ import java.util.ArrayList;
  *  In this class we manage the main actions of the match.
  */
 
-public class Game {
+public class Controller implements Observer<PlayerMove> {
+
+    @Override
+    public void update(PlayerMove message) {
+        performMove(message);
+    }
+
+    private synchronized void performMove(PlayerMove move){
+
+    }
 
     private Model model;
 
@@ -488,15 +499,9 @@ public class Game {
         return model.getCurrentPlayer();
     }
 
-
-
-
-
-
-
-
-
-
+    public Model getModel() {
+        return model;
+    }
 
     public int playCharacterCard1(int playerIndex, int cardIndex, int colorIndex, int islandIndex){
         if(playerIndex == model.getCurrentPlayer()){

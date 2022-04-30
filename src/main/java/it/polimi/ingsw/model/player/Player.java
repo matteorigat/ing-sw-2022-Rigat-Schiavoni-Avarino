@@ -1,6 +1,8 @@
 package it.polimi.ingsw.model.player;
 
+import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.model.enumeration.TowerColour;
+import it.polimi.ingsw.observer.Observer;
 
 import java.util.ArrayList;
 
@@ -83,6 +85,7 @@ public class Player {
     public String getNickname() {
         return nickname;
     }
+
 }
 
 

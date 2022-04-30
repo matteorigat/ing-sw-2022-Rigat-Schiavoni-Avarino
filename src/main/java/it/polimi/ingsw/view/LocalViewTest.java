@@ -1,6 +1,6 @@
 package it.polimi.ingsw.view;
 
-import it.polimi.ingsw.controller.Game;
+import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.model.Parameters;
 import it.polimi.ingsw.model.enumeration.Colour;
 import it.polimi.ingsw.model.enumeration.GamePhase;
@@ -12,20 +12,19 @@ import it.polimi.ingsw.model.gameboard.characters.CharacterCard;
 import it.polimi.ingsw.model.player.*;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class LocalViewTest {
 
     Scanner scanner;
-    private Game controller;
+    private Controller controller;
     private String choice;
 
     public LocalViewTest() {
         this.scanner = new Scanner(System.in);
     }
 
-    public void setController(Game controller) {
+    public void setController(Controller controller) {
         this.controller = controller;
     }
 
@@ -279,7 +278,6 @@ public class LocalViewTest {
             case (2) : return "🟡"; //"\033[93mYellow\033[0m";
             case (3) : return "🟣"; //"\033[38;2;249;177;250mPink\033[0m";
             case (4) : return "🔵"; //"\033[38;2;85;99;250mBlue\033[0m";
-// :air
         }
        return null;
     }

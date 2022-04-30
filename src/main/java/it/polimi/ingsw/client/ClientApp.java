@@ -10,12 +10,12 @@ public class ClientApp {
 
 
     public static void main(String[] args) {
-        System.out.println("IP?");
-        Scanner input = new Scanner(System.in);
-        String s = input.nextLine();
-        Client client = new Client(s,1337);
+        //System.out.println("IP?");
+        //Scanner input = new Scanner(System.in);
+        //String s = input.nextLine();
+        Client client = new Client("127.0.0.1",1337);
         try {
-            client.startClient();
+            client.run();
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
