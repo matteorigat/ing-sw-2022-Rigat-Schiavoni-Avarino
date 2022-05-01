@@ -27,6 +27,8 @@ public class Model extends Observable<MoveMessage> implements Serializable {
     private int phaseCounter;
     private int playerPhaseCounter;
 
+    private boolean expertMode;
+
     //Constructor Game creates a new Game instance
     public Model() {
         this.players = new ArrayList<>();
@@ -149,13 +151,13 @@ public class Model extends Observable<MoveMessage> implements Serializable {
             for(AssistantCard card : p.getAssistantDeck()){
                 System.out.print(card.getValue() + " ");
             }
-            if(Parameters.expertMode){
+            if(expertMode){
                 System.out.print("\nCOINS: " + p.getCoins());
             }
             System.out.println("\n");
         }
 
-        if(Parameters.expertMode){
+        if(expertMode){
             ArrayList<CharacterCard> chtrs = (ArrayList<CharacterCard>) gameBoard.getThreeCharacterCards().clone();
             for (CharacterCard c:  chtrs)
                 System.out.println("CharacterCard | " + c.toString());
@@ -172,7 +174,7 @@ public class Model extends Observable<MoveMessage> implements Serializable {
         }
 
 
-        if(Parameters.expertMode){
+        if(expertMode){
             System.out.println("\nPHASE: " + currentPhase + "... or write 'c' to play a character card");
             boolean characterbool = false;
         } else {
@@ -209,5 +211,7 @@ public class Model extends Observable<MoveMessage> implements Serializable {
         return s;
     }
 
-
+    public void setExpertMode(boolean expertMode) {
+        this.expertMode = expertMode;
+    }
 }

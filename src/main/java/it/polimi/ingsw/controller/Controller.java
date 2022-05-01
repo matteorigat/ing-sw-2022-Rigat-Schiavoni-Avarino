@@ -21,6 +21,19 @@ public class Controller implements Observer<PlayerMove> {
     private Model model;
 
     private synchronized void performMove(PlayerMove move){
+        switch (move.getParam1()){
+            case 0: {
+                playAssistantCard(move.getPlayer().getIndex(), move.getParam2());
+                break;
+            }
+
+            case 1:{
+                if(move.getParam3() == -1)
+                    moveStudentToDiningRoom(move.getPlayer().getIndex(), move.getParam2());
+                else moveStudentToIsland(move.getPlayer().getIndex(), move.getParam2(), move.getParam3());
+                break;
+            }
+        }
         model.performMove(move.getPlayer());
     }
 
@@ -62,6 +75,7 @@ public class Controller implements Observer<PlayerMove> {
     public void init(){   //sto seguendo l'inizializzazione della partita
         double casual = Math.random()*12; //(PUNTO 2)
         int mn = (int) casual;
+        model.setExpertMode(Parameters.expertMode);
 
         model.getGameBoard().setMotherNature(mn);  //posiziono madrenatura
 

@@ -34,36 +34,6 @@ public class Client {
         this.active = active;
     }
 
-    /*
-    public void startClient() throws IOException {
-
-        Socket socket = new Socket(ip, port);
-        System.out.println("Connection established");
-        Scanner socketIn = new Scanner(socket.getInputStream());
-        PrintWriter socketOut = new PrintWriter(socket.getOutputStream());
-        Scanner stdin = new Scanner(System.in);
-        try{
-            while (true){
-                String inputLine = stdin.nextLine();
-                socketOut.println(inputLine);
-                socketOut.flush();
-                String socketLine = socketIn.nextLine();
-                System.out.println(socketLine);
-            }
-        } catch(NoSuchElementException e){
-            System.out.println("Connection closed");
-        } finally {
-            stdin.close();
-            socketIn.close();
-            socketOut.close();
-            socket.close();
-        }
-    }
-
-   */
-
-
-
     public Thread asyncReadFromSocket(final ObjectInputStream socketIn){
         Thread t = new Thread(new Runnable() {
             @Override
