@@ -18,11 +18,12 @@ public class RemoteView extends View {
             System.out.println("Received: " + message);
             try{
                 String[] inputs = message.split(",");
-
                 if(inputs.length == 2)
                     handleMove(Integer.parseInt(inputs[0]), Integer.parseInt(inputs[1]));
                 else if(inputs.length == 3)
                     handleMove(Integer.parseInt(inputs[0]), Integer.parseInt(inputs[1]), Integer.parseInt(inputs[2]));
+                else if(inputs.length == 4)
+                    handleMove(Integer.parseInt(inputs[0]), Integer.parseInt(inputs[1]), Integer.parseInt(inputs[2]), Integer.parseInt(inputs[3]));
             }catch(IllegalArgumentException | ArrayIndexOutOfBoundsException e){
                 clientConnection.asyncSend("Error!");
             }

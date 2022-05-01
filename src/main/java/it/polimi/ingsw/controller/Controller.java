@@ -21,20 +21,65 @@ public class Controller implements Observer<PlayerMove> {
     private Model model;
 
     private synchronized void performMove(PlayerMove move){
+        int result = 0;
         switch (move.getParam1()){
             case 0: {
-                playAssistantCard(move.getPlayer().getIndex(), move.getParam2());
+                result = playAssistantCard(move.getPlayer().getIndex(), move.getParam2());
                 break;
             }
 
-            case 1:{
+            case 1: {
                 if(move.getParam3() == -1)
-                    moveStudentToDiningRoom(move.getPlayer().getIndex(), move.getParam2());
-                else moveStudentToIsland(move.getPlayer().getIndex(), move.getParam2(), move.getParam3());
+                    result = moveStudentToDiningRoom(move.getPlayer().getIndex(), move.getParam2());
+                else
+                    result = moveStudentToIsland(move.getPlayer().getIndex(), move.getParam2(), move.getParam3());
+
+                break;
+            }
+
+            case 2: {
+                //se metto system.out qui la stampa
+                System.out.println("MOVE MOTHERNATURE!  1: " + move.getPlayer().getIndex() + " " + move.getParam2()+ "\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+                result = moveMotherNature(move.getPlayer().getIndex(), move.getParam2());
+                //qui no
+                System.out.println("MOVE MOTHERNATURE!  2\n\n");
+                break;
+            }
+
+            case 3: {
+                result = chooseCloud(move.getPlayer().getIndex(), move.getParam2());
+                break;
+            }
+
+            case 5: { //da valutarne il senso
+                String winner = getTheWinner();
+                System.out.println(winner + "WON THE GAME!\n\n");
+                return;
+            }
+
+            case 10: {
+                if(move.getParam2() == 1){
+                    result = playCharacterCard1(move.getPlayer().getIndex(), move.getParam2(), move.getParam3(), move.getParam4());
+                } else if(move.getParam2() == 3){
+                    result = playCharacterCard3(move.getPlayer().getIndex(), move.getParam2(), move.getParam3());
+                } else if(move.getParam2() == 4){
+                    result = playCharacterCard4(move.getPlayer().getIndex(), move.getParam2());
+                } else if(move.getParam2() == 5){
+                    result = playCharacterCard5(move.getPlayer().getIndex(), move.getParam2(), move.getParam3());
+                } else if(move.getParam2() == 6){
+                    result = playCharacterCard6(move.getPlayer().getIndex(), move.getParam2());
+                } else if(move.getParam2() == 8){
+                    result = playCharacterCard8(move.getPlayer().getIndex(), move.getParam2());
+                } else if(move.getParam2() == 11){
+                    result = playCharacterCard11(move.getPlayer().getIndex(), move.getParam2(), move.getParam3());
+                } else if(move.getParam2() == 12){
+                    result = playCharacterCard12(move.getPlayer().getIndex(), move.getParam2(), move.getParam3());
+                }
                 break;
             }
         }
-        model.performMove(move.getPlayer());
+        if(result == 1)
+           model.performMove(move.getPlayer());
     }
 
     @Override
@@ -62,8 +107,7 @@ public class Controller implements Observer<PlayerMove> {
     public int addPlayer(Player player){
 
         if(model.getPlayers().size() < Parameters.numPlayers) {
-            Player p = player;
-            model.getPlayers().add(p);
+            model.getPlayers().add(player);
             return model.getPlayers().size()-1;
         }
         else{
@@ -75,7 +119,7 @@ public class Controller implements Observer<PlayerMove> {
     public void init(){   //sto seguendo l'inizializzazione della partita
         double casual = Math.random()*12; //(PUNTO 2)
         int mn = (int) casual;
-        model.setExpertMode(Parameters.expertMode);
+        model.setModelParameters(Parameters.numPlayers, Parameters.expertMode);
 
         model.getGameBoard().setMotherNature(mn);  //posiziono madrenatura
 
@@ -292,6 +336,7 @@ public class Controller implements Observer<PlayerMove> {
             if(movements > 0 && movements <= maxMovements){
                 int newPos = (model.getGameBoard().getMotherNature() + movements)%model.getGameBoard().getIslands().size();
                 model.getGameBoard().setMotherNature(newPos);//moves motherNature by specified movements
+                System.out.println("Sto entrando in checkinfluence\n\n");
                 this.checkIslandInfluence(newPos, playerIndex);
             } else return -1;
 
@@ -319,9 +364,10 @@ public class Controller implements Observer<PlayerMove> {
                 }
 
         }
-
+        System.out.println("sto entrando in influence\n\n");
         // vedo chi ha più influenza ora
         Player newPlayer = model.getGameBoard().getIslands().get(islandIndex).Influence(model.getPlayers(), noTowerFlag, twoMorePointsPlayer);
+        System.out.println("sto uscendo in influence\n\n");
 
         if (newPlayer!=null){
             Player oldPlayer = null;  // vedo chi controllava l'isola prima
@@ -329,6 +375,7 @@ public class Controller implements Observer<PlayerMove> {
                 if(pl.PlayerTowerColor().equals(model.getGameBoard().getIslands().get(islandIndex).getTowerColor()))
                     oldPlayer = pl;
             }
+            System.out.println("ho calcolato oldplayer\n\n");
 
             if(oldPlayer == null || !oldPlayer.equals(newPlayer)){
                 //ridò al vecchio giocatore le sue torri e le sostituisco con quelle del nuovo giocatore
@@ -340,6 +387,7 @@ public class Controller implements Observer<PlayerMove> {
                 if(oldPlayer == null)
                     this.getGameBoard().getIslands().get(islandIndex).setNumTower(1);
 
+                System.out.println("sto cambiando colore torri isola\n\n");
                 this.getGameBoard().getIslands().get(islandIndex).changeTowerColor(newPlayer.PlayerTowerColor());
 
                 if(newPlayer.getPlayerSchoolBoard().getTowers().size() == 0){
@@ -347,9 +395,10 @@ public class Controller implements Observer<PlayerMove> {
                     model.setCurrentPhase(GamePhase.GameEnded);
                     return;
                 }
-
+                System.out.println("sto entrando in fusion\n\n");
                 checkIslandFusion(islandIndex);
             }
+            System.out.println("faccio if? riga 380\n\n"); //spoiler: si, visto che questa riga non viene stampata
 
         }
         //se nessuno ha l'influenza o in caso di parità non succede nulla

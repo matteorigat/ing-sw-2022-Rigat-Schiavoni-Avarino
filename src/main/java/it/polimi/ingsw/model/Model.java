@@ -28,6 +28,7 @@ public class Model extends Observable<MoveMessage> implements Serializable {
     private int playerPhaseCounter;
 
     private boolean expertMode;
+    private int numPlayer;
 
     //Constructor Game creates a new Game instance
     public Model() {
@@ -164,7 +165,7 @@ public class Model extends Observable<MoveMessage> implements Serializable {
             System.out.print("\n");
         }
 
-        for(int i=0; i<Parameters.numPlayers; i++){
+        for(int i=0; i<numPlayer; i++){
             System.out.print("Cloud index: " + i + " | ");
             ArrayList<Cloud> clds = (ArrayList<Cloud>) gameBoard.getClouds().clone();
             for (Student s:  clds.get(i).seeStudents()){
@@ -211,7 +212,8 @@ public class Model extends Observable<MoveMessage> implements Serializable {
         return s;
     }
 
-    public void setExpertMode(boolean expertMode) {
+    public void setModelParameters(int numPlayer, boolean expertMode) {
+        this.numPlayer = numPlayer;
         this.expertMode = expertMode;
     }
 }

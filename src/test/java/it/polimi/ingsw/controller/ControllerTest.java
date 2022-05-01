@@ -3,6 +3,8 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.model.Parameters;
 
 import static org.junit.Assert.*;
+
+import it.polimi.ingsw.model.player.Player;
 import org.junit.Test;
 
 public class ControllerTest {
@@ -15,9 +17,12 @@ public class ControllerTest {
         assertNotNull(controller.getGameBoard());
         assertNotNull(controller.getPlayers());
 
-        controller.addPlayer("gius");
-        controller.addPlayer("mef");
-        assertEquals(-1, controller.addPlayer("nico"));
+        Player p1 = new Player("mef", 0);
+        Player p2 = new Player("gius", 1);
+        Player p3 = new Player("nico", 2);
+        controller.addPlayer(p1);
+        controller.addPlayer(p2);
+        assertEquals(-1, controller.addPlayer(p3));
 
         controller.init();
 

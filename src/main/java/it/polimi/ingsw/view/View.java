@@ -27,8 +27,13 @@ public abstract class View extends Observable<PlayerMove> implements Observer<Mo
     }
 
     void handleMove(int param1, int param2, int param3) {
-        System.out.println(param1 + " " + param2);
+        System.out.println(param1 + " " + param2 + " " + param3);
         notify(new PlayerMove(player, param1, param2, param3, this));
+    }
+
+    void handleMove(int param1, int param2, int param3, int param4) {
+        System.out.println(param1 + " " + param2 + " " + param3 + " " + param4);
+        notify(new PlayerMove(player, param1, param2, param3, param4, this));
     }
 
     public void reportError(String message){

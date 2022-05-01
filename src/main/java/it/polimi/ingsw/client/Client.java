@@ -65,6 +65,38 @@ public class Client {
                 try {
                     while (isActive()) {
                         String inputLine = stdin.nextLine();
+
+                        if(inputLine.equals("c")){
+                            String inputLine2 = null;
+                            int c;
+                            System.out.print("Character card index: ");
+                            inputLine = stdin.nextLine();
+                            c = (int)inputLine.charAt(0) - 48;
+                            if(inputLine.length() > 1)
+                                c = c * 10 + (int)inputLine.charAt(1) - 48;
+
+                            if(c == 1){
+                                System.out.print("Insert the student color and island index: ");
+                                inputLine2 = stdin.nextLine();
+
+                            } else if(c == 3){
+                                System.out.print("Insert the island index: ");
+                                inputLine2 = stdin.nextLine();
+
+                            } else if(c == 11){
+                                System.out.print("Insert the student color: ");
+                                inputLine2 = stdin.nextLine();
+
+                            } else if(c == 12){
+                                System.out.print("Insert the student color: ");
+                                inputLine2 = stdin.nextLine();
+                            }
+
+                            if(inputLine2.equals(null))
+                                inputLine = "10," + inputLine;
+                            else
+                                inputLine = "10," + inputLine + "," + inputLine2;
+                        }
                         socketOut.println(inputLine);
                         socketOut.flush();
                     }
