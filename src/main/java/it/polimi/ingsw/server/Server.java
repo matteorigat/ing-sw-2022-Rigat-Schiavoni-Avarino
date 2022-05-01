@@ -52,12 +52,12 @@ public class Server {
         keys = new ArrayList<>(waitingConnection.keySet());
 
         if (waitingConnection.size() == 2) {
-            ClientConnection c1 = waitingConnection.get(keys.get(0));
-            ClientConnection c2 = waitingConnection.get(keys.get(1));
-            Player player1 = new Player(keys.get(0), 0);
-            Player player2 = new Player(keys.get(1), 1);
-            View player1View = new RemoteView(player1, keys.get(1), c1);
-            View player2View = new RemoteView(player2, keys.get(0), c2);
+            ClientConnection c1 = waitingConnection.get(keys.get(1));
+            ClientConnection c2 = waitingConnection.get(keys.get(0));
+            Player player1 = new Player(keys.get(1), 0);
+            Player player2 = new Player(keys.get(0), 1);
+            View player1View = new RemoteView(player1, keys.get(0), c1);
+            View player2View = new RemoteView(player2, keys.get(1), c2);
 
             Controller controller = new Controller();
             controller.setParameters(2,true);
