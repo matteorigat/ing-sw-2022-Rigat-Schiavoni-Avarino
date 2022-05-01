@@ -60,8 +60,11 @@ public class Server {
             View player2View = new RemoteView(player2, keys.get(0), c2);
 
             Controller controller = new Controller();
-            Model model = controller.getModel();
             controller.setParameters(2,true);
+            Model model = controller.getModel();
+            controller.addPlayer(player1);
+            controller.addPlayer(player2);
+            controller.init();
             model.addObserver(player1View);
             model.addObserver(player2View);
             player1View.addObserver(controller);

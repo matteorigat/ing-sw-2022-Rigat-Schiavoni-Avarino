@@ -4,9 +4,10 @@ import it.polimi.ingsw.exceptions.TooManyStudentsOnCloudException;
 import it.polimi.ingsw.model.Parameters;
 import it.polimi.ingsw.model.player.Student;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Cloud {
+public class Cloud implements Serializable {
 
     private ArrayList<Student> students;
     private boolean taken;

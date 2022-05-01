@@ -4,9 +4,10 @@ import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.model.enumeration.TowerColour;
 import it.polimi.ingsw.observer.Observer;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Player {
+public class Player implements Serializable {
     private int index;
     private TowerColour towerColour;
     private String nickname;

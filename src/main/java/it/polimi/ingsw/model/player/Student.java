@@ -2,10 +2,11 @@ package it.polimi.ingsw.model.player;
 
 import it.polimi.ingsw.model.enumeration.Colour;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Student {
+public class Student implements Serializable {
     private Colour colour;
 
     public Student(Colour colour) {

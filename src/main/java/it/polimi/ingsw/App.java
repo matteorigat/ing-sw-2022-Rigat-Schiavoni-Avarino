@@ -29,7 +29,7 @@ public class App
             Student s = b.draw();
             System.out.println(s + "" + i);
         }
-        */
+
 
         Controller controller = new Controller();
         controller.setParameters(2, true);
@@ -40,6 +40,6 @@ public class App
         LocalViewTest view = new LocalViewTest();
         view.setController(controller);
         view.start();
-
+   */
     }
 }

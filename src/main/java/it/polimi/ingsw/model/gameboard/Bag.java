@@ -2,10 +2,11 @@ package it.polimi.ingsw.model.gameboard;
 
 import it.polimi.ingsw.model.player.Student;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Bag {
+public class Bag implements Serializable {
 
     private ArrayList<Student> students;
 

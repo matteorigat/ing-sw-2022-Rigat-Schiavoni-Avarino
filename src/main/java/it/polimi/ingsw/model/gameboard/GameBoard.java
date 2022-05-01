@@ -6,8 +6,9 @@ import it.polimi.ingsw.model.player.Student;
 import it.polimi.ingsw.model.gameboard.characters.*;
 import it.polimi.ingsw.model.gameboard.characters.CharacterCard;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-public class GameBoard {
+public class GameBoard implements Serializable {
 
     private CharacterDeck characterDeck;
     private ArrayList<Island> islands;

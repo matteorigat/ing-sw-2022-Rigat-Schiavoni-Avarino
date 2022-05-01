@@ -46,10 +46,10 @@ public class Controller implements Observer<PlayerMove> {
     }
 
 
-    public int addPlayer(String nickname){
+    public int addPlayer(Player player){
 
         if(model.getPlayers().size() < Parameters.numPlayers) {
-            Player p = new Player(nickname, model.getPlayers().size());
+            Player p = player;
             model.getPlayers().add(p);
             return model.getPlayers().size()-1;
         }

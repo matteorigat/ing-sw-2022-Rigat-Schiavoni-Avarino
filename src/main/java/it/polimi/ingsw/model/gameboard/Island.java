@@ -6,9 +6,10 @@ import it.polimi.ingsw.model.player.Professor;
 import it.polimi.ingsw.model.player.Student;
 import it.polimi.ingsw.model.enumeration.TowerColour;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Island {
+public class Island implements Serializable {
    // private int islandRank;    //numero di isole unite
     //private int islandIndex;
     private int numTower;

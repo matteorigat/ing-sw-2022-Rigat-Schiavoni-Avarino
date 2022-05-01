@@ -5,9 +5,10 @@ import it.polimi.ingsw.model.enumeration.Colour;
 import it.polimi.ingsw.model.enumeration.TowerColour;
 import it.polimi.ingsw.model.gameboard.Island;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class SchoolBoard {
+public class SchoolBoard implements Serializable {
     private ArrayList<Student> studentsEntrance;   //studenti all'entrata: 9
     private DiningRoom diningRoom;
     private ArrayList<Professor> professors;
