@@ -7,12 +7,8 @@ import it.polimi.ingsw.model.gameboard.characters.*;
 import it.polimi.ingsw.model.gameboard.characters.CharacterCard;
 import it.polimi.ingsw.model.gameboard.Cloud;
 import it.polimi.ingsw.model.gameboard.GameBoard;
-import it.polimi.ingsw.model.player.Player;
-import it.polimi.ingsw.model.player.AssistantCard;
-import it.polimi.ingsw.model.player.Professor;
-import it.polimi.ingsw.model.player.Student;
+import it.polimi.ingsw.model.player.*;
 import it.polimi.ingsw.observer.Observer;
-import it.polimi.ingsw.server.PlayerMove;
 
 import java.util.ArrayList;
 
@@ -22,16 +18,16 @@ import java.util.ArrayList;
 
 public class Controller implements Observer<PlayerMove> {
 
+    private Model model;
+
+    private synchronized void performMove(PlayerMove move){
+        model.performMove(move.getPlayer());
+    }
+
     @Override
     public void update(PlayerMove message) {
         performMove(message);
     }
-
-    private synchronized void performMove(PlayerMove move){
-
-    }
-
-    private Model model;
 
 
     //Gets the players of the match

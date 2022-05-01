@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.model.player.MoveMessage;
 import it.polimi.ingsw.model.enumeration.Colour;
 import it.polimi.ingsw.model.enumeration.GamePhase;
 import it.polimi.ingsw.model.enumeration.TowerColour;
@@ -13,7 +14,8 @@ import it.polimi.ingsw.observer.Observable;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Model extends Observable<Model> implements Serializable {
+public class Model extends Observable<MoveMessage> implements Serializable {
+
     private ArrayList<Player> players;
     private GameBoard gameBoard;
 
@@ -33,6 +35,10 @@ public class Model extends Observable<Model> implements Serializable {
         this.playersTurnOrder = new Player[Parameters.numPlayers];
         this.phaseCounter = 0;
         this.playerPhaseCounter = 0;
+    }
+
+    public void performMove(Player player){
+        notify(new MoveMessage(this, player));
     }
 
     public ArrayList<Player> getPlayers() {

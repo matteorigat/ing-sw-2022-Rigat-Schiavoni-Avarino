@@ -14,12 +14,11 @@ public class SocketClientConnection extends Observable<String> implements Client
     private ObjectOutputStream out;
     private Server server;
 
-    private boolean active;
+    private boolean active = true;
 
     public SocketClientConnection(Socket socket, Server server) {
         this.socket = socket;
         this.server = server;
-        this.active = true;
     }
 
     private synchronized boolean isActive(){
@@ -87,3 +86,4 @@ public class SocketClientConnection extends Observable<String> implements Client
         }
     }
 }
+
