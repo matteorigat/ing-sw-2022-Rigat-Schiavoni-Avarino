@@ -57,8 +57,6 @@ public class Server {
             connection.asyncSend("Connected User: " + keys.get(i));
         }
         waitingConnection.put(name, c);
-        if(waitingConnection.size() == 1)
-            c.asyncSend("Waiting for another player");
 
         keys = new ArrayList<>(waitingConnection.keySet());
 
@@ -93,6 +91,57 @@ public class Server {
             } else {
                 c2.asyncSend(gameMessage.moveMessage);
                 c1.asyncSend(gameMessage.waitMessage);
+            }
+
+
+        } else if (waitingConnection.size() == 3) {
+            Controller controller = new Controller();
+            controller.setParameters(numPlayers, expertMode);
+            Model model = controller.getModel();
+
+            ClientConnection c1 = waitingConnection.get(keys.get(2));
+            ClientConnection c2 = waitingConnection.get(keys.get(1));
+            ClientConnection c3 = waitingConnection.get(keys.get(0));
+            Player player1 = new Player(keys.get(2), 0);
+            Player player2 = new Player(keys.get(1), 1);
+            Player player3 = new Player(keys.get(0), 2);
+            View player1View = new RemoteView(player1, keys.get(1) + " and " + keys.get(0), c1);
+            View player2View = new RemoteView(player2, keys.get(2) + " and " + keys.get(0), c2);
+            View player3View = new RemoteView(player3, keys.get(2) + " and " + keys.get(1), c3);
+
+            controller.addPlayer(player1);
+            controller.addPlayer(player2);
+            controller.addPlayer(player3);
+            controller.init();
+            model.addObserver(player1View);
+            model.addObserver(player2View);
+            model.addObserver(player3View);
+            player1View.addObserver(controller);
+            player2View.addObserver(controller);
+            player3View.addObserver(controller);
+            playingConnection.put(c1, c2);
+            playingConnection.put(c1, c3);
+            playingConnection.put(c2, c1);
+            playingConnection.put(c2, c3);
+            playingConnection.put(c3, c1);
+            playingConnection.put(c3, c2);
+            waitingConnection.clear();
+            c1.asyncSend(model);
+            c2.asyncSend(model);
+            c3.asyncSend(model);
+
+            if(model.getCurrentPlayer() == player1.getIndex()){
+                c1.asyncSend(gameMessage.moveMessage);
+                c2.asyncSend(gameMessage.waitMessage);
+                c3.asyncSend(gameMessage.waitMessage);
+            } else if(model.getCurrentPlayer() == player2.getIndex()){
+                c1.asyncSend(gameMessage.waitMessage);
+                c2.asyncSend(gameMessage.moveMessage);
+                c3.asyncSend(gameMessage.waitMessage);
+            } else {
+                c1.asyncSend(gameMessage.waitMessage);
+                c2.asyncSend(gameMessage.waitMessage);
+                c3.asyncSend(gameMessage.moveMessage);
             }
         }
     }
