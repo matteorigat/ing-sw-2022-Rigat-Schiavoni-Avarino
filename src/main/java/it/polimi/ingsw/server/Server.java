@@ -22,6 +22,10 @@ public class Server {
     private ExecutorService executor = Executors.newFixedThreadPool(128);
     private Map<String, ClientConnection> waitingConnection = new HashMap<>();
     private Map<ClientConnection, ClientConnection> playingConnection = new HashMap<>();
+    private boolean chooseMode;
+    private int numPlayers;
+    private boolean expertMode;
+
 
     //Deregister connection
     public synchronized void deregisterConnection(ClientConnection c) {
@@ -39,6 +43,12 @@ public class Server {
         }
     }
 
+    public void setParameters(int numPlayers, boolean expertMode){
+        this.numPlayers = numPlayers;
+        this.expertMode = expertMode;
+    }
+
+
     //Wait for another player
     public synchronized void lobby(ClientConnection c, String name){
         List<String> keys = new ArrayList<>(waitingConnection.keySet());
@@ -54,7 +64,7 @@ public class Server {
 
         if (waitingConnection.size() == 2) {
             Controller controller = new Controller();
-            controller.setParameters(2,true);
+            controller.setParameters(numPlayers, expertMode);
             Model model = controller.getModel();
 
             ClientConnection c1 = waitingConnection.get(keys.get(1));
@@ -107,4 +117,15 @@ public class Server {
         }
     }
 
+    public boolean isChooseMode() {
+        return chooseMode;
+    }
+
+    public void setChooseMode(boolean chooseMode) {
+        this.chooseMode = chooseMode;
+    }
+
+    public Map<String, ClientConnection> getWaitingConnection() {
+        return waitingConnection;
+    }
 }

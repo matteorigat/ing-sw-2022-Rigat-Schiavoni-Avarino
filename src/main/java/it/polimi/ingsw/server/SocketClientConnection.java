@@ -68,6 +68,8 @@ public class SocketClientConnection extends Observable<String> implements Client
     public void run() {
         Scanner in;
         String name;
+        int numPlayers;
+        Boolean expertMode;
         try{
             in = new Scanner(socket.getInputStream());
             out = new ObjectOutputStream(socket.getOutputStream());
@@ -81,7 +83,26 @@ public class SocketClientConnection extends Observable<String> implements Client
             send("Welcome!\nWhat is your name?");
             String read = in.nextLine();
             name = read;
+            if(server.isChooseMode())
+                send("The first player is choosing the game mode, please wait the beginning of the game");
             server.lobby(this, name);
+            synchronized (this) {
+                synchronized (server) {
+                    if (server.getWaitingConnection().size() == 1) {
+                        server.setChooseMode(true);
+                        send("How many players?");
+                        read = in.nextLine();
+                        numPlayers = Integer.parseInt(read);
+                        send("Expert mode? y or n");
+                        read = in.nextLine();
+                        if (read.equals("y"))
+                            expertMode = true;
+                        else expertMode = false;
+                        server.setParameters(numPlayers, expertMode);
+                        server.setChooseMode(false);
+                    }
+                }
+            }
             while(isActive()){
                 read = in.nextLine();
                 notify(read);
