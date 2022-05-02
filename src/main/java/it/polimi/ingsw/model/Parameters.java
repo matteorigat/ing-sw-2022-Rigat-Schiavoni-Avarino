@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model;
 
+import java.io.Serializable;
+
 public class Parameters {
     public static int numPlayers;
     public static int numClouds;
@@ -27,5 +29,4 @@ public class Parameters {
             entranceStudents = 9;
         }
     }
-
 }

@@ -4,6 +4,7 @@ import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.observer.Observer;
+import it.polimi.ingsw.utils.gameMessage;
 import it.polimi.ingsw.view.RemoteView;
 import it.polimi.ingsw.view.View;
 
@@ -52,6 +53,10 @@ public class Server {
         keys = new ArrayList<>(waitingConnection.keySet());
 
         if (waitingConnection.size() == 2) {
+            Controller controller = new Controller();
+            controller.setParameters(2,true);
+            Model model = controller.getModel();
+
             ClientConnection c1 = waitingConnection.get(keys.get(1));
             ClientConnection c2 = waitingConnection.get(keys.get(0));
             Player player1 = new Player(keys.get(1), 0);
@@ -59,9 +64,6 @@ public class Server {
             View player1View = new RemoteView(player1, keys.get(0), c1);
             View player2View = new RemoteView(player2, keys.get(1), c2);
 
-            Controller controller = new Controller();
-            controller.setParameters(2,true);
-            Model model = controller.getModel();
             controller.addPlayer(player1);
             controller.addPlayer(player2);
             controller.init();
@@ -76,11 +78,11 @@ public class Server {
             c2.asyncSend(model);
 
             if(model.getCurrentPlayer() == player1.getIndex()){
-                c1.asyncSend("turno tuo");
-                c2.asyncSend("aspetta");
+                c1.asyncSend(gameMessage.moveMessage);
+                c2.asyncSend(gameMessage.waitMessage);
             } else {
-                c2.asyncSend("turno tuo");
-                c1.asyncSend("aspetta");
+                c2.asyncSend(gameMessage.moveMessage);
+                c1.asyncSend(gameMessage.waitMessage);
             }
         }
     }

@@ -9,11 +9,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class SchoolBoard implements Serializable {
-    private ArrayList<Student> studentsEntrance;   //studenti all'entrata: 9
+    private ArrayList<Student> studentsEntrance;
     private DiningRoom diningRoom;
     private ArrayList<Professor> professors;
     private ArrayList<Tower> towers;
     private TowerColour towerColor;
+
+    private int numTower;
 
     public SchoolBoard(TowerColour towerColour) {
         this.studentsEntrance = new ArrayList<>();

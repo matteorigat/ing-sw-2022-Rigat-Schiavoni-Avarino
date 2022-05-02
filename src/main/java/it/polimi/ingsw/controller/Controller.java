@@ -9,6 +9,7 @@ import it.polimi.ingsw.model.gameboard.Cloud;
 import it.polimi.ingsw.model.gameboard.GameBoard;
 import it.polimi.ingsw.model.player.*;
 import it.polimi.ingsw.observer.Observer;
+import it.polimi.ingsw.utils.gameMessage;
 
 import java.util.ArrayList;
 
@@ -21,6 +22,11 @@ public class Controller implements Observer<PlayerMove> {
     private Model model;
 
     private synchronized void performMove(PlayerMove move){
+        if(getCurrentPlayer() != move.getPlayer().getIndex()){
+            move.getView().reportError(gameMessage.wrongTurnMessage);
+            return;
+        }
+
         int result = 0;
         switch (move.getParam1()){
             case 0: {
@@ -39,7 +45,7 @@ public class Controller implements Observer<PlayerMove> {
 
             case 2: {
                 //se metto system.out qui la stampa
-                System.out.println("MOVE MOTHERNATURE!  1: " + move.getPlayer().getIndex() + " " + move.getParam2()+ "\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+                System.out.println("MOVE MOTHERNATURE!  1: " + move.getPlayer().getIndex() + " " + move.getParam2()+ "\n\n");
                 result = moveMotherNature(move.getPlayer().getIndex(), move.getParam2());
                 //qui no
                 System.out.println("MOVE MOTHERNATURE!  2\n\n");
@@ -80,6 +86,8 @@ public class Controller implements Observer<PlayerMove> {
         }
         if(result == 1)
            model.performMove(move.getPlayer());
+        else
+            move.getView().reportError(gameMessage.invalidMoveMessage);
     }
 
     @Override
@@ -336,7 +344,6 @@ public class Controller implements Observer<PlayerMove> {
             if(movements > 0 && movements <= maxMovements){
                 int newPos = (model.getGameBoard().getMotherNature() + movements)%model.getGameBoard().getIslands().size();
                 model.getGameBoard().setMotherNature(newPos);//moves motherNature by specified movements
-                System.out.println("Sto entrando in checkinfluence\n\n");
                 this.checkIslandInfluence(newPos, playerIndex);
             } else return -1;
 
@@ -364,10 +371,8 @@ public class Controller implements Observer<PlayerMove> {
                 }
 
         }
-        System.out.println("sto entrando in influence\n\n");
         // vedo chi ha più influenza ora
         Player newPlayer = model.getGameBoard().getIslands().get(islandIndex).Influence(model.getPlayers(), noTowerFlag, twoMorePointsPlayer);
-        System.out.println("sto uscendo in influence\n\n");
 
         if (newPlayer!=null){
             Player oldPlayer = null;  // vedo chi controllava l'isola prima
@@ -375,19 +380,20 @@ public class Controller implements Observer<PlayerMove> {
                 if(pl.PlayerTowerColor().equals(model.getGameBoard().getIslands().get(islandIndex).getTowerColor()))
                     oldPlayer = pl;
             }
-            System.out.println("ho calcolato oldplayer\n\n");
 
             if(oldPlayer == null || !oldPlayer.equals(newPlayer)){
                 //ridò al vecchio giocatore le sue torri e le sostituisco con quelle del nuovo giocatore
                 for(int i=0; i<=model.getGameBoard().getIslands().get(islandIndex).getNumTower(); i++){
                     if(oldPlayer != null)
                         oldPlayer.getPlayerSchoolBoard().addTower(oldPlayer.PlayerTowerColor());
+                    System.out.println("sto per togliere torri a newPlayer\n\n");
                     newPlayer.getPlayerSchoolBoard().getTowers().remove(0);
+                    System.out.println("ho tolto torri a newPlayer\n\n");
                 }
-                if(oldPlayer == null)
+                if(oldPlayer == null){
                     this.getGameBoard().getIslands().get(islandIndex).setNumTower(1);
+                }
 
-                System.out.println("sto cambiando colore torri isola\n\n");
                 this.getGameBoard().getIslands().get(islandIndex).changeTowerColor(newPlayer.PlayerTowerColor());
 
                 if(newPlayer.getPlayerSchoolBoard().getTowers().size() == 0){
@@ -395,11 +401,9 @@ public class Controller implements Observer<PlayerMove> {
                     model.setCurrentPhase(GamePhase.GameEnded);
                     return;
                 }
-                System.out.println("sto entrando in fusion\n\n");
+
                 checkIslandFusion(islandIndex);
             }
-            System.out.println("faccio if? riga 380\n\n"); //spoiler: si, visto che questa riga non viene stampata
-
         }
         //se nessuno ha l'influenza o in caso di parità non succede nulla
     }

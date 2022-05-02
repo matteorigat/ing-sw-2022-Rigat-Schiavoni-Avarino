@@ -25,7 +25,7 @@ public class RemoteView extends View {
                 else if(inputs.length == 4)
                     handleMove(Integer.parseInt(inputs[0]), Integer.parseInt(inputs[1]), Integer.parseInt(inputs[2]), Integer.parseInt(inputs[3]));
             }catch(IllegalArgumentException | ArrayIndexOutOfBoundsException e){
-                clientConnection.asyncSend("Error!");
+                clientConnection.asyncSend("Error! Write the move well");
             }
         }
 
