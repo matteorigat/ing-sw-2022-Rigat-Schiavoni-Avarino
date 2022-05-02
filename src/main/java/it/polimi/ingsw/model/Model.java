@@ -183,8 +183,9 @@ public class Model extends Observable<MoveMessage> implements Serializable {
             System.out.println("\nPHASE: " + currentPhase);
         }
         System.out.println("CURRENT PLAYER: " + currentPlayer + " -> " + players.get(currentPlayer).getNickname());
-        System.out.println("Students in the bag: " + gameBoard.getBag().getSize());
-        System.out.println("Mn on: " + gameBoard.getMotherNature());
+        System.out.println("");
+        //System.out.println("Students in the bag: " + gameBoard.getBag().getSize());
+        //System.out.println("Mn on: " + gameBoard.getMotherNature());
     }
 
     private String textColor(Colour colour){
