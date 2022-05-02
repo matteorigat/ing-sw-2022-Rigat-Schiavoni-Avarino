@@ -64,6 +64,10 @@ public class SocketClientConnection extends Observable<String> implements Client
         }).start();
     }
 
+    public Socket getSocket() {
+        return socket;
+    }
+
     @Override
     public void run() {
         Scanner in;
@@ -81,10 +85,22 @@ public class SocketClientConnection extends Observable<String> implements Client
             send("╚══════╝╚═╝░░╚═╝╚═╝╚═╝░░╚═╝╚═╝░░╚══╝░░░╚═╝░░░░░░╚═╝░░░╚═════╝░\n");
 
             send("Welcome!\nWhat is your name?");
-            String read = in.nextLine();
-            name = read;
+            String read;
+            boolean duplicateName;
+            do {
+                duplicateName = false;
+                read = in.nextLine();
+                name = read;
+                for(String s: server.getNicknames()){
+                    if(s.equals(name)){
+                        send("Another player already chosed this name, try with a new one!\n");
+                        duplicateName = true;
+                    }
+                }
+            } while (duplicateName);
+
             if(server.isChooseMode())
-                send("The first player is choosing the game mode, please wait the beginning of the game");
+                send("The first player is choosing the game mode, please wait the beginning of the game\n");
             server.lobby(this, name);
             synchronized (server) {
                 if (server.getWaitingConnection().size() == 1) {
@@ -100,9 +116,9 @@ public class SocketClientConnection extends Observable<String> implements Client
                     server.setParameters(numPlayers, expertMode);
                     server.setChooseMode(false);
                 }
+                if(server.getWaitingConnection().size() < server.getNumPlayers() && server.getWaitingConnection().size() != 0)
+                    send("Waiting for another player\n");
             }
-            if(server.getWaitingConnection().size() == 1)
-                send("Waiting for another player");
 
             while(isActive()){
                 read = in.nextLine();
@@ -113,6 +129,8 @@ public class SocketClientConnection extends Observable<String> implements Client
         }finally{
             close();
         }
+
+
     }
 }
 

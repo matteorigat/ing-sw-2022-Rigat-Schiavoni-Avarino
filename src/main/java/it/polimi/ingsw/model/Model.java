@@ -48,16 +48,8 @@ public class Model extends Observable<MoveMessage> implements Serializable {
         return players;
     }
 
-    public void setPlayers(ArrayList<Player> players) {
-        this.players = players;
-    }
-
     public GameBoard getGameBoard() {
         return gameBoard;
-    }
-
-    public void setGameBoard(GameBoard gameBoard) {
-        this.gameBoard = gameBoard;
     }
 
     public Player getWinner() {
@@ -86,10 +78,6 @@ public class Model extends Observable<MoveMessage> implements Serializable {
 
     public Player[] getPlayersTurnOrder() {
         return playersTurnOrder;
-    }
-
-    public void setPlayersTurnOrder(int i, Player playersTurnOrder) {
-        this.playersTurnOrder[i] = playersTurnOrder;
     }
 
     public int getPhaseCounter() {

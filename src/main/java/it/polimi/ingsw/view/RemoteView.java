@@ -51,11 +51,11 @@ public class RemoteView extends View {
         showMessage(message.getModel());
         String resultMsg = "";
 
-        if(message.getPlayer() == getPlayer()){
-            resultMsg += gameMessage.waitMessage;
+        if(message.getModel().getCurrentPlayer() == getPlayer().getIndex()){
+            resultMsg += gameMessage.moveMessage;
         }
         else{
-            resultMsg += gameMessage.moveMessage;
+            resultMsg += gameMessage.waitMessage;
         }
 
         showMessage(resultMsg);

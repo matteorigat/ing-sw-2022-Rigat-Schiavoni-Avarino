@@ -14,6 +14,7 @@ import java.net.Socket;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.Scanner;
 
 public class Server {
 
@@ -22,6 +23,8 @@ public class Server {
     private ExecutorService executor = Executors.newFixedThreadPool(128);
     private Map<String, ClientConnection> waitingConnection = new HashMap<>();
     private Map<ClientConnection, ClientConnection> playingConnection = new HashMap<>();
+
+    private ArrayList<String> nicknames = new ArrayList<>();
     private boolean chooseMode;
     private int numPlayers;
     private boolean expertMode;
@@ -57,10 +60,10 @@ public class Server {
             connection.asyncSend("Connected User: " + keys.get(i));
         }
         waitingConnection.put(name, c);
-
+        nicknames.add(name);
         keys = new ArrayList<>(waitingConnection.keySet());
 
-        if (waitingConnection.size() == 2) {
+        if (waitingConnection.size() == 2 && numPlayers == 2) {
             Controller controller = new Controller();
             controller.setParameters(numPlayers, expertMode);
             Model model = controller.getModel();
@@ -81,7 +84,8 @@ public class Server {
             player2View.addObserver(controller);
             playingConnection.put(c1, c2);
             playingConnection.put(c2, c1);
-            waitingConnection.clear();
+            waitingConnection.remove(keys.get(1));
+            waitingConnection.remove(keys.get(0));
             c1.asyncSend(model);
             c2.asyncSend(model);
 
@@ -94,7 +98,7 @@ public class Server {
             }
 
 
-        } else if (waitingConnection.size() == 3) {
+        } else if (waitingConnection.size() == 3 && numPlayers == 3) {
             Controller controller = new Controller();
             controller.setParameters(numPlayers, expertMode);
             Model model = controller.getModel();
@@ -120,12 +124,11 @@ public class Server {
             player2View.addObserver(controller);
             player3View.addObserver(controller);
             playingConnection.put(c1, c2);
-            playingConnection.put(c1, c3);
-            playingConnection.put(c2, c1);
             playingConnection.put(c2, c3);
             playingConnection.put(c3, c1);
-            playingConnection.put(c3, c2);
-            waitingConnection.clear();
+            waitingConnection.remove(keys.get(2));
+            waitingConnection.remove(keys.get(1));
+            waitingConnection.remove(keys.get(0));
             c1.asyncSend(model);
             c2.asyncSend(model);
             c3.asyncSend(model);
@@ -176,5 +179,13 @@ public class Server {
 
     public Map<String, ClientConnection> getWaitingConnection() {
         return waitingConnection;
+    }
+
+    public int getNumPlayers() {
+        return numPlayers;
+    }
+
+    public ArrayList<String> getNicknames() {
+        return nicknames;
     }
 }
