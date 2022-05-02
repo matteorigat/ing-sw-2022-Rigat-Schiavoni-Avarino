@@ -33,11 +33,19 @@ public class Server {
     //Deregister connection
     public synchronized void deregisterConnection(ClientConnection c) {
         ClientConnection opponent = playingConnection.get(c);
+        ClientConnection opponent2 = playingConnection.get(opponent);
+
         if(opponent != null) {
             opponent.closeConnection();
         }
+
+        if(opponent2 != null) {
+            opponent2.closeConnection();
+        }
+
         playingConnection.remove(c);
         playingConnection.remove(opponent);
+        playingConnection.remove(opponent2);
         Iterator<String> iterator = waitingConnection.keySet().iterator();
         while(iterator.hasNext()){
             if(waitingConnection.get(iterator.next())==c){
