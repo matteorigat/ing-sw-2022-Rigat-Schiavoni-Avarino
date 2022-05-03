@@ -653,6 +653,24 @@ public class Controller implements Observer<PlayerMove> {
         }
         return -1;
     }
+    /*
+    public int playCharacterCard7(int playerIndex, int cardIndex, int colorIndex, int islandIndex){
+        if(playerIndex == model.getCurrentPlayer()){
+            for (CharacterCard c: model.getGameBoard().getThreeCharacterCards()){
+                if(cardIndex == c.getIndex() && model.getPlayers().get(playerIndex).getCoins() >= c.getCost() && ((Character7) c).checkColorExists(colorIndex)){
+                    System.out.println("STAI GIOCANDO LA CARTA 7");
+                    model.getPlayers().get(playerIndex).removeCoin(c.getCost());
+                    model.getGameBoard().addCoinsToGeneralReserve(c.getCost() - 1); //meno uno perchè una va sulla carta
+                    c.play();
+
+                    model.getGameBoard().addStudentOnIsland(islandIndex, ((Character7) c).getStudent(colorIndex));
+                    ((Character7) c).addStudent(model.getGameBoard().getBag().draw());
+                    return 1;
+                }
+            }
+        }
+        return -1;
+    }*/
 
     public int playCharacterCard8(int playerIndex, int cardIndex){
         if(playerIndex == model.getCurrentPlayer() && model.getCurrentPhase().ordinal() <= GamePhase.MoveMotherNature.ordinal()){

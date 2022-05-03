@@ -1,21 +1,21 @@
 package it.polimi.ingsw.model.gameboard.characters;
 
-import it.polimi.ingsw.model.player.Student;
 import it.polimi.ingsw.model.enumeration.Colour;
+import it.polimi.ingsw.model.player.Student;
 
 import java.util.ArrayList;
 
-public class Character11 implements CharacterCard{
+public class Character7 implements CharacterCard{
     private int index;
     private int cost;
     private ArrayList<Student> students;
 
-    private static final String Description = "Prendi 1 studente e piazzalo nella sala";
-    public Character11() {
-        this.index = 11;
-        this.cost = 2;
-        this.students = new ArrayList<>();
+    private static final String Description = "Prendi 3 studenti e scambiali con 3 del tuo ingresso";
 
+    public Character7() {
+        this.index = 7;
+        this.cost = 1;
+        this.students = new ArrayList<>();
     }
 
     public Student getStudent(int colorIndex) {

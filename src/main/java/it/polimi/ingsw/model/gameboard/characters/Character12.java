@@ -29,6 +29,6 @@ public class Character12 implements CharacterCard{
     @Override
     public String toString() {
         return  "index: " + index +
-                "\tcost: " + cost +  "\t\t" +Description;
+                "\tcost: " + cost +  "\t\t" + Description;
     }
 }

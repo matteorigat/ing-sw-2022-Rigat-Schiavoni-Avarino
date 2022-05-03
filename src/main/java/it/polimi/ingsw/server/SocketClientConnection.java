@@ -64,10 +64,6 @@ public class SocketClientConnection extends Observable<String> implements Client
         }).start();
     }
 
-    public Socket getSocket() {
-        return socket;
-    }
-
     @Override
     public void run() {
         Scanner in;
@@ -129,7 +125,6 @@ public class SocketClientConnection extends Observable<String> implements Client
         }finally{
             close();
         }
-
 
     }
 }

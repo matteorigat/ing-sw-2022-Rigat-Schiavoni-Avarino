@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.model.Model;
+import it.polimi.ingsw.model.enumeration.GamePhase;
 import it.polimi.ingsw.model.player.MoveMessage;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.observer.Observer;
@@ -12,19 +13,28 @@ public class RemoteView extends View {
 
     private ClientConnection clientConnection;
 
+    private int phaseCounter = 0;
+
     private class MessageReceiver implements Observer<String> {
 
         @Override
         public void update(String message) {
             System.out.println("Received: " + message);
+            System.out.println("Phase: " + phaseCounter);
             try{
-                String[] inputs = message.split(",");
-                if(inputs.length == 2)
-                    handleMove(Integer.parseInt(inputs[0]), Integer.parseInt(inputs[1]));
+                String[] inputs;
+                if(message.length() > 1){
+                    inputs = message.split(",");
+                } else {
+                    inputs = new String[1];
+                    inputs[0] = message;
+                }
+                if(inputs.length == 1)
+                    handleMove(phaseCounter, Integer.parseInt(inputs[0]));
+                else if(inputs.length == 2)
+                    handleMove(phaseCounter, Integer.parseInt(inputs[0]), Integer.parseInt(inputs[1]));
                 else if(inputs.length == 3)
-                    handleMove(Integer.parseInt(inputs[0]), Integer.parseInt(inputs[1]), Integer.parseInt(inputs[2]));
-                else if(inputs.length == 4)
-                    handleMove(Integer.parseInt(inputs[0]), Integer.parseInt(inputs[1]), Integer.parseInt(inputs[2]), Integer.parseInt(inputs[3]));
+                    handleMove(phaseCounter, Integer.parseInt(inputs[0]), Integer.parseInt(inputs[1]), Integer.parseInt(inputs[2]));
             }catch(IllegalArgumentException | ArrayIndexOutOfBoundsException e){
                 clientConnection.asyncSend("\u001B[5;31mError! Write the move well\u001B[0m");
             }
@@ -49,6 +59,7 @@ public class RemoteView extends View {
     @Override
     public void update(MoveMessage message){
         showMessage(message.getModel());
+        phaseCounter = message.getModel().getCurrentPhase().ordinal();
         String resultMsg = "";
 
         if(message.getModel().getCurrentPlayer() == getPlayer().getIndex()){

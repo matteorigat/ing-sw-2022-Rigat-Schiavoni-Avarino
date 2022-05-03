@@ -66,7 +66,7 @@ public class Client {
                     while (isActive()) {
                         String inputLine = stdin.nextLine();
 
-                        if(inputLine.equals("c")){
+                        if(inputLine.equals("c")){ //va cambiato
                             String inputLine2 = null;
                             int c;
                             System.out.print("Character card index: ");

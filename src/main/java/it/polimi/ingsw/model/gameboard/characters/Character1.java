@@ -61,6 +61,6 @@ public class Character1 implements CharacterCard{
     public String toString() {
         return  "index: " + index +
                 "\tcost: " + cost +
-                "\t\tstudents: " + students +  "\t\t" +Description;
+                "\t\tstudents: " + students +  "\t\t" + Description;
     }
 }

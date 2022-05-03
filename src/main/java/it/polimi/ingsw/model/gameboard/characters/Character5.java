@@ -36,6 +36,6 @@ public class Character5 implements CharacterCard{
     public String toString() {
         return  "index: " + index +
                 "\tcost: " + cost +
-                "\t\tnoEntry: " + noEntry +  "\t\t" +Description;
+                "\t\tnoEntry: " + noEntry +  "\t\t" + Description;
     }
 }
