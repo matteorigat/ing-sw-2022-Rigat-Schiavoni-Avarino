@@ -61,6 +61,15 @@ public class SchoolBoard implements Serializable {
         }
         return coin;
     }
+    /* serve per la carta 7
+    public void removeStudentFromEntrance(int studentColour) {
+        for (Student s : studentsEntrance) {
+            if (s.getColour().equals(Colour.values()[studentColour])) {
+                this.studentsEntrance.remove(s);
+                break;
+            }
+        }
+    }  */
 
     public void moveStudentToIsland(int studentColour, Island i) {
         for (Student s : studentsEntrance) {

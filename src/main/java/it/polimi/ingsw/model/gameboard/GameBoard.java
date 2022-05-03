@@ -51,6 +51,9 @@ public class GameBoard implements Serializable {
             if(c.getIndex() == 1){
                 for (int i=0; i<4; i++)
                     ((Character1) c).addStudent(getBag().draw());
+            } else if(c.getIndex() == 7){
+                for (int i=0; i<6; i++)
+                    ((Character7) c).addStudent(getBag().draw());
             } else if(c.getIndex() == 11){
                 for (int i=0; i<4; i++)
                     ((Character11) c).addStudent(getBag().draw());

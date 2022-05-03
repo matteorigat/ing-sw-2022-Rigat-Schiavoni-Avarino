@@ -44,11 +44,7 @@ public class Controller implements Observer<PlayerMove> {
             }
 
             case 2: {
-                //se metto system.out qui la stampa
-                System.out.println("MOVE MOTHERNATURE!  1: " + move.getPlayer().getIndex() + " " + move.getParam2()+ "\n\n");
                 result = moveMotherNature(move.getPlayer().getIndex(), move.getParam2());
-                //qui no
-                System.out.println("MOVE MOTHERNATURE!  2\n\n");
                 break;
             }
 
@@ -63,7 +59,7 @@ public class Controller implements Observer<PlayerMove> {
                 return;
             }
 
-            case 10: {
+            case 100: {
                 if(move.getParam2() == 1){
                     result = playCharacterCard1(move.getPlayer().getIndex(), move.getParam2(), move.getParam3(), move.getParam4());
                 } else if(move.getParam2() == 3){
@@ -289,35 +285,7 @@ public class Controller implements Observer<PlayerMove> {
                         model.getPlayers().get(playerIndex).addCoin();
 
                 //controllo chi possiede il professore ora
-
-                Player oldProfessorOwner = null;
-                for (Player p : model.getPlayers())  //vedo chi aveva il professore prima
-                    for (Professor pr : p.getPlayerSchoolBoard().getProfessors())
-                        if (pr.getProfessorColour().equals(Colour.values()[colour])){
-                            oldProfessorOwner = p;
-                            break;
-                        }
-
-                ArrayList<Player> rank = new ArrayList<>();
-                int max = 0;
-                for (Player p : model.getPlayers()){  //trovo il giocatore con più studenti
-                    if(max < p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colour])){
-                        max = p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colour]);
-                        rank.clear();
-                        rank.add(p);
-                    }else if (max == p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colour]) && max != 0){  //qui ho parità
-                        rank.add(p);
-                    }
-                }
-
-                if(rank.size() == 1){
-                    if(oldProfessorOwner == null){
-                        rank.get(0).getPlayerSchoolBoard().addProfessor(Colour.values()[colour]);
-                    } else if(!oldProfessorOwner.equals(rank.get(0))){
-                        oldProfessorOwner.getPlayerSchoolBoard().removeProfessor(Colour.values()[colour]);
-                        rank.get(0).getPlayerSchoolBoard().addProfessor(Colour.values()[colour]);
-                    }
-                }
+                checkProfessorProperty(colour);
 
                 model.setPhaseCounter(model.getPhaseCounter() + 1);
                 if (model.getPhaseCounter()  == Parameters.numCloudStudents) {
@@ -328,6 +296,36 @@ public class Controller implements Observer<PlayerMove> {
                 return 1;
             } else return -1;
         } else return -1;
+    }
+    private void checkProfessorProperty(int colorIndex){
+        Player oldProfessorOwner = null;
+        for (Player p : model.getPlayers())  //vedo chi aveva il professore prima
+            for (Professor pr : p.getPlayerSchoolBoard().getProfessors())
+                if (pr.getProfessorColour().equals(Colour.values()[colorIndex])){
+                    oldProfessorOwner = p;
+                    break;
+                }
+
+        ArrayList<Player> rank = new ArrayList<>();
+        int max = 0;
+        for (Player p : model.getPlayers()){  //trovo il giocatore con più studenti
+            if(max < p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colorIndex])){
+                max = p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colorIndex]);
+                rank.clear();
+                rank.add(p);
+            }else if (max == p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colorIndex]) && max != 0){  //qui ho parità
+                rank.add(p);
+            }
+        }
+
+        if(rank.size() == 1){
+            if(oldProfessorOwner == null){
+                rank.get(0).getPlayerSchoolBoard().addProfessor(Colour.values()[colorIndex]);
+            } else if(!oldProfessorOwner.equals(rank.get(0))){
+                oldProfessorOwner.getPlayerSchoolBoard().removeProfessor(Colour.values()[colorIndex]);
+                rank.get(0).getPlayerSchoolBoard().addProfessor(Colour.values()[colorIndex]);
+            }
+        }
     }
 
     //Fase azione punto 2.1
@@ -386,9 +384,7 @@ public class Controller implements Observer<PlayerMove> {
                 for(int i=0; i<=model.getGameBoard().getIslands().get(islandIndex).getNumTower(); i++){
                     if(oldPlayer != null)
                         oldPlayer.getPlayerSchoolBoard().addTower(oldPlayer.PlayerTowerColor());
-                    System.out.println("sto per togliere torri a newPlayer\n\n");
                     newPlayer.getPlayerSchoolBoard().getTowers().remove(0);
-                    System.out.println("ho tolto torri a newPlayer\n\n");
                 }
                 if(oldPlayer == null){
                     this.getGameBoard().getIslands().get(islandIndex).setNumTower(1);
@@ -566,6 +562,20 @@ public class Controller implements Observer<PlayerMove> {
         return model;
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public int playCharacterCard1(int playerIndex, int cardIndex, int colorIndex, int islandIndex){
         if(playerIndex == model.getCurrentPlayer()){
             for (CharacterCard c: model.getGameBoard().getThreeCharacterCards()){
@@ -654,23 +664,45 @@ public class Controller implements Observer<PlayerMove> {
         return -1;
     }
     /*
-    public int playCharacterCard7(int playerIndex, int cardIndex, int colorIndex, int islandIndex){
+    public int playCharacterCard7(int playerIndex, int cardIndex, int cardStudent1, int cardStudent2, int cardStudent3, int entranceStudent1, int entranceStudent2, int entranceStudent3){
         if(playerIndex == model.getCurrentPlayer()){
             for (CharacterCard c: model.getGameBoard().getThreeCharacterCards()){
-                if(cardIndex == c.getIndex() && model.getPlayers().get(playerIndex).getCoins() >= c.getCost() && ((Character7) c).checkColorExists(colorIndex)){
+                if(cardIndex == c.getIndex() && model.getPlayers().get(playerIndex).getCoins() >= c.getCost() && ((Character7) c).checkColorExists(cardStudent1) && ((Character7) c).checkColorExists(cardStudent2) && ((Character7) c).checkColorExists(cardStudent3)){
+                    //controllo se i tre studenti del suo ingresso sono giusti
+                    boolean validStudents = true;
+                    for(Student s: model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance()){
+                        if(entranceStudent1 != s.getColour().ordinal() && entranceStudent1 < 5)
+                            validStudents = false;
+                        else if(entranceStudent2 != s.getColour().ordinal() && entranceStudent1 < 5)
+                            validStudents = false;
+                        else if(entranceStudent3 != s.getColour().ordinal() && entranceStudent1 < 5)
+                            validStudents = false;
+                    }
+                    if(!validStudents)
+                        return -1;
+
                     System.out.println("STAI GIOCANDO LA CARTA 7");
                     model.getPlayers().get(playerIndex).removeCoin(c.getCost());
                     model.getGameBoard().addCoinsToGeneralReserve(c.getCost() - 1); //meno uno perchè una va sulla carta
                     c.play();
 
-                    model.getGameBoard().addStudentOnIsland(islandIndex, ((Character7) c).getStudent(colorIndex));
+                    model.getPlayers().get(playerIndex).getPlayerSchoolBoard().removeStudentFromEntrance(entranceStudent1);
+                    model.getPlayers().get(playerIndex).getPlayerSchoolBoard().removeStudentFromEntrance(entranceStudent2);
+                    model.getPlayers().get(playerIndex).getPlayerSchoolBoard().removeStudentFromEntrance(entranceStudent3);
+
+                    model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance().add(((Character7) c).getStudent(cardStudent1));
+                    model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance().add(((Character7) c).getStudent(cardStudent2));
+                    model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance().add(((Character7) c).getStudent(cardStudent3));
+
+                    ((Character7) c).addStudent(model.getGameBoard().getBag().draw());
+                    ((Character7) c).addStudent(model.getGameBoard().getBag().draw());
                     ((Character7) c).addStudent(model.getGameBoard().getBag().draw());
                     return 1;
                 }
             }
         }
         return -1;
-    }*/
+    } */
 
     public int playCharacterCard8(int playerIndex, int cardIndex){
         if(playerIndex == model.getCurrentPlayer() && model.getCurrentPhase().ordinal() <= GamePhase.MoveMotherNature.ordinal()){
@@ -706,35 +738,7 @@ public class Controller implements Observer<PlayerMove> {
 
 
                     //controllo chi possiede il professore ora
-
-                    Player oldProfessorOwner = null;
-                    for (Player p : model.getPlayers())  //vedo chi aveva il professore prima
-                        for (Professor pr : p.getPlayerSchoolBoard().getProfessors())
-                            if (pr.getProfessorColour().equals(Colour.values()[colorIndex])){
-                                oldProfessorOwner = p;
-                                break;
-                            }
-
-                    ArrayList<Player> rank = new ArrayList<>();
-                    int max = 0;
-                    for (Player p : model.getPlayers()){  //trovo il giocatore con più studenti
-                        if(max < p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colorIndex])){
-                            max = p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colorIndex]);
-                            rank.clear();
-                            rank.add(p);
-                        }else if (max == p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colorIndex]) && max != 0){  //qui ho parità
-                            rank.add(p);
-                        }
-                    }
-
-                    if(rank.size() == 1){
-                        if(oldProfessorOwner == null){
-                            rank.get(0).getPlayerSchoolBoard().addProfessor(Colour.values()[colorIndex]);
-                        } else if(!oldProfessorOwner.equals(rank.get(0))){
-                            oldProfessorOwner.getPlayerSchoolBoard().removeProfessor(Colour.values()[colorIndex]);
-                            rank.get(0).getPlayerSchoolBoard().addProfessor(Colour.values()[colorIndex]);
-                        }
-                    }
+                    checkProfessorProperty(colorIndex);
 
                     ((Character11) c).addStudent(model.getGameBoard().getBag().draw());
                     return 1;
@@ -757,35 +761,7 @@ public class Controller implements Observer<PlayerMove> {
                         model.getGameBoard().getBag().fill(p.getPlayerSchoolBoard().getDiningRoom().removeThreeStudents(Colour.values()[colorIndex]));
 
                     //controllo chi possiede il professore ora
-
-                    Player oldProfessorOwner = null;
-                    for (Player p : model.getPlayers())  //vedo chi aveva il professore prima
-                        for (Professor pr : p.getPlayerSchoolBoard().getProfessors())
-                            if (pr.getProfessorColour().equals(Colour.values()[colorIndex])){
-                                oldProfessorOwner = p;
-                                break;
-                            }
-
-                    ArrayList<Player> rank = new ArrayList<>();
-                    int max = 0;
-                    for (Player p : model.getPlayers()){  //trovo il giocatore con più studenti
-                        if(max < p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colorIndex])){
-                            max = p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colorIndex]);
-                            rank.clear();
-                            rank.add(p);
-                        }else if (max == p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colorIndex]) && max != 0){  //qui ho parità
-                            rank.add(p);
-                        }
-                    }
-
-                    if(rank.size() == 1){
-                        if(oldProfessorOwner == null){
-                            rank.get(0).getPlayerSchoolBoard().addProfessor(Colour.values()[colorIndex]);
-                        } else if(!oldProfessorOwner.equals(rank.get(0))){
-                            oldProfessorOwner.getPlayerSchoolBoard().removeProfessor(Colour.values()[colorIndex]);
-                            rank.get(0).getPlayerSchoolBoard().addProfessor(Colour.values()[colorIndex]);
-                        }
-                    }
+                    checkProfessorProperty(colorIndex);
 
                     return 1;
                 }

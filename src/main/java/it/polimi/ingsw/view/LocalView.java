@@ -14,13 +14,13 @@ import it.polimi.ingsw.model.player.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class LocalViewTest {
+public class LocalView {
 
     Scanner scanner;
     private Controller controller;
     private String choice;
 
-    public LocalViewTest() {
+    public LocalView() {
         this.scanner = new Scanner(System.in);
     }
 

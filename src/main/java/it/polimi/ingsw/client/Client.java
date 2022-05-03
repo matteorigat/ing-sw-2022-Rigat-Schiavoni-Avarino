@@ -93,9 +93,9 @@ public class Client {
                             }
 
                             if(inputLine2.equals(null))
-                                inputLine = "10," + inputLine;
+                                inputLine = "100," + inputLine;
                             else
-                                inputLine = "10," + inputLine + "," + inputLine2;
+                                inputLine = "100," + inputLine + "," + inputLine2;
                         }
                         socketOut.println(inputLine);
                         socketOut.flush();

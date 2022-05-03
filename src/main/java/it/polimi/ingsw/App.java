@@ -2,7 +2,7 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.model.player.Player;
-import it.polimi.ingsw.view.LocalViewTest;
+import it.polimi.ingsw.view.LocalView;
 
 /**
  *   Hello world!
@@ -21,7 +21,7 @@ public class App
         controller.addPlayer(p2);
         //controller.addPlayer("Nico");
         controller.init();
-        LocalViewTest view = new LocalViewTest();
+        LocalView view = new LocalView();
         view.setController(controller);
         view.start();
 

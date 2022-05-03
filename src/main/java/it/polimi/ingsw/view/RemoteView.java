@@ -23,12 +23,20 @@ public class RemoteView extends View {
             System.out.println("Phase: " + phaseCounter);
             try{
                 String[] inputs;
-                if(message.length() > 1){
+                if(message.length() > 2){
                     inputs = message.split(",");
+                    if(inputs[0].equals("100")) {
+                        String[] inputs2 = new String[inputs.length-1];
+                        for (int i = 0; i < inputs.length-1; i++)
+                            inputs2[i] = inputs[i+1];
+                        inputs = inputs2;
+                        phaseCounter = 100;
+                    }
                 } else {
                     inputs = new String[1];
                     inputs[0] = message;
                 }
+
                 if(inputs.length == 1)
                     handleMove(phaseCounter, Integer.parseInt(inputs[0]));
                 else if(inputs.length == 2)
