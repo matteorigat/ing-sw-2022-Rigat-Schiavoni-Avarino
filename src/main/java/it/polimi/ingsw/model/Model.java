@@ -137,6 +137,12 @@ public class Model extends Observable<MoveMessage> implements Serializable {
             for(Professor pr: sb.getProfessors()){
                 System.out.print(textColor(pr.getProfessorColour()) + " ");
             }
+            System.out.print("\nTOWERS: " + textTower(sb.getTowers().size(), sb.getTowerColor()));
+
+            System.out.print("\nPLAYED CARD: ");
+            if(p.getCurrentCard().getValue() != 0)
+                System.out.print(p.getCurrentCard().getValue());
+
             System.out.print("\nDECK: ");
             for(AssistantCard card : p.getAssistantDeck()){
                 System.out.print(card.getValue() + " ");
@@ -178,26 +184,53 @@ public class Model extends Observable<MoveMessage> implements Serializable {
 
     private String textColor(Colour colour){
         int colorInt = colour.ordinal();
-        switch(colorInt) {
-            case (0) : return "🟢"; //""\033[38;2;31;224;44mGreen\033[0m";
-            case (1) : return "🔴"; //"\033[31mRed\033[0m";
-            case (2) : return "🟡"; //"\033[93mYellow\033[0m";
-            case (3) : return "🟣"; //"\033[38;2;249;177;250mPink\033[0m";
-            case (4) : return "🔵"; //"\033[38;2;85;99;250mBlue\033[0m";
+
+        String operSys = System.getProperty("os.name").toLowerCase();
+        if (operSys.contains("mace")) {
+            switch(colorInt) {
+                case (0) : return "🟢"; //""\033[38;2;31;224;44mGreen\033[0m";
+                case (1) : return "🔴"; //"\033[31mRed\033[0m";
+                case (2) : return "🟡"; //"\033[93mYellow\033[0m";
+                case (3) : return "🟣"; //"\033[38;2;249;177;250mPink\033[0m";
+                case (4) : return "🔵"; //"\033[38;2;85;99;250mBlue\033[0m";
+            }
+        } else {
+            switch(colorInt) {
+                case (0) : return "\033[38;2;31;224;44m●\033[0m";
+                case (1) : return "\033[31m●\033[0m";
+                case (2) : return "\033[93m●\033[0m";
+                case (3) : return "\033[38;2;249;177;250m●\033[0m";
+                case (4) : return "\033[38;2;85;99;250m●\033[0m";
+            }
         }
+
         return null;
     }
 
     private String textTower(int n, TowerColour colour){
         String s = "";
-        for(int i = 0; i<n; i++)
-            if(colour.equals(TowerColour.White)){
-                s = s + "🤍 ";
-            } else if(colour.equals(TowerColour.Black)){
-                s = s + "🖤 ";
-            } else if(colour.equals(TowerColour.Grey)){
-                s = s + "🤎 ";
-            }
+
+        String operSys = System.getProperty("os.name").toLowerCase();
+
+        if (operSys.contains("mace")) {
+            for(int i = 0; i<n; i++)
+                if(colour.equals(TowerColour.White)){
+                    s = s + "🤍 ";
+                } else if(colour.equals(TowerColour.Black)){
+                    s = s + "🖤 ";
+                } else if(colour.equals(TowerColour.Grey)){
+                    s = s + "🤎 ";
+                }
+        } else {
+            for(int i = 0; i<n; i++)
+                if(colour.equals(TowerColour.White)){
+                    s = s + "\033[38;2;255;255;255m🀫\033[0m ";
+                } else if(colour.equals(TowerColour.Black)){
+                    s = s + "\033[38;2;0;0;0m🀫\033[0m ";
+                } else if(colour.equals(TowerColour.Grey)){
+                    s = s + "\033[38;2;128;128;128m🀫\033[0m ";
+                }
+        }
 
         return s;
     }

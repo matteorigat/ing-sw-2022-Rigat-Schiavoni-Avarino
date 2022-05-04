@@ -24,7 +24,7 @@ public class Player implements Serializable {
         this.assistantDeck = new ArrayList<>();
         this.index = index;
         this.coins = 500;
-
+        this.currentCard = new AssistantCard(0,0);
 
         assistantDeck.add(new AssistantCard(1,1));
         assistantDeck.add(new AssistantCard(2,1));
@@ -87,6 +87,9 @@ public class Player implements Serializable {
         return nickname;
     }
 
+    public void setCurrentCard(AssistantCard currentCard) {
+        this.currentCard = currentCard;
+    }
 }
 
 

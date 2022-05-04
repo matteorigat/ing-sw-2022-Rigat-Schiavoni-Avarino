@@ -512,6 +512,7 @@ public class Controller implements Observer<PlayerMove> {
                 min = num;
                 index = p.getIndex();
             }
+            p.setCurrentCard(new AssistantCard(0, 0));
         }
 
         model.setCurrentPlayer(index);
