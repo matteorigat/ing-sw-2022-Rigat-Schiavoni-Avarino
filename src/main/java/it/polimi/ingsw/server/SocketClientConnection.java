@@ -84,16 +84,23 @@ public class SocketClientConnection extends Observable<String> implements Client
             String read;
             boolean duplicateName;
             do {
-                duplicateName = false;
-                read = in.nextLine();
-                name = read;
-                for(String s: server.getNicknames()){
-                    if(s.equals(name)){
-                        send("Another player already chosed this name, try with a new one!\n");
-                        duplicateName = true;
+                do {
+                    duplicateName = false;
+                    read = in.nextLine();
+                    name = read;
+                    for (String s : server.getNicknames()) {
+                        if (s.equals(name)) {
+                            send("Another player already chosed this name, try with a new one!\n");
+                            duplicateName = true;
+                        }
                     }
+                } while (duplicateName);
+
+                if(name.equals("")){
+                    send("write a valid name!\nPlease,try again");
+                    send("What is your name?");
                 }
-            } while (duplicateName);
+            }while(name.equals(""));
             send("NICKNAME" + name);
             if(server.isChooseMode())
                 send("The first player is choosing the game mode, please wait the beginning of the game\n");
@@ -107,11 +114,25 @@ public class SocketClientConnection extends Observable<String> implements Client
                         read = in.nextLine();
                         numPlayers = Integer.parseInt(read);
                         if(numPlayers != 2 & numPlayers != 3){
-                            send("Can't create a match with " + numPlayers + " players \n " + "try again" );
+                            send("Can't create a match with " + numPlayers + " player\n" + "try again" );
                         }
                     }
-                    send("Expert mode? y or n");
-                    read = in.nextLine();
+
+                    boolean wrongInput;
+                    do {
+                        wrongInput = true;
+                        send("Expert mode? y or n");
+                        read = in.nextLine();
+                        if(read.equals("y") || read.equals("n")){
+                            wrongInput = false;
+                        }
+
+                        if (wrongInput){
+                            send("Error!\nPlease write y or n ");
+                        }
+                    }while (wrongInput);
+
+
                     if (read.equals("y"))
                         expertMode = true;
                     else expertMode = false;
