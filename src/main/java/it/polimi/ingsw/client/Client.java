@@ -19,6 +19,8 @@ public class Client {
     private String ip;
     private int port;
 
+    private static String nickname;
+
     public Client(String ip, int port){
         this.ip = ip;
         this.port = port;
@@ -42,9 +44,14 @@ public class Client {
                     while (isActive()) {
                         Object inputObject = socketIn.readObject();
                         if(inputObject instanceof String){
-                            System.out.println((String)inputObject);
+                            if(((String) inputObject).contains("NICKNAME")){
+                                nickname = ((String) inputObject).replace("NICKNAME", "");
+                                System.out.println("nickname: " + nickname);
+                            } else{
+                                System.out.println((String)inputObject);
+                            }
                         } else if (inputObject instanceof Model){
-                            ((Model)inputObject).print();
+                            ((Model)inputObject).print(nickname);
                         } else {
                             throw new IllegalArgumentException();
                         }

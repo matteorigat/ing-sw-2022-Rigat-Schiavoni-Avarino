@@ -94,7 +94,7 @@ public class SocketClientConnection extends Observable<String> implements Client
                     }
                 }
             } while (duplicateName);
-
+            send("NICKNAME" + name);
             if(server.isChooseMode())
                 send("The first player is choosing the game mode, please wait the beginning of the game\n");
             server.lobby(this, name);

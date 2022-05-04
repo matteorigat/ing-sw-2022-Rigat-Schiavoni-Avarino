@@ -96,7 +96,7 @@ public class Model extends Observable<MoveMessage> implements Serializable {
         this.playerPhaseCounter = playerPhaseCounter;
     }
 
-    public void print(){
+    public void print(String nickname){
         System.out.println("\n-------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println("");
 
@@ -143,10 +143,13 @@ public class Model extends Observable<MoveMessage> implements Serializable {
             if(p.getCurrentCard().getValue() != 0)
                 System.out.print(p.getCurrentCard().getValue());
 
-            System.out.print("\nDECK: ");
-            for(AssistantCard card : p.getAssistantDeck()){
-                System.out.print(card.getValue() + " ");
+            if(p.getNickname().equals(nickname)){
+                System.out.print("\nDECK: ");
+                for(AssistantCard card : p.getAssistantDeck()){
+                    System.out.print(card.getValue() + " ");
+                }
             }
+
             if(expertMode){
                 System.out.print("\nCOINS: " + p.getCoins());
             }
@@ -186,7 +189,7 @@ public class Model extends Observable<MoveMessage> implements Serializable {
         int colorInt = colour.ordinal();
 
         String operSys = System.getProperty("os.name").toLowerCase();
-        if (operSys.contains("mace")) {
+        if (operSys.contains("mac")) {
             switch(colorInt) {
                 case (0) : return "🟢"; //""\033[38;2;31;224;44mGreen\033[0m";
                 case (1) : return "🔴"; //"\033[31mRed\033[0m";
@@ -212,7 +215,7 @@ public class Model extends Observable<MoveMessage> implements Serializable {
 
         String operSys = System.getProperty("os.name").toLowerCase();
 
-        if (operSys.contains("mace")) {
+        if (operSys.contains("mac")) {
             for(int i = 0; i<n; i++)
                 if(colour.equals(TowerColour.White)){
                     s = s + "🤍 ";
