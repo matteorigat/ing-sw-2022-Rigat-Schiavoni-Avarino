@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="ing-sw-2022-Rigat-Schiavoni-Avarino" />
         <module name="softeng-GC18" />
+        <module name="GC18" />
       </profile>
     </annotationProcessing>
   </component>

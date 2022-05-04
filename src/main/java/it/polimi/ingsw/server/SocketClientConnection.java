@@ -101,9 +101,15 @@ public class SocketClientConnection extends Observable<String> implements Client
             synchronized (server) {
                 if (server.getWaitingConnection().size() == 1) {
                     server.setChooseMode(true);
-                    send("How many players?");
-                    read = in.nextLine();
-                    numPlayers = Integer.parseInt(read);
+                    numPlayers = 0;
+                    while(numPlayers != 2 & numPlayers != 3){
+                        send("How many players?");
+                        read = in.nextLine();
+                        numPlayers = Integer.parseInt(read);
+                        if(numPlayers != 2 & numPlayers != 3){
+                            send("Can't create a match with " + numPlayers + " players \n " + "try again" );
+                        }
+                    }
                     send("Expert mode? y or n");
                     read = in.nextLine();
                     if (read.equals("y"))
