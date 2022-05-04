@@ -37,12 +37,43 @@ public class RemoteView extends View {
                     inputs[0] = message;
                 }
 
-                if(inputs.length == 1)
-                    handleMove(phaseCounter, Integer.parseInt(inputs[0]));
-                else if(inputs.length == 2)
-                    handleMove(phaseCounter, Integer.parseInt(inputs[0]), Integer.parseInt(inputs[1]));
-                else if(inputs.length == 3)
-                    handleMove(phaseCounter, Integer.parseInt(inputs[0]), Integer.parseInt(inputs[1]), Integer.parseInt(inputs[2]));
+                int[] input = new int[inputs.length];
+                for(int i=0; i<inputs.length; i++){
+                    input[i] = Integer.parseInt(inputs[i]);
+                    if(input[i] < 0){
+                        clientConnection.asyncSend("\u001B[5;31mError! Write the move well\u001B[0m");
+                        return;
+                    }
+                }
+
+                switch (phaseCounter){
+                    case 0:
+                    case 4:
+                    case 3: {
+                        if(inputs.length == 1)
+                            handleMove(phaseCounter, input[0]);
+                        else clientConnection.asyncSend("\u001B[5;31mError! Write the move well\u001B[0m");
+                        break;
+                    }
+                    case 1:{
+                        if(inputs.length == 1)
+                            handleMove(phaseCounter, input[0]);
+                        else if(inputs.length == 2)
+                            handleMove(phaseCounter, input[0], input[1]);
+                        else clientConnection.asyncSend("\u001B[5;31mError! Write the move well\u001B[0m");
+                        break;
+                    }
+                    case 100:{
+                        if(inputs.length == 1)
+                            handleMove(phaseCounter, input[0]);
+                        else if(inputs.length == 2)
+                            handleMove(phaseCounter, input[0], input[1]);
+                        else if(inputs.length == 3)
+                            handleMove(phaseCounter, input[0], input[1], input[2]);
+                        else clientConnection.asyncSend("\u001B[5;31mError! Write the move well\u001B[0m");
+                        break;
+                    }
+                }
             }catch(IllegalArgumentException | ArrayIndexOutOfBoundsException e){
                 clientConnection.asyncSend("\u001B[5;31mError! Write the move well\u001B[0m");
             }
@@ -71,10 +102,17 @@ public class RemoteView extends View {
         String resultMsg = "";
 
         if(message.getModel().getCurrentPlayer() == getPlayer().getIndex()){
-            resultMsg += gameMessage.moveMessage;
+            resultMsg = gameMessage.moveMessage;
         }
         else{
-            resultMsg += gameMessage.waitMessage;
+            resultMsg = gameMessage.waitMessage;
+        }
+
+        if(message.getModel().getCurrentPhase().equals(GamePhase.GameEnded) && message.getModel().getWinner().getIndex() == getPlayer().getIndex()){
+            resultMsg = gameMessage.winMessage;
+        }
+        else if(message.getModel().getCurrentPhase().equals(GamePhase.GameEnded)){
+            resultMsg = gameMessage.loseMessage + getPlayer().getNickname().toUpperCase();
         }
 
         showMessage(resultMsg);
