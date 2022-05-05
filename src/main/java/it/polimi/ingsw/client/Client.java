@@ -19,7 +19,7 @@ public class Client {
     private String ip;
     private int port;
 
-    private static String nickname;
+    private String nickname = "";
 
     public Client(String ip, int port){
         this.ip = ip;
@@ -46,7 +46,6 @@ public class Client {
                         if(inputObject instanceof String){
                             if(((String) inputObject).contains("NICKNAME")){
                                 nickname = ((String) inputObject).replace("NICKNAME", "");
-                                System.out.println("nickname: " + nickname);
                             } else{
                                 System.out.println((String)inputObject);
                             }
@@ -73,7 +72,7 @@ public class Client {
                     while (isActive()) {
                         String inputLine = stdin.nextLine();
 
-                        if(inputLine.equals("c")){ //va cambiato
+                        if(inputLine.equals("c") && !nickname.equals("")){ //va cambiato
                             String inputLine2 = null;
                             int c;
                             System.out.print("Character card index: ");

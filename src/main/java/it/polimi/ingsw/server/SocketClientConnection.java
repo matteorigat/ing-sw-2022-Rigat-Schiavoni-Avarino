@@ -82,71 +82,63 @@ public class SocketClientConnection extends Observable<String> implements Client
 
             send("Welcome!\nWhat is your name?");
             String read;
-            boolean duplicateName;
+            boolean errorName;
             do {
-                do {
-                    duplicateName = false;
-                    read = in.nextLine();
-                    name = read;
-                    for (String s : server.getNicknames()) {
-                        if (s.equals(name)) {
-                            send("Another player already chosed this name, try with a new one!\n");
-                            duplicateName = true;
-                        }
+                errorName = false;
+                read = in.nextLine();
+                name = read;
+                for (String s : server.getNicknames()) {
+                    if (s.equals(name)) {
+                        send("Another player already chosed this name, try with a new one!");
+                        errorName = true;
                     }
-                } while (duplicateName);
-
-                if(name.equals("")){
-                    send("write a valid name!\nPlease,try again");
-                    send("What is your name?");
                 }
-            }while(name.equals(""));
-            send("NICKNAME" + name);
+                if(name.equals("")) {
+                    send("Write a valid name! Please,try again\nWhat is your name?");
+                    errorName = true;
+                }
+            } while (errorName);
+            send("NICKNAME" + name);//IMPORTANTE non modificare la scritta NICKNAME, serve per riconoscimento lato client
             if(server.isChooseMode())
-                send("The first player is choosing the game mode, please wait the beginning of the game\n");
+                send("The first player is choosing the game mode, please wait the beginning of the game");
             server.lobby(this, name);
             synchronized (server) {
-                if (server.getWaitingConnection().size() == 1) {
+                if (server.getWaitingConnection().size() == 1){
                     server.setChooseMode(true);
-
-
                     numPlayers = 0;
-                    while((numPlayers != 2 & numPlayers != 3)){
+                    while(numPlayers != 2 && numPlayers != 3){
                         send("How many players?");
                         read = in.nextLine();
                         if(read.equals("")){
-                            read = "-1";
-                            send("Error, please write a correct number of players");}else{
-                        numPlayers = Integer.parseInt(read);
-                        if(numPlayers != 2 & numPlayers != 3){
-                            send("Can't create a match with " + numPlayers + " player\n" + "try again" );
-                        }}
-
+                            send("Error, please write a correct number of players");
+                        }else{
+                            numPlayers = Integer.parseInt(read);
+                            if(numPlayers != 2 & numPlayers != 3)
+                                send("Can't create a match with " + numPlayers + " player\n");
+                        }
                     }
-
                     boolean wrongInput;
                     do {
                         wrongInput = true;
                         send("Expert mode? y or n");
                         read = in.nextLine();
-                        if(read.equals("y") || read.equals("n")){
+                        if(read.equals("y") || read.equals("n"))
                             wrongInput = false;
-                        }
 
-                        if (wrongInput){
-                            send("Error!\nPlease write y or n ");
-                        }
+                        if (wrongInput)
+                            send("Error! Please write y or n");
+
                     }while (wrongInput);
 
-
-                    if (read.equals("y"))
+                    if(read.equals("y"))
                         expertMode = true;
-                    else expertMode = false;
+                    else
+                        expertMode = false;
                     server.setParameters(numPlayers, expertMode);
                     server.setChooseMode(false);
                 }
                 if(server.getWaitingConnection().size() < server.getNumPlayers() && server.getWaitingConnection().size() != 0)
-                    send("Waiting for another player\n");
+                    send("\nWaiting for another player\n");
             }
 
             while(isActive()){
