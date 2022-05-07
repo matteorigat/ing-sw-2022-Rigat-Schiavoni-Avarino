@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client;
 
+import it.polimi.ingsw.exceptions.ConnectionClosedException;
 import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.server.Pong;
 
@@ -135,11 +136,27 @@ public class Client {
             Thread t0 = asyncReadFromSocket(socketIn);
             Thread t1 = asyncWriteToSocket(stdin, socketOut);
             Thread t2 = pinging(socketOut);
-            t0.join();
-            t1.join();
-            t2.join();
 
-        } catch(InterruptedException | NoSuchElementException e){
+            t2.join();
+            System.out.println("Connection closed t2");
+            t0.join();
+            System.out.println("Connection closed t0");
+
+            t1.interrupt();
+            System.out.println("interrputed t1");
+            System.in.close();
+            /*socketIn.close();
+            System.out.println("socketin");
+            socketOut.close();
+            System.out.println("socketout");
+            socket.close();
+            System.out.println("socket");
+            */
+            t1.stop();
+            t1.join();
+            System.out.println("Connection closed t1");
+
+        } catch(InterruptedException | NoSuchElementException | ConnectionClosedException e){
             System.out.println("Connection closed from the client side");
         } finally {
             stdin.close();
@@ -150,28 +167,28 @@ public class Client {
     }
 
     public Thread pinging(final ObjectOutputStream socketOut) throws RuntimeException{
-        Thread t = new Thread(new Runnable() {
+        Thread t = new Thread(new Runnable(){
             @Override
             public void run() {
 
                 System.out.println("Ping started!\n");
                 while(true) {
-                    if (!isActive()) break;
+                    if (!isActive()) throw new ConnectionClosedException();
                     try {
-
+                        Thread.sleep(1000);
                         synchronized (ip) {
 
-                            System.out.println("Sending ping!");
-                            Thread.sleep(1000);
+                        //    System.out.println("Sending ping!");
                             socketOut.writeObject(new Ping());
                             socketOut.flush();
 
-                            System.out.println("Ping sent|");
+                         //   System.out.println("Ping sent|");
                         }
                     }
-                         catch (IOException | InterruptedException e) {
+                         catch (Exception e) {
                             setActive(false);
                             System.out.println("Connection closed!");
+                            throw new ConnectionClosedException();
 
 
                         //    throw new RuntimeException("Connection closed. Sorry!");
