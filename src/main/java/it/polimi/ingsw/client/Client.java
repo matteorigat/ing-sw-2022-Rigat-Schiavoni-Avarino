@@ -13,6 +13,7 @@ import java.util.Scanner;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.NoSuchElementException;
@@ -109,7 +110,7 @@ public class Client {
                             else
                                 inputLine = "100," + inputLine + "," + inputLine2;
                         }
-                        synchronized (socketOut){
+                        synchronized (this){
                             socketOut.writeObject(inputLine);
                             socketOut.flush();
                         }
@@ -126,18 +127,20 @@ public class Client {
     public void run() throws IOException {
         Socket socket = new Socket(ip, port);
         System.out.println("Connection established");
-        ObjectInputStream socketIn = new ObjectInputStream(socket.getInputStream());
+
         ObjectOutputStream socketOut = new ObjectOutputStream(socket.getOutputStream());
+        ObjectInputStream socketIn = new ObjectInputStream(socket.getInputStream());
         Scanner stdin = new Scanner(System.in);
 
 
         try{
             Thread t0 = asyncReadFromSocket(socketIn);
             Thread t1 = asyncWriteToSocket(stdin, socketOut);
-            Thread t2 = pinging(socketOut);
+          //  Thread t2 = pinging(socketOut);
             t0.join();
             t1.join();
-          //  t2.join();
+         //   t2.join();
+
         } catch(InterruptedException | NoSuchElementException e){
             System.out.println("Connection closed from the client side");
         } finally {
@@ -159,7 +162,7 @@ public class Client {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    synchronized (socketOut) {
+                    synchronized (this) {
                         try {
                             socketOut.writeObject(new Ping());
                             socketOut.flush();
