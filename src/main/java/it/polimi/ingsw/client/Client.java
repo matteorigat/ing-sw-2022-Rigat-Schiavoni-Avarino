@@ -5,9 +5,7 @@ import it.polimi.ingsw.server.Pong;
 
 import javax.swing.*;
 import java.io.*;
-import java.net.InetAddress;
-import java.net.Socket;
-import java.net.UnknownHostException;
+import java.net.*;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -110,7 +108,7 @@ public class Client {
                             else
                                 inputLine = "100," + inputLine + "," + inputLine2;
                         }
-                        synchronized (this){
+                        synchronized (ip){
                             socketOut.writeObject(inputLine);
                             socketOut.flush();
                         }
@@ -136,10 +134,10 @@ public class Client {
         try{
             Thread t0 = asyncReadFromSocket(socketIn);
             Thread t1 = asyncWriteToSocket(stdin, socketOut);
-          //  Thread t2 = pinging(socketOut);
+            Thread t2 = pinging(socketOut);
             t0.join();
             t1.join();
-         //   t2.join();
+            t2.join();
 
         } catch(InterruptedException | NoSuchElementException e){
             System.out.println("Connection closed from the client side");
@@ -151,26 +149,38 @@ public class Client {
         }
     }
 
-    public Thread pinging(final ObjectOutputStream socketOut){
+    public Thread pinging(final ObjectOutputStream socketOut) throws RuntimeException{
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
-                while(isActive()) {
-                    try {
-                        Thread.sleep(5000);
 
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    synchronized (this) {
-                        try {
+                System.out.println("Ping started!\n");
+                while(true) {
+                    if (!isActive()) break;
+                    try {
+
+                        synchronized (ip) {
+
+                            System.out.println("Sending ping!");
+                            Thread.sleep(1000);
                             socketOut.writeObject(new Ping());
                             socketOut.flush();
-                        } catch (IOException e) {
-                            setActive(false);
+
+                            System.out.println("Ping sent|");
                         }
                     }
-                }
+                         catch (IOException | InterruptedException e) {
+                            setActive(false);
+                            System.out.println("Connection closed!");
+
+
+                        //    throw new RuntimeException("Connection closed. Sorry!");
+
+                        }
+                    }
+
+
+
             }
         });
         t.start();
