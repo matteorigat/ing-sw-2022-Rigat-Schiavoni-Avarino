@@ -4,7 +4,9 @@ import it.polimi.ingsw.model.Model;
 
 import javax.swing.*;
 import java.io.*;
+import java.net.InetAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -122,11 +124,14 @@ public class Client {
         PrintWriter socketOut = new PrintWriter(socket.getOutputStream());
         Scanner stdin = new Scanner(System.in);
 
+
         try{
             Thread t0 = asyncReadFromSocket(socketIn);
             Thread t1 = asyncWriteToSocket(stdin, socketOut);
+            Thread t2 = pinging(socketOut);
             t0.join();
             t1.join();
+          //  t2.join();
         } catch(InterruptedException | NoSuchElementException e){
             System.out.println("Connection closed from the client side");
         } finally {
@@ -136,6 +141,21 @@ public class Client {
             socket.close();
         }
     }
+
+    public Thread pinging(final PrintWriter socketOut){
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+
+            }
+        });
+        t.start();
+        return t;
+    }
+
+
+
 
 }
 
