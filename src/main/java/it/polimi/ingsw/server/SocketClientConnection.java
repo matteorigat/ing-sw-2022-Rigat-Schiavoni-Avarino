@@ -1,8 +1,11 @@
 package it.polimi.ingsw.server;
 
+import it.polimi.ingsw.client.Ping;
 import it.polimi.ingsw.observer.Observable;
+import it.polimi.ingsw.utils.gameMessage;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.NoSuchElementException;
@@ -66,27 +69,24 @@ public class SocketClientConnection extends Observable<String> implements Client
 
     @Override
     public void run() {
-        Scanner in;
+        ObjectInputStream in;
         String name;
         int numPlayers;
         Boolean expertMode;
         try{
-            in = new Scanner(socket.getInputStream());
+            in = new ObjectInputStream(socket.getInputStream());
             out = new ObjectOutputStream(socket.getOutputStream());
-            send("\n███████╗██████╗░██╗░█████╗░███╗░░██╗████████╗██╗░░░██╗░██████╗");
-            send("██╔════╝██╔══██╗██║██╔══██╗████╗░██║╚══██╔══╝╚██╗░██╔╝██╔════╝");
-            send("█████╗░░██████╔╝██║███████║██╔██╗██║░░░██║░░░░╚████╔╝░╚█████╗░");
-            send("██╔══╝░░██╔══██╗██║██╔══██║██║╚████║░░░██║░░░░░╚██╔╝░░░╚═══██╗");
-            send("███████╗██║░░██║██║██║░░██║██║░╚███║░░░██║░░░░░░██║░░░██████╔╝");
-            send("╚══════╝╚═╝░░╚═╝╚═╝╚═╝░░╚═╝╚═╝░░╚══╝░░░╚═╝░░░░░░╚═╝░░░╚═════╝░\n");
+            send(gameMessage.eriantys);
 
             send("Welcome!\nWhat is your name?");
-            String read;
+            Object read;
             boolean errorName;
             do {
                 errorName = false;
-                read = in.nextLine();
-                name = read;
+                while((read = in.readObject()) instanceof Ping){
+                     out.writeObject(new Pong());
+                }
+                name = (String) read;
                 for (String s : server.getNicknames()) {
                     if (s.equals(name)) {
                         send("Another player already chosed this name, try with a new one!");
@@ -108,21 +108,27 @@ public class SocketClientConnection extends Observable<String> implements Client
                     numPlayers = 0;
                     while(numPlayers != 2 && numPlayers != 3){
                         send("How many players?");
-                        read = in.nextLine();
+                        while((read = in.readObject()) instanceof Ping){
+                            out.writeObject(new Pong());
+                        }
                         if(read.equals("")){
                             send("Error, please write a correct number of players");
                         }else{
-                            numPlayers = Integer.parseInt(read);
+                            numPlayers = Integer.parseInt((String) read);
                             if(numPlayers != 2 & numPlayers != 3)
                                 send("Can't create a match with " + numPlayers + " player\n");
                         }
                     }
                     boolean wrongInput;
+                    String read1;
                     do {
                         wrongInput = true;
                         send("Expert mode? y or n");
-                        read = in.nextLine();
-                        if(read.equals("y") || read.equals("n"))
+                        while((read = in.readObject()) instanceof Ping){
+                            out.writeObject(new Pong());
+                        }
+                        read1 = (String)read;
+                        if(read1.equals("y") || read1.equals("n"))
                             wrongInput = false;
 
                         if (wrongInput)
@@ -130,7 +136,7 @@ public class SocketClientConnection extends Observable<String> implements Client
 
                     }while (wrongInput);
 
-                    if(read.equals("y"))
+                    if(read1.equals("y"))
                         expertMode = true;
                     else
                         expertMode = false;
@@ -142,12 +148,20 @@ public class SocketClientConnection extends Observable<String> implements Client
             }
 
             while(isActive()){
-                read = in.nextLine();
-                notify(read);
+
+                read = in.readObject();
+
+                if(read instanceof String)
+                notify((String)read);
+                else if (read instanceof Ping){
+                    out.writeObject(new Pong());
+                }
             }
         } catch (IOException | NoSuchElementException e) {
             System.err.println("Error! " + e.getMessage());
-        }finally{
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } finally{
             close();
         }
 

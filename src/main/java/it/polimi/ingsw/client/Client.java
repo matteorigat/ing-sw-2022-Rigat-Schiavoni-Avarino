@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.model.Model;
+import it.polimi.ingsw.server.Pong;
 
 import javax.swing.*;
 import java.io.*;
@@ -22,6 +23,7 @@ public class Client {
     private int port;
 
     private String nickname = "";
+
 
     public Client(String ip, int port){
         this.ip = ip;
@@ -48,11 +50,13 @@ public class Client {
                         if(inputObject instanceof String){
                             if(((String) inputObject).contains("NICKNAME")){
                                 nickname = ((String) inputObject).replace("NICKNAME", "");
-                            } else{
+                            } else {
                                 System.out.println((String)inputObject);
                             }
                         } else if (inputObject instanceof Model){
                             ((Model)inputObject).print(nickname);
+                        } else if(inputObject instanceof Pong){
+
                         } else {
                             throw new IllegalArgumentException();
                         }
@@ -66,7 +70,7 @@ public class Client {
         return t;
     }
 
-    public Thread asyncWriteToSocket(final Scanner stdin, final PrintWriter socketOut){
+    public Thread asyncWriteToSocket(final Scanner stdin, final ObjectOutputStream socketOut){
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -105,8 +109,10 @@ public class Client {
                             else
                                 inputLine = "100," + inputLine + "," + inputLine2;
                         }
-                        socketOut.println(inputLine);
-                        socketOut.flush();
+                        synchronized (socketOut){
+                            socketOut.writeObject(inputLine);
+                            socketOut.flush();
+                        }
                     }
                 }catch(Exception e){
                     setActive(false);
@@ -121,7 +127,7 @@ public class Client {
         Socket socket = new Socket(ip, port);
         System.out.println("Connection established");
         ObjectInputStream socketIn = new ObjectInputStream(socket.getInputStream());
-        PrintWriter socketOut = new PrintWriter(socket.getOutputStream());
+        ObjectOutputStream socketOut = new ObjectOutputStream(socket.getOutputStream());
         Scanner stdin = new Scanner(System.in);
 
 
@@ -142,12 +148,26 @@ public class Client {
         }
     }
 
-    public Thread pinging(final PrintWriter socketOut){
+    public Thread pinging(final ObjectOutputStream socketOut){
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
+                while(isActive()) {
+                    try {
+                        Thread.sleep(5000);
 
-
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    synchronized (socketOut) {
+                        try {
+                            socketOut.writeObject(new Ping());
+                            socketOut.flush();
+                        } catch (IOException e) {
+                            setActive(false);
+                        }
+                    }
+                }
             }
         });
         t.start();
