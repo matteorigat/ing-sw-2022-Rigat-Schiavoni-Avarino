@@ -44,6 +44,6 @@ public class Character8 implements CharacterCard{
     public String toString() {
         return  "index: " + index +
                 "\tcost: " + cost +
-                "\t\teffectFlag: " + effectFlag +  "\t\t" + Description;
+                "\t\teffectFlag: " + effectFlag +  "\t\t\t\t" + Description;
     }
 }

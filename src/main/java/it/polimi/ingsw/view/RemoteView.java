@@ -1,6 +1,5 @@
 package it.polimi.ingsw.view;
 
-import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.model.enumeration.GamePhase;
 import it.polimi.ingsw.model.player.MoveMessage;
 import it.polimi.ingsw.model.player.Player;

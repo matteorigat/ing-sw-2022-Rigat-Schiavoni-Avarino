@@ -60,6 +60,11 @@ public class Controller implements Observer<PlayerMove> {
             }
 
             case 100: {
+                if(!Parameters.expertMode){
+                    move.getView().reportError(gameMessage.invalidMoveMessage);
+                    return;
+                }
+
                 if(move.getParam2() == 1){
                     result = playCharacterCard1(move.getPlayer().getIndex(), move.getParam2(), move.getParam3(), move.getParam4());
                 } else if(move.getParam2() == 3){
@@ -350,10 +355,12 @@ public class Controller implements Observer<PlayerMove> {
         }
         else return -1;
     }
+
     //Fase azione punto 2.2 //vedo chi controlla l'isola, se il player è cambiato sostituisco le torri
     private void checkIslandInfluence(int islandIndex, int playerIndex){
-        boolean noTowerFlag = false;
-        int twoMorePointsPlayer = -1;
+        boolean card6noTowerFlag = false;
+        int card9color = -1;
+        int card8twoMorePointsPlayer = -1;
         if(Parameters.expertMode){
             for(CharacterCard c: model.getGameBoard().getThreeCharacterCards())
                 if(c.getIndex() == 5 && model.getGameBoard().getIslands().get(islandIndex).getNoEntry() > 0){
@@ -362,15 +369,18 @@ public class Controller implements Observer<PlayerMove> {
                     return;  // proseguo come se madre natura non fosse capitata qui
                 } else if(c.getIndex() == 6 && ((Character6) c).isEffectFlag()){
                     ((Character6) c).disableEffect();
-                    noTowerFlag = true;
+                    card6noTowerFlag = true;
                 } else if(c.getIndex() == 8 && ((Character8) c).isEffectFlag()){
                     ((Character8) c).disableEffect();
-                    twoMorePointsPlayer = playerIndex;
+                    card8twoMorePointsPlayer = playerIndex;
+                } else if(c.getIndex() == 9 && ((Character9) c).isEffectFlag()){
+                    ((Character9) c).disableEffect();
+                    card9color = ((Character9) c).getColor();
                 }
 
         }
         // vedo chi ha più influenza ora
-        Player newPlayer = model.getGameBoard().getIslands().get(islandIndex).Influence(model.getPlayers(), noTowerFlag, twoMorePointsPlayer);
+        Player newPlayer = model.getGameBoard().getIslands().get(islandIndex).Influence(model.getPlayers(), card6noTowerFlag, card8twoMorePointsPlayer, card9color);
 
         if (newPlayer!=null){
             Player oldPlayer = null;  // vedo chi controllava l'isola prima
@@ -475,6 +485,15 @@ public class Controller implements Observer<PlayerMove> {
                 model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance().add(s);
             }
 
+            if(Parameters.expertMode){
+                for(CharacterCard c: model.getGameBoard().getThreeCharacterCards())
+                    if(c.getIndex() == 2 && ((Character2) c).isEffectFlag()){
+                        ((Character2) c).disableEffect();
+                        for(int i=0; i<5; i++)
+                            checkProfessorProperty(i);
+                    }
+            }
+
             model.setPlayerPhaseCounter(model.getPlayerPhaseCounter() + 1);
             if(model.getPlayerPhaseCounter() == Parameters.numPlayers){
                 model.setPlayerPhaseCounter(0);
@@ -565,18 +584,6 @@ public class Controller implements Observer<PlayerMove> {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     public int playCharacterCard1(int playerIndex, int cardIndex, int colorIndex, int islandIndex){
         if(playerIndex == model.getCurrentPlayer()){
             for (CharacterCard c: model.getGameBoard().getThreeCharacterCards()){
@@ -593,6 +600,61 @@ public class Controller implements Observer<PlayerMove> {
             }
         }
         return -1;
+    }
+
+    public int playCharacterCard2(int playerIndex, int cardIndex){
+        if(playerIndex == model.getCurrentPlayer() && model.getCurrentPhase().ordinal() <= GamePhase.MoveMotherNature.ordinal()){
+            for (CharacterCard c: model.getGameBoard().getThreeCharacterCards()){
+                if(cardIndex == c.getIndex() && model.getPlayers().get(playerIndex).getCoins() >= c.getCost()){
+                    System.out.println("STAI GIOCANDO LA CARTA 2");
+                    model.getPlayers().get(playerIndex).removeCoin(c.getCost());
+                    model.getGameBoard().addCoinsToGeneralReserve(c.getCost() - 1);
+                    c.play();
+
+                    ((Character2) c).enableEffect();
+                    for(int i=0; i<5; i++)
+                        checkProfessorPropertyCard2(i);
+                    return 1;
+                }
+            }
+        }
+        return -1;
+    }
+
+    private void checkProfessorPropertyCard2(int colorIndex){
+        Player oldProfessorOwner = null;
+        for (Player p : model.getPlayers())  //vedo chi aveva il professore prima
+            for (Professor pr : p.getPlayerSchoolBoard().getProfessors())
+                if (pr.getProfessorColour().equals(Colour.values()[colorIndex])){
+                    oldProfessorOwner = p;
+                    break;
+                }
+
+        ArrayList<Player> rank = new ArrayList<>();
+        int max = 0;
+        for (Player p : model.getPlayers()){  //trovo il giocatore con più studenti
+            if(max < p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colorIndex])){
+                max = p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colorIndex]);
+                rank.clear();
+                rank.add(p);
+            }else if (max == p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colorIndex]) && max != 0){  //qui ho parità
+                rank.add(p);
+            }
+        }
+
+        if(rank.size() == 1){
+            if(oldProfessorOwner == null){
+                rank.get(0).getPlayerSchoolBoard().addProfessor(Colour.values()[colorIndex]);
+            } else if(!oldProfessorOwner.equals(rank.get(0))){
+
+            }
+        } else {
+            for(Player p: rank)
+                if(p.getIndex() == getCurrentPlayer()){
+                    oldProfessorOwner.getPlayerSchoolBoard().removeProfessor(Colour.values()[colorIndex]);
+                    rank.get(0).getPlayerSchoolBoard().addProfessor(Colour.values()[colorIndex]);
+                }
+        }
     }
 
     public int playCharacterCard3(int playerIndex, int cardIndex, int islandIndex){
@@ -664,46 +726,6 @@ public class Controller implements Observer<PlayerMove> {
         }
         return -1;
     }
-    /*
-    public int playCharacterCard7(int playerIndex, int cardIndex, int cardStudent1, int cardStudent2, int cardStudent3, int entranceStudent1, int entranceStudent2, int entranceStudent3){
-        if(playerIndex == model.getCurrentPlayer()){
-            for (CharacterCard c: model.getGameBoard().getThreeCharacterCards()){
-                if(cardIndex == c.getIndex() && model.getPlayers().get(playerIndex).getCoins() >= c.getCost() && ((Character7) c).checkColorExists(cardStudent1) && ((Character7) c).checkColorExists(cardStudent2) && ((Character7) c).checkColorExists(cardStudent3)){
-                    //controllo se i tre studenti del suo ingresso sono giusti
-                    boolean validStudents = true;
-                    for(Student s: model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance()){
-                        if(entranceStudent1 != s.getColour().ordinal() && entranceStudent1 < 5)
-                            validStudents = false;
-                        else if(entranceStudent2 != s.getColour().ordinal() && entranceStudent1 < 5)
-                            validStudents = false;
-                        else if(entranceStudent3 != s.getColour().ordinal() && entranceStudent1 < 5)
-                            validStudents = false;
-                    }
-                    if(!validStudents)
-                        return -1;
-
-                    System.out.println("STAI GIOCANDO LA CARTA 7");
-                    model.getPlayers().get(playerIndex).removeCoin(c.getCost());
-                    model.getGameBoard().addCoinsToGeneralReserve(c.getCost() - 1); //meno uno perchè una va sulla carta
-                    c.play();
-
-                    model.getPlayers().get(playerIndex).getPlayerSchoolBoard().removeStudentFromEntrance(entranceStudent1);
-                    model.getPlayers().get(playerIndex).getPlayerSchoolBoard().removeStudentFromEntrance(entranceStudent2);
-                    model.getPlayers().get(playerIndex).getPlayerSchoolBoard().removeStudentFromEntrance(entranceStudent3);
-
-                    model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance().add(((Character7) c).getStudent(cardStudent1));
-                    model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance().add(((Character7) c).getStudent(cardStudent2));
-                    model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance().add(((Character7) c).getStudent(cardStudent3));
-
-                    ((Character7) c).addStudent(model.getGameBoard().getBag().draw());
-                    ((Character7) c).addStudent(model.getGameBoard().getBag().draw());
-                    ((Character7) c).addStudent(model.getGameBoard().getBag().draw());
-                    return 1;
-                }
-            }
-        }
-        return -1;
-    } */
 
     public int playCharacterCard8(int playerIndex, int cardIndex){
         if(playerIndex == model.getCurrentPlayer() && model.getCurrentPhase().ordinal() <= GamePhase.MoveMotherNature.ordinal()){
@@ -721,6 +743,104 @@ public class Controller implements Observer<PlayerMove> {
         }
         return -1;
     }
+
+    public int playCharacterCard9(int playerIndex, int cardIndex, int colorIndex){
+        if(playerIndex == model.getCurrentPlayer() && model.getCurrentPhase().ordinal() <= GamePhase.MoveMotherNature.ordinal()){
+            for (CharacterCard c: model.getGameBoard().getThreeCharacterCards()){
+                if(cardIndex == c.getIndex() && model.getPlayers().get(playerIndex).getCoins() >= c.getCost()){
+                    System.out.println("STAI GIOCANDO LA CARTA 9");
+                    model.getPlayers().get(playerIndex).removeCoin(c.getCost());
+                    model.getGameBoard().addCoinsToGeneralReserve(c.getCost() - 1);
+                    c.play();
+
+                    ((Character9) c).enableEffect();
+                    ((Character9) c).setColor(colorIndex);
+                    return 1;
+                }
+            }
+        }
+        return -1;
+    }
+
+    public int playCharacterCard10(int playerIndex, int cardIndex, int entranceStudent1, int diningStudent1){
+
+        if(playerIndex == model.getCurrentPlayer() && model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[diningStudent1]) > 0){
+            boolean checkStudentColor = false; // vedo se ha lo studente di quel colore
+            for (Student s : model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance())
+                if (Colour.values()[entranceStudent1] == s.getColour())
+                    checkStudentColor = true;
+
+            if(checkStudentColor){
+                for (CharacterCard c: model.getGameBoard().getThreeCharacterCards()){
+                    if(cardIndex == c.getIndex() && model.getPlayers().get(playerIndex).getCoins() >= c.getCost()){
+                        System.out.println("STAI GIOCANDO LA CARTA 10");
+                        model.getPlayers().get(playerIndex).removeCoin(c.getCost());
+                        model.getGameBoard().addCoinsToGeneralReserve(c.getCost() - 1);
+                        c.play();
+
+                        model.getPlayers().get(playerIndex).getPlayerSchoolBoard().moveStudentToDiningRoom(entranceStudent1);
+                        model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getDiningRoom().removeOneStudent(diningStudent1);
+                        model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance().add(new Student(Colour.values()[diningStudent1]));
+
+                        checkProfessorProperty(entranceStudent1);
+                        checkProfessorProperty(diningStudent1);
+                        return 1;
+                    }
+                }
+            }
+
+        }
+        return -1;
+    }
+
+    public int playCharacterCard10(int playerIndex, int cardIndex, int entranceStudent1, int diningStudent1, int entranceStudent2, int diningStudent2){
+        int sameCard = 0;
+        if(diningStudent1 == diningStudent2)
+            sameCard = 1;
+
+        if(playerIndex == model.getCurrentPlayer() && model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[diningStudent1]) > sameCard && model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[diningStudent2]) > sameCard){
+            int checkStudentColor = 0; // vedo se ha lo studente di quel colore
+            int checkStudentColor2 = 0;
+            for (Student s : model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance()){
+                if (Colour.values()[entranceStudent1] == s.getColour())
+                    checkStudentColor++;
+                else if (Colour.values()[entranceStudent2] == s.getColour())
+                    checkStudentColor2++;
+            }
+
+            sameCard = 0;
+            if(entranceStudent1 == entranceStudent2)
+                sameCard = 1;
+            if(checkStudentColor > sameCard && checkStudentColor2 > sameCard){
+                for (CharacterCard c: model.getGameBoard().getThreeCharacterCards()){
+                    if(cardIndex == c.getIndex() && model.getPlayers().get(playerIndex).getCoins() >= c.getCost()){
+                        System.out.println("STAI GIOCANDO LA CARTA 10");
+                        model.getPlayers().get(playerIndex).removeCoin(c.getCost());
+                        model.getGameBoard().addCoinsToGeneralReserve(c.getCost() - 1);
+                        c.play();
+
+                        model.getPlayers().get(playerIndex).getPlayerSchoolBoard().moveStudentToDiningRoom(entranceStudent1);
+                        model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getDiningRoom().removeOneStudent(diningStudent1);
+                        model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance().add(new Student(Colour.values()[diningStudent1]));
+
+                        checkProfessorProperty(entranceStudent1);
+                        checkProfessorProperty(diningStudent1);
+
+                        model.getPlayers().get(playerIndex).getPlayerSchoolBoard().moveStudentToDiningRoom(entranceStudent2);
+                        model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getDiningRoom().removeOneStudent(diningStudent2);
+                        model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance().add(new Student(Colour.values()[diningStudent2]));
+
+                        checkProfessorProperty(entranceStudent2);
+                        checkProfessorProperty(diningStudent2);
+                        return 1;
+                    }
+                }
+            }
+        }
+        return -1;
+    }
+
+
 
     public int playCharacterCard11(int playerIndex, int cardIndex, int colorIndex){
         if(playerIndex == model.getCurrentPlayer()){
@@ -770,4 +890,46 @@ public class Controller implements Observer<PlayerMove> {
         }
         return -1;
     }
+
+    /*
+
+    public int playCharacterCard7(int playerIndex, int cardIndex, int cardStudent1, int cardStudent2, int cardStudent3, int entranceStudent1, int entranceStudent2, int entranceStudent3){
+        if(playerIndex == model.getCurrentPlayer()){
+            for (CharacterCard c: model.getGameBoard().getThreeCharacterCards()){
+                if(cardIndex == c.getIndex() && model.getPlayers().get(playerIndex).getCoins() >= c.getCost() && ((Character7) c).checkColorExists(cardStudent1) && ((Character7) c).checkColorExists(cardStudent2) && ((Character7) c).checkColorExists(cardStudent3)){
+                    //controllo se i tre studenti del suo ingresso sono giusti
+                    boolean validStudents = true;
+                    for(Student s: model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance()){
+                        if(entranceStudent1 != s.getColour().ordinal() && entranceStudent1 < 5)
+                            validStudents = false;
+                        else if(entranceStudent2 != s.getColour().ordinal() && entranceStudent1 < 5)
+                            validStudents = false;
+                        else if(entranceStudent3 != s.getColour().ordinal() && entranceStudent1 < 5)
+                            validStudents = false;
+                    }
+                    if(!validStudents)
+                        return -1;
+
+                    System.out.println("STAI GIOCANDO LA CARTA 7");
+                    model.getPlayers().get(playerIndex).removeCoin(c.getCost());
+                    model.getGameBoard().addCoinsToGeneralReserve(c.getCost() - 1); //meno uno perchè una va sulla carta
+                    c.play();
+
+                    model.getPlayers().get(playerIndex).getPlayerSchoolBoard().removeStudentFromEntrance(entranceStudent1);
+                    model.getPlayers().get(playerIndex).getPlayerSchoolBoard().removeStudentFromEntrance(entranceStudent2);
+                    model.getPlayers().get(playerIndex).getPlayerSchoolBoard().removeStudentFromEntrance(entranceStudent3);
+
+                    model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance().add(((Character7) c).getStudent(cardStudent1));
+                    model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance().add(((Character7) c).getStudent(cardStudent2));
+                    model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance().add(((Character7) c).getStudent(cardStudent3));
+
+                    ((Character7) c).addStudent(model.getGameBoard().getBag().draw());
+                    ((Character7) c).addStudent(model.getGameBoard().getBag().draw());
+                    ((Character7) c).addStudent(model.getGameBoard().getBag().draw());
+                    return 1;
+                }
+            }
+        }
+        return -1;
+    } */
 }

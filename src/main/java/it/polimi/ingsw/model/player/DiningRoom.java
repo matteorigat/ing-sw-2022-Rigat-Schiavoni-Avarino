@@ -110,4 +110,18 @@ public class DiningRoom implements Serializable {
 
         return stud;
     }
+
+    public void removeOneStudent(int colorIndex){
+        if(colorIndex == 0){
+            greenStudents.remove(0);
+        } else if(colorIndex == 1){
+            redStudents.remove(0);
+        } else if(colorIndex == 2){
+            yellowStudents.remove(0);
+        } else if(colorIndex == 3){
+            pinkStudents.remove(0);
+        } else if(colorIndex == 4){
+            blueStudents.remove(0);
+        }
+    }
 }

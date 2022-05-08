@@ -141,7 +141,7 @@ public class Model extends Observable<MoveMessage> implements Serializable {
 
             System.out.print("\nPLAYED CARD: ");
             if(p.getCurrentCard().getValue() != 0)
-                System.out.print(p.getCurrentCard().getValue());
+                System.out.print(p.getCurrentCard().getValue() + " (" + p.getCurrentCard().getMovements() + " movements)");
 
             if(p.getNickname().equals(nickname)){
                 System.out.print("\nDECK: ");

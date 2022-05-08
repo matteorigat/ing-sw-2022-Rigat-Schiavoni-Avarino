@@ -2,28 +2,20 @@ package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.exceptions.ConnectionClosedException;
 import it.polimi.ingsw.model.Model;
-import it.polimi.ingsw.server.Pong;
 
-import javax.swing.*;
-import java.io.*;
-import java.net.*;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
 
 public class Client {
     private String ip;
     private int port;
 
     private String nickname = "";
-
 
     public Client(String ip, int port){
         this.ip = ip;
@@ -55,8 +47,6 @@ public class Client {
                             }
                         } else if (inputObject instanceof Model){
                             ((Model)inputObject).print(nickname);
-                        } else if(inputObject instanceof Pong){
-
                         } else {
                             throw new IllegalArgumentException();
                         }
@@ -78,7 +68,7 @@ public class Client {
                     while (isActive()) {
                         String inputLine = stdin.nextLine();
 
-                        if(inputLine.equals("c") && !nickname.equals("")){ //va cambiato
+                        if(inputLine.equals("c") && !nickname.equals("")){
                             String inputLine2 = null;
                             int c;
                             System.out.print("Character card index: ");
@@ -135,26 +125,11 @@ public class Client {
         try{
             Thread t0 = asyncReadFromSocket(socketIn);
             Thread t1 = asyncWriteToSocket(stdin, socketOut);
-            Thread t2 = pinging(socketOut);
 
-            t2.join();
-            System.out.println("Connection closed t2");
             t0.join();
-            System.out.println("Connection closed t0");
-
-            t1.interrupt();
-            System.out.println("interrputed t1");
             System.in.close();
-            /*socketIn.close();
-            System.out.println("socketin");
-            socketOut.close();
-            System.out.println("socketout");
-            socket.close();
-            System.out.println("socket");
-            */
-            t1.stop();
             t1.join();
-            System.out.println("Connection closed t1");
+            System.out.println("Connection closed!");
 
         } catch(InterruptedException | NoSuchElementException | ConnectionClosedException e){
             System.out.println("Connection closed from the client side");
@@ -165,48 +140,6 @@ public class Client {
             socket.close();
         }
     }
-
-    public Thread pinging(final ObjectOutputStream socketOut) throws RuntimeException{
-        Thread t = new Thread(new Runnable(){
-            @Override
-            public void run() {
-
-                System.out.println("Ping started!\n");
-                while(true) {
-                    if (!isActive()) throw new ConnectionClosedException();
-                    try {
-                        Thread.sleep(1000);
-                        synchronized (ip) {
-
-                        //    System.out.println("Sending ping!");
-                            socketOut.writeObject(new Ping());
-                            socketOut.flush();
-
-                         //   System.out.println("Ping sent|");
-                        }
-                    }
-                         catch (Exception e) {
-                            setActive(false);
-                            System.out.println("Connection closed!");
-                            throw new ConnectionClosedException();
-
-
-                        //    throw new RuntimeException("Connection closed. Sorry!");
-
-                        }
-                    }
-
-
-
-            }
-        });
-        t.start();
-        return t;
-    }
-
-
-
-
 }
 
 

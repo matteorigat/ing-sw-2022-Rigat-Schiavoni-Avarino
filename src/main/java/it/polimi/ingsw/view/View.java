@@ -1,6 +1,5 @@
 package it.polimi.ingsw.view;
 
-import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.player.MoveMessage;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.observer.Observable;

@@ -1,14 +1,14 @@
 package it.polimi.ingsw.model.gameboard.characters;
 
-public class Character12 implements CharacterCard{
+public class Character10 implements CharacterCard{
     private int index;
     private int cost;
 
-    private static final String Description = "Scegli un colore, tutti i giocatori devono mettere 3 studenti di quel colore dalla sala al sacchetto";
+    private static final String Description = "Scambia tra loro fino a due studenti della sala e dell'ingresso";
 
-    public Character12() {
-        this.index = 12;
-        this.cost = 3;
+    public Character10() {
+        this.index = 10;
+        this.cost = 1;
     }
 
     @Override

@@ -1,6 +1,5 @@
 package it.polimi.ingsw.server;
 
-import it.polimi.ingsw.client.Ping;
 import it.polimi.ingsw.observer.Observable;
 import it.polimi.ingsw.utils.gameMessage;
 
@@ -8,8 +7,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
 
 public class SocketClientConnection extends Observable<String> implements ClientConnection, Runnable {
 
@@ -33,7 +30,7 @@ public class SocketClientConnection extends Observable<String> implements Client
             out.reset();
             out.writeObject(message);
             out.flush();
-        } catch(IOException e){
+        } catch(Exception e){
             System.err.println(e.getMessage());
         }
 
@@ -69,13 +66,13 @@ public class SocketClientConnection extends Observable<String> implements Client
 
     @Override
     public void run() {
-        ObjectInputStream in;
         String name;
         int numPlayers;
         Boolean expertMode;
         try{
-            in = new ObjectInputStream(socket.getInputStream());
+            ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
             out = new ObjectOutputStream(socket.getOutputStream());
+
             send(gameMessage.eriantys);
 
             send("Welcome!\nWhat is your name?");
@@ -83,9 +80,7 @@ public class SocketClientConnection extends Observable<String> implements Client
             boolean errorName;
             do {
                 errorName = false;
-                while((read = in.readObject()) instanceof Ping){
-                     out.writeObject(new Pong());
-                }
+                read = in.readObject();
                 name = (String) read;
                 for (String s : server.getNicknames()) {
                     if (s.equals(name)) {
@@ -108,9 +103,7 @@ public class SocketClientConnection extends Observable<String> implements Client
                     numPlayers = 0;
                     while(numPlayers != 2 && numPlayers != 3){
                         send("How many players?");
-                        while((read = in.readObject()) instanceof Ping){
-                            out.writeObject(new Pong());
-                        }
+                        read = in.readObject();
                         if(read.equals("")){
                             send("Error, please write a correct number of players");
                         }else{
@@ -124,9 +117,7 @@ public class SocketClientConnection extends Observable<String> implements Client
                     do {
                         wrongInput = true;
                         send("Expert mode? y or n");
-                        while((read = in.readObject()) instanceof Ping){
-                            out.writeObject(new Pong());
-                        }
+                        read = in.readObject();
                         read1 = (String)read;
                         if(read1.equals("y") || read1.equals("n"))
                             wrongInput = false;
@@ -150,17 +141,10 @@ public class SocketClientConnection extends Observable<String> implements Client
             while(isActive()){
 
                 read = in.readObject();
-
-                if(read instanceof String)
                 notify((String)read);
-                else if (read instanceof Ping){
-                    out.writeObject(new Pong());
-                }
             }
-        } catch (IOException | NoSuchElementException e) {
+        } catch (Exception e) {
             System.err.println("Error! " + e.getMessage());
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
         } finally{
             close();
         }

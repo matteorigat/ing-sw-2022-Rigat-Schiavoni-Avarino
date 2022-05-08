@@ -1,14 +1,18 @@
 package it.polimi.ingsw.model.gameboard.characters;
 
-public class Character6 implements CharacterCard{
+import it.polimi.ingsw.model.enumeration.Colour;
+
+public class Character9 implements CharacterCard{
     private int index;
     private int cost;
     private boolean effectFlag;
 
-    private static final String Description = "Durante il conteggio dell'influenza, le torri non vengono considerate";
+    private int color;
 
-    public Character6() {
-        this.index = 6;
+    private static final String Description = "Durante il calcolo dell'influenza il colore che scegli non viene contato";
+
+    public Character9() {
+        this.index = 9;
         this.cost = 3;
         this.effectFlag = false;
     }
@@ -38,6 +42,14 @@ public class Character6 implements CharacterCard{
     @Override
     public int getCost() {
         return cost;
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
     }
 
     @Override

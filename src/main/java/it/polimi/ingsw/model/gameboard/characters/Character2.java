@@ -1,15 +1,15 @@
 package it.polimi.ingsw.model.gameboard.characters;
 
-public class Character6 implements CharacterCard{
+public class Character2 implements CharacterCard{
     private int index;
     private int cost;
     private boolean effectFlag;
 
-    private static final String Description = "Durante il conteggio dell'influenza, le torri non vengono considerate";
+    private static final String Description = "Prendi il controllo dei professori anche in caso di parità di studenti";
 
-    public Character6() {
-        this.index = 6;
-        this.cost = 3;
+    public Character2() {
+        this.index = 2;
+        this.cost = 2;
         this.effectFlag = false;
     }
 
