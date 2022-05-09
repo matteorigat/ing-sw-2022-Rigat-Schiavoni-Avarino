@@ -26,6 +26,7 @@ public class Controller implements Observer<PlayerMove> {
             move.getView().reportError(gameMessage.wrongTurnMessage);
             return;
         }
+        //System.out.println("sei in performove " + move.getParam1() + " " + move.getParam2() + " " +  move.getParam3() + " " +  move.getParam4() + " " +  move.getParam5() + " " +  move.getParam6() + " " +  move.getParam7() + " " +  move.getParam8());
 
         int result = 0;
         switch (move.getParam1()){
@@ -44,7 +45,9 @@ public class Controller implements Observer<PlayerMove> {
             }
 
             case 2: {
+                System.out.println("sei per muovere madre natura");
                 result = moveMotherNature(move.getPlayer().getIndex(), move.getParam2());
+                System.out.println("hai mosso madre natura");
                 break;
             }
 
@@ -67,6 +70,8 @@ public class Controller implements Observer<PlayerMove> {
 
                 if(move.getParam2() == 1){
                     result = playCharacterCard1(move.getPlayer().getIndex(), move.getParam2(), move.getParam3(), move.getParam4());
+                } else if(move.getParam2() == 2){
+                    result = playCharacterCard2(move.getPlayer().getIndex(), move.getParam2());
                 } else if(move.getParam2() == 3){
                     result = playCharacterCard3(move.getPlayer().getIndex(), move.getParam2(), move.getParam3());
                 } else if(move.getParam2() == 4){
@@ -75,8 +80,22 @@ public class Controller implements Observer<PlayerMove> {
                     result = playCharacterCard5(move.getPlayer().getIndex(), move.getParam2(), move.getParam3());
                 } else if(move.getParam2() == 6){
                     result = playCharacterCard6(move.getPlayer().getIndex(), move.getParam2());
+                } else if(move.getParam2() == 7){
+                    if(move.getParam5() == -1)
+                        result = playCharacterCard7(move.getPlayer().getIndex(), move.getParam2(), move.getParam3(), move.getParam4());
+                    else if(move.getParam7() == -1)
+                        result = playCharacterCard7(move.getPlayer().getIndex(), move.getParam2(), move.getParam3(), move.getParam4(), move.getParam5(), move.getParam6());
+                    else
+                        result = playCharacterCard7(move.getPlayer().getIndex(), move.getParam2(), move.getParam3(), move.getParam4(), move.getParam5(), move.getParam6(), move.getParam7(), move.getParam8());
                 } else if(move.getParam2() == 8){
                     result = playCharacterCard8(move.getPlayer().getIndex(), move.getParam2());
+                } else if(move.getParam2() == 9){
+                    result = playCharacterCard9(move.getPlayer().getIndex(), move.getParam2(), move.getParam3());
+                } else if(move.getParam2() == 10){
+                    if(move.getParam5() == -1)
+                        result = playCharacterCard10(move.getPlayer().getIndex(), move.getParam2(), move.getParam3(), move.getParam4());
+                    else
+                        result = playCharacterCard10(move.getPlayer().getIndex(), move.getParam2(), move.getParam3(), move.getParam4(), move.getParam5(), move.getParam6());
                 } else if(move.getParam2() == 11){
                     result = playCharacterCard11(move.getPlayer().getIndex(), move.getParam2(), move.getParam3());
                 } else if(move.getParam2() == 12){
@@ -782,6 +801,10 @@ public class Controller implements Observer<PlayerMove> {
                         model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getDiningRoom().removeOneStudent(diningStudent1);
                         model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance().add(new Student(Colour.values()[diningStudent1]));
 
+                        for(Professor p: model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getProfessors())
+                            if(p.getProfessorColour().ordinal() == diningStudent1)
+                                model.getPlayers().get(playerIndex).getPlayerSchoolBoard().removeProfessor(Colour.values()[diningStudent1]);
+
                         checkProfessorProperty(entranceStudent1);
                         checkProfessorProperty(diningStudent1);
                         return 1;
@@ -823,12 +846,20 @@ public class Controller implements Observer<PlayerMove> {
                         model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getDiningRoom().removeOneStudent(diningStudent1);
                         model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance().add(new Student(Colour.values()[diningStudent1]));
 
+                        for(Professor p: model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getProfessors())
+                            if(p.getProfessorColour().ordinal() == diningStudent1)
+                                model.getPlayers().get(playerIndex).getPlayerSchoolBoard().removeProfessor(Colour.values()[diningStudent1]);
+
                         checkProfessorProperty(entranceStudent1);
                         checkProfessorProperty(diningStudent1);
 
                         model.getPlayers().get(playerIndex).getPlayerSchoolBoard().moveStudentToDiningRoom(entranceStudent2);
                         model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getDiningRoom().removeOneStudent(diningStudent2);
                         model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance().add(new Student(Colour.values()[diningStudent2]));
+
+                        for(Professor p: model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getProfessors())
+                            if(p.getProfessorColour().ordinal() == diningStudent2)
+                                model.getPlayers().get(playerIndex).getPlayerSchoolBoard().removeProfessor(Colour.values()[diningStudent2]);
 
                         checkProfessorProperty(entranceStudent2);
                         checkProfessorProperty(diningStudent2);
@@ -891,23 +922,88 @@ public class Controller implements Observer<PlayerMove> {
         return -1;
     }
 
-    /*
+    public int playCharacterCard7(int playerIndex, int cardIndex, int cardStudent1, int entranceStudent1){
+        if(playerIndex == model.getCurrentPlayer()){
+            for (CharacterCard c: model.getGameBoard().getThreeCharacterCards()){
+                if(cardIndex == c.getIndex() && model.getPlayers().get(playerIndex).getCoins() >= c.getCost() && ((Character7) c).checkColorExists(cardStudent1)){
+                    //controllo se i tre studenti del suo ingresso sono giusti
+                    boolean check1 = false;
+                    for(Student s: model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance()){
+                        if(entranceStudent1 == s.getColour().ordinal() && entranceStudent1 < 5)
+                            check1 = true;
+                    }
+                    if(!check1)
+                        return -1;
 
-    public int playCharacterCard7(int playerIndex, int cardIndex, int cardStudent1, int cardStudent2, int cardStudent3, int entranceStudent1, int entranceStudent2, int entranceStudent3){
+                    System.out.println("STAI GIOCANDO LA CARTA 7");
+                    model.getPlayers().get(playerIndex).removeCoin(c.getCost());
+                    model.getGameBoard().addCoinsToGeneralReserve(c.getCost() - 1); //meno uno perchè una va sulla carta
+                    c.play();
+
+                    model.getPlayers().get(playerIndex).getPlayerSchoolBoard().removeStudentFromEntrance(entranceStudent1);
+                    model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance().add(((Character7) c).getStudent(cardStudent1));
+                    ((Character7) c).addStudent(new Student(Colour.values()[entranceStudent1]));
+                    return 1;
+                }
+            }
+        }
+        return -1;
+    }
+
+    public int playCharacterCard7(int playerIndex, int cardIndex, int cardStudent1, int entranceStudent1, int cardStudent2, int entranceStudent2){
+        if(playerIndex == model.getCurrentPlayer()){
+            for (CharacterCard c: model.getGameBoard().getThreeCharacterCards()){
+                if(cardIndex == c.getIndex() && model.getPlayers().get(playerIndex).getCoins() >= c.getCost() && ((Character7) c).checkColorExists(cardStudent1) && ((Character7) c).checkColorExists(cardStudent2)){
+                    //controllo se i tre studenti del suo ingresso sono giusti
+                    boolean check1 = false;
+                    boolean check2 = false;
+                    for(Student s: model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance()){
+                        if(entranceStudent1 == s.getColour().ordinal() && entranceStudent1 < 5)
+                            check1 = true;
+                        else if(entranceStudent2 != s.getColour().ordinal() && entranceStudent1 < 5)
+                            check2 = true;
+                    }
+                    if(!(check1 && check2))
+                        return -1;
+
+                    System.out.println("STAI GIOCANDO LA CARTA 7");
+                    model.getPlayers().get(playerIndex).removeCoin(c.getCost());
+                    model.getGameBoard().addCoinsToGeneralReserve(c.getCost() - 1); //meno uno perchè una va sulla carta
+                    c.play();
+
+                    model.getPlayers().get(playerIndex).getPlayerSchoolBoard().removeStudentFromEntrance(entranceStudent1);
+                    model.getPlayers().get(playerIndex).getPlayerSchoolBoard().removeStudentFromEntrance(entranceStudent2);
+
+                    model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance().add(((Character7) c).getStudent(cardStudent1));
+                    model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance().add(((Character7) c).getStudent(cardStudent2));
+
+                    ((Character7) c).addStudent(new Student(Colour.values()[entranceStudent1]));
+                    ((Character7) c).addStudent(new Student(Colour.values()[entranceStudent2]));
+                    return 1;
+                }
+            }
+        }
+        return -1;
+    }
+
+
+    public int playCharacterCard7(int playerIndex, int cardIndex, int cardStudent1, int entranceStudent1, int cardStudent2, int entranceStudent2, int cardStudent3, int entranceStudent3){
         if(playerIndex == model.getCurrentPlayer()){
             for (CharacterCard c: model.getGameBoard().getThreeCharacterCards()){
                 if(cardIndex == c.getIndex() && model.getPlayers().get(playerIndex).getCoins() >= c.getCost() && ((Character7) c).checkColorExists(cardStudent1) && ((Character7) c).checkColorExists(cardStudent2) && ((Character7) c).checkColorExists(cardStudent3)){
                     //controllo se i tre studenti del suo ingresso sono giusti
-                    boolean validStudents = true;
+                    boolean check1 = false;
+                    boolean check2 = false;
+                    boolean check3 = false;
                     for(Student s: model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance()){
-                        if(entranceStudent1 != s.getColour().ordinal() && entranceStudent1 < 5)
-                            validStudents = false;
+                        if(entranceStudent1 == s.getColour().ordinal() && entranceStudent1 < 5)
+                            check1 = true;
                         else if(entranceStudent2 != s.getColour().ordinal() && entranceStudent1 < 5)
-                            validStudents = false;
+                            check2 = true;
                         else if(entranceStudent3 != s.getColour().ordinal() && entranceStudent1 < 5)
-                            validStudents = false;
+                            check3 = true;
                     }
-                    if(!validStudents)
+                    if(!(check1 && check2 && check3))
                         return -1;
 
                     System.out.println("STAI GIOCANDO LA CARTA 7");
@@ -923,13 +1019,13 @@ public class Controller implements Observer<PlayerMove> {
                     model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance().add(((Character7) c).getStudent(cardStudent2));
                     model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance().add(((Character7) c).getStudent(cardStudent3));
 
-                    ((Character7) c).addStudent(model.getGameBoard().getBag().draw());
-                    ((Character7) c).addStudent(model.getGameBoard().getBag().draw());
-                    ((Character7) c).addStudent(model.getGameBoard().getBag().draw());
+                    ((Character7) c).addStudent(new Student(Colour.values()[entranceStudent1]));
+                    ((Character7) c).addStudent(new Student(Colour.values()[entranceStudent2]));
+                    ((Character7) c).addStudent(new Student(Colour.values()[entranceStudent3]));
                     return 1;
                 }
             }
         }
         return -1;
-    } */
+    }
 }

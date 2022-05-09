@@ -47,6 +47,7 @@ public class RemoteView extends View {
 
                 switch (phaseCounter){
                     case 0:
+                    case 2:
                     case 4:
                     case 3: {
                         if(inputs.length == 1)
@@ -69,6 +70,10 @@ public class RemoteView extends View {
                             handleMove(phaseCounter, input[0], input[1]);
                         else if(inputs.length == 3)
                             handleMove(phaseCounter, input[0], input[1], input[2]);
+                        else if(inputs.length == 5)
+                            handleMove(phaseCounter, input[0], input[1], input[2], input[3], input[4]);
+                        else if(inputs.length == 7)
+                            handleMove(phaseCounter, input[0], input[1], input[2], input[3], input[4], input[5], input[6]);
                         else clientConnection.asyncSend("\u001B[5;31mError! Write the move well\u001B[0m");
                         break;
                     }
