@@ -45,7 +45,7 @@ public class Controller implements Observer<PlayerMove> {
             }
 
             case 2: {
-                System.out.println("sei per muovere madre natura");
+                System.out.println("stai per muovere madre natura");
                 result = moveMotherNature(move.getPlayer().getIndex(), move.getParam2());
                 System.out.println("hai mosso madre natura");
                 break;
@@ -366,6 +366,7 @@ public class Controller implements Observer<PlayerMove> {
             if(movements > 0 && movements <= maxMovements){
                 int newPos = (model.getGameBoard().getMotherNature() + movements)%model.getGameBoard().getIslands().size();
                 model.getGameBoard().setMotherNature(newPos);//moves motherNature by specified movements
+                System.out.println("stai per entrare in checkInfluence");
                 this.checkIslandInfluence(newPos, playerIndex);
             } else return -1;
 
@@ -399,7 +400,9 @@ public class Controller implements Observer<PlayerMove> {
 
         }
         // vedo chi ha più influenza ora
+        System.out.println("stai per calcolare influence");
         Player newPlayer = model.getGameBoard().getIslands().get(islandIndex).Influence(model.getPlayers(), card6noTowerFlag, card8twoMorePointsPlayer, card9color);
+        System.out.println("hai calcolato influence");
 
         if (newPlayer!=null){
             Player oldPlayer = null;  // vedo chi controllava l'isola prima

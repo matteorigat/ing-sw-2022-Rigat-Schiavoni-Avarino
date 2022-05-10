@@ -14,6 +14,7 @@ public class Character9 implements CharacterCard{
     public Character9() {
         this.index = 9;
         this.cost = 3;
+        this.color = -1;
         this.effectFlag = false;
     }
 
@@ -23,6 +24,7 @@ public class Character9 implements CharacterCard{
 
     public void disableEffect(){
         effectFlag = false;
+        this.color = -1;
     }
 
     public boolean isEffectFlag() {
@@ -56,6 +58,6 @@ public class Character9 implements CharacterCard{
     public String toString() {
         return  "index: " + index +
                 "\tcost: " + cost +
-                "\t\teffectFlag: " + effectFlag +  "\t\t\t\t" + Description;
+                "\t\teffectFlag: " + getColor() +  "\t\t\t\t" + Description;
     }
 }
