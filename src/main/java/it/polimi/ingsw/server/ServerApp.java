@@ -3,7 +3,8 @@ package it.polimi.ingsw.server;
 import java.io.IOException;
 
 /**
- * Hello world!
+ * The main class of the server. It simply creates a new server class, adding a server socket to
+ * an executor.
  *
  */
 public class ServerApp

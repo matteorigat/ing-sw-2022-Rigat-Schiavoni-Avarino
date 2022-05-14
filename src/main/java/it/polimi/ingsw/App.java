@@ -4,10 +4,7 @@ import it.polimi.ingsw.controller.Controller;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.view.LocalView;
 
-/**
- *   Hello world!
- *
- **/
+
 
 public class App 
 {

@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.enumeration.Colour;
 
 import java.util.ArrayList;
 
+
 public class Character1 implements CharacterCard{
     private int index;
     private int cost;

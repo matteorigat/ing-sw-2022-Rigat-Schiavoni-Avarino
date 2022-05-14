@@ -5,8 +5,19 @@ import it.polimi.ingsw.server.ServerApp;
 
 import java.util.Scanner;
 
+
+/**
+ * Class Santorini is the main class of whole project.
+ *
+ * */
+
+
 public class Eriantys {
 
+
+/**
+ * Method main selects CLI, GUI or Server based on the arguments provided.
+ */
     public static void main(String[] args) {
         System.out.println("WELCOME! What do you want to launch?");
         System.out.println("0. LOCAL\n1. SERVER\n2. CLIENT (CLI INTERFACE)");

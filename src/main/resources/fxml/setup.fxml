@@ -11,10 +11,10 @@
             <Image url="@../../../../../../01.jpg" />
          </image>
       </ImageView>
-      <Label layoutX="190.0" layoutY="153.0" text="Inserisci lindirizzo ip" />
+      <Label layoutX="175.0" layoutY="153.0" text="insert a Server IP address" />
       <TextField layoutX="167.0" layoutY="180.0" />
-      <Label layoutX="231.0" layoutY="217.0" text="Port" />
+      <Label layoutX="192.0" layoutY="216.0" text="Insert a server port" />
       <TextField layoutX="167.0" layoutY="241.0" />
-      <Button layoutX="209.0" layoutY="292.0" mnemonicParsing="false" text="CONFIRM" />
+      <Button layoutX="209.0" layoutY="292.0" mnemonicParsing="false" prefWidth="76.0" text="JOIN" />
    </children>
 </Pane>
