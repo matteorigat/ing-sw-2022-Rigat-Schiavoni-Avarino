@@ -32,6 +32,8 @@ public class Client {
         this.active = active;
     }
 
+    /* asyncReadFromSocket  */
+
     public Thread asyncReadFromSocket(final ObjectInputStream socketIn){
         Thread t = new Thread(new Runnable() {
             @Override

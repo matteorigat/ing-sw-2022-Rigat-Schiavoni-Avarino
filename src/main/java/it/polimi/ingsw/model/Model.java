@@ -185,6 +185,7 @@ public class Model extends Observable<MoveMessage> implements Serializable {
         //System.out.println("Mn on: " + gameBoard.getMotherNature());
     }
 
+
     private String textColor(Colour colour){
         int colorInt = colour.ordinal();
 
