@@ -11,12 +11,5 @@ public class MainPageController {
     @FXML private TextField ip;
     @FXML private TextField port;
 
-   /* public void start() {
-       // ClientGUI clientGUI = new ClientGUI(ip.getText(), Integer.parseInt(port.getText()));
-        try {
-        //    clientGUI.run();
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
-        }
-    } */
+
 }

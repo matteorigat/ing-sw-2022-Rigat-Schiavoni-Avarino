@@ -2,24 +2,24 @@ package it.polimi.ingsw.client;
 
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class ClientAppGUI extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("My First JavaFX App");
-
-        Label label = new Label("Hello World, JavaFX !");
-        Scene scene = new Scene(label, 400, 200);
-        primaryStage.setScene(scene);
-
-        primaryStage.show();
+    public void start(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(ClientAppGUI.class.getResource("/fxml/setup.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("Hello!");
+        stage.setScene(scene);
+        stage.show();
     }
 
     public static void main(String[] args) {
-        Application.launch(args);
+        launch();
     }
 }
