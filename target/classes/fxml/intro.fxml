@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="486.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="it.polimi.ingsw.client.GUI.controllers.MainPageController">
+   <children>
+      <ImageView fitHeight="360.0" fitWidth="486.0">
+         <image>
+            <Image url="../Graphics/title.jpg" />
+         </image>
+      </ImageView>
+
+      <Label layoutX="190.0" layoutY="153.0" text="Inserisci lindirizzo ip" />
+      <TextField fx:id="ip" layoutX="167.0" layoutY="180.0" />
+
+      <Label layoutX="231.0" layoutY="217.0" text="Port" />
+      <TextField fx:id="port" layoutX="167.0" layoutY="241.0" />
+
+      <Button onAction="#start"  layoutX="209.0" layoutY="292.0" mnemonicParsing="false" text="CONFIRM" />
+
+   </children>
+</Pane>
