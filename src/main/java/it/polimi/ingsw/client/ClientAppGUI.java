@@ -12,7 +12,7 @@ public class ClientAppGUI extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(ClientAppGUI.class.getResource("/fxml/setup.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(ClientAppGUI.class.getResource("/fxml/firstPlayer.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("MainPage");
         stage.setScene(scene);
