@@ -1,6 +1,7 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.client.ClientApp;
+import it.polimi.ingsw.client.ClientAppCLI;
+import it.polimi.ingsw.client.ClientAppGUI;
 import it.polimi.ingsw.server.ServerApp;
 
 import java.util.Scanner;
@@ -9,13 +10,13 @@ public class Eriantys {
 
     public static void main(String[] args) {
         System.out.println("WELCOME! What do you want to launch?");
-        System.out.println("0. LOCAL\n1. SERVER\n2. CLIENT (CLI INTERFACE)");
+        System.out.println("0. LOCAL\n1. SERVER\n2. CLIENT (CLI INTERFACE)\n3. CLIENT (GUI INTERFACE)");
         Scanner scanner = new Scanner(System.in);
         String input;
         do {
             System.out.println("Insert your choice: ");
             input = scanner.nextLine();
-        }while (!(input.equals("0") || input.equals("1") || input.equals("2")));
+        }while (!(input.equals("0") || input.equals("1") || input.equals("2") || input.equals("2")));
 
 
         switch (input){
@@ -26,7 +27,10 @@ public class Eriantys {
                 ServerApp.main(null);
                 break;
             case "2":
-                ClientApp.main(null);
+                ClientAppCLI.main(null);
+                break;
+            case "3":
+                ClientAppGUI.main(null);
                 break;
 
             default:

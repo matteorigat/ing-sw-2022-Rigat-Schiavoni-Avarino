@@ -1,9 +1,11 @@
 package it.polimi.ingsw.client;
 
+import it.polimi.ingsw.client.CLI.ClientCLI;
+
 import java.io.IOException;
 import java.util.Scanner;
 
-public class ClientApp {
+public class ClientAppCLI {
 
 
     public static void main(String[] args) {
@@ -12,9 +14,9 @@ public class ClientApp {
         String s = in.nextLine();
         if(!s.contains("."))
             s = "127.0.0.1";
-        Client client = new Client(s,1337); //192.168.100.10
+        ClientCLI clientCLI = new ClientCLI(s,1337); //192.168.100.10
         try {
-            client.run();
+            clientCLI.run();
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }

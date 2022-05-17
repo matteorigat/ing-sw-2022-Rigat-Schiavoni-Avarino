@@ -1,4 +1,4 @@
-package it.polimi.ingsw.client;
+package it.polimi.ingsw.client.CLI;
 
 import it.polimi.ingsw.exceptions.ConnectionClosedException;
 import it.polimi.ingsw.model.Model;
@@ -11,13 +11,13 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-public class Client {
+public class ClientCLI {
     private String ip;
     private int port;
 
     private String nickname = "";
 
-    public Client(String ip, int port){
+    public ClientCLI(String ip, int port){
         this.ip = ip;
         this.port = port;
     }
