@@ -8,7 +8,7 @@
    <children>
       <ImageView fitHeight="360.0" fitWidth="486.0">
          <image>
-            <Image url="@../../../../../../01.jpg" />
+            <Image url="/Graphics/title.jpg" />
          </image>
       </ImageView>
       <Label layoutX="175.0" layoutY="153.0" text="insert a Server IP address" />
