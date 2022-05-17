@@ -14,11 +14,20 @@ import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * Server class is the main one of the server side, it allows clients to connect, play together and
+ * also starts the match.
+ */
 public class Server {
 
     private static final int PORT = 1337;
     private ServerSocket serverSocket;
     private ExecutorService executor = Executors.newFixedThreadPool(128);
+
+    /**
+     * This hashmap permits to finding client ID relying on his unique nickname.
+     * The client has to be connected to the server.
+     */
     private Map<String, ClientConnection> waitingConnection = new HashMap<>();
     private Map<ClientConnection, ClientConnection> playingConnection = new HashMap<>();
 
@@ -28,6 +37,10 @@ public class Server {
     private boolean expertMode;
 
 
+    /**
+     * Method deregisterClient deletes a client from the hashmaps and active lists, unregistering his
+     * connection with the server
+     */
     //Deregister connection
     public synchronized void deregisterConnection(ClientConnection c) {
         ClientConnection opponent = playingConnection.get(c);
@@ -52,13 +65,25 @@ public class Server {
         }
     }
 
+    /**
+     * Method setParameters permits you to set Gamemode and num of players parameters
+     * @param numPlayers num of players in the game
+     * @param expertMode Gamemode
+     */
     public void setParameters(int numPlayers, boolean expertMode){
         this.numPlayers = numPlayers;
         this.expertMode = expertMode;
     }
 
 
-    //Wait for another player
+/**
+ * Method lobby creates or handle a lobby, which is a common room used before a match. In this
+ * room, connected players are waiting for other ones, in order to reach the correct players'
+ * number for playing. If the waiting clients' queue is empty, the server creates a new lobby and
+ * ask the first player to choose the capacity. After that, when a client connects, it checks if
+ * the players number has been reached; if true, starts the match.
+ */
+
     public synchronized void lobby(ClientConnection c, String name){
         List<String> keys = new ArrayList<>(waitingConnection.keySet());
         for(int i = 0; i < keys.size(); i++){

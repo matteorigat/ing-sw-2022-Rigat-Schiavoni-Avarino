@@ -8,6 +8,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+
+/**
+ * SocketClientConnection handles a connection between client and server, permitting sending and
+ * receiving messages and doing other class-useful operations too.
+ */
 public class SocketClientConnection extends Observable<String> implements ClientConnection, Runnable {
 
     private Socket socket;
@@ -21,6 +26,8 @@ public class SocketClientConnection extends Observable<String> implements Client
         this.server = server;
     }
 
+/**
+ * Method isActive returns the active of this SocketClientConnection object.*/
     private synchronized boolean isActive(){
         return active;
     }
@@ -36,6 +43,7 @@ public class SocketClientConnection extends Observable<String> implements Client
 
     }
 
+
     @Override
     public synchronized void closeConnection() {
         send("Connection closed!");
@@ -47,6 +55,10 @@ public class SocketClientConnection extends Observable<String> implements Client
         active = false;
     }
 
+
+   /** Method close terminates the connection with the client, closing firstly input and output
+   * streams, then invoking the server method called "DeregisteringClient", which will remove the
+   * active virtual client from the list.*/
     private void close() {
         closeConnection();
         System.out.println("Deregistering client...");
@@ -64,6 +76,10 @@ public class SocketClientConnection extends Observable<String> implements Client
         }).start();
     }
 
+
+   /** Method run is the overriding runnable class method, which is called on a new client connection.
+    * Every new Client connected will sign in writing his username and if he's the first player in the match he will choose
+    * the gamemode and the num of players */
     @Override
     public void run() {
         String name;
