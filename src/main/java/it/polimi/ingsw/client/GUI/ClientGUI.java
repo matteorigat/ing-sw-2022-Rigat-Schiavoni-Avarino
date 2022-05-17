@@ -1,7 +1,10 @@
 package it.polimi.ingsw.client.GUI;
 
+import it.polimi.ingsw.client.GUI.controllers.MainPageController;
 import it.polimi.ingsw.exceptions.ConnectionClosedException;
 import it.polimi.ingsw.model.Model;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -10,8 +13,13 @@ import java.net.Socket;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class ClientGUI {
-    private String ip;
+public class ClientGUI  {
+
+
+
+
+
+  /*  private String ip;
     private int port;
 
     private String nickname = "";
@@ -31,7 +39,7 @@ public class ClientGUI {
         this.active = active;
     }
 
-    /* asyncReadFromSocket  */
+    // asyncReadFromSocket
 
     public Thread asyncReadFromSocket(final ObjectInputStream socketIn){
         Thread t = new Thread(new Runnable() {
@@ -152,7 +160,7 @@ public class ClientGUI {
             socketOut.close();
             socket.close();
         }
-    }
+    } */
 }
 
 
