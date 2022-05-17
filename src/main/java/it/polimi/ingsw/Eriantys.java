@@ -27,7 +27,7 @@ public class Eriantys {
         do {
             System.out.println("Insert your choice: ");
             input = scanner.nextLine();
-        }while (!(input.equals("0") || input.equals("1") || input.equals("2") || input.equals("2")));
+        }while (!(input.equals("0") || input.equals("1") || input.equals("2") || input.equals("2") || input.equals("3")));
 
 
         switch (input){

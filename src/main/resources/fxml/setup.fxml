@@ -5,12 +5,18 @@
 <?import javafx.scene.layout.*?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="486.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="it.polimi.ingsw.client.HelloController">
+      fx:controller="it.polimi.ingsw.client.GUI.controllers.MainPageController">
    <children>
+      <ImageView >
+         <image>
+            <Image url="@../Graphics/title.jpg"/>
+         </image>
+      </ImageView>
       <Label layoutX="175.0" layoutY="153.0" text="insert a Server IP address" />
-      <TextField layoutX="167.0" layoutY="180.0" />
+      <TextField fx:id="ip" layoutX="167.0" layoutY="180.0" />
       <Label layoutX="192.0" layoutY="216.0" text="Insert a server port" />
-      <TextField layoutX="167.0" layoutY="241.0" />
-      <Button layoutX="209.0" layoutY="292.0" mnemonicParsing="false" prefWidth="76.0" text="JOIN" />
+      <TextField fx:id="port" layoutX="167.0" layoutY="241.0" />
+      <Button onAction="#onHelloButtonClick" layoutX="209.0" layoutY="292.0" mnemonicParsing="false" prefWidth="76.0" text="JOIN" />
+      <Label fx:id="welcomeText"/>
    </children>
 </Pane>
