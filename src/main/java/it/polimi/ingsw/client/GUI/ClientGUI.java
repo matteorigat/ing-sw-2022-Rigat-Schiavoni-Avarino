@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.GUI;
 
+import it.polimi.ingsw.client.ClientAppGUI;
 import it.polimi.ingsw.exceptions.ConnectionClosedException;
 import it.polimi.ingsw.model.Model;
 
@@ -10,19 +11,39 @@ import java.net.Socket;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class ClientGUI  {
+public class ClientGUI implements Runnable {
 
     private String ip;
-    private int port;
+    private Integer port;
+
+    private ObjectOutputStream socketOut;
+
+    private ClientAppGUI gui;
 
     private String nickname = "";
+    private boolean loading = false;
+    private boolean firstPlayer = false;
 
-    public ClientGUI(String ip, int port){
+    public ClientGUI(String ip, int port, ClientAppGUI gui){
         this.ip = ip;
         this.port = port;
+        this.gui = gui;
     }
 
     private boolean active = true;
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+        System.out.println("Set: " + this.nickname);
+    }
+
+    public boolean isLoading() {
+        return loading;
+    }
+
+    public boolean isFirstPlayer() {
+        return firstPlayer;
+    }
 
     public synchronized boolean isActive(){
         return active;
@@ -34,7 +55,7 @@ public class ClientGUI  {
 
     // asyncReadFromSocket
 
-    public Thread asyncReadFromSocket(final ObjectInputStream socketIn){
+    public Thread asyncReadFromSocket(final ObjectInputStream socketIn, final ObjectOutputStream socketOut){
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -42,12 +63,19 @@ public class ClientGUI  {
                     while (isActive()) {
                         Object inputObject = socketIn.readObject();
                         if(inputObject instanceof String){
-                            if(((String) inputObject).contains("NICKNAME")){
-                                nickname = ((String) inputObject).replace("NICKNAME", "");
-                            } else {
-                                System.out.println((String)inputObject);
+                            System.out.println((String) inputObject);
+                            if(((String) inputObject).contains("Welcome") || ((String) inputObject).contains("valid")){
+                                System.out.println("Sending: " + nickname);
+                                asyncWriteToSocket(nickname);
+                            } else if(((String) inputObject).contains("chosen")){
+                                asyncWriteToSocket(nickname);
+                            } else if (((String) inputObject).contains("players")){
+                                firstPlayer = true;
+                            } else if (((String) inputObject).contains("beginning")){
+                                loading = true;
                             }
                         } else if (inputObject instanceof Model){
+                            gui.setStartGame(true);
                             ((Model)inputObject).print(nickname);
                         } else {
                             throw new IllegalArgumentException();
@@ -62,61 +90,14 @@ public class ClientGUI  {
         return t;
     }
 
-    public Thread asyncWriteToSocket(final Scanner stdin, final ObjectOutputStream socketOut){
+    public Thread asyncWriteToSocket(String message){
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    while (isActive()) {
-                        String inputLine = stdin.nextLine();
-
-                        if(inputLine.equals("c") && !nickname.equals("")){
-                            String inputLine2 = null;
-                            int c;
-                            System.out.print("Character card index: ");
-                            inputLine = stdin.nextLine();
-                            c = (int)inputLine.charAt(0) - 48;
-                            if(inputLine.length() > 1)
-                                c = c * 10 + (int)inputLine.charAt(1) - 48;
-
-                            if(c == 1){
-                                System.out.print("Insert the student color and island index: ");
-                                inputLine2 = stdin.nextLine();
-
-                            } else if(c == 3){
-                                System.out.print("Insert the island index: ");
-                                inputLine2 = stdin.nextLine();
-
-                            } else if(c == 7){
-                                System.out.print("Insert the students color in this order... cardStudent1,entranceStudent1,cardStudent2,entranceStudent2,cardStudent3,entranceStudent3  , students 2 and 3 are not necessary: ");
-                                inputLine2 = stdin.nextLine();
-
-                            } else if(c == 9){
-                                System.out.print("Insert the color: ");
-                                inputLine2 = stdin.nextLine();
-
-                            } else if(c == 10){
-                                System.out.print("Insert the students color in this order... entranceStudent1,diningStudent1,entranceStudent2,diningStudent2  , students 2 are not necessary: ");
-                                inputLine2 = stdin.nextLine();
-
-                            }else if(c == 11){
-                                System.out.print("Insert the student color: ");
-                                inputLine2 = stdin.nextLine();
-
-                            } else if(c == 12){
-                                System.out.print("Insert the student color: ");
-                                inputLine2 = stdin.nextLine();
-                            }
-
-                            if(inputLine2.equals(null))
-                                inputLine = "100," + inputLine;
-                            else
-                                inputLine = "100," + inputLine + "," + inputLine2;
-                        }
-                        synchronized (ip){
-                            socketOut.writeObject(inputLine);
-                            socketOut.flush();
-                        }
+                    synchronized (ip){
+                        socketOut.writeObject(message);
+                        socketOut.flush();
                     }
                 }catch(Exception e){
                     setActive(false);
@@ -127,32 +108,34 @@ public class ClientGUI  {
         return t;
     }
 
-    public void run() throws IOException {
-        Socket socket = new Socket(ip, port);
-        System.out.println("Connection established");
+    @Override
+    public void run() {
+        try {
+            Socket socket = new Socket(ip, port);
+            System.out.println("Connection established");
 
-        ObjectOutputStream socketOut = new ObjectOutputStream(socket.getOutputStream());
-        ObjectInputStream socketIn = new ObjectInputStream(socket.getInputStream());
-        Scanner stdin = new Scanner(System.in);
+            ObjectOutputStream socketOut = new ObjectOutputStream(socket.getOutputStream());
+            this.socketOut = socketOut;
+            ObjectInputStream socketIn = new ObjectInputStream(socket.getInputStream());
 
+            try{
+                Thread t0 = asyncReadFromSocket(socketIn, socketOut);
 
-        try{
-            Thread t0 = asyncReadFromSocket(socketIn);
-            Thread t1 = asyncWriteToSocket(stdin, socketOut);
+                t0.join();
+                System.in.close();
+                System.out.println("Connection closed!");
 
-            t0.join();
-            System.in.close();
-            t1.join();
-            System.out.println("Connection closed!");
-
-        } catch(InterruptedException | NoSuchElementException | ConnectionClosedException e){
-            System.out.println("Connection closed from the client side");
-        } finally {
-            stdin.close();
-            socketIn.close();
-            socketOut.close();
-            socket.close();
+            } catch(InterruptedException | NoSuchElementException | ConnectionClosedException e){
+                System.out.println("Connection closed from the client side");
+            } finally {
+                socketIn.close();
+                socketOut.close();
+                socket.close();
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+
     }
 }
 

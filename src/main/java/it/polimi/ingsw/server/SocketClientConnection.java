@@ -91,7 +91,7 @@ public class SocketClientConnection extends Observable<String> implements Client
 
             send(gameMessage.eriantys);
 
-            send("Welcome!\nWhat is your name?");
+            send("Welcome! What is your nickname?");
             Object read;
             boolean errorName;
             do {
@@ -100,7 +100,7 @@ public class SocketClientConnection extends Observable<String> implements Client
                 name = (String) read;
                 for (String s : server.getNicknames()) {
                     if (s.equals(name)) {
-                        send("Another player already chosed this name, try with a new one!");
+                        send("Another player already chosen this nickname, try with a new one!");
                         errorName = true;
                     }
                 }
