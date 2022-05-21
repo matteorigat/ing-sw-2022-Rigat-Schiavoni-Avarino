@@ -6,7 +6,6 @@ import it.polimi.ingsw.client.ClientAppGUI;
  * GUIController class defines an interface representing a single GUI controller, which is different
  * from phase to phase.
  *
- * @author Luca Pirovano
  */
 public interface GuiController {
   /**
