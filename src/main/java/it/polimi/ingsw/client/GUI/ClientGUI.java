@@ -1,10 +1,7 @@
 package it.polimi.ingsw.client.GUI;
 
-import it.polimi.ingsw.client.GUI.controllers.MainPageController;
 import it.polimi.ingsw.exceptions.ConnectionClosedException;
 import it.polimi.ingsw.model.Model;
-import javafx.application.Application;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -15,11 +12,7 @@ import java.util.Scanner;
 
 public class ClientGUI  {
 
-
-
-
-
-  /*  private String ip;
+    private String ip;
     private int port;
 
     private String nickname = "";
@@ -160,7 +153,7 @@ public class ClientGUI  {
             socketOut.close();
             socket.close();
         }
-    } */
+    }
 }
 
 
