@@ -181,7 +181,7 @@ public class Model extends Observable<MoveMessage> implements Serializable {
         }
         System.out.println("CURRENT PLAYER: " + currentPlayer + " -> " + players.get(currentPlayer).getNickname());
         System.out.println("");
-        //System.out.println("Students in the bag: " + gameBoard.getBag().getSize());
+        System.out.println("Students in the bag: " + gameBoard.getBag().getSize());
         //System.out.println("Mn on: " + gameBoard.getMotherNature());
     }
 

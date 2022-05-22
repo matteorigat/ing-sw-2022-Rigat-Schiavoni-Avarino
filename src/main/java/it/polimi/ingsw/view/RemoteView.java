@@ -116,7 +116,7 @@ public class RemoteView extends View {
             resultMsg = gameMessage.winMessage;
         }
         else if(message.getModel().getCurrentPhase().equals(GamePhase.GameEnded)){
-            resultMsg = gameMessage.loseMessage + getPlayer().getNickname().toUpperCase();
+            resultMsg = gameMessage.loseMessage + message.getModel().getWinner().getNickname().toUpperCase();
         }
 
         showMessage(resultMsg);

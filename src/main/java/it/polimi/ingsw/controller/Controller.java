@@ -45,9 +45,7 @@ public class Controller implements Observer<PlayerMove> {
             }
 
             case 2: {
-                System.out.println("stai per muovere madre natura");
                 result = moveMotherNature(move.getPlayer().getIndex(), move.getParam2());
-                System.out.println("hai mosso madre natura");
                 break;
             }
 
@@ -370,7 +368,9 @@ public class Controller implements Observer<PlayerMove> {
                 this.checkIslandInfluence(newPos, playerIndex);
             } else return -1;
 
-            model.setCurrentPhase(GamePhase.ChooseCloud);
+            if(!model.getCurrentPhase().equals(GamePhase.GameEnded))
+                model.setCurrentPhase(GamePhase.ChooseCloud);
+
             return 1;
         }
         else return -1;
@@ -424,7 +424,7 @@ public class Controller implements Observer<PlayerMove> {
 
                 this.getGameBoard().getIslands().get(islandIndex).changeTowerColor(newPlayer.PlayerTowerColor());
 
-                if(newPlayer.getPlayerSchoolBoard().getTowers().size() == 0){
+                if(newPlayer.getPlayerSchoolBoard().getTowers().size() < 1){
                     model.setWinner(newPlayer);
                     model.setCurrentPhase(GamePhase.GameEnded);
                     return;
