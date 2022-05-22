@@ -1,13 +1,9 @@
 package it.polimi.ingsw.client.GUI.controllers;
 
 import it.polimi.ingsw.client.ClientAppGUI;
-import it.polimi.ingsw.client.GUI.ClientGUI;
-import it.polimi.ingsw.observer.Observable;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-import java.io.IOException;
 
 public class NicknameController {
 
@@ -25,10 +21,10 @@ public class NicknameController {
 
        if(gui.getClientGUI().isFirstPlayer() == true)
            gui.changeStage("FirstPlayer");
-       else if(gui.isStartGame() == false)
+       else if(gui.getClientGUI().isStartgame() == false)
            gui.changeStage("Loading");
        else
-           gui.changeStage("Home");
+           gui.changeStage("GameBoard");
 
 
     }

@@ -5,7 +5,7 @@ import it.polimi.ingsw.client.GUI.ClientGUI;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
-public class MainMenuController {
+public class GameBoardController {
 
     private ClientAppGUI gui;
 

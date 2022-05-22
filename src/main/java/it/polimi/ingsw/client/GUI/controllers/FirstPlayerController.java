@@ -2,9 +2,6 @@ package it.polimi.ingsw.client.GUI.controllers;
 
 import it.polimi.ingsw.client.ClientAppGUI;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.SplitMenuButton;
 
 public class FirstPlayerController {
 
@@ -39,7 +36,11 @@ public class FirstPlayerController {
 
         gui.getClientGUI().asyncWriteToSocket(check);
 
-        gui.changeStage("Loading");
+        if(gui.isStartGame() == false){
+            gui.changeStage("Loading");
+        }
+        else
+            gui.changeStage("GameBoard");
     }
 
     public void setGui(ClientAppGUI gui) {

@@ -1,10 +1,8 @@
 package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.client.GUI.ClientGUI;
-import it.polimi.ingsw.client.GUI.controllers.FirstPlayerController;
-import it.polimi.ingsw.client.GUI.controllers.LoadingController;
-import it.polimi.ingsw.client.GUI.controllers.MainMenuController;
-import it.polimi.ingsw.client.GUI.controllers.NicknameController;
+import it.polimi.ingsw.client.GUI.controllers.*;
+import it.polimi.ingsw.model.gameboard.GameBoard;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -24,6 +22,7 @@ public class ClientAppGUI extends Application {
     private FirstPlayerController firstPlayerController;
     private LoadingController loadingController;
     private NicknameController nicknameController;
+    private GameBoardController gameboardController;
 
     private final Map<String, Scene> sceneMap = new HashMap<>();
 
@@ -31,6 +30,8 @@ public class ClientAppGUI extends Application {
     public static final String LOAD = "Loading";
     public static final String NICKNAME = "Nickname";
     public static final String FIRST = "FirstPlayer";
+
+    public static final String GAMEBOARD = "GameBoard";
 
     private boolean startGame = false;
 
@@ -57,6 +58,11 @@ public class ClientAppGUI extends Application {
         loadingController = loading.getController();
         loadingController.setGui(this);
 
+        FXMLLoader gameboard = new FXMLLoader(getClass().getResource("/fxml/GameBoard.fxml"));
+        Scene gameboardScene = new Scene(gameboard.load());
+        gameboardController = gameboard.getController();
+        gameboardController.setGui(this);
+
         /*
         FXMLLoader loading = new FXMLLoader(getClass().getResource(("/fxml/loading.fxml")));
         LoadingScene = new Scene(loading.load());
@@ -72,6 +78,7 @@ public class ClientAppGUI extends Application {
         sceneMap.put(NICKNAME, nicknameScene);
         sceneMap.put(LOAD, loadingScene);
         sceneMap.put(FIRST, firstScene);
+        sceneMap.put(GAMEBOARD, gameboardScene);
     }
 
 
@@ -100,10 +107,6 @@ public class ClientAppGUI extends Application {
         stage.show();
     }
 
-    public void startLoading(){
-        loadingController.startMatch();
-    }
-
     public void setClientGUI(ClientGUI clientGUI) {
         this.clientGUI = clientGUI;
     }
@@ -118,7 +121,6 @@ public class ClientAppGUI extends Application {
 
     public void setStartGame(boolean startGame) {
         this.startGame = startGame;
-        startLoading();
     }
 }
 

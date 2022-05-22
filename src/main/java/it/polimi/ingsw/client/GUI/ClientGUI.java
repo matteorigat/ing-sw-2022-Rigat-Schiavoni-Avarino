@@ -9,7 +9,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.NoSuchElementException;
-import java.util.Scanner;
 
 public class ClientGUI implements Runnable {
 
@@ -23,6 +22,7 @@ public class ClientGUI implements Runnable {
     private String nickname = "";
     private boolean loading = false;
     private boolean firstPlayer = false;
+    private boolean startgame = false;
 
     public ClientGUI(String ip, int port, ClientAppGUI gui){
         this.ip = ip;
@@ -43,6 +43,10 @@ public class ClientGUI implements Runnable {
 
     public boolean isFirstPlayer() {
         return firstPlayer;
+    }
+
+    public boolean isStartgame() {
+        return startgame;
     }
 
     public synchronized boolean isActive(){
@@ -73,9 +77,11 @@ public class ClientGUI implements Runnable {
                                 firstPlayer = true;
                             } else if (((String) inputObject).contains("beginning")){
                                 loading = true;
+                            } else if (((String) inputObject).contains("opponent")){
+                                startgame = true;
                             }
                         } else if (inputObject instanceof Model){
-                            gui.setStartGame(true);
+                            startgame = true;
                             ((Model)inputObject).print(nickname);
                         } else {
                             throw new IllegalArgumentException();
