@@ -20,6 +20,8 @@ public class ClientGUI implements Runnable {
     private ClientAppGUI gui;
 
     private String nickname = "";
+
+    private boolean connectionEstablished = false;
     private boolean loading = false;
     private boolean firstPlayer = false;
     private boolean startgame = false;
@@ -49,6 +51,10 @@ public class ClientGUI implements Runnable {
         return startgame;
     }
 
+    public boolean isConnectionEstablished() {
+        return connectionEstablished;
+    }
+
     public synchronized boolean isActive(){
         return active;
     }
@@ -67,9 +73,9 @@ public class ClientGUI implements Runnable {
                     while (isActive()) {
                         Object inputObject = socketIn.readObject();
                         if(inputObject instanceof String){
-                            System.out.println((String) inputObject);
+                            //System.out.println((String) inputObject);
                             if(((String) inputObject).contains("Welcome") || ((String) inputObject).contains("valid")){
-                                System.out.println("Sending: " + nickname);
+                                //System.out.println("Sending: " + nickname);
                                 asyncWriteToSocket(nickname);
                             } else if(((String) inputObject).contains("chosen")){
                                 asyncWriteToSocket(nickname);
@@ -119,6 +125,7 @@ public class ClientGUI implements Runnable {
         try {
             Socket socket = new Socket(ip, port);
             System.out.println("Connection established");
+            connectionEstablished = true;
 
             ObjectOutputStream socketOut = new ObjectOutputStream(socket.getOutputStream());
             this.socketOut = socketOut;
