@@ -33,8 +33,6 @@ public class ClientAppGUI extends Application {
 
     public static final String GAMEBOARD = "GameBoard";
 
-    private boolean startGame = false;
-
 
     @Override
     public void init() throws Exception {
@@ -115,12 +113,8 @@ public class ClientAppGUI extends Application {
         return clientGUI;
     }
 
-    public boolean isStartGame() {
-        return startGame;
-    }
-
-    public void setStartGame(boolean startGame) {
-        this.startGame = startGame;
+    public LoadingController getLoadingController() {
+        return loadingController;
     }
 }
 

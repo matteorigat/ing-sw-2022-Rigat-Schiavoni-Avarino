@@ -36,7 +36,7 @@ public class FirstPlayerController {
 
         gui.getClientGUI().asyncWriteToSocket(check);
 
-        if(gui.isStartGame() == false)
+        if(gui.getClientGUI().isStartgame() == false)
             gui.changeStage("Loading");
         else
             gui.changeStage("GameBoard");
