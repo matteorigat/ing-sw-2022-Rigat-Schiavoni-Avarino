@@ -5,13 +5,13 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.controllers.LoadingController">
+<Pane onMouseEntered="#startMatch" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.controllers.LoadingController">
    <children>
       <ImageView fitHeight="800" fitWidth="1200" layoutX="-1.0" layoutY="-1.0">
          <image>
              <Image url="@../Graphics/eriantysBackground.jpg" />
          </image>
       </ImageView>
-      <ProgressBar onMouseEntered="#startMatch" layoutX="372.0" layoutY="714.0"  prefHeight="56.0" prefWidth="541.0" style=" -fx-padding: 8;" />
+      <ProgressBar layoutX="372.0" layoutY="714.0"  prefHeight="56.0" prefWidth="541.0" style=" -fx-padding: 8;" />
    </children>
 </Pane>
