@@ -10,10 +10,8 @@ public class LoadingController {
     @FXML
     public void startMatch() {
 
-        System.out.println("you are in loading 1");
-        while (gui.getClientGUI().isStartgame() == false){}
-        System.out.println("you are in loading 2");
-        gui.changeStage("GameBoard");
+        if (gui.getClientGUI().isStartgame())
+            gui.changeStage("GameBoard");
 
     }
 

@@ -26,6 +26,8 @@ public class ClientGUI implements Runnable {
     private boolean firstPlayer = false;
     private boolean startgame = false;
 
+    private boolean nicknameValid = false;
+
     public ClientGUI(String ip, int port, ClientAppGUI gui){
         this.ip = ip;
         this.port = port;
@@ -35,6 +37,7 @@ public class ClientGUI implements Runnable {
     private boolean active = true;
 
     public void setNickname(String nickname) {
+        asyncWriteToSocket(nickname);
         this.nickname = nickname;
         System.out.println("Set: " + this.nickname);
     }
@@ -73,13 +76,8 @@ public class ClientGUI implements Runnable {
                     while (isActive()) {
                         Object inputObject = socketIn.readObject();
                         if(inputObject instanceof String){
-                            //System.out.println((String) inputObject);
-                            if(((String) inputObject).contains("Welcome") || ((String) inputObject).contains("valid")){
-                                //System.out.println("Sending: " + nickname);
-                                asyncWriteToSocket(nickname);
-                            } else if(((String) inputObject).contains("chosen")){
-                                asyncWriteToSocket(nickname);
-                            } else if (((String) inputObject).contains("players")){
+                            System.out.println((String) inputObject);
+                            if (((String) inputObject).contains("players")){
                                 firstPlayer = true;
                             } else if (((String) inputObject).contains("beginning")){
                                 loading = true;
@@ -87,7 +85,6 @@ public class ClientGUI implements Runnable {
                                 startgame = true;
                             }
                         } else if (inputObject instanceof Model){
-                            startgame = true;
                             ((Model)inputObject).print(nickname);
                         } else {
                             throw new IllegalArgumentException();

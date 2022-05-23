@@ -4,6 +4,8 @@ import it.polimi.ingsw.client.ClientAppGUI;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
+import java.util.concurrent.TimeUnit;
+
 
 public class NicknameController {
 
@@ -12,20 +14,25 @@ public class NicknameController {
     @FXML private TextField nickname;
 
     @FXML
-    protected void onButtonClick() {
+    protected void onButtonClick() throws InterruptedException {
 
        gui.getClientGUI().setNickname(nickname.getText());
 
-       while (gui.getClientGUI().isFirstPlayer() == false && gui.getClientGUI().isLoading() == false){
+        TimeUnit.MILLISECONDS.sleep(100);
+       if(gui.getClientGUI().isFirstPlayer() == false && gui.getClientGUI().isLoading() == false && gui.getClientGUI().isStartgame() == false){
+           nickname.clear();
+           return;
        }
 
-       if(gui.getClientGUI().isFirstPlayer() == true)
-           gui.changeStage("FirstPlayer");
-       else if(gui.getClientGUI().isStartgame() == false)
-           gui.changeStage("Loading");
-       else
-           gui.changeStage("GameBoard");
+       System.out.println("nome ok");
 
+       if(gui.getClientGUI().isFirstPlayer() == true){
+           gui.changeStage("FirstPlayer");
+       } else if(gui.getClientGUI().isStartgame() == false){
+           gui.changeStage("Loading");
+       } else {
+           gui.changeStage("GameBoard");
+       }
 
     }
 
