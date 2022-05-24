@@ -4,8 +4,6 @@ import it.polimi.ingsw.client.ClientAppGUI;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
-import java.util.concurrent.TimeUnit;
-
 
 public class NicknameController {
 

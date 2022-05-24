@@ -22,10 +22,6 @@ public class ClientGUI implements Runnable {
 
     private String nickname = "";
 
-    private boolean connectionEstablished = false;
-    private boolean loading = false;
-    private boolean firstPlayer = false;
-    private boolean startgame = false;
 
     public ClientGUI(String ip, int port, ClientAppGUI gui){
         this.ip = ip;
@@ -38,23 +34,6 @@ public class ClientGUI implements Runnable {
     public void setNickname(String nickname) {
         asyncWriteToSocket(nickname);
         this.nickname = nickname;
-        System.out.println("Set: " + this.nickname);
-    }
-
-    public boolean isLoading() {
-        return loading;
-    }
-
-    public boolean isFirstPlayer() {
-        return firstPlayer;
-    }
-
-    public boolean isStartgame() {
-        return startgame;
-    }
-
-    public boolean isConnectionEstablished() {
-        return connectionEstablished;
     }
 
     public synchronized boolean isActive(){
@@ -66,7 +45,6 @@ public class ClientGUI implements Runnable {
     }
 
     // asyncReadFromSocket
-
     public Thread asyncReadFromSocket(final ObjectInputStream socketIn, final ObjectOutputStream socketOut){
         Thread t = new Thread(new Runnable() {
             @Override
@@ -127,7 +105,6 @@ public class ClientGUI implements Runnable {
         try {
             Socket socket = new Socket(ip, port);
             Platform.runLater(()-> gui.changeStage("Nickname"));
-            connectionEstablished = true;
             System.out.println("Connection established");
 
             ObjectOutputStream socketOut = new ObjectOutputStream(socket.getOutputStream());

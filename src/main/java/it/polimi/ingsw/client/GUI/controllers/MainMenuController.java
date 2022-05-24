@@ -5,8 +5,6 @@ import it.polimi.ingsw.client.GUI.ClientGUI;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
-import java.util.concurrent.TimeUnit;
-
 public class MainMenuController {
 
     private ClientAppGUI gui;

@@ -2,20 +2,17 @@ package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.client.GUI.ClientGUI;
 import it.polimi.ingsw.client.GUI.controllers.*;
-import it.polimi.ingsw.model.gameboard.GameBoard;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ClientAppGUI extends Application {
 
     private Stage stage;
-
     private ClientGUI clientGUI;
 
     private MainMenuController mainMenuController;
@@ -26,12 +23,10 @@ public class ClientAppGUI extends Application {
     private final Map<String, Scene> sceneMap = new HashMap<>();
 
     private String currentFXML;
-
     public static final String MENU = "MainMenu";
     public static final String LOAD = "Loading";
     public static final String NICKNAME = "Nickname";
     public static final String FIRST = "FirstPlayer";
-
     public static final String GAMEBOARD = "GameBoard";
 
 
@@ -61,9 +56,6 @@ public class ClientAppGUI extends Application {
         gameboardController.setGui(this);
 
         /*
-        FXMLLoader loading = new FXMLLoader(getClass().getResource(("/fxml/loading.fxml")));
-        LoadingScene = new Scene(loading.load());
-
         FXMLLoader game = new FXMLLoader(getClass().getResource("/fxml/GameScene.fxml"));
         Scene gameScene = new Scene(game.load());
         gameSceneController = game.getController();
@@ -84,7 +76,7 @@ public class ClientAppGUI extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws IOException {
+    public void start(Stage primaryStage) {
 
         stage = primaryStage;
         stage.setTitle("Eriantys");

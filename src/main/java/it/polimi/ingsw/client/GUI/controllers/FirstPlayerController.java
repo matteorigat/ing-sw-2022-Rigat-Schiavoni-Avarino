@@ -9,7 +9,7 @@ public class FirstPlayerController {
 
     String numPlayers;
 
-    String check = "n";
+    String expertMode = "n";
 
     @FXML
     protected void onTwo() {
@@ -23,17 +23,20 @@ public class FirstPlayerController {
 
     @FXML
     protected void onCheck() {
-        if(check == "n")
-            check = "y";
+        if(expertMode == "n")
+            expertMode = "y";
         else
-            check = "n";
+            expertMode = "n";
     }
 
     @FXML
     protected void onButtonClick() {
 
+        if(numPlayers.equals(""))
+            return;
+
         gui.getClientGUI().asyncWriteToSocket(numPlayers);
-        gui.getClientGUI().asyncWriteToSocket(check);
+        gui.getClientGUI().asyncWriteToSocket(expertMode);
 
     }
 

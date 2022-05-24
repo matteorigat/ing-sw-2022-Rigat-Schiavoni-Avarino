@@ -17,7 +17,6 @@ public class GameBoardController {
     protected void onButtonClick() {
 
 
-        gui.changeStage("Nickname");
     }
 
 
