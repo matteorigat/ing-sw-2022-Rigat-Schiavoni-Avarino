@@ -3,9 +3,12 @@ package it.polimi.ingsw.client;
 import it.polimi.ingsw.client.GUI.ClientGUI;
 import it.polimi.ingsw.client.GUI.controllers.*;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -79,6 +82,13 @@ public class ClientAppGUI extends Application {
     public void start(Stage primaryStage) {
 
         stage = primaryStage;
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent e) {
+                Platform.exit();
+                System.exit(0);
+            }
+        });
         stage.setTitle("Eriantys");
         stage.centerOnScreen();
         stage.setHeight(800);
