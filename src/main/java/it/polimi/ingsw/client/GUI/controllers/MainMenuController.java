@@ -14,26 +14,20 @@ public class MainMenuController {
     @FXML private TextField ip;
     @FXML private TextField port;
 
-
     @FXML
-    protected void onButtonClick() throws InterruptedException {
-
+    protected void onButtonClick() {
 
         ClientGUI clientGUI = new ClientGUI(ip.getText(), Integer.parseInt(port.getText()), gui); //192.168.100.10
         Thread clientThread = new Thread(clientGUI);
         clientThread.start();
         gui.setClientGUI(clientGUI);
-        TimeUnit.MILLISECONDS.sleep(10);
 
-        if(!clientGUI.isConnectionEstablished()){
-            ip.clear();
-            port.clear();
-            return;
-        }
-
-        gui.changeStage("Nickname");
     }
 
+    public void clearIpPort() {
+        this.ip.clear();
+        this.port.clear();
+    }
 
     public void setGui(ClientAppGUI gui) {
         this.gui = gui;

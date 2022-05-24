@@ -3,6 +3,7 @@ package it.polimi.ingsw.client.GUI;
 import it.polimi.ingsw.client.ClientAppGUI;
 import it.polimi.ingsw.exceptions.ConnectionClosedException;
 import it.polimi.ingsw.model.Model;
+import javafx.application.Platform;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -25,8 +26,6 @@ public class ClientGUI implements Runnable {
     private boolean loading = false;
     private boolean firstPlayer = false;
     private boolean startgame = false;
-
-    private boolean nicknameValid = false;
 
     public ClientGUI(String ip, int port, ClientAppGUI gui){
         this.ip = ip;
@@ -77,12 +76,18 @@ public class ClientGUI implements Runnable {
                         Object inputObject = socketIn.readObject();
                         if(inputObject instanceof String){
                             System.out.println((String) inputObject);
-                            if (((String) inputObject).contains("players")){
-                                firstPlayer = true;
-                            } else if (((String) inputObject).contains("beginning")){
-                                loading = true;
-                            } else if (((String) inputObject).contains("opponent")){
-                                startgame = true;
+                            if (((String) inputObject).contains("Write a valid name!") || ((String) inputObject).contains("Another player already chosen this nickname")){
+                                Platform.runLater(()-> gui.getNicknameController().clearNickname());
+                            }
+                            else if (((String) inputObject).contains("How many players?")){
+                                Platform.runLater(()-> gui.changeStage("FirstPlayer"));
+                            }
+                            else if (((String) inputObject).contains("please wait the beginning of the game") || ((String) inputObject).contains("Waiting for another player")){
+                                if(!gui.getCurrentFXML().equals("Loading"))
+                                    Platform.runLater(()-> gui.changeStage("Loading"));
+                            }
+                            else if (((String) inputObject).contains("opponent")){
+                                Platform.runLater(()-> gui.changeStage("GameBoard"));
                             }
                         } else if (inputObject instanceof Model){
                             ((Model)inputObject).print(nickname);
@@ -121,8 +126,9 @@ public class ClientGUI implements Runnable {
     public void run() {
         try {
             Socket socket = new Socket(ip, port);
-            System.out.println("Connection established");
+            Platform.runLater(()-> gui.changeStage("Nickname"));
             connectionEstablished = true;
+            System.out.println("Connection established");
 
             ObjectOutputStream socketOut = new ObjectOutputStream(socket.getOutputStream());
             this.socketOut = socketOut;
@@ -143,6 +149,7 @@ public class ClientGUI implements Runnable {
                 socket.close();
             }
         } catch (IOException e) {
+            Platform.runLater(()-> gui.getMainMenuController().clearIpPort());
             throw new RuntimeException(e);
         }
 

@@ -14,30 +14,17 @@ public class NicknameController {
     @FXML private TextField nickname;
 
     @FXML
-    protected void onButtonClick() throws InterruptedException {
+    protected void onButtonClick() {
 
        gui.getClientGUI().setNickname(nickname.getText());
 
-        TimeUnit.MILLISECONDS.sleep(100);
-       if(gui.getClientGUI().isFirstPlayer() == false && gui.getClientGUI().isLoading() == false && gui.getClientGUI().isStartgame() == false){
-           nickname.clear();
-           return;
-       }
-
-       System.out.println("nome ok");
-
-       if(gui.getClientGUI().isFirstPlayer() == true){
-           gui.changeStage("FirstPlayer");
-       } else if(gui.getClientGUI().isStartgame() == false){
-           gui.changeStage("Loading");
-       } else {
-           gui.changeStage("GameBoard");
-       }
-
     }
-
 
     public void setGui(ClientAppGUI gui) {
         this.gui = gui;
+    }
+
+    public void clearNickname() {
+        this.nickname.clear();
     }
 }

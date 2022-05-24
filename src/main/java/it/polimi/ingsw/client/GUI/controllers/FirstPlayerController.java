@@ -33,13 +33,8 @@ public class FirstPlayerController {
     protected void onButtonClick() {
 
         gui.getClientGUI().asyncWriteToSocket(numPlayers);
-
         gui.getClientGUI().asyncWriteToSocket(check);
 
-        if(gui.getClientGUI().isStartgame() == false)
-            gui.changeStage("Loading");
-        else
-            gui.changeStage("GameBoard");
     }
 
     public void setGui(ClientAppGUI gui) {

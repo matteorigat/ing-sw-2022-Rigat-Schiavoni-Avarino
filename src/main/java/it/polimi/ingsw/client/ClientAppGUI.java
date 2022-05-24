@@ -20,11 +20,12 @@ public class ClientAppGUI extends Application {
 
     private MainMenuController mainMenuController;
     private FirstPlayerController firstPlayerController;
-    private LoadingController loadingController;
     private NicknameController nicknameController;
     private GameBoardController gameboardController;
 
     private final Map<String, Scene> sceneMap = new HashMap<>();
+
+    private String currentFXML;
 
     public static final String MENU = "MainMenu";
     public static final String LOAD = "Loading";
@@ -53,8 +54,6 @@ public class ClientAppGUI extends Application {
 
         FXMLLoader loading = new FXMLLoader(getClass().getResource("/fxml/Loading.fxml"));
         Scene loadingScene = new Scene(loading.load());
-        loadingController = loading.getController();
-        loadingController.setGui(this);
 
         FXMLLoader gameboard = new FXMLLoader(getClass().getResource("/fxml/GameBoard.fxml"));
         Scene gameboardScene = new Scene(gameboard.load());
@@ -80,6 +79,9 @@ public class ClientAppGUI extends Application {
     }
 
 
+    public String getCurrentFXML() {
+        return currentFXML;
+    }
 
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -93,6 +95,7 @@ public class ClientAppGUI extends Application {
         //stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/graphics/inkwell.png"))));
         stage.setScene(sceneMap.get("MainMenu"));
         stage.show();
+        currentFXML = "MainMenu";
     }
 
     public static void main(String[] args) {
@@ -100,6 +103,7 @@ public class ClientAppGUI extends Application {
     }
 
     public void changeStage(String newScene){
+        currentFXML = newScene;
         Scene currentScene = sceneMap.get(newScene);
         stage.setScene(currentScene);
         stage.show();
@@ -113,8 +117,12 @@ public class ClientAppGUI extends Application {
         return clientGUI;
     }
 
-    public LoadingController getLoadingController() {
-        return loadingController;
+    public NicknameController getNicknameController() {
+        return nicknameController;
+    }
+
+    public MainMenuController getMainMenuController() {
+        return mainMenuController;
     }
 }
 
