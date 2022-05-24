@@ -190,7 +190,8 @@ public class Model extends Observable<MoveMessage> implements Serializable {
         int colorInt = colour.ordinal();
 
         String operSys = System.getProperty("os.name").toLowerCase();
-        if (operSys.contains("mac")) {
+        //System.out.println(operSys);
+        if (operSys.contains("mac os x")) {
             switch(colorInt) {
                 case (0) : return "🟢"; //""\033[38;2;31;224;44mGreen\033[0m";
                 case (1) : return "🔴"; //"\033[31mRed\033[0m";
