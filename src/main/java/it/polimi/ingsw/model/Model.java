@@ -217,7 +217,7 @@ public class Model extends Observable<MoveMessage> implements Serializable {
 
         String operSys = System.getProperty("os.name").toLowerCase();
 
-        if (operSys.contains("mac")) {
+        if (operSys.contains("mac os x")) {
             for(int i = 0; i<n; i++)
                 if(colour.equals(TowerColour.White)){
                     s = s + "🤍 ";
