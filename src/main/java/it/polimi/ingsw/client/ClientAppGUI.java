@@ -91,8 +91,6 @@ public class ClientAppGUI extends Application {
         });
         stage.setTitle("Eriantys");
         stage.centerOnScreen();
-        stage.setHeight(800);
-        stage.setWidth(1200);
         stage.setResizable(false);
         //stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/graphics/inkwell.png"))));
         stage.setScene(sceneMap.get("MainMenu"));
@@ -108,6 +106,10 @@ public class ClientAppGUI extends Application {
         currentFXML = newScene;
         Scene currentScene = sceneMap.get(newScene);
         stage.setScene(currentScene);
+        if(newScene.equals("GameBoard")){
+            stage.setResizable(true);
+            stage.setFullScreen(true);
+        }
         stage.show();
     }
 
