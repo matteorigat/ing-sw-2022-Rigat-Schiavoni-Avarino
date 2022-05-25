@@ -3,6 +3,7 @@ package it.polimi.ingsw;
 import it.polimi.ingsw.client.ClientAppCLI;
 import it.polimi.ingsw.client.ClientAppGUI;
 import it.polimi.ingsw.server.ServerApp;
+import javafx.application.Application;
 
 import java.util.Scanner;
 
@@ -35,7 +36,7 @@ public class Eriantys {
                 ClientAppCLI.main(null);
                 break;
             case "3":
-                ClientAppGUI.main(null);
+                Application.launch(ClientAppGUI.class);
                 break;
 
             default:
