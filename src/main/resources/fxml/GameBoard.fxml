@@ -3,6 +3,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.controllers.GameBoardController">
    <children>
@@ -86,5 +87,11 @@
             <Image url="@../Graphics/plancia.png" />
          </image>
       </ImageView>
+      <ImageView fitHeight="75.0" fitWidth="31.0" layoutX="16.0" layoutY="670.0" onDragDetected="#selectStudentGreen" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Graphics/student_green.png" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="270.0" layoutX="27.0" layoutY="360.0" onMouseDragReleased="#diningRoomGreen" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="179.0" />
    </children>
 </Pane>
