@@ -21,9 +21,7 @@ public class Island implements Serializable {
 
     public Island(){
         this.students = new ArrayList<Student>(0);
-        //this.islandIndex = index;
         this.numTower = 0;
-        //this.islandRank = 1;
         this.towerColor = null;
         this.numStudents = new ArrayList<>();
 
@@ -49,14 +47,15 @@ public class Island implements Serializable {
     //Return the player with the most influence on the island
     public Player Influence (ArrayList<Player> players, boolean card6noTowerFlag, int card8twoMorePointsPlayer, int card9color){
 
-        ArrayList<Professor> prof = new ArrayList<>();
+
 
         // sommo gli studenti (colori diversi) di un singolo giocatore in base ai colori che controlla
         int[] somma = new int[Parameters.numPlayers];
         for(Player pl: players) {
-            prof = pl.getPlayerSchoolBoard().getProfessors();
-            for (Professor pr : prof)
-                somma[pl.getIndex()] += numStudents.get(pr.getProfessorColour().ordinal());
+
+            for (Professor pr : pl.getPlayerSchoolBoard().getProfessors())
+                if(pr.getProfessorColour().ordinal() != card9color)
+                    somma[pl.getIndex()] += numStudents.get(pr.getProfessorColour().ordinal());
 
             if(pl.PlayerTowerColor().equals(towerColor) && !card6noTowerFlag)
                 somma[pl.getIndex()] += numTower;
@@ -64,9 +63,6 @@ public class Island implements Serializable {
             if(pl.getIndex() == card8twoMorePointsPlayer)
                 somma[pl.getIndex()] += 2;
         }
-
-        if(card9color != -1)
-            somma[card9color] = 0;
 
         ArrayList<Integer> rank = new ArrayList<>();
         int max = 0;

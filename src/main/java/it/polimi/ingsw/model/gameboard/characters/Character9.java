@@ -18,8 +18,9 @@ public class Character9 implements CharacterCard{
         this.effectFlag = false;
     }
 
-    public void enableEffect(){
+    public void enableEffect(int color){
         effectFlag = true;
+        this.color = color;
     }
 
     public void disableEffect(){
@@ -48,10 +49,6 @@ public class Character9 implements CharacterCard{
 
     public int getColor() {
         return color;
-    }
-
-    public void setColor(int color) {
-        this.color = color;
     }
 
     @Override

@@ -400,9 +400,7 @@ public class Controller implements Observer<PlayerMove> {
 
         }
         // vedo chi ha più influenza ora
-        System.out.println("stai per calcolare influence");
         Player newPlayer = model.getGameBoard().getIslands().get(islandIndex).Influence(model.getPlayers(), card6noTowerFlag, card8twoMorePointsPlayer, card9color);
-        System.out.println("hai calcolato influence");
 
         if (newPlayer!=null){
             Player oldPlayer = null;  // vedo chi controllava l'isola prima
@@ -775,8 +773,7 @@ public class Controller implements Observer<PlayerMove> {
                     model.getGameBoard().addCoinsToGeneralReserve(c.getCost() - 1);
                     c.play();
 
-                    ((Character9) c).enableEffect();
-                    ((Character9) c).setColor(colorIndex);
+                    ((Character9) c).enableEffect(colorIndex);
                     return 1;
                 }
             }
@@ -964,7 +961,7 @@ public class Controller implements Observer<PlayerMove> {
         if(playerIndex == model.getCurrentPlayer()){
             for (CharacterCard c: model.getGameBoard().getThreeCharacterCards()){
                 if(cardIndex == c.getIndex() && model.getPlayers().get(playerIndex).getCoins() >= c.getCost() && ((Character7) c).checkColorExists(cardStudent1) && ((Character7) c).checkColorExists(cardStudent2)){
-                    //controllo se i tre studenti del suo ingresso sono giusti
+                    //controllo se i due studenti del suo ingresso sono giusti
                     boolean check1 = false;
                     boolean check2 = false;
                     for(Student s: model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance()){
