@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Model.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">GC18</a> &gt; <a href="index.source.html" class="el_package">it.polimi.ingsw.model</a> &gt; <span class="el_source">Model.java</span></div><h1>Model.java</h1><pre class="source lang-java linenums">package it.polimi.ingsw.model;
+
+import it.polimi.ingsw.model.player.MoveMessage;
+import it.polimi.ingsw.model.enumeration.Colour;
+import it.polimi.ingsw.model.enumeration.GamePhase;
+import it.polimi.ingsw.model.enumeration.TowerColour;
+import it.polimi.ingsw.model.gameboard.Cloud;
+import it.polimi.ingsw.model.gameboard.GameBoard;
+import it.polimi.ingsw.model.gameboard.Island;
+import it.polimi.ingsw.model.gameboard.characters.CharacterCard;
+import it.polimi.ingsw.model.player.*;
+import it.polimi.ingsw.observer.Observable;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class Model extends Observable&lt;MoveMessage&gt; implements Serializable {
+
+    private ArrayList&lt;Player&gt; players;
+    private GameBoard gameBoard;
+
+    private Player winner;
+
+    private int currentPlayer;
+    private GamePhase currentPhase;
+    private Player[] playersTurnOrder;
+    private int phaseCounter;
+    private int playerPhaseCounter;
+
+    private boolean expertMode;
+    private int numPlayers;
+
+    //Constructor Model creates a new Game instance
+<span class="fc" id="L34">    public Model() {</span>
+<span class="fc" id="L35">        this.players = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L36">        this.gameBoard = new GameBoard();</span>
+
+<span class="fc" id="L38">        this.playersTurnOrder = new Player[Parameters.numPlayers];</span>
+<span class="fc" id="L39">        this.phaseCounter = 0;</span>
+<span class="fc" id="L40">        this.playerPhaseCounter = 0;</span>
+<span class="fc" id="L41">    }</span>
+
+    public void performMove(Player player){
+<span class="nc" id="L44">        notify(new MoveMessage(this, player));</span>
+<span class="nc" id="L45">    }</span>
+
+    public ArrayList&lt;Player&gt; getPlayers() {
+<span class="fc" id="L48">        return players;</span>
+    }
+
+    public GameBoard getGameBoard() {
+<span class="fc" id="L52">        return gameBoard;</span>
+    }
+
+    public Player getWinner() {
+<span class="nc" id="L56">        return winner;</span>
+    }
+
+    public void setWinner(Player winner) {
+<span class="nc" id="L60">        this.winner = winner;</span>
+<span class="nc" id="L61">    }</span>
+
+    public int getCurrentPlayer() {
+<span class="fc" id="L64">        return currentPlayer;</span>
+    }
+
+    public void setCurrentPlayer(int currentPlayer) {
+<span class="fc" id="L68">        this.currentPlayer = currentPlayer;</span>
+<span class="fc" id="L69">    }</span>
+
+    public GamePhase getCurrentPhase() {
+<span class="fc" id="L72">        return currentPhase;</span>
+    }
+
+    public void setCurrentPhase(GamePhase currentPhase) {
+<span class="fc" id="L76">        this.currentPhase = currentPhase;</span>
+<span class="fc" id="L77">    }</span>
+
+    public Player[] getPlayersTurnOrder() {
+<span class="fc" id="L80">        return playersTurnOrder;</span>
+    }
+
+    public int getPhaseCounter() {
+<span class="fc" id="L84">        return phaseCounter;</span>
+    }
+
+    public void setPhaseCounter(int phaseCounter) {
+<span class="fc" id="L88">        this.phaseCounter = phaseCounter;</span>
+<span class="fc" id="L89">    }</span>
+
+    public int getPlayerPhaseCounter() {
+<span class="fc" id="L92">        return playerPhaseCounter;</span>
+    }
+
+    public void setPlayerPhaseCounter(int playerPhaseCounter) {
+<span class="fc" id="L96">        this.playerPhaseCounter = playerPhaseCounter;</span>
+<span class="fc" id="L97">    }</span>
+
+    public void print(String nickname){
+<span class="nc" id="L100">        System.out.println(&quot;\n-------------------------------------------------------------------------------------------------------------------------------------------------------------------------&quot;);</span>
+<span class="nc" id="L101">        System.out.println(&quot;&quot;);</span>
+
+<span class="nc bnc" id="L103" title="All 2 branches missed.">        for(Island i : gameBoard.getIslands()){</span>
+<span class="nc bnc" id="L104" title="All 4 branches missed.">            if(gameBoard.getIslands().indexOf(i) == gameBoard.getMotherNature() &amp;&amp; gameBoard.getIslands().indexOf(i) &lt; 10){</span>
+<span class="nc" id="L105">                System.out.print(&quot;Island: &quot; + gameBoard.getIslands().indexOf(i) + &quot;\033[5;31m   M \033[0m |\t&quot;);</span>
+<span class="nc bnc" id="L106" title="All 2 branches missed.">            } else if(gameBoard.getIslands().indexOf(i) == gameBoard.getMotherNature()){</span>
+<span class="nc" id="L107">                System.out.print(&quot;Island: &quot; + gameBoard.getIslands().indexOf(i) + &quot;\033[5;31m  M\033[0m  |\t&quot;);</span>
+<span class="nc bnc" id="L108" title="All 2 branches missed.">            } else if(i.getNoEntry() != 0){</span>
+<span class="nc" id="L109">                System.out.print(&quot;Island: &quot; + gameBoard.getIslands().indexOf(i) + &quot;\033[5;31m   &quot; + i.getNoEntry() + &quot; \033[0m |\t&quot;);</span>
+            }else
+<span class="nc" id="L111">                System.out.print(&quot;Island: &quot; + gameBoard.getIslands().indexOf(i) + &quot;\t   |\t&quot;);</span>
+
+<span class="nc" id="L113">            System.out.print(&quot;Towers: &quot;+ textTower(i.getNumTower(), i.getTowerColor()) + &quot;\t|\t&quot;);</span>
+
+<span class="nc bnc" id="L115" title="All 2 branches missed.">            for(Student s : i.getStudents())</span>
+<span class="nc" id="L116">                System.out.print(textColor(s.getColour()) + &quot; &quot;);</span>
+
+<span class="nc" id="L118">            System.out.println(&quot;\n&quot;);</span>
+<span class="nc" id="L119">        }</span>
+
+<span class="nc" id="L121">        ArrayList&lt;Player&gt; arrPlr = players;</span>
+<span class="nc bnc" id="L122" title="All 2 branches missed.">        for(Player p : arrPlr){</span>
+<span class="nc" id="L123">            System.out.println(&quot;PLAYER: &quot; + p.getIndex() +  &quot; &quot; + p.getNickname());</span>
+<span class="nc" id="L124">            SchoolBoard sb = p.getPlayerSchoolBoard();</span>
+<span class="nc" id="L125">            System.out.print(&quot;ENTRANCE: &quot;);</span>
+<span class="nc bnc" id="L126" title="All 2 branches missed.">            for(Student t: sb.getStudentsEntrance()){</span>
+<span class="nc" id="L127">                System.out.print(textColor(t.getColour())+ &quot; &quot;);</span>
+<span class="nc" id="L128">            }</span>
+<span class="nc" id="L129">            System.out.print(&quot;\nDINING ROOM: &quot;);</span>
+<span class="nc" id="L130">            DiningRoom dr = sb.getDiningRoom();</span>
+<span class="nc" id="L131">            System.out.print(&quot;\033[38;2;31;224;44mGreen\033[0m: &quot; + dr.numOfStudentByColor(Colour.Green) + &quot; | &quot;);</span>
+<span class="nc" id="L132">            System.out.print(&quot;\033[31mRed\033[0m: &quot; + dr.numOfStudentByColor(Colour.Red) + &quot; | &quot;);</span>
+<span class="nc" id="L133">            System.out.print(&quot;\033[93mYellow\033[0m: &quot; + dr.numOfStudentByColor(Colour.Yellow) + &quot; | &quot;);</span>
+<span class="nc" id="L134">            System.out.print(&quot;\033[38;2;249;177;250mPink\033[0m: &quot; + dr.numOfStudentByColor(Colour.Pink) + &quot; | &quot;);</span>
+<span class="nc" id="L135">            System.out.println(&quot;\033[38;2;85;99;250mBlue\033[0m: &quot; + dr.numOfStudentByColor(Colour.Blue));</span>
+<span class="nc" id="L136">            System.out.print(&quot;PROFESSORS: &quot;);</span>
+<span class="nc bnc" id="L137" title="All 2 branches missed.">            for(Professor pr: sb.getProfessors()){</span>
+<span class="nc" id="L138">                System.out.print(textColor(pr.getProfessorColour()) + &quot; &quot;);</span>
+<span class="nc" id="L139">            }</span>
+<span class="nc" id="L140">            System.out.print(&quot;\nTOWERS: &quot; + textTower(sb.getTowers().size(), sb.getTowerColor()));</span>
+
+<span class="nc" id="L142">            System.out.print(&quot;\nPLAYED CARD: &quot;);</span>
+<span class="nc bnc" id="L143" title="All 2 branches missed.">            if(p.getCurrentCard().getValue() != 0)</span>
+<span class="nc" id="L144">                System.out.print(p.getCurrentCard().getValue() + &quot; (&quot; + p.getCurrentCard().getMovements() + &quot; movements)&quot;);</span>
+
+<span class="nc bnc" id="L146" title="All 2 branches missed.">            if(p.getNickname().equals(nickname)){</span>
+<span class="nc" id="L147">                System.out.print(&quot;\nDECK: &quot;);</span>
+<span class="nc bnc" id="L148" title="All 2 branches missed.">                for(AssistantCard card : p.getAssistantDeck()){</span>
+<span class="nc" id="L149">                    System.out.print(card.getValue() + &quot; &quot;);</span>
+<span class="nc" id="L150">                }</span>
+            }
+
+<span class="nc bnc" id="L153" title="All 2 branches missed.">            if(expertMode){</span>
+<span class="nc" id="L154">                System.out.print(&quot;\nCOINS: &quot; + p.getCoins());</span>
+            }
+<span class="nc" id="L156">            System.out.println(&quot;\n&quot;);</span>
+<span class="nc" id="L157">        }</span>
+
+<span class="nc bnc" id="L159" title="All 2 branches missed.">        if(expertMode){</span>
+<span class="nc" id="L160">            ArrayList&lt;CharacterCard&gt; chtrs = (ArrayList&lt;CharacterCard&gt;) gameBoard.getThreeCharacterCards().clone();</span>
+<span class="nc bnc" id="L161" title="All 2 branches missed.">            for (CharacterCard c:  chtrs)</span>
+<span class="nc" id="L162">                System.out.println(&quot;CharacterCard | &quot; + c.toString());</span>
+<span class="nc" id="L163">            System.out.print(&quot;\n&quot;);</span>
+        }
+
+<span class="nc bnc" id="L166" title="All 2 branches missed.">        for(int i=0; i&lt;numPlayers; i++){</span>
+<span class="nc" id="L167">            System.out.print(&quot;Cloud index: &quot; + i + &quot; | &quot;);</span>
+<span class="nc" id="L168">            ArrayList&lt;Cloud&gt; clds = (ArrayList&lt;Cloud&gt;) gameBoard.getClouds().clone();</span>
+<span class="nc bnc" id="L169" title="All 2 branches missed.">            for (Student s:  clds.get(i).seeStudents()){</span>
+<span class="nc" id="L170">                System.out.print(textColor(s.getColour()) + &quot; &quot;);</span>
+<span class="nc" id="L171">            }</span>
+<span class="nc" id="L172">            System.out.print(&quot;\n&quot;);</span>
+        }
+
+
+<span class="nc bnc" id="L176" title="All 2 branches missed.">        if(expertMode){</span>
+<span class="nc" id="L177">            System.out.println(&quot;\nPHASE: &quot; + currentPhase + &quot;... or write 'c' to play a character card&quot;);</span>
+<span class="nc" id="L178">            boolean characterbool = false;</span>
+<span class="nc" id="L179">        } else {</span>
+<span class="nc" id="L180">            System.out.println(&quot;\nPHASE: &quot; + currentPhase);</span>
+        }
+<span class="nc" id="L182">        System.out.println(&quot;CURRENT PLAYER: &quot; + currentPlayer + &quot; -&gt; &quot; + players.get(currentPlayer).getNickname());</span>
+<span class="nc" id="L183">        System.out.println(&quot;&quot;);</span>
+<span class="nc" id="L184">        System.out.println(&quot;Students in the bag: &quot; + gameBoard.getBag().getSize());</span>
+        //System.out.println(&quot;Mn on: &quot; + gameBoard.getMotherNature());
+<span class="nc" id="L186">    }</span>
+
+
+    private String textColor(Colour colour){
+<span class="nc" id="L190">        int colorInt = colour.ordinal();</span>
+
+<span class="nc" id="L192">        String operSys = System.getProperty(&quot;os.name&quot;).toLowerCase();</span>
+        //System.out.println(operSys);
+<span class="nc bnc" id="L194" title="All 2 branches missed.">        if (operSys.contains(&quot;mac os x&quot;)) {</span>
+<span class="nc bnc" id="L195" title="All 6 branches missed.">            switch(colorInt) {</span>
+<span class="nc" id="L196">                case (0) : return &quot;🟢&quot;; //&quot;&quot;\033[38;2;31;224;44mGreen\033[0m&quot;;</span>
+<span class="nc" id="L197">                case (1) : return &quot;🔴&quot;; //&quot;\033[31mRed\033[0m&quot;;</span>
+<span class="nc" id="L198">                case (2) : return &quot;🟡&quot;; //&quot;\033[93mYellow\033[0m&quot;;</span>
+<span class="nc" id="L199">                case (3) : return &quot;🟣&quot;; //&quot;\033[38;2;249;177;250mPink\033[0m&quot;;</span>
+<span class="nc" id="L200">                case (4) : return &quot;🔵&quot;; //&quot;\033[38;2;85;99;250mBlue\033[0m&quot;;</span>
+            }
+        } else {
+<span class="nc bnc" id="L203" title="All 6 branches missed.">            switch(colorInt) {</span>
+<span class="nc" id="L204">                case (0) : return &quot;\033[38;2;31;224;44m●\033[0m&quot;;</span>
+<span class="nc" id="L205">                case (1) : return &quot;\033[31m●\033[0m&quot;;</span>
+<span class="nc" id="L206">                case (2) : return &quot;\033[93m●\033[0m&quot;;</span>
+<span class="nc" id="L207">                case (3) : return &quot;\033[38;2;249;177;250m●\033[0m&quot;;</span>
+<span class="nc" id="L208">                case (4) : return &quot;\033[38;2;85;99;250m●\033[0m&quot;;</span>
+            }
+        }
+
+<span class="nc" id="L212">        return null;</span>
+    }
+
+    private String textTower(int n, TowerColour colour){
+<span class="nc" id="L216">        String s = &quot;&quot;;</span>
+
+<span class="nc" id="L218">        String operSys = System.getProperty(&quot;os.name&quot;).toLowerCase();</span>
+
+<span class="nc bnc" id="L220" title="All 2 branches missed.">        if (operSys.contains(&quot;mac os x&quot;)) {</span>
+<span class="nc bnc" id="L221" title="All 2 branches missed.">            for(int i = 0; i&lt;n; i++)</span>
+<span class="nc bnc" id="L222" title="All 2 branches missed.">                if(colour.equals(TowerColour.White)){</span>
+<span class="nc" id="L223">                    s = s + &quot;🤍 &quot;;</span>
+<span class="nc bnc" id="L224" title="All 2 branches missed.">                } else if(colour.equals(TowerColour.Black)){</span>
+<span class="nc" id="L225">                    s = s + &quot;🖤 &quot;;</span>
+<span class="nc bnc" id="L226" title="All 2 branches missed.">                } else if(colour.equals(TowerColour.Grey)){</span>
+<span class="nc" id="L227">                    s = s + &quot;🤎 &quot;;</span>
+                }
+        } else {
+<span class="nc bnc" id="L230" title="All 2 branches missed.">            for(int i = 0; i&lt;n; i++)</span>
+<span class="nc bnc" id="L231" title="All 2 branches missed.">                if(colour.equals(TowerColour.White)){</span>
+<span class="nc" id="L232">                    s = s + &quot;\033[38;2;255;255;255m🀫\033[0m &quot;;</span>
+<span class="nc bnc" id="L233" title="All 2 branches missed.">                } else if(colour.equals(TowerColour.Black)){</span>
+<span class="nc" id="L234">                    s = s + &quot;\033[38;2;0;0;0m🀫\033[0m &quot;;</span>
+<span class="nc bnc" id="L235" title="All 2 branches missed.">                } else if(colour.equals(TowerColour.Grey)){</span>
+<span class="nc" id="L236">                    s = s + &quot;\033[38;2;128;128;128m🀫\033[0m &quot;;</span>
+                }
+        }
+
+<span class="nc" id="L240">        return s;</span>
+    }
+
+    public void setModelParameters(int numPlayer, boolean expertMode) {
+<span class="fc" id="L244">        this.numPlayers = numPlayer;</span>
+<span class="fc" id="L245">        this.expertMode = expertMode;</span>
+<span class="fc" id="L246">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

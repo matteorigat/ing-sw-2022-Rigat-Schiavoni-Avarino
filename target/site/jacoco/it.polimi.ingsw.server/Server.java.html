@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Server.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">GC18</a> &gt; <a href="index.source.html" class="el_package">it.polimi.ingsw.server</a> &gt; <span class="el_source">Server.java</span></div><h1>Server.java</h1><pre class="source lang-java linenums">package it.polimi.ingsw.server;
+
+import it.polimi.ingsw.controller.Controller;
+import it.polimi.ingsw.model.Model;
+import it.polimi.ingsw.model.player.Player;
+import it.polimi.ingsw.utils.gameMessage;
+import it.polimi.ingsw.view.RemoteView;
+import it.polimi.ingsw.view.View;
+
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+/**
+ * Server class is the main one of the server side, it allows clients to connect, play together and
+ * also starts the match.
+ */
+public class Server {
+
+    private static final int PORT = 1337;
+    private ServerSocket serverSocket;
+<span class="nc" id="L25">    private ExecutorService executor = Executors.newFixedThreadPool(128);</span>
+
+    /**
+     * This hashmap permits to finding client ID relying on his unique nickname.
+     * The client has to be connected to the server.
+     */
+<span class="nc" id="L31">    private Map&lt;String, ClientConnection&gt; waitingConnection = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L32">    private Map&lt;ClientConnection, ClientConnection&gt; playingConnection = new HashMap&lt;&gt;();</span>
+
+<span class="nc" id="L34">    private ArrayList&lt;String&gt; nicknames = new ArrayList&lt;&gt;();</span>
+    private boolean chooseMode;
+    private int numPlayers;
+    private boolean expertMode;
+
+
+    /**
+     * Method deregisterClient deletes a client from the hashmaps and active lists, unregistering his
+     * connection with the server
+     */
+    //Deregister connection
+    public synchronized void deregisterConnection(ClientConnection c) {
+<span class="nc" id="L46">        ClientConnection opponent = playingConnection.get(c);</span>
+<span class="nc" id="L47">        ClientConnection opponent2 = playingConnection.get(opponent);</span>
+
+<span class="nc bnc" id="L49" title="All 2 branches missed.">        if(opponent != null) {</span>
+<span class="nc" id="L50">            opponent.closeConnection();</span>
+        }
+
+<span class="nc bnc" id="L53" title="All 2 branches missed.">        if(opponent2 != null) {</span>
+<span class="nc" id="L54">            opponent2.closeConnection();</span>
+        }
+
+<span class="nc" id="L57">        playingConnection.remove(c);</span>
+<span class="nc" id="L58">        playingConnection.remove(opponent);</span>
+<span class="nc" id="L59">        playingConnection.remove(opponent2);</span>
+<span class="nc" id="L60">        Iterator&lt;String&gt; iterator = waitingConnection.keySet().iterator();</span>
+<span class="nc bnc" id="L61" title="All 2 branches missed.">        while(iterator.hasNext()){</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">            if(waitingConnection.get(iterator.next())==c){</span>
+<span class="nc" id="L63">                iterator.remove();</span>
+            }
+        }
+<span class="nc" id="L66">    }</span>
+
+    /**
+     * Method setParameters permits you to set Gamemode and num of players parameters
+     * @param numPlayers num of players in the game
+     * @param expertMode Gamemode
+     */
+    public void setParameters(int numPlayers, boolean expertMode){
+<span class="nc" id="L74">        this.numPlayers = numPlayers;</span>
+<span class="nc" id="L75">        this.expertMode = expertMode;</span>
+<span class="nc" id="L76">    }</span>
+
+
+/**
+ * Method lobby creates or handle a lobby, which is a common room used before a match. In this
+ * room, connected players are waiting for other ones, in order to reach the correct players'
+ * number for playing. If the waiting clients' queue is empty, the server creates a new lobby and
+ * ask the first player to choose the capacity. After that, when a client connects, it checks if
+ * the players number has been reached; if true, starts the match.
+ */
+
+    public synchronized void lobby(ClientConnection c, String name){
+<span class="nc" id="L88">        List&lt;String&gt; keys = new ArrayList&lt;&gt;(waitingConnection.keySet());</span>
+<span class="nc bnc" id="L89" title="All 2 branches missed.">        for(int i = 0; i &lt; keys.size(); i++){</span>
+<span class="nc" id="L90">            ClientConnection connection = waitingConnection.get(keys.get(i));</span>
+<span class="nc" id="L91">            connection.asyncSend(&quot;Connected User: &quot; + keys.get(i));</span>
+        }
+<span class="nc" id="L93">        waitingConnection.put(name, c);</span>
+<span class="nc" id="L94">        nicknames.add(name);</span>
+<span class="nc" id="L95">        keys = new ArrayList&lt;&gt;(waitingConnection.keySet());</span>
+
+<span class="nc bnc" id="L97" title="All 4 branches missed.">        if (waitingConnection.size() == 2 &amp;&amp; numPlayers == 2) {</span>
+<span class="nc" id="L98">            Controller controller = new Controller();</span>
+<span class="nc" id="L99">            controller.setParameters(numPlayers, expertMode);</span>
+<span class="nc" id="L100">            Model model = controller.getModel();</span>
+
+<span class="nc" id="L102">            ClientConnection c1 = waitingConnection.get(keys.get(1));</span>
+<span class="nc" id="L103">            ClientConnection c2 = waitingConnection.get(keys.get(0));</span>
+<span class="nc" id="L104">            Player player1 = new Player(keys.get(1), 0);</span>
+<span class="nc" id="L105">            Player player2 = new Player(keys.get(0), 1);</span>
+<span class="nc" id="L106">            View player1View = new RemoteView(player1, keys.get(0), c1);</span>
+<span class="nc" id="L107">            View player2View = new RemoteView(player2, keys.get(1), c2);</span>
+
+<span class="nc" id="L109">            controller.addPlayer(player1);</span>
+<span class="nc" id="L110">            controller.addPlayer(player2);</span>
+<span class="nc" id="L111">            controller.init();</span>
+<span class="nc" id="L112">            model.addObserver(player1View);</span>
+<span class="nc" id="L113">            model.addObserver(player2View);</span>
+<span class="nc" id="L114">            player1View.addObserver(controller);</span>
+<span class="nc" id="L115">            player2View.addObserver(controller);</span>
+<span class="nc" id="L116">            playingConnection.put(c1, c2);</span>
+<span class="nc" id="L117">            playingConnection.put(c2, c1);</span>
+<span class="nc" id="L118">            waitingConnection.remove(keys.get(1));</span>
+<span class="nc" id="L119">            waitingConnection.remove(keys.get(0));</span>
+<span class="nc" id="L120">            c1.asyncSend(model);</span>
+<span class="nc" id="L121">            c2.asyncSend(model);</span>
+
+<span class="nc bnc" id="L123" title="All 2 branches missed.">            if(model.getCurrentPlayer() == player1.getIndex()){</span>
+<span class="nc" id="L124">                c1.asyncSend(gameMessage.moveMessage);</span>
+<span class="nc" id="L125">                c2.asyncSend(gameMessage.waitMessage);</span>
+            } else {
+<span class="nc" id="L127">                c2.asyncSend(gameMessage.moveMessage);</span>
+<span class="nc" id="L128">                c1.asyncSend(gameMessage.waitMessage);</span>
+            }
+
+
+<span class="nc bnc" id="L132" title="All 4 branches missed.">        } else if (waitingConnection.size() == 3 &amp;&amp; numPlayers == 3) {</span>
+<span class="nc" id="L133">            Controller controller = new Controller();</span>
+<span class="nc" id="L134">            controller.setParameters(numPlayers, expertMode);</span>
+<span class="nc" id="L135">            Model model = controller.getModel();</span>
+
+<span class="nc" id="L137">            ClientConnection c1 = waitingConnection.get(keys.get(2));</span>
+<span class="nc" id="L138">            ClientConnection c2 = waitingConnection.get(keys.get(1));</span>
+<span class="nc" id="L139">            ClientConnection c3 = waitingConnection.get(keys.get(0));</span>
+<span class="nc" id="L140">            Player player1 = new Player(keys.get(2), 0);</span>
+<span class="nc" id="L141">            Player player2 = new Player(keys.get(1), 1);</span>
+<span class="nc" id="L142">            Player player3 = new Player(keys.get(0), 2);</span>
+<span class="nc" id="L143">            View player1View = new RemoteView(player1, keys.get(1) + &quot; and &quot; + keys.get(0), c1);</span>
+<span class="nc" id="L144">            View player2View = new RemoteView(player2, keys.get(2) + &quot; and &quot; + keys.get(0), c2);</span>
+<span class="nc" id="L145">            View player3View = new RemoteView(player3, keys.get(2) + &quot; and &quot; + keys.get(1), c3);</span>
+
+<span class="nc" id="L147">            controller.addPlayer(player1);</span>
+<span class="nc" id="L148">            controller.addPlayer(player2);</span>
+<span class="nc" id="L149">            controller.addPlayer(player3);</span>
+<span class="nc" id="L150">            controller.init();</span>
+<span class="nc" id="L151">            model.addObserver(player1View);</span>
+<span class="nc" id="L152">            model.addObserver(player2View);</span>
+<span class="nc" id="L153">            model.addObserver(player3View);</span>
+<span class="nc" id="L154">            player1View.addObserver(controller);</span>
+<span class="nc" id="L155">            player2View.addObserver(controller);</span>
+<span class="nc" id="L156">            player3View.addObserver(controller);</span>
+<span class="nc" id="L157">            playingConnection.put(c1, c2);</span>
+<span class="nc" id="L158">            playingConnection.put(c2, c3);</span>
+<span class="nc" id="L159">            playingConnection.put(c3, c1);</span>
+<span class="nc" id="L160">            waitingConnection.remove(keys.get(2));</span>
+<span class="nc" id="L161">            waitingConnection.remove(keys.get(1));</span>
+<span class="nc" id="L162">            waitingConnection.remove(keys.get(0));</span>
+<span class="nc" id="L163">            c1.asyncSend(model);</span>
+<span class="nc" id="L164">            c2.asyncSend(model);</span>
+<span class="nc" id="L165">            c3.asyncSend(model);</span>
+
+<span class="nc bnc" id="L167" title="All 2 branches missed.">            if(model.getCurrentPlayer() == player1.getIndex()){</span>
+<span class="nc" id="L168">                c1.asyncSend(gameMessage.moveMessage);</span>
+<span class="nc" id="L169">                c2.asyncSend(gameMessage.waitMessage);</span>
+<span class="nc" id="L170">                c3.asyncSend(gameMessage.waitMessage);</span>
+<span class="nc bnc" id="L171" title="All 2 branches missed.">            } else if(model.getCurrentPlayer() == player2.getIndex()){</span>
+<span class="nc" id="L172">                c1.asyncSend(gameMessage.waitMessage);</span>
+<span class="nc" id="L173">                c2.asyncSend(gameMessage.moveMessage);</span>
+<span class="nc" id="L174">                c3.asyncSend(gameMessage.waitMessage);</span>
+            } else {
+<span class="nc" id="L176">                c1.asyncSend(gameMessage.waitMessage);</span>
+<span class="nc" id="L177">                c2.asyncSend(gameMessage.waitMessage);</span>
+<span class="nc" id="L178">                c3.asyncSend(gameMessage.moveMessage);</span>
+            }
+        }
+<span class="nc" id="L181">    }</span>
+
+<span class="nc" id="L183">    public Server() throws IOException {</span>
+<span class="nc" id="L184">        this.serverSocket = new ServerSocket(PORT);</span>
+<span class="nc" id="L185">    }</span>
+
+    public void run(){
+<span class="nc" id="L188">        int connections = 0;</span>
+<span class="nc" id="L189">        System.out.println(&quot;Server is running&quot;);</span>
+        while(true){
+            try {
+<span class="nc" id="L192">                Socket newSocket = serverSocket.accept();</span>
+<span class="nc" id="L193">                connections++;</span>
+<span class="nc" id="L194">                System.out.println(&quot;Ready for the new connection - &quot; + connections);</span>
+<span class="nc" id="L195">                SocketClientConnection socketConnection = new SocketClientConnection(newSocket, this);</span>
+<span class="nc" id="L196">                executor.submit(socketConnection);</span>
+<span class="nc" id="L197">            } catch (IOException e) {</span>
+<span class="nc" id="L198">                System.out.println(&quot;Connection Error!&quot;);</span>
+<span class="nc" id="L199">            }</span>
+        }
+    }
+
+    public boolean isChooseMode() {
+<span class="nc" id="L204">        return chooseMode;</span>
+    }
+
+    public void setChooseMode(boolean chooseMode) {
+<span class="nc" id="L208">        this.chooseMode = chooseMode;</span>
+<span class="nc" id="L209">    }</span>
+
+    public Map&lt;String, ClientConnection&gt; getWaitingConnection() {
+<span class="nc" id="L212">        return waitingConnection;</span>
+    }
+
+    public int getNumPlayers() {
+<span class="nc" id="L216">        return numPlayers;</span>
+    }
+
+    public ArrayList&lt;String&gt; getNicknames() {
+<span class="nc" id="L220">        return nicknames;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

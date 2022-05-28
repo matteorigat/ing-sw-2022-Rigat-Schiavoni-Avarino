@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ClientCLI.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">GC18</a> &gt; <a href="index.source.html" class="el_package">it.polimi.ingsw.client.CLI</a> &gt; <span class="el_source">ClientCLI.java</span></div><h1>ClientCLI.java</h1><pre class="source lang-java linenums">package it.polimi.ingsw.client.CLI;
+
+import it.polimi.ingsw.exceptions.ConnectionClosedException;
+import it.polimi.ingsw.model.Model;
+
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+
+public class ClientCLI {
+    private String ip;
+    private int port;
+
+<span class="nc" id="L18">    private String nickname = &quot;&quot;;</span>
+
+<span class="nc" id="L20">    public ClientCLI(String ip, int port){</span>
+<span class="nc" id="L21">        this.ip = ip;</span>
+<span class="nc" id="L22">        this.port = port;</span>
+<span class="nc" id="L23">    }</span>
+
+<span class="nc" id="L25">    private boolean active = true;</span>
+
+    public synchronized boolean isActive(){
+<span class="nc" id="L28">        return active;</span>
+    }
+
+    public synchronized void setActive(boolean active){
+<span class="nc" id="L32">        this.active = active;</span>
+<span class="nc" id="L33">    }</span>
+
+    /* asyncReadFromSocket  */
+
+    public Thread asyncReadFromSocket(final ObjectInputStream socketIn){
+<span class="nc" id="L38">        Thread t = new Thread(new Runnable() {</span>
+            @Override
+            public void run() {
+                try {
+<span class="nc bnc" id="L42" title="All 2 branches missed.">                    while (isActive()) {</span>
+<span class="nc" id="L43">                        Object inputObject = socketIn.readObject();</span>
+<span class="nc bnc" id="L44" title="All 2 branches missed.">                        if(inputObject instanceof String){</span>
+<span class="nc bnc" id="L45" title="All 2 branches missed.">                            if(((String) inputObject).contains(&quot;NICKNAME&quot;)){</span>
+<span class="nc" id="L46">                                nickname = ((String) inputObject).replace(&quot;NICKNAME&quot;, &quot;&quot;);</span>
+                            } else {
+<span class="nc" id="L48">                                System.out.println((String)inputObject);</span>
+                            }
+<span class="nc bnc" id="L50" title="All 2 branches missed.">                        } else if (inputObject instanceof Model){</span>
+<span class="nc" id="L51">                            ((Model)inputObject).print(nickname);</span>
+                        } else {
+<span class="nc" id="L53">                            throw new IllegalArgumentException();</span>
+                        }
+<span class="nc" id="L55">                    }</span>
+<span class="nc" id="L56">                } catch (Exception e){</span>
+<span class="nc" id="L57">                    setActive(false);</span>
+<span class="nc" id="L58">                }</span>
+<span class="nc" id="L59">            }</span>
+        });
+<span class="nc" id="L61">        t.start();</span>
+<span class="nc" id="L62">        return t;</span>
+    }
+
+    public Thread asyncWriteToSocket(final Scanner stdin, final ObjectOutputStream socketOut){
+<span class="nc" id="L66">        Thread t = new Thread(new Runnable() {</span>
+            @Override
+            public void run() {
+                try {
+<span class="nc bnc" id="L70" title="All 2 branches missed.">                    while (isActive()) {</span>
+<span class="nc" id="L71">                        String inputLine = stdin.nextLine();</span>
+
+<span class="nc bnc" id="L73" title="All 4 branches missed.">                        if(inputLine.equals(&quot;c&quot;) &amp;&amp; !nickname.equals(&quot;&quot;)){</span>
+<span class="nc" id="L74">                            String inputLine2 = null;</span>
+                            int c;
+<span class="nc" id="L76">                            System.out.print(&quot;Character card index: &quot;);</span>
+<span class="nc" id="L77">                            inputLine = stdin.nextLine();</span>
+<span class="nc" id="L78">                            c = (int)inputLine.charAt(0) - 48;</span>
+<span class="nc bnc" id="L79" title="All 2 branches missed.">                            if(inputLine.length() &gt; 1)</span>
+<span class="nc" id="L80">                                c = c * 10 + (int)inputLine.charAt(1) - 48;</span>
+
+<span class="nc bnc" id="L82" title="All 2 branches missed.">                            if(c == 1){</span>
+<span class="nc" id="L83">                                System.out.println(&quot;Insert the student color and island index: &quot;);</span>
+<span class="nc" id="L84">                                inputLine2 = stdin.nextLine();</span>
+
+<span class="nc bnc" id="L86" title="All 2 branches missed.">                            } else if(c == 3){</span>
+<span class="nc" id="L87">                                System.out.println(&quot;Insert the island index: &quot;);</span>
+<span class="nc" id="L88">                                inputLine2 = stdin.nextLine();</span>
+
+<span class="nc bnc" id="L90" title="All 2 branches missed.">                            } else if(c == 7){</span>
+<span class="nc" id="L91">                                System.out.println(&quot;Insert the students color in this order... cardStudent1,entranceStudent1,cardStudent2,entranceStudent2,cardStudent3,entranceStudent3  , students 2 and 3 are not necessary: &quot;);</span>
+<span class="nc" id="L92">                                inputLine2 = stdin.nextLine();</span>
+
+<span class="nc bnc" id="L94" title="All 2 branches missed.">                            } else if(c == 9){</span>
+<span class="nc" id="L95">                                System.out.println(&quot;Insert the color: &quot;);</span>
+<span class="nc" id="L96">                                inputLine2 = stdin.nextLine();</span>
+
+<span class="nc bnc" id="L98" title="All 2 branches missed.">                            } else if(c == 10){</span>
+<span class="nc" id="L99">                                System.out.println(&quot;Insert the students color in this order... entranceStudent1,diningStudent1,entranceStudent2,diningStudent2  , students 2 are not necessary: &quot;);</span>
+<span class="nc" id="L100">                                inputLine2 = stdin.nextLine();</span>
+
+<span class="nc bnc" id="L102" title="All 2 branches missed.">                            }else if(c == 11){</span>
+<span class="nc" id="L103">                                System.out.println(&quot;Insert the student color: &quot;);</span>
+<span class="nc" id="L104">                                inputLine2 = stdin.nextLine();</span>
+
+<span class="nc bnc" id="L106" title="All 2 branches missed.">                            } else if(c == 12){</span>
+<span class="nc" id="L107">                                System.out.println(&quot;Insert the student color: &quot;);</span>
+<span class="nc" id="L108">                                inputLine2 = stdin.nextLine();</span>
+                            }
+
+<span class="nc bnc" id="L111" title="All 2 branches missed.">                            if(inputLine2.equals(null))</span>
+<span class="nc" id="L112">                                inputLine = &quot;100,&quot; + inputLine;</span>
+                            else
+<span class="nc" id="L114">                                inputLine = &quot;100,&quot; + inputLine + &quot;,&quot; + inputLine2;</span>
+                        }
+<span class="nc" id="L116">                        synchronized (ip){</span>
+<span class="nc" id="L117">                            socketOut.writeObject(inputLine);</span>
+<span class="nc" id="L118">                            socketOut.flush();</span>
+<span class="nc" id="L119">                        }</span>
+<span class="nc" id="L120">                    }</span>
+<span class="nc" id="L121">                }catch(Exception e){</span>
+<span class="nc" id="L122">                    setActive(false);</span>
+<span class="nc" id="L123">                }</span>
+<span class="nc" id="L124">            }</span>
+        });
+<span class="nc" id="L126">        t.start();</span>
+<span class="nc" id="L127">        return t;</span>
+    }
+
+    public void run() throws IOException {
+<span class="nc" id="L131">        Socket socket = new Socket(ip, port);</span>
+<span class="nc" id="L132">        System.out.println(&quot;Connection established&quot;);</span>
+
+<span class="nc" id="L134">        ObjectOutputStream socketOut = new ObjectOutputStream(socket.getOutputStream());</span>
+<span class="nc" id="L135">        ObjectInputStream socketIn = new ObjectInputStream(socket.getInputStream());</span>
+<span class="nc" id="L136">        Scanner stdin = new Scanner(System.in);</span>
+
+
+        try{
+<span class="nc" id="L140">            Thread t0 = asyncReadFromSocket(socketIn);</span>
+<span class="nc" id="L141">            Thread t1 = asyncWriteToSocket(stdin, socketOut);</span>
+
+<span class="nc" id="L143">            t0.join();</span>
+<span class="nc" id="L144">            System.in.close();</span>
+<span class="nc" id="L145">            t1.join();</span>
+<span class="nc" id="L146">            System.out.println(&quot;Connection closed!&quot;);</span>
+
+<span class="nc" id="L148">        } catch(InterruptedException | NoSuchElementException | ConnectionClosedException e){</span>
+<span class="nc" id="L149">            System.out.println(&quot;Connection closed from the client side&quot;);</span>
+        } finally {
+<span class="nc" id="L151">            stdin.close();</span>
+<span class="nc" id="L152">            socketIn.close();</span>
+<span class="nc" id="L153">            socketOut.close();</span>
+<span class="nc" id="L154">            socket.close();</span>
+        }
+<span class="nc" id="L156">    }</span>
+}
+
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

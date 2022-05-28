@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Island.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">GC18</a> &gt; <a href="index.source.html" class="el_package">it.polimi.ingsw.model.gameboard</a> &gt; <span class="el_source">Island.java</span></div><h1>Island.java</h1><pre class="source lang-java linenums">package it.polimi.ingsw.model.gameboard;
+
+import it.polimi.ingsw.model.Parameters;
+import it.polimi.ingsw.model.player.Player;
+import it.polimi.ingsw.model.player.Professor;
+import it.polimi.ingsw.model.player.Student;
+import it.polimi.ingsw.model.enumeration.TowerColour;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class Island implements Serializable {
+   // private int islandRank;    //numero di isole unite
+    //private int islandIndex;
+    private int numTower;
+    private TowerColour towerColor;
+    private ArrayList&lt;Student&gt; students;
+    private ArrayList&lt;Integer&gt; numStudents;
+    private int noEntry; //int perchè ne puoi mettere più di uno
+
+
+<span class="fc" id="L22">    public Island(){</span>
+<span class="fc" id="L23">        this.students = new ArrayList&lt;Student&gt;(0);</span>
+        //this.islandIndex = index;
+<span class="fc" id="L25">        this.numTower = 0;</span>
+        //this.islandRank = 1;
+<span class="fc" id="L27">        this.towerColor = null;</span>
+<span class="fc" id="L28">        this.numStudents = new ArrayList&lt;&gt;();</span>
+
+<span class="pc bpc" id="L30" title="1 of 2 branches missed.">        if(Parameters.expertMode){</span>
+<span class="fc" id="L31">            this.noEntry = 0;</span>
+        }
+
+<span class="fc bfc" id="L34" title="All 2 branches covered.">        for (int i = 0; i&lt;5; i++){</span>
+<span class="fc" id="L35">            numStudents.add(0);</span>
+        }
+<span class="fc" id="L37">    }</span>
+
+    public void changeTowerColor(TowerColour colour){
+<span class="fc" id="L40">        this.towerColor = colour;</span>
+<span class="fc" id="L41">    }</span>
+
+    public void addStudent (Student s){
+<span class="fc" id="L44">        this.students.add(s);</span>
+
+<span class="fc" id="L46">        numStudents.set(s.getColour().ordinal(), (numStudents.get(s.getColour().ordinal()) + 1));</span>
+<span class="fc" id="L47">    }</span>
+
+    //Return the player with the most influence on the island
+    public Player Influence (ArrayList&lt;Player&gt; players, boolean card6noTowerFlag, int card8twoMorePointsPlayer, int card9color){
+
+<span class="fc" id="L52">        ArrayList&lt;Professor&gt; prof = new ArrayList&lt;&gt;();</span>
+
+        // sommo gli studenti (colori diversi) di un singolo giocatore in base ai colori che controlla
+<span class="fc" id="L55">        int[] somma = new int[Parameters.numPlayers];</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">        for(Player pl: players) {</span>
+<span class="fc" id="L57">            prof = pl.getPlayerSchoolBoard().getProfessors();</span>
+<span class="fc bfc" id="L58" title="All 2 branches covered.">            for (Professor pr : prof)</span>
+<span class="fc" id="L59">                somma[pl.getIndex()] += numStudents.get(pr.getProfessorColour().ordinal());</span>
+
+<span class="pc bpc" id="L61" title="1 of 4 branches missed.">            if(pl.PlayerTowerColor().equals(towerColor) &amp;&amp; !card6noTowerFlag)</span>
+<span class="fc" id="L62">                somma[pl.getIndex()] += numTower;</span>
+
+<span class="pc bpc" id="L64" title="1 of 2 branches missed.">            if(pl.getIndex() == card8twoMorePointsPlayer)</span>
+<span class="nc" id="L65">                somma[pl.getIndex()] += 2;</span>
+<span class="fc" id="L66">        }</span>
+
+<span class="pc bpc" id="L68" title="1 of 2 branches missed.">        if(card9color != -1)</span>
+<span class="nc" id="L69">            somma[card9color] = 0;</span>
+
+<span class="fc" id="L71">        ArrayList&lt;Integer&gt; rank = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L72">        int max = 0;</span>
+<span class="fc bfc" id="L73" title="All 2 branches covered.">        for (int i = 0; i&lt;Parameters.numPlayers; i++){  //trovo il giocatore con più studenti</span>
+<span class="fc bfc" id="L74" title="All 2 branches covered.">            if(max &lt; somma[i]){</span>
+<span class="fc" id="L75">                max = somma[i];</span>
+<span class="fc" id="L76">                rank.clear();</span>
+<span class="fc" id="L77">                rank.add(i);</span>
+<span class="fc bfc" id="L78" title="All 4 branches covered.">            }else if (max == somma[i] &amp;&amp; max != 0){  //qui ho parità</span>
+<span class="fc" id="L79">                rank.add(i);</span>
+            }
+        }
+
+<span class="fc bfc" id="L83" title="All 2 branches covered.">        if(rank.size() == 1){</span>
+<span class="pc bpc" id="L84" title="1 of 2 branches missed.">            for(Player p: players) {  //ritorno il giocatore che ha il max</span>
+<span class="fc bfc" id="L85" title="All 2 branches covered.">               if(p.getIndex() == rank.get(0))</span>
+<span class="fc" id="L86">                   return p;</span>
+<span class="fc" id="L87">            }</span>
+        }
+
+<span class="fc" id="L90">        return null;  // se non trova nessun player o più di uno</span>
+    }
+
+    public int getNumTower() {
+<span class="fc" id="L94">        return numTower;</span>
+    }
+
+    public void setNumTower(int numTower) {
+<span class="fc" id="L98">        this.numTower = numTower;</span>
+      //  this.islandRank = numTower;
+<span class="fc" id="L100">    }</span>
+
+    public TowerColour getTowerColor() {
+<span class="fc" id="L103">        return towerColor;</span>
+    }
+
+  /*  public int getIslandRank() {
+        return islandRank;
+    } */
+
+   /* public int getIslandIndex() {
+        return islandIndex;
+    } */
+
+    public ArrayList&lt;Student&gt; getStudents() {
+<span class="fc" id="L115">        return students;</span>
+    }
+
+    public ArrayList&lt;Integer&gt; getNumStudents() {
+<span class="fc" id="L119">        return numStudents;</span>
+    }
+
+    public void addNoEntry() {
+<span class="fc" id="L123">        this.noEntry++;</span>
+<span class="fc" id="L124">    }</span>
+
+    public void removeNoEntry(){
+<span class="fc" id="L127">        this.noEntry--;</span>
+<span class="fc" id="L128">    }</span>
+
+    public int getNoEntry() {
+<span class="fc" id="L131">        return noEntry;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

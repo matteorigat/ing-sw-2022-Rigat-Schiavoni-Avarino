@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Character10.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">GC18</a> &gt; <a href="index.source.html" class="el_package">it.polimi.ingsw.model.gameboard.characters</a> &gt; <span class="el_source">Character10.java</span></div><h1>Character10.java</h1><pre class="source lang-java linenums">package it.polimi.ingsw.model.gameboard.characters;
+
+public class Character10 implements CharacterCard{
+    private int index;
+    private int cost;
+
+    private static final String Description = &quot;Scambia tra loro fino a due studenti della sala e dell'ingresso&quot;;
+
+<span class="fc" id="L9">    public Character10() {</span>
+<span class="fc" id="L10">        this.index = 10;</span>
+<span class="fc" id="L11">        this.cost = 1;</span>
+<span class="fc" id="L12">    }</span>
+
+    @Override
+    public void play() {
+<span class="nc" id="L16">        this.cost++;</span>
+<span class="nc" id="L17">    }</span>
+
+    @Override
+    public int getIndex() {
+<span class="fc" id="L21">        return index;</span>
+    }
+
+    @Override
+    public int getCost() {
+<span class="nc" id="L26">        return cost;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L31">        return  &quot;index: &quot; + index +</span>
+                &quot;\tcost: &quot; + cost +  &quot;\t\t\t\t\t\t\t\t\t\t&quot; + Description;
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
