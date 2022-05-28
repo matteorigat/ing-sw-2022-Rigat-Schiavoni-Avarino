@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>App.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">GC18</a> &gt; <a href="index.source.html" class="el_package">it.polimi.ingsw</a> &gt; <span class="el_source">App.java</span></div><h1>App.java</h1><pre class="source lang-java linenums">package it.polimi.ingsw;
+
+import it.polimi.ingsw.controller.Controller;
+import it.polimi.ingsw.model.player.Player;
+import it.polimi.ingsw.view.LocalView;
+
+
+
+<span class="nc" id="L9">public class App </span>
+{
+    public static void main( String[] args )
+    {
+<span class="nc" id="L13">        Controller controller = new Controller();</span>
+<span class="nc" id="L14">        controller.setParameters(2, true);</span>
+<span class="nc" id="L15">        Player p1 = new Player(&quot;mef&quot;, 0);</span>
+<span class="nc" id="L16">        Player p2 = new Player(&quot;gius&quot;, 1);</span>
+<span class="nc" id="L17">        controller.addPlayer(p1);</span>
+<span class="nc" id="L18">        controller.addPlayer(p2);</span>
+        //controller.addPlayer(&quot;Nico&quot;);
+<span class="nc" id="L20">        controller.init();</span>
+<span class="nc" id="L21">        LocalView view = new LocalView();</span>
+<span class="nc" id="L22">        view.setController(controller);</span>
+<span class="nc" id="L23">        view.start();</span>
+
+<span class="nc" id="L25">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

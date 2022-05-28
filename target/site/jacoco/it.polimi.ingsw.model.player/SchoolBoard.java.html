@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SchoolBoard.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">GC18</a> &gt; <a href="index.source.html" class="el_package">it.polimi.ingsw.model.player</a> &gt; <span class="el_source">SchoolBoard.java</span></div><h1>SchoolBoard.java</h1><pre class="source lang-java linenums">package it.polimi.ingsw.model.player;
+
+import it.polimi.ingsw.model.Parameters;
+import it.polimi.ingsw.model.enumeration.Colour;
+import it.polimi.ingsw.model.enumeration.TowerColour;
+import it.polimi.ingsw.model.gameboard.Island;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class SchoolBoard implements Serializable {
+    private ArrayList&lt;Student&gt; studentsEntrance;
+    private DiningRoom diningRoom;
+    private ArrayList&lt;Professor&gt; professors;
+    private ArrayList&lt;Tower&gt; towers;
+    private TowerColour towerColor;
+
+    private int numTower;
+
+<span class="fc" id="L20">    public SchoolBoard(TowerColour towerColour) {</span>
+<span class="fc" id="L21">        this.studentsEntrance = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L22">        this.diningRoom = new DiningRoom();</span>
+<span class="fc" id="L23">        this.professors = new ArrayList&lt;&gt;(0);</span>
+<span class="fc" id="L24">        this.towers = new ArrayList&lt;&gt;(Parameters.numTowers);</span>
+<span class="fc" id="L25">        this.towerColor = towerColour;</span>
+
+<span class="fc bfc" id="L27" title="All 2 branches covered.">        for (int i=0; i&lt;Parameters.numTowers; i++) {</span>
+<span class="fc" id="L28">            Tower t = new Tower(towerColour);</span>
+<span class="fc" id="L29">            towers.add(t);</span>
+        }
+<span class="fc" id="L31">    }</span>
+
+    public ArrayList&lt;Student&gt; getStudentsEntrance() {
+<span class="fc" id="L34">        return studentsEntrance;</span>
+    }
+
+    public ArrayList&lt;Professor&gt; getProfessors() {
+<span class="fc" id="L38">        return professors;</span>
+    }
+
+    public TowerColour getTowerColor() {
+<span class="fc" id="L42">       return towerColor;</span>
+    }
+
+    public void addTower(TowerColour towerColour){
+<span class="fc" id="L46">        Tower t = new Tower(towerColour);</span>
+<span class="fc" id="L47">        towers.add(t);</span>
+<span class="fc" id="L48">    }</span>
+
+    public boolean moveStudentToDiningRoom(int studentColour) {
+<span class="pc bpc" id="L51" title="1 of 2 branches missed.">        if(this.diningRoom.numOfStudentByColor(Colour.values()[studentColour]) &gt;= 10)</span>
+<span class="nc" id="L52">            return false;  //sala piena, non gli faccio aggiungere nulla</span>
+
+<span class="fc" id="L54">        boolean coin = false;</span>
+<span class="fc bfc" id="L55" title="All 2 branches covered.">        for (Student s : studentsEntrance){</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">            if (s.getColour().equals(Colour.values()[studentColour])) {</span>
+<span class="fc" id="L57">                coin = this.diningRoom.addStudent(s);</span>
+<span class="fc" id="L58">                studentsEntrance.remove(s);</span>
+<span class="fc" id="L59">                break;</span>
+            }
+<span class="fc" id="L61">        }</span>
+<span class="fc" id="L62">        return coin;</span>
+    }
+
+    public void removeStudentFromEntrance(int studentColour) {  // serve per la carta 7
+<span class="nc bnc" id="L66" title="All 2 branches missed.">        for (Student s : studentsEntrance) {</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">            if (s.getColour().equals(Colour.values()[studentColour])) {</span>
+<span class="nc" id="L68">                this.studentsEntrance.remove(s);</span>
+<span class="nc" id="L69">                return;</span>
+            }
+<span class="nc" id="L71">        }</span>
+<span class="nc" id="L72">    }</span>
+
+    public void moveStudentToIsland(int studentColour, Island i) {
+<span class="pc bpc" id="L75" title="1 of 2 branches missed.">        for (Student s : studentsEntrance) {</span>
+<span class="fc bfc" id="L76" title="All 2 branches covered.">            if (s.getColour().equals(Colour.values()[studentColour])) {</span>
+
+<span class="fc" id="L78">                i.addStudent(s);</span>
+<span class="fc" id="L79">                this.studentsEntrance.remove(s);</span>
+<span class="fc" id="L80">                break;</span>
+            }
+<span class="fc" id="L82">        }</span>
+<span class="fc" id="L83">    }</span>
+
+    public DiningRoom getDiningRoom() {
+<span class="fc" id="L86">        return diningRoom;</span>
+    }
+
+    public void removeProfessor(Colour color){
+<span class="fc" id="L90">        int size = professors.size();</span>
+<span class="pc bpc" id="L91" title="1 of 2 branches missed.">        for(int i=0; i&lt;size; i++){</span>
+<span class="fc bfc" id="L92" title="All 2 branches covered.">            if(professors.get(i).getProfessorColour().equals(color)){</span>
+<span class="fc" id="L93">                professors.remove(i);</span>
+<span class="fc" id="L94">                return;</span>
+            }
+        }
+<span class="nc" id="L97">    }</span>
+
+    public void addProfessor(Colour color){
+<span class="fc" id="L100">        Professor pr = new Professor(color);</span>
+<span class="fc" id="L101">        professors.add(pr);</span>
+<span class="fc" id="L102">    }</span>
+
+    public ArrayList&lt;Tower&gt; getTowers() {
+<span class="fc" id="L105">        return towers;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

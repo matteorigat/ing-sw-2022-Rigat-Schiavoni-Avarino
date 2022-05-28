@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ClientGUI.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">GC18</a> &gt; <a href="index.source.html" class="el_package">it.polimi.ingsw.client.GUI</a> &gt; <span class="el_source">ClientGUI.java</span></div><h1>ClientGUI.java</h1><pre class="source lang-java linenums">package it.polimi.ingsw.client.GUI;
+
+import it.polimi.ingsw.client.ClientAppGUI;
+import it.polimi.ingsw.exceptions.ConnectionClosedException;
+import it.polimi.ingsw.model.Model;
+import javafx.application.Platform;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+import java.util.NoSuchElementException;
+
+public class ClientGUI implements Runnable {
+
+    private String ip;
+    private Integer port;
+
+    private ObjectOutputStream socketOut;
+
+    private ClientAppGUI gui;
+
+<span class="nc" id="L23">    private String nickname = &quot;&quot;;</span>
+
+
+<span class="nc" id="L26">    public ClientGUI(String ip, int port, ClientAppGUI gui){</span>
+<span class="nc" id="L27">        this.ip = ip;</span>
+<span class="nc" id="L28">        this.port = port;</span>
+<span class="nc" id="L29">        this.gui = gui;</span>
+<span class="nc" id="L30">    }</span>
+
+<span class="nc" id="L32">    private boolean active = true;</span>
+
+    public void setNickname(String nickname) {
+<span class="nc" id="L35">        asyncWriteToSocket(nickname);</span>
+<span class="nc" id="L36">        this.nickname = nickname;</span>
+<span class="nc" id="L37">    }</span>
+
+    public synchronized boolean isActive(){
+<span class="nc" id="L40">        return active;</span>
+    }
+
+    public synchronized void setActive(boolean active){
+<span class="nc" id="L44">        this.active = active;</span>
+<span class="nc" id="L45">    }</span>
+
+    // asyncReadFromSocket
+    public Thread asyncReadFromSocket(final ObjectInputStream socketIn, final ObjectOutputStream socketOut){
+<span class="nc" id="L49">        Thread t = new Thread(new Runnable() {</span>
+            @Override
+            public void run() {
+                try {
+<span class="nc bnc" id="L53" title="All 2 branches missed.">                    while (isActive()) {</span>
+<span class="nc" id="L54">                        Object inputObject = socketIn.readObject();</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">                        if(inputObject instanceof String){</span>
+<span class="nc" id="L56">                            System.out.println((String) inputObject);</span>
+<span class="nc bnc" id="L57" title="All 4 branches missed.">                            if (((String) inputObject).contains(&quot;Write a valid name!&quot;) || ((String) inputObject).contains(&quot;Another player already chosen this nickname&quot;)){</span>
+<span class="nc" id="L58">                                Platform.runLater(()-&gt; gui.getNicknameController().clearNickname());</span>
+                            }
+<span class="nc bnc" id="L60" title="All 2 branches missed.">                            else if (((String) inputObject).contains(&quot;How many players?&quot;)){</span>
+<span class="nc" id="L61">                                Platform.runLater(()-&gt; gui.changeStage(&quot;FirstPlayer&quot;));</span>
+                            }
+<span class="nc bnc" id="L63" title="All 4 branches missed.">                            else if (((String) inputObject).contains(&quot;please wait the beginning of the game&quot;) || ((String) inputObject).contains(&quot;Waiting for another player&quot;)){</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">                                if(!gui.getCurrentFXML().equals(&quot;Loading&quot;))</span>
+<span class="nc" id="L65">                                    Platform.runLater(()-&gt; gui.changeStage(&quot;Loading&quot;));</span>
+                            }
+<span class="nc bnc" id="L67" title="All 2 branches missed.">                            else if (((String) inputObject).contains(&quot;opponent&quot;)){</span>
+<span class="nc" id="L68">                                Platform.runLater(()-&gt; gui.changeStage(&quot;GameBoard&quot;));</span>
+                            }
+<span class="nc bnc" id="L70" title="All 2 branches missed.">                        } else if (inputObject instanceof Model){</span>
+<span class="nc" id="L71">                            ((Model)inputObject).print(nickname);</span>
+                        } else {
+<span class="nc" id="L73">                            throw new IllegalArgumentException();</span>
+                        }
+<span class="nc" id="L75">                    }</span>
+<span class="nc" id="L76">                } catch (Exception e){</span>
+<span class="nc" id="L77">                    setActive(false);</span>
+<span class="nc" id="L78">                }</span>
+<span class="nc" id="L79">            }</span>
+        });
+<span class="nc" id="L81">        t.start();</span>
+<span class="nc" id="L82">        return t;</span>
+    }
+
+    public Thread asyncWriteToSocket(String message){
+<span class="nc" id="L86">        Thread t = new Thread(new Runnable() {</span>
+            @Override
+            public void run() {
+                try {
+<span class="nc" id="L90">                    synchronized (ip){</span>
+<span class="nc" id="L91">                        socketOut.writeObject(message);</span>
+<span class="nc" id="L92">                        socketOut.flush();</span>
+<span class="nc" id="L93">                    }</span>
+<span class="nc" id="L94">                }catch(Exception e){</span>
+<span class="nc" id="L95">                    setActive(false);</span>
+<span class="nc" id="L96">                }</span>
+<span class="nc" id="L97">            }</span>
+        });
+<span class="nc" id="L99">        t.start();</span>
+<span class="nc" id="L100">        return t;</span>
+    }
+
+    @Override
+    public void run() {
+        try {
+<span class="nc" id="L106">            Socket socket = new Socket(ip, port);</span>
+<span class="nc" id="L107">            Platform.runLater(()-&gt; gui.changeStage(&quot;Nickname&quot;));</span>
+<span class="nc" id="L108">            System.out.println(&quot;Connection established&quot;);</span>
+
+<span class="nc" id="L110">            ObjectOutputStream socketOut = new ObjectOutputStream(socket.getOutputStream());</span>
+<span class="nc" id="L111">            this.socketOut = socketOut;</span>
+<span class="nc" id="L112">            ObjectInputStream socketIn = new ObjectInputStream(socket.getInputStream());</span>
+
+            try{
+<span class="nc" id="L115">                Thread t0 = asyncReadFromSocket(socketIn, socketOut);</span>
+
+<span class="nc" id="L117">                t0.join();</span>
+<span class="nc" id="L118">                System.in.close();</span>
+<span class="nc" id="L119">                System.out.println(&quot;Connection closed!&quot;);</span>
+
+<span class="nc" id="L121">            } catch(InterruptedException | NoSuchElementException | ConnectionClosedException e){</span>
+<span class="nc" id="L122">                System.out.println(&quot;Connection closed from the client side&quot;);</span>
+            } finally {
+<span class="nc" id="L124">                socketIn.close();</span>
+<span class="nc" id="L125">                socketOut.close();</span>
+<span class="nc" id="L126">                socket.close();</span>
+            }
+<span class="nc" id="L128">        } catch (IOException e) {</span>
+<span class="nc" id="L129">            Platform.runLater(()-&gt; gui.getMainMenuController().clearIpPort());</span>
+<span class="nc" id="L130">            throw new RuntimeException(e);</span>
+<span class="nc" id="L131">        }</span>
+
+<span class="nc" id="L133">    }</span>
+}
+
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

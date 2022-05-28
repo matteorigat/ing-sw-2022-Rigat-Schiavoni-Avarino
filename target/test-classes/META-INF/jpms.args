@@ -1,0 +1,4 @@
+--patch-module
+it.polimi.ingsw.client=_
+--add-reads
+it.polimi.ingsw.client=ALL-UNNAMED

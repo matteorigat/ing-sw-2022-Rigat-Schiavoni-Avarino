@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Cloud.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">GC18</a> &gt; <a href="index.source.html" class="el_package">it.polimi.ingsw.model.gameboard</a> &gt; <span class="el_source">Cloud.java</span></div><h1>Cloud.java</h1><pre class="source lang-java linenums">package it.polimi.ingsw.model.gameboard;
+
+import it.polimi.ingsw.exceptions.TooManyStudentsOnCloudException;
+import it.polimi.ingsw.model.Parameters;
+import it.polimi.ingsw.model.player.Student;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class Cloud implements Serializable {
+
+    private ArrayList&lt;Student&gt; students;
+    private boolean taken;
+
+<span class="fc" id="L15">    public Cloud() {</span>
+<span class="fc" id="L16">        this.students = new ArrayList&lt;&gt;(0);</span>
+<span class="fc" id="L17">        this.taken = false;</span>
+<span class="fc" id="L18">    }</span>
+
+    // A inizio turmo si aggiungono giocatori sulla nuvola... è possibile modificare la funzione e passare tutti gli studenti insieme come arraylist
+    public void addStudent(Student s) throws TooManyStudentsOnCloudException {
+<span class="fc bfc" id="L22" title="All 2 branches covered.">        if (this.students.size() &lt; Parameters.numCloudStudents){</span>
+<span class="fc" id="L23">            this.students.add(s);</span>
+        }
+<span class="fc" id="L25">        else throw new TooManyStudentsOnCloudException();</span>
+
+<span class="fc" id="L27">    }</span>
+
+    public ArrayList&lt;Student&gt; seeStudents() {
+<span class="fc" id="L30">        return (ArrayList&lt;Student&gt;) students.clone();</span>
+    }
+
+    //quando un giocatore finisce il turno, prende gli studenti dalla nuvola e la svuota
+    public ArrayList&lt;Student&gt; getStudents() {
+<span class="fc" id="L35">        ArrayList&lt;Student&gt; stud = (ArrayList&lt;Student&gt;) students.clone();</span>
+
+<span class="fc bfc" id="L37" title="All 2 branches covered.">        for(int i=0; i&lt;stud.size(); i++)</span>
+<span class="fc" id="L38">            students.remove(0);</span>
+
+<span class="fc" id="L40">        this.taken = true;</span>
+
+<span class="fc" id="L42">        return stud;</span>
+    }
+
+    public boolean isTaken() {
+<span class="fc" id="L46">        return taken;</span>
+    }
+
+    public void setTaken(boolean taken) {
+<span class="fc" id="L50">        this.taken = taken;</span>
+<span class="fc" id="L51">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

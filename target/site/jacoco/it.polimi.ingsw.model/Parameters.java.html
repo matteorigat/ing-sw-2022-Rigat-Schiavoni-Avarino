@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Parameters.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">GC18</a> &gt; <a href="index.source.html" class="el_package">it.polimi.ingsw.model</a> &gt; <span class="el_source">Parameters.java</span></div><h1>Parameters.java</h1><pre class="source lang-java linenums">package it.polimi.ingsw.model;
+
+
+<span class="nc" id="L4">public class Parameters {</span>
+    public static int numPlayers;
+    public static int numClouds;
+    public static int numCloudStudents;
+    public static int numTowers;
+    public static int entranceStudents;
+    public static boolean expertMode;  //true se è expert
+<span class="fc" id="L11">    public static int numIslands = 12;</span>
+<span class="fc" id="L12">    public static int numStudents = 130;</span>
+<span class="fc" id="L13">    public static int numCharacterCards = 8; //se ne implementiamo altre mettiamo 12</span>
+
+
+    public static void setParameters(int players, boolean mode){
+<span class="fc" id="L17">        numPlayers = players;</span>
+<span class="fc" id="L18">        numClouds = players; //numero nuvole uguale a numero giocatori</span>
+<span class="fc" id="L19">        expertMode = mode;</span>
+
+<span class="fc bfc" id="L21" title="All 2 branches covered.">        if (players == 2){</span>
+<span class="fc" id="L22">            numCloudStudents = 3;</span>
+<span class="fc" id="L23">            numTowers = 8;</span>
+<span class="fc" id="L24">            entranceStudents = 7;</span>
+        } else{
+<span class="fc" id="L26">            numCloudStudents = 4;</span>
+<span class="fc" id="L27">            numTowers = 6;</span>
+<span class="fc" id="L28">            entranceStudents = 9;</span>
+        }
+<span class="fc" id="L30">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
