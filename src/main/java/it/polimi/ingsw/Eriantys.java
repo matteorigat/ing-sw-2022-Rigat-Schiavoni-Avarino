@@ -36,7 +36,7 @@ public class Eriantys {
                 ClientAppCLI.main(null);
                 break;
             case "3":
-                Application.launch(ClientAppGUI.class);
+                ClientAppGUI.main(null);
                 break;
 
             default:
