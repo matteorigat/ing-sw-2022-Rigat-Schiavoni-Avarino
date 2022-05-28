@@ -65,10 +65,11 @@ public class ClientGUI implements Runnable {
                                     Platform.runLater(()-> gui.changeStage("Loading"));
                             }
                             else if (((String) inputObject).contains("opponent")){
+                                gui.getGameboardController().setNickname(nickname);
                                 Platform.runLater(()-> gui.changeStage("GameBoard"));
                             }
                         } else if (inputObject instanceof Model){
-                            ((Model)inputObject).print(nickname);
+                            Platform.runLater(()-> gui.getGameboardController().setModel((Model)inputObject));
                         } else {
                             throw new IllegalArgumentException();
                         }

@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Island implements Serializable {
-   // private int islandRank;    //numero di isole unite
+
     //private int islandIndex;
     private int numTower;
     private TowerColour towerColor;

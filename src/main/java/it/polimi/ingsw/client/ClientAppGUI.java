@@ -73,7 +73,6 @@ public class ClientAppGUI extends Application {
         sceneMap.put(GAMEBOARD, gameboardScene);
     }
 
-
     public String getCurrentFXML() {
         return currentFXML;
     }
@@ -99,7 +98,7 @@ public class ClientAppGUI extends Application {
     }
 
     public static void main(String[] args) {
-        launch(args);
+        launch();
     }
 
     public void changeStage(String newScene){
@@ -127,6 +126,10 @@ public class ClientAppGUI extends Application {
 
     public MainMenuController getMainMenuController() {
         return mainMenuController;
+    }
+
+    public GameBoardController getGameboardController() {
+        return gameboardController;
     }
 }
 

@@ -14,8 +14,13 @@ public class MainMenuController {
 
     @FXML
     protected void onButtonClick() {
+        ClientGUI clientGUI;
 
-        ClientGUI clientGUI = new ClientGUI(ip.getText(), Integer.parseInt(port.getText()), gui); //192.168.100.10
+        if(ip.getText() == "")
+            clientGUI = new ClientGUI("127.0.0.1", 1337, gui);
+        else
+            clientGUI = new ClientGUI(ip.getText(), Integer.parseInt(port.getText()), gui); //192.168.100.10
+
         Thread clientThread = new Thread(clientGUI);
         clientThread.start();
         gui.setClientGUI(clientGUI);
