@@ -80,31 +80,31 @@ public class ClientCLI {
                                 c = c * 10 + (int)inputLine.charAt(1) - 48;
 
                             if(c == 1){
-                                System.out.print("Insert the student color and island index: ");
+                                System.out.println("Insert the student color and island index: ");
                                 inputLine2 = stdin.nextLine();
 
                             } else if(c == 3){
-                                System.out.print("Insert the island index: ");
+                                System.out.println("Insert the island index: ");
                                 inputLine2 = stdin.nextLine();
 
                             } else if(c == 7){
-                                System.out.print("Insert the students color in this order... cardStudent1,entranceStudent1,cardStudent2,entranceStudent2,cardStudent3,entranceStudent3  , students 2 and 3 are not necessary: ");
+                                System.out.println("Insert the students color in this order... cardStudent1,entranceStudent1,cardStudent2,entranceStudent2,cardStudent3,entranceStudent3  , students 2 and 3 are not necessary: ");
                                 inputLine2 = stdin.nextLine();
 
                             } else if(c == 9){
-                                System.out.print("Insert the color: ");
+                                System.out.println("Insert the color: ");
                                 inputLine2 = stdin.nextLine();
 
                             } else if(c == 10){
-                                System.out.print("Insert the students color in this order... entranceStudent1,diningStudent1,entranceStudent2,diningStudent2  , students 2 are not necessary: ");
+                                System.out.println("Insert the students color in this order... entranceStudent1,diningStudent1,entranceStudent2,diningStudent2  , students 2 are not necessary: ");
                                 inputLine2 = stdin.nextLine();
 
                             }else if(c == 11){
-                                System.out.print("Insert the student color: ");
+                                System.out.println("Insert the student color: ");
                                 inputLine2 = stdin.nextLine();
 
                             } else if(c == 12){
-                                System.out.print("Insert the student color: ");
+                                System.out.println("Insert the student color: ");
                                 inputLine2 = stdin.nextLine();
                             }
 

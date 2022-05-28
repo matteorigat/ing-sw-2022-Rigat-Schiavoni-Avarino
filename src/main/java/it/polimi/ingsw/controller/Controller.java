@@ -789,8 +789,10 @@ public class Controller implements Observer<PlayerMove> {
         if(playerIndex == model.getCurrentPlayer() && model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[diningStudent1]) > 0){
             boolean checkStudentColor = false; // vedo se ha lo studente di quel colore
             for (Student s : model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance())
-                if (Colour.values()[entranceStudent1] == s.getColour())
+                if (Colour.values()[entranceStudent1] == s.getColour()) {
                     checkStudentColor = true;
+                    break;
+                }
 
             if(checkStudentColor){
                 for (CharacterCard c: model.getGameBoard().getThreeCharacterCards()){
@@ -805,8 +807,10 @@ public class Controller implements Observer<PlayerMove> {
                         model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance().add(new Student(Colour.values()[diningStudent1]));
 
                         for(Professor p: model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getProfessors())
-                            if(p.getProfessorColour().ordinal() == diningStudent1)
+                            if(p.getProfessorColour().ordinal() == diningStudent1){
                                 model.getPlayers().get(playerIndex).getPlayerSchoolBoard().removeProfessor(Colour.values()[diningStudent1]);
+                                break;
+                            }
 
                         checkProfessorProperty(entranceStudent1);
                         checkProfessorProperty(diningStudent1);
@@ -814,7 +818,6 @@ public class Controller implements Observer<PlayerMove> {
                     }
                 }
             }
-
         }
         return -1;
     }
@@ -830,7 +833,7 @@ public class Controller implements Observer<PlayerMove> {
             for (Student s : model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance()){
                 if (Colour.values()[entranceStudent1] == s.getColour())
                     checkStudentColor++;
-                else if (Colour.values()[entranceStudent2] == s.getColour())
+                if (Colour.values()[entranceStudent2] == s.getColour())
                     checkStudentColor2++;
             }
 
@@ -850,8 +853,10 @@ public class Controller implements Observer<PlayerMove> {
                         model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance().add(new Student(Colour.values()[diningStudent1]));
 
                         for(Professor p: model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getProfessors())
-                            if(p.getProfessorColour().ordinal() == diningStudent1)
+                            if(p.getProfessorColour().ordinal() == diningStudent1){
                                 model.getPlayers().get(playerIndex).getPlayerSchoolBoard().removeProfessor(Colour.values()[diningStudent1]);
+                                break;
+                            }
 
                         checkProfessorProperty(entranceStudent1);
                         checkProfessorProperty(diningStudent1);
@@ -861,8 +866,10 @@ public class Controller implements Observer<PlayerMove> {
                         model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance().add(new Student(Colour.values()[diningStudent2]));
 
                         for(Professor p: model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getProfessors())
-                            if(p.getProfessorColour().ordinal() == diningStudent2)
+                            if(p.getProfessorColour().ordinal() == diningStudent2){
                                 model.getPlayers().get(playerIndex).getPlayerSchoolBoard().removeProfessor(Colour.values()[diningStudent2]);
+                                break;
+                            }
 
                         checkProfessorProperty(entranceStudent2);
                         checkProfessorProperty(diningStudent2);
