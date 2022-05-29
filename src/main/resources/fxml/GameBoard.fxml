@@ -8,15 +8,22 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.controllers.GameBoardController">
 
-    <ImageView fitHeight="900.0" fitWidth="1440.0">
-        <Image url="@../Graphics/back.gif" />
-    </ImageView>
+          <ImageView fitHeight="900.0" fitWidth="1440.0">
+               <Image url="@../Graphics/back.gif" />
+          </ImageView>
+
+    <Label fx:id="gamephase" layoutX="20.0" layoutY="20.0" text="Game phase:" textFill="WHITE">
+        <font><Font name="Arial Bold" size="24.0" /></font>
+    </Label>
+    <Label fx:id="currentplayer" layoutX="20.0" layoutY="50.0" text="Current player:" textFill="WHITE">
+        <font><Font name="Arial Bold" size="24.0" /></font>
+    </Label>
 
 
 
-    <!-- ISLANDS AND CLOUDS -->
+<!-- ISLANDS, CLOUDS AND CHARACTERS -->
     <Pane fx:id="Board" layoutX="232.0" prefHeight="666.0" prefWidth="976.0">
-        <!-- ISLAND 0 -->
+<!-- ISLAND 0 -->
         <Pane fx:id="island0" layoutX="138.0" layoutY="40.0" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island1.png" />
@@ -59,7 +66,7 @@
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
         </Pane>
-        <!-- ISLAND 1 -->
+<!-- ISLAND 1 -->
         <Pane fx:id="island1" layoutX="320.0" layoutY="1.0" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island2.png" />
@@ -102,7 +109,7 @@
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
         </Pane>
-        <!-- ISLAND 2 -->
+<!-- ISLAND 2 -->
         <Pane fx:id="island2" layoutX="509.0" layoutY="-6.0" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island3.png" />
@@ -145,7 +152,7 @@
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
         </Pane>
-        <!-- ISLAND 3 -->
+<!-- ISLAND 3 -->
         <Pane fx:id="island3" layoutX="696.0" layoutY="43.0" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island1.png" />
@@ -188,7 +195,7 @@
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
         </Pane>
-        <!-- ISLAND 4 -->
+<!-- ISLAND 4 -->
         <Pane fx:id="island4" layoutX="770.0" layoutY="182.0" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island2.png" />
@@ -231,7 +238,7 @@
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
         </Pane>
-        <!-- ISLAND 5 -->
+<!-- ISLAND 5 -->
         <Pane fx:id="island5" layoutX="797.0" layoutY="356.0" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island3.png" />
@@ -274,8 +281,8 @@
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
         </Pane>
-        <!-- ISLAND 6 -->
-        <Pane fx:id="island6" layoutX="667.0" layoutY="465.0" prefHeight="150.0" prefWidth="150.0">
+<!-- ISLAND 6 -->
+        <Pane fx:id="island6" layoutX="694.0" layoutY="472.0" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island1.png" />
             </ImageView>
@@ -317,7 +324,7 @@
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
         </Pane>
-        <!-- ISLAND 7 -->
+<!-- ISLAND 7 -->
         <Pane fx:id="island7" layoutX="506.0" layoutY="524.0" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island2.png" />
@@ -360,7 +367,7 @@
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
         </Pane>
-        <!-- ISLAND 8 -->
+<!-- ISLAND 8 -->
         <Pane fx:id="island8" layoutX="322.0" layoutY="513.0" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island3.png" />
@@ -403,8 +410,8 @@
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
         </Pane>
-        <!-- ISLAND 9 -->
-        <Pane fx:id="island9" layoutX="153.0" layoutY="475.0" prefHeight="150.0" prefWidth="150.0">
+<!-- ISLAND 9 -->
+        <Pane fx:id="island9" layoutX="146.0" layoutY="497.0" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island1.png" />
             </ImageView>
@@ -446,7 +453,7 @@
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
         </Pane>
-        <!-- ISLAND 10 -->
+<!-- ISLAND 10 -->
         <Pane fx:id="island10" layoutX="32.0" layoutY="369.0" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island2.png" />
@@ -489,7 +496,7 @@
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
         </Pane>
-        <!-- ISLAND 11 -->
+<!-- ISLAND 11 -->
         <Pane fx:id="island11" layoutX="21.0" layoutY="198.0" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island3.png" />
@@ -536,8 +543,10 @@
 
 
 
-        <!-- CLOUD 0 -->
-      <Pane fx:id="cloud0" layoutX="240.0" layoutY="202.0" prefHeight="150.0" prefWidth="150.0">
+
+
+<!-- CLOUD 0 -->
+        <Pane fx:id="cloud0" layoutX="236.0" layoutY="198.0" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/cloud_card.png" />
             </ImageView>
@@ -545,9 +554,9 @@
             <ImageView fx:id="cloudStudent01" fitHeight="25.0" fitWidth="25.0" layoutX="92.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="cloudStudent02" fitHeight="25.0" fitWidth="25.0" layoutX="38.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="cloudStudent03" fitHeight="25.0" fitWidth="25.0" layoutX="93.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-      </Pane>
-        <!-- CLOUD 1 -->
-      <Pane fx:id="cloud1" layoutX="553.0" layoutY="200.0" prefHeight="150.0" prefWidth="150.0">
+        </Pane>
+<!-- CLOUD 1 -->
+        <Pane fx:id="cloud1" layoutX="548.0" layoutY="173.0" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/cloud_card.png" />
             </ImageView>
@@ -555,9 +564,9 @@
             <ImageView fx:id="cloudStudent11" fitHeight="25.0" fitWidth="25.0" layoutX="92.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="cloudStudent12" fitHeight="25.0" fitWidth="25.0" layoutX="38.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="cloudStudent13" fitHeight="25.0" fitWidth="25.0" layoutX="93.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-      </Pane>
-        <!-- CLOUD 2 -->
-      <Pane fx:id="cloud2" layoutX="398.0" layoutY="357.0" prefHeight="150.0" prefWidth="150.0">
+        </Pane>
+<!-- CLOUD 2 -->
+        <Pane fx:id="cloud2" layoutX="397.0" layoutY="339.0" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/cloud_card.png" />
             </ImageView>
@@ -565,7 +574,37 @@
             <ImageView fx:id="cloudStudent21" fitHeight="25.0" fitWidth="25.0" layoutX="92.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="cloudStudent22" fitHeight="25.0" fitWidth="25.0" layoutX="38.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="cloudStudent23" fitHeight="25.0" fitWidth="25.0" layoutX="93.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
-      </Pane>
+        </Pane>
+
+
+
+
+
+
+
+
+
+<!-- CHARACTER 0 -->
+        <Pane fx:id="character0" layoutX="288.0" layoutY="366.0" prefHeight="131.0" prefWidth="86.0">
+            <ImageView fx:id="characterImg0" fitHeight="132.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="characterText0" layoutX="1.0" layoutY="115.0" text="Cost:">
+                <font><Font name="Arial Bold" size="13.0" /></font>
+            </Label>
+        </Pane>
+<!-- CHARACTER 1 -->
+        <Pane fx:id="character1" layoutX="427.0" layoutY="167.0" prefHeight="131.0" prefWidth="86.0">
+            <ImageView fx:id="characterImg1" fitHeight="132.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="characterText1" layoutX="1.0" layoutY="115.0" text="Cost:">
+                <font><Font name="Arial Bold" size="13.0" /></font>
+            </Label>
+        </Pane>
+<!-- CHARACTER 2 -->
+        <Pane fx:id="character2" layoutX="573.0" layoutY="379.0" prefHeight="131.0" prefWidth="86.0">
+            <ImageView fx:id="characterImg2" fitHeight="132.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="characterText2" layoutX="1.0" layoutY="115.0" text="Cost:">
+                <font><Font name="Arial Bold" size="13.0" /></font>
+            </Label>
+        </Pane>
 
 
     </Pane>
@@ -795,6 +834,12 @@
             <ImageView fx:id="tower06" fitHeight="25.0" fitWidth="25.0" layoutX="20.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="tower07" fitHeight="25.0" fitWidth="25.0" layoutX="50.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" />
         </Pane>
+      <Label fx:id="nickname0" layoutY="-27.0" text="You: " textFill="WHITE">
+         <font><Font name="Arial Bold" size="18.0" /></font>
+      </Label>
+      <Label fx:id="coins0" layoutX="475.0" layoutY="-20.0" text="Coins:" textFill="WHITE">
+         <font><Font name="Arial Bold" size="13.0" /></font>
+      </Label>
     </Pane>
 
 
@@ -1026,6 +1071,12 @@
             <ImageView fx:id="tower16" fitHeight="25.0" fitWidth="25.0" layoutX="20.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="tower17" fitHeight="25.0" fitWidth="25.0" layoutX="50.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" />
         </Pane>
+      <Label fx:id="nickname1" layoutX="-60.0" layoutY="40.0" rotate="90.0" text="Player: " textFill="WHITE">
+         <font><Font name="Arial Bold" size="18.0" /></font>
+      </Label>
+      <Label fx:id="coins1" layoutX="-65.0" layoutY="30.0" rotate="90.0" text="Coins:" textFill="WHITE">
+         <font><Font name="Arial Bold" size="13.0" /></font>
+      </Label>
     </Pane>
 
 
@@ -1258,6 +1309,12 @@
             <ImageView fx:id="tower26" fitHeight="25.0" fitWidth="25.0" layoutX="20.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="tower27" fitHeight="25.0" fitWidth="25.0" layoutX="50.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" />
         </Pane>
+      <Label fx:id="nickname2" layoutX="-55.0" layoutY="15.0" rotate="90.0" text="Coins:" textFill="WHITE">
+         <font><Font name="Arial Bold" size="13.0" /></font>
+      </Label>
+      <Label fx:id="coins2" layoutX="-50.0" layoutY="25.0" rotate="90.0" text="Player: " textFill="WHITE">
+         <font><Font name="Arial Bold" size="18.0" /></font>
+      </Label>
     </Pane>
 
 

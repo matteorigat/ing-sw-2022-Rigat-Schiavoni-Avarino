@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.enumeration.Colour;
 import it.polimi.ingsw.model.enumeration.TowerColour;
 import it.polimi.ingsw.model.gameboard.Cloud;
 import it.polimi.ingsw.model.gameboard.Island;
+import it.polimi.ingsw.model.gameboard.characters.CharacterCard;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.Professor;
 import it.polimi.ingsw.model.player.Student;
@@ -27,10 +28,14 @@ public class GameBoardController {
     private Player myPlayer;
 
     int alreadyUsed = 0;
+    @FXML public Label gamephase, currentplayer;
 
-    @FXML public Pane schoolBoard0, schoolBoard1 ,schoolBoard2, cloud0, cloud1, cloud2;
+    @FXML public Pane schoolBoard0, schoolBoard1 ,schoolBoard2, cloud0, cloud1, cloud2, character0, character1, character2;
+    @FXML public ImageView characterImg0, characterImg1, characterImg2;
+    @FXML public Label characterText0, characterText1, characterText2;
     @FXML public Pane island0, island1, island2, island3, island4, island5, island6, island7, island8, island9, island10, island11;
     @FXML public ImageView cloudStudent00, cloudStudent01, cloudStudent02, cloudStudent03, cloudStudent10, cloudStudent11, cloudStudent12, cloudStudent13, cloudStudent20, cloudStudent21, cloudStudent22, cloudStudent23;
+    @FXML public Label nickname0, nickname1, nickname2, coins0, coins1, coins2;
 
     // PLAYER 0
     @FXML public ImageView entrance00, entrance01, entrance02, entrance03, entrance04, entrance05, entrance06, entrance07, entrance08;
@@ -107,13 +112,25 @@ public class GameBoardController {
             cloud2.setVisible(true);
         }
 
+        gamephase.setText("Game phase: " + model.getCurrentPhase().toString());
+        currentplayer.setText("Current player: " + model.getPlayers().get(model.getCurrentPlayer()).getNickname());
+
         alreadyUsed = 0;
         for (Player p : model.getPlayers()) {
             if (p.getNickname().equals(nickname)) {
+                nickname0.setText("You: " + p.getNickname());
+                coins0.setText("Coins: " + p.getCoins());
                 myPlayer = p;
                 updatePlayerSchoolBoard(p, true);
             } else {
                 updatePlayerSchoolBoard(p, false);
+                if(alreadyUsed == 0){
+                    nickname1.setText("Player: " + p.getNickname());
+                    coins1.setText("Coins: " + p.getCoins());
+                } else {
+                    nickname2.setText("Player: " + p.getNickname());
+                    coins2.setText("Coins: " + p.getCoins());
+                }
                 alreadyUsed++;
             }
         }
@@ -203,6 +220,26 @@ public class GameBoardController {
             }
             n++;
         }
+
+        if(model.isExpertMode()){
+            n=0;
+            for(CharacterCard cc: model.getGameBoard().getThreeCharacterCards()){
+                if(n==0){
+                    character0.setVisible(true);
+                    setCharacter(cc.getIndex(), characterImg0);
+                    characterText0.setText("Cost:          " + cc.getCost());
+                } else if(n==1){
+                    character1.setVisible(true);
+                    setCharacter(cc.getIndex(), characterImg1);
+                    characterText1.setText("Cost:          " + cc.getCost());
+                } else if(n==2){
+                    character2.setVisible(true);
+                    setCharacter(cc.getIndex(), characterImg2);
+                    characterText2.setText("Cost:          " + cc.getCost());
+                }
+                n++;
+            }
+        }
     }
 
     public void setGui(ClientAppGUI gui) {
@@ -213,6 +250,9 @@ public class GameBoardController {
         cloud0.setVisible(false);
         cloud1.setVisible(false);
         cloud2.setVisible(false);
+        character0.setVisible(false);
+        character1.setVisible(false);
+        character2.setVisible(false);
     }
 
 
@@ -428,6 +468,34 @@ public class GameBoardController {
             img.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/student_pink.png"))));
         else if (colour.equals(Colour.Blue))
             img.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/student_blue.png"))));
+
+    }
+
+    private void setCharacter(int index, ImageView img) {
+        if(index == 1)
+            img.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/character1.png"))));
+        else if(index == 2)
+            img.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/character2.png"))));
+        else if(index == 3)
+            img.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/character3.png"))));
+        else if(index == 4)
+            img.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/character4.png"))));
+        else if(index == 5)
+            img.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/character5.png"))));
+        else if(index == 6)
+            img.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/character6.png"))));
+        else if(index == 7)
+            img.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/character7.png"))));
+        else if(index == 8)
+            img.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/character8.png"))));
+        else if(index == 9)
+            img.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/character9.png"))));
+        else if(index == 10)
+            img.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/character10.png"))));
+        else if(index == 11)
+            img.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/character11.png"))));
+        else if(index == 12)
+            img.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/character12.png"))));
 
     }
 

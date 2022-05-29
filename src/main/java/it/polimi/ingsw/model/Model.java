@@ -240,8 +240,14 @@ public class Model extends Observable<MoveMessage> implements Serializable {
         return s;
     }
 
+
+
     public void setModelParameters(int numPlayer, boolean expertMode) {
         this.numPlayers = numPlayer;
         this.expertMode = expertMode;
+    }
+
+    public boolean isExpertMode() {
+        return expertMode;
     }
 }
