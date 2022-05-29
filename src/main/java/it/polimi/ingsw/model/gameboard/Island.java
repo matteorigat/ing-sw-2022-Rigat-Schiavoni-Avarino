@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class Island implements Serializable {
 
-    //private int islandIndex;
+    private int islandIndex;
     private int numTower;
     private TowerColour towerColor;
     private ArrayList<Student> students;
@@ -125,5 +125,13 @@ public class Island implements Serializable {
 
     public int getNoEntry() {
         return noEntry;
+    }
+
+    public int getIslandIndex() {
+        return islandIndex;
+    }
+
+    public void setIslandIndex(int islandIndex) {
+        this.islandIndex = islandIndex;
     }
 }

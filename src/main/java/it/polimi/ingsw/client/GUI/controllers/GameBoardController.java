@@ -4,11 +4,13 @@ import it.polimi.ingsw.client.ClientAppGUI;
 import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.model.enumeration.Colour;
 import it.polimi.ingsw.model.enumeration.TowerColour;
+import it.polimi.ingsw.model.gameboard.Island;
 import it.polimi.ingsw.model.player.Player;
 import it.polimi.ingsw.model.player.Professor;
 import it.polimi.ingsw.model.player.Student;
 import it.polimi.ingsw.model.player.Tower;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -27,6 +29,7 @@ public class GameBoardController {
 
     @FXML public Pane schoolBoard0, schoolBoard1 ,schoolBoard2;
 
+    // PLAYER 0
     @FXML public ImageView entrance00, entrance01, entrance02, entrance03, entrance04, entrance05, entrance06, entrance07, entrance08;
     @FXML public ImageView green00, green01, green02, green03, green04, green05, green06, green07, green08, green09;
     @FXML public ImageView red00, red01, red02, red03, red04, red05, red06, red07, red08, red09;
@@ -35,7 +38,7 @@ public class GameBoardController {
     @FXML public ImageView blue00, blue01, blue02, blue03, blue04, blue05, blue06, blue07, blue08, blue09;
     @FXML public ImageView greenProf0, redProf0, yellowProf0, pinkProf0, blueProf0;
     @FXML public ImageView tower00, tower01, tower02, tower03, tower04, tower05, tower06, tower07;
-
+    // PLAYER 1
     @FXML public ImageView entrance10, entrance11, entrance12, entrance13, entrance14, entrance15, entrance16, entrance17, entrance18;
     @FXML public ImageView green10, green11, green12, green13, green14, green15, green16, green17, green18, green19;
     @FXML public ImageView red10, red11, red12, red13, red14, red15, red16, red17, red18, red19;
@@ -44,9 +47,7 @@ public class GameBoardController {
     @FXML public ImageView blue10, blue11, blue12, blue13, blue14, blue15, blue16, blue17, blue18, blue19;
     @FXML public ImageView greenProf1, redProf1, yellowProf1, pinkProf1, blueProf1;
     @FXML public ImageView tower10, tower11, tower12, tower13, tower14, tower15, tower16, tower17;
-
-
-
+    // PLAYER 2
     @FXML public ImageView entrance20, entrance21, entrance22, entrance23, entrance24, entrance25, entrance26, entrance27, entrance28;
     @FXML public ImageView green20, green21, green22, green23, green24, green25, green26, green27, green28, green29;
     @FXML public ImageView red20, red21, red22, red23, red24, red25, red26, red27, red28, red29;
@@ -56,6 +57,9 @@ public class GameBoardController {
     @FXML public ImageView greenProf2, redProf2, yellowProf2, pinkProf2, blueProf2;
     @FXML public ImageView tower20, tower21, tower22, tower23, tower24, tower25, tower26, tower27;
 
+
+    @FXML public ImageView greenIsland0, redIsland0, yellowIsland0, pinkIsland0, blueIsland0, towerIsland0;
+    @FXML public Label greenText0, redText0, yellowText0, pinkText0, blueText0, towerText0;
 
     @FXML
     protected void diningRoomGreen() {}
@@ -83,6 +87,80 @@ public class GameBoardController {
             } else {
                 updatePlayerSchoolBoard(p, false);
                 alreadyUsed++;
+            }
+        }
+
+        for(Island i : model.getGameBoard().getIslands()){
+            int green=0, red=0, yellow=0, pink=0, blue=0;
+            if(i.getIslandIndex() == 0){
+                for(Student s: i.getStudents()){
+                    if(s.getColour().ordinal() == 0)
+                        green++;
+                    else if (s.getColour().ordinal() == 1)
+                        red++;
+                    else if (s.getColour().ordinal() == 2)
+                        yellow++;
+                    else if (s.getColour().ordinal() == 3)
+                        pink++;
+                    else if (s.getColour().ordinal() == 4)
+                        blue++;
+                }
+                if(green == 0){
+                    greenIsland0.setVisible(false);
+                    greenText0.setVisible(false);
+                } else {
+                    greenIsland0.setVisible(true);
+                    greenText0.setVisible(true);
+                    greenText0.setText(String.valueOf(green));
+                }
+                if(red == 0){
+                    redIsland0.setVisible(false);
+                    redText0.setVisible(false);
+                } else {
+                    redIsland0.setVisible(true);
+                    redText0.setVisible(true);
+                    redText0.setText(String.valueOf(red));
+                }
+                if(yellow == 0){
+                    yellowIsland0.setVisible(false);
+                    yellowText0.setVisible(false);
+                } else {
+                    yellowIsland0.setVisible(true);
+                    yellowText0.setVisible(true);
+                    yellowText0.setText(String.valueOf(yellow));
+                }
+                if(pink == 0){
+                    pinkIsland0.setVisible(false);
+                    pinkText0.setVisible(false);
+                } else {
+                    pinkIsland0.setVisible(true);
+                    pinkText0.setVisible(true);
+                    pinkText0.setText(String.valueOf(pink));
+                }
+                if(blue == 0){
+                    blueIsland0.setVisible(false);
+                    blueText0.setVisible(false);
+                } else {
+                    blueIsland0.setVisible(true);
+                    blueText0.setVisible(true);
+                    blueText0.setText(String.valueOf(blue));
+                }
+
+                if(i.getNumTower() == 0){
+                    towerIsland0.setImage(null);
+                    towerText0.setVisible(false);
+                } else {
+                    if(i.getTowerColor().equals(TowerColour.Black))
+                        towerIsland0.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/black_tower.png"))));
+                    else if (i.getTowerColor().equals(TowerColour.White)) {
+                        towerIsland0.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/white_tower.png"))));
+                    } else if (i.getTowerColor().equals(TowerColour.Grey)) {
+                        towerIsland0.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/grey_tower.png"))));
+                    }
+                    towerText0.setVisible(true);
+                    towerText0.setText(String.valueOf(i.getNumTower()));
+                }
+
             }
         }
     }

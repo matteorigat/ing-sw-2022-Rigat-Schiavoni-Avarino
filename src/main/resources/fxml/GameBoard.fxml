@@ -16,42 +16,42 @@
 
       <!-- ISLANDS AND CLOUDS -->
       <Pane fx:id="Board" layoutX="232.0" prefHeight="666.0" prefWidth="976.0">
-          <Pane fx:id="island1" layoutX="138.0" layoutY="40.0" prefHeight="150.0" prefWidth="150.0">
+          <Pane fx:id="island0" layoutX="138.0" layoutY="40.0" prefHeight="150.0" prefWidth="150.0">
                   <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                       <Image url="@../Graphics/island1.png" />
                   </ImageView>
-                  <ImageView fx:id="towerIsland1" fitHeight="25.0" fitWidth="25.0" layoutX="63.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="towerText1" alignment="CENTER" layoutX="63.0" layoutY="28.0" prefHeight="25.0" prefWidth="25.0" textFill="RED">
+                  <ImageView fx:id="towerIsland0" fitHeight="25.0" fitWidth="25.0" layoutX="63.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="towerText0" alignment="CENTER" layoutX="63.0" layoutY="28.0" prefHeight="25.0" prefWidth="25.0" textFill="RED">
                       <font><Font size="12.0" /></font>
                   </Label>
-                  <ImageView fitHeight="23.0" fitWidth="20.0" layoutX="26.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="greenIsland0" fitHeight="23.0" fitWidth="20.0" layoutX="26.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
                       <Image url="@../Graphics/student_green.png" />
                   </ImageView>
-                  <Label fx:id="greenText1" alignment="CENTER" layoutX="26.0" layoutY="63.0" prefHeight="20.0" prefWidth="20.0" textFill="WHITE">
+                  <Label fx:id="greenText0" alignment="CENTER" layoutX="26.0" layoutY="63.0" prefHeight="20.0" prefWidth="20.0" textFill="WHITE">
                       <font><Font size="12.0" /></font>
                   </Label>
-                  <ImageView fitHeight="23.0" fitWidth="20.0" layoutX="66.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="redIsland0" fitHeight="23.0" fitWidth="20.0" layoutX="66.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
                       <Image url="@../Graphics/student_red.png" />
                   </ImageView>
-                  <Label fx:id="redText1" alignment="CENTER" layoutX="66.0" layoutY="63.0" prefHeight="20.0" prefWidth="20.0" textFill="WHITE">
+                  <Label fx:id="redText0" alignment="CENTER" layoutX="66.0" layoutY="63.0" prefHeight="20.0" prefWidth="20.0" textFill="WHITE">
                       <font><Font size="12.0" /></font>
                   </Label>
-                  <ImageView fitHeight="23.0" fitWidth="20.0" layoutX="104.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="yellowIsland0" fitHeight="23.0" fitWidth="20.0" layoutX="104.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
                       <Image url="@../Graphics/student_yellow.png" />
                   </ImageView>
-                  <Label fx:id="yellowText1" alignment="CENTER" layoutX="104.0" layoutY="63.0" prefHeight="20.0" prefWidth="20.0" textFill="WHITE">
+                  <Label fx:id="yellowText0" alignment="CENTER" layoutX="104.0" layoutY="63.0" prefHeight="20.0" prefWidth="20.0" textFill="WHITE">
                       <font><Font size="12.0" /></font>
                   </Label>
-                  <ImageView fitHeight="23.0" fitWidth="20.0" layoutX="43.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="pinkIsland0" fitHeight="23.0" fitWidth="20.0" layoutX="43.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
                       <Image url="@../Graphics/student_pink.png" />
                   </ImageView>
-                  <Label fx:id="pinkText1" alignment="CENTER" layoutX="43.0" layoutY="91.0" prefHeight="20.0" prefWidth="20.0" textFill="WHITE">
+                  <Label fx:id="pinkText0" alignment="CENTER" layoutX="43.0" layoutY="91.0" prefHeight="20.0" prefWidth="20.0" textFill="WHITE">
                       <font><Font size="12.0" /></font>
                   </Label>
-                  <ImageView fitHeight="23.0" fitWidth="20.0" layoutX="84.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="blueIsland0" fitHeight="23.0" fitWidth="20.0" layoutX="84.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
                       <Image url="@../Graphics/student_blue.png" />
                   </ImageView>
-                  <Label fx:id="blueText1" alignment="CENTER" layoutX="84.0" layoutY="91.0" prefHeight="20.0" prefWidth="20.0" textFill="WHITE">
+                  <Label fx:id="blueText0" alignment="CENTER" layoutX="84.0" layoutY="91.0" prefHeight="20.0" prefWidth="20.0" textFill="WHITE">
                       <font>
                           <Font size="12.0" />
                       </font>
