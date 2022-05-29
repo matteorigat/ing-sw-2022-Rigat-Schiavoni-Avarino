@@ -1,7 +1,6 @@
 package it.polimi.ingsw.client.GUI.controllers;
 
 import it.polimi.ingsw.client.ClientAppGUI;
-import it.polimi.ingsw.client.GUI.ClientGUI;
 import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.model.enumeration.Colour;
 import it.polimi.ingsw.model.enumeration.TowerColour;
@@ -10,10 +9,8 @@ import it.polimi.ingsw.model.player.Professor;
 import it.polimi.ingsw.model.player.Student;
 import it.polimi.ingsw.model.player.Tower;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseDragEvent;
 import javafx.scene.layout.Pane;
 
 import java.util.Objects;
@@ -28,7 +25,7 @@ public class GameBoardController {
 
     int alreadyUsed = 0;
 
-    @FXML public Pane schoolBoard3;
+    @FXML public Pane schoolBoard0, schoolBoard1 ,schoolBoard2;
 
     @FXML public ImageView entrance00, entrance01, entrance02, entrance03, entrance04, entrance05, entrance06, entrance07, entrance08;
     @FXML public ImageView green00, green01, green02, green03, green04, green05, green06, green07, green08, green09;
@@ -72,8 +69,11 @@ public class GameBoardController {
     protected void diningRoomBlue() {}
 
     private void update() {
-        if(model.getPlayers().size() < 3)
-            schoolBoard3.setVisible(false);
+        schoolBoard0.setVisible(true);
+        schoolBoard1.setVisible(true);
+        if(model.getPlayers().size() > 2)
+            schoolBoard2.setVisible(true);
+
 
         alreadyUsed = 0;
         for (Player p : model.getPlayers()) {
@@ -89,6 +89,9 @@ public class GameBoardController {
 
     public void setGui(ClientAppGUI gui) {
         this.gui = gui;
+        schoolBoard0.setVisible(false);
+        schoolBoard1.setVisible(false);
+        schoolBoard2.setVisible(false);
     }
 
 
