@@ -2,6 +2,8 @@ package it.polimi.ingsw.model.player;
 
 import java.io.Serializable;
 
+
+/** AssistantCard class defines every assistant card with the integers value and movements attributes */
 public class AssistantCard implements Serializable {
 
     private int value;

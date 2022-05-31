@@ -1,6 +1,6 @@
 package it.polimi.ingsw.model;
 
-
+/** Class parameters permits us to set numPlayers,numClouds,numCloudStudents,numTowers,gameMode*/
 public class Parameters {
     public static int numPlayers;
     public static int numClouds;

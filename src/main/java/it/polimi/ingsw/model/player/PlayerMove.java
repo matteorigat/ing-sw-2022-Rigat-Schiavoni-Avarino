@@ -3,6 +3,10 @@ package it.polimi.ingsw.model.player;
 import it.polimi.ingsw.view.View;
 
 
+/** Player move class permits us to control every moves coming from the player --> client-side
+ * - every move gets at most 8 integer parameters (it depends on the type of move),
+ * player "id" parameter to know who is making te move
+ * and view parameter to update the global view   */
 public class PlayerMove {
 
     private final int param1;

@@ -5,7 +5,7 @@ import it.polimi.ingsw.model.enumeration.Colour;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-
+/** Class Student has a Constructor, a getter and an override tostring method which returns a coloured circle of the corresponding color */
 public class Student implements Serializable {
     private Colour colour;
 

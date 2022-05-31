@@ -36,8 +36,7 @@ public class DiningRoom implements Serializable {
 
      */
 
-
-    //variante con monete, se ritorna true il giocatore guadagna una moneta
+    /** add student method adds a student (whenever it's possible) and returns a boolean which is true if the player gains a coin,otherwise it's false  */
     public boolean addStudent(Student s){
         if(s.getColour().equals(Colour.Green) && greenStudents.size() < 10){
             greenStudents.add(s);
@@ -68,6 +67,7 @@ public class DiningRoom implements Serializable {
     }
 
 
+    /** this method returns the number of the students selected */
     public int numOfStudentByColor(Colour color){
         if(color.equals(Colour.Green)){
             return greenStudents.size();
@@ -83,6 +83,7 @@ public class DiningRoom implements Serializable {
         return -1;//non dovrebbe mai succedere
     }
 
+    /** this method remove three students with the same colour*/
     public ArrayList<Student> removeThreeStudents(Colour color){
         ArrayList<Student> stud = new ArrayList<>();
         int num = 3;
@@ -111,6 +112,7 @@ public class DiningRoom implements Serializable {
         return stud;
     }
 
+    /** this method remove one student by the colour */
     public void removeOneStudent(int colorIndex){
         if(colorIndex == 0){
             greenStudents.remove(0);

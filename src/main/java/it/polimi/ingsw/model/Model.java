@@ -40,6 +40,7 @@ public class Model extends Observable<MoveMessage> implements Serializable {
         this.playerPhaseCounter = 0;
     }
 
+
     public void performMove(Player player){
         notify(new MoveMessage(this, player));
     }
@@ -96,6 +97,8 @@ public class Model extends Observable<MoveMessage> implements Serializable {
         this.playerPhaseCounter = playerPhaseCounter;
     }
 
+    /**Class print is used to show the status of the game (CLI)
+     it shows gameboard,schoolboard of every players and islands.*/
     public void print(String nickname){
         System.out.println("\n-------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println("");
@@ -185,7 +188,7 @@ public class Model extends Observable<MoveMessage> implements Serializable {
         //System.out.println("Mn on: " + gameBoard.getMotherNature());
     }
 
-
+    /** colours settings */
     private String textColor(Colour colour){
         int colorInt = colour.ordinal();
 

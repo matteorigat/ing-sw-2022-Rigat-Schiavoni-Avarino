@@ -6,7 +6,8 @@ import it.polimi.ingsw.observer.Observer;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-
+/** Player Class defines every player setup:
+ * so it has a schoolboard, an assistant deck, a name, and coins */
 public class Player implements Serializable {
     private int index;
     private TowerColour towerColour;
