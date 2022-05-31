@@ -624,7 +624,7 @@
 
 
     <!-- PLAYER SCHOOLBOARD -->
-    <Pane fx:id="schoolBoard0" layoutX="474.0" layoutY="667.0" prefHeight="237.0" prefWidth="541.0">
+    <Pane fx:id="schoolBoard0" layoutX="450.0" layoutY="667.0" prefHeight="237.0" prefWidth="541.0">
         <ImageView fitHeight="235.0" fitWidth="567.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../Graphics/plancia.png" />
         </ImageView>
@@ -1316,6 +1316,56 @@
          <font><Font name="Arial Bold" size="18.0" /></font>
       </Label>
     </Pane>
+   <ImageView fitHeight="124.0" fitWidth="81.0" layoutX="5.0" layoutY="775.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../Graphics/Assistente (1).png" />
+      </image>
+   </ImageView>
+   <ImageView fitHeight="124.0" fitWidth="81.0" layoutX="90.0" layoutY="775.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../Graphics/Assistente (2).png" />
+      </image>
+   </ImageView>
+   <ImageView fitHeight="124.0" fitWidth="81.0" layoutX="175.0" layoutY="775.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../Graphics/Assistente (3).png" />
+      </image>
+   </ImageView>
+   <ImageView fitHeight="124.0" fitWidth="81.0" layoutX="260.0" layoutY="775.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../Graphics/Assistente (4).png" />
+      </image>
+   </ImageView>
+   <ImageView fitHeight="124.0" fitWidth="81.0" layoutX="345.0" layoutY="775.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../Graphics/Assistente (5).png" />
+      </image>
+   </ImageView>
+   <ImageView fitHeight="124.0" fitWidth="81.0" layoutX="1014.0" layoutY="775.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../Graphics/Assistente (6).png" />
+      </image>
+   </ImageView>
+   <ImageView fitHeight="124.0" fitWidth="81.0" layoutX="1099.0" layoutY="775.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../Graphics/Assistente (7).png" />
+      </image>
+   </ImageView>
+   <ImageView fitHeight="124.0" fitWidth="81.0" layoutX="1184.0" layoutY="775.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../Graphics/Assistente (8).png" />
+      </image>
+   </ImageView>
+   <ImageView fitHeight="124.0" fitWidth="81.0" layoutX="1269.0" layoutY="775.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../Graphics/Assistente (9).png" />
+      </image>
+   </ImageView>
+   <ImageView fitHeight="124.0" fitWidth="81.0" layoutX="1354.0" layoutY="775.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../Graphics/Assistente (10).png" />
+      </image>
+   </ImageView>
 
 
 
