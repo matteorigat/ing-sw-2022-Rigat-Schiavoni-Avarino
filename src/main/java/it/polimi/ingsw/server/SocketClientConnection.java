@@ -117,17 +117,14 @@ public class SocketClientConnection extends Observable<String> implements Client
                 if (server.getWaitingConnection().size() == 1){
                     server.setChooseMode(true);
                     numPlayers = 0;
-                    while(numPlayers != 2 && numPlayers != 3){
+                    do{
                         send("How many players?");
                         read = in.readObject();
-                        if(read.equals("")){
+                        if(!read.equals("2") && !read.equals("3")){
                             send("Error, please write a correct number of players");
-                        }else{
-                            numPlayers = Integer.parseInt((String) read);
-                            if(numPlayers != 2 & numPlayers != 3)
-                                send("Can't create a match with " + numPlayers + " player\n");
                         }
-                    }
+                    } while(!read.equals("2") && !read.equals("3"));
+                    numPlayers = Integer.parseInt((String) read);
                     boolean wrongInput;
                     String read1;
                     do {
