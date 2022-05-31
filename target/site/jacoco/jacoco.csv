@@ -33,11 +33,11 @@ GC18,it.polimi.ingsw,Eriantys,64,0,15,0,18,0,11,0,2,0
 GC18,it.polimi.ingsw.observer,Observable,52,8,2,0,14,2,4,1,3,1
 GC18,it.polimi.ingsw.client,ClientAppCLI,35,0,2,0,12,0,3,0,2,0
 GC18,it.polimi.ingsw.client,ClientAppGUI.new EventHandler() {...},10,0,0,0,4,0,2,0,2,0
-GC18,it.polimi.ingsw.client,ClientAppGUI,235,0,2,0,51,0,11,0,10,0
+GC18,it.polimi.ingsw.client,ClientAppGUI,238,0,2,0,52,0,12,0,11,0
 GC18,it.polimi.ingsw.model,Parameters,3,30,0,2,1,14,1,3,1,2
-GC18,it.polimi.ingsw.model,Model,517,67,68,0,107,25,44,13,6,13
+GC18,it.polimi.ingsw.model,Model,520,67,68,0,108,25,45,13,7,13
 GC18,it.polimi.ingsw.client.GUI,ClientGUI.new Runnable() {...},35,0,0,0,9,0,2,0,2,0
-GC18,it.polimi.ingsw.client.GUI,ClientGUI.new Runnable() {...},123,0,20,0,22,0,16,0,6,0
+GC18,it.polimi.ingsw.client.GUI,ClientGUI.new Runnable() {...},137,0,20,0,23,0,17,0,7,0
 GC18,it.polimi.ingsw.client.GUI,ClientGUI,133,0,0,0,39,0,9,0,9,0
 GC18,it.polimi.ingsw.model.player,MoveMessage,15,0,0,0,6,0,3,0,3,0
 GC18,it.polimi.ingsw.model.player,Professor,0,9,0,0,0,4,0,2,0,2
@@ -53,10 +53,10 @@ GC18,it.polimi.ingsw.client.CLI,ClientCLI.new Runnable() {...},61,0,8,0,15,0,6,0
 GC18,it.polimi.ingsw.client.CLI,ClientCLI,108,0,0,0,33,0,6,0,6,0
 GC18,it.polimi.ingsw.model.gameboard,Cloud,0,63,0,4,0,17,0,8,0,6
 GC18,it.polimi.ingsw.model.gameboard,CharacterDeck,0,68,0,2,0,14,0,4,0,3
-GC18,it.polimi.ingsw.model.gameboard,Island,8,236,5,25,1,50,5,22,0,12
-GC18,it.polimi.ingsw.model.gameboard,GameBoard,30,209,8,16,6,46,6,20,0,14
+GC18,it.polimi.ingsw.model.gameboard,Island,11,240,5,25,2,52,6,23,1,13
+GC18,it.polimi.ingsw.model.gameboard,GameBoard,30,212,8,16,6,47,6,20,0,14
 GC18,it.polimi.ingsw.model.gameboard,Bag,0,51,0,4,0,14,0,6,0,4
-GC18,it.polimi.ingsw.client.GUI.controllers,GameBoardController,20,0,0,0,8,0,4,0,4,0
+GC18,it.polimi.ingsw.client.GUI.controllers,GameBoardController,5600,0,841,0,1254,0,572,0,48,0
 GC18,it.polimi.ingsw.client.GUI.controllers,NicknameController,19,0,0,0,7,0,4,0,4,0
-GC18,it.polimi.ingsw.client.GUI.controllers,MainMenuController,39,0,0,0,11,0,4,0,4,0
+GC18,it.polimi.ingsw.client.GUI.controllers,MainMenuController,53,0,2,0,13,0,5,0,4,0
 GC18,it.polimi.ingsw.client.GUI.controllers,FirstPlayerController,51,0,4,0,17,0,8,0,6,0

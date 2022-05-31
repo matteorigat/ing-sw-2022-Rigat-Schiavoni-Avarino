@@ -65,72 +65,73 @@ public class ClientGUI implements Runnable {
 <span class="nc" id="L65">                                    Platform.runLater(()-&gt; gui.changeStage(&quot;Loading&quot;));</span>
                             }
 <span class="nc bnc" id="L67" title="All 2 branches missed.">                            else if (((String) inputObject).contains(&quot;opponent&quot;)){</span>
-<span class="nc" id="L68">                                Platform.runLater(()-&gt; gui.changeStage(&quot;GameBoard&quot;));</span>
+<span class="nc" id="L68">                                gui.getGameboardController().setNickname(nickname);</span>
+<span class="nc" id="L69">                                Platform.runLater(()-&gt; gui.changeStage(&quot;GameBoard&quot;));</span>
                             }
-<span class="nc bnc" id="L70" title="All 2 branches missed.">                        } else if (inputObject instanceof Model){</span>
-<span class="nc" id="L71">                            ((Model)inputObject).print(nickname);</span>
+<span class="nc bnc" id="L71" title="All 2 branches missed.">                        } else if (inputObject instanceof Model){</span>
+<span class="nc" id="L72">                            Platform.runLater(()-&gt; gui.getGameboardController().setModel((Model)inputObject));</span>
                         } else {
-<span class="nc" id="L73">                            throw new IllegalArgumentException();</span>
+<span class="nc" id="L74">                            throw new IllegalArgumentException();</span>
                         }
-<span class="nc" id="L75">                    }</span>
-<span class="nc" id="L76">                } catch (Exception e){</span>
-<span class="nc" id="L77">                    setActive(false);</span>
-<span class="nc" id="L78">                }</span>
-<span class="nc" id="L79">            }</span>
+<span class="nc" id="L76">                    }</span>
+<span class="nc" id="L77">                } catch (Exception e){</span>
+<span class="nc" id="L78">                    setActive(false);</span>
+<span class="nc" id="L79">                }</span>
+<span class="nc" id="L80">            }</span>
         });
-<span class="nc" id="L81">        t.start();</span>
-<span class="nc" id="L82">        return t;</span>
+<span class="nc" id="L82">        t.start();</span>
+<span class="nc" id="L83">        return t;</span>
     }
 
     public Thread asyncWriteToSocket(String message){
-<span class="nc" id="L86">        Thread t = new Thread(new Runnable() {</span>
+<span class="nc" id="L87">        Thread t = new Thread(new Runnable() {</span>
             @Override
             public void run() {
                 try {
-<span class="nc" id="L90">                    synchronized (ip){</span>
-<span class="nc" id="L91">                        socketOut.writeObject(message);</span>
-<span class="nc" id="L92">                        socketOut.flush();</span>
-<span class="nc" id="L93">                    }</span>
-<span class="nc" id="L94">                }catch(Exception e){</span>
-<span class="nc" id="L95">                    setActive(false);</span>
-<span class="nc" id="L96">                }</span>
-<span class="nc" id="L97">            }</span>
+<span class="nc" id="L91">                    synchronized (ip){</span>
+<span class="nc" id="L92">                        socketOut.writeObject(message);</span>
+<span class="nc" id="L93">                        socketOut.flush();</span>
+<span class="nc" id="L94">                    }</span>
+<span class="nc" id="L95">                }catch(Exception e){</span>
+<span class="nc" id="L96">                    setActive(false);</span>
+<span class="nc" id="L97">                }</span>
+<span class="nc" id="L98">            }</span>
         });
-<span class="nc" id="L99">        t.start();</span>
-<span class="nc" id="L100">        return t;</span>
+<span class="nc" id="L100">        t.start();</span>
+<span class="nc" id="L101">        return t;</span>
     }
 
     @Override
     public void run() {
         try {
-<span class="nc" id="L106">            Socket socket = new Socket(ip, port);</span>
-<span class="nc" id="L107">            Platform.runLater(()-&gt; gui.changeStage(&quot;Nickname&quot;));</span>
-<span class="nc" id="L108">            System.out.println(&quot;Connection established&quot;);</span>
+<span class="nc" id="L107">            Socket socket = new Socket(ip, port);</span>
+<span class="nc" id="L108">            Platform.runLater(()-&gt; gui.changeStage(&quot;Nickname&quot;));</span>
+<span class="nc" id="L109">            System.out.println(&quot;Connection established&quot;);</span>
 
-<span class="nc" id="L110">            ObjectOutputStream socketOut = new ObjectOutputStream(socket.getOutputStream());</span>
-<span class="nc" id="L111">            this.socketOut = socketOut;</span>
-<span class="nc" id="L112">            ObjectInputStream socketIn = new ObjectInputStream(socket.getInputStream());</span>
+<span class="nc" id="L111">            ObjectOutputStream socketOut = new ObjectOutputStream(socket.getOutputStream());</span>
+<span class="nc" id="L112">            this.socketOut = socketOut;</span>
+<span class="nc" id="L113">            ObjectInputStream socketIn = new ObjectInputStream(socket.getInputStream());</span>
 
             try{
-<span class="nc" id="L115">                Thread t0 = asyncReadFromSocket(socketIn, socketOut);</span>
+<span class="nc" id="L116">                Thread t0 = asyncReadFromSocket(socketIn, socketOut);</span>
 
-<span class="nc" id="L117">                t0.join();</span>
-<span class="nc" id="L118">                System.in.close();</span>
-<span class="nc" id="L119">                System.out.println(&quot;Connection closed!&quot;);</span>
+<span class="nc" id="L118">                t0.join();</span>
+<span class="nc" id="L119">                System.in.close();</span>
+<span class="nc" id="L120">                System.out.println(&quot;Connection closed!&quot;);</span>
 
-<span class="nc" id="L121">            } catch(InterruptedException | NoSuchElementException | ConnectionClosedException e){</span>
-<span class="nc" id="L122">                System.out.println(&quot;Connection closed from the client side&quot;);</span>
+<span class="nc" id="L122">            } catch(InterruptedException | NoSuchElementException | ConnectionClosedException e){</span>
+<span class="nc" id="L123">                System.out.println(&quot;Connection closed from the client side&quot;);</span>
             } finally {
-<span class="nc" id="L124">                socketIn.close();</span>
-<span class="nc" id="L125">                socketOut.close();</span>
-<span class="nc" id="L126">                socket.close();</span>
+<span class="nc" id="L125">                socketIn.close();</span>
+<span class="nc" id="L126">                socketOut.close();</span>
+<span class="nc" id="L127">                socket.close();</span>
             }
-<span class="nc" id="L128">        } catch (IOException e) {</span>
-<span class="nc" id="L129">            Platform.runLater(()-&gt; gui.getMainMenuController().clearIpPort());</span>
-<span class="nc" id="L130">            throw new RuntimeException(e);</span>
-<span class="nc" id="L131">        }</span>
+<span class="nc" id="L129">        } catch (IOException e) {</span>
+<span class="nc" id="L130">            Platform.runLater(()-&gt; gui.getMainMenuController().clearIpPort());</span>
+<span class="nc" id="L131">            throw new RuntimeException(e);</span>
+<span class="nc" id="L132">        }</span>
 
-<span class="nc" id="L133">    }</span>
+<span class="nc" id="L134">    }</span>
 }
 
 

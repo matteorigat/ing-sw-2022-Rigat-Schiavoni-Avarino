@@ -10,8 +10,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Island implements Serializable {
-   // private int islandRank;    //numero di isole unite
-    //private int islandIndex;
+
+    private int islandIndex;
     private int numTower;
     private TowerColour towerColor;
     private ArrayList&lt;Student&gt; students;
@@ -126,5 +126,13 @@ public class Island implements Serializable {
     public int getNoEntry() {
 <span class="fc" id="L127">        return noEntry;</span>
     }
+
+    public int getIslandIndex() {
+<span class="nc" id="L131">        return islandIndex;</span>
+    }
+
+    public void setIslandIndex(int islandIndex) {
+<span class="fc" id="L135">        this.islandIndex = islandIndex;</span>
+<span class="fc" id="L136">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

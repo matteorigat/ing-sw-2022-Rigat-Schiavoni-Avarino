@@ -14,21 +14,26 @@ import javafx.scene.control.TextField;
 
     @FXML
     protected void onButtonClick() {
+        ClientGUI clientGUI;
 
-<span class="nc" id="L18">        ClientGUI clientGUI = new ClientGUI(ip.getText(), Integer.parseInt(port.getText()), gui); //192.168.100.10</span>
-<span class="nc" id="L19">        Thread clientThread = new Thread(clientGUI);</span>
-<span class="nc" id="L20">        clientThread.start();</span>
-<span class="nc" id="L21">        gui.setClientGUI(clientGUI);</span>
+<span class="nc bnc" id="L19" title="All 2 branches missed.">        if(ip.getText() == &quot;&quot;)</span>
+<span class="nc" id="L20">            clientGUI = new ClientGUI(&quot;127.0.0.1&quot;, 1337, gui);</span>
+        else
+<span class="nc" id="L22">            clientGUI = new ClientGUI(ip.getText(), Integer.parseInt(port.getText()), gui); //192.168.100.10</span>
 
-<span class="nc" id="L23">    }</span>
+<span class="nc" id="L24">        Thread clientThread = new Thread(clientGUI);</span>
+<span class="nc" id="L25">        clientThread.start();</span>
+<span class="nc" id="L26">        gui.setClientGUI(clientGUI);</span>
 
-    public void clearIpPort() {
-<span class="nc" id="L26">        this.ip.clear();</span>
-<span class="nc" id="L27">        this.port.clear();</span>
 <span class="nc" id="L28">    }</span>
 
+    public void clearIpPort() {
+<span class="nc" id="L31">        this.ip.clear();</span>
+<span class="nc" id="L32">        this.port.clear();</span>
+<span class="nc" id="L33">    }</span>
+
     public void setGui(ClientAppGUI gui) {
-<span class="nc" id="L31">        this.gui = gui;</span>
-<span class="nc" id="L32">    }</span>
+<span class="nc" id="L36">        this.gui = gui;</span>
+<span class="nc" id="L37">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

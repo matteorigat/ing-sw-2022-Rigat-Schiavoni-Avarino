@@ -240,9 +240,15 @@ public class Model extends Observable&lt;MoveMessage&gt; implements Serializable
 <span class="nc" id="L240">        return s;</span>
     }
 
+
+
     public void setModelParameters(int numPlayer, boolean expertMode) {
-<span class="fc" id="L244">        this.numPlayers = numPlayer;</span>
-<span class="fc" id="L245">        this.expertMode = expertMode;</span>
-<span class="fc" id="L246">    }</span>
+<span class="fc" id="L246">        this.numPlayers = numPlayer;</span>
+<span class="fc" id="L247">        this.expertMode = expertMode;</span>
+<span class="fc" id="L248">    }</span>
+
+    public boolean isExpertMode() {
+<span class="nc" id="L251">        return expertMode;</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

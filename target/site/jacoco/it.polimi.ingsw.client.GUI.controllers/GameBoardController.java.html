@@ -1,33 +1,1729 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GameBoardController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">GC18</a> &gt; <a href="index.source.html" class="el_package">it.polimi.ingsw.client.GUI.controllers</a> &gt; <span class="el_source">GameBoardController.java</span></div><h1>GameBoardController.java</h1><pre class="source lang-java linenums">package it.polimi.ingsw.client.GUI.controllers;
 
 import it.polimi.ingsw.client.ClientAppGUI;
-import it.polimi.ingsw.client.GUI.ClientGUI;
+import it.polimi.ingsw.model.Model;
+import it.polimi.ingsw.model.enumeration.Colour;
+import it.polimi.ingsw.model.enumeration.TowerColour;
+import it.polimi.ingsw.model.gameboard.Cloud;
+import it.polimi.ingsw.model.gameboard.Island;
+import it.polimi.ingsw.model.gameboard.characters.CharacterCard;
+import it.polimi.ingsw.model.player.Player;
+import it.polimi.ingsw.model.player.Professor;
+import it.polimi.ingsw.model.player.Student;
+import it.polimi.ingsw.model.player.Tower;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
-import javafx.scene.input.MouseDragEvent;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import java.util.Objects;
 
-<span class="nc" id="L9">public class GameBoardController {</span>
+<span class="nc" id="L21">public class GameBoardController {</span>
+
 
     private ClientAppGUI gui;
+    private Colour choice;
+    private Model model;
+    private String nickname;
+    private Player myPlayer;
 
-    private int dragItem;
+<span class="nc" id="L30">    int alreadyUsed = 0;</span>
+    @FXML public Label gamephase, currentplayer;
+
+    @FXML public Pane schoolBoard0, schoolBoard1 ,schoolBoard2, cloud0, cloud1, cloud2, character0, character1, character2;
+    @FXML public ImageView characterImg0, characterImg1, characterImg2;
+    @FXML public Label characterText0, characterText1, characterText2;
+    @FXML public Pane island0, island1, island2, island3, island4, island5, island6, island7, island8, island9, island10, island11;
+    @FXML public ImageView cloudStudent00, cloudStudent01, cloudStudent02, cloudStudent03, cloudStudent10, cloudStudent11, cloudStudent12, cloudStudent13, cloudStudent20, cloudStudent21, cloudStudent22, cloudStudent23;
+    @FXML public Label nickname0, nickname1, nickname2, coins0, coins1, coins2;
+
+    // PLAYER 0
+    @FXML public ImageView entrance00, entrance01, entrance02, entrance03, entrance04, entrance05, entrance06, entrance07, entrance08;
+    @FXML public ImageView green00, green01, green02, green03, green04, green05, green06, green07, green08, green09;
+    @FXML public ImageView red00, red01, red02, red03, red04, red05, red06, red07, red08, red09;
+    @FXML public ImageView yellow00, yellow01, yellow02, yellow03, yellow04, yellow05, yellow06, yellow07, yellow08, yellow09;
+    @FXML public ImageView pink00, pink01, pink02, pink03, pink04, pink05, pink06, pink07, pink08, pink09;
+    @FXML public ImageView blue00, blue01, blue02, blue03, blue04, blue05, blue06, blue07, blue08, blue09;
+    @FXML public ImageView greenProf0, redProf0, yellowProf0, pinkProf0, blueProf0;
+    @FXML public ImageView tower00, tower01, tower02, tower03, tower04, tower05, tower06, tower07;
+    // PLAYER 1
+    @FXML public ImageView entrance10, entrance11, entrance12, entrance13, entrance14, entrance15, entrance16, entrance17, entrance18;
+    @FXML public ImageView green10, green11, green12, green13, green14, green15, green16, green17, green18, green19;
+    @FXML public ImageView red10, red11, red12, red13, red14, red15, red16, red17, red18, red19;
+    @FXML public ImageView yellow10, yellow11, yellow12, yellow13, yellow14, yellow15, yellow16, yellow17, yellow18, yellow19;
+    @FXML public ImageView pink10, pink11, pink12, pink13, pink14, pink15, pink16, pink17, pink18, pink19;
+    @FXML public ImageView blue10, blue11, blue12, blue13, blue14, blue15, blue16, blue17, blue18, blue19;
+    @FXML public ImageView greenProf1, redProf1, yellowProf1, pinkProf1, blueProf1;
+    @FXML public ImageView tower10, tower11, tower12, tower13, tower14, tower15, tower16, tower17;
+    // PLAYER 2
+    @FXML public ImageView entrance20, entrance21, entrance22, entrance23, entrance24, entrance25, entrance26, entrance27, entrance28;
+    @FXML public ImageView green20, green21, green22, green23, green24, green25, green26, green27, green28, green29;
+    @FXML public ImageView red20, red21, red22, red23, red24, red25, red26, red27, red28, red29;
+    @FXML public ImageView yellow20, yellow21, yellow22, yellow23, yellow24, yellow25, yellow26, yellow27, yellow28, yellow29;
+    @FXML public ImageView pink20, pink21, pink22, pink23, pink24, pink25, pink26, pink27, pink28, pink29;
+    @FXML public ImageView blue20, blue21, blue22, blue23, blue24, blue25, blue26, blue27, blue28, blue29;
+    @FXML public ImageView greenProf2, redProf2, yellowProf2, pinkProf2, blueProf2;
+    @FXML public ImageView tower20, tower21, tower22, tower23, tower24, tower25, tower26, tower27;
+
+
+    @FXML public ImageView greenIsland0, redIsland0, yellowIsland0, pinkIsland0, blueIsland0, towerIsland0, mothernature0;
+    @FXML public Label greenText0, redText0, yellowText0, pinkText0, blueText0, towerText0;
+    @FXML public ImageView greenIsland1, redIsland1, yellowIsland1, pinkIsland1, blueIsland1, towerIsland1, mothernature1;
+    @FXML public Label greenText1, redText1, yellowText1, pinkText1, blueText1, towerText1;
+    @FXML public ImageView greenIsland2, redIsland2, yellowIsland2, pinkIsland2, blueIsland2, towerIsland2, mothernature2;
+    @FXML public Label greenText2, redText2, yellowText2, pinkText2, blueText2, towerText2;
+    @FXML public ImageView greenIsland3, redIsland3, yellowIsland3, pinkIsland3, blueIsland3, towerIsland3, mothernature3;
+    @FXML public Label greenText3, redText3, yellowText3, pinkText3, blueText3, towerText3;
+    @FXML public ImageView greenIsland4, redIsland4, yellowIsland4, pinkIsland4, blueIsland4, towerIsland4, mothernature4;
+    @FXML public Label greenText4, redText4, yellowText4, pinkText4, blueText4, towerText4;
+    @FXML public ImageView greenIsland5, redIsland5, yellowIsland5, pinkIsland5, blueIsland5, towerIsland5, mothernature5;
+    @FXML public Label greenText5, redText5, yellowText5, pinkText5, blueText5, towerText5;
+    @FXML public ImageView greenIsland6, redIsland6, yellowIsland6, pinkIsland6, blueIsland6, towerIsland6, mothernature6;
+    @FXML public Label greenText6, redText6, yellowText6, pinkText6, blueText6, towerText6;
+    @FXML public ImageView greenIsland7, redIsland7, yellowIsland7, pinkIsland7, blueIsland7, towerIsland7, mothernature7;
+    @FXML public Label greenText7, redText7, yellowText7, pinkText7, blueText7, towerText7;
+    @FXML public ImageView greenIsland8, redIsland8, yellowIsland8, pinkIsland8, blueIsland8, towerIsland8, mothernature8;
+    @FXML public Label greenText8, redText8, yellowText8, pinkText8, blueText8, towerText8;
+    @FXML public ImageView greenIsland9, redIsland9, yellowIsland9, pinkIsland9, blueIsland9, towerIsland9, mothernature9;
+    @FXML public Label greenText9, redText9, yellowText9, pinkText9, blueText9, towerText9;
+    @FXML public ImageView greenIsland10, redIsland10, yellowIsland10, pinkIsland10, blueIsland10, towerIsland10, mothernature10;
+    @FXML public Label greenText10, redText10, yellowText10, pinkText10, blueText10, towerText10;
+    @FXML public ImageView greenIsland11, redIsland11, yellowIsland11, pinkIsland11, blueIsland11, towerIsland11, mothernature11;
+    @FXML public Label greenText11, redText11, yellowText11, pinkText11, blueText11, towerText11;
 
     @FXML
-    protected void selectStudentGreen() {
-<span class="nc" id="L17">         dragItem = 0;</span>
-<span class="nc" id="L18">        System.out.println(&quot;stai gdraggando&quot;);</span>
-
-<span class="nc" id="L20">    }</span>
-
+<span class="nc" id="L95">    protected void diningRoomGreen() {}</span>
     @FXML
-    protected void diningRoomGreen() {
-<span class="nc" id="L24">       System.out.println(&quot;hai spostato nella sala verde il colore: &quot; + dragItem);</span>
+<span class="nc" id="L97">    protected void diningRoomRed() {}</span>
+    @FXML
+<span class="nc" id="L99">    protected void diningRoomYellow() {}</span>
+    @FXML
+<span class="nc" id="L101">    protected void diningRoomPink() {}</span>
+    @FXML
+<span class="nc" id="L103">    protected void diningRoomBlue() {}</span>
 
-<span class="nc" id="L26">    }</span>
+    private void update() {
+<span class="nc" id="L106">        schoolBoard0.setVisible(true);</span>
+<span class="nc" id="L107">        schoolBoard1.setVisible(true);</span>
+<span class="nc" id="L108">        cloud0.setVisible(true);</span>
+<span class="nc" id="L109">        cloud1.setVisible(true);</span>
+<span class="nc bnc" id="L110" title="All 2 branches missed.">        if(model.getPlayers().size() &gt; 2){</span>
+<span class="nc" id="L111">            schoolBoard2.setVisible(true);</span>
+<span class="nc" id="L112">            cloud2.setVisible(true);</span>
+        }
 
+<span class="nc" id="L115">        gamephase.setText(&quot;Game phase: &quot; + model.getCurrentPhase().toString());</span>
+<span class="nc" id="L116">        currentplayer.setText(&quot;Current player: &quot; + model.getPlayers().get(model.getCurrentPlayer()).getNickname());</span>
+
+<span class="nc" id="L118">        alreadyUsed = 0;</span>
+<span class="nc bnc" id="L119" title="All 2 branches missed.">        for (Player p : model.getPlayers()) {</span>
+<span class="nc bnc" id="L120" title="All 2 branches missed.">            if (p.getNickname().equals(nickname)) {</span>
+<span class="nc" id="L121">                nickname0.setText(&quot;You: &quot; + p.getNickname());</span>
+<span class="nc" id="L122">                coins0.setText(&quot;Coins: &quot; + p.getCoins());</span>
+<span class="nc" id="L123">                myPlayer = p;</span>
+<span class="nc" id="L124">                updatePlayerSchoolBoard(p, true);</span>
+            } else {
+<span class="nc" id="L126">                updatePlayerSchoolBoard(p, false);</span>
+<span class="nc bnc" id="L127" title="All 2 branches missed.">                if(alreadyUsed == 0){</span>
+<span class="nc" id="L128">                    nickname1.setText(&quot;Player: &quot; + p.getNickname());</span>
+<span class="nc" id="L129">                    coins1.setText(&quot;Coins: &quot; + p.getCoins());</span>
+                } else {
+<span class="nc" id="L131">                    nickname2.setText(&quot;Player: &quot; + p.getNickname());</span>
+<span class="nc" id="L132">                    coins2.setText(&quot;Coins: &quot; + p.getCoins());</span>
+                }
+<span class="nc" id="L134">                alreadyUsed++;</span>
+            }
+<span class="nc" id="L136">        }</span>
+
+<span class="nc" id="L138">        int[] deletedIslands = new int[12];</span>
+<span class="nc bnc" id="L139" title="All 2 branches missed.">        for(int n=0; n&lt;12; n++){</span>
+<span class="nc" id="L140">            deletedIslands[n] = 0;</span>
+        }
+<span class="nc bnc" id="L142" title="All 2 branches missed.">        for(Island i : model.getGameBoard().getIslands()){</span>
+<span class="nc bnc" id="L143" title="All 2 branches missed.">            if(i.getIslandIndex() == 0){</span>
+<span class="nc" id="L144">                updateisland0(i);</span>
+<span class="nc" id="L145">                deletedIslands[0] = 1;</span>
+<span class="nc bnc" id="L146" title="All 2 branches missed.">            } else if(i.getIslandIndex() == 1){</span>
+<span class="nc" id="L147">                updateisland1(i);</span>
+<span class="nc" id="L148">                deletedIslands[1] = 1;</span>
+<span class="nc bnc" id="L149" title="All 2 branches missed.">            } else if(i.getIslandIndex() == 2){</span>
+<span class="nc" id="L150">                updateisland2(i);</span>
+<span class="nc" id="L151">                deletedIslands[2] = 1;</span>
+<span class="nc bnc" id="L152" title="All 2 branches missed.">            } else if(i.getIslandIndex() == 3){</span>
+<span class="nc" id="L153">                updateisland3(i);</span>
+<span class="nc" id="L154">                deletedIslands[3] = 1;</span>
+<span class="nc bnc" id="L155" title="All 2 branches missed.">            }  else if(i.getIslandIndex() == 4){</span>
+<span class="nc" id="L156">                updateisland4(i);</span>
+<span class="nc" id="L157">                deletedIslands[4] = 1;</span>
+<span class="nc bnc" id="L158" title="All 2 branches missed.">            }  else if(i.getIslandIndex() == 5){</span>
+<span class="nc" id="L159">                updateisland5(i);</span>
+<span class="nc" id="L160">                deletedIslands[5] = 1;</span>
+<span class="nc bnc" id="L161" title="All 2 branches missed.">            }  else if(i.getIslandIndex() == 6){</span>
+<span class="nc" id="L162">                updateisland6(i);</span>
+<span class="nc" id="L163">                deletedIslands[6] = 1;</span>
+<span class="nc bnc" id="L164" title="All 2 branches missed.">            }  else if(i.getIslandIndex() == 7){</span>
+<span class="nc" id="L165">                updateisland7(i);</span>
+<span class="nc" id="L166">                deletedIslands[7] = 1;</span>
+<span class="nc bnc" id="L167" title="All 2 branches missed.">            }  else if(i.getIslandIndex() == 8){</span>
+<span class="nc" id="L168">                updateisland8(i);</span>
+<span class="nc" id="L169">                deletedIslands[8] = 1;</span>
+<span class="nc bnc" id="L170" title="All 2 branches missed.">            }  else if(i.getIslandIndex() == 9){</span>
+<span class="nc" id="L171">                updateisland9(i);</span>
+<span class="nc" id="L172">                deletedIslands[9] = 1;</span>
+<span class="nc bnc" id="L173" title="All 2 branches missed.">            }  else if(i.getIslandIndex() == 10){</span>
+<span class="nc" id="L174">                updateisland10(i);</span>
+<span class="nc" id="L175">                deletedIslands[10] = 1;</span>
+<span class="nc bnc" id="L176" title="All 2 branches missed.">            }  else if(i.getIslandIndex() == 11){</span>
+<span class="nc" id="L177">                updateisland11(i);</span>
+<span class="nc" id="L178">                deletedIslands[11] = 1;</span>
+            }
+<span class="nc" id="L180">        }</span>
+
+<span class="nc bnc" id="L182" title="All 2 branches missed.">        for(int is=0; is&lt;12; is++){</span>
+<span class="nc bnc" id="L183" title="All 2 branches missed.">            if(deletedIslands[is] == 0){</span>
+<span class="nc bnc" id="L184" title="All 13 branches missed.">                switch (is) {</span>
+<span class="nc" id="L185">                    case 0 -&gt; island0.setVisible(false);</span>
+<span class="nc" id="L186">                    case 1 -&gt; island1.setVisible(false);</span>
+<span class="nc" id="L187">                    case 2 -&gt; island2.setVisible(false);</span>
+<span class="nc" id="L188">                    case 3 -&gt; island3.setVisible(false);</span>
+<span class="nc" id="L189">                    case 4 -&gt; island4.setVisible(false);</span>
+<span class="nc" id="L190">                    case 5 -&gt; island5.setVisible(false);</span>
+<span class="nc" id="L191">                    case 6 -&gt; island6.setVisible(false);</span>
+<span class="nc" id="L192">                    case 7 -&gt; island7.setVisible(false);</span>
+<span class="nc" id="L193">                    case 8 -&gt; island8.setVisible(false);</span>
+<span class="nc" id="L194">                    case 9 -&gt; island9.setVisible(false);</span>
+<span class="nc" id="L195">                    case 10 -&gt; island10.setVisible(false);</span>
+<span class="nc" id="L196">                    case 11 -&gt; island11.setVisible(false);</span>
+                }
+            }
+        }
+<span class="nc" id="L200">        int n=0;</span>
+<span class="nc bnc" id="L201" title="All 2 branches missed.">        for(Cloud c: model.getGameBoard().getClouds()){</span>
+<span class="nc bnc" id="L202" title="All 2 branches missed.">            if(n==0){</span>
+<span class="nc" id="L203">                setCloud(c.seeStudents().get(0).getColour(), cloudStudent00);</span>
+<span class="nc" id="L204">                setCloud(c.seeStudents().get(1).getColour(), cloudStudent01);</span>
+<span class="nc" id="L205">                setCloud(c.seeStudents().get(2).getColour(), cloudStudent02);</span>
+<span class="nc bnc" id="L206" title="All 2 branches missed.">                if(model.getPlayers().size() ==3)</span>
+<span class="nc" id="L207">                    setCloud(c.seeStudents().get(3).getColour(), cloudStudent03);</span>
+<span class="nc bnc" id="L208" title="All 2 branches missed.">            } else if(n==1){</span>
+<span class="nc" id="L209">                setCloud(c.seeStudents().get(0).getColour(), cloudStudent10);</span>
+<span class="nc" id="L210">                setCloud(c.seeStudents().get(1).getColour(), cloudStudent11);</span>
+<span class="nc" id="L211">                setCloud(c.seeStudents().get(2).getColour(), cloudStudent12);</span>
+<span class="nc bnc" id="L212" title="All 2 branches missed.">                if(model.getPlayers().size() ==3)</span>
+<span class="nc" id="L213">                    setCloud(c.seeStudents().get(3).getColour(), cloudStudent13);</span>
+<span class="nc bnc" id="L214" title="All 2 branches missed.">            } else if(n==2){</span>
+<span class="nc" id="L215">                setCloud(c.seeStudents().get(0).getColour(), cloudStudent20);</span>
+<span class="nc" id="L216">                setCloud(c.seeStudents().get(1).getColour(), cloudStudent21);</span>
+<span class="nc" id="L217">                setCloud(c.seeStudents().get(2).getColour(), cloudStudent22);</span>
+<span class="nc bnc" id="L218" title="All 2 branches missed.">                if(model.getPlayers().size() ==3)</span>
+<span class="nc" id="L219">                    setCloud(c.seeStudents().get(3).getColour(), cloudStudent23);</span>
+            }
+<span class="nc" id="L221">            n++;</span>
+<span class="nc" id="L222">        }</span>
+
+<span class="nc bnc" id="L224" title="All 2 branches missed.">        if(model.isExpertMode()){</span>
+<span class="nc" id="L225">            n=0;</span>
+<span class="nc bnc" id="L226" title="All 2 branches missed.">            for(CharacterCard cc: model.getGameBoard().getThreeCharacterCards()){</span>
+<span class="nc bnc" id="L227" title="All 2 branches missed.">                if(n==0){</span>
+<span class="nc" id="L228">                    character0.setVisible(true);</span>
+<span class="nc" id="L229">                    setCharacter(cc.getIndex(), characterImg0);</span>
+<span class="nc" id="L230">                    characterText0.setText(&quot;Cost:          &quot; + cc.getCost());</span>
+<span class="nc bnc" id="L231" title="All 2 branches missed.">                } else if(n==1){</span>
+<span class="nc" id="L232">                    character1.setVisible(true);</span>
+<span class="nc" id="L233">                    setCharacter(cc.getIndex(), characterImg1);</span>
+<span class="nc" id="L234">                    characterText1.setText(&quot;Cost:          &quot; + cc.getCost());</span>
+<span class="nc bnc" id="L235" title="All 2 branches missed.">                } else if(n==2){</span>
+<span class="nc" id="L236">                    character2.setVisible(true);</span>
+<span class="nc" id="L237">                    setCharacter(cc.getIndex(), characterImg2);</span>
+<span class="nc" id="L238">                    characterText2.setText(&quot;Cost:          &quot; + cc.getCost());</span>
+                }
+<span class="nc" id="L240">                n++;</span>
+<span class="nc" id="L241">            }</span>
+        }
+<span class="nc" id="L243">    }</span>
 
     public void setGui(ClientAppGUI gui) {
-<span class="nc" id="L30">        this.gui = gui;</span>
-<span class="nc" id="L31">    }</span>
+<span class="nc" id="L246">        this.gui = gui;</span>
+<span class="nc" id="L247">        schoolBoard0.setVisible(false);</span>
+<span class="nc" id="L248">        schoolBoard1.setVisible(false);</span>
+<span class="nc" id="L249">        schoolBoard2.setVisible(false);</span>
+<span class="nc" id="L250">        cloud0.setVisible(false);</span>
+<span class="nc" id="L251">        cloud1.setVisible(false);</span>
+<span class="nc" id="L252">        cloud2.setVisible(false);</span>
+<span class="nc" id="L253">        character0.setVisible(false);</span>
+<span class="nc" id="L254">        character1.setVisible(false);</span>
+<span class="nc" id="L255">        character2.setVisible(false);</span>
+<span class="nc" id="L256">    }</span>
+
+
+    public void setModel(Model model) {
+<span class="nc" id="L260">        this.model = model;</span>
+<span class="nc" id="L261">        System.out.println(&quot;Ricevuto il model&quot;);</span>
+<span class="nc" id="L262">        update();</span>
+<span class="nc" id="L263">    }</span>
+
+    public void setNickname(String nickname) {
+<span class="nc" id="L266">        this.nickname = nickname;</span>
+<span class="nc" id="L267">    }</span>
+
+
+   protected void chooseIsland1(){
+<span class="nc" id="L271">        String student = getColorString(choice);</span>
+<span class="nc" id="L272">        gui.getClientGUI().asyncWriteToSocket(student + &quot;,1&quot;);</span>
+
+<span class="nc" id="L274">    }</span>
+
+    protected void chooseDiningRoom(){
+<span class="nc" id="L277">        String student = getColorString(choice);</span>
+<span class="nc" id="L278">        gui.getClientGUI().asyncWriteToSocket(student);</span>
+<span class="nc" id="L279">    }</span>
+
+    private String getColorString(Colour color){
+<span class="nc" id="L282">        int col = color.ordinal();</span>
+<span class="nc bnc" id="L283" title="All 6 branches missed.">        return switch (col) {</span>
+<span class="nc" id="L284">            case 0 -&gt; &quot;0&quot;;</span>
+<span class="nc" id="L285">            case 1 -&gt; &quot;1&quot;;</span>
+<span class="nc" id="L286">            case 2 -&gt; &quot;2&quot;;</span>
+<span class="nc" id="L287">            case 3 -&gt; &quot;3&quot;;</span>
+<span class="nc" id="L288">            case 4 -&gt; &quot;4&quot;;</span>
+<span class="nc" id="L289">            default -&gt; null;</span>
+        };
+    }
+
+    @FXML
+    protected void chooseStudent0(){
+<span class="nc" id="L295">        choice = myPlayer.getPlayerSchoolBoard().getStudentsEntrance().get(0).getColour();</span>
+<span class="nc" id="L296">        System.out.println(&quot;studente 0: &quot; + choice);</span>
+
+<span class="nc" id="L298">    }</span>
+    @FXML
+    protected void chooseStudent1(){
+<span class="nc" id="L301">        choice = myPlayer.getPlayerSchoolBoard().getStudentsEntrance().get(1).getColour();</span>
+<span class="nc" id="L302">        System.out.println(&quot;studente 1: &quot; + choice);</span>
+<span class="nc" id="L303">    }</span>
+    @FXML
+    protected void chooseStudent2(){
+<span class="nc" id="L306">        choice = myPlayer.getPlayerSchoolBoard().getStudentsEntrance().get(2).getColour();</span>
+<span class="nc" id="L307">        System.out.println(&quot;studente 2: &quot; + choice);</span>
+<span class="nc" id="L308">    }</span>
+    @FXML
+    protected void chooseStudent3(){
+<span class="nc" id="L311">        choice = myPlayer.getPlayerSchoolBoard().getStudentsEntrance().get(3).getColour();</span>
+<span class="nc" id="L312">        System.out.println(&quot;studente 3: &quot; + choice);</span>
+<span class="nc" id="L313">    }</span>
+    @FXML
+    protected void chooseStudent4(){
+<span class="nc bnc" id="L316" title="All 2 branches missed.">        if(entrance04.getImage() != null){</span>
+<span class="nc" id="L317">            choice = myPlayer.getPlayerSchoolBoard().getStudentsEntrance().get(4).getColour();</span>
+<span class="nc" id="L318">            System.out.println(&quot;studente 4: &quot; + choice);</span>
+        }
+<span class="nc" id="L320">    }</span>
+    @FXML
+    protected void chooseStudent5(){
+<span class="nc bnc" id="L323" title="All 2 branches missed.">        if(entrance05.getImage() != null){</span>
+<span class="nc" id="L324">            choice = myPlayer.getPlayerSchoolBoard().getStudentsEntrance().get(5).getColour();</span>
+<span class="nc" id="L325">            System.out.println(&quot;studente 5: &quot; + choice);</span>
+        }
+<span class="nc" id="L327">    }</span>
+    @FXML
+    protected void chooseStudent6(){
+<span class="nc bnc" id="L330" title="All 2 branches missed.">        if(entrance06.getImage() != null){</span>
+<span class="nc" id="L331">            choice = myPlayer.getPlayerSchoolBoard().getStudentsEntrance().get(6).getColour();</span>
+<span class="nc" id="L332">            System.out.println(&quot;studente 6: &quot; + choice);</span>
+        }
+<span class="nc" id="L334">    }</span>
+
+    @FXML
+    protected void chooseStudent7(){
+<span class="nc bnc" id="L338" title="All 2 branches missed.">        if(entrance07.getImage() != null){</span>
+<span class="nc" id="L339">            choice = myPlayer.getPlayerSchoolBoard().getStudentsEntrance().get(7).getColour();</span>
+<span class="nc" id="L340">            System.out.println(&quot;studente 7: &quot; + choice);</span>
+        }
+<span class="nc" id="L342">    }</span>
+    @FXML
+    protected void chooseStudent8(){
+<span class="nc bnc" id="L345" title="All 2 branches missed.">        if(entrance08.getImage() != null){</span>
+<span class="nc" id="L346">            choice = myPlayer.getPlayerSchoolBoard().getStudentsEntrance().get(8).getColour();</span>
+<span class="nc" id="L347">            System.out.println(&quot;studente 8: &quot; + choice);</span>
+        }
+<span class="nc" id="L349">    }</span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //PLAYER SCHOOLBOARD
+    private void updatePlayerSchoolBoard(Player p, boolean mainPlayer){
+<span class="nc" id="L367">        int i, k = 0;</span>
+<span class="nc bnc" id="L368" title="All 2 branches missed.">        for (Student s : p.getPlayerSchoolBoard().getStudentsEntrance()) {</span>
+<span class="nc" id="L369">            setEntrance(k, s.getColour(), mainPlayer);</span>
+<span class="nc" id="L370">            k++;</span>
+<span class="nc" id="L371">        }</span>
+<span class="nc bnc" id="L372" title="All 2 branches missed.">        for(int t=k; t &lt; 9; t++){</span>
+<span class="nc" id="L373">            getEntrance(t, mainPlayer).setImage(null);</span>
+        }
+
+<span class="nc" id="L376">        int green = p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.Green);</span>
+<span class="nc bnc" id="L377" title="All 2 branches missed.">        for (i = 0; i &lt; green; i++)</span>
+<span class="nc" id="L378">            getGreen(i, mainPlayer).setVisible(true);</span>
+<span class="nc bnc" id="L379" title="All 2 branches missed.">        for (int j = i; j &lt; 10; j++)</span>
+<span class="nc" id="L380">            getGreen(j, mainPlayer).setVisible(false);</span>
+
+<span class="nc" id="L382">        int red = p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.Green);</span>
+<span class="nc bnc" id="L383" title="All 2 branches missed.">        for (i = 0; i &lt; red; i++)</span>
+<span class="nc" id="L384">            getRed(i, mainPlayer).setVisible(true);</span>
+<span class="nc bnc" id="L385" title="All 2 branches missed.">        for (int j = i; j &lt; 10; j++)</span>
+<span class="nc" id="L386">            getRed(j, mainPlayer).setVisible(false);</span>
+
+<span class="nc" id="L388">        int yellow = p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.Green);</span>
+<span class="nc bnc" id="L389" title="All 2 branches missed.">        for (i = 0; i &lt; yellow; i++)</span>
+<span class="nc" id="L390">            getYellow(i, mainPlayer).setVisible(true);</span>
+<span class="nc bnc" id="L391" title="All 2 branches missed.">        for (int j = i; j &lt; 10; j++)</span>
+<span class="nc" id="L392">            getYellow(j, mainPlayer).setVisible(false);</span>
+
+<span class="nc" id="L394">        int pink = p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.Green);</span>
+<span class="nc bnc" id="L395" title="All 2 branches missed.">        for (i = 0; i &lt; pink; i++)</span>
+<span class="nc" id="L396">            getPink(i, mainPlayer).setVisible(true);</span>
+<span class="nc bnc" id="L397" title="All 2 branches missed.">        for (int j = i; j &lt; 10; j++)</span>
+<span class="nc" id="L398">            getPink(j, mainPlayer).setVisible(false);</span>
+
+<span class="nc" id="L400">        int blue = p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.Green);</span>
+<span class="nc bnc" id="L401" title="All 2 branches missed.">        for (i = 0; i &lt; blue; i++)</span>
+<span class="nc" id="L402">            getBlue(i, mainPlayer).setVisible(true);</span>
+<span class="nc bnc" id="L403" title="All 2 branches missed.">        for (int j = i; j &lt; 10; j++)</span>
+<span class="nc" id="L404">            getBlue(j, mainPlayer).setVisible(false);</span>
+
+<span class="nc" id="L406">        k = 0;</span>
+<span class="nc bnc" id="L407" title="All 2 branches missed.">        for (Professor pr : p.getPlayerSchoolBoard().getProfessors()) {</span>
+<span class="nc" id="L408">            setProfessor(k, pr.getProfessorColour(), mainPlayer);</span>
+<span class="nc" id="L409">            k++;</span>
+<span class="nc" id="L410">        }</span>
+<span class="nc bnc" id="L411" title="All 2 branches missed.">        for(int t=k; t &lt; 5; t++){</span>
+<span class="nc" id="L412">            getProfessor(t, mainPlayer).setImage(null);</span>
+        }
+
+<span class="nc" id="L415">        k = 0;</span>
+<span class="nc bnc" id="L416" title="All 2 branches missed.">        for (Tower tr : p.getPlayerSchoolBoard().getTowers()) {</span>
+<span class="nc" id="L417">            setTower(k, tr.getTowerColor(), mainPlayer);</span>
+<span class="nc" id="L418">            k++;</span>
+<span class="nc" id="L419">        }</span>
+<span class="nc bnc" id="L420" title="All 2 branches missed.">        for(int t=k; t &lt; 8; t++){</span>
+<span class="nc" id="L421">            getTower(t, mainPlayer).setImage(null);</span>
+        }
+<span class="nc" id="L423">    }</span>
+    private void setEntrance(int i, Colour colour, boolean mainPlayer) {
+<span class="nc bnc" id="L425" title="All 2 branches missed.">        if (colour.equals(Colour.Green))</span>
+<span class="nc" id="L426">            getEntrance(i, mainPlayer).setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/student_green.png&quot;))));</span>
+<span class="nc bnc" id="L427" title="All 2 branches missed.">        else if (colour.equals(Colour.Red))</span>
+<span class="nc" id="L428">            getEntrance(i, mainPlayer).setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/student_red.png&quot;))));</span>
+<span class="nc bnc" id="L429" title="All 2 branches missed.">        else if (colour.equals(Colour.Yellow))</span>
+<span class="nc" id="L430">            getEntrance(i, mainPlayer).setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/student_yellow.png&quot;))));</span>
+<span class="nc bnc" id="L431" title="All 2 branches missed.">        else if (colour.equals(Colour.Pink))</span>
+<span class="nc" id="L432">            getEntrance(i, mainPlayer).setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/student_pink.png&quot;))));</span>
+<span class="nc bnc" id="L433" title="All 2 branches missed.">        else if (colour.equals(Colour.Blue))</span>
+<span class="nc" id="L434">            getEntrance(i, mainPlayer).setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/student_blue.png&quot;))));</span>
+
+<span class="nc" id="L436">    }</span>
+    private void setProfessor(int i, Colour colour, boolean mainPlayer) {
+<span class="nc bnc" id="L438" title="All 2 branches missed.">        if (colour.equals(Colour.Green))</span>
+<span class="nc" id="L439">            getProfessor(i, mainPlayer).setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/teacher_green.png&quot;))));</span>
+<span class="nc bnc" id="L440" title="All 2 branches missed.">        else if (colour.equals(Colour.Red))</span>
+<span class="nc" id="L441">            getProfessor(i, mainPlayer).setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/teacher_red.png&quot;))));</span>
+<span class="nc bnc" id="L442" title="All 2 branches missed.">        else if (colour.equals(Colour.Yellow))</span>
+<span class="nc" id="L443">            getProfessor(i, mainPlayer).setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/teacher_yellow.png&quot;))));</span>
+<span class="nc bnc" id="L444" title="All 2 branches missed.">        else if (colour.equals(Colour.Pink))</span>
+<span class="nc" id="L445">            getProfessor(i, mainPlayer).setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/teacher_pink.png&quot;))));</span>
+<span class="nc bnc" id="L446" title="All 2 branches missed.">        else if (colour.equals(Colour.Blue))</span>
+<span class="nc" id="L447">            getProfessor(i, mainPlayer).setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/teacher_blue.png&quot;))));</span>
+
+<span class="nc" id="L449">    }</span>
+    private void setTower(int i, TowerColour colour, boolean mainPlayer) {
+<span class="nc bnc" id="L451" title="All 2 branches missed.">        if (colour.equals(TowerColour.Black))</span>
+<span class="nc" id="L452">            getTower(i, mainPlayer).setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/black_tower.png&quot;))));</span>
+<span class="nc bnc" id="L453" title="All 2 branches missed.">        else if (colour.equals(TowerColour.White))</span>
+<span class="nc" id="L454">            getTower(i, mainPlayer).setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/white_tower.png&quot;))));</span>
+<span class="nc bnc" id="L455" title="All 2 branches missed.">        else if (colour.equals(TowerColour.Grey))</span>
+<span class="nc" id="L456">            getTower(i, mainPlayer).setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/grey_tower.png&quot;))));</span>
+
+<span class="nc" id="L458">    }</span>
+
+    private void setCloud(Colour colour, ImageView img) {
+<span class="nc bnc" id="L461" title="All 2 branches missed.">        if (colour.equals(Colour.Green))</span>
+<span class="nc" id="L462">            img.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/student_green.png&quot;))));</span>
+<span class="nc bnc" id="L463" title="All 2 branches missed.">        else if (colour.equals(Colour.Red))</span>
+<span class="nc" id="L464">            img.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/student_red.png&quot;))));</span>
+<span class="nc bnc" id="L465" title="All 2 branches missed.">        else if (colour.equals(Colour.Yellow))</span>
+<span class="nc" id="L466">            img.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/student_yellow.png&quot;))));</span>
+<span class="nc bnc" id="L467" title="All 2 branches missed.">        else if (colour.equals(Colour.Pink))</span>
+<span class="nc" id="L468">            img.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/student_pink.png&quot;))));</span>
+<span class="nc bnc" id="L469" title="All 2 branches missed.">        else if (colour.equals(Colour.Blue))</span>
+<span class="nc" id="L470">            img.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/student_blue.png&quot;))));</span>
+
+<span class="nc" id="L472">    }</span>
+
+    private void setCharacter(int index, ImageView img) {
+<span class="nc bnc" id="L475" title="All 2 branches missed.">        if(index == 1)</span>
+<span class="nc" id="L476">            img.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/character1.png&quot;))));</span>
+<span class="nc bnc" id="L477" title="All 2 branches missed.">        else if(index == 2)</span>
+<span class="nc" id="L478">            img.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/character2.png&quot;))));</span>
+<span class="nc bnc" id="L479" title="All 2 branches missed.">        else if(index == 3)</span>
+<span class="nc" id="L480">            img.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/character3.png&quot;))));</span>
+<span class="nc bnc" id="L481" title="All 2 branches missed.">        else if(index == 4)</span>
+<span class="nc" id="L482">            img.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/character4.png&quot;))));</span>
+<span class="nc bnc" id="L483" title="All 2 branches missed.">        else if(index == 5)</span>
+<span class="nc" id="L484">            img.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/character5.png&quot;))));</span>
+<span class="nc bnc" id="L485" title="All 2 branches missed.">        else if(index == 6)</span>
+<span class="nc" id="L486">            img.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/character6.png&quot;))));</span>
+<span class="nc bnc" id="L487" title="All 2 branches missed.">        else if(index == 7)</span>
+<span class="nc" id="L488">            img.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/character7.png&quot;))));</span>
+<span class="nc bnc" id="L489" title="All 2 branches missed.">        else if(index == 8)</span>
+<span class="nc" id="L490">            img.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/character8.png&quot;))));</span>
+<span class="nc bnc" id="L491" title="All 2 branches missed.">        else if(index == 9)</span>
+<span class="nc" id="L492">            img.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/character9.png&quot;))));</span>
+<span class="nc bnc" id="L493" title="All 2 branches missed.">        else if(index == 10)</span>
+<span class="nc" id="L494">            img.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/character10.png&quot;))));</span>
+<span class="nc bnc" id="L495" title="All 2 branches missed.">        else if(index == 11)</span>
+<span class="nc" id="L496">            img.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/character11.png&quot;))));</span>
+<span class="nc bnc" id="L497" title="All 2 branches missed.">        else if(index == 12)</span>
+<span class="nc" id="L498">            img.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/character12.png&quot;))));</span>
+
+<span class="nc" id="L500">    }</span>
+
+    private ImageView getGreen(int pos, boolean mainPlayer) {
+<span class="nc bnc" id="L503" title="All 2 branches missed.">        if(mainPlayer){</span>
+<span class="nc bnc" id="L504" title="All 11 branches missed.">            return switch (pos) {</span>
+<span class="nc" id="L505">                case 0 -&gt; green00;</span>
+<span class="nc" id="L506">                case 1 -&gt; green01;</span>
+<span class="nc" id="L507">                case 2 -&gt; green02;</span>
+<span class="nc" id="L508">                case 3 -&gt; green03;</span>
+<span class="nc" id="L509">                case 4 -&gt; green04;</span>
+<span class="nc" id="L510">                case 5 -&gt; green05;</span>
+<span class="nc" id="L511">                case 6 -&gt; green06;</span>
+<span class="nc" id="L512">                case 7 -&gt; green07;</span>
+<span class="nc" id="L513">                case 8 -&gt; green08;</span>
+<span class="nc" id="L514">                case 9 -&gt; green09;</span>
+<span class="nc" id="L515">                default -&gt; null;</span>
+            };
+<span class="nc bnc" id="L517" title="All 2 branches missed.">        } else if(alreadyUsed == 0){</span>
+<span class="nc bnc" id="L518" title="All 11 branches missed.">            return switch (pos) {</span>
+<span class="nc" id="L519">                case 0 -&gt; green10;</span>
+<span class="nc" id="L520">                case 1 -&gt; green11;</span>
+<span class="nc" id="L521">                case 2 -&gt; green12;</span>
+<span class="nc" id="L522">                case 3 -&gt; green13;</span>
+<span class="nc" id="L523">                case 4 -&gt; green14;</span>
+<span class="nc" id="L524">                case 5 -&gt; green15;</span>
+<span class="nc" id="L525">                case 6 -&gt; green16;</span>
+<span class="nc" id="L526">                case 7 -&gt; green17;</span>
+<span class="nc" id="L527">                case 8 -&gt; green18;</span>
+<span class="nc" id="L528">                case 9 -&gt; green19;</span>
+<span class="nc" id="L529">                default -&gt; null;</span>
+            };
+        } else {
+<span class="nc bnc" id="L532" title="All 11 branches missed.">            return switch (pos) {</span>
+<span class="nc" id="L533">                case 0 -&gt; green20;</span>
+<span class="nc" id="L534">                case 1 -&gt; green21;</span>
+<span class="nc" id="L535">                case 2 -&gt; green22;</span>
+<span class="nc" id="L536">                case 3 -&gt; green23;</span>
+<span class="nc" id="L537">                case 4 -&gt; green24;</span>
+<span class="nc" id="L538">                case 5 -&gt; green25;</span>
+<span class="nc" id="L539">                case 6 -&gt; green26;</span>
+<span class="nc" id="L540">                case 7 -&gt; green27;</span>
+<span class="nc" id="L541">                case 8 -&gt; green28;</span>
+<span class="nc" id="L542">                case 9 -&gt; green29;</span>
+<span class="nc" id="L543">                default -&gt; null;</span>
+            };
+        }
+    }
+    private ImageView getRed(int pos, boolean mainPlayer) {
+<span class="nc bnc" id="L548" title="All 2 branches missed.">        if(mainPlayer){</span>
+<span class="nc bnc" id="L549" title="All 11 branches missed.">            return switch (pos) {</span>
+<span class="nc" id="L550">                case 0 -&gt; red00;</span>
+<span class="nc" id="L551">                case 1 -&gt; red01;</span>
+<span class="nc" id="L552">                case 2 -&gt; red02;</span>
+<span class="nc" id="L553">                case 3 -&gt; red03;</span>
+<span class="nc" id="L554">                case 4 -&gt; red04;</span>
+<span class="nc" id="L555">                case 5 -&gt; red05;</span>
+<span class="nc" id="L556">                case 6 -&gt; red06;</span>
+<span class="nc" id="L557">                case 7 -&gt; red07;</span>
+<span class="nc" id="L558">                case 8 -&gt; red08;</span>
+<span class="nc" id="L559">                case 9 -&gt; red09;</span>
+<span class="nc" id="L560">                default -&gt; null;</span>
+            };
+<span class="nc bnc" id="L562" title="All 2 branches missed.">        } else if(alreadyUsed == 0){</span>
+<span class="nc bnc" id="L563" title="All 11 branches missed.">            return switch (pos) {</span>
+<span class="nc" id="L564">                case 0 -&gt; red10;</span>
+<span class="nc" id="L565">                case 1 -&gt; red11;</span>
+<span class="nc" id="L566">                case 2 -&gt; red12;</span>
+<span class="nc" id="L567">                case 3 -&gt; red13;</span>
+<span class="nc" id="L568">                case 4 -&gt; red14;</span>
+<span class="nc" id="L569">                case 5 -&gt; red15;</span>
+<span class="nc" id="L570">                case 6 -&gt; red16;</span>
+<span class="nc" id="L571">                case 7 -&gt; red17;</span>
+<span class="nc" id="L572">                case 8 -&gt; red18;</span>
+<span class="nc" id="L573">                case 9 -&gt; red19;</span>
+<span class="nc" id="L574">                default -&gt; null;</span>
+            };
+        } else {
+<span class="nc bnc" id="L577" title="All 11 branches missed.">            return switch (pos) {</span>
+<span class="nc" id="L578">                case 0 -&gt; red20;</span>
+<span class="nc" id="L579">                case 1 -&gt; red21;</span>
+<span class="nc" id="L580">                case 2 -&gt; red22;</span>
+<span class="nc" id="L581">                case 3 -&gt; red23;</span>
+<span class="nc" id="L582">                case 4 -&gt; red24;</span>
+<span class="nc" id="L583">                case 5 -&gt; red25;</span>
+<span class="nc" id="L584">                case 6 -&gt; red26;</span>
+<span class="nc" id="L585">                case 7 -&gt; red27;</span>
+<span class="nc" id="L586">                case 8 -&gt; red28;</span>
+<span class="nc" id="L587">                case 9 -&gt; red29;</span>
+<span class="nc" id="L588">                default -&gt; null;</span>
+            };
+        }
+    }
+    private ImageView getYellow(int pos, boolean mainPlayer) {
+<span class="nc bnc" id="L593" title="All 2 branches missed.">        if(mainPlayer){</span>
+<span class="nc bnc" id="L594" title="All 11 branches missed.">            return switch (pos) {</span>
+<span class="nc" id="L595">                case 0 -&gt; yellow00;</span>
+<span class="nc" id="L596">                case 1 -&gt; yellow01;</span>
+<span class="nc" id="L597">                case 2 -&gt; yellow02;</span>
+<span class="nc" id="L598">                case 3 -&gt; yellow03;</span>
+<span class="nc" id="L599">                case 4 -&gt; yellow04;</span>
+<span class="nc" id="L600">                case 5 -&gt; yellow05;</span>
+<span class="nc" id="L601">                case 6 -&gt; yellow06;</span>
+<span class="nc" id="L602">                case 7 -&gt; yellow07;</span>
+<span class="nc" id="L603">                case 8 -&gt; yellow08;</span>
+<span class="nc" id="L604">                case 9 -&gt; yellow09;</span>
+<span class="nc" id="L605">                default -&gt; null;</span>
+            };
+<span class="nc bnc" id="L607" title="All 2 branches missed.">        } else if(alreadyUsed == 0){</span>
+<span class="nc bnc" id="L608" title="All 11 branches missed.">            return switch (pos) {</span>
+<span class="nc" id="L609">                case 0 -&gt; yellow10;</span>
+<span class="nc" id="L610">                case 1 -&gt; yellow11;</span>
+<span class="nc" id="L611">                case 2 -&gt; yellow12;</span>
+<span class="nc" id="L612">                case 3 -&gt; yellow13;</span>
+<span class="nc" id="L613">                case 4 -&gt; yellow14;</span>
+<span class="nc" id="L614">                case 5 -&gt; yellow15;</span>
+<span class="nc" id="L615">                case 6 -&gt; yellow16;</span>
+<span class="nc" id="L616">                case 7 -&gt; yellow17;</span>
+<span class="nc" id="L617">                case 8 -&gt; yellow18;</span>
+<span class="nc" id="L618">                case 9 -&gt; yellow19;</span>
+<span class="nc" id="L619">                default -&gt; null;</span>
+            };
+        } else {
+<span class="nc bnc" id="L622" title="All 11 branches missed.">            return switch (pos) {</span>
+<span class="nc" id="L623">                case 0 -&gt; yellow20;</span>
+<span class="nc" id="L624">                case 1 -&gt; yellow21;</span>
+<span class="nc" id="L625">                case 2 -&gt; yellow22;</span>
+<span class="nc" id="L626">                case 3 -&gt; yellow23;</span>
+<span class="nc" id="L627">                case 4 -&gt; yellow24;</span>
+<span class="nc" id="L628">                case 5 -&gt; yellow25;</span>
+<span class="nc" id="L629">                case 6 -&gt; yellow26;</span>
+<span class="nc" id="L630">                case 7 -&gt; yellow27;</span>
+<span class="nc" id="L631">                case 8 -&gt; yellow28;</span>
+<span class="nc" id="L632">                case 9 -&gt; yellow29;</span>
+<span class="nc" id="L633">                default -&gt; null;</span>
+            };
+        }
+    }
+    private ImageView getPink(int pos, boolean mainPlayer) {
+<span class="nc bnc" id="L638" title="All 2 branches missed.">        if(mainPlayer){</span>
+<span class="nc bnc" id="L639" title="All 11 branches missed.">            return switch (pos) {</span>
+<span class="nc" id="L640">                case 0 -&gt; pink00;</span>
+<span class="nc" id="L641">                case 1 -&gt; pink01;</span>
+<span class="nc" id="L642">                case 2 -&gt; pink02;</span>
+<span class="nc" id="L643">                case 3 -&gt; pink03;</span>
+<span class="nc" id="L644">                case 4 -&gt; pink04;</span>
+<span class="nc" id="L645">                case 5 -&gt; pink05;</span>
+<span class="nc" id="L646">                case 6 -&gt; pink06;</span>
+<span class="nc" id="L647">                case 7 -&gt; pink07;</span>
+<span class="nc" id="L648">                case 8 -&gt; pink08;</span>
+<span class="nc" id="L649">                case 9 -&gt; pink09;</span>
+<span class="nc" id="L650">                default -&gt; null;</span>
+            };
+<span class="nc bnc" id="L652" title="All 2 branches missed.">        } else if(alreadyUsed == 0){</span>
+<span class="nc bnc" id="L653" title="All 11 branches missed.">            return switch (pos) {</span>
+<span class="nc" id="L654">                case 0 -&gt; pink10;</span>
+<span class="nc" id="L655">                case 1 -&gt; pink11;</span>
+<span class="nc" id="L656">                case 2 -&gt; pink12;</span>
+<span class="nc" id="L657">                case 3 -&gt; pink13;</span>
+<span class="nc" id="L658">                case 4 -&gt; pink14;</span>
+<span class="nc" id="L659">                case 5 -&gt; pink15;</span>
+<span class="nc" id="L660">                case 6 -&gt; pink16;</span>
+<span class="nc" id="L661">                case 7 -&gt; pink17;</span>
+<span class="nc" id="L662">                case 8 -&gt; pink18;</span>
+<span class="nc" id="L663">                case 9 -&gt; pink19;</span>
+<span class="nc" id="L664">                default -&gt; null;</span>
+            };
+        } else {
+<span class="nc bnc" id="L667" title="All 11 branches missed.">            return switch (pos) {</span>
+<span class="nc" id="L668">                case 0 -&gt; pink20;</span>
+<span class="nc" id="L669">                case 1 -&gt; pink21;</span>
+<span class="nc" id="L670">                case 2 -&gt; pink22;</span>
+<span class="nc" id="L671">                case 3 -&gt; pink23;</span>
+<span class="nc" id="L672">                case 4 -&gt; pink24;</span>
+<span class="nc" id="L673">                case 5 -&gt; pink25;</span>
+<span class="nc" id="L674">                case 6 -&gt; pink26;</span>
+<span class="nc" id="L675">                case 7 -&gt; pink27;</span>
+<span class="nc" id="L676">                case 8 -&gt; pink28;</span>
+<span class="nc" id="L677">                case 9 -&gt; pink29;</span>
+<span class="nc" id="L678">                default -&gt; null;</span>
+            };
+        }
+
+    }
+    private ImageView getBlue(int pos, boolean mainPlayer) {
+<span class="nc bnc" id="L684" title="All 2 branches missed.">        if(mainPlayer){</span>
+<span class="nc bnc" id="L685" title="All 11 branches missed.">            return switch (pos) {</span>
+<span class="nc" id="L686">                case 0 -&gt; blue00;</span>
+<span class="nc" id="L687">                case 1 -&gt; blue01;</span>
+<span class="nc" id="L688">                case 2 -&gt; blue02;</span>
+<span class="nc" id="L689">                case 3 -&gt; blue03;</span>
+<span class="nc" id="L690">                case 4 -&gt; blue04;</span>
+<span class="nc" id="L691">                case 5 -&gt; blue05;</span>
+<span class="nc" id="L692">                case 6 -&gt; blue06;</span>
+<span class="nc" id="L693">                case 7 -&gt; blue07;</span>
+<span class="nc" id="L694">                case 8 -&gt; blue08;</span>
+<span class="nc" id="L695">                case 9 -&gt; blue09;</span>
+<span class="nc" id="L696">                default -&gt; null;</span>
+            };
+<span class="nc bnc" id="L698" title="All 2 branches missed.">        } else if(alreadyUsed == 0){</span>
+<span class="nc bnc" id="L699" title="All 11 branches missed.">            return switch (pos) {</span>
+<span class="nc" id="L700">                case 0 -&gt; blue10;</span>
+<span class="nc" id="L701">                case 1 -&gt; blue11;</span>
+<span class="nc" id="L702">                case 2 -&gt; blue12;</span>
+<span class="nc" id="L703">                case 3 -&gt; blue13;</span>
+<span class="nc" id="L704">                case 4 -&gt; blue14;</span>
+<span class="nc" id="L705">                case 5 -&gt; blue15;</span>
+<span class="nc" id="L706">                case 6 -&gt; blue16;</span>
+<span class="nc" id="L707">                case 7 -&gt; blue17;</span>
+<span class="nc" id="L708">                case 8 -&gt; blue18;</span>
+<span class="nc" id="L709">                case 9 -&gt; blue19;</span>
+<span class="nc" id="L710">                default -&gt; null;</span>
+            };
+        } else {
+<span class="nc bnc" id="L713" title="All 11 branches missed.">            return switch (pos) {</span>
+<span class="nc" id="L714">                case 0 -&gt; blue20;</span>
+<span class="nc" id="L715">                case 1 -&gt; blue21;</span>
+<span class="nc" id="L716">                case 2 -&gt; blue22;</span>
+<span class="nc" id="L717">                case 3 -&gt; blue23;</span>
+<span class="nc" id="L718">                case 4 -&gt; blue24;</span>
+<span class="nc" id="L719">                case 5 -&gt; blue25;</span>
+<span class="nc" id="L720">                case 6 -&gt; blue26;</span>
+<span class="nc" id="L721">                case 7 -&gt; blue27;</span>
+<span class="nc" id="L722">                case 8 -&gt; blue28;</span>
+<span class="nc" id="L723">                case 9 -&gt; blue29;</span>
+<span class="nc" id="L724">                default -&gt; null;</span>
+            };
+        }
+    }
+    private ImageView getEntrance(int pos, boolean mainPlayer) {
+<span class="nc bnc" id="L729" title="All 2 branches missed.">        if(mainPlayer){</span>
+<span class="nc bnc" id="L730" title="All 10 branches missed.">            return switch (pos) {</span>
+<span class="nc" id="L731">                case 0 -&gt; entrance00;</span>
+<span class="nc" id="L732">                case 1 -&gt; entrance01;</span>
+<span class="nc" id="L733">                case 2 -&gt; entrance02;</span>
+<span class="nc" id="L734">                case 3 -&gt; entrance03;</span>
+<span class="nc" id="L735">                case 4 -&gt; entrance04;</span>
+<span class="nc" id="L736">                case 5 -&gt; entrance05;</span>
+<span class="nc" id="L737">                case 6 -&gt; entrance06;</span>
+<span class="nc" id="L738">                case 7 -&gt; entrance07;</span>
+<span class="nc" id="L739">                case 8 -&gt; entrance08;</span>
+<span class="nc" id="L740">                default -&gt; null;</span>
+            };
+<span class="nc bnc" id="L742" title="All 2 branches missed.">        } else if(alreadyUsed == 0){</span>
+<span class="nc bnc" id="L743" title="All 10 branches missed.">            return switch (pos) {</span>
+<span class="nc" id="L744">                case 0 -&gt; entrance10;</span>
+<span class="nc" id="L745">                case 1 -&gt; entrance11;</span>
+<span class="nc" id="L746">                case 2 -&gt; entrance12;</span>
+<span class="nc" id="L747">                case 3 -&gt; entrance13;</span>
+<span class="nc" id="L748">                case 4 -&gt; entrance14;</span>
+<span class="nc" id="L749">                case 5 -&gt; entrance15;</span>
+<span class="nc" id="L750">                case 6 -&gt; entrance16;</span>
+<span class="nc" id="L751">                case 7 -&gt; entrance17;</span>
+<span class="nc" id="L752">                case 8 -&gt; entrance18;</span>
+<span class="nc" id="L753">                default -&gt; null;</span>
+            };
+        } else {
+<span class="nc bnc" id="L756" title="All 10 branches missed.">            return switch (pos) {</span>
+<span class="nc" id="L757">                case 0 -&gt; entrance20;</span>
+<span class="nc" id="L758">                case 1 -&gt; entrance21;</span>
+<span class="nc" id="L759">                case 2 -&gt; entrance22;</span>
+<span class="nc" id="L760">                case 3 -&gt; entrance23;</span>
+<span class="nc" id="L761">                case 4 -&gt; entrance24;</span>
+<span class="nc" id="L762">                case 5 -&gt; entrance25;</span>
+<span class="nc" id="L763">                case 6 -&gt; entrance26;</span>
+<span class="nc" id="L764">                case 7 -&gt; entrance27;</span>
+<span class="nc" id="L765">                case 8 -&gt; entrance28;</span>
+<span class="nc" id="L766">                default -&gt; null;</span>
+            };
+        }
+    }
+    private ImageView getProfessor(int pos, boolean mainPlayer) {
+<span class="nc bnc" id="L771" title="All 2 branches missed.">        if(mainPlayer){</span>
+<span class="nc bnc" id="L772" title="All 6 branches missed.">            return switch (pos) {</span>
+<span class="nc" id="L773">                case 0 -&gt; greenProf0;</span>
+<span class="nc" id="L774">                case 1 -&gt; redProf0;</span>
+<span class="nc" id="L775">                case 2 -&gt; yellowProf0;</span>
+<span class="nc" id="L776">                case 3 -&gt; pinkProf0;</span>
+<span class="nc" id="L777">                case 4 -&gt; blueProf0;</span>
+<span class="nc" id="L778">                default -&gt; null;</span>
+            };
+<span class="nc bnc" id="L780" title="All 2 branches missed.">        } else if(alreadyUsed == 0){</span>
+<span class="nc bnc" id="L781" title="All 6 branches missed.">            return switch (pos) {</span>
+<span class="nc" id="L782">                case 0 -&gt; greenProf1;</span>
+<span class="nc" id="L783">                case 1 -&gt; redProf1;</span>
+<span class="nc" id="L784">                case 2 -&gt; yellowProf1;</span>
+<span class="nc" id="L785">                case 3 -&gt; pinkProf1;</span>
+<span class="nc" id="L786">                case 4 -&gt; blueProf1;</span>
+<span class="nc" id="L787">                default -&gt; null;</span>
+            };
+        } else {
+<span class="nc bnc" id="L790" title="All 6 branches missed.">            return switch (pos) {</span>
+<span class="nc" id="L791">                case 0 -&gt; greenProf2;</span>
+<span class="nc" id="L792">                case 1 -&gt; redProf2;</span>
+<span class="nc" id="L793">                case 2 -&gt; yellowProf2;</span>
+<span class="nc" id="L794">                case 3 -&gt; pinkProf2;</span>
+<span class="nc" id="L795">                case 4 -&gt; blueProf2;</span>
+<span class="nc" id="L796">                default -&gt; null;</span>
+            };
+        }
+
+    }
+    private ImageView getTower(int pos, boolean mainPlayer) {
+<span class="nc bnc" id="L802" title="All 2 branches missed.">        if(mainPlayer){</span>
+<span class="nc bnc" id="L803" title="All 9 branches missed.">            return switch (pos) {</span>
+<span class="nc" id="L804">                case 0 -&gt; tower00;</span>
+<span class="nc" id="L805">                case 1 -&gt; tower01;</span>
+<span class="nc" id="L806">                case 2 -&gt; tower02;</span>
+<span class="nc" id="L807">                case 3 -&gt; tower03;</span>
+<span class="nc" id="L808">                case 4 -&gt; tower04;</span>
+<span class="nc" id="L809">                case 5 -&gt; tower05;</span>
+<span class="nc" id="L810">                case 6 -&gt; tower06;</span>
+<span class="nc" id="L811">                case 7 -&gt; tower07;</span>
+<span class="nc" id="L812">                default -&gt; null;</span>
+            };
+<span class="nc bnc" id="L814" title="All 2 branches missed.">        } else if(alreadyUsed == 0){</span>
+<span class="nc bnc" id="L815" title="All 9 branches missed.">            return switch (pos) {</span>
+<span class="nc" id="L816">                case 0 -&gt; tower10;</span>
+<span class="nc" id="L817">                case 1 -&gt; tower11;</span>
+<span class="nc" id="L818">                case 2 -&gt; tower12;</span>
+<span class="nc" id="L819">                case 3 -&gt; tower13;</span>
+<span class="nc" id="L820">                case 4 -&gt; tower14;</span>
+<span class="nc" id="L821">                case 5 -&gt; tower15;</span>
+<span class="nc" id="L822">                case 6 -&gt; tower16;</span>
+<span class="nc" id="L823">                case 7 -&gt; tower17;</span>
+<span class="nc" id="L824">                default -&gt; null;</span>
+            };
+        } else {
+<span class="nc bnc" id="L827" title="All 9 branches missed.">            return switch (pos) {</span>
+<span class="nc" id="L828">                case 0 -&gt; tower20;</span>
+<span class="nc" id="L829">                case 1 -&gt; tower21;</span>
+<span class="nc" id="L830">                case 2 -&gt; tower22;</span>
+<span class="nc" id="L831">                case 3 -&gt; tower23;</span>
+<span class="nc" id="L832">                case 4 -&gt; tower24;</span>
+<span class="nc" id="L833">                case 5 -&gt; tower25;</span>
+<span class="nc" id="L834">                case 6 -&gt; tower26;</span>
+<span class="nc" id="L835">                case 7 -&gt; tower27;</span>
+<span class="nc" id="L836">                default -&gt; null;</span>
+            };
+        }
+    }
+
+   private void updateisland0(Island i){
+<span class="nc" id="L842">       int green=0, red=0, yellow=0, pink=0, blue=0;</span>
+<span class="nc bnc" id="L843" title="All 2 branches missed.">       for(Student s: i.getStudents()){</span>
+<span class="nc bnc" id="L844" title="All 2 branches missed.">           if(s.getColour().ordinal() == 0)</span>
+<span class="nc" id="L845">               green++;</span>
+<span class="nc bnc" id="L846" title="All 2 branches missed.">           else if (s.getColour().ordinal() == 1)</span>
+<span class="nc" id="L847">               red++;</span>
+<span class="nc bnc" id="L848" title="All 2 branches missed.">           else if (s.getColour().ordinal() == 2)</span>
+<span class="nc" id="L849">               yellow++;</span>
+<span class="nc bnc" id="L850" title="All 2 branches missed.">           else if (s.getColour().ordinal() == 3)</span>
+<span class="nc" id="L851">               pink++;</span>
+<span class="nc bnc" id="L852" title="All 2 branches missed.">           else if (s.getColour().ordinal() == 4)</span>
+<span class="nc" id="L853">               blue++;</span>
+<span class="nc" id="L854">       }</span>
+<span class="nc bnc" id="L855" title="All 2 branches missed.">       if(green == 0){</span>
+<span class="nc" id="L856">           greenIsland0.setVisible(false);</span>
+<span class="nc" id="L857">           greenText0.setVisible(false);</span>
+       } else {
+<span class="nc" id="L859">           greenIsland0.setVisible(true);</span>
+<span class="nc" id="L860">           greenText0.setVisible(true);</span>
+<span class="nc" id="L861">           greenText0.setText(String.valueOf(green));</span>
+       }
+<span class="nc bnc" id="L863" title="All 2 branches missed.">       if(red == 0){</span>
+<span class="nc" id="L864">           redIsland0.setVisible(false);</span>
+<span class="nc" id="L865">           redText0.setVisible(false);</span>
+       } else {
+<span class="nc" id="L867">           redIsland0.setVisible(true);</span>
+<span class="nc" id="L868">           redText0.setVisible(true);</span>
+<span class="nc" id="L869">           redText0.setText(String.valueOf(red));</span>
+       }
+<span class="nc bnc" id="L871" title="All 2 branches missed.">       if(yellow == 0){</span>
+<span class="nc" id="L872">           yellowIsland0.setVisible(false);</span>
+<span class="nc" id="L873">           yellowText0.setVisible(false);</span>
+       } else {
+<span class="nc" id="L875">           yellowIsland0.setVisible(true);</span>
+<span class="nc" id="L876">           yellowText0.setVisible(true);</span>
+<span class="nc" id="L877">           yellowText0.setText(String.valueOf(yellow));</span>
+       }
+<span class="nc bnc" id="L879" title="All 2 branches missed.">       if(pink == 0){</span>
+<span class="nc" id="L880">           pinkIsland0.setVisible(false);</span>
+<span class="nc" id="L881">           pinkText0.setVisible(false);</span>
+       } else {
+<span class="nc" id="L883">           pinkIsland0.setVisible(true);</span>
+<span class="nc" id="L884">           pinkText0.setVisible(true);</span>
+<span class="nc" id="L885">           pinkText0.setText(String.valueOf(pink));</span>
+       }
+<span class="nc bnc" id="L887" title="All 2 branches missed.">       if(blue == 0){</span>
+<span class="nc" id="L888">           blueIsland0.setVisible(false);</span>
+<span class="nc" id="L889">           blueText0.setVisible(false);</span>
+       } else {
+<span class="nc" id="L891">           blueIsland0.setVisible(true);</span>
+<span class="nc" id="L892">           blueText0.setVisible(true);</span>
+<span class="nc" id="L893">           blueText0.setText(String.valueOf(blue));</span>
+       }
+
+<span class="nc bnc" id="L896" title="All 2 branches missed.">       if(i.getNumTower() == 0){</span>
+<span class="nc" id="L897">           towerIsland0.setImage(null);</span>
+<span class="nc" id="L898">           towerText0.setVisible(false);</span>
+       } else {
+<span class="nc bnc" id="L900" title="All 2 branches missed.">           if(i.getTowerColor().equals(TowerColour.Black))</span>
+<span class="nc" id="L901">               towerIsland0.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/black_tower.png&quot;))));</span>
+<span class="nc bnc" id="L902" title="All 2 branches missed.">           else if (i.getTowerColor().equals(TowerColour.White)) {</span>
+<span class="nc" id="L903">               towerIsland0.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/white_tower.png&quot;))));</span>
+<span class="nc bnc" id="L904" title="All 2 branches missed.">           } else if (i.getTowerColor().equals(TowerColour.Grey)) {</span>
+<span class="nc" id="L905">               towerIsland0.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/grey_tower.png&quot;))));</span>
+           }
+<span class="nc" id="L907">           towerText0.setVisible(true);</span>
+<span class="nc" id="L908">           towerText0.setText(String.valueOf(i.getNumTower()));</span>
+       }
+
+<span class="nc bnc" id="L911" title="All 2 branches missed.">       mothernature0.setVisible(model.getGameBoard().getMotherNature() == 0);</span>
+<span class="nc" id="L912">   }</span>
+    private void updateisland1(Island i){
+<span class="nc" id="L914">        int green=0, red=0, yellow=0, pink=0, blue=0;</span>
+<span class="nc bnc" id="L915" title="All 2 branches missed.">        for(Student s: i.getStudents()){</span>
+<span class="nc bnc" id="L916" title="All 2 branches missed.">            if(s.getColour().ordinal() == 0)</span>
+<span class="nc" id="L917">                green++;</span>
+<span class="nc bnc" id="L918" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 1)</span>
+<span class="nc" id="L919">                red++;</span>
+<span class="nc bnc" id="L920" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 2)</span>
+<span class="nc" id="L921">                yellow++;</span>
+<span class="nc bnc" id="L922" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 3)</span>
+<span class="nc" id="L923">                pink++;</span>
+<span class="nc bnc" id="L924" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 4)</span>
+<span class="nc" id="L925">                blue++;</span>
+<span class="nc" id="L926">        }</span>
+<span class="nc bnc" id="L927" title="All 2 branches missed.">        if(green == 0){</span>
+<span class="nc" id="L928">            greenIsland1.setVisible(false);</span>
+<span class="nc" id="L929">            greenText1.setVisible(false);</span>
+        } else {
+<span class="nc" id="L931">            greenIsland1.setVisible(true);</span>
+<span class="nc" id="L932">            greenText1.setVisible(true);</span>
+<span class="nc" id="L933">            greenText1.setText(String.valueOf(green));</span>
+        }
+<span class="nc bnc" id="L935" title="All 2 branches missed.">        if(red == 0){</span>
+<span class="nc" id="L936">            redIsland1.setVisible(false);</span>
+<span class="nc" id="L937">            redText1.setVisible(false);</span>
+        } else {
+<span class="nc" id="L939">            redIsland1.setVisible(true);</span>
+<span class="nc" id="L940">            redText1.setVisible(true);</span>
+<span class="nc" id="L941">            redText1.setText(String.valueOf(red));</span>
+        }
+<span class="nc bnc" id="L943" title="All 2 branches missed.">        if(yellow == 0){</span>
+<span class="nc" id="L944">            yellowIsland1.setVisible(false);</span>
+<span class="nc" id="L945">            yellowText1.setVisible(false);</span>
+        } else {
+<span class="nc" id="L947">            yellowIsland1.setVisible(true);</span>
+<span class="nc" id="L948">            yellowText1.setVisible(true);</span>
+<span class="nc" id="L949">            yellowText1.setText(String.valueOf(yellow));</span>
+        }
+<span class="nc bnc" id="L951" title="All 2 branches missed.">        if(pink == 0){</span>
+<span class="nc" id="L952">            pinkIsland1.setVisible(false);</span>
+<span class="nc" id="L953">            pinkText1.setVisible(false);</span>
+        } else {
+<span class="nc" id="L955">            pinkIsland1.setVisible(true);</span>
+<span class="nc" id="L956">            pinkText1.setVisible(true);</span>
+<span class="nc" id="L957">            pinkText1.setText(String.valueOf(pink));</span>
+        }
+<span class="nc bnc" id="L959" title="All 2 branches missed.">        if(blue == 0){</span>
+<span class="nc" id="L960">            blueIsland1.setVisible(false);</span>
+<span class="nc" id="L961">            blueText1.setVisible(false);</span>
+        } else {
+<span class="nc" id="L963">            blueIsland1.setVisible(true);</span>
+<span class="nc" id="L964">            blueText1.setVisible(true);</span>
+<span class="nc" id="L965">            blueText1.setText(String.valueOf(blue));</span>
+        }
+
+<span class="nc bnc" id="L968" title="All 2 branches missed.">        if(i.getNumTower() == 0){</span>
+<span class="nc" id="L969">            towerIsland1.setImage(null);</span>
+<span class="nc" id="L970">            towerText1.setVisible(false);</span>
+        } else {
+<span class="nc bnc" id="L972" title="All 2 branches missed.">            if(i.getTowerColor().equals(TowerColour.Black))</span>
+<span class="nc" id="L973">                towerIsland1.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/black_tower.png&quot;))));</span>
+<span class="nc bnc" id="L974" title="All 2 branches missed.">            else if (i.getTowerColor().equals(TowerColour.White)) {</span>
+<span class="nc" id="L975">                towerIsland1.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/white_tower.png&quot;))));</span>
+<span class="nc bnc" id="L976" title="All 2 branches missed.">            } else if (i.getTowerColor().equals(TowerColour.Grey)) {</span>
+<span class="nc" id="L977">                towerIsland1.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/grey_tower.png&quot;))));</span>
+            }
+<span class="nc" id="L979">            towerText1.setVisible(true);</span>
+<span class="nc" id="L980">            towerText1.setText(String.valueOf(i.getNumTower()));</span>
+        }
+
+<span class="nc bnc" id="L983" title="All 2 branches missed.">        mothernature1.setVisible(model.getGameBoard().getMotherNature() == 1);</span>
+<span class="nc" id="L984">    }</span>
+    private void updateisland2(Island i){
+<span class="nc" id="L986">        int green=0, red=0, yellow=0, pink=0, blue=0;</span>
+<span class="nc bnc" id="L987" title="All 2 branches missed.">        for(Student s: i.getStudents()){</span>
+<span class="nc bnc" id="L988" title="All 2 branches missed.">            if(s.getColour().ordinal() == 0)</span>
+<span class="nc" id="L989">                green++;</span>
+<span class="nc bnc" id="L990" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 1)</span>
+<span class="nc" id="L991">                red++;</span>
+<span class="nc bnc" id="L992" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 2)</span>
+<span class="nc" id="L993">                yellow++;</span>
+<span class="nc bnc" id="L994" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 3)</span>
+<span class="nc" id="L995">                pink++;</span>
+<span class="nc bnc" id="L996" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 4)</span>
+<span class="nc" id="L997">                blue++;</span>
+<span class="nc" id="L998">        }</span>
+<span class="nc bnc" id="L999" title="All 2 branches missed.">        if(green == 0){</span>
+<span class="nc" id="L1000">            greenIsland2.setVisible(false);</span>
+<span class="nc" id="L1001">            greenText2.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1003">            greenIsland2.setVisible(true);</span>
+<span class="nc" id="L1004">            greenText2.setVisible(true);</span>
+<span class="nc" id="L1005">            greenText2.setText(String.valueOf(green));</span>
+        }
+<span class="nc bnc" id="L1007" title="All 2 branches missed.">        if(red == 0){</span>
+<span class="nc" id="L1008">            redIsland2.setVisible(false);</span>
+<span class="nc" id="L1009">            redText2.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1011">            redIsland2.setVisible(true);</span>
+<span class="nc" id="L1012">            redText2.setVisible(true);</span>
+<span class="nc" id="L1013">            redText2.setText(String.valueOf(red));</span>
+        }
+<span class="nc bnc" id="L1015" title="All 2 branches missed.">        if(yellow == 0){</span>
+<span class="nc" id="L1016">            yellowIsland2.setVisible(false);</span>
+<span class="nc" id="L1017">            yellowText2.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1019">            yellowIsland2.setVisible(true);</span>
+<span class="nc" id="L1020">            yellowText2.setVisible(true);</span>
+<span class="nc" id="L1021">            yellowText2.setText(String.valueOf(yellow));</span>
+        }
+<span class="nc bnc" id="L1023" title="All 2 branches missed.">        if(pink == 0){</span>
+<span class="nc" id="L1024">            pinkIsland2.setVisible(false);</span>
+<span class="nc" id="L1025">            pinkText2.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1027">            pinkIsland2.setVisible(true);</span>
+<span class="nc" id="L1028">            pinkText2.setVisible(true);</span>
+<span class="nc" id="L1029">            pinkText2.setText(String.valueOf(pink));</span>
+        }
+<span class="nc bnc" id="L1031" title="All 2 branches missed.">        if(blue == 0){</span>
+<span class="nc" id="L1032">            blueIsland2.setVisible(false);</span>
+<span class="nc" id="L1033">            blueText2.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1035">            blueIsland2.setVisible(true);</span>
+<span class="nc" id="L1036">            blueText2.setVisible(true);</span>
+<span class="nc" id="L1037">            blueText2.setText(String.valueOf(blue));</span>
+        }
+
+<span class="nc bnc" id="L1040" title="All 2 branches missed.">        if(i.getNumTower() == 0){</span>
+<span class="nc" id="L1041">            towerIsland2.setImage(null);</span>
+<span class="nc" id="L1042">            towerText2.setVisible(false);</span>
+        } else {
+<span class="nc bnc" id="L1044" title="All 2 branches missed.">            if(i.getTowerColor().equals(TowerColour.Black))</span>
+<span class="nc" id="L1045">                towerIsland2.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/black_tower.png&quot;))));</span>
+<span class="nc bnc" id="L1046" title="All 2 branches missed.">            else if (i.getTowerColor().equals(TowerColour.White)) {</span>
+<span class="nc" id="L1047">                towerIsland2.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/white_tower.png&quot;))));</span>
+<span class="nc bnc" id="L1048" title="All 2 branches missed.">            } else if (i.getTowerColor().equals(TowerColour.Grey)) {</span>
+<span class="nc" id="L1049">                towerIsland2.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/grey_tower.png&quot;))));</span>
+            }
+<span class="nc" id="L1051">            towerText2.setVisible(true);</span>
+<span class="nc" id="L1052">            towerText2.setText(String.valueOf(i.getNumTower()));</span>
+        }
+
+<span class="nc bnc" id="L1055" title="All 2 branches missed.">        mothernature2.setVisible(model.getGameBoard().getMotherNature() == 2);</span>
+<span class="nc" id="L1056">    }</span>
+
+    private void updateisland3(Island i){
+<span class="nc" id="L1059">        int green=0, red=0, yellow=0, pink=0, blue=0;</span>
+<span class="nc bnc" id="L1060" title="All 2 branches missed.">        for(Student s: i.getStudents()){</span>
+<span class="nc bnc" id="L1061" title="All 2 branches missed.">            if(s.getColour().ordinal() == 0)</span>
+<span class="nc" id="L1062">                green++;</span>
+<span class="nc bnc" id="L1063" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 1)</span>
+<span class="nc" id="L1064">                red++;</span>
+<span class="nc bnc" id="L1065" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 2)</span>
+<span class="nc" id="L1066">                yellow++;</span>
+<span class="nc bnc" id="L1067" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 3)</span>
+<span class="nc" id="L1068">                pink++;</span>
+<span class="nc bnc" id="L1069" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 4)</span>
+<span class="nc" id="L1070">                blue++;</span>
+<span class="nc" id="L1071">        }</span>
+<span class="nc bnc" id="L1072" title="All 2 branches missed.">        if(green == 0){</span>
+<span class="nc" id="L1073">            greenIsland3.setVisible(false);</span>
+<span class="nc" id="L1074">            greenText3.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1076">            greenIsland3.setVisible(true);</span>
+<span class="nc" id="L1077">            greenText3.setVisible(true);</span>
+<span class="nc" id="L1078">            greenText3.setText(String.valueOf(green));</span>
+        }
+<span class="nc bnc" id="L1080" title="All 2 branches missed.">        if(red == 0){</span>
+<span class="nc" id="L1081">            redIsland3.setVisible(false);</span>
+<span class="nc" id="L1082">            redText3.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1084">            redIsland3.setVisible(true);</span>
+<span class="nc" id="L1085">            redText3.setVisible(true);</span>
+<span class="nc" id="L1086">            redText3.setText(String.valueOf(red));</span>
+        }
+<span class="nc bnc" id="L1088" title="All 2 branches missed.">        if(yellow == 0){</span>
+<span class="nc" id="L1089">            yellowIsland3.setVisible(false);</span>
+<span class="nc" id="L1090">            yellowText3.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1092">            yellowIsland3.setVisible(true);</span>
+<span class="nc" id="L1093">            yellowText3.setVisible(true);</span>
+<span class="nc" id="L1094">            yellowText3.setText(String.valueOf(yellow));</span>
+        }
+<span class="nc bnc" id="L1096" title="All 2 branches missed.">        if(pink == 0){</span>
+<span class="nc" id="L1097">            pinkIsland3.setVisible(false);</span>
+<span class="nc" id="L1098">            pinkText3.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1100">            pinkIsland3.setVisible(true);</span>
+<span class="nc" id="L1101">            pinkText3.setVisible(true);</span>
+<span class="nc" id="L1102">            pinkText3.setText(String.valueOf(pink));</span>
+        }
+<span class="nc bnc" id="L1104" title="All 2 branches missed.">        if(blue == 0){</span>
+<span class="nc" id="L1105">            blueIsland3.setVisible(false);</span>
+<span class="nc" id="L1106">            blueText3.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1108">            blueIsland3.setVisible(true);</span>
+<span class="nc" id="L1109">            blueText3.setVisible(true);</span>
+<span class="nc" id="L1110">            blueText3.setText(String.valueOf(blue));</span>
+        }
+
+<span class="nc bnc" id="L1113" title="All 2 branches missed.">        if(i.getNumTower() == 0){</span>
+<span class="nc" id="L1114">            towerIsland3.setImage(null);</span>
+<span class="nc" id="L1115">            towerText3.setVisible(false);</span>
+        } else {
+<span class="nc bnc" id="L1117" title="All 2 branches missed.">            if(i.getTowerColor().equals(TowerColour.Black))</span>
+<span class="nc" id="L1118">                towerIsland3.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/black_tower.png&quot;))));</span>
+<span class="nc bnc" id="L1119" title="All 2 branches missed.">            else if (i.getTowerColor().equals(TowerColour.White)) {</span>
+<span class="nc" id="L1120">                towerIsland3.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/white_tower.png&quot;))));</span>
+<span class="nc bnc" id="L1121" title="All 2 branches missed.">            } else if (i.getTowerColor().equals(TowerColour.Grey)) {</span>
+<span class="nc" id="L1122">                towerIsland3.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/grey_tower.png&quot;))));</span>
+            }
+<span class="nc" id="L1124">            towerText3.setVisible(true);</span>
+<span class="nc" id="L1125">            towerText3.setText(String.valueOf(i.getNumTower()));</span>
+        }
+
+<span class="nc bnc" id="L1128" title="All 2 branches missed.">        mothernature3.setVisible(model.getGameBoard().getMotherNature() == 3);</span>
+<span class="nc" id="L1129">    }</span>
+
+    private void updateisland4(Island i){
+<span class="nc" id="L1132">        int green=0, red=0, yellow=0, pink=0, blue=0;</span>
+<span class="nc bnc" id="L1133" title="All 2 branches missed.">        for(Student s: i.getStudents()){</span>
+<span class="nc bnc" id="L1134" title="All 2 branches missed.">            if(s.getColour().ordinal() == 0)</span>
+<span class="nc" id="L1135">                green++;</span>
+<span class="nc bnc" id="L1136" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 1)</span>
+<span class="nc" id="L1137">                red++;</span>
+<span class="nc bnc" id="L1138" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 2)</span>
+<span class="nc" id="L1139">                yellow++;</span>
+<span class="nc bnc" id="L1140" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 3)</span>
+<span class="nc" id="L1141">                pink++;</span>
+<span class="nc bnc" id="L1142" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 4)</span>
+<span class="nc" id="L1143">                blue++;</span>
+<span class="nc" id="L1144">        }</span>
+<span class="nc bnc" id="L1145" title="All 2 branches missed.">        if(green == 0){</span>
+<span class="nc" id="L1146">            greenIsland4.setVisible(false);</span>
+<span class="nc" id="L1147">            greenText4.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1149">            greenIsland4.setVisible(true);</span>
+<span class="nc" id="L1150">            greenText4.setVisible(true);</span>
+<span class="nc" id="L1151">            greenText4.setText(String.valueOf(green));</span>
+        }
+<span class="nc bnc" id="L1153" title="All 2 branches missed.">        if(red == 0){</span>
+<span class="nc" id="L1154">            redIsland4.setVisible(false);</span>
+<span class="nc" id="L1155">            redText4.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1157">            redIsland4.setVisible(true);</span>
+<span class="nc" id="L1158">            redText4.setVisible(true);</span>
+<span class="nc" id="L1159">            redText4.setText(String.valueOf(red));</span>
+        }
+<span class="nc bnc" id="L1161" title="All 2 branches missed.">        if(yellow == 0){</span>
+<span class="nc" id="L1162">            yellowIsland4.setVisible(false);</span>
+<span class="nc" id="L1163">            yellowText4.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1165">            yellowIsland4.setVisible(true);</span>
+<span class="nc" id="L1166">            yellowText4.setVisible(true);</span>
+<span class="nc" id="L1167">            yellowText4.setText(String.valueOf(yellow));</span>
+        }
+<span class="nc bnc" id="L1169" title="All 2 branches missed.">        if(pink == 0){</span>
+<span class="nc" id="L1170">            pinkIsland4.setVisible(false);</span>
+<span class="nc" id="L1171">            pinkText4.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1173">            pinkIsland4.setVisible(true);</span>
+<span class="nc" id="L1174">            pinkText4.setVisible(true);</span>
+<span class="nc" id="L1175">            pinkText4.setText(String.valueOf(pink));</span>
+        }
+<span class="nc bnc" id="L1177" title="All 2 branches missed.">        if(blue == 0){</span>
+<span class="nc" id="L1178">            blueIsland4.setVisible(false);</span>
+<span class="nc" id="L1179">            blueText4.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1181">            blueIsland4.setVisible(true);</span>
+<span class="nc" id="L1182">            blueText4.setVisible(true);</span>
+<span class="nc" id="L1183">            blueText4.setText(String.valueOf(blue));</span>
+        }
+
+<span class="nc bnc" id="L1186" title="All 2 branches missed.">        if(i.getNumTower() == 0){</span>
+<span class="nc" id="L1187">            towerIsland4.setImage(null);</span>
+<span class="nc" id="L1188">            towerText4.setVisible(false);</span>
+        } else {
+<span class="nc bnc" id="L1190" title="All 2 branches missed.">            if(i.getTowerColor().equals(TowerColour.Black))</span>
+<span class="nc" id="L1191">                towerIsland4.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/black_tower.png&quot;))));</span>
+<span class="nc bnc" id="L1192" title="All 2 branches missed.">            else if (i.getTowerColor().equals(TowerColour.White)) {</span>
+<span class="nc" id="L1193">                towerIsland4.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/white_tower.png&quot;))));</span>
+<span class="nc bnc" id="L1194" title="All 2 branches missed.">            } else if (i.getTowerColor().equals(TowerColour.Grey)) {</span>
+<span class="nc" id="L1195">                towerIsland4.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/grey_tower.png&quot;))));</span>
+            }
+<span class="nc" id="L1197">            towerText4.setVisible(true);</span>
+<span class="nc" id="L1198">            towerText4.setText(String.valueOf(i.getNumTower()));</span>
+        }
+
+<span class="nc bnc" id="L1201" title="All 2 branches missed.">        mothernature4.setVisible(model.getGameBoard().getMotherNature() == 4);</span>
+<span class="nc" id="L1202">    }</span>
+
+    private void updateisland5(Island i){
+<span class="nc" id="L1205">        int green=0, red=0, yellow=0, pink=0, blue=0;</span>
+<span class="nc bnc" id="L1206" title="All 2 branches missed.">        for(Student s: i.getStudents()){</span>
+<span class="nc bnc" id="L1207" title="All 2 branches missed.">            if(s.getColour().ordinal() == 0)</span>
+<span class="nc" id="L1208">                green++;</span>
+<span class="nc bnc" id="L1209" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 1)</span>
+<span class="nc" id="L1210">                red++;</span>
+<span class="nc bnc" id="L1211" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 2)</span>
+<span class="nc" id="L1212">                yellow++;</span>
+<span class="nc bnc" id="L1213" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 3)</span>
+<span class="nc" id="L1214">                pink++;</span>
+<span class="nc bnc" id="L1215" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 4)</span>
+<span class="nc" id="L1216">                blue++;</span>
+<span class="nc" id="L1217">        }</span>
+<span class="nc bnc" id="L1218" title="All 2 branches missed.">        if(green == 0){</span>
+<span class="nc" id="L1219">            greenIsland5.setVisible(false);</span>
+<span class="nc" id="L1220">            greenText5.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1222">            greenIsland5.setVisible(true);</span>
+<span class="nc" id="L1223">            greenText5.setVisible(true);</span>
+<span class="nc" id="L1224">            greenText5.setText(String.valueOf(green));</span>
+        }
+<span class="nc bnc" id="L1226" title="All 2 branches missed.">        if(red == 0){</span>
+<span class="nc" id="L1227">            redIsland5.setVisible(false);</span>
+<span class="nc" id="L1228">            redText5.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1230">            redIsland5.setVisible(true);</span>
+<span class="nc" id="L1231">            redText5.setVisible(true);</span>
+<span class="nc" id="L1232">            redText5.setText(String.valueOf(red));</span>
+        }
+<span class="nc bnc" id="L1234" title="All 2 branches missed.">        if(yellow == 0){</span>
+<span class="nc" id="L1235">            yellowIsland5.setVisible(false);</span>
+<span class="nc" id="L1236">            yellowText5.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1238">            yellowIsland5.setVisible(true);</span>
+<span class="nc" id="L1239">            yellowText5.setVisible(true);</span>
+<span class="nc" id="L1240">            yellowText5.setText(String.valueOf(yellow));</span>
+        }
+<span class="nc bnc" id="L1242" title="All 2 branches missed.">        if(pink == 0){</span>
+<span class="nc" id="L1243">            pinkIsland5.setVisible(false);</span>
+<span class="nc" id="L1244">            pinkText5.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1246">            pinkIsland5.setVisible(true);</span>
+<span class="nc" id="L1247">            pinkText5.setVisible(true);</span>
+<span class="nc" id="L1248">            pinkText5.setText(String.valueOf(pink));</span>
+        }
+<span class="nc bnc" id="L1250" title="All 2 branches missed.">        if(blue == 0){</span>
+<span class="nc" id="L1251">            blueIsland5.setVisible(false);</span>
+<span class="nc" id="L1252">            blueText5.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1254">            blueIsland5.setVisible(true);</span>
+<span class="nc" id="L1255">            blueText5.setVisible(true);</span>
+<span class="nc" id="L1256">            blueText5.setText(String.valueOf(blue));</span>
+        }
+
+<span class="nc bnc" id="L1259" title="All 2 branches missed.">        if(i.getNumTower() == 0){</span>
+<span class="nc" id="L1260">            towerIsland5.setImage(null);</span>
+<span class="nc" id="L1261">            towerText5.setVisible(false);</span>
+        } else {
+<span class="nc bnc" id="L1263" title="All 2 branches missed.">            if(i.getTowerColor().equals(TowerColour.Black))</span>
+<span class="nc" id="L1264">                towerIsland5.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/black_tower.png&quot;))));</span>
+<span class="nc bnc" id="L1265" title="All 2 branches missed.">            else if (i.getTowerColor().equals(TowerColour.White)) {</span>
+<span class="nc" id="L1266">                towerIsland5.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/white_tower.png&quot;))));</span>
+<span class="nc bnc" id="L1267" title="All 2 branches missed.">            } else if (i.getTowerColor().equals(TowerColour.Grey)) {</span>
+<span class="nc" id="L1268">                towerIsland5.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/grey_tower.png&quot;))));</span>
+            }
+<span class="nc" id="L1270">            towerText5.setVisible(true);</span>
+<span class="nc" id="L1271">            towerText5.setText(String.valueOf(i.getNumTower()));</span>
+        }
+
+<span class="nc bnc" id="L1274" title="All 2 branches missed.">        mothernature5.setVisible(model.getGameBoard().getMotherNature() == 5);</span>
+<span class="nc" id="L1275">    }</span>
+
+    private void updateisland6(Island i){
+<span class="nc" id="L1278">        int green=0, red=0, yellow=0, pink=0, blue=0;</span>
+<span class="nc bnc" id="L1279" title="All 2 branches missed.">        for(Student s: i.getStudents()){</span>
+<span class="nc bnc" id="L1280" title="All 2 branches missed.">            if(s.getColour().ordinal() == 0)</span>
+<span class="nc" id="L1281">                green++;</span>
+<span class="nc bnc" id="L1282" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 1)</span>
+<span class="nc" id="L1283">                red++;</span>
+<span class="nc bnc" id="L1284" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 2)</span>
+<span class="nc" id="L1285">                yellow++;</span>
+<span class="nc bnc" id="L1286" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 3)</span>
+<span class="nc" id="L1287">                pink++;</span>
+<span class="nc bnc" id="L1288" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 4)</span>
+<span class="nc" id="L1289">                blue++;</span>
+<span class="nc" id="L1290">        }</span>
+<span class="nc bnc" id="L1291" title="All 2 branches missed.">        if(green == 0){</span>
+<span class="nc" id="L1292">            greenIsland6.setVisible(false);</span>
+<span class="nc" id="L1293">            greenText6.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1295">            greenIsland6.setVisible(true);</span>
+<span class="nc" id="L1296">            greenText6.setVisible(true);</span>
+<span class="nc" id="L1297">            greenText6.setText(String.valueOf(green));</span>
+        }
+<span class="nc bnc" id="L1299" title="All 2 branches missed.">        if(red == 0){</span>
+<span class="nc" id="L1300">            redIsland6.setVisible(false);</span>
+<span class="nc" id="L1301">            redText6.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1303">            redIsland6.setVisible(true);</span>
+<span class="nc" id="L1304">            redText6.setVisible(true);</span>
+<span class="nc" id="L1305">            redText6.setText(String.valueOf(red));</span>
+        }
+<span class="nc bnc" id="L1307" title="All 2 branches missed.">        if(yellow == 0){</span>
+<span class="nc" id="L1308">            yellowIsland6.setVisible(false);</span>
+<span class="nc" id="L1309">            yellowText6.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1311">            yellowIsland6.setVisible(true);</span>
+<span class="nc" id="L1312">            yellowText6.setVisible(true);</span>
+<span class="nc" id="L1313">            yellowText6.setText(String.valueOf(yellow));</span>
+        }
+<span class="nc bnc" id="L1315" title="All 2 branches missed.">        if(pink == 0){</span>
+<span class="nc" id="L1316">            pinkIsland6.setVisible(false);</span>
+<span class="nc" id="L1317">            pinkText6.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1319">            pinkIsland6.setVisible(true);</span>
+<span class="nc" id="L1320">            pinkText6.setVisible(true);</span>
+<span class="nc" id="L1321">            pinkText6.setText(String.valueOf(pink));</span>
+        }
+<span class="nc bnc" id="L1323" title="All 2 branches missed.">        if(blue == 0){</span>
+<span class="nc" id="L1324">            blueIsland6.setVisible(false);</span>
+<span class="nc" id="L1325">            blueText6.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1327">            blueIsland6.setVisible(true);</span>
+<span class="nc" id="L1328">            blueText6.setVisible(true);</span>
+<span class="nc" id="L1329">            blueText6.setText(String.valueOf(blue));</span>
+        }
+
+<span class="nc bnc" id="L1332" title="All 2 branches missed.">        if(i.getNumTower() == 0){</span>
+<span class="nc" id="L1333">            towerIsland6.setImage(null);</span>
+<span class="nc" id="L1334">            towerText6.setVisible(false);</span>
+        } else {
+<span class="nc bnc" id="L1336" title="All 2 branches missed.">            if(i.getTowerColor().equals(TowerColour.Black))</span>
+<span class="nc" id="L1337">                towerIsland6.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/black_tower.png&quot;))));</span>
+<span class="nc bnc" id="L1338" title="All 2 branches missed.">            else if (i.getTowerColor().equals(TowerColour.White)) {</span>
+<span class="nc" id="L1339">                towerIsland6.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/white_tower.png&quot;))));</span>
+<span class="nc bnc" id="L1340" title="All 2 branches missed.">            } else if (i.getTowerColor().equals(TowerColour.Grey)) {</span>
+<span class="nc" id="L1341">                towerIsland6.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/grey_tower.png&quot;))));</span>
+            }
+<span class="nc" id="L1343">            towerText6.setVisible(true);</span>
+<span class="nc" id="L1344">            towerText6.setText(String.valueOf(i.getNumTower()));</span>
+        }
+
+<span class="nc bnc" id="L1347" title="All 2 branches missed.">        mothernature6.setVisible(model.getGameBoard().getMotherNature() == 6);</span>
+<span class="nc" id="L1348">    }</span>
+
+    private void updateisland7(Island i){
+<span class="nc" id="L1351">        int green=0, red=0, yellow=0, pink=0, blue=0;</span>
+<span class="nc bnc" id="L1352" title="All 2 branches missed.">        for(Student s: i.getStudents()){</span>
+<span class="nc bnc" id="L1353" title="All 2 branches missed.">            if(s.getColour().ordinal() == 0)</span>
+<span class="nc" id="L1354">                green++;</span>
+<span class="nc bnc" id="L1355" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 1)</span>
+<span class="nc" id="L1356">                red++;</span>
+<span class="nc bnc" id="L1357" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 2)</span>
+<span class="nc" id="L1358">                yellow++;</span>
+<span class="nc bnc" id="L1359" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 3)</span>
+<span class="nc" id="L1360">                pink++;</span>
+<span class="nc bnc" id="L1361" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 4)</span>
+<span class="nc" id="L1362">                blue++;</span>
+<span class="nc" id="L1363">        }</span>
+<span class="nc bnc" id="L1364" title="All 2 branches missed.">        if(green == 0){</span>
+<span class="nc" id="L1365">            greenIsland7.setVisible(false);</span>
+<span class="nc" id="L1366">            greenText7.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1368">            greenIsland7.setVisible(true);</span>
+<span class="nc" id="L1369">            greenText7.setVisible(true);</span>
+<span class="nc" id="L1370">            greenText7.setText(String.valueOf(green));</span>
+        }
+<span class="nc bnc" id="L1372" title="All 2 branches missed.">        if(red == 0){</span>
+<span class="nc" id="L1373">            redIsland7.setVisible(false);</span>
+<span class="nc" id="L1374">            redText7.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1376">            redIsland7.setVisible(true);</span>
+<span class="nc" id="L1377">            redText7.setVisible(true);</span>
+<span class="nc" id="L1378">            redText7.setText(String.valueOf(red));</span>
+        }
+<span class="nc bnc" id="L1380" title="All 2 branches missed.">        if(yellow == 0){</span>
+<span class="nc" id="L1381">            yellowIsland7.setVisible(false);</span>
+<span class="nc" id="L1382">            yellowText7.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1384">            yellowIsland7.setVisible(true);</span>
+<span class="nc" id="L1385">            yellowText7.setVisible(true);</span>
+<span class="nc" id="L1386">            yellowText7.setText(String.valueOf(yellow));</span>
+        }
+<span class="nc bnc" id="L1388" title="All 2 branches missed.">        if(pink == 0){</span>
+<span class="nc" id="L1389">            pinkIsland7.setVisible(false);</span>
+<span class="nc" id="L1390">            pinkText7.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1392">            pinkIsland7.setVisible(true);</span>
+<span class="nc" id="L1393">            pinkText7.setVisible(true);</span>
+<span class="nc" id="L1394">            pinkText7.setText(String.valueOf(pink));</span>
+        }
+<span class="nc bnc" id="L1396" title="All 2 branches missed.">        if(blue == 0){</span>
+<span class="nc" id="L1397">            blueIsland7.setVisible(false);</span>
+<span class="nc" id="L1398">            blueText7.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1400">            blueIsland7.setVisible(true);</span>
+<span class="nc" id="L1401">            blueText7.setVisible(true);</span>
+<span class="nc" id="L1402">            blueText7.setText(String.valueOf(blue));</span>
+        }
+
+<span class="nc bnc" id="L1405" title="All 2 branches missed.">        if(i.getNumTower() == 0){</span>
+<span class="nc" id="L1406">            towerIsland7.setImage(null);</span>
+<span class="nc" id="L1407">            towerText7.setVisible(false);</span>
+        } else {
+<span class="nc bnc" id="L1409" title="All 2 branches missed.">            if(i.getTowerColor().equals(TowerColour.Black))</span>
+<span class="nc" id="L1410">                towerIsland7.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/black_tower.png&quot;))));</span>
+<span class="nc bnc" id="L1411" title="All 2 branches missed.">            else if (i.getTowerColor().equals(TowerColour.White)) {</span>
+<span class="nc" id="L1412">                towerIsland7.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/white_tower.png&quot;))));</span>
+<span class="nc bnc" id="L1413" title="All 2 branches missed.">            } else if (i.getTowerColor().equals(TowerColour.Grey)) {</span>
+<span class="nc" id="L1414">                towerIsland7.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/grey_tower.png&quot;))));</span>
+            }
+<span class="nc" id="L1416">            towerText7.setVisible(true);</span>
+<span class="nc" id="L1417">            towerText7.setText(String.valueOf(i.getNumTower()));</span>
+        }
+
+<span class="nc bnc" id="L1420" title="All 2 branches missed.">        mothernature7.setVisible(model.getGameBoard().getMotherNature() == 7);</span>
+<span class="nc" id="L1421">    }</span>
+
+    private void updateisland8(Island i){
+<span class="nc" id="L1424">        int green=0, red=0, yellow=0, pink=0, blue=0;</span>
+<span class="nc bnc" id="L1425" title="All 2 branches missed.">        for(Student s: i.getStudents()){</span>
+<span class="nc bnc" id="L1426" title="All 2 branches missed.">            if(s.getColour().ordinal() == 0)</span>
+<span class="nc" id="L1427">                green++;</span>
+<span class="nc bnc" id="L1428" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 1)</span>
+<span class="nc" id="L1429">                red++;</span>
+<span class="nc bnc" id="L1430" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 2)</span>
+<span class="nc" id="L1431">                yellow++;</span>
+<span class="nc bnc" id="L1432" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 3)</span>
+<span class="nc" id="L1433">                pink++;</span>
+<span class="nc bnc" id="L1434" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 4)</span>
+<span class="nc" id="L1435">                blue++;</span>
+<span class="nc" id="L1436">        }</span>
+<span class="nc bnc" id="L1437" title="All 2 branches missed.">        if(green == 0){</span>
+<span class="nc" id="L1438">            greenIsland8.setVisible(false);</span>
+<span class="nc" id="L1439">            greenText8.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1441">            greenIsland8.setVisible(true);</span>
+<span class="nc" id="L1442">            greenText8.setVisible(true);</span>
+<span class="nc" id="L1443">            greenText8.setText(String.valueOf(green));</span>
+        }
+<span class="nc bnc" id="L1445" title="All 2 branches missed.">        if(red == 0){</span>
+<span class="nc" id="L1446">            redIsland8.setVisible(false);</span>
+<span class="nc" id="L1447">            redText8.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1449">            redIsland8.setVisible(true);</span>
+<span class="nc" id="L1450">            redText8.setVisible(true);</span>
+<span class="nc" id="L1451">            redText8.setText(String.valueOf(red));</span>
+        }
+<span class="nc bnc" id="L1453" title="All 2 branches missed.">        if(yellow == 0){</span>
+<span class="nc" id="L1454">            yellowIsland8.setVisible(false);</span>
+<span class="nc" id="L1455">            yellowText8.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1457">            yellowIsland8.setVisible(true);</span>
+<span class="nc" id="L1458">            yellowText8.setVisible(true);</span>
+<span class="nc" id="L1459">            yellowText8.setText(String.valueOf(yellow));</span>
+        }
+<span class="nc bnc" id="L1461" title="All 2 branches missed.">        if(pink == 0){</span>
+<span class="nc" id="L1462">            pinkIsland8.setVisible(false);</span>
+<span class="nc" id="L1463">            pinkText8.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1465">            pinkIsland8.setVisible(true);</span>
+<span class="nc" id="L1466">            pinkText8.setVisible(true);</span>
+<span class="nc" id="L1467">            pinkText8.setText(String.valueOf(pink));</span>
+        }
+<span class="nc bnc" id="L1469" title="All 2 branches missed.">        if(blue == 0){</span>
+<span class="nc" id="L1470">            blueIsland8.setVisible(false);</span>
+<span class="nc" id="L1471">            blueText8.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1473">            blueIsland8.setVisible(true);</span>
+<span class="nc" id="L1474">            blueText8.setVisible(true);</span>
+<span class="nc" id="L1475">            blueText8.setText(String.valueOf(blue));</span>
+        }
+
+<span class="nc bnc" id="L1478" title="All 2 branches missed.">        if(i.getNumTower() == 0){</span>
+<span class="nc" id="L1479">            towerIsland8.setImage(null);</span>
+<span class="nc" id="L1480">            towerText8.setVisible(false);</span>
+        } else {
+<span class="nc bnc" id="L1482" title="All 2 branches missed.">            if(i.getTowerColor().equals(TowerColour.Black))</span>
+<span class="nc" id="L1483">                towerIsland8.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/black_tower.png&quot;))));</span>
+<span class="nc bnc" id="L1484" title="All 2 branches missed.">            else if (i.getTowerColor().equals(TowerColour.White)) {</span>
+<span class="nc" id="L1485">                towerIsland8.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/white_tower.png&quot;))));</span>
+<span class="nc bnc" id="L1486" title="All 2 branches missed.">            } else if (i.getTowerColor().equals(TowerColour.Grey)) {</span>
+<span class="nc" id="L1487">                towerIsland8.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/grey_tower.png&quot;))));</span>
+            }
+<span class="nc" id="L1489">            towerText8.setVisible(true);</span>
+<span class="nc" id="L1490">            towerText8.setText(String.valueOf(i.getNumTower()));</span>
+        }
+
+<span class="nc bnc" id="L1493" title="All 2 branches missed.">        mothernature8.setVisible(model.getGameBoard().getMotherNature() == 8);</span>
+<span class="nc" id="L1494">    }</span>
+
+    private void updateisland9(Island i){
+<span class="nc" id="L1497">        int green=0, red=0, yellow=0, pink=0, blue=0;</span>
+<span class="nc bnc" id="L1498" title="All 2 branches missed.">        for(Student s: i.getStudents()){</span>
+<span class="nc bnc" id="L1499" title="All 2 branches missed.">            if(s.getColour().ordinal() == 0)</span>
+<span class="nc" id="L1500">                green++;</span>
+<span class="nc bnc" id="L1501" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 1)</span>
+<span class="nc" id="L1502">                red++;</span>
+<span class="nc bnc" id="L1503" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 2)</span>
+<span class="nc" id="L1504">                yellow++;</span>
+<span class="nc bnc" id="L1505" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 3)</span>
+<span class="nc" id="L1506">                pink++;</span>
+<span class="nc bnc" id="L1507" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 4)</span>
+<span class="nc" id="L1508">                blue++;</span>
+<span class="nc" id="L1509">        }</span>
+<span class="nc bnc" id="L1510" title="All 2 branches missed.">        if(green == 0){</span>
+<span class="nc" id="L1511">            greenIsland9.setVisible(false);</span>
+<span class="nc" id="L1512">            greenText9.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1514">            greenIsland9.setVisible(true);</span>
+<span class="nc" id="L1515">            greenText9.setVisible(true);</span>
+<span class="nc" id="L1516">            greenText9.setText(String.valueOf(green));</span>
+        }
+<span class="nc bnc" id="L1518" title="All 2 branches missed.">        if(red == 0){</span>
+<span class="nc" id="L1519">            redIsland9.setVisible(false);</span>
+<span class="nc" id="L1520">            redText9.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1522">            redIsland9.setVisible(true);</span>
+<span class="nc" id="L1523">            redText9.setVisible(true);</span>
+<span class="nc" id="L1524">            redText9.setText(String.valueOf(red));</span>
+        }
+<span class="nc bnc" id="L1526" title="All 2 branches missed.">        if(yellow == 0){</span>
+<span class="nc" id="L1527">            yellowIsland9.setVisible(false);</span>
+<span class="nc" id="L1528">            yellowText9.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1530">            yellowIsland9.setVisible(true);</span>
+<span class="nc" id="L1531">            yellowText9.setVisible(true);</span>
+<span class="nc" id="L1532">            yellowText9.setText(String.valueOf(yellow));</span>
+        }
+<span class="nc bnc" id="L1534" title="All 2 branches missed.">        if(pink == 0){</span>
+<span class="nc" id="L1535">            pinkIsland9.setVisible(false);</span>
+<span class="nc" id="L1536">            pinkText9.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1538">            pinkIsland9.setVisible(true);</span>
+<span class="nc" id="L1539">            pinkText9.setVisible(true);</span>
+<span class="nc" id="L1540">            pinkText9.setText(String.valueOf(pink));</span>
+        }
+<span class="nc bnc" id="L1542" title="All 2 branches missed.">        if(blue == 0){</span>
+<span class="nc" id="L1543">            blueIsland9.setVisible(false);</span>
+<span class="nc" id="L1544">            blueText9.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1546">            blueIsland9.setVisible(true);</span>
+<span class="nc" id="L1547">            blueText9.setVisible(true);</span>
+<span class="nc" id="L1548">            blueText9.setText(String.valueOf(blue));</span>
+        }
+
+<span class="nc bnc" id="L1551" title="All 2 branches missed.">        if(i.getNumTower() == 0){</span>
+<span class="nc" id="L1552">            towerIsland9.setImage(null);</span>
+<span class="nc" id="L1553">            towerText9.setVisible(false);</span>
+        } else {
+<span class="nc bnc" id="L1555" title="All 2 branches missed.">            if(i.getTowerColor().equals(TowerColour.Black))</span>
+<span class="nc" id="L1556">                towerIsland9.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/black_tower.png&quot;))));</span>
+<span class="nc bnc" id="L1557" title="All 2 branches missed.">            else if (i.getTowerColor().equals(TowerColour.White)) {</span>
+<span class="nc" id="L1558">                towerIsland9.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/white_tower.png&quot;))));</span>
+<span class="nc bnc" id="L1559" title="All 2 branches missed.">            } else if (i.getTowerColor().equals(TowerColour.Grey)) {</span>
+<span class="nc" id="L1560">                towerIsland9.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/grey_tower.png&quot;))));</span>
+            }
+<span class="nc" id="L1562">            towerText9.setVisible(true);</span>
+<span class="nc" id="L1563">            towerText9.setText(String.valueOf(i.getNumTower()));</span>
+        }
+
+<span class="nc bnc" id="L1566" title="All 2 branches missed.">        mothernature9.setVisible(model.getGameBoard().getMotherNature() == 9);</span>
+<span class="nc" id="L1567">    }</span>
+
+    private void updateisland10(Island i){
+<span class="nc" id="L1570">        int green=0, red=0, yellow=0, pink=0, blue=0;</span>
+<span class="nc bnc" id="L1571" title="All 2 branches missed.">        for(Student s: i.getStudents()){</span>
+<span class="nc bnc" id="L1572" title="All 2 branches missed.">            if(s.getColour().ordinal() == 0)</span>
+<span class="nc" id="L1573">                green++;</span>
+<span class="nc bnc" id="L1574" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 1)</span>
+<span class="nc" id="L1575">                red++;</span>
+<span class="nc bnc" id="L1576" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 2)</span>
+<span class="nc" id="L1577">                yellow++;</span>
+<span class="nc bnc" id="L1578" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 3)</span>
+<span class="nc" id="L1579">                pink++;</span>
+<span class="nc bnc" id="L1580" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 4)</span>
+<span class="nc" id="L1581">                blue++;</span>
+<span class="nc" id="L1582">        }</span>
+<span class="nc bnc" id="L1583" title="All 2 branches missed.">        if(green == 0){</span>
+<span class="nc" id="L1584">            greenIsland10.setVisible(false);</span>
+<span class="nc" id="L1585">            greenText10.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1587">            greenIsland10.setVisible(true);</span>
+<span class="nc" id="L1588">            greenText10.setVisible(true);</span>
+<span class="nc" id="L1589">            greenText10.setText(String.valueOf(green));</span>
+        }
+<span class="nc bnc" id="L1591" title="All 2 branches missed.">        if(red == 0){</span>
+<span class="nc" id="L1592">            redIsland10.setVisible(false);</span>
+<span class="nc" id="L1593">            redText10.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1595">            redIsland10.setVisible(true);</span>
+<span class="nc" id="L1596">            redText10.setVisible(true);</span>
+<span class="nc" id="L1597">            redText10.setText(String.valueOf(red));</span>
+        }
+<span class="nc bnc" id="L1599" title="All 2 branches missed.">        if(yellow == 0){</span>
+<span class="nc" id="L1600">            yellowIsland10.setVisible(false);</span>
+<span class="nc" id="L1601">            yellowText10.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1603">            yellowIsland10.setVisible(true);</span>
+<span class="nc" id="L1604">            yellowText10.setVisible(true);</span>
+<span class="nc" id="L1605">            yellowText10.setText(String.valueOf(yellow));</span>
+        }
+<span class="nc bnc" id="L1607" title="All 2 branches missed.">        if(pink == 0){</span>
+<span class="nc" id="L1608">            pinkIsland10.setVisible(false);</span>
+<span class="nc" id="L1609">            pinkText10.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1611">            pinkIsland10.setVisible(true);</span>
+<span class="nc" id="L1612">            pinkText10.setVisible(true);</span>
+<span class="nc" id="L1613">            pinkText10.setText(String.valueOf(pink));</span>
+        }
+<span class="nc bnc" id="L1615" title="All 2 branches missed.">        if(blue == 0){</span>
+<span class="nc" id="L1616">            blueIsland10.setVisible(false);</span>
+<span class="nc" id="L1617">            blueText10.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1619">            blueIsland10.setVisible(true);</span>
+<span class="nc" id="L1620">            blueText10.setVisible(true);</span>
+<span class="nc" id="L1621">            blueText10.setText(String.valueOf(blue));</span>
+        }
+
+<span class="nc bnc" id="L1624" title="All 2 branches missed.">        if(i.getNumTower() == 0){</span>
+<span class="nc" id="L1625">            towerIsland10.setImage(null);</span>
+<span class="nc" id="L1626">            towerText10.setVisible(false);</span>
+        } else {
+<span class="nc bnc" id="L1628" title="All 2 branches missed.">            if(i.getTowerColor().equals(TowerColour.Black))</span>
+<span class="nc" id="L1629">                towerIsland10.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/black_tower.png&quot;))));</span>
+<span class="nc bnc" id="L1630" title="All 2 branches missed.">            else if (i.getTowerColor().equals(TowerColour.White)) {</span>
+<span class="nc" id="L1631">                towerIsland10.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/white_tower.png&quot;))));</span>
+<span class="nc bnc" id="L1632" title="All 2 branches missed.">            } else if (i.getTowerColor().equals(TowerColour.Grey)) {</span>
+<span class="nc" id="L1633">                towerIsland10.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/grey_tower.png&quot;))));</span>
+            }
+<span class="nc" id="L1635">            towerText10.setVisible(true);</span>
+<span class="nc" id="L1636">            towerText10.setText(String.valueOf(i.getNumTower()));</span>
+        }
+
+<span class="nc bnc" id="L1639" title="All 2 branches missed.">        mothernature10.setVisible(model.getGameBoard().getMotherNature() == 10);</span>
+<span class="nc" id="L1640">    }</span>
+
+
+    private void updateisland11(Island i){
+<span class="nc" id="L1644">        int green=0, red=0, yellow=0, pink=0, blue=0;</span>
+<span class="nc bnc" id="L1645" title="All 2 branches missed.">        for(Student s: i.getStudents()){</span>
+<span class="nc bnc" id="L1646" title="All 2 branches missed.">            if(s.getColour().ordinal() == 0)</span>
+<span class="nc" id="L1647">                green++;</span>
+<span class="nc bnc" id="L1648" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 1)</span>
+<span class="nc" id="L1649">                red++;</span>
+<span class="nc bnc" id="L1650" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 2)</span>
+<span class="nc" id="L1651">                yellow++;</span>
+<span class="nc bnc" id="L1652" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 3)</span>
+<span class="nc" id="L1653">                pink++;</span>
+<span class="nc bnc" id="L1654" title="All 2 branches missed.">            else if (s.getColour().ordinal() == 4)</span>
+<span class="nc" id="L1655">                blue++;</span>
+<span class="nc" id="L1656">        }</span>
+<span class="nc bnc" id="L1657" title="All 2 branches missed.">        if(green == 0){</span>
+<span class="nc" id="L1658">            greenIsland11.setVisible(false);</span>
+<span class="nc" id="L1659">            greenText11.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1661">            greenIsland11.setVisible(true);</span>
+<span class="nc" id="L1662">            greenText11.setVisible(true);</span>
+<span class="nc" id="L1663">            greenText11.setText(String.valueOf(green));</span>
+        }
+<span class="nc bnc" id="L1665" title="All 2 branches missed.">        if(red == 0){</span>
+<span class="nc" id="L1666">            redIsland11.setVisible(false);</span>
+<span class="nc" id="L1667">            redText11.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1669">            redIsland11.setVisible(true);</span>
+<span class="nc" id="L1670">            redText11.setVisible(true);</span>
+<span class="nc" id="L1671">            redText11.setText(String.valueOf(red));</span>
+        }
+<span class="nc bnc" id="L1673" title="All 2 branches missed.">        if(yellow == 0){</span>
+<span class="nc" id="L1674">            yellowIsland11.setVisible(false);</span>
+<span class="nc" id="L1675">            yellowText11.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1677">            yellowIsland11.setVisible(true);</span>
+<span class="nc" id="L1678">            yellowText11.setVisible(true);</span>
+<span class="nc" id="L1679">            yellowText11.setText(String.valueOf(yellow));</span>
+        }
+<span class="nc bnc" id="L1681" title="All 2 branches missed.">        if(pink == 0){</span>
+<span class="nc" id="L1682">            pinkIsland11.setVisible(false);</span>
+<span class="nc" id="L1683">            pinkText11.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1685">            pinkIsland11.setVisible(true);</span>
+<span class="nc" id="L1686">            pinkText11.setVisible(true);</span>
+<span class="nc" id="L1687">            pinkText11.setText(String.valueOf(pink));</span>
+        }
+<span class="nc bnc" id="L1689" title="All 2 branches missed.">        if(blue == 0){</span>
+<span class="nc" id="L1690">            blueIsland11.setVisible(false);</span>
+<span class="nc" id="L1691">            blueText11.setVisible(false);</span>
+        } else {
+<span class="nc" id="L1693">            blueIsland11.setVisible(true);</span>
+<span class="nc" id="L1694">            blueText11.setVisible(true);</span>
+<span class="nc" id="L1695">            blueText11.setText(String.valueOf(blue));</span>
+        }
+
+<span class="nc bnc" id="L1698" title="All 2 branches missed.">        if(i.getNumTower() == 0){</span>
+<span class="nc" id="L1699">            towerIsland11.setImage(null);</span>
+<span class="nc" id="L1700">            towerText11.setVisible(false);</span>
+        } else {
+<span class="nc bnc" id="L1702" title="All 2 branches missed.">            if(i.getTowerColor().equals(TowerColour.Black))</span>
+<span class="nc" id="L1703">                towerIsland11.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/black_tower.png&quot;))));</span>
+<span class="nc bnc" id="L1704" title="All 2 branches missed.">            else if (i.getTowerColor().equals(TowerColour.White)) {</span>
+<span class="nc" id="L1705">                towerIsland11.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/white_tower.png&quot;))));</span>
+<span class="nc bnc" id="L1706" title="All 2 branches missed.">            } else if (i.getTowerColor().equals(TowerColour.Grey)) {</span>
+<span class="nc" id="L1707">                towerIsland11.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(&quot;/Graphics/grey_tower.png&quot;))));</span>
+            }
+<span class="nc" id="L1709">            towerText11.setVisible(true);</span>
+<span class="nc" id="L1710">            towerText11.setText(String.valueOf(i.getNumTower()));</span>
+        }
+
+<span class="nc bnc" id="L1713" title="All 2 branches missed.">        mothernature11.setVisible(model.getGameBoard().getMotherNature() == 11);</span>
+<span class="nc" id="L1714">    }</span>
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
