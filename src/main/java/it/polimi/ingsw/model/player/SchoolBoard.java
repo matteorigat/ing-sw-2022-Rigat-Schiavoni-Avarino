@@ -8,6 +8,7 @@ import it.polimi.ingsw.model.gameboard.Island;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/** SchoolBoard Class it's composed by three arraylist which are professors,towers and students entrance and a dining room */
 public class SchoolBoard implements Serializable {
     private ArrayList<Student> studentsEntrance;
     private DiningRoom diningRoom;
@@ -17,6 +18,7 @@ public class SchoolBoard implements Serializable {
 
     private int numTower;
 
+    /** SchoolBoard constructor */
     public SchoolBoard(TowerColour towerColour) {
         this.studentsEntrance = new ArrayList<>();
         this.diningRoom = new DiningRoom();
@@ -42,11 +44,15 @@ public class SchoolBoard implements Serializable {
        return towerColor;
     }
 
+    /** Tower adder */
     public void addTower(TowerColour towerColour){
         Tower t = new Tower(towerColour);
         towers.add(t);
     }
 
+
+    /**this method add a student in to the dining room and of course remove it from the students entrance
+     * it also checks if the room is full (in case it doesn't let you add anything)  */
     public boolean moveStudentToDiningRoom(int studentColour) {
         if(this.diningRoom.numOfStudentByColor(Colour.values()[studentColour]) >= 10)
             return false;  //sala piena, non gli faccio aggiungere nulla
@@ -71,6 +77,7 @@ public class SchoolBoard implements Serializable {
         }
     }
 
+    /** this method allows you to move a student from the students entrance to an island */
     public void moveStudentToIsland(int studentColour, Island i) {
         for (Student s : studentsEntrance) {
             if (s.getColour().equals(Colour.values()[studentColour])) {
@@ -86,6 +93,7 @@ public class SchoolBoard implements Serializable {
         return diningRoom;
     }
 
+    /** this method removes a professor from a player's gameboard */
     public void removeProfessor(Colour color){
         int size = professors.size();
         for(int i=0; i<size; i++){

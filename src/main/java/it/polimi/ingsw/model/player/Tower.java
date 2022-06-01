@@ -7,6 +7,7 @@ import java.io.Serializable;
 public class Tower implements Serializable {
     private TowerColour towerColor;
 
+    /** Tower constructor */
     public Tower(TowerColour towerColor) {
         this.towerColor = towerColor;
     }
