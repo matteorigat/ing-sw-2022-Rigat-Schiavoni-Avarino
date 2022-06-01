@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.controllers.GameBoardController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.controllers.GameBoardController">
 
           <ImageView fitHeight="900.0" fitWidth="1440.0">
                <Image url="@../Graphics/back.gif" />
@@ -22,9 +22,9 @@
 
 
 <!-- ISLANDS, CLOUDS AND CHARACTERS -->
-    <Pane fx:id="Board" layoutX="232.0" prefHeight="666.0" prefWidth="976.0">
+    <Pane layoutX="232.0" prefHeight="666.0" prefWidth="976.0">
 <!-- ISLAND 0 -->
-        <Pane fx:id="island0" layoutX="138.0" layoutY="40.0" prefHeight="150.0" prefWidth="150.0">
+        <Pane fx:id="island0" onMouseClicked="#chooseIsland0" layoutX="138.0" layoutY="40.0" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island1.png" />
             </ImageView>
@@ -67,7 +67,7 @@
             </Label>
         </Pane>
 <!-- ISLAND 1 -->
-        <Pane fx:id="island1" layoutX="320.0" layoutY="1.0" prefHeight="150.0" prefWidth="150.0">
+        <Pane fx:id="island1" onMouseClicked="#chooseIsland1" layoutX="320.0" layoutY="1.0" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island2.png" />
             </ImageView>
@@ -110,7 +110,7 @@
             </Label>
         </Pane>
 <!-- ISLAND 2 -->
-        <Pane fx:id="island2" layoutX="509.0" layoutY="-6.0" prefHeight="150.0" prefWidth="150.0">
+        <Pane fx:id="island2" onMouseClicked="#chooseIsland2" layoutX="509.0" layoutY="-6.0" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island3.png" />
             </ImageView>
@@ -153,7 +153,7 @@
             </Label>
         </Pane>
 <!-- ISLAND 3 -->
-        <Pane fx:id="island3" layoutX="696.0" layoutY="43.0" prefHeight="150.0" prefWidth="150.0">
+        <Pane fx:id="island3" onMouseClicked="#chooseIsland3" layoutX="696.0" layoutY="43.0" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island1.png" />
             </ImageView>
@@ -196,7 +196,7 @@
             </Label>
         </Pane>
 <!-- ISLAND 4 -->
-        <Pane fx:id="island4" layoutX="770.0" layoutY="182.0" prefHeight="150.0" prefWidth="150.0">
+        <Pane fx:id="island4" onMouseClicked="#chooseIsland4" layoutX="770.0" layoutY="182.0" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island2.png" />
             </ImageView>
@@ -239,7 +239,7 @@
             </Label>
         </Pane>
 <!-- ISLAND 5 -->
-        <Pane fx:id="island5" layoutX="797.0" layoutY="356.0" prefHeight="150.0" prefWidth="150.0">
+        <Pane fx:id="island5" onMouseClicked="#chooseIsland5" layoutX="797.0" layoutY="356.0" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island3.png" />
             </ImageView>
@@ -282,7 +282,7 @@
             </Label>
         </Pane>
 <!-- ISLAND 6 -->
-        <Pane fx:id="island6" layoutX="694.0" layoutY="472.0" prefHeight="150.0" prefWidth="150.0">
+        <Pane fx:id="island6" onMouseClicked="#chooseIsland6" layoutX="694.0" layoutY="472.0" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island1.png" />
             </ImageView>
@@ -325,7 +325,7 @@
             </Label>
         </Pane>
 <!-- ISLAND 7 -->
-        <Pane fx:id="island7" layoutX="506.0" layoutY="524.0" prefHeight="150.0" prefWidth="150.0">
+        <Pane fx:id="island7" onMouseClicked="#chooseIsland7" layoutX="506.0" layoutY="524.0" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island2.png" />
             </ImageView>
@@ -368,7 +368,7 @@
             </Label>
         </Pane>
 <!-- ISLAND 8 -->
-        <Pane fx:id="island8" layoutX="322.0" layoutY="513.0" prefHeight="150.0" prefWidth="150.0">
+        <Pane fx:id="island8" onMouseClicked="#chooseIsland8" layoutX="322.0" layoutY="513.0" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island3.png" />
             </ImageView>
@@ -411,7 +411,7 @@
             </Label>
         </Pane>
 <!-- ISLAND 9 -->
-        <Pane fx:id="island9" layoutX="146.0" layoutY="497.0" prefHeight="150.0" prefWidth="150.0">
+        <Pane fx:id="island9" onMouseClicked="#chooseIsland9" layoutX="146.0" layoutY="497.0" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island1.png" />
             </ImageView>
@@ -454,7 +454,7 @@
             </Label>
         </Pane>
 <!-- ISLAND 10 -->
-        <Pane fx:id="island10" layoutX="32.0" layoutY="369.0" prefHeight="150.0" prefWidth="150.0">
+        <Pane fx:id="island10" onMouseClicked="#chooseIsland10" layoutX="32.0" layoutY="369.0" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island2.png" />
             </ImageView>
@@ -497,7 +497,7 @@
             </Label>
         </Pane>
 <!-- ISLAND 11 -->
-        <Pane fx:id="island11" layoutX="21.0" layoutY="198.0" prefHeight="150.0" prefWidth="150.0">
+        <Pane fx:id="island11" onMouseClicked="#chooseIsland11" layoutX="21.0" layoutY="198.0" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island3.png" />
             </ImageView>
@@ -1316,55 +1316,44 @@
          <font><Font name="Arial Bold" size="18.0" /></font>
       </Label>
     </Pane>
-   <ImageView fitHeight="124.0" fitWidth="81.0" layoutX="5.0" layoutY="775.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../Graphics/Assistente (1).png" />
-      </image>
-   </ImageView>
-   <ImageView fitHeight="124.0" fitWidth="81.0" layoutX="90.0" layoutY="775.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../Graphics/Assistente (2).png" />
-      </image>
-   </ImageView>
-   <ImageView fitHeight="124.0" fitWidth="81.0" layoutX="175.0" layoutY="775.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../Graphics/Assistente (3).png" />
-      </image>
-   </ImageView>
-   <ImageView fitHeight="124.0" fitWidth="81.0" layoutX="260.0" layoutY="775.0" pickOnBounds="true" preserveRatio="true">
-      <image>
+
+
+
+
+
+
+
+
+    <!-- ASSISTANT CARD -->
+    <ImageView fx:id="assistant1" fitHeight="124.0" fitWidth="81.0" layoutX="5.0" layoutY="775.0" onMouseClicked="#assistant1" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../Graphics/Assistente (1).png" />
+    </ImageView>
+    <ImageView fx:id="assistant2" fitHeight="124.0" fitWidth="81.0" layoutX="90.0" layoutY="775.0" onMouseClicked="#assistant2" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../Graphics/Assistente (2).png" />
+    </ImageView>
+    <ImageView fx:id="assistant3" fitHeight="124.0" fitWidth="81.0" layoutX="175.0" layoutY="775.0" onMouseClicked="#assistant3" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../Graphics/Assistente (3).png" />
+    </ImageView>
+   <ImageView fx:id="assistant4" fitHeight="124.0" fitWidth="81.0" layoutX="260.0" layoutY="775.0" onMouseClicked="#assistant4" pickOnBounds="true" preserveRatio="true">
          <Image url="@../Graphics/Assistente (4).png" />
-      </image>
    </ImageView>
-   <ImageView fitHeight="124.0" fitWidth="81.0" layoutX="345.0" layoutY="775.0" pickOnBounds="true" preserveRatio="true">
-      <image>
+   <ImageView fx:id="assistant5" fitHeight="124.0" fitWidth="81.0" layoutX="345.0" layoutY="775.0" onMouseClicked="#assistant5" pickOnBounds="true" preserveRatio="true">
          <Image url="@../Graphics/Assistente (5).png" />
-      </image>
    </ImageView>
-   <ImageView fitHeight="124.0" fitWidth="81.0" layoutX="1014.0" layoutY="775.0" pickOnBounds="true" preserveRatio="true">
-      <image>
+   <ImageView fx:id="assistant6" fitHeight="124.0" fitWidth="81.0" layoutX="1014.0" layoutY="775.0" onMouseClicked="#assistant6" pickOnBounds="true" preserveRatio="true">
          <Image url="@../Graphics/Assistente (6).png" />
-      </image>
    </ImageView>
-   <ImageView fitHeight="124.0" fitWidth="81.0" layoutX="1099.0" layoutY="775.0" pickOnBounds="true" preserveRatio="true">
-      <image>
+   <ImageView fx:id="assistant7" fitHeight="124.0" fitWidth="81.0" layoutX="1099.0" layoutY="775.0" onMouseClicked="#assistant7" pickOnBounds="true" preserveRatio="true">
          <Image url="@../Graphics/Assistente (7).png" />
-      </image>
    </ImageView>
-   <ImageView fitHeight="124.0" fitWidth="81.0" layoutX="1184.0" layoutY="775.0" pickOnBounds="true" preserveRatio="true">
-      <image>
+   <ImageView fx:id="assistant8" fitHeight="124.0" fitWidth="81.0" layoutX="1184.0" layoutY="775.0" onMouseClicked="#assistant8" pickOnBounds="true" preserveRatio="true">
          <Image url="@../Graphics/Assistente (8).png" />
-      </image>
    </ImageView>
-   <ImageView fitHeight="124.0" fitWidth="81.0" layoutX="1269.0" layoutY="775.0" pickOnBounds="true" preserveRatio="true">
-      <image>
+   <ImageView fx:id="assistant9" fitHeight="124.0" fitWidth="81.0" layoutX="1269.0" layoutY="775.0" onMouseClicked="#assistant9" pickOnBounds="true" preserveRatio="true">
          <Image url="@../Graphics/Assistente (9).png" />
-      </image>
    </ImageView>
-   <ImageView fitHeight="124.0" fitWidth="81.0" layoutX="1354.0" layoutY="775.0" pickOnBounds="true" preserveRatio="true">
-      <image>
+   <ImageView fx:id="assistant10" fitHeight="124.0" fitWidth="81.0" layoutX="1354.0" layoutY="775.0" onMouseClicked="#assistant10" pickOnBounds="true" preserveRatio="true">
          <Image url="@../Graphics/Assistente (10).png" />
-      </image>
    </ImageView>
 
 

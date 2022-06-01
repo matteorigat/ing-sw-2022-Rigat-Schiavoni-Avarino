@@ -3,14 +3,12 @@ package it.polimi.ingsw.client.GUI.controllers;
 import it.polimi.ingsw.client.ClientAppGUI;
 import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.model.enumeration.Colour;
+import it.polimi.ingsw.model.enumeration.GamePhase;
 import it.polimi.ingsw.model.enumeration.TowerColour;
 import it.polimi.ingsw.model.gameboard.Cloud;
 import it.polimi.ingsw.model.gameboard.Island;
 import it.polimi.ingsw.model.gameboard.characters.CharacterCard;
-import it.polimi.ingsw.model.player.Player;
-import it.polimi.ingsw.model.player.Professor;
-import it.polimi.ingsw.model.player.Student;
-import it.polimi.ingsw.model.player.Tower;
+import it.polimi.ingsw.model.player.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -22,7 +20,7 @@ public class GameBoardController {
 
 
     private ClientAppGUI gui;
-    private Colour choice;
+    private int studentChoice = -1;
     private Model model;
     private String nickname;
     private Player myPlayer;
@@ -36,6 +34,8 @@ public class GameBoardController {
     @FXML public Pane island0, island1, island2, island3, island4, island5, island6, island7, island8, island9, island10, island11;
     @FXML public ImageView cloudStudent00, cloudStudent01, cloudStudent02, cloudStudent03, cloudStudent10, cloudStudent11, cloudStudent12, cloudStudent13, cloudStudent20, cloudStudent21, cloudStudent22, cloudStudent23;
     @FXML public Label nickname0, nickname1, nickname2, coins0, coins1, coins2;
+
+    @FXML public ImageView assistant1, assistant2, assistant3, assistant4, assistant5, assistant6, assistant7, assistant8, assistant9, assistant10;
 
     // PLAYER 0
     @FXML public ImageView entrance00, entrance01, entrance02, entrance03, entrance04, entrance05, entrance06, entrance07, entrance08;
@@ -91,16 +91,64 @@ public class GameBoardController {
     @FXML public ImageView greenIsland11, redIsland11, yellowIsland11, pinkIsland11, blueIsland11, towerIsland11, mothernature11;
     @FXML public Label greenText11, redText11, yellowText11, pinkText11, blueText11, towerText11;
 
+
+
+    private void cleanParameters(){
+        alreadyUsed = 0; //non serve qui, ma non fa mai male
+        studentChoice = -1;
+    }
     @FXML
-    protected void diningRoomGreen() {}
+    protected void assistant1() {
+        if(model.getCurrentPhase().equals(GamePhase.PlayAssistantCard) && model.getCurrentPlayer() == myPlayer.getIndex())
+            gui.getClientGUI().asyncWriteToSocket("1");
+    }
+
     @FXML
-    protected void diningRoomRed() {}
+    protected void assistant2() {
+        if(model.getCurrentPhase().equals(GamePhase.PlayAssistantCard) && model.getCurrentPlayer() == myPlayer.getIndex())
+            gui.getClientGUI().asyncWriteToSocket("2");
+    }
     @FXML
-    protected void diningRoomYellow() {}
+    protected void assistant3() {
+        if(model.getCurrentPhase().equals(GamePhase.PlayAssistantCard) && model.getCurrentPlayer() == myPlayer.getIndex())
+            gui.getClientGUI().asyncWriteToSocket("3");
+    }
     @FXML
-    protected void diningRoomPink() {}
+    protected void assistant4() {
+        if(model.getCurrentPhase().equals(GamePhase.PlayAssistantCard) && model.getCurrentPlayer() == myPlayer.getIndex())
+            gui.getClientGUI().asyncWriteToSocket("4");
+    }
     @FXML
-    protected void diningRoomBlue() {}
+    protected void assistant5() {
+        if(model.getCurrentPhase().equals(GamePhase.PlayAssistantCard) && model.getCurrentPlayer() == myPlayer.getIndex())
+            gui.getClientGUI().asyncWriteToSocket("5");
+    }
+    @FXML
+    protected void assistant6() {
+        if(model.getCurrentPhase().equals(GamePhase.PlayAssistantCard) && model.getCurrentPlayer() == myPlayer.getIndex())
+            gui.getClientGUI().asyncWriteToSocket("6");
+    }
+    @FXML
+    protected void assistant7() {
+        if(model.getCurrentPhase().equals(GamePhase.PlayAssistantCard) && model.getCurrentPlayer() == myPlayer.getIndex())
+            gui.getClientGUI().asyncWriteToSocket("7");
+    }
+    @FXML
+    protected void assistant8() {
+        if(model.getCurrentPhase().equals(GamePhase.PlayAssistantCard) && model.getCurrentPlayer() == myPlayer.getIndex())
+            gui.getClientGUI().asyncWriteToSocket("8");
+    }
+    @FXML
+    protected void assistant9() {
+        if(model.getCurrentPhase().equals(GamePhase.PlayAssistantCard) && model.getCurrentPlayer() == myPlayer.getIndex())
+            gui.getClientGUI().asyncWriteToSocket("9");
+    }
+
+    @FXML
+    protected void assistant10() {
+        if(model.getCurrentPhase().equals(GamePhase.PlayAssistantCard) && model.getCurrentPlayer() == myPlayer.getIndex())
+            gui.getClientGUI().asyncWriteToSocket("10");
+    }
 
     private void update() {
         schoolBoard0.setVisible(true);
@@ -122,6 +170,29 @@ public class GameBoardController {
                 coins0.setText("Coins: " + p.getCoins());
                 myPlayer = p;
                 updatePlayerSchoolBoard(p, true);
+                int[] deletedCards = new int[10];
+                for(int n=0; n<10; n++){
+                    deletedCards[n] = 0;
+                }
+                for(AssistantCard c: p.getAssistantDeck())
+                    deletedCards[c.getValue()-1] = 1;
+
+                for(int i=0; i< 10; i++){
+                    if(deletedCards[i] == 0){
+                        switch (i+1) {
+                            case 1 -> assistant1.setVisible(false);
+                            case 2 -> assistant2.setVisible(false);
+                            case 3 -> assistant3.setVisible(false);
+                            case 4 -> assistant4.setVisible(false);
+                            case 5 -> assistant5.setVisible(false);
+                            case 6 -> assistant6.setVisible(false);
+                            case 7 -> assistant7.setVisible(false);
+                            case 8 -> assistant8.setVisible(false);
+                            case 9 -> assistant9.setVisible(false);
+                            case 10 -> assistant10.setVisible(false);
+                        }
+                    }
+                }
             } else {
                 updatePlayerSchoolBoard(p, false);
                 if(alreadyUsed == 0){
@@ -200,23 +271,50 @@ public class GameBoardController {
         int n=0;
         for(Cloud c: model.getGameBoard().getClouds()){
             if(n==0){
-                setCloud(c.seeStudents().get(0).getColour(), cloudStudent00);
-                setCloud(c.seeStudents().get(1).getColour(), cloudStudent01);
-                setCloud(c.seeStudents().get(2).getColour(), cloudStudent02);
-                if(model.getPlayers().size() ==3)
-                    setCloud(c.seeStudents().get(3).getColour(), cloudStudent03);
+                if(c.isTaken()){
+                    cloudStudent00.setImage(null);
+                    cloudStudent01.setImage(null);
+                    cloudStudent02.setImage(null);
+                    if(model.getPlayers().size() ==3)
+                        cloudStudent03.setImage(null);
+
+                } else {
+                    setCloud(c.seeStudents().get(0).getColour(), cloudStudent00);
+                    setCloud(c.seeStudents().get(1).getColour(), cloudStudent01);
+                    setCloud(c.seeStudents().get(2).getColour(), cloudStudent02);
+                    if(model.getPlayers().size() ==3)
+                        setCloud(c.seeStudents().get(3).getColour(), cloudStudent03);
+                }
             } else if(n==1){
-                setCloud(c.seeStudents().get(0).getColour(), cloudStudent10);
-                setCloud(c.seeStudents().get(1).getColour(), cloudStudent11);
-                setCloud(c.seeStudents().get(2).getColour(), cloudStudent12);
-                if(model.getPlayers().size() ==3)
-                    setCloud(c.seeStudents().get(3).getColour(), cloudStudent13);
+                if(c.isTaken()){
+                    cloudStudent10.setImage(null);
+                    cloudStudent11.setImage(null);
+                    cloudStudent12.setImage(null);
+                    if(model.getPlayers().size() ==3)
+                        cloudStudent13.setImage(null);
+
+                } else {
+                    setCloud(c.seeStudents().get(0).getColour(), cloudStudent10);
+                    setCloud(c.seeStudents().get(1).getColour(), cloudStudent11);
+                    setCloud(c.seeStudents().get(2).getColour(), cloudStudent12);
+                    if(model.getPlayers().size() ==3)
+                        setCloud(c.seeStudents().get(3).getColour(), cloudStudent13);
+                }
             } else if(n==2){
-                setCloud(c.seeStudents().get(0).getColour(), cloudStudent20);
-                setCloud(c.seeStudents().get(1).getColour(), cloudStudent21);
-                setCloud(c.seeStudents().get(2).getColour(), cloudStudent22);
-                if(model.getPlayers().size() ==3)
-                    setCloud(c.seeStudents().get(3).getColour(), cloudStudent23);
+                if(c.isTaken()){
+                    cloudStudent20.setImage(null);
+                    cloudStudent21.setImage(null);
+                    cloudStudent22.setImage(null);
+                    if(model.getPlayers().size() ==3)
+                        cloudStudent23.setImage(null);
+
+                } else {
+                    setCloud(c.seeStudents().get(0).getColour(), cloudStudent20);
+                    setCloud(c.seeStudents().get(1).getColour(), cloudStudent21);
+                    setCloud(c.seeStudents().get(2).getColour(), cloudStudent22);
+                    if(model.getPlayers().size() ==3)
+                        setCloud(c.seeStudents().get(3).getColour(), cloudStudent23);
+                }
             }
             n++;
         }
@@ -266,16 +364,89 @@ public class GameBoardController {
         this.nickname = nickname;
     }
 
-
-   protected void chooseIsland1(){
-        String student = getColorString(choice);
-        gui.getClientGUI().asyncWriteToSocket(student + ",1");
-
+   @FXML
+   protected void chooseIsland0(){
+       if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice >= 0 && studentChoice <= 4){
+           gui.getClientGUI().asyncWriteToSocket(studentChoice + ",0");
+       } else
+           cleanParameters();
     }
-
-    protected void chooseDiningRoom(){
-        String student = getColorString(choice);
-        gui.getClientGUI().asyncWriteToSocket(student);
+    @FXML
+    protected void chooseIsland1(){
+        if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice >= 0 && studentChoice <= 4){
+            gui.getClientGUI().asyncWriteToSocket(studentChoice + ",1");
+        } else
+            cleanParameters();
+    }
+    @FXML
+    protected void chooseIsland2(){
+        if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice >= 0 && studentChoice <= 4){
+            gui.getClientGUI().asyncWriteToSocket(studentChoice + ",2");
+        } else
+            cleanParameters();
+    }
+    @FXML
+    protected void chooseIsland3(){
+        if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice >= 0 && studentChoice <= 4){
+            gui.getClientGUI().asyncWriteToSocket(studentChoice + ",3");
+        } else
+            cleanParameters();
+    }
+    @FXML
+    protected void chooseIsland4(){
+        if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice >= 0 && studentChoice <= 4){
+            gui.getClientGUI().asyncWriteToSocket(studentChoice + ",4");
+        } else
+            cleanParameters();
+    }
+    @FXML
+    protected void chooseIsland5(){
+        if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice >= 0 && studentChoice <= 4){
+            gui.getClientGUI().asyncWriteToSocket(studentChoice + ",5");
+        } else
+            cleanParameters();
+    }
+    @FXML
+    protected void chooseIsland6(){
+        if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice >= 0 && studentChoice <= 4){
+            gui.getClientGUI().asyncWriteToSocket(studentChoice + ",6");
+        } else
+            cleanParameters();
+    }
+    @FXML
+    protected void chooseIsland7(){
+        if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice >= 0 && studentChoice <= 4){
+            gui.getClientGUI().asyncWriteToSocket(studentChoice + ",7");
+        } else
+            cleanParameters();
+    }
+    @FXML
+    protected void chooseIsland8(){
+        if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice >= 0 && studentChoice <= 4){
+            gui.getClientGUI().asyncWriteToSocket(studentChoice + ",8");
+        } else
+            cleanParameters();
+    }
+    @FXML
+    protected void chooseIsland9(){
+        if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice >= 0 && studentChoice <= 4){
+            gui.getClientGUI().asyncWriteToSocket(studentChoice + ",9");
+        } else
+            cleanParameters();
+    }
+    @FXML
+    protected void chooseIsland10(){
+        if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice >= 0 && studentChoice <= 4){
+            gui.getClientGUI().asyncWriteToSocket(studentChoice + ",10");
+        } else
+            cleanParameters();
+    }
+    @FXML
+    protected void chooseIsland11(){
+        if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice >= 0 && studentChoice <= 4){
+            gui.getClientGUI().asyncWriteToSocket(studentChoice + ",11");
+        } else
+            cleanParameters();
     }
 
     private String getColorString(Colour color){
@@ -292,60 +463,104 @@ public class GameBoardController {
 
     @FXML
     protected void chooseStudent0(){
-        choice = myPlayer.getPlayerSchoolBoard().getStudentsEntrance().get(0).getColour();
-        System.out.println("studente 0: " + choice);
-
+        if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex()){
+            studentChoice = myPlayer.getPlayerSchoolBoard().getStudentsEntrance().get(0).getColour().ordinal();
+        } else
+            cleanParameters();
     }
     @FXML
     protected void chooseStudent1(){
-        choice = myPlayer.getPlayerSchoolBoard().getStudentsEntrance().get(1).getColour();
-        System.out.println("studente 1: " + choice);
+        if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex()){
+            studentChoice = myPlayer.getPlayerSchoolBoard().getStudentsEntrance().get(1).getColour().ordinal();
+        } else
+            cleanParameters();
     }
     @FXML
     protected void chooseStudent2(){
-        choice = myPlayer.getPlayerSchoolBoard().getStudentsEntrance().get(2).getColour();
-        System.out.println("studente 2: " + choice);
+        if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex()){
+            studentChoice = myPlayer.getPlayerSchoolBoard().getStudentsEntrance().get(2).getColour().ordinal();
+        } else
+            cleanParameters();
     }
     @FXML
     protected void chooseStudent3(){
-        choice = myPlayer.getPlayerSchoolBoard().getStudentsEntrance().get(3).getColour();
-        System.out.println("studente 3: " + choice);
+        if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex()){
+            studentChoice = myPlayer.getPlayerSchoolBoard().getStudentsEntrance().get(3).getColour().ordinal();
+        } else
+            cleanParameters();
     }
     @FXML
     protected void chooseStudent4(){
-        if(entrance04.getImage() != null){
-            choice = myPlayer.getPlayerSchoolBoard().getStudentsEntrance().get(4).getColour();
-            System.out.println("studente 4: " + choice);
-        }
+        if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex()){
+            studentChoice = myPlayer.getPlayerSchoolBoard().getStudentsEntrance().get(4).getColour().ordinal();
+        } else
+            cleanParameters();
     }
     @FXML
     protected void chooseStudent5(){
-        if(entrance05.getImage() != null){
-            choice = myPlayer.getPlayerSchoolBoard().getStudentsEntrance().get(5).getColour();
-            System.out.println("studente 5: " + choice);
-        }
+        if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex()){
+            studentChoice = myPlayer.getPlayerSchoolBoard().getStudentsEntrance().get(5).getColour().ordinal();
+        } else
+            cleanParameters();
     }
     @FXML
     protected void chooseStudent6(){
-        if(entrance06.getImage() != null){
-            choice = myPlayer.getPlayerSchoolBoard().getStudentsEntrance().get(6).getColour();
-            System.out.println("studente 6: " + choice);
-        }
+        if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex()){
+            studentChoice = myPlayer.getPlayerSchoolBoard().getStudentsEntrance().get(6).getColour().ordinal();
+        } else
+            cleanParameters();
     }
 
     @FXML
     protected void chooseStudent7(){
-        if(entrance07.getImage() != null){
-            choice = myPlayer.getPlayerSchoolBoard().getStudentsEntrance().get(7).getColour();
-            System.out.println("studente 7: " + choice);
-        }
+        if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex()){
+            studentChoice = myPlayer.getPlayerSchoolBoard().getStudentsEntrance().get(7).getColour().ordinal();
+        } else
+            cleanParameters();
     }
     @FXML
     protected void chooseStudent8(){
-        if(entrance08.getImage() != null){
-            choice = myPlayer.getPlayerSchoolBoard().getStudentsEntrance().get(8).getColour();
-            System.out.println("studente 8: " + choice);
-        }
+        if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex()){
+            studentChoice = myPlayer.getPlayerSchoolBoard().getStudentsEntrance().get(8).getColour().ordinal();
+        } else
+            cleanParameters();
+    }
+
+
+    @FXML
+    protected void diningRoomGreen() {
+        if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice == 0){
+            gui.getClientGUI().asyncWriteToSocket("0");
+        } else
+            cleanParameters();
+    }
+    @FXML
+    protected void diningRoomRed() {
+        if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice == 1){
+            gui.getClientGUI().asyncWriteToSocket("1");
+        } else
+            cleanParameters();
+    }
+    @FXML
+    protected void diningRoomYellow() {
+        if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice == 2){
+            gui.getClientGUI().asyncWriteToSocket("2");
+        } else
+            cleanParameters();
+    }
+    @FXML
+    protected void diningRoomPink() {
+        if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice == 3){
+            gui.getClientGUI().asyncWriteToSocket("3");
+        } else
+            cleanParameters();
+    }
+    @FXML
+    protected void diningRoomBlue() {
+        if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice == 4){
+            gui.getClientGUI().asyncWriteToSocket("4");
+        } else
+            cleanParameters();
     }
 
 
@@ -379,37 +594,42 @@ public class GameBoardController {
         for (int j = i; j < 10; j++)
             getGreen(j, mainPlayer).setVisible(false);
 
-        int red = p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.Green);
+        int red = p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.Red);
         for (i = 0; i < red; i++)
             getRed(i, mainPlayer).setVisible(true);
         for (int j = i; j < 10; j++)
             getRed(j, mainPlayer).setVisible(false);
 
-        int yellow = p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.Green);
+        int yellow = p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.Yellow);
         for (i = 0; i < yellow; i++)
             getYellow(i, mainPlayer).setVisible(true);
         for (int j = i; j < 10; j++)
             getYellow(j, mainPlayer).setVisible(false);
 
-        int pink = p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.Green);
+        int pink = p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.Pink);
         for (i = 0; i < pink; i++)
             getPink(i, mainPlayer).setVisible(true);
         for (int j = i; j < 10; j++)
             getPink(j, mainPlayer).setVisible(false);
 
-        int blue = p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.Green);
+        int blue = p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.Blue);
         for (i = 0; i < blue; i++)
             getBlue(i, mainPlayer).setVisible(true);
         for (int j = i; j < 10; j++)
             getBlue(j, mainPlayer).setVisible(false);
 
-        k = 0;
-        for (Professor pr : p.getPlayerSchoolBoard().getProfessors()) {
-            setProfessor(k, pr.getProfessorColour(), mainPlayer);
-            k++;
+
+        int[] deletedProfessors = new int[5];
+        for(int n=0; n<5; n++){
+            deletedProfessors[n] = 0;
         }
-        for(int t=k; t < 5; t++){
-            getProfessor(t, mainPlayer).setImage(null);
+        for (Professor pr : p.getPlayerSchoolBoard().getProfessors()) {
+            getProfessor(pr.getProfessorColour().ordinal(), mainPlayer);
+            deletedProfessors[pr.getProfessorColour().ordinal()] = 1;
+        }
+        for(int n=0; n<5; n++){
+            if(deletedProfessors[n] == 0)
+                getProfessor(n, mainPlayer).setVisible(false);
         }
 
         k = 0;
@@ -432,19 +652,6 @@ public class GameBoardController {
             getEntrance(i, mainPlayer).setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/student_pink.png"))));
         else if (colour.equals(Colour.Blue))
             getEntrance(i, mainPlayer).setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/student_blue.png"))));
-
-    }
-    private void setProfessor(int i, Colour colour, boolean mainPlayer) {
-        if (colour.equals(Colour.Green))
-            getProfessor(i, mainPlayer).setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/teacher_green.png"))));
-        else if (colour.equals(Colour.Red))
-            getProfessor(i, mainPlayer).setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/teacher_red.png"))));
-        else if (colour.equals(Colour.Yellow))
-            getProfessor(i, mainPlayer).setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/teacher_yellow.png"))));
-        else if (colour.equals(Colour.Pink))
-            getProfessor(i, mainPlayer).setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/teacher_pink.png"))));
-        else if (colour.equals(Colour.Blue))
-            getProfessor(i, mainPlayer).setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/teacher_blue.png"))));
 
     }
     private void setTower(int i, TowerColour colour, boolean mainPlayer) {
