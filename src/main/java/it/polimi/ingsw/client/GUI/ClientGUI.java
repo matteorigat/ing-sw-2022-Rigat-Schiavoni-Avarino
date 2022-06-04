@@ -21,6 +21,7 @@ public class ClientGUI implements Runnable {
     private ClientAppGUI gui;
 
     private String nickname = "";
+    private boolean firstModel = true;
 
 
     public ClientGUI(String ip, int port, ClientAppGUI gui){
@@ -66,10 +67,13 @@ public class ClientGUI implements Runnable {
                             }
                             else if (((String) inputObject).contains("opponent")){
                                 gui.getGameboardController().setNickname(nickname);
-                                Platform.runLater(()-> gui.changeStage("GameBoard"));
                             }
                         } else if (inputObject instanceof Model){
                             Platform.runLater(()-> gui.getGameboardController().setModel((Model)inputObject));
+                            if(firstModel){
+                                Platform.runLater(()-> gui.changeStage("GameBoard"));
+                                firstModel = false;
+                            }
                         } else {
                             throw new IllegalArgumentException();
                         }
