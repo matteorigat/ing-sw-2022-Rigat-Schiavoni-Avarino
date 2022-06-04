@@ -20,21 +20,7 @@ public class DiningRoom implements Serializable {
         this.pinkStudents = new ArrayList<>(0);
         this.blueStudents = new ArrayList<>(0);
     }
-    /*
-    public void addStudent(Student s){                 // scusate i tanti if ma sono funzionali
-        if(s.getColour().equals(Colour.Green))         // qui poi nelle regole esperte bisogna contare le  monete
-            greenStudents.add(s);
-        else if(s.getColour().equals(Colour.Red))
-            redStudents.add(s);
-        else if(s.getColour().equals(Colour.Yellow))
-            yellowStudents.add(s);
-        else if(s.getColour().equals(Colour.Pink))
-            pinkStudents.add(s);
-        else if(s.getColour().equals(Colour.Blue))
-            blueStudents.add(s);
-    }
 
-     */
 
     /** add student method adds a student (whenever it's possible) and returns a boolean which is true if the player gains a coin,otherwise it's false  */
     public boolean addStudent(Student s){

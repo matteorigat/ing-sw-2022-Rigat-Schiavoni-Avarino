@@ -99,13 +99,6 @@ public class Island implements Serializable {
         return towerColor;
     }
 
-  /*  public int getIslandRank() {
-        return islandRank;
-    } */
-
-   /* public int getIslandIndex() {
-        return islandIndex;
-    } */
 
     public ArrayList<Student> getStudents() {
         return students;

@@ -1,8 +1,6 @@
 package it.polimi.ingsw.model.player;
 
-import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.model.enumeration.TowerColour;
-import it.polimi.ingsw.observer.Observer;
 
 import java.io.Serializable;
 import java.util.ArrayList;
