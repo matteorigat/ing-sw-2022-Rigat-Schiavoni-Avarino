@@ -619,16 +619,16 @@ public class GameBoardController {
             getBlue(j, mainPlayer).setVisible(false);
 
 
-        int[] deletedProfessors = new int[5];
+        int[] visitedProfessors = new int[5];
         for(int n=0; n<5; n++){
-            deletedProfessors[n] = 0;
+            visitedProfessors[n] = 0;
         }
         for (Professor pr : p.getPlayerSchoolBoard().getProfessors()) {
-            getProfessor(pr.getProfessorColour().ordinal(), mainPlayer);
-            deletedProfessors[pr.getProfessorColour().ordinal()] = 1;
+            getProfessor(pr.getProfessorColour().ordinal(), mainPlayer).setVisible(true);
+            visitedProfessors[pr.getProfessorColour().ordinal()] = 1;
         }
         for(int n=0; n<5; n++){
-            if(deletedProfessors[n] == 0)
+            if(visitedProfessors[n] == 0)
                 getProfessor(n, mainPlayer).setVisible(false);
         }
 
