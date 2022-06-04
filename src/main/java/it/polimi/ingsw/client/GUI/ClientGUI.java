@@ -121,6 +121,7 @@ public class ClientGUI implements Runnable {
 
                 t0.join();
                 System.in.close();
+                Platform.runLater(Platform::exit);
                 System.out.println("Connection closed!");
 
             } catch(InterruptedException | NoSuchElementException | ConnectionClosedException e){

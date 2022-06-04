@@ -143,7 +143,6 @@ public class ClientCLI {
             t0.join();
             System.in.close();
             t1.join();
-            System.out.println("Connection closed!");
 
         } catch(InterruptedException | NoSuchElementException | ConnectionClosedException e){
             System.out.println("Connection closed from the client side");
