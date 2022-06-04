@@ -13,7 +13,7 @@ import it.polimi.ingsw.utils.gameMessage;
 
 import java.util.ArrayList;
 
-/*
+/**
  *  In this class we manage the main actions of the match.
  */
 
@@ -21,6 +21,18 @@ public class Controller implements Observer<PlayerMove> {
 
     private Model model;
 
+    /**
+     * performmove Method permits us to filter a move, depending on the number of parameters.
+     * There are 6 cases and it's possible to understand which move is played and in
+     * which case we are, just analyzing the number of parameters.
+     * Every parameters is an integer and it means an indication about the move.
+     * for example the move: "movemothernature" will have 1 parameters ( in this case param2) which is
+     * the number of the movements of mother nature from her position.
+     * So param2 is the parameters of the movements.
+     * Others move get more parameters like Character Cards which have differents
+     * needs like moving students from school board to islands and at the same time they make others moves.
+     *
+     * */
     private synchronized void performMove(PlayerMove move){
         if(getCurrentPlayer() != move.getPlayer().getIndex()){
             move.getView().reportError(gameMessage.wrongTurnMessage);
@@ -108,6 +120,8 @@ public class Controller implements Observer<PlayerMove> {
             move.getView().reportError(gameMessage.invalidMoveMessage);
     }
 
+
+
     @Override
     public void update(PlayerMove message) {
         performMove(message);
@@ -142,14 +156,18 @@ public class Controller implements Observer<PlayerMove> {
         }
     }
 
-    public void init(){   //sto seguendo l'inizializzazione della partita
+    /**
+     * init method initialize the match choosing randomly the disposition of mother
+     * nature and students on the board.
+     * */
+    public void init(){   //initialazing the match
         double casual = Math.random()*12; //(PUNTO 2)
         int mn = (int) casual;
         model.setModelParameters(Parameters.numPlayers, Parameters.expertMode);
 
-        model.getGameBoard().setMotherNature(mn);  //posiziono madrenatura
+        model.getGameBoard().setMotherNature(mn);  //positioning mother nature
 
-        ArrayList<Student> arr = new ArrayList<>();  //(PUNTO 3) creo studenti per le isole
+        ArrayList<Student> arr = new ArrayList<>();  //(PUNTO 3) creating students
         for (Colour c : Colour.values()) {
             for(int i=0;i<2;i++){
                 Student s = new Student(c);
@@ -164,7 +182,7 @@ public class Controller implements Observer<PlayerMove> {
 
         }
 
-        for (Colour c : Colour.values()) {  //creo gli studenti per il sacchetto
+        for (Colour c : Colour.values()) {  //creating students for the bag
             for(int i=0;i<24;i++){
                 Student s = new Student(c);
                 arr.add(s);
@@ -186,13 +204,13 @@ public class Controller implements Observer<PlayerMove> {
             model.getPlayersTurnOrder()[i] = model.getPlayers().get(i);
         }
 
-        addStudentsOnClouds();
+        addStudentsOnClouds(); // adding students on clouds
 
         model.setCurrentPhase(GamePhase.PlayAssistantCard);
     }
 
 
-    //Fase pianificazione punto 1
+    //pianification phase 1 adds students on clouds
     private void addStudentsOnClouds(){
         int num = 0;
         for(Cloud c: model.getGameBoard().getClouds()){
@@ -203,7 +221,9 @@ public class Controller implements Observer<PlayerMove> {
             c.setTaken(false);
         }
     }
-    //Fase pianificazione punto 2
+
+    //pianification phase 2 , play an assistant card and control if it is possible to play it (already played or the
+    // opposite player played it
     public int playAssistantCard(int playerIndex, int priority){
         if(model.getCurrentPhase().equals(GamePhase.PlayAssistantCard) && playerIndex == model.getCurrentPlayer() && priority > 0 && priority <= 10) {
             boolean alreadyPlayed = false;
@@ -237,7 +257,7 @@ public class Controller implements Observer<PlayerMove> {
                     break;
                 }
 
-            if(found == false) return -1; //non ha la carta, non ha senso proseguire, tocca ancora lui
+            if(found == false) return -1; //card is already played, no sense to play it, wait for an other card
             if(model.getPhaseCounter() < Parameters.numPlayers-1) {   //AGGIUNTA GIUS ALTRIMENTI SFORA LA DIMENSIONE DELL'ARRAY
                 model.setCurrentPlayer(model.getPlayersTurnOrder()[model.getPhaseCounter() + 1].getIndex());
 
@@ -255,7 +275,7 @@ public class Controller implements Observer<PlayerMove> {
         else return -1;
     }
 
-    private void orderPlayerActionPhase(){  // con algoritmo bubble sort
+    private void orderPlayerActionPhase(){  // bubble sort algorithm
         for(int i = 0; i < model.getPlayersTurnOrder().length; i++){
             boolean swap = false;
             for(int j = 0; j < model.getPlayersTurnOrder().length-1; j++){
@@ -263,22 +283,22 @@ public class Controller implements Observer<PlayerMove> {
                     Player k = model.getPlayersTurnOrder()[j];
                     model.getPlayersTurnOrder()[j] = model.getPlayersTurnOrder()[j+1];
                     model.getPlayersTurnOrder()[j+1] = k;
-                    swap = true; //segna che è avvenuto uno scambio
+                    swap = true; //swap happened
                 }
             }
-            if(!swap) break; // esce prima se ha già ordinato tutto
+            if(!swap) break;
         }
     }
 
-    //Fase azione punto 1
+    //Action phase 1
     public int moveStudentToIsland(int playerIndex, int colour, int IslandPosition){
 
-        boolean checkStudentColor = false; // vedo se ha lo studente di quel colore
+        boolean checkStudentColor = false; // check if it has that colour
         for(Student s: model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance())
             if(Colour.values()[colour] == s.getColour())
                 checkStudentColor = true;
 
-        if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && playerIndex == model.getCurrentPlayer() && checkStudentColor && colour >= 0 && colour < Colour.values().length && IslandPosition >= 0 && IslandPosition < model.getGameBoard().getIslands().size()){
+        if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && playerIndex == model.getCurrentPlayer() && checkStudentColor && colour >= 0 && colour < Colour.values().length && IslandPosition >= 0 && IslandPosition < model.getGameBoard().getIslands().size()){ // if the phase is correct,the player is correct the colour is correctand the informations are correct then move students to island
             model.getPlayers().get(playerIndex).getPlayerSchoolBoard().moveStudentToIsland(colour, model.getGameBoard().getIslands().get(IslandPosition));
 
             model.setPhaseCounter(model.getPhaseCounter() + 1);
@@ -290,23 +310,23 @@ public class Controller implements Observer<PlayerMove> {
         }
         else return -1;
     }
-    //Fase azione punto 1
+    //Action phase 1
     public int moveStudentToDiningRoom(int playerIndex, int colour){
         if (model.getCurrentPhase().equals(GamePhase.MoveStudents) && playerIndex == model.getCurrentPlayer() && colour >= 0 && colour < Colour.values().length && model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colour]) < 10){
 
-            boolean checkStudentColor = false; // vedo se ha lo studente di quel colore
+            boolean checkStudentColor = false; // check the student's colour
             for (Student s : model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance())
                 if (Colour.values()[colour] == s.getColour())
                     checkStudentColor = true;
 
             if(checkStudentColor){
-                boolean coin; //ritorna true se il giocatore merita una moneta
+                boolean coin; //return true id the player deserve a coin
                 coin = model.getPlayers().get(playerIndex).getPlayerSchoolBoard().moveStudentToDiningRoom(colour);
                 if (Parameters.expertMode && coin)
                     if(model.getGameBoard().getOneCoin())
                         model.getPlayers().get(playerIndex).addCoin();
 
-                //controllo chi possiede il professore ora
+                //checking who has the professor
                 checkProfessorProperty(colour);
 
                 model.setPhaseCounter(model.getPhaseCounter() + 1);
@@ -321,7 +341,7 @@ public class Controller implements Observer<PlayerMove> {
     }
     private void checkProfessorProperty(int colorIndex){
         Player oldProfessorOwner = null;
-        for (Player p : model.getPlayers())  //vedo chi aveva il professore prima
+        for (Player p : model.getPlayers())  //checking who had the professor
             for (Professor pr : p.getPlayerSchoolBoard().getProfessors())
                 if (pr.getProfessorColour().equals(Colour.values()[colorIndex])){
                     oldProfessorOwner = p;
@@ -330,7 +350,7 @@ public class Controller implements Observer<PlayerMove> {
 
         ArrayList<Player> rank = new ArrayList<>();
         int max = 0;
-        for (Player p : model.getPlayers()){  //trovo il giocatore con più studenti
+        for (Player p : model.getPlayers()){  //finding the player with most students
             if(max < p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colorIndex])){
                 max = p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colorIndex]);
                 rank.clear();
@@ -350,8 +370,8 @@ public class Controller implements Observer<PlayerMove> {
         }
     }
 
-    //Fase azione punto 2.1
-    public int moveMotherNature(int playerIndex, int movements){ //devo controllare se player ha i permessi
+    //Action Phase punto 2.1
+    public int moveMotherNature(int playerIndex, int movements){ //checking if player has the rights
         if(model.getCurrentPhase().equals(GamePhase.MoveMotherNature) && playerIndex == model.getCurrentPlayer()){
             int maxMovements = model.getPlayers().get(model.getCurrentPlayer()).getCurrentCard().getMovements();
             if(Parameters.expertMode && movements <= maxMovements+2){
@@ -376,7 +396,7 @@ public class Controller implements Observer<PlayerMove> {
         else return -1;
     }
 
-    //Fase azione punto 2.2 //vedo chi controlla l'isola, se il player è cambiato sostituisco le torri
+    //action phase 2 punto 2.2 //checking who controls the island, if it's a different player i'll change towers
     private void checkIslandInfluence(int islandIndex, int playerIndex){
         boolean card6noTowerFlag = false;
         int card9color = -1;
@@ -386,7 +406,7 @@ public class Controller implements Observer<PlayerMove> {
                 if(c.getIndex() == 5 && model.getGameBoard().getIslands().get(islandIndex).getNoEntry() > 0){
                     model.getGameBoard().getIslands().get(islandIndex).removeNoEntry();
                     ((Character5) c).addNoEntry();
-                    return;  // proseguo come se madre natura non fosse capitata qui
+                    return;  // moving on like mother nature has never been here
                 } else if(c.getIndex() == 6 && ((Character6) c).isEffectFlag()){
                     ((Character6) c).disableEffect();
                     card6noTowerFlag = true;
@@ -399,18 +419,18 @@ public class Controller implements Observer<PlayerMove> {
                 }
 
         }
-        // vedo chi ha più influenza ora
+        // checking who has the influences
         Player newPlayer = model.getGameBoard().getIslands().get(islandIndex).Influence(model.getPlayers(), card6noTowerFlag, card8twoMorePointsPlayer, card9color);
 
         if (newPlayer!=null){
-            Player oldPlayer = null;  // vedo chi controllava l'isola prima
+            Player oldPlayer = null;  // checking who owned the island
             for (Player pl: model.getPlayers()){
                 if(pl.PlayerTowerColor().equals(model.getGameBoard().getIslands().get(islandIndex).getTowerColor()))
                     oldPlayer = pl;
             }
 
             if(oldPlayer == null || !oldPlayer.equals(newPlayer)){
-                //ridò al vecchio giocatore le sue torri e le sostituisco con quelle del nuovo giocatore
+                //giving back towers to the previous player and replace them with the towers of the new player
                 for(int i=0; i<=model.getGameBoard().getIslands().get(islandIndex).getNumTower(); i++){
                     if(oldPlayer != null)
                         oldPlayer.getPlayerSchoolBoard().addTower(oldPlayer.PlayerTowerColor());
@@ -431,11 +451,11 @@ public class Controller implements Observer<PlayerMove> {
                 checkIslandFusion(islandIndex);
             }
         }
-        //se nessuno ha l'influenza o in caso di parità non succede nulla
+        //if none has the influence or if it's a draw, nothing happen
     }
-    //Fase azione punto 2.3
+    //action phase punto 2.3
     private void checkIslandFusion(int islandIndex){
-        //se il colore delle torri sull'isola e su quella successiva sono uguali
+        //if the colour of the tower on one island is the same of the next one...
         while (model.getGameBoard().getIslands().get(islandIndex).getTowerColor().equals(model.getGameBoard().getIslands().get((islandIndex+1)%model.getGameBoard().getIslands().size()).getTowerColor())){
             if(Parameters.expertMode) {
                 for (CharacterCard c : model.getGameBoard().getThreeCharacterCards())
@@ -453,7 +473,7 @@ public class Controller implements Observer<PlayerMove> {
         int newPosition2 = newPosition-1;
         if (newPosition2 == -1)
             newPosition2 = model.getGameBoard().getIslands().size()-1;
-        //se il colore delle torri sull'isola e su quella precedente sono uguali
+        //if the colour of the tower on one island is the same of the previous one...
         while (model.getGameBoard().getIslands().get(newPosition).getTowerColor().equals(model.getGameBoard().getIslands().get(newPosition2).getTowerColor())){
             model.getGameBoard().islandFusion(newPosition2, newPosition);
 
@@ -496,7 +516,7 @@ public class Controller implements Observer<PlayerMove> {
         }
     }
 
-    //Fase azione punto 3
+    //Action phase punto 3
     public int chooseCloud(int playerIndex, int cloudPosition){
         if(model.getCurrentPhase().equals(GamePhase.ChooseCloud) && playerIndex == model.getCurrentPlayer() && cloudPosition >= 0 && cloudPosition < Parameters.numClouds && !model.getGameBoard().getClouds().get(cloudPosition).isTaken()){
             ArrayList<Student> stud = model.getGameBoard().getClouds().get(cloudPosition).getStudents();
@@ -560,7 +580,7 @@ public class Controller implements Observer<PlayerMove> {
     }
 
     private void endGame(){
-        //vince il giocatore che ha costruito il maggior numero di torri
+        //wins the player with most number of towers
         ArrayList<Player> rank = new ArrayList<>();
         int min = Parameters.numTowers;
         for (Player p: model.getPlayers())
@@ -571,7 +591,7 @@ public class Controller implements Observer<PlayerMove> {
             } else if(p.getPlayerSchoolBoard().getTowers().size() == min)
                 rank.add(p);
 
-        //in caso di parità chi ha piu professori
+        //if it's a draw the player with the most number of professors will win
         if(rank.size() == 1)
             model.setWinner(rank.get(0));
         else {
@@ -604,6 +624,8 @@ public class Controller implements Observer<PlayerMove> {
 
 
 
+    /** character card 1 effect : take 1 student from this card and place it on an island of your choice
+     * .Then draw a new student from the bag and place it on this card*/
     public int playCharacterCard1(int playerIndex, int cardIndex, int colorIndex, int islandIndex){
         if(playerIndex == model.getCurrentPlayer()){
             for (CharacterCard c: model.getGameBoard().getThreeCharacterCards()){
@@ -622,6 +644,9 @@ public class Controller implements Observer<PlayerMove> {
         return -1;
     }
 
+
+    /** Character card 2 effect : During this turn, you take contol of any number of Professors even
+     *  if you have the same number of Students as the player who currently controls them */
     public int playCharacterCard2(int playerIndex, int cardIndex){
         if(playerIndex == model.getCurrentPlayer() && model.getCurrentPhase().ordinal() <= GamePhase.MoveMotherNature.ordinal()){
             for (CharacterCard c: model.getGameBoard().getThreeCharacterCards()){
@@ -640,6 +665,7 @@ public class Controller implements Observer<PlayerMove> {
         }
         return -1;
     }
+
 
     private void checkProfessorPropertyCard2(int colorIndex){
         Player oldProfessorOwner = null;
@@ -676,7 +702,8 @@ public class Controller implements Observer<PlayerMove> {
                 }
         }
     }
-
+    /** Character card 3 effect : Choose an island and resolve the island as if Mother Nature had ended her movement there.
+     * Mother nature  will still move and the island where she ends her movement will also be resolved*/
     public int playCharacterCard3(int playerIndex, int cardIndex, int islandIndex){
         if(playerIndex == model.getCurrentPlayer()){
             for (CharacterCard c: model.getGameBoard().getThreeCharacterCards()){
@@ -696,6 +723,8 @@ public class Controller implements Observer<PlayerMove> {
         return -1;
     }
 
+    /** Character card 4 effect : You may move Mother Nature up to 2
+     * additional Island than is indicated by the Assistant card you've played*/
     public int playCharacterCard4(int playerIndex, int cardIndex){
         if(playerIndex == model.getCurrentPlayer() && model.getCurrentPhase().ordinal() <= GamePhase.MoveMotherNature.ordinal()){
             for (CharacterCard c: model.getGameBoard().getThreeCharacterCards()){
@@ -713,6 +742,8 @@ public class Controller implements Observer<PlayerMove> {
         return -1;
     }
 
+    /** Character card 5 effect : Place a no Entry title on an Island of your choice . The first time Mother Nature ends her movement there
+     * put the NoEntry title back onto this card DO NOT calculate influence on that island or place any towers*/
     public int playCharacterCard5(int playerIndex, int cardIndex, int islandIndex){
         if(playerIndex == model.getCurrentPlayer()){
             for (CharacterCard c: model.getGameBoard().getThreeCharacterCards()){
@@ -730,6 +761,7 @@ public class Controller implements Observer<PlayerMove> {
         return -1;
     }
 
+    /** Character card 6 effect : when resolving a Conquering on an island Towers do not count towards influence */
     public int playCharacterCard6(int playerIndex, int cardIndex){
         if(playerIndex == model.getCurrentPlayer() && model.getCurrentPhase().ordinal() <= GamePhase.MoveMotherNature.ordinal()){
             for (CharacterCard c: model.getGameBoard().getThreeCharacterCards()){
@@ -747,6 +779,7 @@ public class Controller implements Observer<PlayerMove> {
         return -1;
     }
 
+    /** Character card 8 effect : during the influence calculation this turn, you count as having 2 more influence */
     public int playCharacterCard8(int playerIndex, int cardIndex){
         if(playerIndex == model.getCurrentPlayer() && model.getCurrentPhase().ordinal() <= GamePhase.MoveMotherNature.ordinal()){
             for (CharacterCard c: model.getGameBoard().getThreeCharacterCards()){
@@ -763,7 +796,7 @@ public class Controller implements Observer<PlayerMove> {
         }
         return -1;
     }
-
+    /** Character card 9 effect : Choose a color of student: during the influence calculation this turn, that color adds no influence*/
     public int playCharacterCard9(int playerIndex, int cardIndex, int colorIndex){
         if(playerIndex == model.getCurrentPlayer() && model.getCurrentPhase().ordinal() <= GamePhase.MoveMotherNature.ordinal()){
             for (CharacterCard c: model.getGameBoard().getThreeCharacterCards()){
@@ -781,10 +814,15 @@ public class Controller implements Observer<PlayerMove> {
         return -1;
     }
 
+    /** Character card 10 effect : You may exchange up to 2 Students between your entrance and your dining room
+     * there are 2 methods because we have to manage 2 cases:
+     * 1) when you decide to move 2 students
+     * 2) when you decide to move less then 2 students
+     * */
     public int playCharacterCard10(int playerIndex, int cardIndex, int entranceStudent1, int diningStudent1){
 
         if(playerIndex == model.getCurrentPlayer() && model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[diningStudent1]) > 0){
-            boolean checkStudentColor = false; // vedo se ha lo studente di quel colore
+            boolean checkStudentColor = false; // checking if students have the same colour
             for (Student s : model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance())
                 if (Colour.values()[entranceStudent1] == s.getColour()) {
                     checkStudentColor = true;
@@ -825,7 +863,7 @@ public class Controller implements Observer<PlayerMove> {
             sameCard = 1;
 
         if(playerIndex == model.getCurrentPlayer() && model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[diningStudent1]) > sameCard && model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[diningStudent2]) > sameCard){
-            int checkStudentColor = 0; // vedo se ha lo studente di quel colore
+            int checkStudentColor = 0; //checking if students have the same colour
             int checkStudentColor2 = 0;
             for (Student s : model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance()){
                 if (Colour.values()[entranceStudent1] == s.getColour())
@@ -879,6 +917,7 @@ public class Controller implements Observer<PlayerMove> {
     }
 
 
+    /** Character card 11 effect : Take 1 student from this card and place it in your dining room. Then draw a new student from the bag and place it on this card */
 
     public int playCharacterCard11(int playerIndex, int cardIndex, int colorIndex){
         if(playerIndex == model.getCurrentPlayer()){
@@ -907,6 +946,8 @@ public class Controller implements Observer<PlayerMove> {
         return -1;
     }
 
+    /** Character card 12 effect : Choose a type of student: every player (including yourself) must return 3 students of that type from
+     * the dining room to the bag . if any player has fewer than 3 students of that type, return as many students as they have */
     public int playCharacterCard12(int playerIndex, int cardIndex, int colorIndex){
         if(playerIndex == model.getCurrentPlayer()){
             for (CharacterCard c: model.getGameBoard().getThreeCharacterCards()){
@@ -929,11 +970,13 @@ public class Controller implements Observer<PlayerMove> {
         return -1;
     }
 
+    /** Character card 7 effect : In setup draw 6 students and place them on this card.
+     * You may take up to 3 students from this card and replace them with the same number of Students from your entrance*/
     public int playCharacterCard7(int playerIndex, int cardIndex, int cardStudent1, int entranceStudent1){
         if(playerIndex == model.getCurrentPlayer()){
             for (CharacterCard c: model.getGameBoard().getThreeCharacterCards()){
                 if(cardIndex == c.getIndex() && model.getPlayers().get(playerIndex).getCoins() >= c.getCost() && ((Character7) c).checkColorExists(cardStudent1)){
-                    //controllo se i tre studenti del suo ingresso sono giusti
+                    //checking if the student in the entrance is right
                     boolean check1 = false;
                     for(Student s: model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance()){
                         if(entranceStudent1 == s.getColour().ordinal() && entranceStudent1 < 5)
@@ -957,11 +1000,13 @@ public class Controller implements Observer<PlayerMove> {
         return -1;
     }
 
+    /**Cases when you will play less than 3 students
+     * 2 students case here */
     public int playCharacterCard7(int playerIndex, int cardIndex, int cardStudent1, int entranceStudent1, int cardStudent2, int entranceStudent2){
         if(playerIndex == model.getCurrentPlayer()){
             for (CharacterCard c: model.getGameBoard().getThreeCharacterCards()){
                 if(cardIndex == c.getIndex() && model.getPlayers().get(playerIndex).getCoins() >= c.getCost() && ((Character7) c).checkColorExists(cardStudent1) && ((Character7) c).checkColorExists(cardStudent2)){
-                    //controllo se i due studenti del suo ingresso sono giusti
+                    //checking i 2 students in the entrance are right
                     boolean check1 = false;
                     boolean check2 = false;
                     for(Student s: model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance()){
@@ -998,7 +1043,7 @@ public class Controller implements Observer<PlayerMove> {
         if(playerIndex == model.getCurrentPlayer()){
             for (CharacterCard c: model.getGameBoard().getThreeCharacterCards()){
                 if(cardIndex == c.getIndex() && model.getPlayers().get(playerIndex).getCoins() >= c.getCost() && ((Character7) c).checkColorExists(cardStudent1) && ((Character7) c).checkColorExists(cardStudent2) && ((Character7) c).checkColorExists(cardStudent3)){
-                    //controllo se i tre studenti del suo ingresso sono giusti
+                    //checking if the three students in the entrance are right
                     boolean check1 = false;
                     boolean check2 = false;
                     boolean check3 = false;

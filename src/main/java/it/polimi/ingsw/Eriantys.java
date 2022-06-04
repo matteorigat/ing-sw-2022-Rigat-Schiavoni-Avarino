@@ -9,7 +9,11 @@ import java.util.Scanner;
 
 
 
-
+/**
+ * Eriantys class call the executable application depending on the client's decision.
+ * it can create 4 differents "App" executions: local,server,client and client with GUI.
+ *
+ * */
 
 public class Eriantys {
 
