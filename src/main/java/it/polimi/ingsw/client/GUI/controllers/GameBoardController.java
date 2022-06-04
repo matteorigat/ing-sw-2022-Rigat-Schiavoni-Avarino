@@ -601,6 +601,30 @@ public class GameBoardController {
             cleanParameters();
     }
 
+    @FXML
+    protected void chooseCloud0(){
+        if(model.getCurrentPhase().equals(GamePhase.ChooseCloud) && model.getCurrentPlayer() == myPlayer.getIndex()){
+            gui.getClientGUI().asyncWriteToSocket("0");
+        } else
+            cleanParameters();
+    }
+
+    @FXML
+    protected void chooseCloud1(){
+        if(model.getCurrentPhase().equals(GamePhase.ChooseCloud) && model.getCurrentPlayer() == myPlayer.getIndex()){
+            gui.getClientGUI().asyncWriteToSocket("1");
+        } else
+            cleanParameters();
+    }
+
+    @FXML
+    protected void chooseCloud2(){
+        if(model.getCurrentPhase().equals(GamePhase.ChooseCloud) && model.getCurrentPlayer() == myPlayer.getIndex()){
+            gui.getClientGUI().asyncWriteToSocket("2");
+        } else
+            cleanParameters();
+    }
+
 
 
 

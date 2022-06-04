@@ -546,7 +546,7 @@
 
 
 <!-- CLOUD 0 -->
-        <Pane fx:id="cloud0" layoutX="236.0" layoutY="198.0" prefHeight="150.0" prefWidth="150.0">
+        <Pane fx:id="cloud0" onMouseClicked="#chooseCloud0" layoutX="236.0" layoutY="198.0" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/cloud_card.png" />
             </ImageView>
@@ -556,7 +556,7 @@
             <ImageView fx:id="cloudStudent03" fitHeight="25.0" fitWidth="25.0" layoutX="93.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
         </Pane>
 <!-- CLOUD 1 -->
-        <Pane fx:id="cloud1" layoutX="548.0" layoutY="173.0" prefHeight="150.0" prefWidth="150.0">
+        <Pane fx:id="cloud1" onMouseClicked="#chooseCloud1" layoutX="548.0" layoutY="173.0" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/cloud_card.png" />
             </ImageView>
@@ -566,7 +566,7 @@
             <ImageView fx:id="cloudStudent13" fitHeight="25.0" fitWidth="25.0" layoutX="93.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
         </Pane>
 <!-- CLOUD 2 -->
-        <Pane fx:id="cloud2" layoutX="397.0" layoutY="339.0" prefHeight="150.0" prefWidth="150.0">
+        <Pane fx:id="cloud2" onMouseClicked="#chooseCloud2" layoutX="397.0" layoutY="339.0" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/cloud_card.png" />
             </ImageView>
