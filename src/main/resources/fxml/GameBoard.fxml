@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.controllers.GameBoardController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.controllers.GameBoardController">
 
           <ImageView fitHeight="900.0" fitWidth="1440.0">
                <Image url="@../Graphics/back.gif" />
@@ -585,21 +585,21 @@
 
 
 <!-- CHARACTER 0 -->
-        <Pane fx:id="character0" layoutX="288.0" layoutY="366.0" prefHeight="131.0" prefWidth="86.0">
+        <Pane fx:id="character0" layoutX="288.0" layoutY="366.0" onMouseClicked="#chooseCharacter0" prefHeight="131.0" prefWidth="86.0">
             <ImageView fx:id="characterImg0" fitHeight="132.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true" />
             <Label fx:id="characterText0" layoutX="1.0" layoutY="115.0" text="Cost:">
                 <font><Font name="Arial Bold" size="13.0" /></font>
             </Label>
         </Pane>
 <!-- CHARACTER 1 -->
-        <Pane fx:id="character1" layoutX="427.0" layoutY="167.0" prefHeight="131.0" prefWidth="86.0">
+        <Pane fx:id="character1" layoutX="427.0" layoutY="167.0" onMouseClicked="#chooseCharacter1" prefHeight="131.0" prefWidth="86.0">
             <ImageView fx:id="characterImg1" fitHeight="132.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true" />
             <Label fx:id="characterText1" layoutX="1.0" layoutY="115.0" text="Cost:">
                 <font><Font name="Arial Bold" size="13.0" /></font>
             </Label>
         </Pane>
 <!-- CHARACTER 2 -->
-        <Pane fx:id="character2" layoutX="573.0" layoutY="379.0" prefHeight="131.0" prefWidth="86.0">
+        <Pane fx:id="character2" layoutX="573.0" layoutY="379.0" onMouseClicked="#chooseCharacter2" prefHeight="131.0" prefWidth="86.0">
             <ImageView fx:id="characterImg2" fitHeight="132.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true" />
             <Label fx:id="characterText2" layoutX="1.0" layoutY="115.0" text="Cost:">
                 <font><Font name="Arial Bold" size="13.0" /></font>
@@ -1071,12 +1071,6 @@
             <ImageView fx:id="tower16" fitHeight="25.0" fitWidth="25.0" layoutX="20.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="tower17" fitHeight="25.0" fitWidth="25.0" layoutX="50.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" />
         </Pane>
-      <Label fx:id="nickname1" layoutX="-60.0" layoutY="40.0" rotate="90.0" text="Player: " textFill="WHITE">
-         <font><Font name="Arial Bold" size="18.0" /></font>
-      </Label>
-      <Label fx:id="coins1" layoutX="-65.0" layoutY="30.0" rotate="90.0" text="Coins:" textFill="WHITE">
-         <font><Font name="Arial Bold" size="13.0" /></font>
-      </Label>
     </Pane>
 
 
@@ -1309,12 +1303,6 @@
             <ImageView fx:id="tower26" fitHeight="25.0" fitWidth="25.0" layoutX="20.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="tower27" fitHeight="25.0" fitWidth="25.0" layoutX="50.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" />
         </Pane>
-      <Label fx:id="nickname2" layoutX="-55.0" layoutY="15.0" rotate="90.0" text="Coins:" textFill="WHITE">
-         <font><Font name="Arial Bold" size="13.0" /></font>
-      </Label>
-      <Label fx:id="coins2" layoutX="-50.0" layoutY="25.0" rotate="90.0" text="Player: " textFill="WHITE">
-         <font><Font name="Arial Bold" size="18.0" /></font>
-      </Label>
     </Pane>
 
 
@@ -1355,6 +1343,29 @@
    <ImageView fx:id="assistant10" fitHeight="124.0" fitWidth="81.0" layoutX="1354.0" layoutY="775.0" onMouseClicked="#assistant10" pickOnBounds="true" preserveRatio="true">
          <Image url="@../Graphics/Assistente (10).png" />
    </ImageView>
+
+
+
+
+    <!-- LAST PLAYED ASSISTANT CARDS -->
+   <ImageView fx:id="lastAssistant0" fitHeight="106.0" fitWidth="59.0" layoutX="995.0" layoutY="667.0" onMouseClicked="#assistant6" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="lastAssistant1" fitHeight="106.0" fitWidth="59.0" layoutX="235.0" layoutY="632.0" onMouseClicked="#assistant6" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="lastAssistant2" fitHeight="106.0" fitWidth="59.0" layoutX="1207.0" layoutY="87.0" onMouseClicked="#assistant6" pickOnBounds="true" preserveRatio="true" />
+
+
+
+   <Label fx:id="nickname1" layoutX="15.0" layoutY="725.0" text="Player: " textFill="WHITE">
+      <font><Font name="Arial Bold" size="18.0" /></font>
+   </Label>
+   <Label fx:id="coins1" layoutX="15.0" layoutY="745.0" text="Coins:" textFill="WHITE">
+      <font><Font name="Arial Bold" size="13.0" /></font>
+   </Label>
+   <Label fx:id="nickname2" layoutX="1210.0" layoutY="725.0" text="Player: " textFill="WHITE">
+       <font><Font name="Arial Bold" size="18.0" /></font>
+   </Label>
+   <Label fx:id="coins2" layoutX="1210.0" layoutY="745.0" text="Coins:" textFill="WHITE">
+       <font><Font name="Arial Bold" size="13.0" /></font>
+   </Label>
 
 
 

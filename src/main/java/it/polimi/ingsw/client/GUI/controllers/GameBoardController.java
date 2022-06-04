@@ -18,7 +18,6 @@ import java.util.Objects;
 
 public class GameBoardController {
 
-
     private ClientAppGUI gui;
     private int studentChoice = -1;
     private Model model;
@@ -34,6 +33,7 @@ public class GameBoardController {
     @FXML public Pane island0, island1, island2, island3, island4, island5, island6, island7, island8, island9, island10, island11;
     @FXML public ImageView cloudStudent00, cloudStudent01, cloudStudent02, cloudStudent03, cloudStudent10, cloudStudent11, cloudStudent12, cloudStudent13, cloudStudent20, cloudStudent21, cloudStudent22, cloudStudent23;
     @FXML public Label nickname0, nickname1, nickname2, coins0, coins1, coins2;
+    @FXML public ImageView lastAssistant0, lastAssistant1, lastAssistant2;
 
     @FXML public ImageView assistant1, assistant2, assistant3, assistant4, assistant5, assistant6, assistant7, assistant8, assistant9, assistant10;
 
@@ -151,13 +151,11 @@ public class GameBoardController {
     }
 
     private void update() {
-        schoolBoard0.setVisible(true);
-        schoolBoard1.setVisible(true);
-        cloud0.setVisible(true);
-        cloud1.setVisible(true);
-        if(model.getPlayers().size() > 2){
-            schoolBoard2.setVisible(true);
-            cloud2.setVisible(true);
+        if(model.getPlayers().size() == 2){
+            schoolBoard2.setVisible(false);
+            cloud2.setVisible(false);
+            nickname2.setVisible(false);
+            coins2.setVisible(false);
         }
 
         gamephase.setText("Game phase: " + model.getCurrentPhase().toString());
@@ -342,15 +340,6 @@ public class GameBoardController {
 
     public void setGui(ClientAppGUI gui) {
         this.gui = gui;
-        schoolBoard0.setVisible(false);
-        schoolBoard1.setVisible(false);
-        schoolBoard2.setVisible(false);
-        cloud0.setVisible(false);
-        cloud1.setVisible(false);
-        cloud2.setVisible(false);
-        character0.setVisible(false);
-        character1.setVisible(false);
-        character2.setVisible(false);
     }
 
 
@@ -628,6 +617,30 @@ public class GameBoardController {
             cleanParameters();
     }
 
+    @FXML
+    protected void chooseCharacter0(){
+        if(model.getCurrentPlayer() == myPlayer.getIndex()){
+            //gui.getClientGUI().asyncWriteToSocket("100,");
+        } else
+            cleanParameters();
+    }
+
+    @FXML
+    protected void chooseCharacter1(){
+        if(model.getCurrentPlayer() == myPlayer.getIndex()){
+            //gui.getClientGUI().asyncWriteToSocket("100,");
+        } else
+            cleanParameters();
+    }
+
+    @FXML
+    protected void chooseCharacter2(){
+        if(model.getCurrentPlayer() == myPlayer.getIndex()){
+            //gui.getClientGUI().asyncWriteToSocket("100,");
+        } else
+            cleanParameters();
+    }
+
 
 
 
@@ -705,6 +718,8 @@ public class GameBoardController {
         for(int t=k; t < 8; t++){
             getTower(t, mainPlayer).setImage(null);
         }
+
+        setPlayedAssistantCard(p, mainPlayer);
     }
     private void setEntrance(int i, Colour colour, boolean mainPlayer) {
         if (colour.equals(Colour.Green))
@@ -769,6 +784,32 @@ public class GameBoardController {
         else if(index == 12)
             img.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/character12.png"))));
 
+    }
+
+    private void setPlayedAssistantCard(Player p, boolean mainPlayer){
+        if(mainPlayer){
+            lastAssistant0.setImage(getAssistantCard(p.getCurrentCard().getValue()));
+        } else if(alreadyUsed == 0){
+            lastAssistant1.setImage(getAssistantCard(p.getCurrentCard().getValue()));
+        } else {
+            lastAssistant2.setImage(getAssistantCard(p.getCurrentCard().getValue()));
+        }
+    }
+
+    private Image getAssistantCard(int value){
+        return switch (value) {
+            case 1 -> new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/Assistente (1).png")));
+            case 2 -> new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/Assistente (2).png")));
+            case 3 -> new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/Assistente (3).png")));
+            case 4 -> new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/Assistente (4).png")));
+            case 5 -> new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/Assistente (5).png")));
+            case 6 -> new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/Assistente (6).png")));
+            case 7 -> new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/Assistente (7).png")));
+            case 8 -> new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/Assistente (8).png")));
+            case 9 -> new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/Assistente (9).png")));
+            case 10 -> new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/Assistente (10).png")));
+            default -> null;
+        };
     }
 
     private ImageView getGreen(int pos, boolean mainPlayer) {
