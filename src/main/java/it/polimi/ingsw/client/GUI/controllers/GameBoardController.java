@@ -367,7 +367,7 @@ public class GameBoardController {
    @FXML
    protected void chooseIsland0(){
        if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice >= 0 && studentChoice <= 4){
-           gui.getClientGUI().asyncWriteToSocket(studentChoice + ",0");
+           gui.getClientGUI().asyncWriteToSocket(studentChoice + "," + islandAbsolutePosition(0));
        } else if(model.getCurrentPhase().equals(GamePhase.MoveMotherNature) && model.getCurrentPlayer() == myPlayer.getIndex()){
            moveMotherNature(0);
        } else
@@ -376,7 +376,7 @@ public class GameBoardController {
     @FXML
     protected void chooseIsland1(){
         if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice >= 0 && studentChoice <= 4){
-            gui.getClientGUI().asyncWriteToSocket(studentChoice + ",1");
+            gui.getClientGUI().asyncWriteToSocket(studentChoice + "," + islandAbsolutePosition(1));
         } else if(model.getCurrentPhase().equals(GamePhase.MoveMotherNature) && model.getCurrentPlayer() == myPlayer.getIndex()){
             moveMotherNature(1);
         } else
@@ -385,7 +385,7 @@ public class GameBoardController {
     @FXML
     protected void chooseIsland2(){
         if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice >= 0 && studentChoice <= 4){
-            gui.getClientGUI().asyncWriteToSocket(studentChoice + ",2");
+            gui.getClientGUI().asyncWriteToSocket(studentChoice + "," + islandAbsolutePosition(2));
         } else if(model.getCurrentPhase().equals(GamePhase.MoveMotherNature) && model.getCurrentPlayer() == myPlayer.getIndex()){
             moveMotherNature(2);
         } else
@@ -394,7 +394,7 @@ public class GameBoardController {
     @FXML
     protected void chooseIsland3(){
         if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice >= 0 && studentChoice <= 4){
-            gui.getClientGUI().asyncWriteToSocket(studentChoice + ",3");
+            gui.getClientGUI().asyncWriteToSocket(studentChoice + "," + islandAbsolutePosition(3));
         } else if(model.getCurrentPhase().equals(GamePhase.MoveMotherNature) && model.getCurrentPlayer() == myPlayer.getIndex()){
             moveMotherNature(3);
         } else
@@ -403,7 +403,7 @@ public class GameBoardController {
     @FXML
     protected void chooseIsland4(){
         if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice >= 0 && studentChoice <= 4){
-            gui.getClientGUI().asyncWriteToSocket(studentChoice + ",4");
+            gui.getClientGUI().asyncWriteToSocket(studentChoice + "," + islandAbsolutePosition(4));
         } else if(model.getCurrentPhase().equals(GamePhase.MoveMotherNature) && model.getCurrentPlayer() == myPlayer.getIndex()){
             moveMotherNature(4);
         } else
@@ -412,7 +412,7 @@ public class GameBoardController {
     @FXML
     protected void chooseIsland5(){
         if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice >= 0 && studentChoice <= 4){
-            gui.getClientGUI().asyncWriteToSocket(studentChoice + ",5");
+            gui.getClientGUI().asyncWriteToSocket(studentChoice + "," + islandAbsolutePosition(5));
         } else if(model.getCurrentPhase().equals(GamePhase.MoveMotherNature) && model.getCurrentPlayer() == myPlayer.getIndex()){
             moveMotherNature(5);
         } else
@@ -421,7 +421,7 @@ public class GameBoardController {
     @FXML
     protected void chooseIsland6(){
         if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice >= 0 && studentChoice <= 4){
-            gui.getClientGUI().asyncWriteToSocket(studentChoice + ",6");
+            gui.getClientGUI().asyncWriteToSocket(studentChoice + "," + islandAbsolutePosition(6));
         } else if(model.getCurrentPhase().equals(GamePhase.MoveMotherNature) && model.getCurrentPlayer() == myPlayer.getIndex()){
             moveMotherNature(6);
         } else
@@ -430,7 +430,7 @@ public class GameBoardController {
     @FXML
     protected void chooseIsland7(){
         if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice >= 0 && studentChoice <= 4){
-            gui.getClientGUI().asyncWriteToSocket(studentChoice + ",7");
+            gui.getClientGUI().asyncWriteToSocket(studentChoice + "," + islandAbsolutePosition(7));
         } else if(model.getCurrentPhase().equals(GamePhase.MoveMotherNature) && model.getCurrentPlayer() == myPlayer.getIndex()){
             moveMotherNature(7);
         } else
@@ -439,7 +439,7 @@ public class GameBoardController {
     @FXML
     protected void chooseIsland8(){
         if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice >= 0 && studentChoice <= 4){
-            gui.getClientGUI().asyncWriteToSocket(studentChoice + ",8");
+            gui.getClientGUI().asyncWriteToSocket(studentChoice + "," + islandAbsolutePosition(8));
         } else if(model.getCurrentPhase().equals(GamePhase.MoveMotherNature) && model.getCurrentPlayer() == myPlayer.getIndex()){
             moveMotherNature(8);
         } else
@@ -448,7 +448,7 @@ public class GameBoardController {
     @FXML
     protected void chooseIsland9(){
         if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice >= 0 && studentChoice <= 4){
-            gui.getClientGUI().asyncWriteToSocket(studentChoice + ",9");
+            gui.getClientGUI().asyncWriteToSocket(studentChoice + "," + islandAbsolutePosition(9));
         } else if(model.getCurrentPhase().equals(GamePhase.MoveMotherNature) && model.getCurrentPlayer() == myPlayer.getIndex()){
             moveMotherNature(9);
         } else
@@ -457,7 +457,7 @@ public class GameBoardController {
     @FXML
     protected void chooseIsland10(){
         if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice >= 0 && studentChoice <= 4){
-            gui.getClientGUI().asyncWriteToSocket(studentChoice + ",10");
+            gui.getClientGUI().asyncWriteToSocket(studentChoice + "," + islandAbsolutePosition(10));
         } else if(model.getCurrentPhase().equals(GamePhase.MoveMotherNature) && model.getCurrentPlayer() == myPlayer.getIndex()){
             moveMotherNature(10);
         } else
@@ -466,7 +466,7 @@ public class GameBoardController {
     @FXML
     protected void chooseIsland11(){
         if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice >= 0 && studentChoice <= 4){
-            gui.getClientGUI().asyncWriteToSocket(studentChoice + ",11");
+            gui.getClientGUI().asyncWriteToSocket(studentChoice + "," + islandAbsolutePosition(11));
         } else if(model.getCurrentPhase().equals(GamePhase.MoveMotherNature) && model.getCurrentPlayer() == myPlayer.getIndex()){
             moveMotherNature(11);
         } else

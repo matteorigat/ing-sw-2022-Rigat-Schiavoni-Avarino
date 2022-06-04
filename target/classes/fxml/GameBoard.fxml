@@ -24,21 +24,21 @@
 <!-- ISLANDS, CLOUDS AND CHARACTERS -->
     <Pane layoutX="232.0" prefHeight="666.0" prefWidth="976.0">
 <!-- ISLAND 0 -->
-        <Pane fx:id="island0" onMouseClicked="#chooseIsland0" layoutX="138.0" layoutY="40.0" prefHeight="150.0" prefWidth="150.0">
+        <Pane fx:id="island0" layoutX="138.0" layoutY="40.0" onMouseClicked="#chooseIsland0" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island1.png" />
             </ImageView>
-            <ImageView fx:id="mothernature0" fitHeight="30.0" fitWidth="30.0" layoutX="40.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="mothernature0" fitHeight="50.0" fitWidth="50.0" layoutX="21.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/mother_nature.png" />
             </ImageView>
-            <ImageView fx:id="towerIsland0" fitHeight="30.0" fitWidth="30.0" layoutX="77.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="towerText0" alignment="CENTER" layoutX="77.0" layoutY="28.0" prefHeight="30.0" prefWidth="30.0" textFill="RED">
+            <ImageView fx:id="towerIsland0" fitHeight="50.0" fitWidth="45.0" layoutX="77.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="towerText0" alignment="CENTER" layoutX="77.0" layoutY="7.0" prefHeight="50.0" prefWidth="45.0" textFill="RED">
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
             <ImageView fx:id="greenIsland0" fitHeight="23.0" fitWidth="20.0" layoutX="26.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/student_green.png" />
             </ImageView>
-            <Label fx:id="greenText0" alignment="CENTER" layoutX="26.0" layoutY="63.0" prefHeight="20.0" prefWidth="20.0" text="1" textFill="BLACK">
+            <Label fx:id="greenText0" alignment="CENTER" layoutX="26.0" layoutY="63.0" prefHeight="20.0" prefWidth="20.0" textFill="BLACK">
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
             <ImageView fx:id="redIsland0" fitHeight="23.0" fitWidth="20.0" layoutX="66.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
@@ -67,15 +67,15 @@
             </Label>
         </Pane>
 <!-- ISLAND 1 -->
-        <Pane fx:id="island1" onMouseClicked="#chooseIsland1" layoutX="320.0" layoutY="1.0" prefHeight="150.0" prefWidth="150.0">
+        <Pane fx:id="island1" layoutX="320.0" layoutY="1.0" onMouseClicked="#chooseIsland1" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island2.png" />
             </ImageView>
-            <ImageView fx:id="mothernature1" fitHeight="30.0" fitWidth="30.0" layoutX="40.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="mothernature1" fitHeight="50.0" fitWidth="50.0" layoutX="21.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/mother_nature.png" />
             </ImageView>
-            <ImageView fx:id="towerIsland1" fitHeight="30.0" fitWidth="30.0" layoutX="77.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="towerText1" alignment="CENTER" layoutX="77.0" layoutY="28.0" prefHeight="30.0" prefWidth="30.0" textFill="RED">
+            <ImageView fx:id="towerIsland1" fitHeight="50.0" fitWidth="45.0" layoutX="77.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="towerText1" alignment="CENTER" layoutX="77.0" layoutY="7.0" prefHeight="50.0" prefWidth="45.0" textFill="RED">
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
             <ImageView fx:id="greenIsland1" fitHeight="23.0" fitWidth="20.0" layoutX="26.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
@@ -110,15 +110,15 @@
             </Label>
         </Pane>
 <!-- ISLAND 2 -->
-        <Pane fx:id="island2" onMouseClicked="#chooseIsland2" layoutX="509.0" layoutY="-6.0" prefHeight="150.0" prefWidth="150.0">
+        <Pane fx:id="island2" layoutX="509.0" layoutY="-6.0" onMouseClicked="#chooseIsland2" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island3.png" />
             </ImageView>
-            <ImageView fx:id="mothernature2" fitHeight="30.0" fitWidth="30.0" layoutX="40.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="mothernature2" fitHeight="50.0" fitWidth="50.0" layoutX="21.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/mother_nature.png" />
             </ImageView>
-            <ImageView fx:id="towerIsland2" fitHeight="30.0" fitWidth="30.0" layoutX="77.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="towerText2" alignment="CENTER" layoutX="77.0" layoutY="28.0" prefHeight="30.0" prefWidth="30.0" textFill="RED">
+            <ImageView fx:id="towerIsland2" fitHeight="50.0" fitWidth="45.0" layoutX="77.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="towerText2" alignment="CENTER" layoutX="77.0" layoutY="7.0" prefHeight="50.0" prefWidth="45.0" textFill="RED">
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
             <ImageView fx:id="greenIsland2" fitHeight="23.0" fitWidth="20.0" layoutX="26.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
@@ -153,15 +153,15 @@
             </Label>
         </Pane>
 <!-- ISLAND 3 -->
-        <Pane fx:id="island3" onMouseClicked="#chooseIsland3" layoutX="696.0" layoutY="43.0" prefHeight="150.0" prefWidth="150.0">
+        <Pane fx:id="island3" layoutX="696.0" layoutY="43.0" onMouseClicked="#chooseIsland3" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island1.png" />
             </ImageView>
-            <ImageView fx:id="mothernature3" fitHeight="30.0" fitWidth="30.0" layoutX="40.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="mothernature3" fitHeight="50.0" fitWidth="50.0" layoutX="21.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/mother_nature.png" />
             </ImageView>
-            <ImageView fx:id="towerIsland3" fitHeight="30.0" fitWidth="30.0" layoutX="77.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="towerText3" alignment="CENTER" layoutX="77.0" layoutY="28.0" prefHeight="30.0" prefWidth="30.0" textFill="RED">
+            <ImageView fx:id="towerIsland3" fitHeight="50.0" fitWidth="45.0" layoutX="77.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="towerText3" alignment="CENTER" layoutX="77.0" layoutY="7.0" prefHeight="50.0" prefWidth="45.0" textFill="RED">
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
             <ImageView fx:id="greenIsland3" fitHeight="23.0" fitWidth="20.0" layoutX="26.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
@@ -196,15 +196,15 @@
             </Label>
         </Pane>
 <!-- ISLAND 4 -->
-        <Pane fx:id="island4" onMouseClicked="#chooseIsland4" layoutX="770.0" layoutY="182.0" prefHeight="150.0" prefWidth="150.0">
+        <Pane fx:id="island4" layoutX="770.0" layoutY="182.0" onMouseClicked="#chooseIsland4" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island2.png" />
             </ImageView>
-            <ImageView fx:id="mothernature4" fitHeight="30.0" fitWidth="30.0" layoutX="40.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="mothernature4" fitHeight="50.0" fitWidth="50.0" layoutX="21.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/mother_nature.png" />
             </ImageView>
-            <ImageView fx:id="towerIsland4" fitHeight="30.0" fitWidth="30.0" layoutX="77.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="towerText4" alignment="CENTER" layoutX="77.0" layoutY="28.0" prefHeight="30.0" prefWidth="30.0" textFill="RED">
+            <ImageView fx:id="towerIsland4" fitHeight="50.0" fitWidth="45.0" layoutX="77.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="towerText4" alignment="CENTER" layoutX="77.0" layoutY="7.0" prefHeight="50.0" prefWidth="45.0" textFill="RED">
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
             <ImageView fx:id="greenIsland4" fitHeight="23.0" fitWidth="20.0" layoutX="26.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
@@ -239,15 +239,15 @@
             </Label>
         </Pane>
 <!-- ISLAND 5 -->
-        <Pane fx:id="island5" onMouseClicked="#chooseIsland5" layoutX="797.0" layoutY="356.0" prefHeight="150.0" prefWidth="150.0">
+        <Pane fx:id="island5" layoutX="797.0" layoutY="356.0" onMouseClicked="#chooseIsland5" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island3.png" />
             </ImageView>
-            <ImageView fx:id="mothernature5" fitHeight="30.0" fitWidth="30.0" layoutX="40.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="mothernature5" fitHeight="50.0" fitWidth="50.0" layoutX="21.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/mother_nature.png" />
             </ImageView>
-            <ImageView fx:id="towerIsland5" fitHeight="30.0" fitWidth="30.0" layoutX="77.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="towerText5" alignment="CENTER" layoutX="77.0" layoutY="28.0" prefHeight="30.0" prefWidth="30.0" textFill="RED">
+            <ImageView fx:id="towerIsland5" fitHeight="50.0" fitWidth="45.0" layoutX="77.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="towerText5" alignment="CENTER" layoutX="77.0" layoutY="7.0" prefHeight="50.0" prefWidth="45.0" textFill="RED">
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
             <ImageView fx:id="greenIsland5" fitHeight="23.0" fitWidth="20.0" layoutX="26.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
@@ -282,15 +282,15 @@
             </Label>
         </Pane>
 <!-- ISLAND 6 -->
-        <Pane fx:id="island6" onMouseClicked="#chooseIsland6" layoutX="694.0" layoutY="472.0" prefHeight="150.0" prefWidth="150.0">
+        <Pane fx:id="island6" layoutX="694.0" layoutY="472.0" onMouseClicked="#chooseIsland6" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island1.png" />
             </ImageView>
-            <ImageView fx:id="mothernature6" fitHeight="30.0" fitWidth="30.0" layoutX="40.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="mothernature6" fitHeight="50.0" fitWidth="50.0" layoutX="21.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/mother_nature.png" />
             </ImageView>
-            <ImageView fx:id="towerIsland6" fitHeight="30.0" fitWidth="30.0" layoutX="77.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="towerText6" alignment="CENTER" layoutX="77.0" layoutY="28.0" prefHeight="30.0" prefWidth="30.0" textFill="RED">
+            <ImageView fx:id="towerIsland6" fitHeight="50.0" fitWidth="45.0" layoutX="77.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="towerText6" alignment="CENTER" layoutX="77.0" layoutY="7.0" prefHeight="50.0" prefWidth="45.0" textFill="RED">
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
             <ImageView fx:id="greenIsland6" fitHeight="23.0" fitWidth="20.0" layoutX="26.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
@@ -325,15 +325,15 @@
             </Label>
         </Pane>
 <!-- ISLAND 7 -->
-        <Pane fx:id="island7" onMouseClicked="#chooseIsland7" layoutX="506.0" layoutY="524.0" prefHeight="150.0" prefWidth="150.0">
+        <Pane fx:id="island7" layoutX="506.0" layoutY="524.0" onMouseClicked="#chooseIsland7" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island2.png" />
             </ImageView>
-            <ImageView fx:id="mothernature7" fitHeight="30.0" fitWidth="30.0" layoutX="40.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="mothernature7" fitHeight="50.0" fitWidth="50.0" layoutX="21.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/mother_nature.png" />
             </ImageView>
-            <ImageView fx:id="towerIsland7" fitHeight="30.0" fitWidth="30.0" layoutX="77.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="towerText7" alignment="CENTER" layoutX="77.0" layoutY="28.0" prefHeight="30.0" prefWidth="30.0" textFill="RED">
+            <ImageView fx:id="towerIsland7" fitHeight="50.0" fitWidth="45.0" layoutX="77.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="towerText7" alignment="CENTER" layoutX="77.0" layoutY="7.0" prefHeight="50.0" prefWidth="45.0" textFill="RED">
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
             <ImageView fx:id="greenIsland7" fitHeight="23.0" fitWidth="20.0" layoutX="26.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
@@ -368,15 +368,15 @@
             </Label>
         </Pane>
 <!-- ISLAND 8 -->
-        <Pane fx:id="island8" onMouseClicked="#chooseIsland8" layoutX="322.0" layoutY="513.0" prefHeight="150.0" prefWidth="150.0">
+        <Pane fx:id="island8" layoutX="322.0" layoutY="513.0" onMouseClicked="#chooseIsland8" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island3.png" />
             </ImageView>
-            <ImageView fx:id="mothernature8" fitHeight="30.0" fitWidth="30.0" layoutX="40.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="mothernature8" fitHeight="50.0" fitWidth="50.0" layoutX="21.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/mother_nature.png" />
             </ImageView>
-            <ImageView fx:id="towerIsland8" fitHeight="30.0" fitWidth="30.0" layoutX="77.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="towerText8" alignment="CENTER" layoutX="77.0" layoutY="28.0" prefHeight="30.0" prefWidth="30.0" textFill="RED">
+            <ImageView fx:id="towerIsland8" fitHeight="50.0" fitWidth="45.0" layoutX="77.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="towerText8" alignment="CENTER" layoutX="77.0" layoutY="7.0" prefHeight="50.0" prefWidth="45.0" textFill="RED">
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
             <ImageView fx:id="greenIsland8" fitHeight="23.0" fitWidth="20.0" layoutX="26.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
@@ -411,15 +411,15 @@
             </Label>
         </Pane>
 <!-- ISLAND 9 -->
-        <Pane fx:id="island9" onMouseClicked="#chooseIsland9" layoutX="146.0" layoutY="497.0" prefHeight="150.0" prefWidth="150.0">
+        <Pane fx:id="island9" layoutX="146.0" layoutY="497.0" onMouseClicked="#chooseIsland9" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island1.png" />
             </ImageView>
-            <ImageView fx:id="mothernature9" fitHeight="30.0" fitWidth="30.0" layoutX="40.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="mothernature9" fitHeight="50.0" fitWidth="50.0" layoutX="21.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/mother_nature.png" />
             </ImageView>
-            <ImageView fx:id="towerIsland9" fitHeight="30.0" fitWidth="30.0" layoutX="77.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="towerText9" alignment="CENTER" layoutX="77.0" layoutY="28.0" prefHeight="30.0" prefWidth="30.0" textFill="RED">
+            <ImageView fx:id="towerIsland9" fitHeight="50.0" fitWidth="45.0" layoutX="77.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="towerText9" alignment="CENTER" layoutX="77.0" layoutY="7.0" prefHeight="50.0" prefWidth="45.0" textFill="RED">
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
             <ImageView fx:id="greenIsland9" fitHeight="23.0" fitWidth="20.0" layoutX="26.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
@@ -454,15 +454,15 @@
             </Label>
         </Pane>
 <!-- ISLAND 10 -->
-        <Pane fx:id="island10" onMouseClicked="#chooseIsland10" layoutX="32.0" layoutY="369.0" prefHeight="150.0" prefWidth="150.0">
+        <Pane fx:id="island10" layoutX="32.0" layoutY="369.0" onMouseClicked="#chooseIsland10" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island2.png" />
             </ImageView>
-            <ImageView fx:id="mothernature10" fitHeight="30.0" fitWidth="30.0" layoutX="40.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="mothernature10" fitHeight="50.0" fitWidth="50.0" layoutX="21.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/mother_nature.png" />
             </ImageView>
-            <ImageView fx:id="towerIsland10" fitHeight="30.0" fitWidth="30.0" layoutX="77.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="towerText10" alignment="CENTER" layoutX="77.0" layoutY="28.0" prefHeight="30.0" prefWidth="30.0" textFill="RED">
+            <ImageView fx:id="towerIsland10" fitHeight="50.0" fitWidth="45.0" layoutX="77.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="towerText10" alignment="CENTER" layoutX="77.0" layoutY="7.0" prefHeight="50.0" prefWidth="45.0" textFill="RED">
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
             <ImageView fx:id="greenIsland10" fitHeight="23.0" fitWidth="20.0" layoutX="26.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
@@ -497,15 +497,15 @@
             </Label>
         </Pane>
 <!-- ISLAND 11 -->
-        <Pane fx:id="island11" onMouseClicked="#chooseIsland11" layoutX="21.0" layoutY="198.0" prefHeight="150.0" prefWidth="150.0">
+        <Pane fx:id="island11" layoutX="21.0" layoutY="198.0" onMouseClicked="#chooseIsland11" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island3.png" />
             </ImageView>
-            <ImageView fx:id="mothernature11" fitHeight="30.0" fitWidth="30.0" layoutX="40.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="mothernature11" fitHeight="50.0" fitWidth="50.0" layoutX="21.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/mother_nature.png" />
             </ImageView>
-            <ImageView fx:id="towerIsland11" fitHeight="30.0" fitWidth="30.0" layoutX="77.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="towerText11" alignment="CENTER" layoutX="77.0" layoutY="28.0" prefHeight="30.0" prefWidth="30.0" textFill="RED">
+            <ImageView fx:id="towerIsland11" fitHeight="50.0" fitWidth="45.0" layoutX="77.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="towerText11" alignment="CENTER" layoutX="77.0" layoutY="7.0" prefHeight="50.0" prefWidth="45.0" textFill="RED">
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
             <ImageView fx:id="greenIsland11" fitHeight="23.0" fitWidth="20.0" layoutX="26.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
@@ -546,7 +546,7 @@
 
 
 <!-- CLOUD 0 -->
-        <Pane fx:id="cloud0" onMouseClicked="#chooseCloud0" layoutX="236.0" layoutY="198.0" prefHeight="150.0" prefWidth="150.0">
+        <Pane fx:id="cloud0" layoutX="236.0" layoutY="198.0" onMouseClicked="#chooseCloud0" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/cloud_card.png" />
             </ImageView>
@@ -556,7 +556,7 @@
             <ImageView fx:id="cloudStudent03" fitHeight="25.0" fitWidth="25.0" layoutX="93.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
         </Pane>
 <!-- CLOUD 1 -->
-        <Pane fx:id="cloud1" onMouseClicked="#chooseCloud1" layoutX="548.0" layoutY="173.0" prefHeight="150.0" prefWidth="150.0">
+        <Pane fx:id="cloud1" layoutX="548.0" layoutY="173.0" onMouseClicked="#chooseCloud1" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/cloud_card.png" />
             </ImageView>
@@ -566,7 +566,7 @@
             <ImageView fx:id="cloudStudent13" fitHeight="25.0" fitWidth="25.0" layoutX="93.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true" />
         </Pane>
 <!-- CLOUD 2 -->
-        <Pane fx:id="cloud2" onMouseClicked="#chooseCloud2" layoutX="397.0" layoutY="339.0" prefHeight="150.0" prefWidth="150.0">
+        <Pane fx:id="cloud2" layoutX="397.0" layoutY="339.0" onMouseClicked="#chooseCloud2" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/cloud_card.png" />
             </ImageView>
