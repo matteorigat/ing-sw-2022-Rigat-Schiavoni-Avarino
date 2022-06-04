@@ -1351,25 +1351,20 @@
    <ImageView fx:id="lastAssistant0" fitHeight="106.0" fitWidth="59.0" layoutX="995.0" layoutY="667.0" onMouseClicked="#assistant6" pickOnBounds="true" preserveRatio="true" />
    <ImageView fx:id="lastAssistant1" fitHeight="106.0" fitWidth="59.0" layoutX="235.0" layoutY="632.0" onMouseClicked="#assistant6" pickOnBounds="true" preserveRatio="true" />
    <ImageView fx:id="lastAssistant2" fitHeight="106.0" fitWidth="59.0" layoutX="1207.0" layoutY="87.0" onMouseClicked="#assistant6" pickOnBounds="true" preserveRatio="true" />
+
+
+
    <Label fx:id="nickname1" layoutX="15.0" layoutY="725.0" text="Player: " textFill="WHITE">
-      <font>
-         <Font name="Arial Bold" size="18.0" />
-      </font>
+      <font><Font name="Arial Bold" size="18.0" /></font>
    </Label>
    <Label fx:id="coins1" layoutX="15.0" layoutY="745.0" text="Coins:" textFill="WHITE">
-      <font>
-         <Font name="Arial Bold" size="13.0" />
-      </font>
+      <font><Font name="Arial Bold" size="13.0" /></font>
    </Label>
-   <Label fx:id="coins2" layoutX="1210.0" layoutY="725.0" text="Player: " textFill="WHITE">
-      <font>
-         <Font name="Arial Bold" size="18.0" />
-      </font>
+   <Label fx:id="nickname2" layoutX="1210.0" layoutY="725.0" text="Player: " textFill="WHITE">
+       <font><Font name="Arial Bold" size="18.0" /></font>
    </Label>
-   <Label fx:id="nickname2" layoutX="1210.0" layoutY="745.0" text="Coins:" textFill="WHITE">
-      <font>
-         <Font name="Arial Bold" size="13.0" />
-      </font>
+   <Label fx:id="coins2" layoutX="1210.0" layoutY="745.0" text="Coins:" textFill="WHITE">
+       <font><Font name="Arial Bold" size="13.0" /></font>
    </Label>
 
 

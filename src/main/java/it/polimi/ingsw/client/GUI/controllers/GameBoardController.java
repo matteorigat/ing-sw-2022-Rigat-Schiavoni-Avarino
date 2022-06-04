@@ -10,10 +10,16 @@ import it.polimi.ingsw.model.gameboard.Island;
 import it.polimi.ingsw.model.gameboard.characters.CharacterCard;
 import it.polimi.ingsw.model.player.*;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
 import java.util.Objects;
 
 public class GameBoardController {
@@ -479,18 +485,6 @@ public class GameBoardController {
         return -1;
     }
 
-    private String getColorString(Colour color){
-        int col = color.ordinal();
-        return switch (col) {
-            case 0 -> "0";
-            case 1 -> "1";
-            case 2 -> "2";
-            case 3 -> "3";
-            case 4 -> "4";
-            default -> null;
-        };
-    }
-
     @FXML
     protected void chooseStudent0(){
         if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex()){
@@ -617,10 +611,19 @@ public class GameBoardController {
             cleanParameters();
     }
 
+
+
     @FXML
     protected void chooseCharacter0(){
         if(model.getCurrentPlayer() == myPlayer.getIndex()){
-            //gui.getClientGUI().asyncWriteToSocket("100,");
+            final Stage dialog = new Stage();
+            dialog.initModality(Modality.APPLICATION_MODAL);
+            dialog.initOwner(gui.getStage());
+            VBox dialogVbox = new VBox(20);
+            dialogVbox.getChildren().add(new Text("This is a Dialog"));
+            Scene dialogScene = new Scene(dialogVbox, 300, 200);
+            dialog.setScene(dialogScene);
+            dialog.show();
         } else
             cleanParameters();
     }

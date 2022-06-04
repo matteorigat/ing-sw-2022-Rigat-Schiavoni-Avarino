@@ -131,5 +131,9 @@ public class ClientAppGUI extends Application {
     public GameBoardController getGameboardController() {
         return gameboardController;
     }
+
+    public Stage getStage() {
+        return stage;
+    }
 }
 
