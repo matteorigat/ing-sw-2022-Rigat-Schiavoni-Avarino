@@ -473,18 +473,21 @@ public class GameBoardController {
             cleanParameters();
     }
 
-    private void moveMotherNature(int islandPosition){
-        int islandIndex = -1;
-        for(int i=0; i<model.getGameBoard().getIslands().size(); i++)
-            if(model.getGameBoard().getIslands().get(i).getIslandIndex() == islandPosition){
-                islandIndex = i;
-                break;
-            }
-        islandIndex -= model.getGameBoard().getMotherNature();
-        if(islandIndex<0)
-            islandIndex += model.getGameBoard().getIslands().size();
+    private void moveMotherNature(int islandIndex){
+        int islandPosition = islandAbsolutePosition(islandIndex);
+        islandPosition -= model.getGameBoard().getMotherNature();
+        if(islandPosition<0)
+            islandPosition += model.getGameBoard().getIslands().size();
 
-        gui.getClientGUI().asyncWriteToSocket(String.valueOf(islandIndex));
+        gui.getClientGUI().asyncWriteToSocket(String.valueOf(islandPosition));
+    }
+
+    private int islandAbsolutePosition(int islandIndex){
+        for(int i=0; i<model.getGameBoard().getIslands().size(); i++)
+            if(model.getGameBoard().getIslands().get(i).getIslandIndex() == islandIndex)
+                return i;
+
+        return -1;
     }
 
     private String getColorString(Colour color){
@@ -1177,7 +1180,7 @@ public class GameBoardController {
            towerText0.setText(String.valueOf(i.getNumTower()));
        }
 
-       mothernature0.setVisible(model.getGameBoard().getMotherNature() == 0);
+       mothernature0.setVisible(islandAbsolutePosition(model.getGameBoard().getMotherNature()) == 0);
    }
     private void updateisland1(Island i){
         int green=0, red=0, yellow=0, pink=0, blue=0;
@@ -1249,7 +1252,7 @@ public class GameBoardController {
             towerText1.setText(String.valueOf(i.getNumTower()));
         }
 
-        mothernature1.setVisible(model.getGameBoard().getMotherNature() == 1);
+        mothernature1.setVisible(islandAbsolutePosition(model.getGameBoard().getMotherNature()) == 1);
     }
     private void updateisland2(Island i){
         int green=0, red=0, yellow=0, pink=0, blue=0;
@@ -1321,7 +1324,7 @@ public class GameBoardController {
             towerText2.setText(String.valueOf(i.getNumTower()));
         }
 
-        mothernature2.setVisible(model.getGameBoard().getMotherNature() == 2);
+        mothernature2.setVisible(islandAbsolutePosition(model.getGameBoard().getMotherNature()) == 2);
     }
 
     private void updateisland3(Island i){
@@ -1394,7 +1397,7 @@ public class GameBoardController {
             towerText3.setText(String.valueOf(i.getNumTower()));
         }
 
-        mothernature3.setVisible(model.getGameBoard().getMotherNature() == 3);
+        mothernature3.setVisible(islandAbsolutePosition(model.getGameBoard().getMotherNature()) == 3);
     }
 
     private void updateisland4(Island i){
@@ -1467,7 +1470,7 @@ public class GameBoardController {
             towerText4.setText(String.valueOf(i.getNumTower()));
         }
 
-        mothernature4.setVisible(model.getGameBoard().getMotherNature() == 4);
+        mothernature4.setVisible(islandAbsolutePosition(model.getGameBoard().getMotherNature()) == 4);
     }
 
     private void updateisland5(Island i){
@@ -1540,7 +1543,7 @@ public class GameBoardController {
             towerText5.setText(String.valueOf(i.getNumTower()));
         }
 
-        mothernature5.setVisible(model.getGameBoard().getMotherNature() == 5);
+        mothernature5.setVisible(islandAbsolutePosition(model.getGameBoard().getMotherNature()) == 5);
     }
 
     private void updateisland6(Island i){
@@ -1613,7 +1616,7 @@ public class GameBoardController {
             towerText6.setText(String.valueOf(i.getNumTower()));
         }
 
-        mothernature6.setVisible(model.getGameBoard().getMotherNature() == 6);
+        mothernature6.setVisible(islandAbsolutePosition(model.getGameBoard().getMotherNature()) == 6);
     }
 
     private void updateisland7(Island i){
@@ -1686,7 +1689,7 @@ public class GameBoardController {
             towerText7.setText(String.valueOf(i.getNumTower()));
         }
 
-        mothernature7.setVisible(model.getGameBoard().getMotherNature() == 7);
+        mothernature7.setVisible(islandAbsolutePosition(model.getGameBoard().getMotherNature()) == 7);
     }
 
     private void updateisland8(Island i){
@@ -1759,7 +1762,7 @@ public class GameBoardController {
             towerText8.setText(String.valueOf(i.getNumTower()));
         }
 
-        mothernature8.setVisible(model.getGameBoard().getMotherNature() == 8);
+        mothernature8.setVisible(islandAbsolutePosition(model.getGameBoard().getMotherNature()) == 8);
     }
 
     private void updateisland9(Island i){
@@ -1832,7 +1835,7 @@ public class GameBoardController {
             towerText9.setText(String.valueOf(i.getNumTower()));
         }
 
-        mothernature9.setVisible(model.getGameBoard().getMotherNature() == 9);
+        mothernature9.setVisible(islandAbsolutePosition(model.getGameBoard().getMotherNature()) == 9);
     }
 
     private void updateisland10(Island i){
@@ -1905,7 +1908,7 @@ public class GameBoardController {
             towerText10.setText(String.valueOf(i.getNumTower()));
         }
 
-        mothernature10.setVisible(model.getGameBoard().getMotherNature() == 10);
+        mothernature10.setVisible(islandAbsolutePosition(model.getGameBoard().getMotherNature()) == 10);
     }
 
 
@@ -1979,7 +1982,7 @@ public class GameBoardController {
             towerText11.setText(String.valueOf(i.getNumTower()));
         }
 
-        mothernature11.setVisible(model.getGameBoard().getMotherNature() == 11);
+        mothernature11.setVisible(islandAbsolutePosition(model.getGameBoard().getMotherNature()) == 11);
     }
 
 
