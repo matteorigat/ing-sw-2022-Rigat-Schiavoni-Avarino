@@ -372,28 +372,33 @@ public class Controller implements Observer<PlayerMove> {
 
     //Action Phase punto 2.1
     public int moveMotherNature(int playerIndex, int movements){ //checking if player has the rights
-        if(model.getCurrentPhase().equals(GamePhase.MoveMotherNature) && playerIndex == model.getCurrentPlayer()){
-            int maxMovements = model.getPlayers().get(model.getCurrentPlayer()).getCurrentCard().getMovements();
-            if(Parameters.expertMode && movements <= maxMovements+2){
-                for(CharacterCard c: model.getGameBoard().getThreeCharacterCards())
-                    if(c.getIndex() == 4 && ((Character4) c).isEffectFlag()){
-                        maxMovements += 2;
-                        ((Character4) c).disableEffect();
-                    }
+        try {
+            if(model.getCurrentPhase().equals(GamePhase.MoveMotherNature) && playerIndex == model.getCurrentPlayer()){
+                int maxMovements = model.getPlayers().get(model.getCurrentPlayer()).getCurrentCard().getMovements();
+                if(Parameters.expertMode && movements <= maxMovements+2){
+                    for(CharacterCard c: model.getGameBoard().getThreeCharacterCards())
+                        if(c.getIndex() == 4 && ((Character4) c).isEffectFlag()){
+                            maxMovements += 2;
+                            ((Character4) c).disableEffect();
+                        }
+                }
+                if(movements > 0 && movements <= maxMovements){
+                    int newPos = (model.getGameBoard().getMotherNature() + movements)%model.getGameBoard().getIslands().size();
+                    model.getGameBoard().setMotherNature(newPos);//moves motherNature by specified movements
+                    System.out.println("stai per entrare in checkInfluence");
+                    this.checkIslandInfluence(newPos, playerIndex);
+                } else return -1;
+
+                if(!model.getCurrentPhase().equals(GamePhase.GameEnded))
+                    model.setCurrentPhase(GamePhase.ChooseCloud);
+
+                return 1;
             }
-            if(movements > 0 && movements <= maxMovements){
-                int newPos = (model.getGameBoard().getMotherNature() + movements)%model.getGameBoard().getIslands().size();
-                model.getGameBoard().setMotherNature(newPos);//moves motherNature by specified movements
-                System.out.println("stai per entrare in checkInfluence");
-                this.checkIslandInfluence(newPos, playerIndex);
-            } else return -1;
-
-            if(!model.getCurrentPhase().equals(GamePhase.GameEnded))
-                model.setCurrentPhase(GamePhase.ChooseCloud);
-
-            return 1;
+            else return -1;
+        } catch (IndexOutOfBoundsException e){
+            e.printStackTrace();
         }
-        else return -1;
+        return -1;
     }
 
     //action phase 2 punto 2.2 //checking who controls the island, if it's a different player i'll change towers
