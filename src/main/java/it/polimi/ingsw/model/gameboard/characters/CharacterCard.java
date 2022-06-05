@@ -15,4 +15,9 @@ public interface CharacterCard extends Serializable {
 
     public int getCost();
 
+    @Override
+    public String toString();
+
+    public String getDescription();
+
 }

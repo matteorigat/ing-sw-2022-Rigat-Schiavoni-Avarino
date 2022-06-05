@@ -38,4 +38,8 @@ public class Character5 implements CharacterCard{
                 "\tcost: " + cost +
                 "\t\tnoEntry: " + noEntry +  "\t\t\t\t\t\t" + Description;
     }
+    @Override
+    public String getDescription(){
+        return Description;
+    }
 }

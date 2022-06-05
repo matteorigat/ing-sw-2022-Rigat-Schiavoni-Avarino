@@ -46,4 +46,8 @@ public class Character3 implements CharacterCard{
                 "\tcost: " + cost +
                 "\t\teffectFlag: " + effectFlag +  "\t\t\t\t" + Description;
     }
+    @Override
+    public String getDescription(){
+        return Description;
+    }
 }

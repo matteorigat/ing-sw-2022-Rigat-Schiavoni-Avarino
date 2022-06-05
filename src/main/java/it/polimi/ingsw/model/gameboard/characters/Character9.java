@@ -57,4 +57,8 @@ public class Character9 implements CharacterCard{
                 "\tcost: " + cost +
                 "\t\teffectFlag: " + getColor() +  "\t\t\t\t" + Description;
     }
+    @Override
+    public String getDescription(){
+        return Description;
+    }
 }

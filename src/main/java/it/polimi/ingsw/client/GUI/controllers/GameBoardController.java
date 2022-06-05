@@ -615,32 +615,53 @@ public class GameBoardController {
 
     @FXML
     protected void chooseCharacter0(){
-        if(model.getCurrentPlayer() == myPlayer.getIndex()){
+
             final Stage dialog = new Stage();
             dialog.initModality(Modality.APPLICATION_MODAL);
             dialog.initOwner(gui.getStage());
             VBox dialogVbox = new VBox(20);
-            dialogVbox.getChildren().add(new Text("This is a Dialog"));
-            Scene dialogScene = new Scene(dialogVbox, 300, 200);
+            dialogVbox.getChildren().add(new Text(model.getGameBoard().getThreeCharacterCards().get(0).getDescription()));
+            Scene dialogScene = new Scene(dialogVbox, 400, 100);
             dialog.setScene(dialogScene);
             dialog.show();
-        } else
+
+            //POI DEVE MANDARE AL SERVER
+
+            //Secondo me è giusto poter sapere l'effetto di una carta anche se non è il proprio turno
+        if(!(model.getCurrentPlayer() == myPlayer.getIndex()))
             cleanParameters();
     }
 
     @FXML
     protected void chooseCharacter1(){
-        if(model.getCurrentPlayer() == myPlayer.getIndex()){
-            //gui.getClientGUI().asyncWriteToSocket("100,");
-        } else
+
+            final Stage dialog = new Stage();
+            dialog.initModality(Modality.APPLICATION_MODAL);
+            dialog.initOwner(gui.getStage());
+            VBox dialogVbox = new VBox(20);
+            dialogVbox.getChildren().add(new Text(model.getGameBoard().getThreeCharacterCards().get(1).getDescription()));
+            Scene dialogScene = new Scene(dialogVbox, 400, 100);
+            dialog.setScene(dialogScene);
+            dialog.show();
+
+
+            if(!(model.getCurrentPlayer() == myPlayer.getIndex()))
             cleanParameters();
     }
 
     @FXML
     protected void chooseCharacter2(){
-        if(model.getCurrentPlayer() == myPlayer.getIndex()){
-            //gui.getClientGUI().asyncWriteToSocket("100,");
-        } else
+
+            final Stage dialog = new Stage();
+            dialog.initModality(Modality.APPLICATION_MODAL);
+            dialog.initOwner(gui.getStage());
+            VBox dialogVbox = new VBox(20);
+            dialogVbox.getChildren().add(new Text(model.getGameBoard().getThreeCharacterCards().get(2).getDescription()));
+            Scene dialogScene = new Scene(dialogVbox, 400, 100);
+            dialog.setScene(dialogScene);
+            dialog.show();
+
+            if(!(model.getCurrentPlayer() == myPlayer.getIndex()))
             cleanParameters();
     }
 

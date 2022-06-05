@@ -31,4 +31,8 @@ public class Character10 implements CharacterCard{
         return  "index: " + index +
                 "\tcost: " + cost +  "\t\t\t\t\t\t\t\t\t\t" + Description;
     }
+    @Override
+    public String getDescription(){
+        return Description;
+    }
 }

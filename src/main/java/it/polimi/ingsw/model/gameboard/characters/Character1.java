@@ -64,4 +64,9 @@ public class Character1 implements CharacterCard{
                 "\tcost: " + cost +
                 "\t\tstudents: " + students +  "\t\t" + Description;
     }
+
+    @Override
+    public String getDescription(){
+        return Description;
+    }
 }
