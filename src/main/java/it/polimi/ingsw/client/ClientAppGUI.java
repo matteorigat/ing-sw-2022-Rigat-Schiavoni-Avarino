@@ -71,6 +71,16 @@ public class ClientAppGUI extends Application {
         sceneMap.put(LOAD, loadingScene);
         sceneMap.put(FIRST, firstScene);
         sceneMap.put(GAMEBOARD, gameboardScene);
+
+        /*  Image i = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/Cursor.png")));
+  ImageCursor ic = new ImageCursor(i);
+  menuScene.setCursor(ic);
+  nicknameScene.setCursor(ic);
+  loadingScene.setCursor(ic);
+  firstScene.setCursor(ic);
+  gameboardScene.setCursor(ic);
+//  menuScene.setCursor(Cursor.DEFAULT); //per ripristinare default */
+
     }
 
     public String getCurrentFXML() {
