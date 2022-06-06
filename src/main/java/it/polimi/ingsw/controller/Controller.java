@@ -474,7 +474,15 @@ public class Controller implements Observer<PlayerMove> {
             model.getGameBoard().islandFusion(islandIndex, (islandIndex+1)%model.getGameBoard().getIslands().size());
             if((islandIndex+1)%(model.getGameBoard().getIslands().size()+1) == 0){
                 islandIndex--;
-                model.getGameBoard().setMotherNature(islandIndex);
+                if(!Parameters.expertMode){
+                    model.getGameBoard().setMotherNature(islandIndex);
+                } else {
+                    for(CharacterCard c: model.getGameBoard().getThreeCharacterCards())
+                        if(c.getIndex() == 3 && ((Character3) c).isEffectFlag()){
+                            model.getGameBoard().setMotherNature(islandIndex);
+                            break;
+                        }
+                }
             }
         }
 

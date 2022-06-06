@@ -6,12 +6,15 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class ClientAppGUI extends Application {
 
@@ -72,7 +75,7 @@ public class ClientAppGUI extends Application {
         sceneMap.put(FIRST, firstScene);
         sceneMap.put(GAMEBOARD, gameboardScene);
 
-        /*  Image i = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/Cursor.png")));
+         /* Image i = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/pointer.png")));
   ImageCursor ic = new ImageCursor(i);
   menuScene.setCursor(ic);
   nicknameScene.setCursor(ic);
