@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 public class Character4 {
-    private ClientAppGUI gui;
+    private ClientAppGUI gui ;
 
     @FXML
     private Label effect;
