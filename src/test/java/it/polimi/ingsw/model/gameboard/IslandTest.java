@@ -23,6 +23,7 @@ public class IslandTest {
         arrayPlayers.add(p2);
 
         Island island = new Island();
+        island.setIslandIndex(0);
         Student student1 = new Student(Colour.Green);
         Student student2 = new Student(Colour.Green);
         Student student3 = new Student(Colour.Yellow);
@@ -78,5 +79,10 @@ public class IslandTest {
         assertEquals(1, island.getNoEntry());
         island.removeNoEntry();
         assertEquals(0, island.getNoEntry());
+
+
+        assertEquals(0, island.getIslandIndex());
+
+
     }
 }

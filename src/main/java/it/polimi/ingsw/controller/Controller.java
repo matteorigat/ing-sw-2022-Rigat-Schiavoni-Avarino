@@ -477,11 +477,15 @@ public class Controller implements Observer<PlayerMove> {
                 if(!Parameters.expertMode){
                     model.getGameBoard().setMotherNature(islandIndex);
                 } else {
+                    boolean card3 = false;
                     for(CharacterCard c: model.getGameBoard().getThreeCharacterCards())
                         if(c.getIndex() == 3 && ((Character3) c).isEffectFlag()){
-                            model.getGameBoard().setMotherNature(islandIndex);
+                            card3 = true;
                             break;
                         }
+
+                    if (!card3)
+                        model.getGameBoard().setMotherNature(islandIndex);
                 }
             }
         }
