@@ -61,6 +61,7 @@ public class ClientAppGUI extends Application {
         gameboardController = gameboard.getController();
         gameboardController.setGui(this);
 
+
         /*
         FXMLLoader game = new FXMLLoader(getClass().getResource("/fxml/GameScene.fxml"));
         Scene gameScene = new Scene(game.load());

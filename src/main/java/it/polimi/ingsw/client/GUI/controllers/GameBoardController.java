@@ -10,6 +10,7 @@ import it.polimi.ingsw.model.gameboard.Island;
 import it.polimi.ingsw.model.gameboard.characters.CharacterCard;
 import it.polimi.ingsw.model.player.*;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -20,6 +21,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.Objects;
 
 public class GameBoardController {
@@ -365,8 +367,8 @@ public class GameBoardController {
            gui.getClientGUI().asyncWriteToSocket(studentChoice + "," + islandAbsolutePosition(0));
        } else if(model.getCurrentPhase().equals(GamePhase.MoveMotherNature) && model.getCurrentPlayer() == myPlayer.getIndex()){
            moveMotherNature(0);
-       } else
-           cleanParameters();
+       }
+       cleanParameters();
     }
     @FXML
     protected void chooseIsland1(){
@@ -374,8 +376,8 @@ public class GameBoardController {
             gui.getClientGUI().asyncWriteToSocket(studentChoice + "," + islandAbsolutePosition(1));
         } else if(model.getCurrentPhase().equals(GamePhase.MoveMotherNature) && model.getCurrentPlayer() == myPlayer.getIndex()){
             moveMotherNature(1);
-        } else
-            cleanParameters();
+        }
+        cleanParameters();
     }
     @FXML
     protected void chooseIsland2(){
@@ -383,8 +385,8 @@ public class GameBoardController {
             gui.getClientGUI().asyncWriteToSocket(studentChoice + "," + islandAbsolutePosition(2));
         } else if(model.getCurrentPhase().equals(GamePhase.MoveMotherNature) && model.getCurrentPlayer() == myPlayer.getIndex()){
             moveMotherNature(2);
-        } else
-            cleanParameters();
+        }
+        cleanParameters();
     }
     @FXML
     protected void chooseIsland3(){
@@ -392,8 +394,8 @@ public class GameBoardController {
             gui.getClientGUI().asyncWriteToSocket(studentChoice + "," + islandAbsolutePosition(3));
         } else if(model.getCurrentPhase().equals(GamePhase.MoveMotherNature) && model.getCurrentPlayer() == myPlayer.getIndex()){
             moveMotherNature(3);
-        } else
-            cleanParameters();
+        }
+        cleanParameters();
     }
     @FXML
     protected void chooseIsland4(){
@@ -401,8 +403,8 @@ public class GameBoardController {
             gui.getClientGUI().asyncWriteToSocket(studentChoice + "," + islandAbsolutePosition(4));
         } else if(model.getCurrentPhase().equals(GamePhase.MoveMotherNature) && model.getCurrentPlayer() == myPlayer.getIndex()){
             moveMotherNature(4);
-        } else
-            cleanParameters();
+        }
+        cleanParameters();
     }
     @FXML
     protected void chooseIsland5(){
@@ -410,8 +412,8 @@ public class GameBoardController {
             gui.getClientGUI().asyncWriteToSocket(studentChoice + "," + islandAbsolutePosition(5));
         } else if(model.getCurrentPhase().equals(GamePhase.MoveMotherNature) && model.getCurrentPlayer() == myPlayer.getIndex()){
             moveMotherNature(5);
-        } else
-            cleanParameters();
+        }
+        cleanParameters();
     }
     @FXML
     protected void chooseIsland6(){
@@ -419,8 +421,8 @@ public class GameBoardController {
             gui.getClientGUI().asyncWriteToSocket(studentChoice + "," + islandAbsolutePosition(6));
         } else if(model.getCurrentPhase().equals(GamePhase.MoveMotherNature) && model.getCurrentPlayer() == myPlayer.getIndex()){
             moveMotherNature(6);
-        } else
-            cleanParameters();
+        }
+        cleanParameters();
     }
     @FXML
     protected void chooseIsland7(){
@@ -428,8 +430,8 @@ public class GameBoardController {
             gui.getClientGUI().asyncWriteToSocket(studentChoice + "," + islandAbsolutePosition(7));
         } else if(model.getCurrentPhase().equals(GamePhase.MoveMotherNature) && model.getCurrentPlayer() == myPlayer.getIndex()){
             moveMotherNature(7);
-        } else
-            cleanParameters();
+        }
+        cleanParameters();
     }
     @FXML
     protected void chooseIsland8(){
@@ -437,8 +439,8 @@ public class GameBoardController {
             gui.getClientGUI().asyncWriteToSocket(studentChoice + "," + islandAbsolutePosition(8));
         } else if(model.getCurrentPhase().equals(GamePhase.MoveMotherNature) && model.getCurrentPlayer() == myPlayer.getIndex()){
             moveMotherNature(8);
-        } else
-            cleanParameters();
+        }
+        cleanParameters();
     }
     @FXML
     protected void chooseIsland9(){
@@ -446,8 +448,8 @@ public class GameBoardController {
             gui.getClientGUI().asyncWriteToSocket(studentChoice + "," + islandAbsolutePosition(9));
         } else if(model.getCurrentPhase().equals(GamePhase.MoveMotherNature) && model.getCurrentPlayer() == myPlayer.getIndex()){
             moveMotherNature(9);
-        } else
-            cleanParameters();
+        }
+        cleanParameters();
     }
     @FXML
     protected void chooseIsland10(){
@@ -455,8 +457,8 @@ public class GameBoardController {
             gui.getClientGUI().asyncWriteToSocket(studentChoice + "," + islandAbsolutePosition(10));
         } else if(model.getCurrentPhase().equals(GamePhase.MoveMotherNature) && model.getCurrentPlayer() == myPlayer.getIndex()){
             moveMotherNature(10);
-        } else
-            cleanParameters();
+        }
+        cleanParameters();
     }
     @FXML
     protected void chooseIsland11(){
@@ -464,8 +466,8 @@ public class GameBoardController {
             gui.getClientGUI().asyncWriteToSocket(studentChoice + "," + islandAbsolutePosition(11));
         } else if(model.getCurrentPhase().equals(GamePhase.MoveMotherNature) && model.getCurrentPlayer() == myPlayer.getIndex()){
             moveMotherNature(11);
-        } else
-            cleanParameters();
+        }
+        cleanParameters();
     }
 
     private void moveMotherNature(int islandIndex){
@@ -555,36 +557,36 @@ public class GameBoardController {
     protected void diningRoomGreen() {
         if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice == 0){
             gui.getClientGUI().asyncWriteToSocket("0");
-        } else
-            cleanParameters();
+        }
+        cleanParameters();
     }
     @FXML
     protected void diningRoomRed() {
         if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice == 1){
             gui.getClientGUI().asyncWriteToSocket("1");
-        } else
-            cleanParameters();
+        }
+        cleanParameters();
     }
     @FXML
     protected void diningRoomYellow() {
         if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice == 2){
             gui.getClientGUI().asyncWriteToSocket("2");
-        } else
-            cleanParameters();
+        }
+        cleanParameters();
     }
     @FXML
     protected void diningRoomPink() {
         if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice == 3){
             gui.getClientGUI().asyncWriteToSocket("3");
-        } else
-            cleanParameters();
+        }
+        cleanParameters();
     }
     @FXML
     protected void diningRoomBlue() {
         if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice == 4){
             gui.getClientGUI().asyncWriteToSocket("4");
-        } else
-            cleanParameters();
+        }
+        cleanParameters();
     }
 
     @FXML
@@ -614,22 +616,26 @@ public class GameBoardController {
 
 
     @FXML
-    protected void chooseCharacter0(){
+    protected void chooseCharacter0() throws IOException {
 
             final Stage dialog = new Stage();
             dialog.initModality(Modality.APPLICATION_MODAL);
             dialog.initOwner(gui.getStage());
             VBox dialogVbox = new VBox(20);
             dialogVbox.getChildren().add(new Text(model.getGameBoard().getThreeCharacterCards().get(0).getDescription()));
-            Scene dialogScene = new Scene(dialogVbox, 400, 100);
+
+            FXMLLoader character2 = new FXMLLoader(getClass().getResource("/fxml/Character2.fxml"));
+            Scene dialogScene = new Scene(character2.load());
+            Character2 c2 = character2.getController();
+            c2.setGui(this.gui);
             dialog.setScene(dialogScene);
             dialog.show();
 
             //POI DEVE MANDARE AL SERVER
 
             //Secondo me è giusto poter sapere l'effetto di una carta anche se non è il proprio turno
-        if(!(model.getCurrentPlayer() == myPlayer.getIndex()))
-            cleanParameters();
+            if(!(model.getCurrentPlayer() == myPlayer.getIndex()))
+                cleanParameters();
     }
 
     @FXML
@@ -646,7 +652,7 @@ public class GameBoardController {
 
 
             if(!(model.getCurrentPlayer() == myPlayer.getIndex()))
-            cleanParameters();
+                cleanParameters();
     }
 
     @FXML
@@ -662,7 +668,7 @@ public class GameBoardController {
             dialog.show();
 
             if(!(model.getCurrentPlayer() == myPlayer.getIndex()))
-            cleanParameters();
+                cleanParameters();
     }
 
 
