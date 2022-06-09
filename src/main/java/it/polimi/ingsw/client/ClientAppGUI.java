@@ -120,7 +120,6 @@ public class ClientAppGUI extends Application {
         stage.setScene(currentScene);
         if(newScene.equals("GameBoard")){
             stage.setResizable(true);
-            stage.setFullScreen(true);
         }
         stage.show();
     }
