@@ -99,7 +99,7 @@ public class ClientCLI {
                                 System.out.println("Insert the students color in this order... entranceStudent1,diningStudent1,entranceStudent2,diningStudent2  , students 2 are not necessary: ");
                                 inputLine2 = stdin.nextLine();
 
-                            }else if(c == 11){
+                            } else if(c == 11){
                                 System.out.println("Insert the student color: ");
                                 inputLine2 = stdin.nextLine();
 
@@ -108,7 +108,7 @@ public class ClientCLI {
                                 inputLine2 = stdin.nextLine();
                             }
 
-                            if(inputLine2.equals(null))
+                            if(inputLine2 == null)
                                 inputLine = "100," + inputLine;
                             else
                                 inputLine = "100," + inputLine + "," + inputLine2;
