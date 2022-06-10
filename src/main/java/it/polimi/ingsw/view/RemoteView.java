@@ -18,6 +18,7 @@ public class RemoteView extends View {
 
         @Override
         public void update(String message) {
+            int currentPhase = phaseCounter;
             System.out.println("Received: " + message);
             System.out.println("Phase: " + phaseCounter);
             try{
@@ -29,7 +30,7 @@ public class RemoteView extends View {
                         for (int i = 0; i < inputs.length-1; i++)
                             inputs2[i] = inputs[i+1];
                         inputs = inputs2;
-                        phaseCounter = 100;
+                        currentPhase = 100;
                     }
                 } else {
                     inputs = new String[1];
@@ -45,35 +46,35 @@ public class RemoteView extends View {
                     }
                 }
 
-                switch (phaseCounter){
+                switch (currentPhase){
                     case 0:
                     case 2:
                     case 4:
                     case 3: {
                         if(inputs.length == 1)
-                            handleMove(phaseCounter, input[0]);
+                            handleMove(currentPhase, input[0]);
                         else clientConnection.asyncSend("\u001B[5;31mError! Write the move well\u001B[0m");
                         break;
                     }
                     case 1:{
                         if(inputs.length == 1)
-                            handleMove(phaseCounter, input[0]);
+                            handleMove(currentPhase, input[0]);
                         else if(inputs.length == 2)
-                            handleMove(phaseCounter, input[0], input[1]);
+                            handleMove(currentPhase, input[0], input[1]);
                         else clientConnection.asyncSend("\u001B[5;31mError! Write the move well\u001B[0m");
                         break;
                     }
                     case 100:{
                         if(inputs.length == 1)
-                            handleMove(phaseCounter, input[0]);
+                            handleMove(currentPhase, input[0]);
                         else if(inputs.length == 2)
-                            handleMove(phaseCounter, input[0], input[1]);
+                            handleMove(currentPhase, input[0], input[1]);
                         else if(inputs.length == 3)
-                            handleMove(phaseCounter, input[0], input[1], input[2]);
+                            handleMove(currentPhase, input[0], input[1], input[2]);
                         else if(inputs.length == 5)
-                            handleMove(phaseCounter, input[0], input[1], input[2], input[3], input[4]);
+                            handleMove(currentPhase, input[0], input[1], input[2], input[3], input[4]);
                         else if(inputs.length == 7)
-                            handleMove(phaseCounter, input[0], input[1], input[2], input[3], input[4], input[5], input[6]);
+                            handleMove(currentPhase, input[0], input[1], input[2], input[3], input[4], input[5], input[6]);
                         else clientConnection.asyncSend("\u001B[5;31mError! Write the move well\u001B[0m");
                         break;
                     }
