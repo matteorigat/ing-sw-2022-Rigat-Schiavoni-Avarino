@@ -13,7 +13,7 @@ public class Character4 {
 
     @FXML
     protected void onButtonClick() {
-        Platform.runLater(()-> gui.getClientGUI().asyncWriteToSocket("100,2"));
+        Platform.runLater(()-> gui.getClientGUI().asyncWriteToSocket("100,4"));
     }
 
 
