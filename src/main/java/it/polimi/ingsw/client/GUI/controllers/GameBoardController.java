@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client.GUI.controllers;
 
 import it.polimi.ingsw.client.ClientAppGUI;
+import it.polimi.ingsw.client.GUI.controllers.characters.Character;
 import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.model.enumeration.Colour;
 import it.polimi.ingsw.model.enumeration.GamePhase;
@@ -16,8 +17,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -615,60 +614,78 @@ public class GameBoardController {
 
 
 
+    private FXMLLoader getCharacterFXML(int index){
+        return switch (index) {
+            case 1 -> new FXMLLoader(getClass().getResource("/fxml/Characters/Character1.fxml"));
+            case 2 -> new FXMLLoader(getClass().getResource("/fxml/Characters/Character2.fxml"));
+            case 3 -> new FXMLLoader(getClass().getResource("/fxml/Characters/Character3.fxml"));
+            case 4 -> new FXMLLoader(getClass().getResource("/fxml/Characters/Character4.fxml"));
+            case 5 -> new FXMLLoader(getClass().getResource("/fxml/Characters/Character5.fxml"));
+            case 6 -> new FXMLLoader(getClass().getResource("/fxml/Characters/Character6.fxml"));
+            case 7 -> new FXMLLoader(getClass().getResource("/fxml/Characters/Character7.fxml"));
+            case 8 -> new FXMLLoader(getClass().getResource("/fxml/Characters/Character8.fxml"));
+            case 9 -> new FXMLLoader(getClass().getResource("/fxml/Characters/Character9.fxml"));
+            case 10 -> new FXMLLoader(getClass().getResource("/fxml/Characters/Character10.fxml"));
+            case 11 -> new FXMLLoader(getClass().getResource("/fxml/Characters/Character11.fxml"));
+            case 12 -> new FXMLLoader(getClass().getResource("/fxml/Characters/Character12.fxml"));
+            default -> null;
+        };
+    }
+
+
+
     @FXML
     protected void chooseCharacter0() throws IOException {
+        final Stage dialog = new Stage();
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        dialog.initOwner(gui.getStage());
 
-            final Stage dialog = new Stage();
-            dialog.initModality(Modality.APPLICATION_MODAL);
-            dialog.initOwner(gui.getStage());
-            VBox dialogVbox = new VBox(20);
-            dialogVbox.getChildren().add(new Text(model.getGameBoard().getThreeCharacterCards().get(0).getDescription()));
-
-            FXMLLoader character2 = new FXMLLoader(getClass().getResource("/fxml/Character2.fxml"));
-            Scene dialogScene = new Scene(character2.load());
-            Character2 c2 = character2.getController();
-            c2.setGui(this.gui);
+        FXMLLoader character = getCharacterFXML(model.getGameBoard().getThreeCharacterCards().get(0).getIndex());
+        if(character != null){
+            Scene dialogScene = new Scene(character.load());
+            Character c = character.getController();
+            c.setGui(this.gui);
             dialog.setScene(dialogScene);
             dialog.show();
+        }
 
-            //POI DEVE MANDARE AL SERVER
-
-            //Secondo me è giusto poter sapere l'effetto di una carta anche se non è il proprio turno
-            if(!(model.getCurrentPlayer() == myPlayer.getIndex()))
-                cleanParameters();
+        cleanParameters();
     }
 
     @FXML
-    protected void chooseCharacter1(){
+    protected void chooseCharacter1() throws IOException {
+        final Stage dialog = new Stage();
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        dialog.initOwner(gui.getStage());
 
-            final Stage dialog = new Stage();
-            dialog.initModality(Modality.APPLICATION_MODAL);
-            dialog.initOwner(gui.getStage());
-            VBox dialogVbox = new VBox(20);
-            dialogVbox.getChildren().add(new Text(model.getGameBoard().getThreeCharacterCards().get(1).getDescription()));
-            Scene dialogScene = new Scene(dialogVbox, 400, 100);
+        FXMLLoader character = getCharacterFXML(model.getGameBoard().getThreeCharacterCards().get(1).getIndex());
+        if(character != null){
+            Scene dialogScene = new Scene(character.load());
+            Character c = character.getController();
+            c.setGui(this.gui);
             dialog.setScene(dialogScene);
             dialog.show();
+        }
 
-
-            if(!(model.getCurrentPlayer() == myPlayer.getIndex()))
-                cleanParameters();
+        cleanParameters();
     }
 
     @FXML
-    protected void chooseCharacter2(){
+    protected void chooseCharacter2() throws IOException {
+        final Stage dialog = new Stage();
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        dialog.initOwner(gui.getStage());
 
-            final Stage dialog = new Stage();
-            dialog.initModality(Modality.APPLICATION_MODAL);
-            dialog.initOwner(gui.getStage());
-            VBox dialogVbox = new VBox(20);
-            dialogVbox.getChildren().add(new Text(model.getGameBoard().getThreeCharacterCards().get(2).getDescription()));
-            Scene dialogScene = new Scene(dialogVbox, 400, 100);
+        FXMLLoader character = getCharacterFXML(model.getGameBoard().getThreeCharacterCards().get(2).getIndex());
+        if(character != null){
+            Scene dialogScene = new Scene(character.load());
+            Character c = character.getController();
+            c.setGui(this.gui);
             dialog.setScene(dialogScene);
             dialog.show();
+        }
 
-            if(!(model.getCurrentPlayer() == myPlayer.getIndex()))
-                cleanParameters();
+        cleanParameters();
     }
 
 
