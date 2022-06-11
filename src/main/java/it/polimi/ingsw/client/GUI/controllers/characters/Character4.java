@@ -13,7 +13,7 @@ public class Character4 implements Character{
 
     @FXML
     protected void onButtonClick() {
-        effect.setText("hai giocato questa carta!");
+        //effect.setText("hai giocato questa carta!");
         Platform.runLater(()-> gui.getClientGUI().asyncWriteToSocket("100,4"));
     }
 
