@@ -31,6 +31,10 @@ public class Character1 implements CharacterCard{
         return null; //non dovrebbe mai succedere
     }
 
+    public ArrayList<Student> getStudents() {
+        return students;
+    }
+
     public boolean checkColorExists(int colorIndex){
         for (Student s: students)
             if(s.getColour().equals(Colour.values()[colorIndex]))

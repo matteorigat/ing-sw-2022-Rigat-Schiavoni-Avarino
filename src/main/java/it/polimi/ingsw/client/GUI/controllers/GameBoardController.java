@@ -644,7 +644,8 @@ public class GameBoardController {
         if(character != null){
             Scene dialogScene = new Scene(character.load());
             Character c = character.getController();
-            c.setGui(this.gui);
+            c.setGui(this.gui, dialog);
+            c.setModel(model, 0);
             dialog.setScene(dialogScene);
             dialog.show();
         }
@@ -662,7 +663,8 @@ public class GameBoardController {
         if(character != null){
             Scene dialogScene = new Scene(character.load());
             Character c = character.getController();
-            c.setGui(this.gui);
+            c.setGui(this.gui, dialog);
+            c.setModel(model, 1);
             dialog.setScene(dialogScene);
             dialog.show();
         }
@@ -680,7 +682,8 @@ public class GameBoardController {
         if(character != null){
             Scene dialogScene = new Scene(character.load());
             Character c = character.getController();
-            c.setGui(this.gui);
+            c.setGui(this.gui, dialog);
+            c.setModel(model, 2);
             dialog.setScene(dialogScene);
             dialog.show();
         }
