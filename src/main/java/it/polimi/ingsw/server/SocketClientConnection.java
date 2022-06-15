@@ -10,8 +10,10 @@ import java.net.Socket;
 
 
 /**
- * SocketClientConnection handles a connection between client and server, permitting sending and
- * receiving messages and doing other class-useful operations too.
+ * SocketClientConnection handles a connection between client and server, it  permits to send and
+ * receive messages and doing other class-useful operations too.
+ * @see Runnable
+ * @see ClientConnection
  */
 public class SocketClientConnection extends Observable<String> implements ClientConnection, Runnable {
 
@@ -21,17 +23,31 @@ public class SocketClientConnection extends Observable<String> implements Client
 
     private boolean active = true;
 
+    /**
+     * Constructor SocketClientConnection instantiates an input/output stream from the socket received
+     *  as parameters, and adds the main server to his attributes too.
+     *
+     * @param socket  of type Socket - the socket which accepted the client connection.
+     * @param server  of type Server - the main server class.
+     */
     public SocketClientConnection(Socket socket, Server server) {
         this.socket = socket;
         this.server = server;
     }
 
 /**
- * Method isActive returns the active of this SocketClientConnection object.*/
+ * Method isActive returns the active of this SocketClientConnection object.
+ * @return the active (type boolean) of this SocketClientConnection object.
+ * */
     private synchronized boolean isActive(){
         return active;
     }
 
+
+    /**
+     * Method send is used to send messages
+     * @param message
+     */
     public synchronized void send(Object message) {
         try {
             out.reset();
@@ -43,7 +59,9 @@ public class SocketClientConnection extends Observable<String> implements Client
 
     }
 
-
+    /**
+     * closeConnection method is used to close connection
+     */
     @Override
     public synchronized void closeConnection() {
         send("Connection closed!");
@@ -79,7 +97,11 @@ public class SocketClientConnection extends Observable<String> implements Client
 
    /** Method run is the overriding runnable class method, which is called on a new client connection.
     * Every new Client connected will sign in writing his username and if he's the first player in the match he will choose
-    * the gamemode and the num of players */
+    * the gamemode and the num of players
+    *
+    * @see Runnable #run()
+    *
+    */
     @Override
     public void run() {
         String name;

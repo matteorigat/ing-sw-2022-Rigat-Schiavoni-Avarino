@@ -14,10 +14,19 @@ public class AssistantCard implements Serializable {
         this.movements = movements;
     }
 
+    /**
+     * getValue method returns the value of the assistant card
+     * @return value
+     */
     public int getValue() {
         return value;
     }
 
+    /**
+     * getMovements method returns the value of the movements of the assistant card
+     *
+     * @return movements
+     */
     public int getMovements() {
         return movements;
     }

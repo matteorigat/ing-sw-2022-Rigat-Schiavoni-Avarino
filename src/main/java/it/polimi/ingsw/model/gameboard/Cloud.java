@@ -7,16 +7,29 @@ import it.polimi.ingsw.model.player.Student;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Cloud Class defines 2 or 3 clouds (depending on the number of players) with 3 students on them.
+ * At the end of every turn every player choose one of the cloud and get the students.
+ * Then Clouds will be refilled.
+ */
 public class Cloud implements Serializable {
 
     private ArrayList<Student> students;
     private boolean taken;
 
+    /**
+     * Cloud constructor method
+     */
     public Cloud() {
         this.students = new ArrayList<>(0);
         this.taken = false;
     }
 
+    /**
+     * addStudents method adds students on one cloud
+     * @param s
+     * @throws TooManyStudentsOnCloudException
+     */
     // A inizio turmo si aggiungono giocatori sulla nuvola... è possibile modificare la funzione e passare tutti gli studenti insieme come arraylist
     public void addStudent(Student s) throws TooManyStudentsOnCloudException {
         if (this.students.size() < Parameters.numCloudStudents){
@@ -26,11 +39,20 @@ public class Cloud implements Serializable {
 
     }
 
+    /**
+     * seeStudents method returns the arraylist of the students of the island
+     * @return (ArrayList<Students>)
+     */
     public ArrayList<Student> seeStudents() {
         return (ArrayList<Student>) students.clone();
     }
 
     //quando un giocatore finisce il turno, prende gli studenti dalla nuvola e la svuota
+
+    /**
+     * getStudents method get the arrayList of the students of the island
+     * @return (ArrayList<Students>)
+     */
     public ArrayList<Student> getStudents() {
         ArrayList<Student> stud = (ArrayList<Student>) students.clone();
 
@@ -42,10 +64,18 @@ public class Cloud implements Serializable {
         return stud;
     }
 
+    /**
+     * isTaken method returns a boolean which tells if the students on cloud are already taken
+     * @return taken
+     */
     public boolean isTaken() {
         return taken;
     }
 
+    /**
+     * setTaken method sets the boolean taken
+     * @param taken
+     */
     public void setTaken(boolean taken) {
         this.taken = taken;
     }

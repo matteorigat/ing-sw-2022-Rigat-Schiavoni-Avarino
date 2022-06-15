@@ -121,28 +121,49 @@ public class Controller implements Observer<PlayerMove> {
     }
 
 
-
+    /**
+     * update method updates model by the information got from message
+     * @param message
+     */
     @Override
     public void update(PlayerMove message) {
         performMove(message);
     }
 
 
-    //Gets the players of the match
+    /**
+     * getPlayer method gets the players
+     * @return players
+     */
     public ArrayList<Player> getPlayers() {
         return model.getPlayers();
     }
 
-    //Gets the gameBoard instance
+    /**
+     * getGameBoard method gets the gameBoard instance
+     * @return
+     */
+
     public GameBoard getGameBoard() {
         return model.getGameBoard();
     }
 
+
+    /**
+     * setParameters method sets num of players and expert mode parameters
+     * @param numPlayers
+     * @param expertMode
+     */
     public void setParameters(int numPlayers, Boolean expertMode){
         Parameters.setParameters(numPlayers, expertMode);
         this.model = new Model();
     }
 
+    /**
+     * addPlayer method adds player to the model
+     * @param player
+     * @return
+     */
 
     public int addPlayer(Player player){
 
@@ -210,7 +231,10 @@ public class Controller implements Observer<PlayerMove> {
     }
 
 
-    //pianification phase 1 adds students on clouds
+    /**
+     * addStudentsOnClouds method adds students to the clouds. This is the pianification phase 1
+     */
+
     private void addStudentsOnClouds(){
         int num = 0;
         for(Cloud c: model.getGameBoard().getClouds()){
@@ -222,8 +246,15 @@ public class Controller implements Observer<PlayerMove> {
         }
     }
 
-    //pianification phase 2 , play an assistant card and control if it is possible to play it (already played or the
-    // opposite player played it
+    /**
+     * PlayAssistantCard method plays an assistant card and controls if it is possible to play
+     * it (already played or the opposite player played it.
+     * This is the pianification phase 2
+     * @param playerIndex
+     * @param priority
+     * @return
+     */
+
     public int playAssistantCard(int playerIndex, int priority){
         if(model.getCurrentPhase().equals(GamePhase.PlayAssistantCard) && playerIndex == model.getCurrentPlayer() && priority > 0 && priority <= 10) {
             boolean alreadyPlayed = false;
@@ -275,6 +306,9 @@ public class Controller implements Observer<PlayerMove> {
         else return -1;
     }
 
+    /**
+     * orderPlayerActionPhase method orders players with bubble sort algorithm do decide who is the first player
+     */
     private void orderPlayerActionPhase(){  // bubble sort algorithm
         for(int i = 0; i < model.getPlayersTurnOrder().length; i++){
             boolean swap = false;
@@ -290,7 +324,14 @@ public class Controller implements Observer<PlayerMove> {
         }
     }
 
-    //Action phase 1
+    /**
+     * MoveStudentToISland method moves students to the island.
+     * This is the Action phase number 1
+     * @param playerIndex type of integer
+     * @param colour type of integer
+     * @param IslandPosition type of integer
+     * @return Integer (1 correct move, -1 incorrect move)
+     */
     public int moveStudentToIsland(int playerIndex, int colour, int IslandPosition){
 
         boolean checkStudentColor = false; // check if it has that colour
@@ -310,6 +351,13 @@ public class Controller implements Observer<PlayerMove> {
         }
         else return -1;
     }
+
+    /**
+     * moveStudentToDiningRoom method moves student to the dining room
+     * @param playerIndex type of integer
+     * @param colour type of integer
+     * @return Integer (1 correct move, -1 incorrect move)
+     */
     //Action phase 1
     public int moveStudentToDiningRoom(int playerIndex, int colour){
         if (model.getCurrentPhase().equals(GamePhase.MoveStudents) && playerIndex == model.getCurrentPlayer() && colour >= 0 && colour < Colour.values().length && model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colour]) < 10){
@@ -339,6 +387,11 @@ public class Controller implements Observer<PlayerMove> {
             } else return -1;
         } else return -1;
     }
+
+    /**
+     * checkProfessorProperty method checks which player is the owner of the Professor indicated
+     * @param colorIndex
+     */
     private void checkProfessorProperty(int colorIndex){
         Player oldProfessorOwner = null;
         for (Player p : model.getPlayers())  //checking who had the professor
@@ -370,7 +423,14 @@ public class Controller implements Observer<PlayerMove> {
         }
     }
 
-    //Action Phase punto 2.1
+    /**
+     * moveMOtherNature method moves mother nature
+     * this is Action phase 2.1
+     * @param playerIndex
+     * @param movements
+     * @return Integer (1 correct move, -1 incorrect move)
+     */
+
     public int moveMotherNature(int playerIndex, int movements){ //checking if player has the rights
         try {
             if(model.getCurrentPhase().equals(GamePhase.MoveMotherNature) && playerIndex == model.getCurrentPlayer()){
@@ -401,7 +461,14 @@ public class Controller implements Observer<PlayerMove> {
         return -1;
     }
 
-    //action phase 2 punto 2.2 //checking who controls the island, if it's a different player i'll change towers
+
+    /**
+     * CheckIslandInfluence method checks who controls the island, if it's a different player it'll change the towers
+     * This is Action phase 2.2
+     * @param islandIndex
+     * @param playerIndex
+     */
+
     private void checkIslandInfluence(int islandIndex, int playerIndex){
         boolean card6noTowerFlag = false;
         int card9color = -1;
@@ -458,7 +525,14 @@ public class Controller implements Observer<PlayerMove> {
         }
         //if none has the influence or if it's a draw, nothing happen
     }
-    //action phase punto 2.3
+
+    /**
+     * checkIslandFusion method checks if one islands has towers of the same colour of the next one or
+     * the previous one if it happens we have to merge those islands.
+     * this is action phase 2.2
+     * @param islandIndex
+     */
+
     private void checkIslandFusion(int islandIndex){
         //if the colour of the tower on one island is the same of the next one...
         while (model.getGameBoard().getIslands().get(islandIndex).getTowerColor().equals(model.getGameBoard().getIslands().get((islandIndex+1)%model.getGameBoard().getIslands().size()).getTowerColor())){
@@ -537,7 +611,13 @@ public class Controller implements Observer<PlayerMove> {
         }
     }
 
-    //Action phase punto 3
+    /**
+     * chooseCloud method chooses one of the available cloud
+     * This is action phase 2.3
+     * @param playerIndex
+     * @param cloudPosition
+     * @return the index of the cloud choosen
+     */
     public int chooseCloud(int playerIndex, int cloudPosition){
         if(model.getCurrentPhase().equals(GamePhase.ChooseCloud) && playerIndex == model.getCurrentPlayer() && cloudPosition >= 0 && cloudPosition < Parameters.numClouds && !model.getGameBoard().getClouds().get(cloudPosition).isTaken()){
             ArrayList<Student> stud = model.getGameBoard().getClouds().get(cloudPosition).getStudents();
@@ -582,6 +662,9 @@ public class Controller implements Observer<PlayerMove> {
             return -1;
     }
 
+    /**
+     * orderPlayersAssistantCard method sets the order player of the incoming turn.
+     */
     private void orderPlayersAssistantCard(){
         int index = -1;
         int num;
@@ -600,6 +683,12 @@ public class Controller implements Observer<PlayerMove> {
             model.getPlayersTurnOrder()[i] = model.getPlayers().get((index + i)%Parameters.numPlayers);
     }
 
+    /**
+     * EndGame method controls parameters to declare who is the winner.
+     * it controls the player with the most number of towers and if it's a draw
+     * it controls the player with the mot nomber of professros controlled
+     *
+     */
     private void endGame(){
         //wins the player with most number of towers
         ArrayList<Player> rank = new ArrayList<>();
@@ -627,18 +716,34 @@ public class Controller implements Observer<PlayerMove> {
         model.setCurrentPhase(GamePhase.GameEnded);
     }
 
+    /**
+     * getWinner method gets the winner of the match
+     * @return player winner
+     */
     public String getTheWinner(){
         return model.getWinner().getNickname();
     }
 
+    /**
+     * getCurrentPhase method gets the current phase
+     * @return gamephase
+     */
     public int getCurrentPhase() {
         return model.getCurrentPhase().ordinal();
     }
 
+    /**
+     * getCurrentPlayer gets the current player
+     * @return player
+     */
     public int getCurrentPlayer(){
         return model.getCurrentPlayer();
     }
 
+    /**
+     * getModel method gets the model
+     * @return model
+     */
     public Model getModel() {
         return model;
     }
@@ -687,6 +792,11 @@ public class Controller implements Observer<PlayerMove> {
         return -1;
     }
 
+    /**
+     *checkProfessorPropertyCard2 method is used to controls who is the owner of the professors and to set
+     *  the Card 2 player up to control them (the professors) for this turn
+     * @param colorIndex
+     */
 
     private void checkProfessorPropertyCard2(int colorIndex){
         Player oldProfessorOwner = null;

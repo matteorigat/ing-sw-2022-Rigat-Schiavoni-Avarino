@@ -14,6 +14,10 @@ import it.polimi.ingsw.observer.Observable;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Model class it's the main logic of Eriantys.
+ * Here we contruct the gameBoard, an arraylist of players and we declare a players turn order
+ */
 public class Model extends Observable<MoveMessage> implements Serializable {
 
     private ArrayList<Player> players;
@@ -30,7 +34,7 @@ public class Model extends Observable<MoveMessage> implements Serializable {
     private boolean expertMode;
     private int numPlayers;
 
-    //Constructor Model creates a new Game instance
+    /**Constructor Model creates a new Game instance*/
     public Model() {
         this.players = new ArrayList<>();
         this.gameBoard = new GameBoard();
@@ -215,6 +219,12 @@ public class Model extends Observable<MoveMessage> implements Serializable {
         return null;
     }
 
+    /**
+     * textTower method prints in CLI the correct location of every tower on the board
+     * @param n number of towers
+     * @param colour colour of towers
+     * @return "s"  string
+     */
     private String textTower(int n, TowerColour colour){
         String s = "";
 

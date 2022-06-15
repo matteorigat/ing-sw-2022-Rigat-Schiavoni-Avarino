@@ -17,7 +17,10 @@ import java.util.concurrent.Executors;
 /**
  * Server class is the main one of the server side, it allows clients to connect, play together and
  * also starts the match.
+ *
  */
+
+
 public class Server {
 
     private static final int PORT = 1337;
@@ -40,7 +43,12 @@ public class Server {
     /**
      * Method deregisterClient deletes a client from the hashmaps and active lists, unregistering his
      * connection with the server
+     *
+     * @param c of type ClientConnection
      */
+
+
+
     //Deregister connection
     public synchronized void deregisterConnection(ClientConnection c) {
         ClientConnection opponent = playingConnection.get(c);
@@ -82,7 +90,14 @@ public class Server {
  * number for playing. If the waiting clients' queue is empty, the server creates a new lobby and
  * ask the first player to choose the capacity. After that, when a client connects, it checks if
  * the players number has been reached; if true, starts the match.
+ *
+ *
+ * @param c of type Client Connection
+ * @param name of type String
+ * they are both used together in waitingConnection, very helpfull to associate name to a connection
  */
+
+
 
     public synchronized void lobby(ClientConnection c, String name){
         List<String> keys = new ArrayList<>(waitingConnection.keySet());
@@ -180,10 +195,19 @@ public class Server {
         }
     }
 
+
+    /**
+     * Server method
+     * @throws IOException
+     */
     public Server() throws IOException {
         this.serverSocket = new ServerSocket(PORT);
     }
 
+
+    /**
+     *Run Method
+     */
     public void run(){
         int connections = 0;
         System.out.println("Server is running");
@@ -200,13 +224,24 @@ public class Server {
         }
     }
 
+
+    /**
+     * Choosing gamemode status
+     * @return chooseMode of type boolean
+     */
     public boolean isChooseMode() {
         return chooseMode;
     }
 
+
+    /**
+     * setting gamemode status
+     * @param chooseMode of type boolean
+     */
     public void setChooseMode(boolean chooseMode) {
         this.chooseMode = chooseMode;
     }
+
 
     public Map<String, ClientConnection> getWaitingConnection() {
         return waitingConnection;

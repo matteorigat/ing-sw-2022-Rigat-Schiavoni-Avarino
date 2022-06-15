@@ -5,6 +5,11 @@ import it.polimi.ingsw.model.enumeration.Colour;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * DiningRoom Class is a part of the schoolBoard.
+ * Here we have 5 arrayList of students sort by colour.
+ *
+ */
 public class DiningRoom implements Serializable {
 
     private ArrayList<Student> greenStudents;

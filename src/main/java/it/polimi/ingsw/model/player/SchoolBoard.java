@@ -44,7 +44,7 @@ public class SchoolBoard implements Serializable {
        return towerColor;
     }
 
-    /** Tower adder */
+    /** this method adds a tower */
     public void addTower(TowerColour towerColour){
         Tower t = new Tower(towerColour);
         towers.add(t);
@@ -68,6 +68,10 @@ public class SchoolBoard implements Serializable {
         return coin;
     }
 
+    /**
+     * this method remove a student from entrance by his colour
+     * @param studentColour
+     */
     public void removeStudentFromEntrance(int studentColour) {  // serve per la carta 7
         for (Student s : studentsEntrance) {
             if (s.getColour().equals(Colour.values()[studentColour])) {
@@ -104,11 +108,19 @@ public class SchoolBoard implements Serializable {
         }
     }
 
+    /**
+     * this method adds a professor by the colour
+     * @param color
+     */
     public void addProfessor(Colour color){
         Professor pr = new Professor(color);
         professors.add(pr);
     }
 
+    /**
+     * Method getTowers returns the every towers of the same type.
+     * @return towers
+     */
     public ArrayList<Tower> getTowers() {
         return towers;
     }

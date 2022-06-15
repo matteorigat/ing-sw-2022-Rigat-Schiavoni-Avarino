@@ -15,7 +15,11 @@ public class Player implements Serializable {
     private AssistantCard currentCard;
     private int coins;
 
-    // Constructor Player creates a new Player instance
+    /**
+     *  Constructor Player creates a new Player instance
+     * @param nickname
+     * @param index
+     */
     public Player(String nickname, int index) {
         this.nickname = nickname;
         this.towerColour = TowerColour.values()[(index)];
@@ -37,55 +41,100 @@ public class Player implements Serializable {
         assistantDeck.add(new AssistantCard(10,5));
     }
 
+    /**
+     * getIndex method returns index of the player
+     * @return index
+     */
     public int getIndex() {
         return index;
     }
 
-    //Return the player's tower color
+    /**
+     * TowerColour method returns the player towers colour
+     * @return the player's tower color
+     */
+
     public TowerColour PlayerTowerColor(){
         return playerSchoolBoard.getTowerColor();
     }
 
-    //Gets the schoolBoard of the player
+    /**
+     * getPlayerSchoolBoard returns the schoolBoard of the player
+     * @return playerSchoolBoard
+     */
+    //
     public SchoolBoard getPlayerSchoolBoard() {
         return playerSchoolBoard;
     }
 
+    /**
+     *  getAssistantDeck method returns assistant deck
+     * @return assistant deck
+     */
     public ArrayList<AssistantCard> getAssistantDeck() {
         return assistantDeck;
     }
 
-    // play a card and remove it from the deck
+    /**
+     * PlayAssistantCard play a card an remove it from the deck
+     * @param cardPlayed
+     */
+
     public void playAssistantCard(AssistantCard cardPlayed){
                 this.currentCard = cardPlayed;
                 assistantDeck.remove(cardPlayed);
     }
 
+    /**
+     * getCurrentCard method returns currentCard
+     * @return CurrentCard
+     */
     public AssistantCard getCurrentCard() {
         return currentCard;
     }
 
+    /**
+     * addCoin method adds a coin
+     */
     public void addCoin() {
         coins++;
     }
 
+    /**
+     * removeCoin method removes a coin
+     * @param cost
+     */
     public void removeCoin(int cost){
         coins -= cost;
     }
 
+    /**
+     * getCoins method returns the number of Coins
+     * @return coins
+     */
     public int getCoins() {
         return coins;
     }
+
 
     @Override
     public String toString() {
         return "Player : " + index + " " +nickname;
     }
 
+    /**
+     * getNickname method returns a nickname
+     *
+     * @return nickname
+     */
     public String getNickname() {
         return nickname;
     }
 
+    /**
+     * setCurrentCard method sets the current assistant card
+     * @param currentCard
+     */
     public void setCurrentCard(AssistantCard currentCard) {
         this.currentCard = currentCard;
     }

@@ -6,9 +6,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * CharacterDeck Class is where every character card instance is created.
+ * At the beginning of evey match will be chosen 3 cards randomly.
+ *Every card has differents coins cost and diffents effects
+ */
 public class CharacterDeck implements Serializable {
     private ArrayList<CharacterCard> characterCards;
 
+    /**
+     * Character Deck constructor
+     */
     public CharacterDeck() {
         characterCards = new ArrayList<CharacterCard>();
         /*characterCards.add(new Character2());
@@ -30,6 +38,10 @@ public class CharacterDeck implements Serializable {
 
     }
 
+    /**
+     * getThreeRandomCards method choose 3 cards randomly from the deck
+     * @return ArrayList<CharacterCard> threeCards
+     */
     public ArrayList<CharacterCard> getThreeRandomCards(){
         ArrayList<CharacterCard> threeCards = new ArrayList<CharacterCard>();
 
@@ -43,6 +55,10 @@ public class CharacterDeck implements Serializable {
         return threeCards;
     }
 
+    /**
+     * getCharacterCards return an arrayList of the characterCards
+     * @return characterCards
+     */
     public ArrayList<CharacterCard> getCharacterCards() {
         return characterCards;
     }
