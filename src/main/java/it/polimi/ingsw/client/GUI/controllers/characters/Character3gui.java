@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class Character3 implements Character{
+public class Character3gui implements Character{
 
 
     private ClientAppGUI gui;

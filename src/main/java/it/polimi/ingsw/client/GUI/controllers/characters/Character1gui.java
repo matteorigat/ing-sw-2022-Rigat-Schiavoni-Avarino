@@ -46,6 +46,7 @@ public class Character1gui implements Character{
         this.dialog = dialog;
     }
 
+    @Override
     public void setModel(Model model, int cardPosition){
         this.model = model;
 

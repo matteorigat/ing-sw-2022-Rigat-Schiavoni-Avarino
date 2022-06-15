@@ -42,6 +42,8 @@ public class GameBoardController {
     @FXML public Label nickname0, nickname1, nickname2, coins0, coins1, coins2;
     @FXML public ImageView lastAssistant0, lastAssistant1, lastAssistant2;
 
+    @FXML public ImageView deny0, deny1, deny2, deny3, deny4, deny5, deny6, deny7, deny8, deny9, deny10, deny11;
+
     @FXML public ImageView assistant1, assistant2, assistant3, assistant4, assistant5, assistant6, assistant7, assistant8, assistant9, assistant10;
 
     // PLAYER 0
@@ -1272,6 +1274,10 @@ public class GameBoardController {
        }
 
        mothernature0.setVisible(model.getGameBoard().getIslands().get(model.getGameBoard().getMotherNature()).getIslandIndex() == 0);
+
+       if(i.getNoEntry() > 0)
+           deny0.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/deny_island_icon.png"))));
+       else deny0.setImage(null);
    }
     private void updateisland1(Island i){
         int green=0, red=0, yellow=0, pink=0, blue=0;
@@ -1345,6 +1351,10 @@ public class GameBoardController {
 
         mothernature1.setVisible(model.getGameBoard().getIslands().get(model.getGameBoard().getMotherNature()).getIslandIndex() == 1);
 
+        if(i.getNoEntry() > 0)
+            deny1.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/deny_island_icon.png"))));
+        else deny1.setImage(null);
+
     }
     private void updateisland2(Island i){
         int green=0, red=0, yellow=0, pink=0, blue=0;
@@ -1417,6 +1427,10 @@ public class GameBoardController {
         }
 
         mothernature2.setVisible(model.getGameBoard().getIslands().get(model.getGameBoard().getMotherNature()).getIslandIndex() == 2);
+
+        if(i.getNoEntry() > 0)
+            deny2.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/deny_island_icon.png"))));
+        else deny2.setImage(null);
     }
 
     private void updateisland3(Island i){
@@ -1490,6 +1504,10 @@ public class GameBoardController {
         }
 
         mothernature3.setVisible(model.getGameBoard().getIslands().get(model.getGameBoard().getMotherNature()).getIslandIndex() == 3);
+
+        if(i.getNoEntry() > 0)
+            deny3.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/deny_island_icon.png"))));
+        else deny3.setImage(null);
     }
 
     private void updateisland4(Island i){
@@ -1563,6 +1581,10 @@ public class GameBoardController {
         }
 
         mothernature4.setVisible(model.getGameBoard().getIslands().get(model.getGameBoard().getMotherNature()).getIslandIndex() == 4);
+
+        if(i.getNoEntry() > 0)
+            deny4.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/deny_island_icon.png"))));
+        else deny4.setImage(null);
     }
 
     private void updateisland5(Island i){
@@ -1636,6 +1658,10 @@ public class GameBoardController {
         }
 
         mothernature5.setVisible(model.getGameBoard().getIslands().get(model.getGameBoard().getMotherNature()).getIslandIndex() == 5);
+
+        if(i.getNoEntry() > 0)
+            deny5.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/deny_island_icon.png"))));
+        else deny5.setImage(null);
     }
 
     private void updateisland6(Island i){
@@ -1709,6 +1735,10 @@ public class GameBoardController {
         }
 
         mothernature6.setVisible(model.getGameBoard().getIslands().get(model.getGameBoard().getMotherNature()).getIslandIndex() == 6);
+
+        if(i.getNoEntry() > 0)
+            deny6.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/deny_island_icon.png"))));
+        else deny6.setImage(null);
     }
 
     private void updateisland7(Island i){
@@ -1782,6 +1812,10 @@ public class GameBoardController {
         }
 
         mothernature7.setVisible(model.getGameBoard().getIslands().get(model.getGameBoard().getMotherNature()).getIslandIndex() == 7);
+
+        if(i.getNoEntry() > 0)
+            deny7.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/deny_island_icon.png"))));
+        else deny7.setImage(null);
     }
 
     private void updateisland8(Island i){
@@ -1855,6 +1889,10 @@ public class GameBoardController {
         }
 
         mothernature8.setVisible(model.getGameBoard().getIslands().get(model.getGameBoard().getMotherNature()).getIslandIndex() == 8);
+
+        if(i.getNoEntry() > 0)
+            deny8.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/deny_island_icon.png"))));
+        else deny8.setImage(null);
     }
 
     private void updateisland9(Island i){
@@ -1928,6 +1966,10 @@ public class GameBoardController {
         }
 
         mothernature9.setVisible(model.getGameBoard().getIslands().get(model.getGameBoard().getMotherNature()).getIslandIndex() == 9);
+
+        if(i.getNoEntry() > 0)
+            deny9.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/deny_island_icon.png"))));
+        else deny9.setImage(null);
     }
 
     private void updateisland10(Island i){
@@ -2001,6 +2043,10 @@ public class GameBoardController {
         }
 
         mothernature10.setVisible(model.getGameBoard().getIslands().get(model.getGameBoard().getMotherNature()).getIslandIndex() == 10);
+
+        if(i.getNoEntry() > 0)
+            deny10.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/deny_island_icon.png"))));
+        else deny10.setImage(null);
     }
 
 
@@ -2075,6 +2121,10 @@ public class GameBoardController {
         }
 
         mothernature11.setVisible(model.getGameBoard().getIslands().get(model.getGameBoard().getMotherNature()).getIslandIndex() == 11);
+
+        if(i.getNoEntry() > 0)
+            deny11.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/deny_island_icon.png"))));
+        else deny11.setImage(null);
     }
 
 

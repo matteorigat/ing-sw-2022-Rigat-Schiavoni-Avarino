@@ -7,19 +7,20 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class Character4 implements Character{
+public class Character2gui implements Character{
+
     private ClientAppGUI gui;
     private Stage dialog;
     private Model model;
     private int cardPosition;
 
-    @FXML
-    private Label effect;
+    @FXML private Label effect;
 
     @FXML
     protected void onButtonClick() {
         //effect.setText("hai giocato questa carta!");
-        Platform.runLater(()-> gui.getClientGUI().asyncWriteToSocket("100,4"));
+        Platform.runLater(()-> gui.getClientGUI().asyncWriteToSocket("100,2"));
+
     }
 
     @Override
@@ -32,6 +33,5 @@ public class Character4 implements Character{
     public void setModel(Model model, int cardPosition) {
 
     }
+
 }
-
-

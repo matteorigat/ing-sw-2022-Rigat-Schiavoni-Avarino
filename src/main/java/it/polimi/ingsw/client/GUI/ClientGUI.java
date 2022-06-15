@@ -136,6 +136,10 @@ public class ClientGUI implements Runnable {
         }
 
     }
+
+    public String getNickname() {
+        return nickname;
+    }
 }
 
 

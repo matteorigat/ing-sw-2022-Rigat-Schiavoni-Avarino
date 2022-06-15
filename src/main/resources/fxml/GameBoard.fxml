@@ -65,6 +65,7 @@
             <Label fx:id="blueText0" alignment="CENTER" layoutX="84.0" layoutY="91.0" prefHeight="20.0" prefWidth="20.0" textFill="BLACK">
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
+         <ImageView fx:id="deny0" fitHeight="72.0" fitWidth="65.0" layoutX="42.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
         </Pane>
 <!-- ISLAND 1 -->
         <Pane fx:id="island1" layoutX="320.0" layoutY="1.0" onMouseClicked="#chooseIsland1" prefHeight="150.0" prefWidth="150.0">
@@ -108,6 +109,7 @@
             <Label fx:id="blueText1" alignment="CENTER" layoutX="84.0" layoutY="91.0" prefHeight="20.0" prefWidth="20.0" textFill="BLACK">
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
+         <ImageView fx:id="deny1" fitHeight="72.0" fitWidth="65.0" layoutX="42.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
         </Pane>
 <!-- ISLAND 2 -->
         <Pane fx:id="island2" layoutX="509.0" layoutY="-6.0" onMouseClicked="#chooseIsland2" prefHeight="150.0" prefWidth="150.0">
@@ -151,6 +153,7 @@
             <Label fx:id="blueText2" alignment="CENTER" layoutX="84.0" layoutY="91.0" prefHeight="20.0" prefWidth="20.0" textFill="BLACK">
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
+         <ImageView fx:id="deny2" fitHeight="72.0" fitWidth="65.0" layoutX="42.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
         </Pane>
 <!-- ISLAND 3 -->
         <Pane fx:id="island3" layoutX="696.0" layoutY="43.0" onMouseClicked="#chooseIsland3" prefHeight="150.0" prefWidth="150.0">
@@ -194,6 +197,7 @@
             <Label fx:id="blueText3" alignment="CENTER" layoutX="84.0" layoutY="91.0" prefHeight="20.0" prefWidth="20.0" textFill="BLACK">
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
+            <ImageView fx:id="deny3" fitHeight="72.0" fitWidth="65.0" layoutX="42.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
         </Pane>
 <!-- ISLAND 4 -->
         <Pane fx:id="island4" layoutX="770.0" layoutY="182.0" onMouseClicked="#chooseIsland4" prefHeight="150.0" prefWidth="150.0">
@@ -237,6 +241,7 @@
             <Label fx:id="blueText4" alignment="CENTER" layoutX="84.0" layoutY="91.0" prefHeight="20.0" prefWidth="20.0" textFill="BLACK">
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
+            <ImageView fx:id="deny4" fitHeight="72.0" fitWidth="65.0" layoutX="42.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
         </Pane>
 <!-- ISLAND 5 -->
         <Pane fx:id="island5" layoutX="797.0" layoutY="356.0" onMouseClicked="#chooseIsland5" prefHeight="150.0" prefWidth="150.0">
@@ -280,6 +285,7 @@
             <Label fx:id="blueText5" alignment="CENTER" layoutX="84.0" layoutY="91.0" prefHeight="20.0" prefWidth="20.0" textFill="BLACK">
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
+            <ImageView fx:id="deny5" fitHeight="72.0" fitWidth="65.0" layoutX="42.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
         </Pane>
 <!-- ISLAND 6 -->
         <Pane fx:id="island6" layoutX="694.0" layoutY="472.0" onMouseClicked="#chooseIsland6" prefHeight="150.0" prefWidth="150.0">
@@ -323,6 +329,7 @@
             <Label fx:id="blueText6" alignment="CENTER" layoutX="84.0" layoutY="91.0" prefHeight="20.0" prefWidth="20.0" textFill="BLACK">
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
+            <ImageView fx:id="deny6" fitHeight="72.0" fitWidth="65.0" layoutX="42.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
         </Pane>
 <!-- ISLAND 7 -->
         <Pane fx:id="island7" layoutX="506.0" layoutY="524.0" onMouseClicked="#chooseIsland7" prefHeight="150.0" prefWidth="150.0">
@@ -366,6 +373,7 @@
             <Label fx:id="blueText7" alignment="CENTER" layoutX="84.0" layoutY="91.0" prefHeight="20.0" prefWidth="20.0" textFill="BLACK">
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
+            <ImageView fx:id="deny7" fitHeight="72.0" fitWidth="65.0" layoutX="42.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
         </Pane>
 <!-- ISLAND 8 -->
         <Pane fx:id="island8" layoutX="322.0" layoutY="513.0" onMouseClicked="#chooseIsland8" prefHeight="150.0" prefWidth="150.0">
@@ -409,6 +417,7 @@
             <Label fx:id="blueText8" alignment="CENTER" layoutX="84.0" layoutY="91.0" prefHeight="20.0" prefWidth="20.0" textFill="BLACK">
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
+            <ImageView fx:id="deny8" fitHeight="72.0" fitWidth="65.0" layoutX="42.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
         </Pane>
 <!-- ISLAND 9 -->
         <Pane fx:id="island9" layoutX="146.0" layoutY="497.0" onMouseClicked="#chooseIsland9" prefHeight="150.0" prefWidth="150.0">
@@ -452,6 +461,7 @@
             <Label fx:id="blueText9" alignment="CENTER" layoutX="84.0" layoutY="91.0" prefHeight="20.0" prefWidth="20.0" textFill="BLACK">
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
+            <ImageView fx:id="deny9" fitHeight="72.0" fitWidth="65.0" layoutX="42.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
         </Pane>
 <!-- ISLAND 10 -->
         <Pane fx:id="island10" layoutX="32.0" layoutY="369.0" onMouseClicked="#chooseIsland10" prefHeight="150.0" prefWidth="150.0">
@@ -495,6 +505,7 @@
             <Label fx:id="blueText10" alignment="CENTER" layoutX="84.0" layoutY="91.0" prefHeight="20.0" prefWidth="20.0" textFill="BLACK">
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
+            <ImageView fx:id="deny10" fitHeight="72.0" fitWidth="65.0" layoutX="42.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
         </Pane>
 <!-- ISLAND 11 -->
         <Pane fx:id="island11" layoutX="21.0" layoutY="198.0" onMouseClicked="#chooseIsland11" prefHeight="150.0" prefWidth="150.0">
@@ -538,6 +549,7 @@
             <Label fx:id="blueText11" alignment="CENTER" layoutX="84.0" layoutY="91.0" prefHeight="20.0" prefWidth="20.0" textFill="BLACK">
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
+            <ImageView fx:id="deny11" fitHeight="72.0" fitWidth="65.0" layoutX="42.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
         </Pane>
 
 

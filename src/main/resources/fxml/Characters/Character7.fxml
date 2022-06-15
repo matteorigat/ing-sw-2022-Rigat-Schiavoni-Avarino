@@ -2,13 +2,59 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100" prefWidth="400" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.controllers.characters.Character7">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="255.0" prefWidth="521.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.controllers.characters.Character7gui">
 
-      <Label fx:id="effect" layoutX="10.0" layoutY="10.0" text="Prendi 3 studenti e scambiali con 3 del tuo ingresso" textFill="BLACK">
-         <font><Font name="Arial Bold" size="15.0" /></font>
-      </Label>
-      <Button layoutX="300.0" layoutY="80.0" mnemonicParsing="false" onAction="#onButtonClick" prefWidth="76.0" text="PLAY" />
+    <Label fx:id="effect" layoutX="10.0" layoutY="10.0" text="Prendi 3 studenti e scambiali con 3 del tuo ingresso" textFill="BLACK">
+        <font><Font name="Arial Bold" size="15.0" /></font>
+    </Label>
+    <Button layoutX="223.0" layoutY="222.0" mnemonicParsing="false" onAction="#onButtonClick" prefWidth="76.0" text="PLAY" />
+
+
+    <ImageView fx:id="student0" fitHeight="30.0" fitWidth="30.0" layoutX="50.0" layoutY="70.0" onMouseClicked="#chooseStudent0" pickOnBounds="true" preserveRatio="true" />
+    <Label fx:id="selected0" layoutX="62.0" layoutY="100.0" />
+    <ImageView fx:id="student1" fitHeight="30.0" fitWidth="30.0" layoutX="100.0" layoutY="70.0" onMouseClicked="#chooseStudent1" pickOnBounds="true" preserveRatio="true" />
+    <Label fx:id="selected1" layoutX="112.0" layoutY="100.0" />
+    <ImageView fx:id="student2" fitHeight="30.0" fitWidth="30.0" layoutX="150.0" layoutY="70.0" onMouseClicked="#chooseStudent2" pickOnBounds="true" preserveRatio="true" />
+    <Label fx:id="selected2" layoutX="162.0" layoutY="100.0" />
+    <ImageView fx:id="student3" fitHeight="30.0" fitWidth="30.0" layoutX="200.0" layoutY="70.0" onMouseClicked="#chooseStudent3" pickOnBounds="true" preserveRatio="true" />
+    <Label fx:id="selected3" layoutX="212.0" layoutY="100.0" />
+    <ImageView fx:id="student4" fitHeight="30.0" fitWidth="30.0" layoutX="250.0" layoutY="70.0" onMouseClicked="#chooseStudent4" pickOnBounds="true" preserveRatio="true" />
+    <Label fx:id="selected4" layoutX="262.0" layoutY="100.0" />
+    <ImageView fx:id="student5" fitHeight="30.0" fitWidth="30.0" layoutX="300.0" layoutY="70.0" onMouseClicked="#chooseStudent5" pickOnBounds="true" preserveRatio="true" />
+    <Label fx:id="selected5" layoutX="312.0" layoutY="100.0" />
+
+
+
+    <ImageView fx:id="entrance0" fitHeight="30.0" fitWidth="30.0" layoutX="50.0" layoutY="150.0" onMouseClicked="#chooseEntrance0" pickOnBounds="true" preserveRatio="true" />
+    <Label fx:id="entranceselected0" layoutX="62.0" layoutY="180.0" />
+    <ImageView fx:id="entrance1" fitHeight="30.0" fitWidth="30.0" layoutX="100.0" layoutY="150.0" onMouseClicked="#chooseEntrance1" pickOnBounds="true" preserveRatio="true" />
+    <Label fx:id="entranceselected1" layoutX="112.0" layoutY="180.0" />
+    <ImageView fx:id="entrance2" fitHeight="30.0" fitWidth="30.0" layoutX="150.0" layoutY="150.0" onMouseClicked="#chooseEntrance2" pickOnBounds="true" preserveRatio="true" />
+    <Label fx:id="entranceselected2" layoutX="162.0" layoutY="180.0" />
+    <ImageView fx:id="entrance3" fitHeight="30.0" fitWidth="30.0" layoutX="200.0" layoutY="150.0" onMouseClicked="#chooseEntrance3" pickOnBounds="true" preserveRatio="true" />
+    <Label fx:id="entranceselected3" layoutX="212.0" layoutY="180.0" />
+    <ImageView fx:id="entrance4" fitHeight="30.0" fitWidth="30.0" layoutX="250.0" layoutY="150.0" onMouseClicked="#chooseEntrance4" pickOnBounds="true" preserveRatio="true" />
+    <Label fx:id="entranceselected4" layoutX="262.0" layoutY="180.0" />
+    <ImageView fx:id="entrance5" fitHeight="30.0" fitWidth="30.0" layoutX="300.0" layoutY="150.0" onMouseClicked="#chooseEntrance5" pickOnBounds="true" preserveRatio="true" />
+    <Label fx:id="entranceselected5" layoutX="312.0" layoutY="180.0" />
+    <ImageView fx:id="entrance6" fitHeight="30.0" fitWidth="30.0" layoutX="350.0" layoutY="150.0" onMouseClicked="#chooseEntrance6" pickOnBounds="true" preserveRatio="true" />
+    <Label fx:id="entranceselected6" layoutX="362.0" layoutY="180.0" />
+    <ImageView fx:id="entrance7" fitHeight="30.0" fitWidth="30.0" layoutX="400.0" layoutY="150.0" onMouseClicked="#chooseEntrance7" pickOnBounds="true" preserveRatio="true" />
+    <Label fx:id="entranceselected7" layoutX="412.0" layoutY="180.0" />
+    <ImageView fx:id="entrance8" fitHeight="30.0" fitWidth="30.0" layoutX="450.0" layoutY="150.0" onMouseClicked="#chooseEntrance8" pickOnBounds="true" preserveRatio="true" />
+    <Label fx:id="entranceselected8" layoutX="462.0" layoutY="180.0" />
+   <Label fx:id="effect1" layoutX="10.0" layoutY="40.0" text="card students" textFill="BLACK">
+      <font>
+         <Font name="Arial Bold" size="13.0" />
+      </font>
+   </Label>
+   <Label fx:id="effect11" layoutX="10.0" layoutY="120.0" text="entrance students" textFill="BLACK">
+      <font>
+         <Font name="Arial Bold" size="13.0" />
+      </font>
+   </Label>
 </Pane>
