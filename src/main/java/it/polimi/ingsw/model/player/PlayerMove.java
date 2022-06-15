@@ -85,42 +85,87 @@ public class PlayerMove {
         this.param8 = param8;
     }
 
+
+    /**
+     * Method getPlayer returns a player
+     * @return player
+     */
     public Player getPlayer() {
         return player;
     }
 
+    /**
+     * Method getView returns the view
+     * @return view
+     */
     public View getView() {
         return view;
     }
 
+    /**
+     * Method getParam1 returns param1
+     * @return param1
+     */
     public int getParam1() {
         return param1;
     }
+
+    /**
+     * Method getParam2 returns param1
+     * @return param2
+     */
 
     public int getParam2() {
         return param2;
     }
 
+
+    /**
+     * Method getParam3 returns param1
+     * @return param3
+     */
     public int getParam3() {
         return param3;
     }
 
+
+    /**
+     * Method getParam4 returns param1
+     * @return param4
+     */
     public int getParam4() {
         return param4;
     }
 
+
+    /**
+     * Method getParam5 returns param1
+     * @return param5
+     */
     public int getParam5() {
         return param5;
     }
 
+    /**
+     * Method getParam6 returns param1
+     * @return param6
+     */
     public int getParam6() {
         return param6;
     }
 
+    /**
+     * Method getParam7 returns param1
+     * @return param7
+     */
     public int getParam7() {
         return param7;
     }
 
+    /**
+     * Method getParam8 returns param1
+     * @return param8
+     */
     public int getParam8() {
         return param8;
     }

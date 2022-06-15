@@ -5,6 +5,8 @@ import it.polimi.ingsw.model.player.Student;
 
 import java.util.ArrayList;
 
+/** Character card 7 effect : In setup draw 6 students and place them on this card.
+ * You may take up to 3 students from this card and replace them with the same number of Students from your entrance*/
 public class Character7 implements CharacterCard{
     private int index;
     private int cost;
@@ -46,16 +48,27 @@ public class Character7 implements CharacterCard{
         this.students.add(s);
     }
 
+    /**
+     * play method increases the cost of the card
+     */
     @Override
     public void play() {
         this.cost++;
     }
 
+    /**
+     * getIndex method returns the index
+     * @return index
+     */
     @Override
     public int getIndex() {
         return index;
     }
 
+    /**
+     * getCost method returns the cost
+     * @return cost
+     */
     @Override
     public int getCost() {
         return cost;
@@ -67,6 +80,11 @@ public class Character7 implements CharacterCard{
                 "\tcost: " + cost +
                 "\t\tstudents: " + students +  "\t\t" + Description;
     }
+
+    /**
+     * getDescription method return the description
+     * @return description
+     */
     @Override
     public String getDescription(){
         return Description;

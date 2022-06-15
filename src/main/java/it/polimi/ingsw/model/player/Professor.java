@@ -12,7 +12,10 @@ public class Professor implements Serializable {
         this.professorColour = professorColour;
     }
 
-    //Gets the professor color
+    /**
+     * Method getProfessourColour returns a professour by his colour.
+     * @return professorColour
+     */
     public Colour getProfessorColour() {
         return professorColour;
     }

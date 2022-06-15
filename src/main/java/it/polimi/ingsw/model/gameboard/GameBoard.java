@@ -19,6 +19,9 @@ public class GameBoard implements Serializable {
     private Bag bag;
     private int generalReserve;
 
+    /**
+     * GameBoard Constructor
+     */
     public GameBoard() {
         this.islands = new ArrayList<>(Parameters.numIslands);
         this.clouds = new ArrayList<>(Parameters.numClouds);
@@ -41,10 +44,18 @@ public class GameBoard implements Serializable {
         }
     }
 
+    /**
+     * addStudentOnIsland method adds one student on an island
+     * @param numIsland
+     * @param student
+     */
     public void addStudentOnIsland(int numIsland, Student student){
         islands.get(numIsland).addStudent(student);
     }
 
+    /**
+     * choosethreecards method decides randomly the 3 character cards that will be played in the game
+     */
     public void chooseThreeCards(){
         threeCharacterCards = characterDeck.getThreeRandomCards();
 
@@ -62,6 +73,11 @@ public class GameBoard implements Serializable {
         }
     }
 
+    /**
+     * getThreeCharacterCards method returns the 3 character cards in game
+     * @return threeCharacterCards
+     */
+
     public ArrayList<CharacterCard> getThreeCharacterCards() {
         return threeCharacterCards;
     }
@@ -75,23 +91,44 @@ public class GameBoard implements Serializable {
         }
     }
 
+    /**
+     * getMoteherNature method returns motherNature (her value --> position)
+     * @return motherNature
+     */
     public int getMotherNature() {
         return motherNature;
     }
 
 
+    /**
+     * setMOtherNature method sets motherNature value
+     * @param motherNature
+     */
     public void setMotherNature(int motherNature) {
         this.motherNature = motherNature;
     }
 
+    /**
+     * getBag Method return Bag
+     * @return Bag
+     */
     public Bag getBag() {
         return bag;
     }
 
+    /**
+     * getClouds method returns the arraylist of clouds
+     * @return clouds
+     */
     public ArrayList<Cloud> getClouds() {
         return clouds;
     }
 
+    /**
+     * IslandFusion method permits to do the fusion of 2 islands
+     * @param island1
+     * @param island2
+     */
     public void islandFusion(int island1, int island2) {
 
         for(Student s: islands.get(island2).getStudents())
@@ -104,6 +141,10 @@ public class GameBoard implements Serializable {
 
     }
 
+    /**
+     * getOneCoin method get one coin and remove it from the general reserve
+     * @return Boolean
+     */
     public boolean getOneCoin(){
         if(this.generalReserve > 0){
             this.generalReserve--;
@@ -112,14 +153,26 @@ public class GameBoard implements Serializable {
             return false;
     }
 
+    /**
+     * getGeneralReserve method returns how many coins are in the general reserve
+     * @return generalResevre
+     */
     public int getGeneralReserve() {
         return generalReserve;
     }
 
+    /**
+     * addCoinsToGeneralReserve adds a coin to the general reserve
+     * @param coins
+     */
     public void addCoinsToGeneralReserve(int coins) {
         this.generalReserve += coins;
     }
 
+    /**
+     * getIsland mehtod returns the arraylist of the islands
+     * @return islands
+     */
     public ArrayList<Island> getIslands() {
         return islands;
     }

@@ -9,6 +9,9 @@ import it.polimi.ingsw.model.enumeration.TowerColour;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Island Class defines every 12 islands where the game takes place.
+ */
 public class Island implements Serializable {
 
     private int islandIndex;
@@ -19,6 +22,9 @@ public class Island implements Serializable {
     private int noEntry; //int perchè ne puoi mettere più di uno
 
 
+    /**
+     * Island constructor
+     */
     public Island(){
         this.students = new ArrayList<Student>(0);
         this.numTower = 0;
@@ -34,17 +40,34 @@ public class Island implements Serializable {
         }
     }
 
+    /**
+     * changeTowerColour methods permits us to change tower colour when one player has more
+     * influnce than the owner of tower on the island
+     * @param colour
+     */
     public void changeTowerColor(TowerColour colour){
         this.towerColor = colour;
     }
 
+    /**
+     * addStudent method adds a student and update the number of the students on the island
+     * @param s
+     */
     public void addStudent (Student s){
         this.students.add(s);
 
         numStudents.set(s.getColour().ordinal(), (numStudents.get(s.getColour().ordinal()) + 1));
     }
 
-    //Return the player with the most influence on the island
+    /**
+     *  Influence method returns the player with the most influence on the island
+     * @param players
+     * @param card6noTowerFlag
+     * @param card8twoMorePointsPlayer
+     * @param card9color
+     * @return Player
+     */
+
     public Player Influence (ArrayList<Player> players, boolean card6noTowerFlag, int card8twoMorePointsPlayer, int card9color){
 
 
@@ -86,24 +109,44 @@ public class Island implements Serializable {
         return null;  // se non trova nessun player o più di uno
     }
 
+    /**
+     * getNumTower method returns the number of the towers on the island
+     * @return numTower
+     */
     public int getNumTower() {
         return numTower;
     }
 
+    /**
+     * SetNUmTower method sets the number of tower
+     * @param numTower
+     */
     public void setNumTower(int numTower) {
         this.numTower = numTower;
       //  this.islandRank = numTower;
     }
 
+    /**
+     * getTowerColour method returns the colour of the towers on the island
+     * @return TowerColour
+     */
     public TowerColour getTowerColor() {
         return towerColor;
     }
 
 
+    /**
+     * getStudents method returns the students on the island
+     * @return students
+     */
     public ArrayList<Student> getStudents() {
         return students;
     }
 
+    /**
+     * getNumStudents method returns the number of the Students on the island
+     * @return numTower
+     */
     public ArrayList<Integer> getNumStudents() {
         return numStudents;
     }
@@ -112,18 +155,31 @@ public class Island implements Serializable {
         this.noEntry++;
     }
 
+
     public void removeNoEntry(){
         this.noEntry--;
     }
 
+    /**
+     * getNoEntry method returns noEntry
+     * @return NoEntry
+     */
     public int getNoEntry() {
         return noEntry;
     }
 
+    /**
+     * getIslandIndex method returns the index of the island
+     * @return IslandIndex
+     */
     public int getIslandIndex() {
         return islandIndex;
     }
 
+    /**
+     * setIslandIndex method set the index
+     * @return IslandIndex
+     */
     public void setIslandIndex(int islandIndex) {
         this.islandIndex = islandIndex;
     }

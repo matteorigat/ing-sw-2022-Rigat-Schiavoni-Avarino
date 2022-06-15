@@ -4,6 +4,9 @@ import it.polimi.ingsw.model.enumeration.TowerColour;
 
 import java.io.Serializable;
 
+/**
+ * Tower class defines Towers and create instance of them
+ */
 public class Tower implements Serializable {
     private TowerColour towerColor;
 
@@ -12,7 +15,10 @@ public class Tower implements Serializable {
         this.towerColor = towerColor;
     }
 
-    //Gets the tower color
+    /**
+     * Method getTowerColour returns the Colour of the tower.
+     * @return towercolour colour of the tower
+     */
     public TowerColour getTowerColor() {
         return towerColor;
     }
