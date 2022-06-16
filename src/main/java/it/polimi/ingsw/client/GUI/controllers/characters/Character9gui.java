@@ -22,6 +22,9 @@ public class Character9gui implements Character{
 
     @FXML private Label effect;
 
+    /**
+     * onButtonClick method gets the user input written/declared in the button
+     */
     @FXML
     protected void onButtonClick() {
 
@@ -31,12 +34,22 @@ public class Character9gui implements Character{
         }
     }
 
+    /**
+     * setGui sets a GUI
+     * @param gui
+     * @param dialog
+     */
     @Override
     public void setGui(ClientAppGUI gui, Stage dialog) {
         this.gui = gui;
         this.dialog = dialog;
     }
 
+    /**
+     * setModel method sets the model
+     * @param model
+     * @param cardPosition
+     */
     @Override
     public void setModel(Model model, int cardPosition){
         this.model = model;

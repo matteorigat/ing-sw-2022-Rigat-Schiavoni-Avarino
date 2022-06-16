@@ -23,6 +23,11 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
+
+/**
+ * GameBoardController class controls every input (GUI side) on the game board
+ */
+
 public class GameBoardController {
 
     private ClientAppGUI gui;
@@ -101,64 +106,109 @@ public class GameBoardController {
     @FXML public Label greenText11, redText11, yellowText11, pinkText11, blueText11, towerText11;
 
 
+    /**
+     * cleanParameters method cleans parameters on the gameboard
+     */
 
     private void cleanParameters(){
         alreadyUsed = 0; //non serve qui, ma non fa mai male
         studentChoice = -1;
     }
+
+    /**
+     * if it's the right game phase assistant1 method plays assistant card number 1 sending the message to the socket
+     */
     @FXML
     protected void assistant1() {
         if(model.getCurrentPhase().equals(GamePhase.PlayAssistantCard) && model.getCurrentPlayer() == myPlayer.getIndex())
             gui.getClientGUI().asyncWriteToSocket("1");
     }
 
+    /**
+     *     if it's the right game phase assistant2 method plays assistant card number 2 sending the message to the socket
+     */
     @FXML
     protected void assistant2() {
         if(model.getCurrentPhase().equals(GamePhase.PlayAssistantCard) && model.getCurrentPlayer() == myPlayer.getIndex())
             gui.getClientGUI().asyncWriteToSocket("2");
     }
+
+    /**
+     * if it's the right game phase assistant3 method plays assistant card number 3 sending the message to the socket
+     */
     @FXML
     protected void assistant3() {
         if(model.getCurrentPhase().equals(GamePhase.PlayAssistantCard) && model.getCurrentPlayer() == myPlayer.getIndex())
             gui.getClientGUI().asyncWriteToSocket("3");
     }
+
+    /**
+     * if it's the right game phase assistant4 method plays assistant card number 4 sending the message to the socket
+     */
     @FXML
     protected void assistant4() {
         if(model.getCurrentPhase().equals(GamePhase.PlayAssistantCard) && model.getCurrentPlayer() == myPlayer.getIndex())
             gui.getClientGUI().asyncWriteToSocket("4");
     }
+
+    /**
+     * if it's the right game phase assistant5 method plays assistant card number 5 sending the message to the socket
+     */
     @FXML
     protected void assistant5() {
         if(model.getCurrentPhase().equals(GamePhase.PlayAssistantCard) && model.getCurrentPlayer() == myPlayer.getIndex())
             gui.getClientGUI().asyncWriteToSocket("5");
     }
+
+    /**
+     * if it's the right game phase assistant6 method plays assistant card number 6 sending the message to the socket
+     */
     @FXML
     protected void assistant6() {
         if(model.getCurrentPhase().equals(GamePhase.PlayAssistantCard) && model.getCurrentPlayer() == myPlayer.getIndex())
             gui.getClientGUI().asyncWriteToSocket("6");
     }
+
+    /**
+     * if it's the right game phase assistant7 method plays assistant card number 7 sending the message to the socket
+     */
     @FXML
     protected void assistant7() {
         if(model.getCurrentPhase().equals(GamePhase.PlayAssistantCard) && model.getCurrentPlayer() == myPlayer.getIndex())
             gui.getClientGUI().asyncWriteToSocket("7");
     }
+
+    /**
+     * if it's the right game phase assistant8 method plays assistant card number 8 sending the message to the socket
+     */
     @FXML
     protected void assistant8() {
         if(model.getCurrentPhase().equals(GamePhase.PlayAssistantCard) && model.getCurrentPlayer() == myPlayer.getIndex())
             gui.getClientGUI().asyncWriteToSocket("8");
     }
+
+    /**
+     * if it's the right game phase assistant9 method plays assistant card number 9 sending the message to the socket
+     */
     @FXML
     protected void assistant9() {
         if(model.getCurrentPhase().equals(GamePhase.PlayAssistantCard) && model.getCurrentPlayer() == myPlayer.getIndex())
             gui.getClientGUI().asyncWriteToSocket("9");
     }
 
+    /**
+     * if it's the right game phase assistant10 method plays assistant card number 10 sending the message to the socket
+     */
     @FXML
     protected void assistant10() {
         if(model.getCurrentPhase().equals(GamePhase.PlayAssistantCard) && model.getCurrentPlayer() == myPlayer.getIndex())
             gui.getClientGUI().asyncWriteToSocket("10");
     }
 
+
+    /**
+     * update method controls every parameter on the game board and updates them
+     */
     private void update() {
         if(model.getPlayers().size() == 2){
             schoolBoard2.setVisible(false);
@@ -347,21 +397,37 @@ public class GameBoardController {
         }
     }
 
+    /**
+     * setGui method sets gui
+     * @param gui
+     */
     public void setGui(ClientAppGUI gui) {
         this.gui = gui;
     }
 
 
+    /**
+     * setModel method sets model
+     * @param model
+     */
     public void setModel(Model model) {
         this.model = model;
         System.out.println("Ricevuto il model");
         update();
     }
 
+    /**
+     * setNickname method sets nickname
+     * @param nickname
+     */
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
 
+    /**
+     * chooseIsland0 gets the input from the model (if it's the right game phase), and sent to the socket a
+     * message with the right move (move students or move mother nature)
+     */
    @FXML
    protected void chooseIsland0(){
        if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice >= 0 && studentChoice <= 4){
@@ -371,6 +437,10 @@ public class GameBoardController {
        }
        cleanParameters();
     }
+    /**
+     * chooseIsland1 gets the input from the model (if it's the right game phase), and sent to the socket a
+     * message with the right move (move students or move mother nature)
+     */
     @FXML
     protected void chooseIsland1(){
         if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice >= 0 && studentChoice <= 4){
@@ -380,6 +450,10 @@ public class GameBoardController {
         }
         cleanParameters();
     }
+    /**
+     * chooseIsland2 gets the input from the model (if it's the right game phase), and sent to the socket a
+     * message with the right move (move students or move mother nature)
+     */
     @FXML
     protected void chooseIsland2(){
         if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice >= 0 && studentChoice <= 4){
@@ -389,6 +463,13 @@ public class GameBoardController {
         }
         cleanParameters();
     }
+
+    /**
+     * chooseIsland3 gets the input from the model (if it's the right game phase), and sent to the socket a
+     * message with the right move (move students or move mother nature)
+     */
+
+
     @FXML
     protected void chooseIsland3(){
         if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice >= 0 && studentChoice <= 4){
@@ -398,6 +479,10 @@ public class GameBoardController {
         }
         cleanParameters();
     }
+    /**
+     * chooseIsland4 gets the input from the model (if it's the right game phase), and sent to the socket a
+     * message with the right move (move students or move mother nature)
+     */
     @FXML
     protected void chooseIsland4(){
         if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice >= 0 && studentChoice <= 4){
@@ -407,6 +492,11 @@ public class GameBoardController {
         }
         cleanParameters();
     }
+
+    /**
+     * chooseIsland5 gets the input from the model (if it's the right game phase), and sent to the socket a
+     * message with the right move (move students or move mother nature)
+     */
     @FXML
     protected void chooseIsland5(){
         if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice >= 0 && studentChoice <= 4){
@@ -416,6 +506,10 @@ public class GameBoardController {
         }
         cleanParameters();
     }
+    /**
+     * chooseIsland6 gets the input from the model (if it's the right game phase), and sent to the socket a
+     * message with the right move (move students or move mother nature)
+     */
     @FXML
     protected void chooseIsland6(){
         if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice >= 0 && studentChoice <= 4){
@@ -425,6 +519,10 @@ public class GameBoardController {
         }
         cleanParameters();
     }
+    /**
+     * chooseIsland7 gets the input from the model (if it's the right game phase), and sent to the socket a
+     * message with the right move (move students or move mother nature)
+     */
     @FXML
     protected void chooseIsland7(){
         if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice >= 0 && studentChoice <= 4){
@@ -434,6 +532,10 @@ public class GameBoardController {
         }
         cleanParameters();
     }
+    /**
+     * chooseIsland8 gets the input from the model (if it's the right game phase), and sent to the socket a
+     * message with the right move (move students or move mother nature)
+     */
     @FXML
     protected void chooseIsland8(){
         if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice >= 0 && studentChoice <= 4){
@@ -443,6 +545,11 @@ public class GameBoardController {
         }
         cleanParameters();
     }
+
+    /**
+     * chooseIsland9 gets the input from the model (if it's the right game phase), and sent to the socket a
+     * message with the right move (move students or move mother nature)
+     */
     @FXML
     protected void chooseIsland9(){
         if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice >= 0 && studentChoice <= 4){
@@ -452,6 +559,11 @@ public class GameBoardController {
         }
         cleanParameters();
     }
+
+    /**
+     * chooseIsland10 gets the input from the model (if it's the right game phase), and sent to the socket a
+     * message with the right move (move students or move mother nature)
+     */
     @FXML
     protected void chooseIsland10(){
         if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice >= 0 && studentChoice <= 4){
@@ -461,6 +573,11 @@ public class GameBoardController {
         }
         cleanParameters();
     }
+
+    /**
+     * chooseIsland11 gets the input from the model (if it's the right game phase), and sent to the socket a
+     * message with the right move (move students or move mother nature)
+     */
     @FXML
     protected void chooseIsland11(){
         if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex() && studentChoice >= 0 && studentChoice <= 4){
@@ -471,6 +588,10 @@ public class GameBoardController {
         cleanParameters();
     }
 
+    /**
+     * moveMotherNature method moves mother nature on the correct island index parameter set
+     * @param islandIndex
+     */
     private void moveMotherNature(int islandIndex){
         int islandPosition = islandAbsolutePosition(islandIndex);
         islandPosition -= model.getGameBoard().getMotherNature();
@@ -488,6 +609,9 @@ public class GameBoardController {
         return -1;
     }
 
+    /**
+     * chooseStudent0 method gets the student in position 0 from the entrance
+     */
     @FXML
     protected void chooseStudent0(){
         if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex()){
@@ -495,6 +619,9 @@ public class GameBoardController {
         } else
             cleanParameters();
     }
+    /**
+     * chooseStudent1 method gets the student in position 1 from the entrance
+     */
     @FXML
     protected void chooseStudent1(){
         if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex()){
@@ -502,6 +629,9 @@ public class GameBoardController {
         } else
             cleanParameters();
     }
+    /**
+     * chooseStudent2 method gets the student in position 2 from the entrance
+     */
     @FXML
     protected void chooseStudent2(){
         if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex()){
@@ -509,6 +639,9 @@ public class GameBoardController {
         } else
             cleanParameters();
     }
+    /**
+     * chooseStudent3 method gets the student in position 3 from the entrance
+     */
     @FXML
     protected void chooseStudent3(){
         if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex()){
@@ -516,6 +649,9 @@ public class GameBoardController {
         } else
             cleanParameters();
     }
+    /**
+     * chooseStudent4 method gets the student in position 4 from the entrance
+     */
     @FXML
     protected void chooseStudent4(){
         if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex()){
@@ -523,6 +659,9 @@ public class GameBoardController {
         } else
             cleanParameters();
     }
+    /**
+     * chooseStudent5 method gets the student in position 5 from the entrance
+     */
     @FXML
     protected void chooseStudent5(){
         if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex()){
@@ -530,6 +669,9 @@ public class GameBoardController {
         } else
             cleanParameters();
     }
+    /**
+     * chooseStudent6 method gets the student in position 6 from the entrance
+     */
     @FXML
     protected void chooseStudent6(){
         if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex()){
@@ -538,6 +680,9 @@ public class GameBoardController {
             cleanParameters();
     }
 
+    /**
+     * chooseStudent7 method gets the student in position 7 from the entrance
+     */
     @FXML
     protected void chooseStudent7(){
         if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex()){
@@ -545,6 +690,10 @@ public class GameBoardController {
         } else
             cleanParameters();
     }
+
+    /**
+     * chooseStudent8 method gets the student in position 8 from the entrance
+     */
     @FXML
     protected void chooseStudent8(){
         if(model.getCurrentPhase().equals(GamePhase.MoveStudents) && model.getCurrentPlayer() == myPlayer.getIndex()){
@@ -590,6 +739,9 @@ public class GameBoardController {
         cleanParameters();
     }
 
+    /**
+     * chooseCloud0 method gets the cloud number 0
+     */
     @FXML
     protected void chooseCloud0(){
         if(model.getCurrentPhase().equals(GamePhase.ChooseCloud) && model.getCurrentPlayer() == myPlayer.getIndex()){
@@ -598,6 +750,9 @@ public class GameBoardController {
             cleanParameters();
     }
 
+    /**
+     * chooseCloud1 method gets the cloud number 1
+     */
     @FXML
     protected void chooseCloud1(){
         if(model.getCurrentPhase().equals(GamePhase.ChooseCloud) && model.getCurrentPlayer() == myPlayer.getIndex()){
@@ -606,6 +761,9 @@ public class GameBoardController {
             cleanParameters();
     }
 
+    /**
+     * chooseCloud2 method gets the cloud number 2
+     */
     @FXML
     protected void chooseCloud2(){
         if(model.getCurrentPhase().equals(GamePhase.ChooseCloud) && model.getCurrentPlayer() == myPlayer.getIndex()){
@@ -615,6 +773,11 @@ public class GameBoardController {
     }
 
 
+    /**
+     * getCharacterFXML method
+     * @param index
+     * @return
+     */
 
     private FXMLLoader getCharacterFXML(int index){
         return switch (index) {

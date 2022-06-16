@@ -12,6 +12,9 @@ public class MainMenuController {
     @FXML private TextField ip;
     @FXML private TextField port;
 
+    /**
+     * onButtonClick method gets the user input written in the button
+     */
     @FXML
     protected void onButtonClick() {
         ClientGUI clientGUI;
@@ -27,11 +30,18 @@ public class MainMenuController {
 
     }
 
+    /**
+     * clearIpPost method clears port and ip
+     */
     public void clearIpPort() {
         this.ip.clear();
         this.port.clear();
     }
 
+    /**
+     * setGui method sets GUI
+     * @param gui
+     */
     public void setGui(ClientAppGUI gui) {
         this.gui = gui;
     }

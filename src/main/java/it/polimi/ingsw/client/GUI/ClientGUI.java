@@ -11,6 +11,9 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.NoSuchElementException;
 
+/**
+ * Client class GUI it's the main class for graphical user interface
+ */
 public class ClientGUI implements Runnable {
 
     private String ip;
@@ -24,6 +27,12 @@ public class ClientGUI implements Runnable {
     private boolean firstModel = true;
 
 
+    /**
+     * ClientGUI constructor
+     * @param ip
+     * @param port
+     * @param gui
+     */
     public ClientGUI(String ip, int port, ClientAppGUI gui){
         this.ip = ip;
         this.port = port;
@@ -32,19 +41,37 @@ public class ClientGUI implements Runnable {
 
     private boolean active = true;
 
+    /**
+     * setNickname method sets the nickname of the player
+     * @param nickname
+     */
     public void setNickname(String nickname) {
         asyncWriteToSocket(nickname);
         this.nickname = nickname;
     }
 
+    /**
+     * isActive method returns active (boolean parameter)
+     * @return active
+     */
     public synchronized boolean isActive(){
         return active;
     }
 
+    /**
+     * setActive method sets active parameter
+     * @param active
+     */
     public synchronized void setActive(boolean active){
         this.active = active;
     }
 
+    /**
+     * asyncReadFromSocket method creates a thread which receives a message from the socket in asynchronized way
+     *
+     * @param socketIn
+     * @return thread
+     */
     // asyncReadFromSocket
     public Thread asyncReadFromSocket(final ObjectInputStream socketIn, final ObjectOutputStream socketOut){
         Thread t = new Thread(new Runnable() {
@@ -87,6 +114,12 @@ public class ClientGUI implements Runnable {
         return t;
     }
 
+
+    /**
+     * asyncWriteToSocket method creates a thread which sends a message to the socket in asynchronized way
+     * @param message
+     * @return thread
+     */
     public Thread asyncWriteToSocket(String message){
         Thread t = new Thread(new Runnable() {
             @Override
@@ -105,6 +138,9 @@ public class ClientGUI implements Runnable {
         return t;
     }
 
+    /**
+     * run method of Client
+     */
     @Override
     public void run() {
         try {
@@ -137,6 +173,10 @@ public class ClientGUI implements Runnable {
 
     }
 
+    /**
+     * getNickname method returns nickname
+     * @return nickname
+     */
     public String getNickname() {
         return nickname;
     }

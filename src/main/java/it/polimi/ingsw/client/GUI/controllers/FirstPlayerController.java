@@ -3,6 +3,9 @@ package it.polimi.ingsw.client.GUI.controllers;
 import it.polimi.ingsw.client.ClientAppGUI;
 import javafx.fxml.FXML;
 
+/**
+ * firstPlayerController class controls the first player settings about the match
+ */
 public class FirstPlayerController {
 
     private ClientAppGUI gui;
@@ -10,6 +13,7 @@ public class FirstPlayerController {
     String numPlayers;
 
     String expertMode = "n";
+
 
     @FXML
     protected void onTwo() {
@@ -21,6 +25,9 @@ public class FirstPlayerController {
         numPlayers = "3";
     }
 
+    /**
+     * onCheck method checks the expert mode button
+     */
     @FXML
     protected void onCheck() {
         if(expertMode == "n")
@@ -29,6 +36,9 @@ public class FirstPlayerController {
             expertMode = "n";
     }
 
+    /**
+     * onButtonClick method gets the user input written in the button
+     */
     @FXML
     protected void onButtonClick() {
 
@@ -40,6 +50,9 @@ public class FirstPlayerController {
 
     }
 
+    /**
+     * setGui method sets GUI
+     */
     public void setGui(ClientAppGUI gui) {
         this.gui = gui;
     }
