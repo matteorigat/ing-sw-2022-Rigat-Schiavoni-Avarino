@@ -20,6 +20,7 @@ public class Character6gui implements Character{
     protected void onButtonClick() {
         //effect.setText("hai giocato questa carta!");
         Platform.runLater(()-> gui.getClientGUI().asyncWriteToSocket("100,6"));
+        dialog.close();
     }
 
     @Override

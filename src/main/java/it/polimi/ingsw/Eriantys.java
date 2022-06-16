@@ -3,8 +3,6 @@ package it.polimi.ingsw;
 import it.polimi.ingsw.client.ClientAppCLI;
 import it.polimi.ingsw.client.ClientAppGUI;
 import it.polimi.ingsw.server.ServerApp;
-import javafx.application.Application;
-
 import java.util.Scanner;
 
 
@@ -27,7 +25,7 @@ public class Eriantys {
         do {
             System.out.println("Insert your choice: ");
             input = scanner.nextLine();
-        }while (!(input.equals("0") || input.equals("1") || input.equals("2") || input.equals("2") || input.equals("3")));
+        }while (!(input.equals("0") || input.equals("1") || input.equals("2") || input.equals("3")));
 
 
         switch (input){

@@ -20,6 +20,7 @@ public class Character8gui implements Character{
     protected void onButtonClick() {
         //effect.setText("hai giocato questa carta!");
         Platform.runLater(()-> gui.getClientGUI().asyncWriteToSocket("100,8"));
+        dialog.close();
     }
 
     @Override
