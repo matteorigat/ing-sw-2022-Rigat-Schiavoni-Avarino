@@ -1110,8 +1110,10 @@ public class Controller implements Observer<PlayerMove> {
                     //checking if the student in the entrance is right
                     boolean check1 = false;
                     for(Student s: model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance()){
-                        if(entranceStudent1 == s.getColour().ordinal() && entranceStudent1 < 5)
+                        if (entranceStudent1 == s.getColour().ordinal() && entranceStudent1 < 5) {
                             check1 = true;
+                            break;
+                        }
                     }
                     if(!check1)
                         return -1;
@@ -1141,9 +1143,9 @@ public class Controller implements Observer<PlayerMove> {
                     boolean check1 = false;
                     boolean check2 = false;
                     for(Student s: model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance()){
-                        if(entranceStudent1 == s.getColour().ordinal() && entranceStudent1 < 5)
+                        if(!check1 && entranceStudent1 == s.getColour().ordinal() && entranceStudent1 < 5)
                             check1 = true;
-                        else if(entranceStudent2 != s.getColour().ordinal() && entranceStudent1 < 5)
+                        else if(!check2 && entranceStudent2 == s.getColour().ordinal() && entranceStudent2 < 5)
                             check2 = true;
                     }
                     if(!(check1 && check2))
@@ -1179,11 +1181,11 @@ public class Controller implements Observer<PlayerMove> {
                     boolean check2 = false;
                     boolean check3 = false;
                     for(Student s: model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance()){
-                        if(entranceStudent1 == s.getColour().ordinal() && entranceStudent1 < 5)
+                        if(!check1 && entranceStudent1 == s.getColour().ordinal() && entranceStudent1 < 5)
                             check1 = true;
-                        else if(entranceStudent2 != s.getColour().ordinal() && entranceStudent1 < 5)
+                        else if(!check2 && entranceStudent2 == s.getColour().ordinal() && entranceStudent2 < 5)
                             check2 = true;
-                        else if(entranceStudent3 != s.getColour().ordinal() && entranceStudent1 < 5)
+                        else if(!check3 && entranceStudent3 == s.getColour().ordinal() && entranceStudent3 < 5)
                             check3 = true;
                     }
                     if(!(check1 && check2 && check3))
