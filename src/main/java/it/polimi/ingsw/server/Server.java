@@ -84,18 +84,18 @@ public class Server {
     }
 
 
-/**
- * Method lobby creates or handle a lobby, which is a common room used before a match. In this
- * room, connected players are waiting for other ones, in order to reach the correct players'
- * number for playing. If the waiting clients' queue is empty, the server creates a new lobby and
- * ask the first player to choose the capacity. After that, when a client connects, it checks if
- * the players number has been reached; if true, starts the match.
- *
- *
- * @param c of type Client Connection
- * @param name of type String
- * they are both used together in waitingConnection, very helpfull to associate name to a connection
- */
+    /**
+     * Method lobby creates or handle a lobby, which is a common room used before a match. In this
+     * room, connected players are waiting for other ones, in order to reach the correct players'
+     * number for playing. If the waiting clients' queue is empty, the server creates a new lobby and
+     * ask the first player to choose the capacity. After that, when a client connects, it checks if
+     * the players number has been reached; if true, starts the match.
+     *
+     *
+     * @param c of type Client Connection
+     * @param name of type String
+     * they are both used together in waitingConnection, very helpfull to associate name to a connection
+     */
 
 
 

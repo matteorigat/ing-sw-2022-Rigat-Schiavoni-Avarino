@@ -5,6 +5,10 @@ import it.polimi.ingsw.client.CLI.ClientCLI;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ *The main class of the client. It simply creates a new client class, adding a scanner
+ *
+ */
 public class ClientAppCLI {
 
 

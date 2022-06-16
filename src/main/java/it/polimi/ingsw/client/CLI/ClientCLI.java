@@ -1,3 +1,6 @@
+
+
+
 package it.polimi.ingsw.client.CLI;
 
 import it.polimi.ingsw.exceptions.ConnectionClosedException;
@@ -17,23 +20,45 @@ public class ClientCLI {
 
     private String nickname = "";
 
+    /**
+     * Client CLI constructor
+     * @param ip
+     * @param port
+     */
     public ClientCLI(String ip, int port){
         this.ip = ip;
         this.port = port;
     }
 
+    /**
+     * active boolean parameter
+     */
     private boolean active = true;
 
+    /**
+     * isActive method returns active parameter
+     * @return active parameter
+     */
     public synchronized boolean isActive(){
         return active;
     }
 
+    /**
+     * setActive method sets active
+     * @param active
+     */
     public synchronized void setActive(boolean active){
         this.active = active;
     }
 
     /* asyncReadFromSocket  */
 
+    /**
+     * asyncReadFromSocket method creates a thread which receives a message from the socket in asynchronized way
+     *
+     * @param socketIn
+     * @return thread
+     */
     public Thread asyncReadFromSocket(final ObjectInputStream socketIn){
         Thread t = new Thread(new Runnable() {
             @Override
@@ -62,6 +87,13 @@ public class ClientCLI {
         return t;
     }
 
+
+    /**
+     * asyncWriteToSocket method creates a thread which sends a message to the socket in asynchronized way
+     * @param stdin
+     * @param socketOut
+     * @return thread
+     */
     public Thread asyncWriteToSocket(final Scanner stdin, final ObjectOutputStream socketOut){
         Thread t = new Thread(new Runnable() {
             @Override
@@ -127,6 +159,10 @@ public class ClientCLI {
         return t;
     }
 
+    /**
+     * run method of Client
+     * @throws IOException
+     */
     public void run() throws IOException {
         Socket socket = new Socket(ip, port);
         System.out.println("Connection established");
@@ -154,6 +190,3 @@ public class ClientCLI {
         }
     }
 }
-
-
-

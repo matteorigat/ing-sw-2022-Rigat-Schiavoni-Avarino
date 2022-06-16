@@ -35,10 +35,10 @@ public class SocketClientConnection extends Observable<String> implements Client
         this.server = server;
     }
 
-/**
- * Method isActive returns the active of this SocketClientConnection object.
- * @return the active (type boolean) of this SocketClientConnection object.
- * */
+    /**
+     * Method isActive returns the active of this SocketClientConnection object.
+     * @return the active (type boolean) of this SocketClientConnection object.
+     * */
     private synchronized boolean isActive(){
         return active;
     }
@@ -74,9 +74,9 @@ public class SocketClientConnection extends Observable<String> implements Client
     }
 
 
-   /** Method close terminates the connection with the client, closing firstly input and output
-   * streams, then invoking the server method called "DeregisteringClient", which will remove the
-   * active virtual client from the list.*/
+    /** Method close terminates the connection with the client, closing firstly input and output
+     * streams, then invoking the server method called "DeregisteringClient", which will remove the
+     * active virtual client from the list.*/
     private void close() {
         closeConnection();
         System.out.println("Deregistering client...");
@@ -95,13 +95,13 @@ public class SocketClientConnection extends Observable<String> implements Client
     }
 
 
-   /** Method run is the overriding runnable class method, which is called on a new client connection.
-    * Every new Client connected will sign in writing his username and if he's the first player in the match he will choose
-    * the gamemode and the num of players
-    *
-    * @see Runnable #run()
-    *
-    */
+    /** Method run is the overriding runnable class method, which is called on a new client connection.
+     * Every new Client connected will sign in writing his username and if he's the first player in the match he will choose
+     * the gamemode and the num of players
+     *
+     * @see Runnable #run()
+     *
+     */
     @Override
     public void run() {
         String name;

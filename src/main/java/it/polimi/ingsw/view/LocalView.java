@@ -20,14 +20,24 @@ public class LocalView {
     private Controller controller;
     private String choice;
 
+    /**
+     * LocalView constructor
+     */
     public LocalView() {
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * setController method sets the controller
+     * @param controller
+     */
     public void setController(Controller controller) {
         this.controller = controller;
     }
 
+    /**
+     * Start method starts the game
+     */
     public void start() {
 
         System.out.println("\n███████╗██████╗░██╗░█████╗░███╗░░██╗████████╗██╗░░░██╗░██████╗");
@@ -270,6 +280,11 @@ public class LocalView {
         }
     }
 
+    /**
+     * textColour method defines the colours of the students
+     * @param colour
+     * @return an emoji of the colour
+     */
     private String textColor(Colour colour){
         int colorInt = colour.ordinal();
         switch(colorInt) {
@@ -282,6 +297,12 @@ public class LocalView {
        return null;
     }
 
+    /**
+     *textTower method defines an emoji of the tower
+     * @param n
+     * @param colour
+     * @return an emoji of the tower
+     */
     private String textTower(int n, TowerColour colour){
         String s = "";
         for(int i = 0; i<n; i++)
