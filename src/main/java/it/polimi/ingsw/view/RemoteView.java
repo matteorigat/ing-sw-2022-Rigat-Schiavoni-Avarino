@@ -14,6 +14,9 @@ public class RemoteView extends View {
 
     private int phaseCounter = 0;
 
+    /**
+     * MessageReceiver method menages every message received distinguishing which type of move is it
+     */
     private class MessageReceiver implements Observer<String> {
 
         @Override
@@ -87,6 +90,12 @@ public class RemoteView extends View {
     }
 
 
+    /**
+     * RemoteView constructor
+     * @param player
+     * @param opponent
+     * @param c
+     */
     public RemoteView(Player player, String opponent, ClientConnection c) {
         super(player);
         this.clientConnection = c;
@@ -95,11 +104,22 @@ public class RemoteView extends View {
 
     }
 
+    /**
+     * showMessage method shows a message
+     * @param message
+     */
     @Override
     protected void showMessage(Object message) {
         clientConnection.asyncSend(message);
     }
 
+
+    /**
+     * update method analyzes the type of message and creates (and shows) a message by the meaning of the input message.
+     * For example if the model has a winner player.
+     * update message will show a win Message.
+     * @param message
+     */
     @Override
     public void update(MoveMessage message){
         showMessage(message.getModel());
