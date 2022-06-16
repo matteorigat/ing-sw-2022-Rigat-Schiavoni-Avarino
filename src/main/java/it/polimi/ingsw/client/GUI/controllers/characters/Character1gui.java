@@ -18,8 +18,12 @@ import java.util.Objects;
 
 public class Character1gui implements Character{
 
-    public ImageView student0, student1, student2, student3;
-    public TextField islandIndex;
+    @FXML public ImageView student0, student1, student2, student3;
+    @FXML public TextField islandIndex;
+    @FXML public Label selected0, selected1, selected2, selected3;
+
+    int previusSelected = -1;
+
     private ClientAppGUI gui;
     private ArrayList<Student> students;
     private Model model;
@@ -84,19 +88,43 @@ public class Character1gui implements Character{
 
     @FXML
     protected void chooseStudent0() {
+        removeSelected(previusSelected);
+        previusSelected = 0;
+        selected0.setText("°");
         selectedStudent = students.get(0).getColour().ordinal();
     }
     @FXML
     protected void chooseStudent1() {
+        removeSelected(previusSelected);
+        previusSelected = 1;
+        selected1.setText("°");
         selectedStudent = students.get(1).getColour().ordinal();
     }
     @FXML
     protected void chooseStudent2() {
+        removeSelected(previusSelected);
+        previusSelected = 2;
+        selected2.setText("°");
         selectedStudent = students.get(2).getColour().ordinal();
     }
     @FXML
     protected void chooseStudent3() {
+        removeSelected(previusSelected);
+        previusSelected = 3;
+        selected3.setText("°");
         selectedStudent = students.get(3).getColour().ordinal();
+    }
+
+
+    private void removeSelected(int i){
+        if(i == 0)
+            selected0.setText("");
+        else if(i == 1)
+            selected1.setText("");
+        else if(i == 2)
+            selected2.setText("");
+        else if(i == 3)
+            selected3.setText("");
     }
 
 }

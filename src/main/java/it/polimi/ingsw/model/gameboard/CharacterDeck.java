@@ -21,8 +21,8 @@ public class CharacterDeck implements Serializable {
         characterCards = new ArrayList<CharacterCard>();
 
         //characterCards.add(new Character2());
-        characterCards.add(new Character7());
-        //characterCards.add(new Character9());
+        //characterCards.add(new Character7());
+        characterCards.add(new Character9());
         //characterCards.add(new Character10());
 
         characterCards.add(new Character1());

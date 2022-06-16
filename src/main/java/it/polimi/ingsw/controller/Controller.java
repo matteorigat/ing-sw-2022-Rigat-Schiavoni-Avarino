@@ -480,14 +480,14 @@ public class Controller implements Observer<PlayerMove> {
                     ((Character5) c).addNoEntry();
                     return;  // moving on like mother nature has never been here
                 } else if(c.getIndex() == 6 && ((Character6) c).isEffectFlag()){
-                    ((Character6) c).disableEffect();
                     card6noTowerFlag = true;
+                    ((Character6) c).disableEffect();
                 } else if(c.getIndex() == 8 && ((Character8) c).isEffectFlag()){
-                    ((Character8) c).disableEffect();
                     card8twoMorePointsPlayer = playerIndex;
+                    ((Character8) c).disableEffect();
                 } else if(c.getIndex() == 9 && ((Character9) c).isEffectFlag()){
-                    ((Character9) c).disableEffect();
                     card9color = ((Character9) c).getColor();
+                    ((Character9) c).disableEffect();
                 }
 
         }
@@ -527,7 +527,7 @@ public class Controller implements Observer<PlayerMove> {
     }
 
     /**
-     * checkIslandFusion method checks if one islands has towers of the same colour of the next one or
+     * checkIslandFusion method checks if one island has towers of the same colour of the next one or
      * the previous one if it happens we have to merge those islands.
      * this is action phase 2.2
      * @param islandIndex
