@@ -235,7 +235,7 @@ public class Character7gui implements Character{
             select[0][1] = students.get(3).getColour().ordinal();
             removeSelected(select[1][1]);
             selected3.setText("°");
-            select[1][1] = 0;
+            select[1][1] = 3;
             counter++;
         }
         else if(counter == 2){
