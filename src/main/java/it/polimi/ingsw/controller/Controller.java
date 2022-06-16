@@ -951,7 +951,6 @@ public class Controller implements Observer<PlayerMove> {
      * 2) when you decide to move less then 2 students
      * */
     public int playCharacterCard10(int playerIndex, int cardIndex, int entranceStudent1, int diningStudent1){
-
         if(playerIndex == model.getCurrentPlayer() && model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[diningStudent1]) > 0){
             boolean checkStudentColor = false; // checking if students have the same colour
             for (Student s : model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getStudentsEntrance())
