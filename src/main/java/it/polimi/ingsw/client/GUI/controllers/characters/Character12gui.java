@@ -8,7 +8,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 
-public class Character9gui implements Character{
+public class Character12gui implements Character{
 
 
     @FXML public Label selected0, selected1, selected2, selected3, selected4;
@@ -26,7 +26,7 @@ public class Character9gui implements Character{
     protected void onButtonClick() {
 
         if(previusSelected >= 0 && previusSelected <5){
-            Platform.runLater(()-> gui.getClientGUI().asyncWriteToSocket("100,9," + previusSelected));
+            Platform.runLater(()-> gui.getClientGUI().asyncWriteToSocket("100,12," + previusSelected));
             dialog.close();
         }
     }

@@ -22,7 +22,7 @@ public class CharacterDeck implements Serializable {
 
         //characterCards.add(new Character2());
         //characterCards.add(new Character7());
-        characterCards.add(new Character9());
+        //characterCards.add(new Character9());
         characterCards.add(new Character10());
 
         //characterCards.add(new Character1());
@@ -34,7 +34,7 @@ public class CharacterDeck implements Serializable {
         //characterCards.add(new Character6());
         //characterCards.add(new Character8());
         characterCards.add(new Character11());
-        //characterCards.add(new Character12());
+        characterCards.add(new Character12());
 
 
     }

@@ -420,7 +420,8 @@ public class Controller implements Observer<PlayerMove> {
                 oldProfessorOwner.getPlayerSchoolBoard().removeProfessor(Colour.values()[colorIndex]);
                 rank.get(0).getPlayerSchoolBoard().addProfessor(Colour.values()[colorIndex]);
             }
-        }
+        } else if(max == 0 && oldProfessorOwner != null)
+            oldProfessorOwner.getPlayerSchoolBoard().removeProfessor(Colour.values()[colorIndex]);
     }
 
     /**
@@ -1086,10 +1087,8 @@ public class Controller implements Observer<PlayerMove> {
                     model.getPlayers().get(playerIndex).removeCoin(c.getCost());
                     model.getGameBoard().addCoinsToGeneralReserve(c.getCost() - 1);
                     c.play();
-
                     for (Player p: model.getPlayers())
                         model.getGameBoard().getBag().fill(p.getPlayerSchoolBoard().getDiningRoom().removeThreeStudents(Colour.values()[colorIndex]));
-
                     //controllo chi possiede il professore ora
                     checkProfessorProperty(colorIndex);
 
