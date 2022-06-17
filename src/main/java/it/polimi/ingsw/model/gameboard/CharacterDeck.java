@@ -18,7 +18,7 @@ public class CharacterDeck implements Serializable {
      * Character Deck constructor
      */
     public CharacterDeck() {
-        characterCards = new ArrayList<CharacterCard>();
+        characterCards = new ArrayList<>();
 
         characterCards.add(new Character1());
         characterCards.add(new Character2());
@@ -40,7 +40,7 @@ public class CharacterDeck implements Serializable {
      * @return ArrayList<CharacterCard> threeCards
      */
     public ArrayList<CharacterCard> getThreeRandomCards(){
-        ArrayList<CharacterCard> threeCards = new ArrayList<CharacterCard>();
+        ArrayList<CharacterCard> threeCards = new ArrayList<>();
 
         Collections.shuffle(this.characterCards);
 

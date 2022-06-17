@@ -29,7 +29,7 @@ public class Character7 implements CharacterCard{
                 return stud;
             }
 
-        return null; //non dovrebbe mai succedere
+        return null;
     }
 
     public ArrayList<Student> getStudents() {

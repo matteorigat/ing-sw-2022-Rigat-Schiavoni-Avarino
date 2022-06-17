@@ -118,7 +118,7 @@ public class LocalView {
 
             if(Parameters.expertMode){
                 System.out.println("\nPHASE: " + GamePhase.values()[controller.getCurrentPhase()] + "... or write 'c' to play a character card");
-                boolean characterbool = false;
+
             } else {
                 System.out.println("\nPHASE: " + GamePhase.values()[controller.getCurrentPhase()]);
             }
@@ -131,7 +131,7 @@ public class LocalView {
             boolean resultbool = false;
             while(resultbool == false) {
 
-                //questi due valori andranno presi dal client poi
+
                 int phase = controller.getCurrentPhase();
                 int currentPlayer = controller.getCurrentPlayer();
 

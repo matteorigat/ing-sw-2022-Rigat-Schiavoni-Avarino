@@ -111,7 +111,7 @@ public class GameBoardController {
      */
 
     private void cleanParameters(){
-        alreadyUsed = 0; //non serve qui, ma non fa mai male
+        alreadyUsed = 0;
         studentChoice = -1;
     }
 

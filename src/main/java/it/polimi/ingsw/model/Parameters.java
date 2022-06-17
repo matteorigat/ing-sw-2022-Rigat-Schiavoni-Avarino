@@ -9,10 +9,9 @@ public class Parameters {
     public static int numCloudStudents;
     public static int numTowers;
     public static int entranceStudents;
-    public static boolean expertMode;  //true se è expert
+    public static boolean expertMode;
     public static int numIslands = 12;
-    public static int numStudents = 130;
-    public static int numCharacterCards = 8; //se ne implementiamo altre mettiamo 12
+
 
     /**
      * setParameters method sets these parameters:
@@ -21,7 +20,7 @@ public class Parameters {
      */
     public static void setParameters(int players, boolean mode){
         numPlayers = players;
-        numClouds = players; //numero nuvole uguale a numero giocatori
+        numClouds = players;
         expertMode = mode;
 
         if (players == 2){

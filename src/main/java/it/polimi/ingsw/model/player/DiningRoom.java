@@ -31,7 +31,7 @@ public class DiningRoom implements Serializable {
     public boolean addStudent(Student s){
         if(s.getColour().equals(Colour.Green) && greenStudents.size() < 10){
             greenStudents.add(s);
-            if (greenStudents.size()%3 == 0) //moneta se 3, 6 e 9
+            if (greenStudents.size()%3 == 0)
                 return true;
         }
         else if(s.getColour().equals(Colour.Red) && redStudents.size() < 10){
@@ -71,7 +71,7 @@ public class DiningRoom implements Serializable {
         } else if(color.equals(Colour.Blue)){
             return blueStudents.size();
         }
-        return -1;//non dovrebbe mai succedere
+        return -1;
     }
 
     /** this method remove three students with the same colour*/

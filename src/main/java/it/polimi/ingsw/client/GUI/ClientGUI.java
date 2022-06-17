@@ -74,40 +74,37 @@ public class ClientGUI implements Runnable {
      */
     // asyncReadFromSocket
     public Thread asyncReadFromSocket(final ObjectInputStream socketIn, final ObjectOutputStream socketOut){
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    while (isActive()) {
-                        Object inputObject = socketIn.readObject();
-                        if(inputObject instanceof String){
-                            System.out.println((String) inputObject);
-                            if (((String) inputObject).contains("Write a valid name!") || ((String) inputObject).contains("Another player already chosen this nickname")){
-                                Platform.runLater(()-> gui.getNicknameController().clearNickname());
-                            }
-                            else if (((String) inputObject).contains("How many players?")){
-                                Platform.runLater(()-> gui.changeStage("FirstPlayer"));
-                            }
-                            else if (((String) inputObject).contains("please wait the beginning of the game") || ((String) inputObject).contains("Waiting for another player")){
-                                if(!gui.getCurrentFXML().equals("Loading"))
-                                    Platform.runLater(()-> gui.changeStage("Loading"));
-                            }
-                            else if (((String) inputObject).contains("opponent")){
-                                gui.getGameboardController().setNickname(nickname);
-                            }
-                        } else if (inputObject instanceof Model){
-                            Platform.runLater(()-> gui.getGameboardController().setModel((Model)inputObject));
-                            if(firstModel){
-                                Platform.runLater(()-> gui.changeStage("GameBoard"));
-                                firstModel = false;
-                            }
-                        } else {
-                            throw new IllegalArgumentException();
+        Thread t = new Thread(() -> {
+            try {
+                while (isActive()) {
+                    Object inputObject = socketIn.readObject();
+                    if(inputObject instanceof String){
+                        System.out.println((String) inputObject);
+                        if (((String) inputObject).contains("Write a valid name!") || ((String) inputObject).contains("Another player already chosen this nickname")){
+                            Platform.runLater(()-> gui.getNicknameController().clearNickname());
                         }
+                        else if (((String) inputObject).contains("How many players?")){
+                            Platform.runLater(()-> gui.changeStage("FirstPlayer"));
+                        }
+                        else if (((String) inputObject).contains("please wait the beginning of the game") || ((String) inputObject).contains("Waiting for another player")){
+                            if(!gui.getCurrentFXML().equals("Loading"))
+                                Platform.runLater(()-> gui.changeStage("Loading"));
+                        }
+                        else if (((String) inputObject).contains("opponent")){
+                            gui.getGameboardController().setNickname(nickname);
+                        }
+                    } else if (inputObject instanceof Model){
+                        Platform.runLater(()-> gui.getGameboardController().setModel((Model)inputObject));
+                        if(firstModel){
+                            Platform.runLater(()-> gui.changeStage("GameBoard"));
+                            firstModel = false;
+                        }
+                    } else {
+                        throw new IllegalArgumentException();
                     }
-                } catch (Exception e){
-                    setActive(false);
                 }
+            } catch (Exception e){
+                setActive(false);
             }
         });
         t.start();
@@ -121,17 +118,14 @@ public class ClientGUI implements Runnable {
      * @return thread
      */
     public Thread asyncWriteToSocket(String message){
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    synchronized (ip){
-                        socketOut.writeObject(message);
-                        socketOut.flush();
-                    }
-                }catch(Exception e){
-                    setActive(false);
+        Thread t = new Thread(() -> {
+            try {
+                synchronized (ip){
+                    socketOut.writeObject(message);
+                    socketOut.flush();
                 }
+            }catch(Exception e){
+                setActive(false);
             }
         });
         t.start();

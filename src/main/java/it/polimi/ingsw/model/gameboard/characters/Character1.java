@@ -38,7 +38,7 @@ public class Character1 implements CharacterCard{
                 return stud;
             }
 
-        return null; //non dovrebbe mai succedere
+        return null;
     }
 
     /**

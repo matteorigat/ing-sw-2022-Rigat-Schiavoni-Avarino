@@ -87,7 +87,7 @@ public class GameBoard implements Serializable {
         clouds.get(numCloud).addStudent(student);
         }
         catch(TooManyStudentsOnCloudException e){
-            // CODICE GESTIONE ERRORE
+
         }
     }
 
@@ -135,7 +135,7 @@ public class GameBoard implements Serializable {
             islands.get(island1).addStudent(s);
 
         this.islands.get(island1).setNumTower(this.islands.get(island1).getNumTower() + this.islands.get(island2).getNumTower());
-       // this.islands.get(island1).setNumTower(this.islands.get(island1).getIslandRank() + 1);
+
 
         islands.remove(island2);
 

@@ -49,7 +49,7 @@ public class Server {
 
 
 
-    //Deregister connection
+
     public synchronized void deregisterConnection(ClientConnection c) {
         ClientConnection opponent = playingConnection.get(c);
         ClientConnection opponent2 = playingConnection.get(opponent);

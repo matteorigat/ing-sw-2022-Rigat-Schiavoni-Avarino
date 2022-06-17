@@ -19,7 +19,7 @@ public class Island implements Serializable {
     private TowerColour towerColor;
     private ArrayList<Student> students;
     private ArrayList<Integer> numStudents;
-    private int noEntry; //int perchè ne puoi mettere più di uno
+    private int noEntry;
 
 
     /**
@@ -72,7 +72,7 @@ public class Island implements Serializable {
 
 
 
-        // sommo gli studenti (colori diversi) di un singolo giocatore in base ai colori che controlla
+
         int[] somma = new int[Parameters.numPlayers];
         for(Player pl: players) {
 
@@ -89,24 +89,24 @@ public class Island implements Serializable {
 
         ArrayList<Integer> rank = new ArrayList<>();
         int max = 0;
-        for (int i = 0; i<Parameters.numPlayers; i++){  //trovo il giocatore con più studenti
+        for (int i = 0; i<Parameters.numPlayers; i++){
             if(max < somma[i]){
                 max = somma[i];
                 rank.clear();
                 rank.add(i);
-            }else if (max == somma[i] && max != 0){  //qui ho parità
+            }else if (max == somma[i] && max != 0){
                 rank.add(i);
             }
         }
 
         if(rank.size() == 1){
-            for(Player p: players) {  //ritorno il giocatore che ha il max
+            for(Player p: players) {
                if(p.getIndex() == rank.get(0))
                    return p;
             }
         }
 
-        return null;  // se non trova nessun player o più di uno
+        return null;
     }
 
     /**
@@ -123,7 +123,7 @@ public class Island implements Serializable {
      */
     public void setNumTower(int numTower) {
         this.numTower = numTower;
-      //  this.islandRank = numTower;
+
     }
 
     /**

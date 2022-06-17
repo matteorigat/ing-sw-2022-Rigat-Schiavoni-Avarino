@@ -62,13 +62,7 @@ public class ClientAppGUI extends Application {
         gameboardController.setGui(this);
 
 
-        /*
-        FXMLLoader game = new FXMLLoader(getClass().getResource("/fxml/GameScene.fxml"));
-        Scene gameScene = new Scene(game.load());
-        gameSceneController = game.getController();
-        gameSceneController.setGui(this);
-        gameScene.getStylesheets().add(Objects.requireNonNull(GUI.class.getResource("/bootstrap3.css")).toExternalForm());
-        */
+
 
         sceneMap.put(MENU, menuScene);
         sceneMap.put(NICKNAME, nicknameScene);
@@ -76,14 +70,6 @@ public class ClientAppGUI extends Application {
         sceneMap.put(FIRST, firstScene);
         sceneMap.put(GAMEBOARD, gameboardScene);
 
-         /* Image i = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/pointer.png")));
-  ImageCursor ic = new ImageCursor(i);
-  menuScene.setCursor(ic);
-  nicknameScene.setCursor(ic);
-  loadingScene.setCursor(ic);
-  firstScene.setCursor(ic);
-  gameboardScene.setCursor(ic);
-//  menuScene.setCursor(Cursor.DEFAULT); //per ripristinare default */
 
     }
 
@@ -95,17 +81,13 @@ public class ClientAppGUI extends Application {
     public void start(Stage primaryStage) {
 
         stage = primaryStage;
-        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent e) {
-                Platform.exit();
-                System.exit(0);
-            }
+        stage.setOnCloseRequest(e -> {
+            Platform.exit();
+            System.exit(0);
         });
         stage.setTitle("Eriantys");
         stage.centerOnScreen();
         stage.setResizable(false);
-        //stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/graphics/inkwell.png"))));
         stage.setScene(sceneMap.get("MainMenu"));
         stage.show();
         currentFXML = "MainMenu";

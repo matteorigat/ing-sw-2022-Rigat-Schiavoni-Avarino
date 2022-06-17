@@ -26,11 +26,11 @@ public class Cloud implements Serializable {
     }
 
     /**
-     * addStudents method adds students on one cloud
+     * addStudents method adds students on one cloud at the beginning of the turn
      * @param s
      * @throws TooManyStudentsOnCloudException
      */
-    // A inizio turmo si aggiungono giocatori sulla nuvola... è possibile modificare la funzione e passare tutti gli studenti insieme come arraylist
+
     public void addStudent(Student s) throws TooManyStudentsOnCloudException {
         if (this.students.size() < Parameters.numCloudStudents){
             this.students.add(s);
@@ -47,7 +47,7 @@ public class Cloud implements Serializable {
         return (ArrayList<Student>) students.clone();
     }
 
-    //quando un giocatore finisce il turno, prende gli studenti dalla nuvola e la svuota
+
 
     /**
      * getStudents method get the arrayList of the students of the island

@@ -16,7 +16,7 @@ public class SchoolBoard implements Serializable {
     private ArrayList<Tower> towers;
     private TowerColour towerColor;
 
-    private int numTower;
+
 
     /** SchoolBoard constructor */
     public SchoolBoard(TowerColour towerColour) {
@@ -55,7 +55,7 @@ public class SchoolBoard implements Serializable {
      * it also checks if the room is full (in case it doesn't let you add anything)  */
     public boolean moveStudentToDiningRoom(int studentColour) {
         if(this.diningRoom.numOfStudentByColor(Colour.values()[studentColour]) >= 10)
-            return false;  //sala piena, non gli faccio aggiungere nulla
+            return false;
 
         boolean coin = false;
         for (Student s : studentsEntrance){
@@ -72,7 +72,7 @@ public class SchoolBoard implements Serializable {
      * this method remove a student from entrance by his colour
      * @param studentColour
      */
-    public void removeStudentFromEntrance(int studentColour) {  // serve per la carta 7
+    public void removeStudentFromEntrance(int studentColour) {
         for (Student s : studentsEntrance) {
             if (s.getColour().equals(Colour.values()[studentColour])) {
                 this.studentsEntrance.remove(s);

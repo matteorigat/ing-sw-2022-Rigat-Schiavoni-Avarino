@@ -86,12 +86,7 @@ public class SocketClientConnection extends Observable<String> implements Client
 
     @Override
     public void asyncSend(final Object message){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                send(message);
-            }
-        }).start();
+        new Thread(() -> send(message)).start();
     }
 
 

@@ -182,14 +182,14 @@ public class Model extends Observable<MoveMessage> implements Serializable {
 
         if(expertMode){
             System.out.println("\nPHASE: " + currentPhase + "... or write 'c' to play a character card");
-            boolean characterbool = false;
+
         } else {
             System.out.println("\nPHASE: " + currentPhase);
         }
         System.out.println("CURRENT PLAYER: " + currentPlayer + " -> " + players.get(currentPlayer).getNickname());
         System.out.println("");
         System.out.println("Students in the bag: " + gameBoard.getBag().getSize());
-        //System.out.println("Mn on: " + gameBoard.getMotherNature());
+
     }
 
     /** colours settings */
@@ -197,7 +197,7 @@ public class Model extends Observable<MoveMessage> implements Serializable {
         int colorInt = colour.ordinal();
 
         String operSys = System.getProperty("os.name").toLowerCase();
-        //System.out.println(operSys);
+
         if (operSys.contains("mac os x")) {
             switch(colorInt) {
                 case (0) : return "🟢"; //""\033[38;2;31;224;44mGreen\033[0m";
