@@ -1411,6 +1411,980 @@ public class GameBoardController {
     }
 
 
+    /**
+     *updateisland0 method controls every parameter of the island 0 and updates them
+     * @param i
+     */
+    private void updateisland0(Island i){
+        int green=0, red=0, yellow=0, pink=0, blue=0;
+        for(Student s: i.getStudents()){
+            if(s.getColour().ordinal() == 0)
+                green++;
+            else if (s.getColour().ordinal() == 1)
+                red++;
+            else if (s.getColour().ordinal() == 2)
+                yellow++;
+            else if (s.getColour().ordinal() == 3)
+                pink++;
+            else if (s.getColour().ordinal() == 4)
+                blue++;
+        }
+        if(green == 0){
+            greenIsland0.setVisible(false);
+            greenText0.setVisible(false);
+        } else {
+            greenIsland0.setVisible(true);
+            greenText0.setVisible(true);
+            greenText0.setText(String.valueOf(green));
+        }
+        if(red == 0){
+            redIsland0.setVisible(false);
+            redText0.setVisible(false);
+        } else {
+            redIsland0.setVisible(true);
+            redText0.setVisible(true);
+            redText0.setText(String.valueOf(red));
+        }
+        if(yellow == 0){
+            yellowIsland0.setVisible(false);
+            yellowText0.setVisible(false);
+        } else {
+            yellowIsland0.setVisible(true);
+            yellowText0.setVisible(true);
+            yellowText0.setText(String.valueOf(yellow));
+        }
+        if(pink == 0){
+            pinkIsland0.setVisible(false);
+            pinkText0.setVisible(false);
+        } else {
+            pinkIsland0.setVisible(true);
+            pinkText0.setVisible(true);
+            pinkText0.setText(String.valueOf(pink));
+        }
+        if(blue == 0){
+            blueIsland0.setVisible(false);
+            blueText0.setVisible(false);
+        } else {
+            blueIsland0.setVisible(true);
+            blueText0.setVisible(true);
+            blueText0.setText(String.valueOf(blue));
+        }
+
+        if(i.getNumTower() == 0){
+            towerIsland0.setImage(null);
+            towerText0.setVisible(false);
+        } else {
+            if(i.getTowerColor().equals(TowerColour.Black))
+                towerIsland0.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/black_tower.png"))));
+            else if (i.getTowerColor().equals(TowerColour.White)) {
+                towerIsland0.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/white_tower.png"))));
+            } else if (i.getTowerColor().equals(TowerColour.Grey)) {
+                towerIsland0.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/grey_tower.png"))));
+            }
+            towerText0.setVisible(true);
+            towerText0.setText(String.valueOf(i.getNumTower()));
+        }
+
+        mothernature0.setVisible(model.getGameBoard().getIslands().get(model.getGameBoard().getMotherNature()).getIslandIndex() == 0);
+
+        if(i.getNoEntry() > 0)
+            deny0.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/deny_island_icon.png"))));
+        else deny0.setImage(null);
+    }
+    /**
+     *updateisland1 method controls every parameter of the island 1 and updates them
+     * @param i
+     */
+    private void updateisland1(Island i){
+        int green=0, red=0, yellow=0, pink=0, blue=0;
+        for(Student s: i.getStudents()){
+            if(s.getColour().ordinal() == 0)
+                green++;
+            else if (s.getColour().ordinal() == 1)
+                red++;
+            else if (s.getColour().ordinal() == 2)
+                yellow++;
+            else if (s.getColour().ordinal() == 3)
+                pink++;
+            else if (s.getColour().ordinal() == 4)
+                blue++;
+        }
+        if(green == 0){
+            greenIsland1.setVisible(false);
+            greenText1.setVisible(false);
+        } else {
+            greenIsland1.setVisible(true);
+            greenText1.setVisible(true);
+            greenText1.setText(String.valueOf(green));
+        }
+        if(red == 0){
+            redIsland1.setVisible(false);
+            redText1.setVisible(false);
+        } else {
+            redIsland1.setVisible(true);
+            redText1.setVisible(true);
+            redText1.setText(String.valueOf(red));
+        }
+        if(yellow == 0){
+            yellowIsland1.setVisible(false);
+            yellowText1.setVisible(false);
+        } else {
+            yellowIsland1.setVisible(true);
+            yellowText1.setVisible(true);
+            yellowText1.setText(String.valueOf(yellow));
+        }
+        if(pink == 0){
+            pinkIsland1.setVisible(false);
+            pinkText1.setVisible(false);
+        } else {
+            pinkIsland1.setVisible(true);
+            pinkText1.setVisible(true);
+            pinkText1.setText(String.valueOf(pink));
+        }
+        if(blue == 0){
+            blueIsland1.setVisible(false);
+            blueText1.setVisible(false);
+        } else {
+            blueIsland1.setVisible(true);
+            blueText1.setVisible(true);
+            blueText1.setText(String.valueOf(blue));
+        }
+
+        if(i.getNumTower() == 0){
+            towerIsland1.setImage(null);
+            towerText1.setVisible(false);
+        } else {
+            if(i.getTowerColor().equals(TowerColour.Black))
+                towerIsland1.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/black_tower.png"))));
+            else if (i.getTowerColor().equals(TowerColour.White)) {
+                towerIsland1.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/white_tower.png"))));
+            } else if (i.getTowerColor().equals(TowerColour.Grey)) {
+                towerIsland1.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/grey_tower.png"))));
+            }
+            towerText1.setVisible(true);
+            towerText1.setText(String.valueOf(i.getNumTower()));
+        }
+
+        mothernature1.setVisible(model.getGameBoard().getIslands().get(model.getGameBoard().getMotherNature()).getIslandIndex() == 1);
+
+        if(i.getNoEntry() > 0)
+            deny1.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/deny_island_icon.png"))));
+        else deny1.setImage(null);
+
+    }
+
+    /**
+     *updateisland2 method controls every parameter of the island 2 and updates them
+     * @param i
+     */
+    private void updateisland2(Island i){
+        int green=0, red=0, yellow=0, pink=0, blue=0;
+        for(Student s: i.getStudents()){
+            if(s.getColour().ordinal() == 0)
+                green++;
+            else if (s.getColour().ordinal() == 1)
+                red++;
+            else if (s.getColour().ordinal() == 2)
+                yellow++;
+            else if (s.getColour().ordinal() == 3)
+                pink++;
+            else if (s.getColour().ordinal() == 4)
+                blue++;
+        }
+        if(green == 0){
+            greenIsland2.setVisible(false);
+            greenText2.setVisible(false);
+        } else {
+            greenIsland2.setVisible(true);
+            greenText2.setVisible(true);
+            greenText2.setText(String.valueOf(green));
+        }
+        if(red == 0){
+            redIsland2.setVisible(false);
+            redText2.setVisible(false);
+        } else {
+            redIsland2.setVisible(true);
+            redText2.setVisible(true);
+            redText2.setText(String.valueOf(red));
+        }
+        if(yellow == 0){
+            yellowIsland2.setVisible(false);
+            yellowText2.setVisible(false);
+        } else {
+            yellowIsland2.setVisible(true);
+            yellowText2.setVisible(true);
+            yellowText2.setText(String.valueOf(yellow));
+        }
+        if(pink == 0){
+            pinkIsland2.setVisible(false);
+            pinkText2.setVisible(false);
+        } else {
+            pinkIsland2.setVisible(true);
+            pinkText2.setVisible(true);
+            pinkText2.setText(String.valueOf(pink));
+        }
+        if(blue == 0){
+            blueIsland2.setVisible(false);
+            blueText2.setVisible(false);
+        } else {
+            blueIsland2.setVisible(true);
+            blueText2.setVisible(true);
+            blueText2.setText(String.valueOf(blue));
+        }
+
+        if(i.getNumTower() == 0){
+            towerIsland2.setImage(null);
+            towerText2.setVisible(false);
+        } else {
+            if(i.getTowerColor().equals(TowerColour.Black))
+                towerIsland2.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/black_tower.png"))));
+            else if (i.getTowerColor().equals(TowerColour.White)) {
+                towerIsland2.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/white_tower.png"))));
+            } else if (i.getTowerColor().equals(TowerColour.Grey)) {
+                towerIsland2.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/grey_tower.png"))));
+            }
+            towerText2.setVisible(true);
+            towerText2.setText(String.valueOf(i.getNumTower()));
+        }
+
+        mothernature2.setVisible(model.getGameBoard().getIslands().get(model.getGameBoard().getMotherNature()).getIslandIndex() == 2);
+
+        if(i.getNoEntry() > 0)
+            deny2.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/deny_island_icon.png"))));
+        else deny2.setImage(null);
+    }
+
+    /**
+     *updateisland3 method controls every parameter of the island 3 and updates them
+     * @param i
+     */
+    private void updateisland3(Island i){
+        int green=0, red=0, yellow=0, pink=0, blue=0;
+        for(Student s: i.getStudents()){
+            if(s.getColour().ordinal() == 0)
+                green++;
+            else if (s.getColour().ordinal() == 1)
+                red++;
+            else if (s.getColour().ordinal() == 2)
+                yellow++;
+            else if (s.getColour().ordinal() == 3)
+                pink++;
+            else if (s.getColour().ordinal() == 4)
+                blue++;
+        }
+        if(green == 0){
+            greenIsland3.setVisible(false);
+            greenText3.setVisible(false);
+        } else {
+            greenIsland3.setVisible(true);
+            greenText3.setVisible(true);
+            greenText3.setText(String.valueOf(green));
+        }
+        if(red == 0){
+            redIsland3.setVisible(false);
+            redText3.setVisible(false);
+        } else {
+            redIsland3.setVisible(true);
+            redText3.setVisible(true);
+            redText3.setText(String.valueOf(red));
+        }
+        if(yellow == 0){
+            yellowIsland3.setVisible(false);
+            yellowText3.setVisible(false);
+        } else {
+            yellowIsland3.setVisible(true);
+            yellowText3.setVisible(true);
+            yellowText3.setText(String.valueOf(yellow));
+        }
+        if(pink == 0){
+            pinkIsland3.setVisible(false);
+            pinkText3.setVisible(false);
+        } else {
+            pinkIsland3.setVisible(true);
+            pinkText3.setVisible(true);
+            pinkText3.setText(String.valueOf(pink));
+        }
+        if(blue == 0){
+            blueIsland3.setVisible(false);
+            blueText3.setVisible(false);
+        } else {
+            blueIsland3.setVisible(true);
+            blueText3.setVisible(true);
+            blueText3.setText(String.valueOf(blue));
+        }
+
+        if(i.getNumTower() == 0){
+            towerIsland3.setImage(null);
+            towerText3.setVisible(false);
+        } else {
+            if(i.getTowerColor().equals(TowerColour.Black))
+                towerIsland3.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/black_tower.png"))));
+            else if (i.getTowerColor().equals(TowerColour.White)) {
+                towerIsland3.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/white_tower.png"))));
+            } else if (i.getTowerColor().equals(TowerColour.Grey)) {
+                towerIsland3.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/grey_tower.png"))));
+            }
+            towerText3.setVisible(true);
+            towerText3.setText(String.valueOf(i.getNumTower()));
+        }
+
+        mothernature3.setVisible(model.getGameBoard().getIslands().get(model.getGameBoard().getMotherNature()).getIslandIndex() == 3);
+
+        if(i.getNoEntry() > 0)
+            deny3.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/deny_island_icon.png"))));
+        else deny3.setImage(null);
+    }
+
+    /**
+     *updateisland4 method controls every parameter of the island 4 and updates them
+     * @param i
+     */
+    private void updateisland4(Island i){
+        int green=0, red=0, yellow=0, pink=0, blue=0;
+        for(Student s: i.getStudents()){
+            if(s.getColour().ordinal() == 0)
+                green++;
+            else if (s.getColour().ordinal() == 1)
+                red++;
+            else if (s.getColour().ordinal() == 2)
+                yellow++;
+            else if (s.getColour().ordinal() == 3)
+                pink++;
+            else if (s.getColour().ordinal() == 4)
+                blue++;
+        }
+        if(green == 0){
+            greenIsland4.setVisible(false);
+            greenText4.setVisible(false);
+        } else {
+            greenIsland4.setVisible(true);
+            greenText4.setVisible(true);
+            greenText4.setText(String.valueOf(green));
+        }
+        if(red == 0){
+            redIsland4.setVisible(false);
+            redText4.setVisible(false);
+        } else {
+            redIsland4.setVisible(true);
+            redText4.setVisible(true);
+            redText4.setText(String.valueOf(red));
+        }
+        if(yellow == 0){
+            yellowIsland4.setVisible(false);
+            yellowText4.setVisible(false);
+        } else {
+            yellowIsland4.setVisible(true);
+            yellowText4.setVisible(true);
+            yellowText4.setText(String.valueOf(yellow));
+        }
+        if(pink == 0){
+            pinkIsland4.setVisible(false);
+            pinkText4.setVisible(false);
+        } else {
+            pinkIsland4.setVisible(true);
+            pinkText4.setVisible(true);
+            pinkText4.setText(String.valueOf(pink));
+        }
+        if(blue == 0){
+            blueIsland4.setVisible(false);
+            blueText4.setVisible(false);
+        } else {
+            blueIsland4.setVisible(true);
+            blueText4.setVisible(true);
+            blueText4.setText(String.valueOf(blue));
+        }
+
+        if(i.getNumTower() == 0){
+            towerIsland4.setImage(null);
+            towerText4.setVisible(false);
+        } else {
+            if(i.getTowerColor().equals(TowerColour.Black))
+                towerIsland4.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/black_tower.png"))));
+            else if (i.getTowerColor().equals(TowerColour.White)) {
+                towerIsland4.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/white_tower.png"))));
+            } else if (i.getTowerColor().equals(TowerColour.Grey)) {
+                towerIsland4.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/grey_tower.png"))));
+            }
+            towerText4.setVisible(true);
+            towerText4.setText(String.valueOf(i.getNumTower()));
+        }
+
+        mothernature4.setVisible(model.getGameBoard().getIslands().get(model.getGameBoard().getMotherNature()).getIslandIndex() == 4);
+
+        if(i.getNoEntry() > 0)
+            deny4.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/deny_island_icon.png"))));
+        else deny4.setImage(null);
+    }
+
+    /**
+     *updateisland5 method controls every parameter of the island 5 and updates them
+     * @param i
+     */
+    private void updateisland5(Island i){
+        int green=0, red=0, yellow=0, pink=0, blue=0;
+        for(Student s: i.getStudents()){
+            if(s.getColour().ordinal() == 0)
+                green++;
+            else if (s.getColour().ordinal() == 1)
+                red++;
+            else if (s.getColour().ordinal() == 2)
+                yellow++;
+            else if (s.getColour().ordinal() == 3)
+                pink++;
+            else if (s.getColour().ordinal() == 4)
+                blue++;
+        }
+        if(green == 0){
+            greenIsland5.setVisible(false);
+            greenText5.setVisible(false);
+        } else {
+            greenIsland5.setVisible(true);
+            greenText5.setVisible(true);
+            greenText5.setText(String.valueOf(green));
+        }
+        if(red == 0){
+            redIsland5.setVisible(false);
+            redText5.setVisible(false);
+        } else {
+            redIsland5.setVisible(true);
+            redText5.setVisible(true);
+            redText5.setText(String.valueOf(red));
+        }
+        if(yellow == 0){
+            yellowIsland5.setVisible(false);
+            yellowText5.setVisible(false);
+        } else {
+            yellowIsland5.setVisible(true);
+            yellowText5.setVisible(true);
+            yellowText5.setText(String.valueOf(yellow));
+        }
+        if(pink == 0){
+            pinkIsland5.setVisible(false);
+            pinkText5.setVisible(false);
+        } else {
+            pinkIsland5.setVisible(true);
+            pinkText5.setVisible(true);
+            pinkText5.setText(String.valueOf(pink));
+        }
+        if(blue == 0){
+            blueIsland5.setVisible(false);
+            blueText5.setVisible(false);
+        } else {
+            blueIsland5.setVisible(true);
+            blueText5.setVisible(true);
+            blueText5.setText(String.valueOf(blue));
+        }
+
+        if(i.getNumTower() == 0){
+            towerIsland5.setImage(null);
+            towerText5.setVisible(false);
+        } else {
+            if(i.getTowerColor().equals(TowerColour.Black))
+                towerIsland5.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/black_tower.png"))));
+            else if (i.getTowerColor().equals(TowerColour.White)) {
+                towerIsland5.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/white_tower.png"))));
+            } else if (i.getTowerColor().equals(TowerColour.Grey)) {
+                towerIsland5.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/grey_tower.png"))));
+            }
+            towerText5.setVisible(true);
+            towerText5.setText(String.valueOf(i.getNumTower()));
+        }
+
+        mothernature5.setVisible(model.getGameBoard().getIslands().get(model.getGameBoard().getMotherNature()).getIslandIndex() == 5);
+
+        if(i.getNoEntry() > 0)
+            deny5.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/deny_island_icon.png"))));
+        else deny5.setImage(null);
+    }
+
+    /**
+     *updateisland6 method controls every parameter of the island 6 and updates them
+     * @param i
+     */
+    private void updateisland6(Island i){
+        int green=0, red=0, yellow=0, pink=0, blue=0;
+        for(Student s: i.getStudents()){
+            if(s.getColour().ordinal() == 0)
+                green++;
+            else if (s.getColour().ordinal() == 1)
+                red++;
+            else if (s.getColour().ordinal() == 2)
+                yellow++;
+            else if (s.getColour().ordinal() == 3)
+                pink++;
+            else if (s.getColour().ordinal() == 4)
+                blue++;
+        }
+        if(green == 0){
+            greenIsland6.setVisible(false);
+            greenText6.setVisible(false);
+        } else {
+            greenIsland6.setVisible(true);
+            greenText6.setVisible(true);
+            greenText6.setText(String.valueOf(green));
+        }
+        if(red == 0){
+            redIsland6.setVisible(false);
+            redText6.setVisible(false);
+        } else {
+            redIsland6.setVisible(true);
+            redText6.setVisible(true);
+            redText6.setText(String.valueOf(red));
+        }
+        if(yellow == 0){
+            yellowIsland6.setVisible(false);
+            yellowText6.setVisible(false);
+        } else {
+            yellowIsland6.setVisible(true);
+            yellowText6.setVisible(true);
+            yellowText6.setText(String.valueOf(yellow));
+        }
+        if(pink == 0){
+            pinkIsland6.setVisible(false);
+            pinkText6.setVisible(false);
+        } else {
+            pinkIsland6.setVisible(true);
+            pinkText6.setVisible(true);
+            pinkText6.setText(String.valueOf(pink));
+        }
+        if(blue == 0){
+            blueIsland6.setVisible(false);
+            blueText6.setVisible(false);
+        } else {
+            blueIsland6.setVisible(true);
+            blueText6.setVisible(true);
+            blueText6.setText(String.valueOf(blue));
+        }
+
+        if(i.getNumTower() == 0){
+            towerIsland6.setImage(null);
+            towerText6.setVisible(false);
+        } else {
+            if(i.getTowerColor().equals(TowerColour.Black))
+                towerIsland6.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/black_tower.png"))));
+            else if (i.getTowerColor().equals(TowerColour.White)) {
+                towerIsland6.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/white_tower.png"))));
+            } else if (i.getTowerColor().equals(TowerColour.Grey)) {
+                towerIsland6.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/grey_tower.png"))));
+            }
+            towerText6.setVisible(true);
+            towerText6.setText(String.valueOf(i.getNumTower()));
+        }
+
+        mothernature6.setVisible(model.getGameBoard().getIslands().get(model.getGameBoard().getMotherNature()).getIslandIndex() == 6);
+
+        if(i.getNoEntry() > 0)
+            deny6.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/deny_island_icon.png"))));
+        else deny6.setImage(null);
+    }
+
+    /**
+     *updateisland7 method controls every parameter of the island 7 and updates them
+     * @param i
+     */
+    private void updateisland7(Island i){
+        int green=0, red=0, yellow=0, pink=0, blue=0;
+        for(Student s: i.getStudents()){
+            if(s.getColour().ordinal() == 0)
+                green++;
+            else if (s.getColour().ordinal() == 1)
+                red++;
+            else if (s.getColour().ordinal() == 2)
+                yellow++;
+            else if (s.getColour().ordinal() == 3)
+                pink++;
+            else if (s.getColour().ordinal() == 4)
+                blue++;
+        }
+        if(green == 0){
+            greenIsland7.setVisible(false);
+            greenText7.setVisible(false);
+        } else {
+            greenIsland7.setVisible(true);
+            greenText7.setVisible(true);
+            greenText7.setText(String.valueOf(green));
+        }
+        if(red == 0){
+            redIsland7.setVisible(false);
+            redText7.setVisible(false);
+        } else {
+            redIsland7.setVisible(true);
+            redText7.setVisible(true);
+            redText7.setText(String.valueOf(red));
+        }
+        if(yellow == 0){
+            yellowIsland7.setVisible(false);
+            yellowText7.setVisible(false);
+        } else {
+            yellowIsland7.setVisible(true);
+            yellowText7.setVisible(true);
+            yellowText7.setText(String.valueOf(yellow));
+        }
+        if(pink == 0){
+            pinkIsland7.setVisible(false);
+            pinkText7.setVisible(false);
+        } else {
+            pinkIsland7.setVisible(true);
+            pinkText7.setVisible(true);
+            pinkText7.setText(String.valueOf(pink));
+        }
+        if(blue == 0){
+            blueIsland7.setVisible(false);
+            blueText7.setVisible(false);
+        } else {
+            blueIsland7.setVisible(true);
+            blueText7.setVisible(true);
+            blueText7.setText(String.valueOf(blue));
+        }
+
+        if(i.getNumTower() == 0){
+            towerIsland7.setImage(null);
+            towerText7.setVisible(false);
+        } else {
+            if(i.getTowerColor().equals(TowerColour.Black))
+                towerIsland7.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/black_tower.png"))));
+            else if (i.getTowerColor().equals(TowerColour.White)) {
+                towerIsland7.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/white_tower.png"))));
+            } else if (i.getTowerColor().equals(TowerColour.Grey)) {
+                towerIsland7.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/grey_tower.png"))));
+            }
+            towerText7.setVisible(true);
+            towerText7.setText(String.valueOf(i.getNumTower()));
+        }
+
+        mothernature7.setVisible(model.getGameBoard().getIslands().get(model.getGameBoard().getMotherNature()).getIslandIndex() == 7);
+
+        if(i.getNoEntry() > 0)
+            deny7.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/deny_island_icon.png"))));
+        else deny7.setImage(null);
+    }
+
+    /**
+     *updateisland8 method controls every parameter of the island 8 and updates them
+     * @param i
+     */
+    private void updateisland8(Island i){
+        int green=0, red=0, yellow=0, pink=0, blue=0;
+        for(Student s: i.getStudents()){
+            if(s.getColour().ordinal() == 0)
+                green++;
+            else if (s.getColour().ordinal() == 1)
+                red++;
+            else if (s.getColour().ordinal() == 2)
+                yellow++;
+            else if (s.getColour().ordinal() == 3)
+                pink++;
+            else if (s.getColour().ordinal() == 4)
+                blue++;
+        }
+        if(green == 0){
+            greenIsland8.setVisible(false);
+            greenText8.setVisible(false);
+        } else {
+            greenIsland8.setVisible(true);
+            greenText8.setVisible(true);
+            greenText8.setText(String.valueOf(green));
+        }
+        if(red == 0){
+            redIsland8.setVisible(false);
+            redText8.setVisible(false);
+        } else {
+            redIsland8.setVisible(true);
+            redText8.setVisible(true);
+            redText8.setText(String.valueOf(red));
+        }
+        if(yellow == 0){
+            yellowIsland8.setVisible(false);
+            yellowText8.setVisible(false);
+        } else {
+            yellowIsland8.setVisible(true);
+            yellowText8.setVisible(true);
+            yellowText8.setText(String.valueOf(yellow));
+        }
+        if(pink == 0){
+            pinkIsland8.setVisible(false);
+            pinkText8.setVisible(false);
+        } else {
+            pinkIsland8.setVisible(true);
+            pinkText8.setVisible(true);
+            pinkText8.setText(String.valueOf(pink));
+        }
+        if(blue == 0){
+            blueIsland8.setVisible(false);
+            blueText8.setVisible(false);
+        } else {
+            blueIsland8.setVisible(true);
+            blueText8.setVisible(true);
+            blueText8.setText(String.valueOf(blue));
+        }
+
+        if(i.getNumTower() == 0){
+            towerIsland8.setImage(null);
+            towerText8.setVisible(false);
+        } else {
+            if(i.getTowerColor().equals(TowerColour.Black))
+                towerIsland8.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/black_tower.png"))));
+            else if (i.getTowerColor().equals(TowerColour.White)) {
+                towerIsland8.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/white_tower.png"))));
+            } else if (i.getTowerColor().equals(TowerColour.Grey)) {
+                towerIsland8.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/grey_tower.png"))));
+            }
+            towerText8.setVisible(true);
+            towerText8.setText(String.valueOf(i.getNumTower()));
+        }
+
+        mothernature8.setVisible(model.getGameBoard().getIslands().get(model.getGameBoard().getMotherNature()).getIslandIndex() == 8);
+
+        if(i.getNoEntry() > 0)
+            deny8.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/deny_island_icon.png"))));
+        else deny8.setImage(null);
+    }
+
+    /**
+     *updateisland9 method controls every parameter of the island 9 and updates them
+     * @param i
+     */
+    private void updateisland9(Island i){
+        int green=0, red=0, yellow=0, pink=0, blue=0;
+        for(Student s: i.getStudents()){
+            if(s.getColour().ordinal() == 0)
+                green++;
+            else if (s.getColour().ordinal() == 1)
+                red++;
+            else if (s.getColour().ordinal() == 2)
+                yellow++;
+            else if (s.getColour().ordinal() == 3)
+                pink++;
+            else if (s.getColour().ordinal() == 4)
+                blue++;
+        }
+        if(green == 0){
+            greenIsland9.setVisible(false);
+            greenText9.setVisible(false);
+        } else {
+            greenIsland9.setVisible(true);
+            greenText9.setVisible(true);
+            greenText9.setText(String.valueOf(green));
+        }
+        if(red == 0){
+            redIsland9.setVisible(false);
+            redText9.setVisible(false);
+        } else {
+            redIsland9.setVisible(true);
+            redText9.setVisible(true);
+            redText9.setText(String.valueOf(red));
+        }
+        if(yellow == 0){
+            yellowIsland9.setVisible(false);
+            yellowText9.setVisible(false);
+        } else {
+            yellowIsland9.setVisible(true);
+            yellowText9.setVisible(true);
+            yellowText9.setText(String.valueOf(yellow));
+        }
+        if(pink == 0){
+            pinkIsland9.setVisible(false);
+            pinkText9.setVisible(false);
+        } else {
+            pinkIsland9.setVisible(true);
+            pinkText9.setVisible(true);
+            pinkText9.setText(String.valueOf(pink));
+        }
+        if(blue == 0){
+            blueIsland9.setVisible(false);
+            blueText9.setVisible(false);
+        } else {
+            blueIsland9.setVisible(true);
+            blueText9.setVisible(true);
+            blueText9.setText(String.valueOf(blue));
+        }
+
+        if(i.getNumTower() == 0){
+            towerIsland9.setImage(null);
+            towerText9.setVisible(false);
+        } else {
+            if(i.getTowerColor().equals(TowerColour.Black))
+                towerIsland9.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/black_tower.png"))));
+            else if (i.getTowerColor().equals(TowerColour.White)) {
+                towerIsland9.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/white_tower.png"))));
+            } else if (i.getTowerColor().equals(TowerColour.Grey)) {
+                towerIsland9.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/grey_tower.png"))));
+            }
+            towerText9.setVisible(true);
+            towerText9.setText(String.valueOf(i.getNumTower()));
+        }
+
+        mothernature9.setVisible(model.getGameBoard().getIslands().get(model.getGameBoard().getMotherNature()).getIslandIndex() == 9);
+
+        if(i.getNoEntry() > 0)
+            deny9.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/deny_island_icon.png"))));
+        else deny9.setImage(null);
+    }
+
+    /**
+     *updateisland10 method controls every parameter of the island 10 and updates them
+     * @param i
+     */
+    private void updateisland10(Island i){
+        int green=0, red=0, yellow=0, pink=0, blue=0;
+        for(Student s: i.getStudents()){
+            if(s.getColour().ordinal() == 0)
+                green++;
+            else if (s.getColour().ordinal() == 1)
+                red++;
+            else if (s.getColour().ordinal() == 2)
+                yellow++;
+            else if (s.getColour().ordinal() == 3)
+                pink++;
+            else if (s.getColour().ordinal() == 4)
+                blue++;
+        }
+        if(green == 0){
+            greenIsland10.setVisible(false);
+            greenText10.setVisible(false);
+        } else {
+            greenIsland10.setVisible(true);
+            greenText10.setVisible(true);
+            greenText10.setText(String.valueOf(green));
+        }
+        if(red == 0){
+            redIsland10.setVisible(false);
+            redText10.setVisible(false);
+        } else {
+            redIsland10.setVisible(true);
+            redText10.setVisible(true);
+            redText10.setText(String.valueOf(red));
+        }
+        if(yellow == 0){
+            yellowIsland10.setVisible(false);
+            yellowText10.setVisible(false);
+        } else {
+            yellowIsland10.setVisible(true);
+            yellowText10.setVisible(true);
+            yellowText10.setText(String.valueOf(yellow));
+        }
+        if(pink == 0){
+            pinkIsland10.setVisible(false);
+            pinkText10.setVisible(false);
+        } else {
+            pinkIsland10.setVisible(true);
+            pinkText10.setVisible(true);
+            pinkText10.setText(String.valueOf(pink));
+        }
+        if(blue == 0){
+            blueIsland10.setVisible(false);
+            blueText10.setVisible(false);
+        } else {
+            blueIsland10.setVisible(true);
+            blueText10.setVisible(true);
+            blueText10.setText(String.valueOf(blue));
+        }
+
+        if(i.getNumTower() == 0){
+            towerIsland10.setImage(null);
+            towerText10.setVisible(false);
+        } else {
+            if(i.getTowerColor().equals(TowerColour.Black))
+                towerIsland10.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/black_tower.png"))));
+            else if (i.getTowerColor().equals(TowerColour.White)) {
+                towerIsland10.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/white_tower.png"))));
+            } else if (i.getTowerColor().equals(TowerColour.Grey)) {
+                towerIsland10.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/grey_tower.png"))));
+            }
+            towerText10.setVisible(true);
+            towerText10.setText(String.valueOf(i.getNumTower()));
+        }
+
+        mothernature10.setVisible(model.getGameBoard().getIslands().get(model.getGameBoard().getMotherNature()).getIslandIndex() == 10);
+
+        if(i.getNoEntry() > 0)
+            deny10.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/deny_island_icon.png"))));
+        else deny10.setImage(null);
+    }
+
+
+    /**
+     *updateisland11 method controls every parameter of the island 11 and updates them
+     * @param i
+     */
+    private void updateisland11(Island i){
+        int green=0, red=0, yellow=0, pink=0, blue=0;
+        for(Student s: i.getStudents()){
+            if(s.getColour().ordinal() == 0)
+                green++;
+            else if (s.getColour().ordinal() == 1)
+                red++;
+            else if (s.getColour().ordinal() == 2)
+                yellow++;
+            else if (s.getColour().ordinal() == 3)
+                pink++;
+            else if (s.getColour().ordinal() == 4)
+                blue++;
+        }
+        if(green == 0){
+            greenIsland11.setVisible(false);
+            greenText11.setVisible(false);
+        } else {
+            greenIsland11.setVisible(true);
+            greenText11.setVisible(true);
+            greenText11.setText(String.valueOf(green));
+        }
+        if(red == 0){
+            redIsland11.setVisible(false);
+            redText11.setVisible(false);
+        } else {
+            redIsland11.setVisible(true);
+            redText11.setVisible(true);
+            redText11.setText(String.valueOf(red));
+        }
+        if(yellow == 0){
+            yellowIsland11.setVisible(false);
+            yellowText11.setVisible(false);
+        } else {
+            yellowIsland11.setVisible(true);
+            yellowText11.setVisible(true);
+            yellowText11.setText(String.valueOf(yellow));
+        }
+        if(pink == 0){
+            pinkIsland11.setVisible(false);
+            pinkText11.setVisible(false);
+        } else {
+            pinkIsland11.setVisible(true);
+            pinkText11.setVisible(true);
+            pinkText11.setText(String.valueOf(pink));
+        }
+        if(blue == 0){
+            blueIsland11.setVisible(false);
+            blueText11.setVisible(false);
+        } else {
+            blueIsland11.setVisible(true);
+            blueText11.setVisible(true);
+            blueText11.setText(String.valueOf(blue));
+        }
+
+        if(i.getNumTower() == 0){
+            towerIsland11.setImage(null);
+            towerText11.setVisible(false);
+        } else {
+            if(i.getTowerColor().equals(TowerColour.Black))
+                towerIsland11.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/black_tower.png"))));
+            else if (i.getTowerColor().equals(TowerColour.White)) {
+                towerIsland11.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/white_tower.png"))));
+            } else if (i.getTowerColor().equals(TowerColour.Grey)) {
+                towerIsland11.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/grey_tower.png"))));
+            }
+            towerText11.setVisible(true);
+            towerText11.setText(String.valueOf(i.getNumTower()));
+        }
+
+        mothernature11.setVisible(model.getGameBoard().getIslands().get(model.getGameBoard().getMotherNature()).getIslandIndex() == 11);
+
+        if(i.getNoEntry() > 0)
+            deny11.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/deny_island_icon.png"))));
+        else deny11.setImage(null);
+    }
+
+
 
 
 
