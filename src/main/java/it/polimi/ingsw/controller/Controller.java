@@ -555,7 +555,7 @@ public class Controller implements Observer<PlayerMove> {
                     if (c.getIndex() == 3 && ((Character3) c).isEffectFlag() && model.getGameBoard().getMotherNature() >= (islandIndex + 1) % model.getGameBoard().getIslands().size()) {
                         int mn = model.getGameBoard().getMotherNature() - 1;
                         if (mn == -1)
-                            mn = model.getGameBoard().getIslands().size() - 1;
+                            mn = model.getGameBoard().getIslands().size() - 2;
                         model.getGameBoard().setMotherNature(mn);
                     }
             }
