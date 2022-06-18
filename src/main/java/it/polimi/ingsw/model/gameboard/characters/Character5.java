@@ -45,6 +45,10 @@ public class Character5 implements CharacterCard{
         return cost;
     }
 
+    public int getNoEntry() {
+        return noEntry;
+    }
+
     @Override
     public String toString() {
         return  "index: " + index +

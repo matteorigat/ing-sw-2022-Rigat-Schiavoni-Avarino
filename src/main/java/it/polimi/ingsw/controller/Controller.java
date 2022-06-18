@@ -852,7 +852,7 @@ public class Controller implements Observer<PlayerMove> {
     public int playCharacterCard5(int playerIndex, int cardIndex, int islandIndex){
         if(playerIndex == model.getCurrentPlayer()){
             for (CharacterCard c: model.getGameBoard().getThreeCharacterCards()){
-                if(cardIndex == c.getIndex() && model.getPlayers().get(playerIndex).getCoins() >= c.getCost()){
+                if(cardIndex == c.getIndex() && model.getPlayers().get(playerIndex).getCoins() >= c.getCost() && ((Character5) c).getNoEntry() > 0){
                     System.out.println("YOU ARE PLAYING CARD 5");
                     model.getPlayers().get(playerIndex).removeCoin(c.getCost());
                     model.getGameBoard().addCoinsToGeneralReserve(c.getCost() - 1);
