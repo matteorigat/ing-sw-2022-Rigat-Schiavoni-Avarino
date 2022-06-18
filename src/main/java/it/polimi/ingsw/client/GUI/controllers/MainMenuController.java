@@ -34,7 +34,7 @@ public class MainMenuController {
     protected void onSoundClick() {
 
         if(gui.getLaserPlayer().isPlaying())
-           gui.getLaserPlayer();
+           gui.getLaserPlayer().stop();
         else gui.getLaserPlayer().play();
 
     }

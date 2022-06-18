@@ -1379,6 +1379,9 @@
        <font><Font name="Arial Bold" size="13.0" /></font>
    </Label>
 
-
+   
+       <ImageView fitHeight="70.0" fitWidth="65.0" layoutX="1362.0" layoutY="1.0" onMouseClicked="#onSoundClick" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../Graphics/sound-off-music-mute-off-sound-speaker-volume-icon-16.png" />
+    </ImageView>
 
 </Pane>

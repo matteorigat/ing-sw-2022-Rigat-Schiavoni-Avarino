@@ -35,5 +35,9 @@
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font></Button>
+
+       <ImageView onMouseClicked="#onSoundClick" fitHeight="70.0" fitWidth="65.0" layoutX="1121.0" layoutY="721.0" pickOnBounds="true" preserveRatio="true">
+           <Image url="@../Graphics/sound-off-music-mute-off-sound-speaker-volume-icon-16.png" />
+       </ImageView>
    </children>
 </Pane>

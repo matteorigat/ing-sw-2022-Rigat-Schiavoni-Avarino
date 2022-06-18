@@ -26,5 +26,8 @@
          </font></Label>
       <TextField fx:id="port" layoutX="526.0" layoutY="419.0" />
       <Button layoutX="568.0" layoutY="477.0" mnemonicParsing="false" onAction="#onButtonClick" prefWidth="76.0" text="JOIN" />
+      <ImageView onMouseClicked="#onSoundClick" fitHeight="70.0" fitWidth="65.0" layoutX="1121.0" layoutY="721.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../Graphics/sound-off-music-mute-off-sound-speaker-volume-icon-16.png" />
+      </ImageView>
    </children>
 </Pane>
