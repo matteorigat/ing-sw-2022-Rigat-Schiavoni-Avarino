@@ -24,6 +24,7 @@ public class Model extends Observable<MoveMessage> implements Serializable {
     private GameBoard gameBoard;
 
     private Player winner;
+    private String lastMove;
 
     private int currentPlayer;
     private GamePhase currentPhase;
@@ -261,5 +262,13 @@ public class Model extends Observable<MoveMessage> implements Serializable {
 
     public boolean isExpertMode() {
         return expertMode;
+    }
+
+    public String getLastMove() {
+        return lastMove;
+    }
+
+    public void setLastMove(String nickname, String move) {
+        this.lastMove = nickname + move;
     }
 }

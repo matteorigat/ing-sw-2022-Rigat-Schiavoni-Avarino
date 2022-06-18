@@ -11,33 +11,27 @@
 <?import javafx.scene.text.Font?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.controllers.FirstPlayerController">
-   <children>
-      <ImageView fitHeight="800" fitWidth="1200" layoutX="-1.0" layoutY="-1.0">
-         <image>
-             <Image url="@../Graphics/eriantysBackground.jpg" />
-         </image>
+      <ImageView fitHeight="800" fitWidth="1200">
+         <Image url="@../Graphics/eriantysBackground.jpg" />
       </ImageView>
       <SplitMenuButton contentDisplay="RIGHT" layoutX="520.0" layoutY="322.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="185.0" style="item1: 2; item2: 3;" text="number of players">
         <items>
-          <MenuItem onAction="#onTwo" text="2" mnemonicParsing="false" />
-          <MenuItem onAction="#onThree" text="3" mnemonicParsing="false" />
+          <MenuItem mnemonicParsing="false" onAction="#onTwo" text="2" />
+          <MenuItem mnemonicParsing="false" onAction="#onThree" text="3" />
         </items>
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font>
       </SplitMenuButton>
       <Label layoutX="192.0" layoutY="216.0" />
-       <CheckBox onAction="#onCheck" contentDisplay="RIGHT" layoutX="547.0" layoutY="391.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="121.0" text="Expert Mode" textFill="WHITE">
-           <font>
-               <Font name="Arial Bold" size="15.0" />
-           </font></CheckBox>
+       <CheckBox contentDisplay="RIGHT" layoutX="547.0" layoutY="391.0" mnemonicParsing="false" onAction="#onCheck" prefHeight="32.0" prefWidth="121.0" text="Expert Mode" textFill="WHITE">
+           <font><Font name="Arial Bold" size="15.0" /></font>
+       </CheckBox>
       <Button layoutX="540.0" layoutY="479.0" mnemonicParsing="false" onAction="#onButtonClick" prefHeight="22.0" prefWidth="133.0" text="START GAME">
-         <font>
-            <Font name="Arial Bold" size="15.0" />
-         </font></Button>
+          <font><Font name="Arial Bold" size="15.0" /></font>
+      </Button>
 
-       <ImageView onMouseClicked="#onSoundClick" fitHeight="70.0" fitWidth="65.0" layoutX="1121.0" layoutY="721.0" pickOnBounds="true" preserveRatio="true">
-           <Image url="@../Graphics/sound-off-music-mute-off-sound-speaker-volume-icon-16.png" />
+       <ImageView fitHeight="49.0" fitWidth="48.0" layoutX="1138.0" layoutY="738.0" onMouseClicked="#onSoundClick" pickOnBounds="true" preserveRatio="true">
+           <Image url="@../Graphics/soundoff.png" />
        </ImageView>
-   </children>
 </Pane>

@@ -30,7 +30,6 @@ import java.util.Objects;
 
 public class GameBoardController {
 
-    @FXML public Label islandIndex0, islandIndex1, islandIndex2, islandIndex3, islandIndex4, islandIndex5, islandIndex6, islandIndex7, islandIndex8, islandIndex9, islandIndex10, islandIndex11;
     private ClientAppGUI gui;
     private int studentChoice = -1;
     private Model model;
@@ -38,12 +37,13 @@ public class GameBoardController {
     private Player myPlayer;
 
     int alreadyUsed = 0;
-    @FXML public Label gamephase, currentplayer;
+    @FXML public Label gamephase, currentplayer, currentMove;
 
     @FXML public Pane schoolBoard0, schoolBoard1 ,schoolBoard2, cloud0, cloud1, cloud2, character0, character1, character2;
     @FXML public ImageView characterImg0, characterImg1, characterImg2;
     @FXML public Label characterText0, characterText1, characterText2;
     @FXML public Pane island0, island1, island2, island3, island4, island5, island6, island7, island8, island9, island10, island11;
+    @FXML public Label islandIndex0, islandIndex1, islandIndex2, islandIndex3, islandIndex4, islandIndex5, islandIndex6, islandIndex7, islandIndex8, islandIndex9, islandIndex10, islandIndex11;
     @FXML public ImageView cloudStudent00, cloudStudent01, cloudStudent02, cloudStudent03, cloudStudent10, cloudStudent11, cloudStudent12, cloudStudent13, cloudStudent20, cloudStudent21, cloudStudent22, cloudStudent23;
     @FXML public Label nickname0, nickname1, nickname2, coins0, coins1, coins2;
     @FXML public ImageView lastAssistant0, lastAssistant1, lastAssistant2;
@@ -210,7 +210,7 @@ public class GameBoardController {
     /**
      * update method controls every parameter on the game board and updates them
      */
-    private void update() {
+    private void update(){
         if(model.getPlayers().size() == 2){
             schoolBoard2.setVisible(false);
             cloud2.setVisible(false);
@@ -220,6 +220,7 @@ public class GameBoardController {
 
         gamephase.setText("Game phase: " + model.getCurrentPhase().toString());
         currentplayer.setText("Current player: " + model.getPlayers().get(model.getCurrentPlayer()).getNickname());
+        currentMove.setText(model.getLastMove());
 
         alreadyUsed = 0;
         for (Player p : model.getPlayers()) {
@@ -396,7 +397,32 @@ public class GameBoardController {
                 n++;
             }
         }
+
+        if(model.getCurrentPhase().equals(GamePhase.GameEnded)){
+            try {
+                finalPhase();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
+
+    protected void finalPhase() throws IOException {
+        final Stage dialog = new Stage();
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        dialog.initOwner(gui.getStage());
+        FXMLLoader window;
+        if(nickname.equals(model.getWinner().getNickname()))
+            window = new FXMLLoader(getClass().getResource("/fxml/win.fxml"));
+        else
+            window = new FXMLLoader(getClass().getResource("/fxml/lose.fxml"));
+
+        Scene dialogScene = new Scene(window.load());
+        dialog.setScene(dialogScene);
+        dialog.setTitle("Game Ended");
+        dialog.show();
+    }
+
 
     /**
      * setGui method sets gui
@@ -411,7 +437,7 @@ public class GameBoardController {
      * setModel method sets model
      * @param model
      */
-    public void setModel(Model model) {
+    public void setModel(Model model){
         this.model = model;
         System.out.println("Ricevuto il model");
         update();

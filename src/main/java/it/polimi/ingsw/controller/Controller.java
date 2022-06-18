@@ -39,36 +39,42 @@ public class Controller implements Observer<PlayerMove> {
             return;
         }
 
+        String lastMove = "";
 
         int result = 0;
         switch (move.getParam1()){
             case 0: {
                 result = playAssistantCard(move.getPlayer().getIndex(), move.getParam2());
+                lastMove = " has played assistant card " + move.getParam2();
                 break;
             }
 
             case 1: {
-                if(move.getParam3() == -1)
+                if(move.getParam3() == -1){
                     result = moveStudentToDiningRoom(move.getPlayer().getIndex(), move.getParam2());
-                else
+                    lastMove = " has moved a " + Colour.values()[move.getParam2()].toString().toLowerCase() + " student to diningroom";
+                }else{
                     result = moveStudentToIsland(move.getPlayer().getIndex(), move.getParam2(), move.getParam3());
-
+                    lastMove = " has moved a " + Colour.values()[move.getParam2()].toString().toLowerCase() + " student to island " + (move.getParam3()+1);
+                }
                 break;
             }
 
             case 2: {
                 result = moveMotherNature(move.getPlayer().getIndex(), move.getParam2());
+                lastMove = " has moved mother nature of " + move.getParam2() + " movements";
                 break;
             }
 
             case 3: {
                 result = chooseCloud(move.getPlayer().getIndex(), move.getParam2());
+                lastMove = " has choosed cloud " + move.getParam2();
                 break;
             }
 
-            case 5: { //da valutarne il senso
+            case 5: {
                 String winner = getTheWinner();
-                System.out.println(winner + "WON THE GAME!\n\n");
+                System.out.println(winner + "WON THE GAME!\n\n"); //server side
                 return;
             }
 
@@ -111,15 +117,17 @@ public class Controller implements Observer<PlayerMove> {
                 } else if(move.getParam2() == 12){
                     result = playCharacterCard12(move.getPlayer().getIndex(), move.getParam2(), move.getParam3());
                 }
+                lastMove = " has played character card " + move.getParam2();
                 break;
             }
         }
-        if(result == 1)
-           model.performMove(move.getPlayer());
+        if(result == 1){
+            model.setLastMove(move.getPlayer().getNickname(), lastMove);
+            model.performMove(move.getPlayer());
+        }
         else
             move.getView().reportError(gameMessage.invalidMoveMessage);
     }
-
 
     /**
      * update method updates model by the information got from message
