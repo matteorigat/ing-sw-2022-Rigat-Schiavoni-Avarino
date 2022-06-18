@@ -212,12 +212,6 @@ public class GameBoardController {
      * update method controls every parameter on the game board and updates them
      */
     private void update() {
-        if(nickname.equals(model.getPlayers().get(model.getCurrentPlayer()).getNickname()) && model.getCurrentPhase().equals(GamePhase.PlayAssistantCard)){
-            URL laserResource = getClass().getResource("/Graphics/The Lord of the Rings.wav");
-            AudioClip laserPlayer = new AudioClip(laserResource.toString());
-            laserPlayer.setCycleCount(1000);
-            laserPlayer.play();
-        }
         if(model.getPlayers().size() == 2){
             schoolBoard2.setVisible(false);
             cloud2.setVisible(false);
@@ -402,6 +396,12 @@ public class GameBoardController {
                 }
                 n++;
             }
+        }
+
+        if(nickname.equals(model.getPlayers().get(model.getCurrentPlayer()).getNickname()) && model.getCurrentPhase().equals(GamePhase.PlayAssistantCard)){
+            URL laserResource = getClass().getResource("/Graphics/turn.mp3");
+            AudioClip laserPlayer = new AudioClip(laserResource.toString());
+            laserPlayer.play();
         }
     }
 
