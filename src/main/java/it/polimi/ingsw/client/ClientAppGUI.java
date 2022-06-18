@@ -8,13 +8,12 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
+import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class ClientAppGUI extends Application {
 
@@ -91,6 +90,12 @@ public class ClientAppGUI extends Application {
         stage.setScene(sceneMap.get("MainMenu"));
         stage.show();
         currentFXML = "MainMenu";
+
+
+        URL laserResource = getClass().getResource("/Graphics/The Lord of the Rings.wav");
+        AudioClip laserPlayer = new AudioClip(laserResource.toString());
+        laserPlayer.setCycleCount(1000);
+        laserPlayer.play();
     }
 
     public static void main(String[] args) {

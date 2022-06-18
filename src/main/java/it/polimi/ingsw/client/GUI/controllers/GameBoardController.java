@@ -17,10 +17,12 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.AudioClip;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Objects;
 
 
@@ -210,6 +212,12 @@ public class GameBoardController {
      * update method controls every parameter on the game board and updates them
      */
     private void update() {
+        if(nickname.equals(model.getPlayers().get(model.getCurrentPlayer()).getNickname()) && model.getCurrentPhase().equals(GamePhase.PlayAssistantCard)){
+            URL laserResource = getClass().getResource("/Graphics/The Lord of the Rings.wav");
+            AudioClip laserPlayer = new AudioClip(laserResource.toString());
+            laserPlayer.setCycleCount(1000);
+            laserPlayer.play();
+        }
         if(model.getPlayers().size() == 2){
             schoolBoard2.setVisible(false);
             cloud2.setVisible(false);
