@@ -8,7 +8,6 @@ import it.polimi.ingsw.model.player.Student;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -29,8 +28,6 @@ public class Character11gui implements Character{
     private Stage dialog;
 
     private int selectedStudent = -1;
-
-    @FXML private Label effect;
 
     /**
      * onButtonClick method gets the user input written/declared in the button

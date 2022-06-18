@@ -17,12 +17,10 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.media.AudioClip;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.Objects;
 
 
@@ -32,6 +30,7 @@ import java.util.Objects;
 
 public class GameBoardController {
 
+    @FXML public Label islandIndex0, islandIndex1, islandIndex2, islandIndex3, islandIndex4, islandIndex5, islandIndex6, islandIndex7, islandIndex8, islandIndex9, islandIndex10, islandIndex11;
     private ClientAppGUI gui;
     private int studentChoice = -1;
     private Model model;
@@ -396,12 +395,6 @@ public class GameBoardController {
                 }
                 n++;
             }
-        }
-
-        if(nickname.equals(model.getPlayers().get(model.getCurrentPlayer()).getNickname()) && model.getCurrentPhase().equals(GamePhase.PlayAssistantCard)){
-            URL laserResource = getClass().getResource("/Graphics/turn.mp3");
-            AudioClip laserPlayer = new AudioClip(laserResource.toString());
-            laserPlayer.play();
         }
     }
 
@@ -824,6 +817,7 @@ public class GameBoardController {
             c.setGui(this.gui, dialog);
             c.setModel(model, 0);
             dialog.setScene(dialogScene);
+            dialog.setTitle("Character " + model.getGameBoard().getThreeCharacterCards().get(0).getIndex());
             dialog.show();
         }
 
@@ -847,6 +841,7 @@ public class GameBoardController {
             c.setGui(this.gui, dialog);
             c.setModel(model, 1);
             dialog.setScene(dialogScene);
+            dialog.setTitle("Character " + model.getGameBoard().getThreeCharacterCards().get(1).getIndex());
             dialog.show();
         }
 
@@ -870,6 +865,7 @@ public class GameBoardController {
             c.setGui(this.gui, dialog);
             c.setModel(model, 2);
             dialog.setScene(dialogScene);
+            dialog.setTitle("Character " + model.getGameBoard().getThreeCharacterCards().get(2).getIndex());
             dialog.show();
         }
 
@@ -1498,6 +1494,8 @@ public class GameBoardController {
         if(i.getNoEntry() > 0)
             deny0.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/deny_island_icon.png"))));
         else deny0.setImage(null);
+
+        islandIndex0.setText("Island " + (islandAbsolutePosition(0)+1));
     }
     /**
      *updateisland1 method controls every parameter of the island 1 and updates them
@@ -1578,6 +1576,8 @@ public class GameBoardController {
         if(i.getNoEntry() > 0)
             deny1.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/deny_island_icon.png"))));
         else deny1.setImage(null);
+
+        islandIndex1.setText("Island " + (islandAbsolutePosition(1)+1));
 
     }
 
@@ -1660,6 +1660,8 @@ public class GameBoardController {
         if(i.getNoEntry() > 0)
             deny2.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/deny_island_icon.png"))));
         else deny2.setImage(null);
+
+        islandIndex2.setText("Island " + (islandAbsolutePosition(2)+1));
     }
 
     /**
@@ -1741,6 +1743,8 @@ public class GameBoardController {
         if(i.getNoEntry() > 0)
             deny3.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/deny_island_icon.png"))));
         else deny3.setImage(null);
+
+        islandIndex3.setText("Island " + (islandAbsolutePosition(3)+1));
     }
 
     /**
@@ -1822,6 +1826,8 @@ public class GameBoardController {
         if(i.getNoEntry() > 0)
             deny4.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/deny_island_icon.png"))));
         else deny4.setImage(null);
+
+        islandIndex4.setText("Island " + (islandAbsolutePosition(4)+1));
     }
 
     /**
@@ -1903,6 +1909,8 @@ public class GameBoardController {
         if(i.getNoEntry() > 0)
             deny5.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/deny_island_icon.png"))));
         else deny5.setImage(null);
+
+        islandIndex5.setText("Island " + (islandAbsolutePosition(5)+1));
     }
 
     /**
@@ -1984,6 +1992,8 @@ public class GameBoardController {
         if(i.getNoEntry() > 0)
             deny6.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/deny_island_icon.png"))));
         else deny6.setImage(null);
+
+        islandIndex6.setText("Island " + (islandAbsolutePosition(6)+1));
     }
 
     /**
@@ -2065,6 +2075,8 @@ public class GameBoardController {
         if(i.getNoEntry() > 0)
             deny7.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/deny_island_icon.png"))));
         else deny7.setImage(null);
+
+        islandIndex7.setText("Island " + (islandAbsolutePosition(7)+1));
     }
 
     /**
@@ -2146,6 +2158,8 @@ public class GameBoardController {
         if(i.getNoEntry() > 0)
             deny8.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/deny_island_icon.png"))));
         else deny8.setImage(null);
+
+        islandIndex8.setText("Island " + (islandAbsolutePosition(8)+1));
     }
 
     /**
@@ -2227,6 +2241,8 @@ public class GameBoardController {
         if(i.getNoEntry() > 0)
             deny9.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/deny_island_icon.png"))));
         else deny9.setImage(null);
+
+        islandIndex9.setText("Island " + (islandAbsolutePosition(9)+1));
     }
 
     /**
@@ -2308,6 +2324,8 @@ public class GameBoardController {
         if(i.getNoEntry() > 0)
             deny10.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/deny_island_icon.png"))));
         else deny10.setImage(null);
+
+        islandIndex10.setText("Island " + (islandAbsolutePosition(10)+1));
     }
 
 
@@ -2390,6 +2408,8 @@ public class GameBoardController {
         if(i.getNoEntry() > 0)
             deny11.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/deny_island_icon.png"))));
         else deny11.setImage(null);
+
+        islandIndex11.setText("Island " + (islandAbsolutePosition(11)+1));
     }
 
 

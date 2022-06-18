@@ -9,12 +9,17 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="255.0" prefWidth="521.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.controllers.characters.Character10gui">
 
-    <Label fx:id="effect" layoutX="10.0" layoutY="10.0" text="Scambia tra loro fino a due studenti della sala e dell'ingresso" textFill="BLACK">
+    <Label layoutX="10.0" layoutY="10.0" text="Scambia tra loro fino a due studenti della sala e dell'ingresso" textFill="BLACK">
         <font><Font name="Arial Bold" size="15.0" /></font>
     </Label>
     <Button layoutX="223.0" layoutY="222.0" mnemonicParsing="false" onAction="#onButtonClick" prefWidth="76.0" text="PLAY" />
 
 
+
+
+    <Label layoutX="10.0" layoutY="40.0" text="diningroom students" textFill="BLACK">
+        <font><Font name="Arial Bold" size="13.0" /></font>
+    </Label>
     <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="50.0" layoutY="70.0"  pickOnBounds="true" preserveRatio="true">
       <Image url="@../../Graphics/student_green.png" /></ImageView>
     <Label fx:id="selected0" alignment="CENTER" layoutX="56.0" layoutY="100.0" prefWidth="15.0" textAlignment="CENTER" />
@@ -52,6 +57,13 @@
 
 
 
+
+
+
+
+    <Label layoutX="10.0" layoutY="120.0" text="entrance students" textFill="BLACK">
+        <font><Font name="Arial Bold" size="13.0" /></font>
+    </Label>
     <ImageView fx:id="entrance0" fitHeight="30.0" fitWidth="30.0" layoutX="50.0" layoutY="150.0" onMouseClicked="#chooseEntrance0" pickOnBounds="true" preserveRatio="true" />
     <Label fx:id="entranceselected0" layoutX="62.0" layoutY="180.0" />
     <ImageView fx:id="entrance1" fitHeight="30.0" fitWidth="30.0" layoutX="100.0" layoutY="150.0" onMouseClicked="#chooseEntrance1" pickOnBounds="true" preserveRatio="true" />
@@ -70,14 +82,6 @@
     <Label fx:id="entranceselected7" layoutX="412.0" layoutY="180.0" />
     <ImageView fx:id="entrance8" fitHeight="30.0" fitWidth="30.0" layoutX="450.0" layoutY="150.0" onMouseClicked="#chooseEntrance8" pickOnBounds="true" preserveRatio="true" />
     <Label fx:id="entranceselected8" layoutX="462.0" layoutY="180.0" />
-    <Label layoutX="10.0" layoutY="40.0" text="diningroom students" textFill="BLACK">
-        <font>
-            <Font name="Arial Bold" size="13.0" />
-        </font>
-    </Label>
-    <Label layoutX="10.0" layoutY="120.0" text="entrance students" textFill="BLACK">
-        <font>
-            <Font name="Arial Bold" size="13.0" />
-        </font>
-    </Label>
+
+
 </Pane>

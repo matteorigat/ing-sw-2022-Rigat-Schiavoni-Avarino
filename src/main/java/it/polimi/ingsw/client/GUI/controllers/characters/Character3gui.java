@@ -10,14 +10,12 @@ import javafx.stage.Stage;
 
 public class Character3gui implements Character{
 
-    public TextField islandIndex;
     private ClientAppGUI gui;
     private Model model;
     private Stage dialog;
 
-    private int selectedStudent = -1;
-
-    @FXML private Label effect;
+    @FXML public TextField islandIndex;
+    @FXML public Label islandsSize;
 
     /**
      * onButtonClick method gets the user input written/declared in the button
@@ -52,6 +50,7 @@ public class Character3gui implements Character{
     @Override
     public void setModel(Model model, int cardPosition){
         this.model = model;
+        islandsSize.setText("Insert the island index from 1 to " + model.getGameBoard().getIslands().size());
     }
 
 

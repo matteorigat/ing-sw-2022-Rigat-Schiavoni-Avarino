@@ -34,7 +34,6 @@ public class Character7gui implements Character{
 
     private int selectedStudent = -1;
 
-    @FXML private Label effect;
 
     /**
      * onButtonClick method gets the user input written/declared in the button

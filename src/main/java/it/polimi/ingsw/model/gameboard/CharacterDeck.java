@@ -4,7 +4,6 @@ import it.polimi.ingsw.model.gameboard.characters.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * CharacterDeck Class is where every character card instance is created.
@@ -20,18 +19,18 @@ public class CharacterDeck implements Serializable {
     public CharacterDeck() {
         characterCards = new ArrayList<>();
 
-        //characterCards.add(new Character1());
-        //characterCards.add(new Character2());
-        //characterCards.add(new Character3());
+        characterCards.add(new Character1());
+        characterCards.add(new Character2());
+        characterCards.add(new Character3());
         characterCards.add(new Character4());
         characterCards.add(new Character5());
         characterCards.add(new Character6());
-        //characterCards.add(new Character7());
-        //characterCards.add(new Character8());
-        //characterCards.add(new Character9());
-        //characterCards.add(new Character10());
-        //characterCards.add(new Character11());
-        //characterCards.add(new Character12());
+        characterCards.add(new Character7());
+        characterCards.add(new Character8());
+        characterCards.add(new Character9());
+        characterCards.add(new Character10());
+        characterCards.add(new Character11());
+        characterCards.add(new Character12());
 
     }
 
@@ -42,11 +41,11 @@ public class CharacterDeck implements Serializable {
     public ArrayList<CharacterCard> getThreeRandomCards(){
         ArrayList<CharacterCard> threeCards = new ArrayList<>();
 
-        Collections.shuffle(this.characterCards);
-
         for (int i=0; i<3; i++){
-            threeCards.add(characterCards.get(0));
-            characterCards.remove(0);
+            double casual = Math.random()*(characterCards.size()-i);
+            int num = (int) casual;
+            threeCards.add(characterCards.get(num));
+            characterCards.remove(num);
         }
 
         return threeCards;

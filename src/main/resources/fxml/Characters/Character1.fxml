@@ -7,12 +7,12 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="243.0" prefWidth="400" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.controllers.characters.Character1gui">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.controllers.characters.Character1gui">
 
-      <Label fx:id="effect" layoutX="10.0" layoutY="10.0" text="Prendi 1 studente e piazzalo su un'isola" textFill="BLACK">
+      <Label layoutX="10.0" layoutY="10.0" text="Prendi 1 studente e piazzalo su un'isola" textFill="BLACK">
          <font><Font name="Arial Bold" size="15.0" /></font>
       </Label>
-      <Button layoutX="310.0" layoutY="203.0" mnemonicParsing="false" onAction="#onButtonClick" prefWidth="76.0" text="PLAY" />
+      <Button layoutX="112.0" layoutY="207.0" mnemonicParsing="false" onAction="#onButtonClick" prefWidth="76.0" text="PLAY" />
    <ImageView fx:id="student0" fitHeight="30.0" fitWidth="30.0" layoutX="50.0" layoutY="50.0" onMouseClicked="#chooseStudent0" pickOnBounds="true" preserveRatio="true" />
     <Label fx:id="selected0" layoutX="62.0" layoutY="80.0" />
    <ImageView fx:id="student1" fitHeight="30.0" fitWidth="30.0" layoutX="100.0" layoutY="50.0" onMouseClicked="#chooseStudent1" pickOnBounds="true" preserveRatio="true" />
@@ -23,10 +23,8 @@
     <Label fx:id="selected3" layoutX="212.0" layoutY="80.0" />
 
 
-    <Label layoutX="20.0" layoutY="125.0" text="Insert the island index from 1 to 12">
-        <font>
-            <Font name="Arial Bold" size="15.0" />
-        </font>
+    <Label fx:id="islandsSize" layoutX="10.0" layoutY="125.0">
+        <font><Font name="Arial Bold" size="15.0" /></font>
     </Label>
-    <TextField fx:id="islandIndex" layoutX="20.0" layoutY="145.0" />
+    <TextField fx:id="islandIndex" layoutX="10.0" layoutY="145.0" />
 </Pane>

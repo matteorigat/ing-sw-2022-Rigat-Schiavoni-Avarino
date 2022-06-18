@@ -9,10 +9,10 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="185.0" prefWidth="400" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.controllers.characters.Character12gui">
 
-    <Label fx:id="effect" layoutX="10.0" layoutY="10.0" text="Scegli un colore, tutti i giocatori devono mettere 3" textFill="BLACK">
+    <Label layoutX="10.0" layoutY="10.0" text="Scegli un colore, tutti i giocatori devono mettere 3" textFill="BLACK">
         <font><Font name="Arial Bold" size="15.0" /></font>
     </Label>
-    <Label fx:id="effect1" layoutX="10.0" layoutY="30.0" text="studenti di quel colore dalla sala al sacchetto" textFill="BLACK">
+    <Label layoutX="10.0" layoutY="30.0" text="studenti di quel colore dalla sala al sacchetto" textFill="BLACK">
         <font><Font name="Arial Bold" size="15.0" /></font>
     </Label>
     <Button layoutX="153.0" layoutY="152.0" mnemonicParsing="false" onAction="#onButtonClick" prefWidth="76.0" text="PLAY" />

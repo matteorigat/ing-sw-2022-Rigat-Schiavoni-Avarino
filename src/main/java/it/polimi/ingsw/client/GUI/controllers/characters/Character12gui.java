@@ -20,8 +20,6 @@ public class Character12gui implements Character{
     private Stage dialog;
 
 
-    @FXML private Label effect;
-
     /**
      * onButtonClick method gets the user input written/declared in the button
      */

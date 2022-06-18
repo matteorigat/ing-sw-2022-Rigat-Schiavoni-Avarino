@@ -182,7 +182,7 @@ public class Controller implements Observer<PlayerMove> {
      * nature and students on the board.
      * */
     public void init(){
-        double casual = Math.random()*12; //(PUNTO 2)
+        double casual = Math.random()*12;
         int mn = (int) casual;
         model.setModelParameters(Parameters.numPlayers, Parameters.expertMode);
 
@@ -517,13 +517,14 @@ public class Controller implements Observer<PlayerMove> {
 
             if(oldPlayer == null || !oldPlayer.equals(newPlayer)){
 
-                for(int i=0; i<=model.getGameBoard().getIslands().get(islandIndex).getNumTower(); i++){
-                    if(oldPlayer != null)
-                        oldPlayer.getPlayerSchoolBoard().addTower(oldPlayer.PlayerTowerColor());
-                    newPlayer.getPlayerSchoolBoard().getTowers().remove(0);
-                }
                 if(oldPlayer == null){
                     this.getGameBoard().getIslands().get(islandIndex).setNumTower(1);
+                    newPlayer.getPlayerSchoolBoard().getTowers().remove(0);
+                } else {
+                    for(int i=0; i<model.getGameBoard().getIslands().get(islandIndex).getNumTower(); i++){
+                        oldPlayer.getPlayerSchoolBoard().addTower(oldPlayer.PlayerTowerColor());
+                        newPlayer.getPlayerSchoolBoard().getTowers().remove(0);
+                    }
                 }
 
                 this.getGameBoard().getIslands().get(islandIndex).changeTowerColor(newPlayer.PlayerTowerColor());

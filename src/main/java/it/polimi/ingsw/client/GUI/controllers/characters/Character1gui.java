@@ -20,9 +20,10 @@ public class Character1gui implements Character{
 
     @FXML public ImageView student0, student1, student2, student3;
     @FXML public TextField islandIndex;
+    @FXML public Label islandsSize;
     @FXML public Label selected0, selected1, selected2, selected3;
 
-    int previusSelected = -1;
+    private int previusSelected = -1;
 
     private ClientAppGUI gui;
     private ArrayList<Student> students;
@@ -31,7 +32,6 @@ public class Character1gui implements Character{
 
     private int selectedStudent = -1;
 
-    @FXML private Label effect;
 
     /**
      * onButtonClick method gets the user input written/declared in the button
@@ -82,6 +82,8 @@ public class Character1gui implements Character{
                 student3.setImage(getStudentImage(students.get(3).getColour()));
             }
         }
+
+        islandsSize.setText("Insert the island index from 1 to " + model.getGameBoard().getIslands().size());
 
     }
 

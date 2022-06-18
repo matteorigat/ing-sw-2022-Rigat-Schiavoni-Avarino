@@ -70,9 +70,6 @@ public class Island implements Serializable {
 
     public Player Influence (ArrayList<Player> players, boolean card6noTowerFlag, int card8twoMorePointsPlayer, int card9color){
 
-
-
-
         int[] somma = new int[Parameters.numPlayers];
         for(Player pl: players) {
 

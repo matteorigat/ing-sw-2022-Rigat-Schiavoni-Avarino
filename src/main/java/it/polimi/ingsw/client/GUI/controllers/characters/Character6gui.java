@@ -4,24 +4,17 @@ import it.polimi.ingsw.client.ClientAppGUI;
 import it.polimi.ingsw.model.Model;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class Character6gui implements Character{
     private ClientAppGUI gui;
     private Stage dialog;
-    private Model model;
-    private int cardPosition;
-
-    @FXML
-    private Label effect;
 
     /**
      * onButtonClick method gets the user input written/declared in the button
      */
     @FXML
     protected void onButtonClick() {
-        //effect.setText("hai giocato questa carta!");
         Platform.runLater(()-> gui.getClientGUI().asyncWriteToSocket("100,6"));
         dialog.close();
     }

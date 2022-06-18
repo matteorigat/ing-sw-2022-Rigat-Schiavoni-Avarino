@@ -12,10 +12,10 @@
                <Image url="@../Graphics/animesky.png" />
           </ImageView>
 
-    <Label fx:id="gamephase" layoutX="20.0" layoutY="20.0" text="Game phase:" textFill="WHITE">
+    <Label fx:id="gamephase" layoutX="20.0" layoutY="20.0" text="Game phase:">
         <font><Font name="Arial Bold" size="24.0" /></font>
     </Label>
-    <Label fx:id="currentplayer" layoutX="20.0" layoutY="50.0" text="Current player:" textFill="WHITE">
+    <Label fx:id="currentplayer" layoutX="20.0" layoutY="50.0" text="Current player:">
         <font><Font name="Arial Bold" size="24.0" /></font>
     </Label>
 
@@ -65,10 +65,13 @@
             <Label fx:id="blueText0" alignment="CENTER" layoutX="84.0" layoutY="91.0" prefHeight="20.0" prefWidth="20.0" textFill="BLACK">
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
-         <ImageView fx:id="deny0" fitHeight="72.0" fitWidth="65.0" layoutX="42.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="deny0" fitHeight="72.0" fitWidth="65.0" layoutX="42.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="islandIndex0" alignment="CENTER" layoutY="126.0" prefHeight="20.0" prefWidth="150.0" textFill="BLACK">
+                <font><Font name="Arial Bold" size="15.0" /></font>
+            </Label>
         </Pane>
 <!-- ISLAND 1 -->
-        <Pane fx:id="island1" layoutX="320.0" layoutY="1.0" onMouseClicked="#chooseIsland1" prefHeight="150.0" prefWidth="150.0">
+        <Pane fx:id="island1" layoutX="320.0" layoutY="-6.0" onMouseClicked="#chooseIsland1" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island2.png" />
             </ImageView>
@@ -109,7 +112,10 @@
             <Label fx:id="blueText1" alignment="CENTER" layoutX="84.0" layoutY="91.0" prefHeight="20.0" prefWidth="20.0" textFill="BLACK">
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
-         <ImageView fx:id="deny1" fitHeight="72.0" fitWidth="65.0" layoutX="42.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="deny1" fitHeight="72.0" fitWidth="65.0" layoutX="42.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="islandIndex1" alignment="CENTER" layoutY="126.0" prefHeight="20.0" prefWidth="150.0" textFill="BLACK">
+                <font><Font name="Arial Bold" size="15.0" /></font>
+            </Label>
         </Pane>
 <!-- ISLAND 2 -->
         <Pane fx:id="island2" layoutX="509.0" layoutY="-6.0" onMouseClicked="#chooseIsland2" prefHeight="150.0" prefWidth="150.0">
@@ -153,7 +159,10 @@
             <Label fx:id="blueText2" alignment="CENTER" layoutX="84.0" layoutY="91.0" prefHeight="20.0" prefWidth="20.0" textFill="BLACK">
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
-         <ImageView fx:id="deny2" fitHeight="72.0" fitWidth="65.0" layoutX="42.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="deny2" fitHeight="72.0" fitWidth="65.0" layoutX="42.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="islandIndex2" alignment="CENTER" layoutY="126.0" prefHeight="20.0" prefWidth="150.0" textFill="BLACK">
+                <font><Font name="Arial Bold" size="15.0" /></font>
+            </Label>
         </Pane>
 <!-- ISLAND 3 -->
         <Pane fx:id="island3" layoutX="696.0" layoutY="43.0" onMouseClicked="#chooseIsland3" prefHeight="150.0" prefWidth="150.0">
@@ -198,6 +207,9 @@
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
             <ImageView fx:id="deny3" fitHeight="72.0" fitWidth="65.0" layoutX="42.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="islandIndex3" alignment="CENTER" layoutY="126.0" prefHeight="20.0" prefWidth="150.0" textFill="BLACK">
+                <font><Font name="Arial Bold" size="15.0" /></font>
+            </Label>
         </Pane>
 <!-- ISLAND 4 -->
         <Pane fx:id="island4" layoutX="770.0" layoutY="182.0" onMouseClicked="#chooseIsland4" prefHeight="150.0" prefWidth="150.0">
@@ -242,6 +254,9 @@
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
             <ImageView fx:id="deny4" fitHeight="72.0" fitWidth="65.0" layoutX="42.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="islandIndex4" alignment="CENTER" layoutY="126.0" prefHeight="20.0" prefWidth="150.0" textFill="BLACK">
+                <font><Font name="Arial Bold" size="15.0" /></font>
+            </Label>
         </Pane>
 <!-- ISLAND 5 -->
         <Pane fx:id="island5" layoutX="797.0" layoutY="356.0" onMouseClicked="#chooseIsland5" prefHeight="150.0" prefWidth="150.0">
@@ -286,6 +301,9 @@
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
             <ImageView fx:id="deny5" fitHeight="72.0" fitWidth="65.0" layoutX="42.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="islandIndex5" alignment="CENTER" layoutY="126.0" prefHeight="20.0" prefWidth="150.0" textFill="BLACK">
+                <font><Font name="Arial Bold" size="15.0" /></font>
+            </Label>
         </Pane>
 <!-- ISLAND 6 -->
         <Pane fx:id="island6" layoutX="694.0" layoutY="472.0" onMouseClicked="#chooseIsland6" prefHeight="150.0" prefWidth="150.0">
@@ -330,9 +348,12 @@
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
             <ImageView fx:id="deny6" fitHeight="72.0" fitWidth="65.0" layoutX="42.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="islandIndex6" alignment="CENTER" layoutY="126.0" prefHeight="20.0" prefWidth="150.0" textFill="BLACK">
+                <font><Font name="Arial Bold" size="15.0" /></font>
+            </Label>
         </Pane>
 <!-- ISLAND 7 -->
-        <Pane fx:id="island7" layoutX="506.0" layoutY="524.0" onMouseClicked="#chooseIsland7" prefHeight="150.0" prefWidth="150.0">
+        <Pane fx:id="island7" layoutX="506.0" layoutY="513.0" onMouseClicked="#chooseIsland7" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island2.png" />
             </ImageView>
@@ -374,6 +395,9 @@
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
             <ImageView fx:id="deny7" fitHeight="72.0" fitWidth="65.0" layoutX="42.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="islandIndex7" alignment="CENTER" layoutY="126.0" prefHeight="20.0" prefWidth="150.0" textFill="BLACK">
+                <font><Font name="Arial Bold" size="15.0" /></font>
+            </Label>
         </Pane>
 <!-- ISLAND 8 -->
         <Pane fx:id="island8" layoutX="322.0" layoutY="513.0" onMouseClicked="#chooseIsland8" prefHeight="150.0" prefWidth="150.0">
@@ -418,9 +442,12 @@
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
             <ImageView fx:id="deny8" fitHeight="72.0" fitWidth="65.0" layoutX="42.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="islandIndex8" alignment="CENTER" layoutY="126.0" prefHeight="20.0" prefWidth="150.0" textFill="BLACK">
+                <font><Font name="Arial Bold" size="15.0" /></font>
+            </Label>
         </Pane>
 <!-- ISLAND 9 -->
-        <Pane fx:id="island9" layoutX="146.0" layoutY="497.0" onMouseClicked="#chooseIsland9" prefHeight="150.0" prefWidth="150.0">
+        <Pane fx:id="island9" layoutX="146.0" layoutY="472.0" onMouseClicked="#chooseIsland9" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island1.png" />
             </ImageView>
@@ -462,9 +489,12 @@
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
             <ImageView fx:id="deny9" fitHeight="72.0" fitWidth="65.0" layoutX="42.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="islandIndex9" alignment="CENTER" layoutY="126.0" prefHeight="20.0" prefWidth="150.0" textFill="BLACK">
+                <font><Font name="Arial Bold" size="15.0" /></font>
+            </Label>
         </Pane>
 <!-- ISLAND 10 -->
-        <Pane fx:id="island10" layoutX="32.0" layoutY="369.0" onMouseClicked="#chooseIsland10" prefHeight="150.0" prefWidth="150.0">
+        <Pane fx:id="island10" layoutX="32.0" layoutY="356.0" onMouseClicked="#chooseIsland10" prefHeight="150.0" prefWidth="150.0">
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../Graphics/island2.png" />
             </ImageView>
@@ -506,6 +536,9 @@
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
             <ImageView fx:id="deny10" fitHeight="72.0" fitWidth="65.0" layoutX="42.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="islandIndex10" alignment="CENTER" layoutY="126.0" prefHeight="20.0" prefWidth="150.0" textFill="BLACK">
+                <font><Font name="Arial Bold" size="15.0" /></font>
+            </Label>
         </Pane>
 <!-- ISLAND 11 -->
         <Pane fx:id="island11" layoutX="21.0" layoutY="198.0" onMouseClicked="#chooseIsland11" prefHeight="150.0" prefWidth="150.0">
@@ -550,6 +583,9 @@
                 <font><Font name="Arial Bold" size="15.0" /></font>
             </Label>
             <ImageView fx:id="deny11" fitHeight="72.0" fitWidth="65.0" layoutX="42.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="islandIndex11" alignment="CENTER" layoutY="126.0" prefHeight="20.0" prefWidth="150.0" textFill="BLACK">
+                <font><Font name="Arial Bold" size="15.0" /></font>
+            </Label>
         </Pane>
 
 
@@ -846,10 +882,10 @@
             <ImageView fx:id="tower06" fitHeight="25.0" fitWidth="25.0" layoutX="20.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="tower07" fitHeight="25.0" fitWidth="25.0" layoutX="50.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" />
         </Pane>
-      <Label fx:id="nickname0" layoutY="-27.0" text="You: " textFill="WHITE">
+      <Label fx:id="nickname0" layoutY="-27.0" text="You: ">
          <font><Font name="Arial Bold" size="18.0" /></font>
       </Label>
-      <Label fx:id="coins0" layoutX="475.0" layoutY="-20.0" text="Coins:" textFill="WHITE">
+      <Label fx:id="coins0" layoutX="475.0" layoutY="-20.0" text="Coins:">
          <font><Font name="Arial Bold" size="13.0" /></font>
       </Label>
     </Pane>
@@ -1366,22 +1402,22 @@
 
 
 
-   <Label fx:id="nickname1" layoutX="15.0" layoutY="725.0" text="Player: " textFill="WHITE">
+   <Label fx:id="nickname1" layoutX="15.0" layoutY="725.0" text="Player: ">
       <font><Font name="Arial Bold" size="18.0" /></font>
    </Label>
-   <Label fx:id="coins1" layoutX="15.0" layoutY="745.0" text="Coins:" textFill="WHITE">
+   <Label fx:id="coins1" layoutX="15.0" layoutY="745.0" text="Coins:">
       <font><Font name="Arial Bold" size="13.0" /></font>
    </Label>
-   <Label fx:id="nickname2" layoutX="1210.0" layoutY="725.0" text="Player: " textFill="WHITE">
+   <Label fx:id="nickname2" layoutX="1210.0" layoutY="725.0" text="Player: ">
        <font><Font name="Arial Bold" size="18.0" /></font>
    </Label>
-   <Label fx:id="coins2" layoutX="1210.0" layoutY="745.0" text="Coins:" textFill="WHITE">
+   <Label fx:id="coins2" layoutX="1210.0" layoutY="745.0" text="Coins:">
        <font><Font name="Arial Bold" size="13.0" /></font>
    </Label>
 
    
-       <ImageView fitHeight="70.0" fitWidth="65.0" layoutX="1362.0" layoutY="1.0" onMouseClicked="#onSoundClick" pickOnBounds="true" preserveRatio="true">
-        <Image url="@../Graphics/sound-off-music-mute-off-sound-speaker-volume-icon-16.png" />
+       <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="1392.0" layoutY="8.0" onMouseClicked="#onSoundClick" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../Graphics/soundoff.png" />
     </ImageView>
 
 </Pane>
