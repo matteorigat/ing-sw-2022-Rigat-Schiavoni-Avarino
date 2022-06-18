@@ -415,15 +415,28 @@ public class Controller implements Observer<PlayerMove> {
             }
         }
 
-        if(rank.size() == 1){
-            if(oldProfessorOwner == null){
-                rank.get(0).getPlayerSchoolBoard().addProfessor(Colour.values()[colorIndex]);
-            } else if(!oldProfessorOwner.equals(rank.get(0))){
+        if(Parameters.expertMode) {
+            for (CharacterCard c : model.getGameBoard().getThreeCharacterCards())
+                if (c.getIndex() == 2 && ((Character2) c).isEffectFlag()) {
+                    if (rank.size() > 1) {
+                        for (Player p : rank)
+                            if (p.getIndex() == getCurrentPlayer()) {
+                                oldProfessorOwner.getPlayerSchoolBoard().removeProfessor(Colour.values()[colorIndex]);
+                                p.getPlayerSchoolBoard().addProfessor(Colour.values()[colorIndex]);
+                            }
+                    }
+                }
+        } else {
+            if(rank.size() == 1){
+                if(oldProfessorOwner == null){
+                    rank.get(0).getPlayerSchoolBoard().addProfessor(Colour.values()[colorIndex]);
+                } else if(!oldProfessorOwner.equals(rank.get(0))){
+                    oldProfessorOwner.getPlayerSchoolBoard().removeProfessor(Colour.values()[colorIndex]);
+                    rank.get(0).getPlayerSchoolBoard().addProfessor(Colour.values()[colorIndex]);
+                }
+            } else if(max == 0 && oldProfessorOwner != null)
                 oldProfessorOwner.getPlayerSchoolBoard().removeProfessor(Colour.values()[colorIndex]);
-                rank.get(0).getPlayerSchoolBoard().addProfessor(Colour.values()[colorIndex]);
-            }
-        } else if(max == 0 && oldProfessorOwner != null)
-            oldProfessorOwner.getPlayerSchoolBoard().removeProfessor(Colour.values()[colorIndex]);
+        }
     }
 
     /**
@@ -786,7 +799,7 @@ public class Controller implements Observer<PlayerMove> {
 
                     ((Character2) c).enableEffect();
                     for(int i=0; i<5; i++)
-                        checkProfessorPropertyCard2(i);
+                        checkProfessorProperty(i);
                     return 1;
                 }
             }
@@ -794,47 +807,7 @@ public class Controller implements Observer<PlayerMove> {
         return -1;
     }
 
-    /**
-     *checkProfessorPropertyCard2 method is used to controls who is the owner of the professors and to set
-     *  the Card 2 player up to control them (the professors) for this turn
-     * @param colorIndex
-     */
 
-    private void checkProfessorPropertyCard2(int colorIndex){
-        Player oldProfessorOwner = null;
-        for (Player p : model.getPlayers())
-            for (Professor pr : p.getPlayerSchoolBoard().getProfessors())
-                if (pr.getProfessorColour().equals(Colour.values()[colorIndex])){
-                    oldProfessorOwner = p;
-                    break;
-                }
-
-        ArrayList<Player> rank = new ArrayList<>();
-        int max = 0;
-        for (Player p : model.getPlayers()){
-            if(max < p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colorIndex])){
-                max = p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colorIndex]);
-                rank.clear();
-                rank.add(p);
-            }else if (max == p.getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colorIndex]) && max != 0){  //qui ho parità
-                rank.add(p);
-            }
-        }
-
-        if(rank.size() == 1){
-            if(oldProfessorOwner == null){
-                rank.get(0).getPlayerSchoolBoard().addProfessor(Colour.values()[colorIndex]);
-            } else if(!oldProfessorOwner.equals(rank.get(0))){
-
-            }
-        } else {
-            for(Player p: rank)
-                if(p.getIndex() == getCurrentPlayer()){
-                    oldProfessorOwner.getPlayerSchoolBoard().removeProfessor(Colour.values()[colorIndex]);
-                    rank.get(0).getPlayerSchoolBoard().addProfessor(Colour.values()[colorIndex]);
-                }
-        }
-    }
     /** Character card 3 effect : Choose an island and resolve the island as if Mother Nature had ended her movement there.
      * Mother nature  will still move and the island where she ends her movement will also be resolved*/
     public int playCharacterCard3(int playerIndex, int cardIndex, int islandIndex){
