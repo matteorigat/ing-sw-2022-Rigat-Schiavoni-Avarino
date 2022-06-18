@@ -109,9 +109,9 @@ public class Model extends Observable<MoveMessage> implements Serializable {
 
         for(Island i : gameBoard.getIslands()){
             if(gameBoard.getIslands().indexOf(i) == gameBoard.getMotherNature() && gameBoard.getIslands().indexOf(i) < 10){
-                System.out.print("Island: " + gameBoard.getIslands().indexOf(i) + "\033[5;31m   M \033[0m |\t");
+                System.out.print("Island: " + gameBoard.getIslands().indexOf(i) + "\033[5;31m     M\033[0m    |\t");
             } else if(gameBoard.getIslands().indexOf(i) == gameBoard.getMotherNature()){
-                System.out.print("Island: " + gameBoard.getIslands().indexOf(i) + "\033[5;31m  M\033[0m  |\t");
+                System.out.print("Island: " + gameBoard.getIslands().indexOf(i) + "\033[5;31m    M\033[0m    |\t");
             } else if(i.getNoEntry() != 0){
                 System.out.print("Island: " + gameBoard.getIslands().indexOf(i) + "\033[5;31m   " + i.getNoEntry() + " \033[0m |\t");
             }else
@@ -135,11 +135,11 @@ public class Model extends Observable<MoveMessage> implements Serializable {
             }
             System.out.print("\nDINING ROOM: ");
             DiningRoom dr = sb.getDiningRoom();
-            System.out.print("\033[38;2;31;224;44mGreen\033[0m: " + dr.numOfStudentByColor(Colour.Green) + " | ");
+            System.out.print("\033[32mGreen\033[0m: " + dr.numOfStudentByColor(Colour.Green) + " | ");
             System.out.print("\033[31mRed\033[0m: " + dr.numOfStudentByColor(Colour.Red) + " | ");
             System.out.print("\033[93mYellow\033[0m: " + dr.numOfStudentByColor(Colour.Yellow) + " | ");
-            System.out.print("\033[38;2;249;177;250mPink\033[0m: " + dr.numOfStudentByColor(Colour.Pink) + " | ");
-            System.out.println("\033[38;2;85;99;250mBlue\033[0m: " + dr.numOfStudentByColor(Colour.Blue));
+            System.out.print("\033[95mPink\033[0m: " + dr.numOfStudentByColor(Colour.Pink) + " | ");
+            System.out.println("\033[34mBlue\033[0m: " + dr.numOfStudentByColor(Colour.Blue));
             System.out.print("PROFESSORS: ");
             for(Professor pr: sb.getProfessors()){
                 System.out.print(textColor(pr.getProfessorColour()) + " ");
@@ -182,14 +182,14 @@ public class Model extends Observable<MoveMessage> implements Serializable {
 
         if(expertMode){
             System.out.println("\nPHASE: " + currentPhase + "... or write 'c' to play a character card");
-
+            boolean characterbool = false;
         } else {
             System.out.println("\nPHASE: " + currentPhase);
         }
         System.out.println("CURRENT PLAYER: " + currentPlayer + " -> " + players.get(currentPlayer).getNickname());
         System.out.println("");
         System.out.println("Students in the bag: " + gameBoard.getBag().getSize());
-
+        //System.out.println("Mn on: " + gameBoard.getMotherNature());
     }
 
     /** colours settings */
@@ -197,7 +197,6 @@ public class Model extends Observable<MoveMessage> implements Serializable {
         int colorInt = colour.ordinal();
 
         String operSys = System.getProperty("os.name").toLowerCase();
-
         if (operSys.contains("mac os x")) {
             switch(colorInt) {
                 case (0) : return "🟢"; //""\033[38;2;31;224;44mGreen\033[0m";
@@ -208,11 +207,11 @@ public class Model extends Observable<MoveMessage> implements Serializable {
             }
         } else {
             switch(colorInt) {
-                case (0) : return "\033[38;2;31;224;44m●\033[0m";
+                case (0) : return "\033[32m●\033[0m";
                 case (1) : return "\033[31m●\033[0m";
                 case (2) : return "\033[93m●\033[0m";
-                case (3) : return "\033[38;2;249;177;250m●\033[0m";
-                case (4) : return "\033[38;2;85;99;250m●\033[0m";
+                case (3) : return "\033[95m●\033[0m";
+                case (4) : return "\033[34m●\033[0m";
             }
         }
 
@@ -242,11 +241,11 @@ public class Model extends Observable<MoveMessage> implements Serializable {
         } else {
             for(int i = 0; i<n; i++)
                 if(colour.equals(TowerColour.White)){
-                    s = s + "\033[38;2;255;255;255m🀫\033[0m ";
+                    s = s + "\033[97m🀫\033[0m ";
                 } else if(colour.equals(TowerColour.Black)){
-                    s = s + "\033[38;2;0;0;0m🀫\033[0m ";
+                    s = s + "\033[30m🀫\033[0m ";
                 } else if(colour.equals(TowerColour.Grey)){
-                    s = s + "\033[38;2;128;128;128m🀫\033[0m ";
+                    s = s + "\033[90m🀫\033[0m ";
                 }
         }
 
