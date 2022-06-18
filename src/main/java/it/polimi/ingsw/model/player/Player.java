@@ -26,7 +26,7 @@ public class Player implements Serializable {
         this.playerSchoolBoard = new SchoolBoard(TowerColour.values()[(index)]);
         this.assistantDeck = new ArrayList<>();
         this.index = index;
-        this.coins = 500;
+        this.coins = 1;
         this.currentCard = new AssistantCard(0,0);
 
         assistantDeck.add(new AssistantCard(1,1));
