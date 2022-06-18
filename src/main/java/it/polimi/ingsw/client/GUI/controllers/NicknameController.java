@@ -38,4 +38,13 @@ public class NicknameController {
     public void clearNickname() {
         this.nickname.clear();
     }
+
+    @FXML
+    protected void onSoundClick() {
+
+        if(gui.getLaserPlayer().isPlaying())
+            gui.getLaserPlayer().stop();
+        else gui.getLaserPlayer().play();
+
+    }
 }

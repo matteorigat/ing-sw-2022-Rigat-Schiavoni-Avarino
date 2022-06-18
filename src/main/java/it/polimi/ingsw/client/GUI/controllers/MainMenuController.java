@@ -30,6 +30,15 @@ public class MainMenuController {
 
     }
 
+    @FXML
+    protected void onSoundClick() {
+
+        if(gui.getLaserPlayer().isPlaying())
+           gui.getLaserPlayer();
+        else gui.getLaserPlayer().play();
+
+    }
+
     /**
      * clearIpPost method clears port and ip
      */

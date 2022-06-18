@@ -2393,12 +2393,14 @@ public class GameBoardController {
     }
 
 
+    @FXML
+    protected void onSoundClick() {
 
+        if(gui.getLaserPlayer().isPlaying())
+            gui.getLaserPlayer().stop();
+        else gui.getLaserPlayer().play();
 
-
-
-
-
+    }
 
 
 

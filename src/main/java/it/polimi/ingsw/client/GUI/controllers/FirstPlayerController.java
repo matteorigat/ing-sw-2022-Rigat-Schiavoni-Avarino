@@ -56,4 +56,13 @@ public class FirstPlayerController {
     public void setGui(ClientAppGUI gui) {
         this.gui = gui;
     }
+
+    @FXML
+    protected void onSoundClick() {
+
+        if(gui.getLaserPlayer().isPlaying())
+            gui.getLaserPlayer().stop();
+        else gui.getLaserPlayer().play();
+
+    }
 }

@@ -20,6 +20,8 @@ public class ClientAppGUI extends Application {
     private Stage stage;
     private ClientGUI clientGUI;
 
+    private AudioClip laserPlayer;
+
     private MainMenuController mainMenuController;
     private FirstPlayerController firstPlayerController;
     private NicknameController nicknameController;
@@ -93,8 +95,8 @@ public class ClientAppGUI extends Application {
 
 
         URL laserResource = getClass().getResource("/Graphics/The Lord of the Rings.wav");
-        AudioClip laserPlayer = new AudioClip(laserResource.toString());
-        laserPlayer.setCycleCount(1000);
+        laserPlayer = new AudioClip(laserResource.toString());
+        laserPlayer.setCycleCount(10000);
         laserPlayer.play();
     }
 
@@ -134,6 +136,10 @@ public class ClientAppGUI extends Application {
 
     public Stage getStage() {
         return stage;
+    }
+
+    public AudioClip getLaserPlayer() {
+        return laserPlayer;
     }
 }
 
