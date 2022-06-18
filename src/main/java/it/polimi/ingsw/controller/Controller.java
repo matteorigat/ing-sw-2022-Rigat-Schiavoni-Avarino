@@ -415,7 +415,16 @@ public class Controller implements Observer<PlayerMove> {
             }
         }
 
-        if(Parameters.expertMode) {
+        if(rank.size() == 1){
+            if(oldProfessorOwner == null){
+                rank.get(0).getPlayerSchoolBoard().addProfessor(Colour.values()[colorIndex]);
+            } else if(!oldProfessorOwner.equals(rank.get(0))){
+                oldProfessorOwner.getPlayerSchoolBoard().removeProfessor(Colour.values()[colorIndex]);
+                rank.get(0).getPlayerSchoolBoard().addProfessor(Colour.values()[colorIndex]);
+            }
+        } else if(max == 0 && oldProfessorOwner != null){
+            oldProfessorOwner.getPlayerSchoolBoard().removeProfessor(Colour.values()[colorIndex]);
+        } else if(Parameters.expertMode && oldProfessorOwner != null) {
             for (CharacterCard c : model.getGameBoard().getThreeCharacterCards())
                 if (c.getIndex() == 2 && ((Character2) c).isEffectFlag()) {
                     if (rank.size() > 1) {
@@ -426,16 +435,6 @@ public class Controller implements Observer<PlayerMove> {
                             }
                     }
                 }
-        } else {
-            if(rank.size() == 1){
-                if(oldProfessorOwner == null){
-                    rank.get(0).getPlayerSchoolBoard().addProfessor(Colour.values()[colorIndex]);
-                } else if(!oldProfessorOwner.equals(rank.get(0))){
-                    oldProfessorOwner.getPlayerSchoolBoard().removeProfessor(Colour.values()[colorIndex]);
-                    rank.get(0).getPlayerSchoolBoard().addProfessor(Colour.values()[colorIndex]);
-                }
-            } else if(max == 0 && oldProfessorOwner != null)
-                oldProfessorOwner.getPlayerSchoolBoard().removeProfessor(Colour.values()[colorIndex]);
         }
     }
 
