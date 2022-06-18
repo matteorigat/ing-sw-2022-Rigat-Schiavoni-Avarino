@@ -94,7 +94,7 @@ public class ClientAppGUI extends Application {
         currentFXML = "MainMenu";
 
 
-        URL laserResource = getClass().getResource("/Graphics/The Lord of the Rings.wav");
+        URL laserResource = getClass().getResource("/Graphics/The Lord of the Rings.mp3");
         laserPlayer = new AudioClip(laserResource.toString());
         laserPlayer.setCycleCount(10000);
         laserPlayer.play();
