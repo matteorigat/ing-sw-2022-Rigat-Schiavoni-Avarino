@@ -38,7 +38,7 @@ public class GameBoardController {
 
     int alreadyUsed = 0;
     @FXML public Label gamephase, currentplayer, currentMove;
-
+    @FXML public ImageView sound;
     @FXML public Pane schoolBoard0, schoolBoard1 ,schoolBoard2, cloud0, cloud1, cloud2, character0, character1, character2;
     @FXML public ImageView characterImg0, characterImg1, characterImg2;
     @FXML public Label characterText0, characterText1, characterText2;
@@ -2441,11 +2441,7 @@ public class GameBoardController {
 
     @FXML
     protected void onSoundClick() {
-
-        if(gui.getLaserPlayer().isPlaying())
-            gui.getLaserPlayer().stop();
-        else gui.getLaserPlayer().play();
-
+        gui.changeSound();
     }
 
 

@@ -8,12 +8,14 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class ClientAppGUI extends Application {
 
@@ -39,6 +41,12 @@ public class ClientAppGUI extends Application {
 
     @Override
     public void init() throws Exception {
+
+        URL laserResource = getClass().getResource("/Graphics/The Lord of the Rings.mp3");
+        laserPlayer = new AudioClip(Objects.requireNonNull(laserResource).toString());
+        laserPlayer.setCycleCount(10000);
+        laserPlayer.play();
+
         FXMLLoader menu = new FXMLLoader(getClass().getResource("/fxml/MainMenu.fxml"));
         Scene menuScene = new Scene(menu.load());
         mainMenuController = menu.getController();
@@ -92,12 +100,6 @@ public class ClientAppGUI extends Application {
         stage.setScene(sceneMap.get("MainMenu"));
         stage.show();
         currentFXML = "MainMenu";
-
-
-        URL laserResource = getClass().getResource("/Graphics/The Lord of the Rings.mp3");
-        laserPlayer = new AudioClip(laserResource.toString());
-        laserPlayer.setCycleCount(10000);
-        laserPlayer.play();
     }
 
     public static void main(String[] args) {
@@ -138,8 +140,21 @@ public class ClientAppGUI extends Application {
         return stage;
     }
 
-    public AudioClip getLaserPlayer() {
-        return laserPlayer;
+
+    public void changeSound(){
+        if(laserPlayer.isPlaying()){
+            laserPlayer.stop();
+            nicknameController.sound.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/mute.png"))));
+            mainMenuController.sound.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/mute.png"))));
+            firstPlayerController.sound.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/mute.png"))));
+            gameboardController.sound.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/mute.png"))));
+        } else {
+            laserPlayer.play();
+            nicknameController.sound.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/volume.png"))));
+            mainMenuController.sound.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/volume.png"))));
+            firstPlayerController.sound.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/volume.png"))));
+            gameboardController.sound.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/volume.png"))));
+        }
     }
 }
 

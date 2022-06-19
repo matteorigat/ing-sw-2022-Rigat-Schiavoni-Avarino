@@ -3,6 +3,10 @@ package it.polimi.ingsw.client.GUI.controllers;
 import it.polimi.ingsw.client.ClientAppGUI;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
+import java.util.Objects;
 
 /**
  * NicknameController class is a controller for nickname
@@ -12,6 +16,7 @@ public class NicknameController {
     private ClientAppGUI gui;
 
     @FXML private TextField nickname;
+    @FXML public ImageView sound;
 
     /**
      * onButtonClick method gets the text of the nickname set from the button (GUI/client side)
@@ -41,10 +46,6 @@ public class NicknameController {
 
     @FXML
     protected void onSoundClick() {
-
-        if(gui.getLaserPlayer().isPlaying())
-            gui.getLaserPlayer().stop();
-        else gui.getLaserPlayer().play();
-
+        gui.changeSound();
     }
 }

@@ -2,6 +2,10 @@ package it.polimi.ingsw.client.GUI.controllers;
 
 import it.polimi.ingsw.client.ClientAppGUI;
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
+import java.util.Objects;
 
 /**
  * firstPlayerController class controls the first player settings about the match
@@ -10,9 +14,11 @@ public class FirstPlayerController {
 
     private ClientAppGUI gui;
 
-    String numPlayers;
+    @FXML public ImageView sound;
 
+    String numPlayers;
     String expertMode = "n";
+
 
 
     @FXML
@@ -59,10 +65,6 @@ public class FirstPlayerController {
 
     @FXML
     protected void onSoundClick() {
-
-        if(gui.getLaserPlayer().isPlaying())
-            gui.getLaserPlayer().stop();
-        else gui.getLaserPlayer().play();
-
+        gui.changeSound();
     }
 }

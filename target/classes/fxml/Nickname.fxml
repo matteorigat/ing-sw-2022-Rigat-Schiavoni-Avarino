@@ -22,7 +22,7 @@
       <TextField fx:id="nickname" layoutX="528.0" layoutY="329.0" />
       <Button layoutX="568.0" layoutY="408.0" mnemonicParsing="false" onAction="#onButtonClick" prefWidth="76.0" text="JOIN" />
    </children>
-   <ImageView fitHeight="49.0" fitWidth="48.0" layoutX="1138.0" layoutY="738.0" onMouseClicked="#onSoundClick" pickOnBounds="true" preserveRatio="true">
-      <Image url="@../Graphics/soundoff.png" />
+   <ImageView fx:id="sound" fitHeight="40.0" fitWidth="40.0" layoutX="1146.0" layoutY="746.0" onMouseClicked="#onSoundClick" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../Graphics/volume.png" />
    </ImageView>
 </Pane>

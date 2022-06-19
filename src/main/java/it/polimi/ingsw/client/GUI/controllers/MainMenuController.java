@@ -4,13 +4,17 @@ import it.polimi.ingsw.client.ClientAppGUI;
 import it.polimi.ingsw.client.GUI.ClientGUI;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
+import java.util.Objects;
 
 public class MainMenuController {
-
     private ClientAppGUI gui;
 
     @FXML private TextField ip;
     @FXML private TextField port;
+    @FXML public ImageView sound;
 
     /**
      * onButtonClick method gets the user input written in the button
@@ -32,11 +36,7 @@ public class MainMenuController {
 
     @FXML
     protected void onSoundClick() {
-
-        if(gui.getLaserPlayer().isPlaying())
-           gui.getLaserPlayer().stop();
-        else gui.getLaserPlayer().play();
-
+        gui.changeSound();
     }
 
     /**

@@ -1415,9 +1415,9 @@
        <font><Font name="Arial Bold" size="13.0" /></font>
    </Label>
 
-   
-       <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="1392.0" layoutY="8.0" onMouseClicked="#onSoundClick" pickOnBounds="true" preserveRatio="true">
-        <Image url="@../Graphics/soundoff.png" />
+
+    <ImageView fx:id="sound" fitHeight="40.0" fitWidth="40.0" layoutX="1392.0" layoutY="8.0" onMouseClicked="#onSoundClick" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../Graphics/volume.png" />
     </ImageView>
 
    <Label fx:id="currentMove" layoutX="20.0" layoutY="90.0">

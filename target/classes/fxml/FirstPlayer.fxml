@@ -31,7 +31,7 @@
           <font><Font name="Arial Bold" size="15.0" /></font>
       </Button>
 
-       <ImageView fitHeight="49.0" fitWidth="48.0" layoutX="1138.0" layoutY="738.0" onMouseClicked="#onSoundClick" pickOnBounds="true" preserveRatio="true">
-           <Image url="@../Graphics/soundoff.png" />
-       </ImageView>
+    <ImageView fx:id="sound" fitHeight="40.0" fitWidth="40.0" layoutX="1146.0" layoutY="746.0" onMouseClicked="#onSoundClick" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../Graphics/volume.png" />
+    </ImageView>
 </Pane>
