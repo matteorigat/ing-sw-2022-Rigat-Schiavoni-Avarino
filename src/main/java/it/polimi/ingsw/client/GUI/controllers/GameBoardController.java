@@ -351,14 +351,14 @@ public class GameBoardController {
                     cloudStudent10.setImage(null);
                     cloudStudent11.setImage(null);
                     cloudStudent12.setImage(null);
-                    if(model.getPlayers().size() ==3)
+                    if(model.getPlayers().size() == 3)
                         cloudStudent13.setImage(null);
 
                 } else {
                     setCloud(c.seeStudents().get(0).getColour(), cloudStudent10);
                     setCloud(c.seeStudents().get(1).getColour(), cloudStudent11);
                     setCloud(c.seeStudents().get(2).getColour(), cloudStudent12);
-                    if(model.getPlayers().size() ==3)
+                    if(model.getPlayers().size() == 3)
                         setCloud(c.seeStudents().get(3).getColour(), cloudStudent13);
                 }
             } else if(n==2){

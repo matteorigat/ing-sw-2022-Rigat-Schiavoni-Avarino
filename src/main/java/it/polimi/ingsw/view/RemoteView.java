@@ -133,7 +133,11 @@ public class RemoteView extends View {
             resultMsg = gameMessage.waitMessage;
         }
 
-        if(message.getModel().getCurrentPhase().equals(GamePhase.GameEnded) && message.getModel().getWinner().getIndex() == getPlayer().getIndex()){
+
+        if(message.getModel().getCurrentPhase().equals(GamePhase.GameEnded) && message.getModel().getWinner() == null){
+
+        }
+        else if(message.getModel().getCurrentPhase().equals(GamePhase.GameEnded) && message.getModel().getWinner().getIndex() == getPlayer().getIndex()){
             resultMsg = gameMessage.winMessage;
         }
         else if(message.getModel().getCurrentPhase().equals(GamePhase.GameEnded)){

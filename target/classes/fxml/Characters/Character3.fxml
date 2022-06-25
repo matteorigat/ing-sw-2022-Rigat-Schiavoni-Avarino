@@ -1,23 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="190.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.controllers.characters.Character3gui">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="190.0" prefWidth="371.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.controllers.characters.Character3gui">
 
-    <Label layoutX="5.0" layoutY="10.0" text="Scegli un'isola e calcola l'influenza come" textFill="BLACK">
+    <Label layoutX="43.0" layoutY="14.0" text="Choose an island and resolve the island" textFill="BLACK">
         <font><Font name="Arial Bold" size="15.0" /></font>
     </Label>
-    <Label layoutX="5.0" layoutY="30.0" text="se MN avesse terminato lì." textFill="BLACK">
+    <Label layoutX="5.0" layoutY="30.0" text="as if Mother Nature had ended her movement there " textFill="BLACK">
         <font><Font name="Arial Bold" size="15.0" /></font>
     </Label>
-    <Button layoutX="210.0" layoutY="150.0" mnemonicParsing="false" onAction="#onButtonClick" prefWidth="76.0" text="PLAY" />
+    <Button layoutX="148.0" layoutY="151.0" mnemonicParsing="false" onAction="#onButtonClick" prefWidth="76.0" text="PLAY" />
 
     <Label fx:id="islandsSize" layoutX="10.0" layoutY="70.0">
         <font><Font name="Arial Bold" size="15.0" /></font>
     </Label>
-    <TextField fx:id="islandIndex" layoutX="10.0" layoutY="95.0" />
+    <TextField fx:id="islandIndex" layoutX="111.0" layoutY="101.0" />
 </Pane>
