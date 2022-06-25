@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="185.0" prefWidth="400" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.controllers.characters.Character9gui">
+
+      <Label layoutX="10.0" layoutY="10.0" text="Durante il calcolo dell'influenza il colore che scegli" textFill="BLACK">
+         <font><Font name="Arial Bold" size="15.0" /></font>
+      </Label>
+      <Label layoutX="10.0" layoutY="30.0" text="non viene contato" textFill="BLACK">
+        <font><Font name="Arial Bold" size="15.0" /></font>
+      </Label>
+      <Button layoutX="153.0" layoutY="152.0" mnemonicParsing="false" onAction="#onButtonClick" prefWidth="76.0" text="PLAY" />
+
+
+    <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="76.0" layoutY="69.0" onMouseClicked="#chooseStudent0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../../Graphics/teacher_green.png" /></ImageView>
+    <Label fx:id="selected0" layoutX="88.0" layoutY="99.0" />
+
+    <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="126.0" layoutY="69.0" onMouseClicked="#chooseStudent1" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../../Graphics/teacher_red.png" /></ImageView>
+    <Label fx:id="selected1" layoutX="138.0" layoutY="99.0" />
+
+    <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="176.0" layoutY="69.0" onMouseClicked="#chooseStudent2" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../../Graphics/teacher_yellow.png" /></ImageView>
+    <Label fx:id="selected2" layoutX="188.0" layoutY="99.0" />
+
+    <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="226.0" layoutY="69.0" onMouseClicked="#chooseStudent3" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../../Graphics/teacher_pink.png" /></ImageView>
+    <Label fx:id="selected3" layoutX="238.0" layoutY="99.0" />
+
+    <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="276.0" layoutY="69.0" onMouseClicked="#chooseStudent4" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../../Graphics/teacher_blue.png" /></ImageView>
+    <Label fx:id="selected4" layoutX="288.0" layoutY="99.0" />
+
+
+</Pane>
