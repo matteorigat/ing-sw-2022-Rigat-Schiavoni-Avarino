@@ -127,8 +127,12 @@ public class SocketClientConnection extends Observable<String> implements Client
                 }
             } while (errorName);
             send("NICKNAME" + name);//IMPORTANTE non modificare la scritta NICKNAME, serve per riconoscimento lato client
-            if(server.isChooseMode())
+            if(server.isChooseMode()){
                 send("The first player is choosing the game mode, please wait the beginning of the game");
+                while (server.getWaitingConnection().size() == 1 && server.isChooseMode()){
+                    Thread.sleep(250);
+                }
+            }
             server.lobby(this, name);
             synchronized (server) {
                 if (server.getWaitingConnection().size() == 1){

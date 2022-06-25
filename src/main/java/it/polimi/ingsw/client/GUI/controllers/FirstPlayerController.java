@@ -16,7 +16,7 @@ public class FirstPlayerController {
 
     @FXML public ImageView sound;
 
-    String numPlayers;
+    String numPlayers = "";
     String expertMode = "n";
 
 

@@ -23,7 +23,6 @@ import java.util.concurrent.Executors;
 
 public class Server {
 
-    private static final int PORT = 1337;
     private ServerSocket serverSocket;
     private ExecutorService executor = Executors.newFixedThreadPool(128);
 
@@ -200,8 +199,8 @@ public class Server {
      * Server method
      * @throws IOException
      */
-    public Server() throws IOException {
-        this.serverSocket = new ServerSocket(PORT);
+    public Server(int port) throws IOException {
+        this.serverSocket = new ServerSocket(port);
     }
 
 

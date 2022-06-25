@@ -24,7 +24,8 @@ public class NicknameController {
     @FXML
     protected void onButtonClick() {
 
-       gui.getClientGUI().setNickname(nickname.getText());
+       if(nickname.getText() != "")
+           gui.getClientGUI().setNickname(nickname.getText());
 
     }
 

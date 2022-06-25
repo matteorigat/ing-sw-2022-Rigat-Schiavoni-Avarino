@@ -6,6 +6,7 @@ package it.polimi.ingsw.client.CLI;
 import it.polimi.ingsw.exceptions.ConnectionClosedException;
 import it.polimi.ingsw.model.Model;
 
+import java.net.SocketException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -180,9 +181,10 @@ public class ClientCLI {
             System.in.close();
             t1.join();
 
-        } catch(InterruptedException | NoSuchElementException | ConnectionClosedException e){
+        } catch(InterruptedException | NoSuchElementException | ConnectionClosedException | SocketException e){
             System.out.println("Connection closed from the client side");
         } finally {
+            System.out.println("Connection closed from the client side - 2");
             stdin.close();
             socketIn.close();
             socketOut.close();

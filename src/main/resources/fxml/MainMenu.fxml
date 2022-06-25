@@ -19,7 +19,7 @@
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font></Label>
-      <TextField fx:id="ip" layoutX="528.0" layoutY="329.0" />
+      <TextField fx:id="ip" layoutX="528.0" layoutY="329.0" promptText="or a casual letter for local" />
       <Label layoutX="538.0" layoutY="391.0" text="Insert a server port" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="15.0" />
