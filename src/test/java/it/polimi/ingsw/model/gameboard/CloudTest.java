@@ -1,10 +1,8 @@
 package it.polimi.ingsw.model.gameboard;
 
-import it.polimi.ingsw.exceptions.TooManyStudentsOnCloudException;
 import it.polimi.ingsw.model.Parameters;
 import it.polimi.ingsw.model.player.Student;
 import it.polimi.ingsw.model.enumeration.Colour;
-import it.polimi.ingsw.model.gameboard.Cloud;
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
@@ -25,30 +23,24 @@ public class CloudTest{
 
         ArrayList<Student> stud =  cloud.getStudents();
         assertEquals(stud.size(),0);
-        try
-        {
-            cloud.addStudent(student1);
+
+        cloud.addStudent(student1);
         cloud.addStudent(student2);
         cloud.addStudent(student3);
         cloud.addStudent(student4);
-        }
-        catch(TooManyStudentsOnCloudException e){}
+
+
         stud= cloud.getStudents();
         assertEquals(stud.size(),4);
         stud= cloud.getStudents();
         assertEquals(stud.size(),0);
-        try
-        {
-            cloud.addStudent(student1);
+
+        cloud.addStudent(student1);
 
         cloud.addStudent(student2);
         cloud.addStudent(student3);
         cloud.addStudent(student4);
-        cloud.addStudent(student5); }
-        catch (TooManyStudentsOnCloudException e){
-            thrown = true;
-        }
-        assertEquals(thrown,true);
+        cloud.addStudent(student5);
 
         stud = cloud.seeStudents();
         assertEquals(stud.size(),4);

@@ -64,7 +64,7 @@ public class SocketClientConnection extends Observable<String> implements Client
      */
     @Override
     public synchronized void closeConnection() {
-        send("Connection closed!");
+        send("Connection closed, another player left the match!");
         try {
             socket.close();
         } catch (IOException e) {

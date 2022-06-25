@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model.gameboard;
 
-import it.polimi.ingsw.exceptions.TooManyStudentsOnCloudException;
 import it.polimi.ingsw.model.Parameters;
 import it.polimi.ingsw.model.player.Student;
 
@@ -28,14 +27,12 @@ public class Cloud implements Serializable {
     /**
      * addStudents method adds students on one cloud at the beginning of the turn
      * @param s
-     * @throws TooManyStudentsOnCloudException
      */
 
-    public void addStudent(Student s) throws TooManyStudentsOnCloudException {
+    public void addStudent(Student s){
         if (this.students.size() < Parameters.numCloudStudents){
             this.students.add(s);
         }
-        else throw new TooManyStudentsOnCloudException();
 
     }
 

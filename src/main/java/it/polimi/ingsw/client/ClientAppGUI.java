@@ -9,7 +9,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -155,6 +158,18 @@ public class ClientAppGUI extends Application {
             firstPlayerController.sound.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/volume.png"))));
             gameboardController.sound.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Graphics/volume.png"))));
         }
+    }
+
+    public void closeConnection(String message){
+        final Stage dialog = new Stage();
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        dialog.initOwner(stage);
+        VBox dialogVbox = new VBox(20);
+        dialogVbox.getChildren().add(new Text(message));
+        Scene dialogScene = new Scene(dialogVbox, 300, 200);
+        dialog.setScene(dialogScene);
+        dialog.setTitle("Connection closed");
+        dialog.show();
     }
 }
 

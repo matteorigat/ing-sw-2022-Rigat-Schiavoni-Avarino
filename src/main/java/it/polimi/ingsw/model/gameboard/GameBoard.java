@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model.gameboard;
 
-import it.polimi.ingsw.exceptions.TooManyStudentsOnCloudException;
 import it.polimi.ingsw.model.Parameters;
 import it.polimi.ingsw.model.player.Student;
 import it.polimi.ingsw.model.gameboard.characters.*;
@@ -83,12 +82,7 @@ public class GameBoard implements Serializable {
     }
 
     public void addStudentOnCloud(int numCloud, Student student){
-        try{
         clouds.get(numCloud).addStudent(student);
-        }
-        catch(TooManyStudentsOnCloudException e){
-
-        }
     }
 
     /**

@@ -1,7 +1,6 @@
 package it.polimi.ingsw.client.GUI;
 
 import it.polimi.ingsw.client.ClientAppGUI;
-import it.polimi.ingsw.exceptions.ConnectionClosedException;
 import it.polimi.ingsw.model.Model;
 import javafx.application.Platform;
 
@@ -24,6 +23,7 @@ public class ClientGUI implements Runnable {
     private ClientAppGUI gui;
 
     private String nickname = "";
+    private String message = "Connection closed from server side";
     private boolean firstModel = true;
 
 
@@ -93,6 +93,9 @@ public class ClientGUI implements Runnable {
                         else if (((String) inputObject).contains("opponent")){
                             gui.getGameboardController().setNickname(nickname);
                         }
+                        else if (((String) inputObject).contains("left")){
+                            message = (String) inputObject;
+                        }
                     } else if (inputObject instanceof Model){
                         Platform.runLater(()-> gui.getGameboardController().setModel((Model)inputObject));
                         if(firstModel){
@@ -151,11 +154,11 @@ public class ClientGUI implements Runnable {
 
                 t0.join();
                 System.in.close();
-                Platform.runLater(Platform::exit);
 
-            } catch(InterruptedException | NoSuchElementException | ConnectionClosedException e){
-                System.out.println("Connection closed from the client side");
+            } catch(InterruptedException | NoSuchElementException e){
+                System.out.println("Exception connection closed");
             } finally {
+                Platform.runLater(()-> gui.closeConnection(message));
                 socketIn.close();
                 socketOut.close();
                 socket.close();

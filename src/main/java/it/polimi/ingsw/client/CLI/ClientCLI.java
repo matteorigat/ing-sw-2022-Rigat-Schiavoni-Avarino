@@ -3,7 +3,6 @@
 
 package it.polimi.ingsw.client.CLI;
 
-import it.polimi.ingsw.exceptions.ConnectionClosedException;
 import it.polimi.ingsw.model.Model;
 
 import java.net.SocketException;
@@ -178,13 +177,11 @@ public class ClientCLI {
             Thread t1 = asyncWriteToSocket(stdin, socketOut);
 
             t0.join();
-            System.in.close();
-            t1.join();
 
-        } catch(InterruptedException | NoSuchElementException | ConnectionClosedException | SocketException e){
-            System.out.println("Connection closed from the client side");
+        } catch(InterruptedException | NoSuchElementException  e){
+            System.out.println("Exception connection closed");
         } finally {
-            System.out.println("Connection closed from the client side - 2");
+            System.out.println("Connection closed from server side");
             stdin.close();
             socketIn.close();
             socketOut.close();
