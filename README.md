@@ -4,8 +4,6 @@
 **Eriantys** is the final project of **Software Engineering** course held
 at Politecnico di Milano (2021/2022).
 
-**Teacher** Gianpaolo Cugola
-
 ![Image of the game](src/main/resources/Graphics/eriantysBackground.jpg)
 
 ## Implemented Functionalities
@@ -82,6 +80,8 @@ The model has a test coverage of:
 * [Matteo Rigat](https://github.com/MatteoRigat)
 * [Nicolò Avarino](https://github.com/nicoloavarino)
 * [Giuseppe Schiavoni](https://github.com/Giuseppe-Schiavoni)
+
+**Teacher** Gianpaolo Cugola
 
 # Tools
 * Maven - Dependency Management
