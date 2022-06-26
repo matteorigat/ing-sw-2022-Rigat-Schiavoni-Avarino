@@ -23,6 +23,8 @@ at Politecnico di Milano (2021/2022).
 ⛔ Not Implemented &nbsp;&nbsp;&nbsp;&nbsp; ⚠️ Implementing&nbsp;&nbsp;&nbsp;&nbsp; ✅ Implemented
 
 ## Running
+First of all [install Java SE 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) on your computer.
+
 To launch the game use the following command in the directory of the jar.
 
 ```
@@ -37,7 +39,7 @@ java -jar mac_intel.jar
 java -jar win.jar 
 ```
 
-If you don't have one of the above operating system, [download javafx 18](https://gluonhq.com/products/javafx/) and use the following command in the directory of the jar (one of the three, is the same) and the directory you already downloaded.
+If you don't have one of the above operating system, [download JavaFX 18.0.1 SDK](https://gluonhq.com/products/javafx/) and use the following command in the directory of the jar (one of the three, is the same) and the directory you already downloaded.
 
 ```
 java --module-path \Users\.."complete here"..\javafx-sdk-18.0.1\lib --add-modules=javafx.controls,javafx.fxml,javafx.media -jar \Users\.."complete here"..\win.jar
@@ -48,6 +50,7 @@ java --module-path \Users\.."complete here"..\javafx-sdk-18.0.1\lib --add-module
 You'll have to choose if you want to run the server, CLI client or GUI client.
 
 If you use the default configuration on the server the port is 50000.
+
 If you use the default configuration on the client the ip is 127.0.0.1 and the port is 50000.
 
 The recommended setting for the GUI are : 
