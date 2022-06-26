@@ -40,7 +40,7 @@ java -jar win.jar
 If you don't have one of the above operating system, [download javafx 18](https://gluonhq.com/products/javafx/) and use the following command in the directory of the jar (one of the three, is the same) and the directory you already downloaded.
 
 ```
-java --module-path \Users\.."complete here"..\javafx-sdk-18.0.1/lib --add-modules=javafx.controls,javafx.fxml,javafx.media -jar \Users\.."complete here"..\win.jar
+java --module-path \Users\.."complete here"..\javafx-sdk-18.0.1\lib --add-modules=javafx.controls,javafx.fxml,javafx.media -jar \Users\.."complete here"..\win.jar
 ```
 
 ##
