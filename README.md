@@ -56,7 +56,7 @@ java --module-path \Users\.."complete here"..\javafx-sdk-18.0.1\lib --add-module
 
 You'll have to choose if you want to run the server, CLI client or GUI client.
 
-You can read the CLI and GUI instructions [here](Deliverables/instructions_CLI_GUI/) (only in Italian)
+You can read the CLI and GUI instructions [here](Deliverables/instructions_CLI_GUI.pdf) (only in Italian)
 
 Game rules [here](Deliverables/Gamerules/)
 
