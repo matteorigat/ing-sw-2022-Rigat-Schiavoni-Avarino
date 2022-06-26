@@ -11,16 +11,16 @@ at Politecnico di Milano. (2021/2022)
 ## Implemented Functionalities
 | Functionality | Status |
 |:-----------------------|:------------------------------------:|
-| Basic rules | [✅] |
-| Complete rules | [✅] |
-| Socket |[✅] |
-| CLI | [✅] |
-| GUI |[✅] |
-| Multiple games | [✅] |
-| 12 character cards | [✅] |
+| Basic rules | ✅ |
+| Complete rules | ✅ |
+| Socket | ✅ |
+| CLI | ✅ |
+| GUI | ✅ |
+| Multiple games | ✅ |
+| 12 character cards | ✅ |
 
 #### Legend
-[✅]() Implemented
+✅() Implemented
 
 ## Running
 To launch the game use the following command in the directory of the jar.
