@@ -62,11 +62,11 @@ You can read the CLI and GUI instructions [here](Deliverables/instructions_CLI_G
 
 Game rules [here](Deliverables/Gamerules/)
 
-If you use the default configuration on the server the port is 50000.
+If you use the default configuration on the server, the port is 50000.
 
-If you use the default configuration on the client the ip is 127.0.0.1 and the port is 50000.
+If you use the default configuration on the client, the ip is 127.0.0.1 and the port is 50000.
 
-The recommended setting for the GUI are : 
+The recommended computer settings for the GUI are: 
 * Resolution 1440x900  (13inches at least)
 
 ## Coverage
