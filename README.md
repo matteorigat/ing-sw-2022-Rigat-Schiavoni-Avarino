@@ -53,6 +53,15 @@ If you use the default configuration on the client the ip is 127.0.0.1 and the p
 The recommended setting for the GUI are : 
 * Resolution 1440x900  (13inches at least)
 
+## Coverage
+The model has a test coverage of:
+* Classes: (19/19) 100%
+* Methods: (121/129) 93%
+* Classes: (463/514) 100%
+
+![Coverage](Deliverables/coverage.png)
+
+
 ## Authors
 * [Matteo Rigat](https://github.com/MatteoRigat)
 * [Nicolò Avarino](https://github.com/nicoloavarino)
