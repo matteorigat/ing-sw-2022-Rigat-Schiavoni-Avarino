@@ -31,12 +31,12 @@ public class PlayerTest {
         assertEquals(TowerColour.values()[2], p3.PlayerTowerColor());
         assertEquals(p3.PlayerTowerColor(), p3.getPlayerSchoolBoard().getTowerColor());
 
-        assertEquals(500, p1.getCoins()); //va messo ad 1
+        assertEquals(1, p1.getCoins()); //va messo ad 1
         p2.addCoin();
-        assertEquals(501, p2.getCoins()); //va messo a 2
+        assertEquals(2, p2.getCoins()); //va messo a 2
         for(int i=0; i<10; i++)
             p3.addCoin();
-        assertEquals(510, p3.getCoins()); //va messo ad 11
+        assertEquals(11, p3.getCoins()); //va messo ad 11
 
         assertEquals(10, p1.getAssistantDeck().size());
         assertEquals(10, p2.getAssistantDeck().size());

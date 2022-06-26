@@ -441,7 +441,6 @@ public class GameBoardController {
      */
     public void setModel(Model model){
         this.model = model;
-        System.out.println("Ricevuto il model");
         update();
     }
 

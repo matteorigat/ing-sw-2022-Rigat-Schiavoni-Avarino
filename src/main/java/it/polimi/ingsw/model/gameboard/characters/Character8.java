@@ -6,7 +6,7 @@ public class Character8 implements CharacterCard{
     private int cost;
     private boolean effectFlag;
 
-    private static final String Description = "2 punti influenza addizionali";
+    private static final String Description = "You have +2 influence points this turn.";
 
     public Character8() {
         this.index = 8;

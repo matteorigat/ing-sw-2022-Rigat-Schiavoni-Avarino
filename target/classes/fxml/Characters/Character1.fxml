@@ -9,7 +9,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.controllers.characters.Character1gui">
 
-      <Label layoutX="10.0" layoutY="10.0" text="Take 1 student and place it on an island" textFill="BLACK">
+      <Label layoutX="5.0" layoutY="10.0" text="Take 1 student and place it on an island." textFill="BLACK">
          <font><Font name="Arial Bold" size="15.0" /></font>
       </Label>
       <Button layoutX="112.0" layoutY="207.0" mnemonicParsing="false" onAction="#onButtonClick" prefWidth="76.0" text="PLAY" />

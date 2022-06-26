@@ -7,7 +7,7 @@ public class Character5 implements CharacterCard{
     private int cost;
     private int noEntry;
 
-    private static final String Description = "Tessera divieto su un'isola";
+    private static final String Description = "Place a noEntry title on an island of your choice. Mother nature will not calculate influence on that island.";
     public Character5() {
         this.index = 5;
         this.cost = 2;

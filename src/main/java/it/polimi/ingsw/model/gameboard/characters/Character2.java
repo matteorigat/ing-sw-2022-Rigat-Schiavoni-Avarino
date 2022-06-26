@@ -7,7 +7,7 @@ public class Character2 implements CharacterCard{
     private int cost;
     private boolean effectFlag;
 
-    private static final String Description = "Prendi il controllo dei professori anche in caso di parità di studenti";
+    private static final String Description = "Take control of any number of professors even if you have the same number of students.";
 
     /**
      * Constructor

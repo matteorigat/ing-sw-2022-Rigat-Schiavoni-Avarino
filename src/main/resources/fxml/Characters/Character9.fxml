@@ -9,7 +9,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="180.0" prefWidth="379.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.controllers.characters.Character9gui">
 
-      <Label layoutX="5.0" layoutY="10.0" text="Choose a colour: during the influence calcolation " textFill="BLACK">
+      <Label layoutX="5.0" layoutY="10.0" text="Choose a colour: during the influence calculation" textFill="BLACK">
          <font><Font name="Arial Bold" size="15.0" /></font>
       </Label>
       <Label layoutX="5.0" layoutY="30.0" text="this turn, that color adds no influence." textFill="BLACK">

@@ -79,7 +79,7 @@ public class ClientGUI implements Runnable {
                 while (isActive()) {
                     Object inputObject = socketIn.readObject();
                     if(inputObject instanceof String){
-                        System.out.println((String) inputObject);
+                        //System.out.println((String) inputObject);
                         if (((String) inputObject).contains("Write a valid name!") || ((String) inputObject).contains("Another player already chosen this nickname")){
                             Platform.runLater(()-> gui.getNicknameController().clearNickname());
                         }

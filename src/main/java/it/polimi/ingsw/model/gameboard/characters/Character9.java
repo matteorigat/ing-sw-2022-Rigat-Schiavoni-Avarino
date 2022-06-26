@@ -10,7 +10,7 @@ public class Character9 implements CharacterCard{
 
     private int color;
 
-    private static final String Description = "Durante il calcolo dell'influenza il colore che scegli non viene contato";
+    private static final String Description = "Choose a colour: during the influence calculation this turn, that color adds no influence.";
 
     public Character9() {
         this.index = 9;

@@ -7,7 +7,7 @@ public class Character3 implements CharacterCard{
     private int cost;
     private boolean effectFlag;
 
-    private static final String Description = "Scegli un'isola e calcola l'influenza come se MN avesse terminato lì";
+    private static final String Description = "Choose an island and resolve the island as if mother nature had ended her movement there.";
 
     /**
      * Character 3 card constructor

@@ -12,7 +12,7 @@ public class Character1 implements CharacterCard{
     private int cost;
     private ArrayList<Student> students;
 
-    private static final String Description = "Prendi 1 studente e piazzalo su un'isola";
+    private static final String Description = "Take 1 student and place it on an island.";
 
     /**
      * character1 constructor

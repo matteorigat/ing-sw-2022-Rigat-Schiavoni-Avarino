@@ -6,7 +6,7 @@ public class Character6 implements CharacterCard{
     private int cost;
     private boolean effectFlag;
 
-    private static final String Description = "Durante il conteggio dell'influenza, le torri non vengono considerate";
+    private static final String Description = "When resolving a conquering on an island, towers do not count towards influence.";
 
     public Character6() {
         this.index = 6;

@@ -7,7 +7,7 @@ public class Character4 implements CharacterCard{
     private int cost;
     private boolean effectFlag;
 
-    private static final String Description = "Puoi muovere MN fino a 2 isole addizionali";
+    private static final String Description = "You can move mother nature up to 2 additional islands.";
 
     public Character4(){
         this.index = 4;

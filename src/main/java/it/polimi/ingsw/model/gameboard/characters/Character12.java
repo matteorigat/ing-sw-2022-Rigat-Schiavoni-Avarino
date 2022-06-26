@@ -6,7 +6,7 @@ public class Character12 implements CharacterCard{
     private int index;
     private int cost;
 
-    private static final String Description = "Scegli un colore, tutti i giocatori devono mettere 3 studenti di quel colore dalla sala al sacchetto";
+    private static final String Description = "Choose 1 color: every player must return 3 students of that type from the diningroom to the bag.";
 
 
     public Character12() {

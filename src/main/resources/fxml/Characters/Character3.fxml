@@ -11,7 +11,7 @@
     <Label layoutX="5.0" layoutY="10.0" text="Choose an island and resolve the island as if" textFill="BLACK">
         <font><Font name="Arial Bold" size="15.0" /></font>
     </Label>
-    <Label layoutX="5.0" layoutY="30.0" text="mother nature had ended her movement there. " textFill="BLACK">
+    <Label layoutX="5.0" layoutY="30.0" text="mother nature had ended her movement there." textFill="BLACK">
         <font><Font name="Arial Bold" size="15.0" /></font>
     </Label>
     <Button layoutX="133.0" layoutY="140.0" mnemonicParsing="false" onAction="#onButtonClick" prefWidth="76.0" text="PLAY" />

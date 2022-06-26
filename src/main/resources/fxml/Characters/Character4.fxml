@@ -7,7 +7,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100" prefWidth="269.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.GUI.controllers.characters.Character4gui">
 
-      <Label layoutX="5.0" layoutY="10.0" text="You can move mother nature up to 2 " textFill="BLACK">
+      <Label layoutX="5.0" layoutY="10.0" text="You can move mother nature up to 2" textFill="BLACK">
          <font><Font name="Arial Bold" size="15.0" /></font>
       </Label>
       <Button layoutX="97.0" layoutY="66.0" mnemonicParsing="false" onAction="#onButtonClick" prefWidth="76.0" text="PLAY" />

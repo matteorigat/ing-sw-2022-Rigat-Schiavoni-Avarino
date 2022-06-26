@@ -5,7 +5,7 @@ public class Character10 implements CharacterCard{
     private int index;
     private int cost;
 
-    private static final String Description = "Scambia tra loro fino a due studenti della sala e dell'ingresso";
+    private static final String Description = "Swap up to 2 students between your entrance and diningroom.";
 
     public Character10() {
         this.index = 10;

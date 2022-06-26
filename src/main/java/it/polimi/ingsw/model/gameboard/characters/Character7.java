@@ -12,7 +12,7 @@ public class Character7 implements CharacterCard{
     private int cost;
     private ArrayList<Student> students;
 
-    private static final String Description = "Prendi 3 studenti e scambiali con 3 del tuo ingresso";
+    private static final String Description = "Take up to 3 students and replace them with students from your entrance.";
 
     public Character7() {
         this.index = 7;
