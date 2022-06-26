@@ -44,6 +44,11 @@ java --module-path \Users\.."complete here"..\javafx-sdk-18.0.1/lib --add-module
 ```
 
 
+
+
+
+
+
 You'll have to choose if you want to run the server, CLI client or GUI client.
 
 If you use the default configuration on the server the port is 50000.
