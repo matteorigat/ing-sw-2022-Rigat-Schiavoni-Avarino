@@ -2,7 +2,7 @@
 # Software Engineering final project
 
 **Eriantys** is the final project of **Software Engineering** course held
-at Politecnico di Milano. (2021/2022)  
+at Politecnico di Milano (2021/2022).
 
 **Teacher** Gianpaolo Cugola
 
@@ -37,7 +37,7 @@ java -jar mac_intel.jar
 java -jar win.jar 
 ```
 
-If you don't have one of the above operating system, [download javafx 18](https://gluonhq.com/products/javafx/) and use the following command in the directory of the jar (one of the three, is the same) and the directory you already downloaded
+If you don't have one of the above operating system, [download javafx 18](https://gluonhq.com/products/javafx/) and use the following command in the directory of the jar (one of the three, is the same) and the directory you already downloaded.
 
 ```
 java --module-path \Users\.."complete here"..\javafx-sdk-18.0.1/lib --add-modules=javafx.controls,javafx.fxml,javafx.media -jar \Users\.."complete here"..\win.jar
@@ -54,9 +54,9 @@ The recommended setting for the GUI are :
 * Resolution 1440x900  (13inches at least)
 
 ## Authors
-* [Matteo Rigat]([https://github.com/](https://github.com/MatteoRigat))
-* [Nicolò Avarino]([https://github.com/neekoo0](https://github.com/nicoloavarino))
-* [Giuseppe Schiavoni]([https://github.com/fraleone99](https://github.com/Giuseppe-Schiavoni))
+* [Matteo Rigat](https://github.com/](https://github.com/MatteoRigat)
+* [Nicolò Avarino](https://github.com/neekoo0](https://github.com/nicoloavarino)
+* [Giuseppe Schiavoni](https://github.com/fraleone99](https://github.com/Giuseppe-Schiavoni)
 
 # Tools
 * Maven - Dependency Management
@@ -64,5 +64,5 @@ The recommended setting for the GUI are :
 * JavaFX - GUI
 
 ## License
-This project is developed in collaboration with [Politecnico di Milano](https://www.polimi.it/) and [Cranio Creations](https://www.craniocreations.it/)
+This project is developed in collaboration with [Politecnico di Milano](https://www.polimi.it/) and [Cranio Creations](https://www.craniocreations.it/).
 
