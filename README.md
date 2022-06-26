@@ -23,9 +23,18 @@ at Politecnico di Milano (2021/2022).
 ⛔ Not Implemented &nbsp;&nbsp;&nbsp;&nbsp; ⚠️ Implementing&nbsp;&nbsp;&nbsp;&nbsp; ✅ Implemented
 
 ## Running
+
 First of all [install Java SE 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) on your computer.
 
-To launch the game use the following command in the directory of the jar.
+Then download the jar [here](Deliverables/Jar/), and move it to the desktop.
+
+Open the directory of the jar using:
+
+```
+cd Desktop
+```
+
+To launch the game use one of the following commands:
 
 ```
 java -jar mac_arm.jar 
@@ -48,6 +57,9 @@ java --module-path \Users\.."complete here"..\javafx-sdk-18.0.1\lib --add-module
 ##
 
 You'll have to choose if you want to run the server, CLI client or GUI client.
+
+You can read the CLI and GUI instructions [here](Deliverables/instructions_CLI_GUI/) (only in Italian)
+Game rules [here](Deliverables/Game rules/)
 
 If you use the default configuration on the server the port is 50000.
 
