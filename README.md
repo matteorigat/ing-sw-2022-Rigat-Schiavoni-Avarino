@@ -54,10 +54,9 @@ The recommended setting for the GUI are :
 * Resolution 1440x900  (13inches at least)
 
 ## Authors
-* [Matteo Rigat](https://github.com/](https://github.com/MatteoRigat)
-* [Matteo Rigat]([https://gluonhq.com/products/javafx/](https://github.com/](https://github.com/MatteoRigat))
-* [Nicolò Avarino](https://github.com/neekoo0](https://github.com/nicoloavarino)
-* [Giuseppe Schiavoni](https://github.com/fraleone99](https://github.com/Giuseppe-Schiavoni)
+* [Matteo Rigat](https://github.com/MatteoRigat)
+* [Nicolò Avarino](https://github.com/nicoloavarino)
+* [Giuseppe Schiavoni](https://github.com/Giuseppe-Schiavoni)
 
 # Tools
 * Maven - Dependency Management
