@@ -57,7 +57,7 @@ The recommended setting for the GUI are :
 The model has a test coverage of:
 * Classes: (19/19) 100%
 * Methods: (121/129) 93%
-* Classes: (463/514) 100%
+* Classes: (463/514) 90%
 
 ![Coverage](Deliverables/coverage.png)
 
