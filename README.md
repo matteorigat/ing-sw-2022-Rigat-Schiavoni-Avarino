@@ -43,11 +43,7 @@ If you don't have one of the above operating system, [download javafx 18](https:
 java --module-path \Users\.."complete here"..\javafx-sdk-18.0.1/lib --add-modules=javafx.controls,javafx.fxml,javafx.media -jar \Users\.."complete here"..\win.jar
 ```
 
-
-
-
-
-
+##
 
 You'll have to choose if you want to run the server, CLI client or GUI client.
 
