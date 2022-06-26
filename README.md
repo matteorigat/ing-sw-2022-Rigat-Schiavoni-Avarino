@@ -20,7 +20,7 @@ at Politecnico di Milano (2021/2022).
 | 12 character cards | ✅ |
 
 #### Legend
-✅ Implemented
+⛔ Not Implemented &nbsp;&nbsp;&nbsp;&nbsp; ⚠️ Implementing&nbsp;&nbsp;&nbsp;&nbsp; ✅ Implemented
 
 ## Running
 To launch the game use the following command in the directory of the jar.
