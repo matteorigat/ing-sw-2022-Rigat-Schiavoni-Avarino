@@ -24,15 +24,27 @@ public class Student implements Serializable {
     @Override
     public String toString() {
         int colorInt = colour.ordinal();
-        return switch (colorInt) {
-            case (0) -> "🟢"; //""\033[38;2;31;224;44mGreen\033[0m";
-            case (1) -> "🔴"; //"\033[31mRed\033[0m";
-            case (2) -> "🟡"; //"\033[93mYellow\033[0m";
-            case (3) -> "🟣"; //"\033[38;2;249;177;250mPink\033[0m";
-            case (4) -> "🔵";
-            default -> //"\033[38;2;85;99;250mBlue\033[0m";
-                    "";
-        };
+
+        String operSys = System.getProperty("os.name").toLowerCase();
+        if (operSys.contains("mac os x")) {
+            switch(colorInt) {
+                case (0) : return "🟢"; //""\033[38;2;31;224;44mGreen\033[0m";
+                case (1) : return "🔴"; //"\033[31mRed\033[0m";
+                case (2) : return "🟡"; //"\033[93mYellow\033[0m";
+                case (3) : return "🟣"; //"\033[38;2;249;177;250mPink\033[0m";
+                case (4) : return "🔵"; //"\033[38;2;85;99;250mBlue\033[0m";
+            }
+        } else {
+            switch(colorInt) {
+                case (0) : return "green";//"\033[32m●\033[0m";
+                case (1) : return "red";//"\033[31m●\033[0m";
+                case (2) : return "yellow";//"\033[93m●\033[0m";
+                case (3) : return "pink";//"\033[95m●\033[0m";
+                case (4) : return "blue";//"\033[34m●\033[0m";
+            }
+        }
+
+        return null;
     }
 }
 
