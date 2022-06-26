@@ -6,7 +6,7 @@ at Politecnico di Milano. (2021/2022)
 
 **Teacher** Gianpaolo Cugola
 
-![Image of the game](src/main/resources/Graphics/eriantysBackground.jpg =x250)
+![Image of the game](src/main/resources/Graphics/eriantysBackground.jpg)
 
 ## Implemented Functionalities
 | Functionality | Status |
