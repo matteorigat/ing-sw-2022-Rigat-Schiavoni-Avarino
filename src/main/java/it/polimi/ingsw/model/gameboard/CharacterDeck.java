@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * CharacterDeck Class is where every character card instance is created.
  * At the beginning of evey match will be chosen 3 cards randomly.
- *Every card has differents coins cost and diffents effects
+ *Every card has differents coins cost and differents effects
  */
 public class CharacterDeck implements Serializable {
     private ArrayList<CharacterCard> characterCards;
@@ -35,7 +35,7 @@ public class CharacterDeck implements Serializable {
     }
 
     /**
-     * getThreeRandomCards method choose 3 cards randomly from the deck
+     * getThreeRandomCards method chooses 3 cards randomly from the deck
      * @return ArrayList<CharacterCard> threeCards
      */
     public ArrayList<CharacterCard> getThreeRandomCards(){
@@ -52,7 +52,7 @@ public class CharacterDeck implements Serializable {
     }
 
     /**
-     * getCharacterCards return an arrayList of the characterCards
+     * getCharacterCards returns the arrayList with the characterCards
      * @return characterCards
      */
     public ArrayList<CharacterCard> getCharacterCards() {

@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Island Class defines every 12 islands where the game takes place.
+ * Island Class defines every island where the game takes place.
  */
 public class Island implements Serializable {
 
@@ -41,8 +41,8 @@ public class Island implements Serializable {
     }
 
     /**
-     * changeTowerColour methods permits us to change tower colour when one player has more
-     * influnce than the owner of tower on the island
+     * changeTowerColour methods permits to change the tower's colour when one player has
+     * more influence than the current owner of the Island.
      * @param colour
      */
     public void changeTowerColor(TowerColour colour){
@@ -50,7 +50,7 @@ public class Island implements Serializable {
     }
 
     /**
-     * addStudent method adds a student and update the number of the students on the island
+     * addStudent method adds a student on the Island and updates the number of the students on the Island
      * @param s
      */
     public void addStudent (Student s){
@@ -60,7 +60,7 @@ public class Island implements Serializable {
     }
 
     /**
-     *  Influence method returns the player with the most influence on the island
+     *  Influence method returns the player with the most influence on the Island.
      * @param players
      * @param card6noTowerFlag
      * @param card8twoMorePointsPlayer
@@ -107,7 +107,7 @@ public class Island implements Serializable {
     }
 
     /**
-     * getNumTower method returns the number of the towers on the island
+     * getNumTower method returns the number of Towers on the Island
      * @return numTower
      */
     public int getNumTower() {
@@ -115,7 +115,7 @@ public class Island implements Serializable {
     }
 
     /**
-     * SetNUmTower method sets the number of tower
+     * SetNumTower method sets the number of Towers
      * @param numTower
      */
     public void setNumTower(int numTower) {
@@ -124,7 +124,7 @@ public class Island implements Serializable {
     }
 
     /**
-     * getTowerColour method returns the colour of the towers on the island
+     * getTowerColour method returns the colour of the Towers on the Island
      * @return TowerColour
      */
     public TowerColour getTowerColor() {
@@ -133,7 +133,7 @@ public class Island implements Serializable {
 
 
     /**
-     * getStudents method returns the students on the island
+     * getStudents method returns the students on the Island
      * @return students
      */
     public ArrayList<Student> getStudents() {
@@ -141,7 +141,7 @@ public class Island implements Serializable {
     }
 
     /**
-     * getNumStudents method returns the number of the Students on the island
+     * getNumStudents method returns the number of the students on the Island
      * @return numTower
      */
     public ArrayList<Integer> getNumStudents() {
@@ -158,7 +158,7 @@ public class Island implements Serializable {
     }
 
     /**
-     * getNoEntry method returns noEntry
+     * getNoEntry method returns the number of noEntry tiles
      * @return NoEntry
      */
     public int getNoEntry() {
@@ -166,7 +166,7 @@ public class Island implements Serializable {
     }
 
     /**
-     * getIslandIndex method returns the index of the island
+     * getIslandIndex method returns the index of the Island
      * @return IslandIndex
      */
     public int getIslandIndex() {

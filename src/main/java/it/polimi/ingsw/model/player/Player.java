@@ -5,7 +5,7 @@ import it.polimi.ingsw.model.enumeration.TowerColour;
 import java.io.Serializable;
 import java.util.ArrayList;
 /** Player Class defines every player setup:
- * so it has a schoolboard, an assistant deck, a name, and coins */
+ * he has a schoolBoard, an AssistantDeck, a name, and a number of coins */
 public class Player implements Serializable {
     private int index;
     private TowerColour towerColour;
@@ -16,7 +16,7 @@ public class Player implements Serializable {
     private int coins;
 
     /**
-     *  Constructor Player creates a new Player instance
+     *  Constructor of Player creates a new Player instance
      * @param nickname
      * @param index
      */
@@ -42,7 +42,7 @@ public class Player implements Serializable {
     }
 
     /**
-     * getIndex method returns index of the player
+     * getIndex method returns the index of the player in the game
      * @return index
      */
     public int getIndex() {
@@ -50,7 +50,7 @@ public class Player implements Serializable {
     }
 
     /**
-     * TowerColour method returns the player towers colour
+     * TowerColour method returns the player's towers' colour
      * @return the player's tower color
      */
 
@@ -68,7 +68,7 @@ public class Player implements Serializable {
     }
 
     /**
-     *  getAssistantDeck method returns assistant deck
+     *  getAssistantDeck method returns the assistant deck
      * @return assistant deck
      */
     public ArrayList<AssistantCard> getAssistantDeck() {
@@ -76,7 +76,7 @@ public class Player implements Serializable {
     }
 
     /**
-     * PlayAssistantCard play a card an remove it from the deck
+     * PlayAssistantCard plays a card an remove it from the deck
      * @param cardPlayed
      */
 
@@ -86,7 +86,7 @@ public class Player implements Serializable {
     }
 
     /**
-     * getCurrentCard method returns currentCard
+     * getCurrentCard method returns the currently played Card
      * @return CurrentCard
      */
     public AssistantCard getCurrentCard() {
@@ -109,7 +109,7 @@ public class Player implements Serializable {
     }
 
     /**
-     * getCoins method returns the number of Coins
+     * getCoins method returns the number of coins
      * @return coins
      */
     public int getCoins() {
@@ -123,7 +123,7 @@ public class Player implements Serializable {
     }
 
     /**
-     * getNickname method returns a nickname
+     * getNickname method returns the nickname
      *
      * @return nickname
      */
@@ -132,7 +132,7 @@ public class Player implements Serializable {
     }
 
     /**
-     * setCurrentCard method sets the current assistant card
+     * setCurrentCard method sets the chosen assistant card
      * @param currentCard
      */
     public void setCurrentCard(AssistantCard currentCard) {

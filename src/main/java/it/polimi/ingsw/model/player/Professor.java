@@ -4,7 +4,7 @@ import it.polimi.ingsw.model.enumeration.Colour;
 
 import java.io.Serializable;
 
-/** the professor class has only onw attribute which defined the professor colour  */
+/** the Professor class has only the attribute which defines the professor's colour  */
 public class Professor implements Serializable {
     private Colour professorColour;
 
@@ -13,7 +13,7 @@ public class Professor implements Serializable {
     }
 
     /**
-     * Method getProfessourColour returns a professour by his colour.
+     * Method getProfessourColour returns the professor's colour.
      * @return professorColour
      */
     public Colour getProfessorColour() {

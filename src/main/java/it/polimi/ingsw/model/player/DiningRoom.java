@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 /**
  * DiningRoom Class is a part of the schoolBoard.
- * Here we have 5 arrayList of students sort by colour.
+ * Here we have 5 arrayList of students separated by colour.
  *
  */
 public class DiningRoom implements Serializable {
@@ -27,7 +27,8 @@ public class DiningRoom implements Serializable {
     }
 
 
-    /** add student method adds a student (whenever it's possible) and returns a boolean which is true if the player gains a coin,otherwise it's false  */
+    /** add student method adds a student (whenever it's possible) and returns
+     *  true if the player gains a coin with that move, otherwise false  */
     public boolean addStudent(Student s){
         if(s.getColour().equals(Colour.Green) && greenStudents.size() < 10){
             greenStudents.add(s);
@@ -58,7 +59,7 @@ public class DiningRoom implements Serializable {
     }
 
 
-    /** this method returns the number of the students selected */
+    /** this method returns the number of students of the given colour */
     public int numOfStudentByColor(Colour color){
         if(color.equals(Colour.Green)){
             return greenStudents.size();
@@ -74,7 +75,7 @@ public class DiningRoom implements Serializable {
         return -1;
     }
 
-    /** this method remove three students with the same colour*/
+    /** this method removes three students of the same given colour*/
     public ArrayList<Student> removeThreeStudents(Colour color){
         ArrayList<Student> stud = new ArrayList<>();
         int num = 3;
@@ -103,7 +104,7 @@ public class DiningRoom implements Serializable {
         return stud;
     }
 
-    /** this method remove one student by the colour */
+    /** this method remove one student by the given colour */
     public void removeOneStudent(int colorIndex){
         if(colorIndex == 0){
             greenStudents.remove(0);

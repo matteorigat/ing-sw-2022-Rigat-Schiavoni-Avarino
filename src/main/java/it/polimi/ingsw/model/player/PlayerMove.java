@@ -3,10 +3,10 @@ package it.polimi.ingsw.model.player;
 import it.polimi.ingsw.view.View;
 
 
-/** Player move class permits us to control every moves coming from the player --> client-side
+/** PlayerMove class permits us to perform every move coming from the player (client-side)
  * - every move gets at most 8 integer parameters (it depends on the type of move),
- * player "id" parameter to know who is making te move
- * and view parameter to update the global view   */
+ * Player attribute to know who is making the move
+ * and View attribute to update it.   */
 public class PlayerMove {
 
     private final int param1;
@@ -87,7 +87,7 @@ public class PlayerMove {
 
 
     /**
-     * Method getPlayer returns a player
+     * Method getPlayer returns the Player
      * @return player
      */
     public Player getPlayer() {
@@ -95,7 +95,7 @@ public class PlayerMove {
     }
 
     /**
-     * Method getView returns the view
+     * Method getView returns the View
      * @return view
      */
     public View getView() {
@@ -111,7 +111,7 @@ public class PlayerMove {
     }
 
     /**
-     * Method getParam2 returns param1
+     * Method getParam2 returns param2
      * @return param2
      */
 
@@ -121,7 +121,7 @@ public class PlayerMove {
 
 
     /**
-     * Method getParam3 returns param1
+     * Method getParam3 returns param3
      * @return param3
      */
     public int getParam3() {
@@ -130,7 +130,7 @@ public class PlayerMove {
 
 
     /**
-     * Method getParam4 returns param1
+     * Method getParam4 returns param4
      * @return param4
      */
     public int getParam4() {
@@ -139,7 +139,7 @@ public class PlayerMove {
 
 
     /**
-     * Method getParam5 returns param1
+     * Method getParam5 returns param5
      * @return param5
      */
     public int getParam5() {
@@ -147,7 +147,7 @@ public class PlayerMove {
     }
 
     /**
-     * Method getParam6 returns param1
+     * Method getParam6 returns param6
      * @return param6
      */
     public int getParam6() {
@@ -155,7 +155,7 @@ public class PlayerMove {
     }
 
     /**
-     * Method getParam7 returns param1
+     * Method getParam7 returns param7
      * @return param7
      */
     public int getParam7() {
@@ -163,7 +163,7 @@ public class PlayerMove {
     }
 
     /**
-     * Method getParam8 returns param1
+     * Method getParam8 returns param8
      * @return param8
      */
     public int getParam8() {

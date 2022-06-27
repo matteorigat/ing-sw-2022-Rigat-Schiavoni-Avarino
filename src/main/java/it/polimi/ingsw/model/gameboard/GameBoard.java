@@ -53,7 +53,7 @@ public class GameBoard implements Serializable {
     }
 
     /**
-     * choosethreecards method decides randomly the 3 character cards that will be played in the game
+     * chooseThreeCards method decides randomly the 3 character cards that will be playable in the game
      */
     public void chooseThreeCards(){
         threeCharacterCards = characterDeck.getThreeRandomCards();
@@ -73,7 +73,7 @@ public class GameBoard implements Serializable {
     }
 
     /**
-     * getThreeCharacterCards method returns the 3 character cards in game
+     * getThreeCharacterCards method returns the 3 character cards in current game
      * @return threeCharacterCards
      */
 
@@ -86,7 +86,7 @@ public class GameBoard implements Serializable {
     }
 
     /**
-     * getMoteherNature method returns motherNature (her value --> position)
+     * getMoteherNature method returns the position of MotherNature (which Island she's currenly on).
      * @return motherNature
      */
     public int getMotherNature() {
@@ -103,7 +103,7 @@ public class GameBoard implements Serializable {
     }
 
     /**
-     * getBag Method return Bag
+     * getBag Method return the Bag
      * @return Bag
      */
     public Bag getBag() {
@@ -111,7 +111,7 @@ public class GameBoard implements Serializable {
     }
 
     /**
-     * getClouds method returns the arraylist of clouds
+     * getClouds method returns the arrayList of Clouds
      * @return clouds
      */
     public ArrayList<Cloud> getClouds() {
@@ -119,7 +119,7 @@ public class GameBoard implements Serializable {
     }
 
     /**
-     * IslandFusion method permits to do the fusion of 2 islands
+     * IslandFusion method permits to do the merge of 2 islands.
      * @param island1
      * @param island2
      */
@@ -148,7 +148,7 @@ public class GameBoard implements Serializable {
     }
 
     /**
-     * getGeneralReserve method returns how many coins are in the general reserve
+     * getGeneralReserve method returns how many coins are left in the general reserve
      * @return generalResevre
      */
     public int getGeneralReserve() {
@@ -156,7 +156,7 @@ public class GameBoard implements Serializable {
     }
 
     /**
-     * addCoinsToGeneralReserve adds a coin to the general reserve
+     * addCoinsToGeneralReserve adds a coin back to the general reserve
      * @param coins
      */
     public void addCoinsToGeneralReserve(int coins) {
@@ -164,7 +164,7 @@ public class GameBoard implements Serializable {
     }
 
     /**
-     * getIsland mehtod returns the arraylist of the islands
+     * getIsland method returns the arrayList of the islands
      * @return islands
      */
     public ArrayList<Island> getIslands() {

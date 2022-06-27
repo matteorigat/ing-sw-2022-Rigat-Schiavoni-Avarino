@@ -3,7 +3,7 @@ package it.polimi.ingsw.model.player;
 import java.io.Serializable;
 
 
-/** AssistantCard class defines every assistant card with the integers value and movements attributes */
+/** AssistantCard class defines every assistant card with the integers value (priority) and movements attributes */
 public class AssistantCard implements Serializable {
 
     private int value;
@@ -15,7 +15,7 @@ public class AssistantCard implements Serializable {
     }
 
     /**
-     * getValue method returns the value of the assistant card
+     * getValue method returns the value of priority the AssistantCard
      * @return value
      */
     public int getValue() {
@@ -23,7 +23,7 @@ public class AssistantCard implements Serializable {
     }
 
     /**
-     * getMovements method returns the value of the movements of the assistant card
+     * getMovements method returns the value of the movements of the AssistantCard
      *
      * @return movements
      */

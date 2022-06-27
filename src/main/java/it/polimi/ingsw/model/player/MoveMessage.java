@@ -4,9 +4,9 @@ import it.polimi.ingsw.model.Model;
 
 
 /**
- * Move Message class permits us to communicate with the model sending him the
- * status of the game everytime something happens.
- * infact in every moveMessage is sent the model and a player.
+ * Move Message class permits us to communicate with the Clients sending them the
+ * status of the game everytime something changes.
+ * In fact a moveMessage contains the Model and a Player.
  */
 public class MoveMessage {
 
@@ -25,7 +25,7 @@ public class MoveMessage {
     }
 
     /**
-     * getPlayer method returns a player
+     * getPlayer method returns the player
      * @return player
      */
     public Player getPlayer() {
@@ -33,7 +33,7 @@ public class MoveMessage {
     }
 
     /**
-     * getModel method returns the model
+     * getModel method returns the Model
      * @return model
      */
 

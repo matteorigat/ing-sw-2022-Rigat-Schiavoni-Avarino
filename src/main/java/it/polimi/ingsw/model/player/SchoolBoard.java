@@ -8,7 +8,7 @@ import it.polimi.ingsw.model.gameboard.Island;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-/** SchoolBoard Class it's composed by three arraylist which are professors,towers and students entrance and a dining room */
+/** SchoolBoard Class is composed by three arraylist which are the Professors, the Towers and the studentsEntrance and by a DiningRoom */
 public class SchoolBoard implements Serializable {
     private ArrayList<Student> studentsEntrance;
     private DiningRoom diningRoom;
@@ -44,15 +44,15 @@ public class SchoolBoard implements Serializable {
        return towerColor;
     }
 
-    /** this method adds a tower */
+    /** this method adds a Tower */
     public void addTower(TowerColour towerColour){
         Tower t = new Tower(towerColour);
         towers.add(t);
     }
 
 
-    /**this method add a student in to the dining room and of course remove it from the students entrance
-     * it also checks if the room is full (in case it doesn't let you add anything)  */
+    /**this method adds a student to the dining room and of course removes it from the students entrance
+     * it also checks if the room is full (in that case it doesn't let to add anything)  */
     public boolean moveStudentToDiningRoom(int studentColour) {
         if(this.diningRoom.numOfStudentByColor(Colour.values()[studentColour]) >= 10)
             return false;

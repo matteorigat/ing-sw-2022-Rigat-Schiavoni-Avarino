@@ -7,8 +7,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Cloud Class defines 2 or 3 clouds (depending on the number of players) with 3 students on them.
- * At the end of every turn every player choose one of the cloud and get the students.
+ * Cloud Class defines clouds with 3 or 4 students on them (depending on the number of players).
+ * At the end of every turn every player choose one of the cloud and gets its students.
  * Then Clouds will be refilled.
  */
 public class Cloud implements Serializable {
@@ -25,7 +25,7 @@ public class Cloud implements Serializable {
     }
 
     /**
-     * addStudents method adds students on one cloud at the beginning of the turn
+     * addStudents method adds students on the Cloud at the beginning of the turn
      * @param s
      */
 
@@ -37,7 +37,7 @@ public class Cloud implements Serializable {
     }
 
     /**
-     * seeStudents method returns the arraylist of the students of the island
+     * seeStudents method returns the arrayList of the students of the Cloud
      * @return (ArrayList<Students>)
      */
     public ArrayList<Student> seeStudents() {
@@ -47,7 +47,7 @@ public class Cloud implements Serializable {
 
 
     /**
-     * getStudents method get the arrayList of the students of the island
+     * getStudents method get the arrayList of the students of the Cloud
      * @return (ArrayList<Students>)
      */
     public ArrayList<Student> getStudents() {
@@ -62,7 +62,7 @@ public class Cloud implements Serializable {
     }
 
     /**
-     * isTaken method returns a boolean which tells if the students on cloud are already taken
+     * isTaken method returns a boolean which tells if the students on that cloud have been already taken.
      * @return taken
      */
     public boolean isTaken() {
@@ -70,7 +70,7 @@ public class Cloud implements Serializable {
     }
 
     /**
-     * setTaken method sets the boolean taken
+     * setTaken method sets the boolean taken.
      * @param taken
      */
     public void setTaken(boolean taken) {
