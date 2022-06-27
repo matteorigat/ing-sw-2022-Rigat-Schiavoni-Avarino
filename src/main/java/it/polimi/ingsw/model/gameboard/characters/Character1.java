@@ -42,7 +42,7 @@ public class Character1 implements CharacterCard{
     }
 
     /**
-     * getStudents method returns a students
+     * getStudents method returns the students
      * @return students
      */
     public ArrayList<Student> getStudents() {
@@ -50,7 +50,7 @@ public class Character1 implements CharacterCard{
     }
 
     /**
-     * checkColorExists method controls if exists the input colour parameter
+     * checkColorExists method controls if exists one student of the input colour
      * @param colorIndex
      * @return
      */

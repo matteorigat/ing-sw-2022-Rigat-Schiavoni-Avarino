@@ -52,10 +52,10 @@ public class ClientCLI {
         this.active = active;
     }
 
-    /* asyncReadFromSocket  */
+
 
     /**
-     * asyncReadFromSocket method creates a thread which receives a message from the socket in asynchronized way
+     * asyncReadFromSocket method creates a thread which receives messages from the socket in asynchronous way
      *
      * @param socketIn
      * @return thread
@@ -98,7 +98,7 @@ public class ClientCLI {
 
 
     /**
-     * asyncWriteToSocket method creates a thread which sends a message to the socket in asynchronized way
+     * asyncWriteToSocket method creates a thread which sends messages to the socket in asynchronous way
      * @param stdin
      * @param socketOut
      * @return thread
@@ -188,7 +188,7 @@ public class ClientCLI {
             t0.join();
 
         } catch(InterruptedException | NoSuchElementException  e){
-            System.out.println("Exception connection closed");
+            System.out.println("Exception: connection closed");
         } finally {
             System.out.println("Connection closed from server side");
             stdin.close();

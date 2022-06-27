@@ -25,12 +25,12 @@ public class Controller implements Observer<PlayerMove> {
      * performmove Method permits us to filter a move, depending on the number of parameters.
      * There are 6 cases and it's possible to understand which move is played and in
      * which case we are, just analyzing the number of parameters.
-     * Every parameters is an integer and it means an indication about the move.
-     * for example the move: "movemothernature" will have 1 parameters ( in this case param2) which is
-     * the number of the movements of mother nature from her position.
-     * So param2 is the parameters of the movements.
-     * Others move get more parameters like Character Cards which have differents
-     * needs like moving students from school board to islands and at the same time they make others moves.
+     * Every parameters is an integer and it gives an indication about the move.
+     * For example the move: "movemothernature" will have 1 parameters ( in this case param2) which is
+     * the number of the movements of mother nature from its position.
+     * So param2 is the number of the movements.
+     * Others move require more parameters like playing Character cards which have differents
+     * needs like moving students from school board to islands.
      *
      * */
     private synchronized void performMove(PlayerMove move){
@@ -130,7 +130,7 @@ public class Controller implements Observer<PlayerMove> {
     }
 
     /**
-     * update method updates model by the information got from message
+     * update method updates the Model with the information got from message
      * @param message
      */
     @Override
@@ -148,7 +148,7 @@ public class Controller implements Observer<PlayerMove> {
     }
 
     /**
-     * getGameBoard method gets the gameBoard instance
+     * getGameBoard method gets the Gameboard of the game
      * @return
      */
 
@@ -158,7 +158,7 @@ public class Controller implements Observer<PlayerMove> {
 
 
     /**
-     * setParameters method sets num of players and expert mode parameters
+     * setParameters method sets the number of players and the expert mode flag.
      * @param numPlayers
      * @param expertMode
      */
@@ -168,7 +168,7 @@ public class Controller implements Observer<PlayerMove> {
     }
 
     /**
-     * addPlayer method adds player to the model
+     * addPlayer method adds a player to the Model.
      * @param player
      * @return
      */
@@ -186,8 +186,8 @@ public class Controller implements Observer<PlayerMove> {
     }
 
     /**
-     * init method initialize the match choosing randomly the disposition of mother
-     * nature and students on the board.
+     * init method initialize the match choosing randomly the disposition of
+     * Mothernature and placing students on the board.
      * */
     public void init(){
         double casual = Math.random()*12;
@@ -240,7 +240,7 @@ public class Controller implements Observer<PlayerMove> {
 
 
     /**
-     * addStudentsOnClouds method adds students to the clouds. This is the pianification phase 1
+     * addStudentsOnClouds method adds 3 or 4 students on the clouds. This is the Planning phase 1 from the rules.
      */
 
     private void addStudentsOnClouds(){
@@ -255,9 +255,9 @@ public class Controller implements Observer<PlayerMove> {
     }
 
     /**
-     * PlayAssistantCard method plays an assistant card and controls if it is possible to play
-     * it (already played or the opposite player played it.
-     * This is the pianification phase 2
+     * PlayAssistantCard method checks if it is possible to play a certain AssistantCard
+     * by a player accordingly to the rules (it may has already been chosen by another player).
+     * Whether is possible, the method plays the card. This is the Planning phase 2.
      * @param playerIndex
      * @param priority
      * @return
@@ -316,7 +316,7 @@ public class Controller implements Observer<PlayerMove> {
     }
 
     /**
-     * orderPlayerActionPhase method orders players with bubble sort algorithm do decide who is the first player
+     * orderPlayerActionPhase method orders players with bubble sort algorithm do define who is the first player.
      */
     private void orderPlayerActionPhase(){
 
@@ -335,8 +335,8 @@ public class Controller implements Observer<PlayerMove> {
     }
 
     /**
-     * MoveStudentToISland method moves students to the island.
-     * This is the Action phase number 1
+     * MoveStudentToIsland method moves a student to an island.
+     * This is the Action phase number 1.
      * @param playerIndex type of integer
      * @param colour type of integer
      * @param IslandPosition type of integer
@@ -363,12 +363,13 @@ public class Controller implements Observer<PlayerMove> {
     }
 
     /**
-     * moveStudentToDiningRoom method moves student to the dining room
+     * moveStudentToDiningRoom method moves a student to the Dining room.
+     * This is the Action phase number 1.
      * @param playerIndex type of integer
      * @param colour type of integer
      * @return Integer (1 correct move, -1 incorrect move)
      */
-    //Action phase 1
+
     public int moveStudentToDiningRoom(int playerIndex, int colour){
         if (model.getCurrentPhase().equals(GamePhase.MoveStudents) && playerIndex == model.getCurrentPlayer() && colour >= 0 && colour < Colour.values().length && model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[colour]) < 10){
 
@@ -399,7 +400,7 @@ public class Controller implements Observer<PlayerMove> {
     }
 
     /**
-     * checkProfessorProperty method checks which player is the owner of the Professor indicated
+     * checkProfessorProperty method checks which player is the owner of the selected Professor
      * @param colorIndex
      */
     private void checkProfessorProperty(int colorIndex){
@@ -447,8 +448,8 @@ public class Controller implements Observer<PlayerMove> {
     }
 
     /**
-     * moveMOtherNature method moves mother nature
-     * this is Action phase 2.1
+     * moveMotherNature method moves mother nature by the given number of islands.
+     * This is Action phase 2.1
      * @param playerIndex
      * @param movements
      * @return Integer (1 correct move, -1 incorrect move)
@@ -485,7 +486,8 @@ public class Controller implements Observer<PlayerMove> {
 
 
     /**
-     * CheckIslandInfluence method checks who controls the island, if it's a different player it'll change the towers
+     * CheckIslandInfluence method checks who controls the island,
+     * if it's a different player from previously it also changes the towers colour
      * This is Action phase 2.2
      * @param islandIndex
      * @param playerIndex
@@ -550,9 +552,9 @@ public class Controller implements Observer<PlayerMove> {
     }
 
     /**
-     * checkIslandFusion method checks if one island has towers of the same colour of the next one or
-     * the previous one if it happens we have to merge those islands.
-     * this is action phase 2.2
+     * checkIslandFusion method checks if one island has tower(s) of the same colour of the next one or
+     * the previous one. If it does happen, it merges those islands.
+     * This is action phase 2.3
      * @param islandIndex
      */
 
@@ -635,8 +637,8 @@ public class Controller implements Observer<PlayerMove> {
     }
 
     /**
-     * chooseCloud method chooses one of the available cloud
-     * This is action phase 2.3
+     * chooseCloud method permits a player to choose one of the still available clouds.
+     * This is action phase 3
      * @param playerIndex
      * @param cloudPosition
      * @return the index of the cloud choosen
@@ -686,7 +688,7 @@ public class Controller implements Observer<PlayerMove> {
     }
 
     /**
-     * orderPlayersAssistantCard method sets the order player of the incoming turn.
+     * orderPlayersAssistantCard method determines the player's order of the incoming turn.
      */
     private void orderPlayersAssistantCard(){
         int index = -1;
@@ -707,9 +709,9 @@ public class Controller implements Observer<PlayerMove> {
     }
 
     /**
-     * EndGame method controls parameters to declare who is the winner.
+     * EndGame method checks the variables to declare who is the winner:
      * it controls the player with the most number of towers and if it's a draw
-     * it controls the player with the mot nomber of professros controlled
+     * it controls the player with the most nomber of professors controlled.
      *
      */
     private void endGame(){
@@ -773,8 +775,8 @@ public class Controller implements Observer<PlayerMove> {
 
 
 
-    /** character card 1 effect : take 1 student from this card and place it on an island of your choice
-     * .Then draw a new student from the bag and place it on this card*/
+    /** character card 1 effect : take 1 student from this card and place it on an island of your choice.
+     * Then draw a new student from the bag and place it on this card*/
     public int playCharacterCard1(int playerIndex, int cardIndex, int colorIndex, int islandIndex){
         if(playerIndex == model.getCurrentPlayer()){
             for (CharacterCard c: model.getGameBoard().getThreeCharacterCards()){
@@ -857,7 +859,7 @@ public class Controller implements Observer<PlayerMove> {
     }
 
     /** Character card 5 effect : Place a no Entry title on an Island of your choice . The first time Mother Nature ends her movement there
-     * put the NoEntry title back onto this card DO NOT calculate influence on that island or place any towers*/
+     * put the NoEntry title back onto this card. DO NOT calculate influence on that island, or place any towers*/
     public int playCharacterCard5(int playerIndex, int cardIndex, int islandIndex){
         if(playerIndex == model.getCurrentPlayer()){
             for (CharacterCard c: model.getGameBoard().getThreeCharacterCards()){
@@ -875,7 +877,7 @@ public class Controller implements Observer<PlayerMove> {
         return -1;
     }
 
-    /** Character card 6 effect : when resolving a Conquering on an island Towers do not count towards influence */
+    /** Character card 6 effect : when resolving a Conquering on an island, Towers do not count towards influence */
     public int playCharacterCard6(int playerIndex, int cardIndex){
         if(playerIndex == model.getCurrentPlayer() && model.getCurrentPhase().ordinal() <= GamePhase.MoveMotherNature.ordinal()){
             for (CharacterCard c: model.getGameBoard().getThreeCharacterCards()){
@@ -929,9 +931,9 @@ public class Controller implements Observer<PlayerMove> {
     }
 
     /** Character card 10 effect : You may exchange up to 2 Students between your entrance and your dining room
-     * there are 2 methods because we have to manage 2 cases:
+     * There are 2 methods since we have to manage 2 cases:
      * 1) when you decide to move 2 students
-     * 2) when you decide to move less then 2 students
+     * 2) when you decide to move less than 2 students
      * */
     public int playCharacterCard10(int playerIndex, int cardIndex, int entranceStudent1, int diningStudent1){
         if(playerIndex == model.getCurrentPlayer() && model.getPlayers().get(playerIndex).getPlayerSchoolBoard().getDiningRoom().numOfStudentByColor(Colour.values()[diningStudent1]) > 0){
@@ -1060,7 +1062,7 @@ public class Controller implements Observer<PlayerMove> {
     }
 
     /** Character card 12 effect : Choose a type of student: every player (including yourself) must return 3 students of that type from
-     * the dining room to the bag . if any player has fewer than 3 students of that type, return as many students as they have */
+     * the dining room to the bag . If any player has fewer than 3 students of that type, return as many students as they have */
     public int playCharacterCard12(int playerIndex, int cardIndex, int colorIndex){
         if(playerIndex == model.getCurrentPlayer()){
             for (CharacterCard c: model.getGameBoard().getThreeCharacterCards()){
@@ -1113,7 +1115,7 @@ public class Controller implements Observer<PlayerMove> {
         return -1;
     }
 
-    /**Cases when you will play less than 3 students
+    /**Cases when you will play less than 3 students:
      * 2 students case here */
     public int playCharacterCard7(int playerIndex, int cardIndex, int cardStudent1, int entranceStudent1, int cardStudent2, int entranceStudent2){
         if(playerIndex == model.getCurrentPlayer()){
