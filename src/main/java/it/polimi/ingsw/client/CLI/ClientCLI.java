@@ -4,6 +4,7 @@
 package it.polimi.ingsw.client.CLI;
 
 import it.polimi.ingsw.model.Model;
+import it.polimi.ingsw.model.enumeration.TowerColour;
 
 import java.net.SocketException;
 import java.util.NoSuchElementException;
@@ -69,6 +70,14 @@ public class ClientCLI {
                         if(inputObject instanceof String){
                             if(((String) inputObject).contains("NICKNAME")){
                                 nickname = ((String) inputObject).replace("NICKNAME", "");
+                            } else if(((String) inputObject).contains("It's your turn! Make your move:") || ((String) inputObject).contains("It's not your turn!") || ((String) inputObject).contains("Wait for the other player's move!") || ((String) inputObject).contains("Error! retry your move!")){
+                                String operSys = System.getProperty("os.name").toLowerCase();
+                                if (operSys.contains("mac os x")) {
+                                   operSys = "\u001B[5;31m" + (String)inputObject + "\u001B[0m";
+                                    System.out.println(operSys);
+                                } else {
+                                    System.out.println((String)inputObject);
+                                }
                             } else {
                                 System.out.println((String)inputObject);
                             }
