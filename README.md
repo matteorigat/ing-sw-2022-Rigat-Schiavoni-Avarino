@@ -35,15 +35,15 @@ cd Desktop
 To launch the game use one of the following commands:
 
 ```
-java -jar mac_arm.jar 
+java -jar mac_arm.jar
 ```
 
 ```
-java -jar mac_intel.jar 
+java -jar mac_intel.jar
 ```
 
 ```
-java -jar win.jar 
+java -jar win.jar
 ```
 
 If you don't have one of the above operating system, [download JavaFX 18.0.1 SDK](https://gluonhq.com/products/javafx/) and use the following command in the directory of the jar (one of the three, is the same) and the directory you already downloaded.
