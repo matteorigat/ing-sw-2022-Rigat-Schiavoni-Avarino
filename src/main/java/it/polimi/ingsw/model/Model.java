@@ -15,8 +15,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Model class it's the main logic of Eriantys.
- * Here we contruct the gameBoard, an arraylist of players and we declare a players turn order
+ * Model class is the main logic of Eriantys.
+ * Here we contruct the gameBoard, an arraylist of players and we declare the players' turn order
  */
 public class Model extends Observable<MoveMessage> implements Serializable {
 
@@ -35,7 +35,7 @@ public class Model extends Observable<MoveMessage> implements Serializable {
     private boolean expertMode;
     private int numPlayers;
 
-    /**Constructor Model creates a new Game instance*/
+    /**Constructor Model creates a new Model instance*/
     public Model() {
         this.players = new ArrayList<>();
         this.gameBoard = new GameBoard();
@@ -102,8 +102,8 @@ public class Model extends Observable<MoveMessage> implements Serializable {
         this.playerPhaseCounter = playerPhaseCounter;
     }
 
-    /**Class print is used to show the status of the game (CLI)
-     it shows gameboard,schoolboard of every players and islands.*/
+    /**Class print is used to show the status of the game (CLI).
+     It shows the gameboard, the schoolboard of every players and the islands.*/
     public void print(String nickname){
         System.out.println("\n-------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println("");

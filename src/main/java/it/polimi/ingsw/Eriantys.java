@@ -9,8 +9,8 @@ import java.util.Scanner;
 
 /**
  *
- * Eriantys class call the executable application depending on the client's decision.
- * it can create 4 differents "App" executions: local,server,client and client with GUI.
+ * Eriantys is the main class of the game. It calls the executable application depending on the client's decision.
+ * It can create 3 differents "App" executions: server, client with CLI and client with GUI.
  *
  * */
 

@@ -281,7 +281,7 @@ public class LocalView {
     }
 
     /**
-     * textColour method defines the colours of the students
+     * textColour method returns the colours of the students
      * @param colour
      * @return an emoji of the colour
      */

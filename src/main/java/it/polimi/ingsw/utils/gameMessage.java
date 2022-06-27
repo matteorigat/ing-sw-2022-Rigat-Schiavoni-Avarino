@@ -1,7 +1,7 @@
 package it.polimi.ingsw.utils;
 
 
-/** In gameMessage class we have all the default strings messages   */
+/** In gameMessage class we store all the default string messages   */
 public class gameMessage {
 
     public static String eriantys =

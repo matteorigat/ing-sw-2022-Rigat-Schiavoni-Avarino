@@ -7,8 +7,8 @@ import it.polimi.ingsw.observer.Observer;
 import it.polimi.ingsw.model.player.PlayerMove;
 
 /**
- * View is an abstract class and it is very important to manage
- * every move played in the macth by each player
+ * View is an abstract class and it is important to manage
+ * every move played in the match by each player.
  */
 public abstract class View extends Observable<PlayerMove> implements Observer<MoveMessage> {
 
@@ -23,7 +23,7 @@ public abstract class View extends Observable<PlayerMove> implements Observer<Mo
     }
 
     /**
-     * getPlayer method returns a player
+     * getPlayer method returns the player
      * @return player
      */
     protected Player getPlayer(){
@@ -31,7 +31,7 @@ public abstract class View extends Observable<PlayerMove> implements Observer<Mo
     }
 
     /**
-     * showMessage method shows the message object sent
+     * showMessage method sends the Model changes to its specific Client.
      * @param message
      */
     protected abstract void showMessage(Object message);
@@ -39,11 +39,11 @@ public abstract class View extends Observable<PlayerMove> implements Observer<Mo
 
     /**
      * We have different type of moves. They all use integer parameters but every specific
-     * move uses a specific number of parameters so we have to be able to handle every kind of move
+     * move uses a different number of parameters so we have to handle every kind of move.
      */
 
     /**
-     * HandleMove method handles a move with 2 parameters
+     * HandleMove method handles the received move with 2 parameters
      * @param param1
      * @param param2
      */
@@ -53,7 +53,7 @@ public abstract class View extends Observable<PlayerMove> implements Observer<Mo
     }
 
     /**
-     * HandleMove method handles a move with 3 parameters
+     * HandleMove method handles the received move with 3 parameters
      * @param param1
      * @param param2
      * @param param3
@@ -64,7 +64,7 @@ public abstract class View extends Observable<PlayerMove> implements Observer<Mo
     }
 
     /**
-     * HandleMove method handles a move with 4 parameters
+     * HandleMove method handles the received move with 4 parameters
      * @param param1
      * @param param2
      * @param param3
@@ -76,7 +76,7 @@ public abstract class View extends Observable<PlayerMove> implements Observer<Mo
     }
 
     /**
-     * HandleMove method handles a move with 5 parameters
+     * HandleMove method handles the received move with 5 parameters
      * @param param1
      * @param param2
      * @param param3
@@ -90,7 +90,7 @@ public abstract class View extends Observable<PlayerMove> implements Observer<Mo
     }
 
     /**
-     * HandleMove method handles a move with 6 parameters
+     * HandleMove method handles the received move with 6 parameters
      * @param param1
      * @param param2
      * @param param3
@@ -106,7 +106,7 @@ public abstract class View extends Observable<PlayerMove> implements Observer<Mo
     }
 
     /**
-     * reportError method reports a message error whenever it happens
+     * reportError method reports an Error message to the Player whenever he tries to perform an unpermitted move.
      * @param message
      */
     public void reportError(String message){

@@ -15,8 +15,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * Server class is the main one of the server side, it allows clients to connect, play together and
- * also starts the match.
+ * Server class is the primary class on the server side, it allows clients to connect,
+ * match together in the lobby and start the game.
  *
  */
 
@@ -27,8 +27,8 @@ public class Server {
     private ExecutorService executor = Executors.newFixedThreadPool(128);
 
     /**
-     * This hashmap permits to finding client ID relying on his unique nickname.
-     * The client has to be connected to the server.
+     * This hashMap permits to find client ID relying on his unique nickname.
+     * The client has to be still connected to the server.
      */
     private Map<String, ClientConnection> waitingConnection = new HashMap<>();
     private Map<ClientConnection, ClientConnection> playingConnection = new HashMap<>();
@@ -40,7 +40,7 @@ public class Server {
 
 
     /**
-     * Method deregisterClient deletes a client from the hashmaps and active lists, unregistering his
+     * Method deregisterClient deletes a client from the hashMaps and active lists, unregistering his
      * connection with the server
      *
      * @param c of type ClientConnection
@@ -73,7 +73,7 @@ public class Server {
     }
 
     /**
-     * Method setParameters permits you to set Gamemode and num of players parameters
+     * Method setParameters permits to set the gamemode and the number of players parameters
      * @param numPlayers num of players in the game
      * @param expertMode Gamemode
      */
@@ -84,7 +84,7 @@ public class Server {
 
 
     /**
-     * Method lobby creates or handle a lobby, which is a common room used before a match. In this
+     * Method lobby creates or handle a lobby, which is a common room used before starting a match. In this
      * room, connected players are waiting for other ones, in order to reach the correct players'
      * number for playing. If the waiting clients' queue is empty, the server creates a new lobby and
      * ask the first player to choose the capacity. After that, when a client connects, it checks if
@@ -205,7 +205,7 @@ public class Server {
 
 
     /**
-     *Run Method
+     *Run Method of the server. It accepts a new connection and submits the socket to an Executor
      */
     public void run(){
         int connections = 0;
@@ -225,7 +225,7 @@ public class Server {
 
 
     /**
-     * Choosing gamemode status
+     * Returns the choosing status (true if one player is already choosing the game parameters).
      * @return chooseMode of type boolean
      */
     public boolean isChooseMode() {
@@ -234,7 +234,7 @@ public class Server {
 
 
     /**
-     * setting gamemode status
+     * Sets choosing status
      * @param chooseMode of type boolean
      */
     public void setChooseMode(boolean chooseMode) {

@@ -4,8 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * The main class of the server. It simply creates a new server class, adding a server socket to
- * an executor.
+ * The main class of the server. It simply creates a new server class and runs it.
  *
  */
 

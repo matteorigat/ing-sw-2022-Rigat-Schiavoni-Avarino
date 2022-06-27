@@ -5,7 +5,7 @@ import it.polimi.ingsw.model.enumeration.TowerColour;
 import java.io.Serializable;
 
 /**
- * Tower class defines Towers and create instance of them
+ * Tower class defines Towers of the game
  */
 public class Tower implements Serializable {
     private TowerColour towerColor;

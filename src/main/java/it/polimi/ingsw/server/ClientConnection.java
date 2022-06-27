@@ -2,7 +2,7 @@ package it.polimi.ingsw.server;
 
 import it.polimi.ingsw.observer.Observer;
 /**
- * ClientConnection class defines an interface representing the type of client connection.
+ * ClientConnection class defines an interface representing a connection with a client.
  */
 
 

@@ -7,7 +7,9 @@ import it.polimi.ingsw.observer.Observer;
 import it.polimi.ingsw.server.ClientConnection;
 import it.polimi.ingsw.utils.gameMessage;
 
-
+/**
+ * RemoteView class is linked to a specific Client and Player
+ */
 public class RemoteView extends View {
 
     private ClientConnection clientConnection;
@@ -15,7 +17,7 @@ public class RemoteView extends View {
     private int phaseCounter = 0;
 
     /**
-     * MessageReceiver method menages every message received distinguishing which type of move is it
+     * MessageReceiver inner class manages every message received by the Client, distinguishing which type of move it is
      */
     private class MessageReceiver implements Observer<String> {
 
@@ -105,7 +107,7 @@ public class RemoteView extends View {
     }
 
     /**
-     * showMessage method shows a message
+     * showMessage method sends the Model changes to its specific Client.
      * @param message
      */
     @Override
@@ -115,9 +117,9 @@ public class RemoteView extends View {
 
 
     /**
-     * update method analyzes the type of message and creates (and shows) a message by the meaning of the input message.
-     * For example if the model has a winner player.
-     * update message will show a win Message.
+     * update method analyzes the type of MoveMessage and creates a new String message
+     * For example if the model has a winner player,
+     * the resultMessage will show a win Message.
      * @param message
      */
     @Override

@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model;
 
-/** Class parameters permits us to set numPlayers,numClouds,numCloudStudents,numTowers,gameMode*/
+/** Class parameters permits us to set numPlayers,numClouds,numCloudStudents,numTowers,gameMode,
+ * depending on the number of players of the match and the game mode (expert or not). */
 
 
 public class Parameters {
@@ -14,7 +15,7 @@ public class Parameters {
 
 
     /**
-     * setParameters method sets these parameters:
+     * setParameters method sets the parameters:
      * @param players of type integer
      * @param mode of type boolean
      */

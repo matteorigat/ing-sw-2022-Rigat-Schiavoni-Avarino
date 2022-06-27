@@ -69,7 +69,7 @@ public class SchoolBoard implements Serializable {
     }
 
     /**
-     * this method remove a student from entrance by his colour
+     * this method remove a student from the entrance of the selected colour (if present).
      * @param studentColour
      */
     public void removeStudentFromEntrance(int studentColour) {
@@ -81,7 +81,7 @@ public class SchoolBoard implements Serializable {
         }
     }
 
-    /** this method allows you to move a student from the students entrance to an island */
+    /** this method allows to move a student from the students entrance to an island */
     public void moveStudentToIsland(int studentColour, Island i) {
         for (Student s : studentsEntrance) {
             if (s.getColour().equals(Colour.values()[studentColour])) {
@@ -118,7 +118,7 @@ public class SchoolBoard implements Serializable {
     }
 
     /**
-     * Method getTowers returns the every towers of the same type.
+     * Method getTowers returns the towers of the SchoolBoard.
      * @return towers
      */
     public ArrayList<Tower> getTowers() {
