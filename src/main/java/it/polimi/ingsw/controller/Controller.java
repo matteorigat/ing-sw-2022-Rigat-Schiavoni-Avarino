@@ -778,10 +778,10 @@ public class Controller implements Observer<PlayerMove> {
     /** character card 1 effect : take 1 student from this card and place it on an island of your choice.
      * Then draw a new student from the bag and place it on this card*/
     public int playCharacterCard1(int playerIndex, int cardIndex, int colorIndex, int islandIndex){
-        if(playerIndex == model.getCurrentPlayer()){
+        if(playerIndex == model.getCurrentPlayer() && islandIndex > 0 && islandIndex < model.getGameBoard().getIslands().size()){
             for (CharacterCard c: model.getGameBoard().getThreeCharacterCards()){
                 if(cardIndex == c.getIndex() && model.getPlayers().get(playerIndex).getCoins() >= c.getCost() && ((Character1) c).checkColorExists(colorIndex)){
-                    System.out.println("STAI GIOCANDO LA CARTA 1");
+                    System.out.println("YOU ARE PLAYING CARD 1");
                     model.getPlayers().get(playerIndex).removeCoin(c.getCost());
                     model.getGameBoard().addCoinsToGeneralReserve(c.getCost() - 1);
                     c.play();
@@ -802,7 +802,7 @@ public class Controller implements Observer<PlayerMove> {
         if(playerIndex == model.getCurrentPlayer() && model.getCurrentPhase().ordinal() <= GamePhase.MoveMotherNature.ordinal()){
             for (CharacterCard c: model.getGameBoard().getThreeCharacterCards()){
                 if(cardIndex == c.getIndex() && model.getPlayers().get(playerIndex).getCoins() >= c.getCost()){
-                    System.out.println("STAI GIOCANDO LA CARTA 2");
+                    System.out.println("YOU ARE PLAYING CARD 2");
                     model.getPlayers().get(playerIndex).removeCoin(c.getCost());
                     model.getGameBoard().addCoinsToGeneralReserve(c.getCost() - 1);
                     c.play();

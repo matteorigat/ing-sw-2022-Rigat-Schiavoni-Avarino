@@ -73,6 +73,8 @@ The model has a test coverage of:
 * Methods: (121/129) 93%
 * Lines: (463/514) 90%
 
+ps: These percentages are calculated excluding the "Charcters" folder since it contains 200 repeated lines, the effect of the cards is in the model so cards are tested in any case.
+
 ![Coverage](Deliverables/coverage.png)
 
 
