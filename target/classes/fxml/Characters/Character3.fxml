@@ -16,7 +16,7 @@
     </Label>
     <Button layoutX="133.0" layoutY="140.0" mnemonicParsing="false" onAction="#onButtonClick" prefWidth="76.0" text="PLAY" />
 
-    <Label fx:id="islandsSize" layoutX="10.0" layoutY="70.0">
+    <Label fx:id="islandsSize" layoutX="10.0" layoutY="70.0" prefHeight="17.0" prefWidth="320.0">
         <font><Font name="Arial Bold" size="15.0" /></font>
     </Label>
     <TextField fx:id="islandIndex" layoutX="10.0" layoutY="90.0" />
