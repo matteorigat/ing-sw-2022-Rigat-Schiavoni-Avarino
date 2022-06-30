@@ -23,7 +23,7 @@
     <Label fx:id="selected3" layoutX="212.0" layoutY="80.0" />
 
 
-    <Label fx:id="islandsSize" layoutX="10.0" layoutY="125.0">
+    <Label fx:id="islandsSize" layoutX="10.0" layoutY="125.0" prefHeight="17.0" prefWidth="276.0">
         <font><Font name="Arial Bold" size="15.0" /></font>
     </Label>
     <TextField fx:id="islandIndex" layoutX="10.0" layoutY="145.0" />
