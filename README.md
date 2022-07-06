@@ -4,7 +4,9 @@
 **Eriantys** is the final project of **Software Engineering** course held
 at Politecnico di Milano (2021/2022).
 
-![Image of the game](src/main/resources/Graphics/eriantysBackground.jpg)
+Final vote: 30/30
+
+![Image of the game](Deliverables/gameboard.png)
 
 ## Implemented Functionalities
 | Functionality | Status |
@@ -72,8 +74,6 @@ The model has a test coverage of:
 * Classes: (19/19) 100%
 * Methods: (121/129) 93%
 * Lines: (463/514) 90%
-
-ps: These percentages are calculated excluding the "Charcters" folder since it contains 200 repeated lines, the effect of the cards is in the model so cards are tested in any case.
 
 ![Coverage](Deliverables/coverage.png)
 
